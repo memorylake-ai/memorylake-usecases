@@ -268,9 +268,20 @@ def main() -> None:
     ap.add_argument("--no-browser", action="store_true", help="do not open the page automatically")
     args = ap.parse_args()
     demo.find_binary()  # fail early, with the install hint, if the CLI is missing
-    httpd = ThreadingHTTPServer(("127.0.0.1", args.port), Handler)
+    httpd = None
+    for port in range(args.port, args.port + 20):
+        try:
+            httpd = ThreadingHTTPServer(("127.0.0.1", port), Handler)
+            break
+        except OSError as e:
+            if e.errno not in (48, 98, 10048):  # EADDRINUSE on macOS / Linux / Windows
+                raise
+            print(f"port {port} is in use (another copy of this server, probably); trying {port + 1}", flush=True)
+    if httpd is None:
+        print(f"error: no free port between {args.port} and {args.port + 19}; pass --port N", file=sys.stderr)
+        sys.exit(1)
     httpd.daemon_threads = True
-    url = f"http://127.0.0.1:{args.port}/"
+    url = f"http://127.0.0.1:{port}/"
     print(f"sales-call-memory web demo on {url}  (Ctrl-C to stop)", flush=True)
     if not args.no_browser:
         threading.Timer(0.6, lambda: webbrowser.open(url)).start()
