@@ -23,6 +23,9 @@ hand-off doc + email thread ──▶  documents (indexed) ───────
 
 Runs in about 3 minutes on a free personal account. The only credential you need is a MemoryLake API key.
 
+**Watch it run** (real recordings, unedited):
+[CLI demo, 4:12](https://github.com/memorylake-ai/memorylake-usecases/releases/download/sales-call-memory-v1/sales-call-memory-cli-demo.mp4) · [Web companion demo, 4:59](https://github.com/memorylake-ai/memorylake-usecases/releases/download/sales-call-memory-v1/sales-call-memory-web-demo.mp4)
+
 ## Prerequisites
 
 1. **A MemoryLake account and API key.** Sign up at [app.memorylake.ai](https://app.memorylake.ai),
@@ -84,6 +87,8 @@ python3 web/server.py        # opens http://127.0.0.1:8765 — standard library 
 ```
 
 ![Web companion — the calls view during a run](https://github.com/memorylake-ai/memorylake-usecases/raw/main/sales-call-memory/web/screenshot-calls.png)
+
+[Watch the web companion demo (mp4, 4:59)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/sales-call-memory-v1/sales-call-memory-web-demo.mp4) — connect, live run, memory timeline, brief, free-form search, cleanup.
 
 - It imports `demo.py` and runs the identical functions; the page is a view over the demo's event
   stream (`demo.emit`), so what you see in the browser is exactly what the CLI run prints.
