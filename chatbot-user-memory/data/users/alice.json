@@ -1,0 +1,56 @@
+{
+  "key": "alice",
+  "user_id": "u-1001",
+  "display": "Alice Weber",
+  "sessions": [
+    {
+      "custom_id": "alice-s1-web",
+      "channel": "web widget",
+      "date": "2026-09-20T18:05:00Z",
+      "title": "First visit",
+      "turns": [
+        ["user", "Hi, I'm Alice. Can you help me find a place for dinner on Friday?"],
+        ["bot", "Of course. To pick well: any dietary needs, and which city?"],
+        ["user", "I'm vegetarian and allergic to peanuts. I live in Berlin, Prenzlauer Berg. And please keep answers short, I read these on my phone."],
+        ["bot", "Got it: vegetarian, peanut allergy, Berlin, short answers. How many people on Friday?"],
+        ["user", "Four of us, around 8pm, somewhere in Mitte."],
+        ["bot", "I'll shortlist vegetarian-friendly places in Mitte for four at 8pm and send them over."]
+      ]
+    },
+    {
+      "custom_id": "alice-s2-app",
+      "channel": "mobile app",
+      "date": "2026-09-27T09:40:00Z",
+      "title": "Trip to Lisbon",
+      "turns": [
+        ["user", "I want to book a trip to Lisbon, October 15 to 18, for me and my sister."],
+        ["bot", "Lisbon, Oct 15–18, two travellers. Flights from Berlin? Any seat preference?"],
+        ["user", "Yes from Berlin. Window seat for me. My sister is gluten-free, so restaurant suggestions need to work for her too. Hotel budget is 150 euros a night max."],
+        ["bot", "Noted: window seat, sister is gluten-free, hotel under €150/night. I'll hold two options for each and come back."],
+        ["user", "Perfect. Also I pay with my Visa ending 4421, keep it on file for bookings."],
+        ["bot", "Saved for bookings. I'll confirm the Lisbon options within the hour."]
+      ]
+    },
+    {
+      "custom_id": "alice-s3-whatsapp",
+      "channel": "WhatsApp",
+      "date": "2026-10-05T20:15:00Z",
+      "title": "Changes before the trip",
+      "turns": [
+        ["user", "Quick update: I moved to Hamburg last week, so flights should leave from Hamburg now, not Berlin."],
+        ["bot", "Updated: you're in Hamburg now, flights from Hamburg. The Lisbon dates stay Oct 15–18?"],
+        ["user", "Yes same dates. And I've changed my mind on seats, aisle is better for me now."],
+        ["bot", "Aisle seat from now on. Anything else before I rebook the flights?"],
+        ["user", "That's it, thanks."]
+      ]
+    }
+  ],
+  "returning": {
+    "channel": "WhatsApp",
+    "question": "Hey, what did I book with you, and did you remember my sister's thing?"
+  },
+  "forget": {
+    "request": "Please forget where I live, I don't want that stored.",
+    "query": "where does the user live"
+  }
+}

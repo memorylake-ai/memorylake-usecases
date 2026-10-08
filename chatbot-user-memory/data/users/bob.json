@@ -1,0 +1,38 @@
+{
+  "key": "bob",
+  "user_id": "u-2002",
+  "display": "Bob Martínez",
+  "sessions": [
+    {
+      "custom_id": "bob-s1-web",
+      "channel": "web widget",
+      "date": "2026-09-22T11:20:00Z",
+      "title": "Business travel setup",
+      "turns": [
+        ["user", "Hola. I travel for work about twice a month, mostly Madrid to Frankfurt and Zurich. Can you handle my bookings?"],
+        ["bot", "Yes. I'll keep your travel profile. Who should invoices go to, and any preferences?"],
+        ["user", "Invoices go to my company, Orbit GmbH, VAT DE811223344. I always want extra legroom, and I only fly in the morning so I'm back for dinner with my two kids."],
+        ["bot", "Saved: Orbit GmbH invoices with VAT DE811223344, extra legroom, morning flights only."],
+        ["user", "One more thing, I'm a big steak fan, so when you suggest dinner places, no vegan places please."],
+        ["bot", "Noted, steak over vegan. Anything else for your profile?"],
+        ["user", "I speak Spanish and English, either is fine."]
+      ]
+    },
+    {
+      "custom_id": "bob-s2-slack",
+      "channel": "Slack",
+      "date": "2026-10-03T08:05:00Z",
+      "title": "Frankfurt next week",
+      "turns": [
+        ["user", "Need Madrid to Frankfurt next Tuesday, back Wednesday evening."],
+        ["bot", "Tuesday out, Wednesday back. Morning departure as usual, extra legroom, invoice to Orbit GmbH. Hotel?"],
+        ["user", "Yes, the usual: near the Messe, and I need the hotel invoice in the company name too."],
+        ["bot", "Will do. I'll send the options in a moment."]
+      ]
+    }
+  ],
+  "returning": {
+    "channel": "WhatsApp",
+    "question": "Book me a dinner in Zurich for Thursday, you know what I like."
+  }
+}
