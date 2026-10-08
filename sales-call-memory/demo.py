@@ -13,7 +13,8 @@ emails are uploaded as documents.  At the end, the CSM gets a pre-kickoff brief
 in seconds by searching the account memory — no re-discovery.
 
 Everything the script does is a plain CLI command, echoed as it runs, so you
-can copy any line into your own shell.
+can copy any line into your own shell.  The companion web app (web/server.py)
+drives the same functions and streams the same events to a browser.
 
 Requirements: Python 3.9+, the memorylake CLI on PATH, and a MemoryLake API key.
 """
@@ -34,7 +35,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 DATA = HERE / "data"
 OUT = HERE / "out"
-STATE_DIR = HERE / ".memorylake-demo"  # isolated CLI config, used only with MEMORYLAKE_API_KEY
+STATE_DIR = HERE / ".memorylake-demo"  # isolated CLI config, used only with an explicit API key
 PROFILE = "memorylake-usecases"
 DEFAULT_BASE_URL = "https://app.memorylake.ai/openapi/memorylake"
 
@@ -80,19 +81,45 @@ BRIEF = [
 ]
 
 
-# --------------------------------------------------------------------------- output helpers
+# --------------------------------------------------------------------------- output sink
+#
+# Everything the demo says goes through `emit`.  The CLI runner prints; the web app
+# replaces EMIT with a function that streams the same events to the browser.
 
-def banner(step: str, total: int, title: str) -> None:
-    print(f"\n{'=' * 78}\n  Step {step}/{total}  {title}\n{'=' * 78}")
+class DemoError(Exception):
+    pass
+
+
+def _print_sink(kind: str, text: str, data: dict) -> None:
+    if kind == "step":
+        print(f"\n{'=' * 78}\n  {text}\n{'=' * 78}")
+    elif kind == "cmd":
+        print("$ " + text)
+    elif kind == "note":
+        print(f"  · {text}")
+    elif kind in ("text", "json", "progress"):
+        print(text)
+    # "call", "turn", "facts", "brief" carry structured data for the web app; the text
+    # versions of the same information are emitted alongside them.
+
+
+EMIT = _print_sink
+
+
+def emit(kind: str, text: str = "", **data) -> None:
+    EMIT(kind, text, data)
+
+
+def banner(step: int, total: int, title: str) -> None:
+    emit("step", f"Step {step}/{total}  {title}", index=step, total=total, title=title)
 
 
 def note(msg: str) -> None:
-    print(f"  · {msg}")
+    emit("note", msg)
 
 
 def die(msg: str) -> None:
-    print(f"\nerror: {msg}", file=sys.stderr)
-    sys.exit(1)
+    raise DemoError(msg)
 
 
 # --------------------------------------------------------------------------- CLI wrapper
@@ -110,7 +137,7 @@ class CLIError(RuntimeError):
 class CLI:
     """Thin wrapper: runs `memorylake …`, echoes the command, parses the JSON reply."""
 
-    def __init__(self, binary: str, env: dict[str, str], show_json: bool):
+    def __init__(self, binary: str, env: dict[str, str], show_json: bool = False):
         self.binary = binary
         self.env = env
         self.show_json = show_json
@@ -121,7 +148,7 @@ class CLI:
         shown = list(args)
         if self.secret:
             shown = [a.replace(self.secret, "sk-…") for a in shown]
-        print("$ " + shlex.join(["memorylake", *shown]))
+        emit("cmd", shlex.join(["memorylake", *shown]))
 
     def raw(self, *args: str, scoped: bool = False, echo: bool = True) -> tuple[int, str, str]:
         argv = [str(a) for a in args]
@@ -138,7 +165,7 @@ class CLI:
         if rc != 0:
             raise CLIError([self.binary, *map(str, args)], rc, out, err)
         if self.show_json and out.strip():
-            print(out.rstrip())
+            emit("json", out.rstrip())
         try:
             return json.loads(out) if out.strip() else None
         except json.JSONDecodeError:
@@ -156,15 +183,22 @@ class CLI:
 
 # --------------------------------------------------------------------------- step 1: connect
 
-def connect(show_json: bool) -> CLI:
+def find_binary() -> str:
     binary = os.environ.get("MEMORYLAKE_BIN") or shutil.which("memorylake")
     if not binary:
         die("the `memorylake` CLI is not on PATH.\n"
             "  install: curl -fsSL https://raw.githubusercontent.com/memorylake-ai/memorylake-cli/main/scripts/install.sh | sh\n"
             "  or set MEMORYLAKE_BIN=/path/to/memorylake")
+    return binary
 
+
+def connect(show_json: bool = False, api_key: str | None = None, base_url: str | None = None,
+            workspace: str | None = None) -> CLI:
+    """Log in (isolated profile when a key is given) and pick a workspace."""
+    binary = find_binary()
     env = dict(os.environ)
-    api_key = env.get("MEMORYLAKE_API_KEY", "").strip()
+    api_key = (api_key or env.get("MEMORYLAKE_API_KEY", "")).strip()
+    base_url = base_url or env.get("MEMORYLAKE_BASE_URL") or DEFAULT_BASE_URL
     cli = CLI(binary, env, show_json)
 
     if api_key:
@@ -172,20 +206,21 @@ def connect(show_json: bool) -> CLI:
         STATE_DIR.mkdir(exist_ok=True)
         env["MEMORYLAKE_CONFIG_DIR"] = str(STATE_DIR)
         cli.secret = api_key
-        base_url = env.get("MEMORYLAKE_BASE_URL", DEFAULT_BASE_URL)
-        note(f"MEMORYLAKE_API_KEY is set — logging into an isolated profile under {STATE_DIR.name}/")
+        note(f"API key given — logging into an isolated profile under {STATE_DIR.name}/")
         cli.run("auth", "login", "--api-key", api_key, "--base-url", base_url, "--profile", PROFILE)
     else:
-        note("MEMORYLAKE_API_KEY is not set — using your existing `memorylake auth login` session")
+        note("no API key given — using your existing `memorylake auth login` session")
         rc, out, _ = cli.raw("auth", "status")
         if rc != 0 or "Logged in: yes" not in out:
             die("not logged in. Either export MEMORYLAKE_API_KEY=sk-… or run `memorylake auth login` first.")
 
     team = cli.run("team", "get")
     note(f"connected to team “{team.get('name')}” as {team.get('caller_role')}")
+    cli.team = team  # type: ignore[attr-defined]
 
-    # Workspace: explicit env var → the one remembered by `ws use` → the first one listed.
-    ws = env.get("MEMORYLAKE_WORKSPACE", "").strip()
+    # Workspace: explicit → env var → the one remembered by `ws use` → the first one listed.
+    ws = (workspace or env.get("MEMORYLAKE_WORKSPACE", "")).strip()
+    ws_name = ""
     if not ws:
         rc, out, _ = cli.raw("ws", "current")
         m = re.search(r"\b(ws-[0-9a-f]+)\b", out) if rc == 0 else None
@@ -195,11 +230,12 @@ def connect(show_json: bool) -> CLI:
         items = listing.get("items") or []
         if not items:
             die("this account has no workspace; create one with `memorylake ws create --name … --custom-id …`")
-        ws = items[0]["id"]
-        note(f"using workspace “{items[0]['name']}” ({ws})")
+        ws, ws_name = items[0]["id"], items[0]["name"]
+        note(f"using workspace “{ws_name}” ({ws})")
     else:
         note(f"using workspace {ws}")
     cli.workspace = ws
+    cli.workspace_name = ws_name  # type: ignore[attr-defined]
     return cli
 
 
@@ -222,7 +258,16 @@ def ensure_actor(cli: CLI, key: str) -> str:
         if not e.has("409", "already"):
             raise
         note("already bound to this workspace")
+    emit("actor", "", key=key, id=actor["id"], display=p["display"], role=p["role"])
     return actor["id"]
+
+
+def load_calls() -> list[dict]:
+    return [json.loads(p.read_text(encoding="utf-8")) for p in sorted((DATA / "calls").glob("*.json"))]
+
+
+def load_notes() -> list[dict]:
+    return [dict(name=p.name, text=p.read_text(encoding="utf-8")) for p in sorted((DATA / "notes").glob("*.md"))]
 
 
 def delete_conversations(cli: CLI) -> int:
@@ -236,9 +281,13 @@ def delete_conversations(cli: CLI) -> int:
     return removed
 
 
+def find_project(cli: CLI):
+    return cli.try_run("proj", "get", PROJECT["custom_id"], "--by-custom-id", scoped=True)
+
+
 def ensure_project(cli: CLI, reset: bool) -> tuple[str, bool]:
     """Returns (project_id, fresh)."""
-    proj = cli.try_run("proj", "get", PROJECT["custom_id"], "--by-custom-id", scoped=True)
+    proj = find_project(cli)
     if proj is not None and reset:
         note(f"--reset: deleting the demo conversations and project {proj['id']} (documents go with it)")
         delete_conversations(cli)
@@ -248,19 +297,19 @@ def ensure_project(cli: CLI, reset: bool) -> tuple[str, bool]:
         proj = cli.run("proj", "create", "--name", PROJECT["name"], "--custom-id", PROJECT["custom_id"],
                        "--description", PROJECT["description"], scoped=True)
         note(f"created project “{proj['name']}” → {proj['id']}")
+        emit("project", "", id=proj["id"], name=proj["name"], fresh=True)
         return proj["id"], True
     note(f"project “{proj['name']}” already exists → {proj['id']} (pass --reset to start over)")
+    emit("project", "", id=proj["id"], name=proj["name"], fresh=False)
     return proj["id"], False
 
 
 # --------------------------------------------------------------------------- step 3: calls → conversations
 
-def load_calls() -> list[dict]:
-    return [json.loads(p.read_text(encoding="utf-8")) for p in sorted((DATA / "calls").glob("*.json"))]
-
-
 def ingest_calls(cli: CLI, project_id: str, actors: dict[str, str]) -> list[str]:
     conv_ids: list[str] = []
+    # Facts already in the project, so a re-run does not pin the same rep note twice.
+    known_facts = {f.get("fact") for f in list_facts(cli, project_id)}
     for call in load_calls():
         conv = cli.try_run("conv", "get", call["custom_id"], "--by-custom-id", scoped=True)
         done = 0
@@ -280,6 +329,8 @@ def ingest_calls(cli: CLI, project_id: str, actors: dict[str, str]) -> list[str]
             done = len(cli.run("conv", "msg", "list", conv["id"], "--page-size", "50").get("items") or [])
             note(f"conversation “{call['name']}” exists with {done} message(s) → {conv['id']}")
         conv_ids.append(conv["id"])
+        emit("call", "", custom_id=call["custom_id"], id=conv["id"], name=call["name"], date=call["date"],
+             turns=len(call["turns"]), done=done)
         start = datetime.fromisoformat(call["date"].replace("Z", "+00:00")).astimezone(timezone.utc)
         parent = conv.get("current_message_id")
         for i, (speaker, text) in enumerate(call["turns"], start=1):
@@ -297,13 +348,17 @@ def ingest_calls(cli: CLI, project_id: str, actors: dict[str, str]) -> list[str]
                 args += ["--parent", parent]
             msg = cli.run(*args, scoped=True)
             parent = msg["id"]
+            emit("turn", "", custom_id=call["custom_id"], index=i, speaker=speaker)
         if done < len(call["turns"]):
             note(f"{len(call['turns']) - done} turn(s) appended to “{call['name']}”")
-        if call.get("rep_notes") and done == 0:
+        missing = [n for n in call.get("rep_notes") or [] if n not in known_facts]
+        if missing:
             # What the rep typed into the CRM after the call. Facts are stored verbatim and are
             # searchable immediately, with no extraction step in between.
-            cli.run("fact", "add", "--project", project_id, *call["rep_notes"], scoped=True)
-            note(f"{len(call['rep_notes'])} rep note(s) pinned as facts")
+            cli.run("fact", "add", "--project", project_id, *missing, scoped=True)
+            note(f"{len(missing)} rep note(s) pinned as facts")
+        if call.get("rep_notes"):
+            emit("pinned", "", custom_id=call["custom_id"], notes=call["rep_notes"])
     return conv_ids
 
 
@@ -317,10 +372,12 @@ def wait_for_memory(cli: CLI, conv_ids: list[str], timeout: int = 600) -> None:
             status = cli.run("conv", "cook-status", cid, scoped=True, echo=first)
             if status.get("cook_finished"):
                 pending.discard(cid)
+                emit("cooked", "", id=cid)
         first = False
         if pending:
             if time.time() - last_report >= 30:
-                print(f"  … {len(pending)} conversation(s) still cooking ({int(time.time() - t0)}s)", flush=True)
+                emit("progress", f"  … {len(pending)} conversation(s) still cooking ({int(time.time() - t0)}s)",
+                     pending=len(pending), elapsed=int(time.time() - t0))
                 last_report = time.time()
             time.sleep(5)
     if pending:
@@ -338,9 +395,11 @@ def ingest_notes(cli: CLI, project_id: str) -> None:
         item = cli.run("lib", "upload", str(path), "--on-conflict", "overwrite")
         item_ids.append(item["item_id"])
         note(f"uploaded {item['name']}")
+        emit("uploaded", "", name=item["name"], item_id=item["item_id"])
     result = cli.run("proj", "doc", "import", "--project", project_id, *item_ids, "--wait", scoped=True)
     note(f"imported: {result.get('success_count', 0)} new, {result.get('duplicate_count', 0)} already in project, "
          f"{result.get('failure_count', 0)} failed")
+    emit("imported", "", **{k: result.get(k, 0) for k in ("success_count", "duplicate_count", "failure_count")})
 
 
 # --------------------------------------------------------------------------- step 5: what did MemoryLake remember?
@@ -365,35 +424,66 @@ def fact_date(f: dict) -> str:
 
 def show_facts(facts: list[dict]) -> None:
     extracted = [f for f in facts if "(as of " in f.get("fact", "")]
-    print(f"\n  {len(facts)} facts in the account memory: {len(extracted)} extracted from the calls, "
-          f"{len(facts) - len(extracted)} pinned by the reps.\n")
+    lines = [f"\n  {len(facts)} facts in the account memory: {len(extracted)} extracted from the calls, "
+             f"{len(facts) - len(extracted)} pinned by the reps.\n"]
     for f in sorted(facts, key=fact_date):
         flag = "  (expired)" if f.get("expired") else ""
-        print(f"   - {f['fact']}{flag}")
+        lines.append(f"   - {f['fact']}{flag}")
+    emit("text", "\n".join(lines))
+    emit("facts", "", facts=[dict(id=f.get("id"), fact=f.get("fact"), expired=bool(f.get("expired")),
+                                   date=fact_date(f), pinned="(as of " not in f.get("fact", ""))
+                              for f in sorted(facts, key=fact_date)])
 
 
 # --------------------------------------------------------------------------- step 6: the hand-off brief
 
-def build_brief(cli: CLI, project_id: str, top_k: int) -> str:
+def search(cli: CLI, project_id: str, query: str, top_k: int = 5) -> dict:
+    res = cli.run("search", query, "--projects", project_id, "--top-k", str(top_k), scoped=True)
+    return dict(
+        query=query,
+        facts=[dict(id=f.get("id"), fact=f.get("fact"), score=f.get("score")) for f in res.get("facts") or []],
+        documents=[dict(id=d.get("document_id"), name=d.get("document_name") or d.get("file_name"),
+                        summary=d.get("document_summary")) for d in res.get("documents") or []],
+    )
+
+
+def brief_sections(cli: CLI, project_id: str, top_k: int) -> list[dict]:
+    sections = []
+    for heading, query in BRIEF:
+        res = search(cli, project_id, query, top_k)
+        sections.append(dict(heading=heading, **res))
+        emit("brief_section", "", heading=heading, **res)
+    return sections
+
+
+def render_brief(sections: list[dict]) -> str:
     lines = ["# Acme Corp — pre-kickoff brief for the CSM",
              "",
              f"_Generated {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')} from MemoryLake account memory "
              f"(project `{PROJECT['custom_id']}`). Every bullet is a retrieved memory, not a summary._",
              ""]
-    for heading, query in BRIEF:
-        res = cli.run("search", query, "--projects", project_id, "--top-k", str(top_k), scoped=True)
-        lines.append(f"## {heading}")
-        facts = res.get("facts") or []
-        if not facts:
+    for s in sections:
+        lines.append(f"## {s['heading']}")
+        if not s["facts"]:
             lines.append("_No facts matched._")
-        for f in facts:
+        for f in s["facts"]:
             lines.append(f"- {f['fact']}")
-        docs = res.get("documents") or []
-        if docs:
-            names = ", ".join(sorted({d.get("document_name") or d.get("file_name") or "?" for d in docs}))
+        if s["documents"]:
+            names = ", ".join(sorted({d["name"] or "?" for d in s["documents"]}))
             lines.append(f"\n_Source documents: {names}_")
         lines.append("")
     return "\n".join(lines)
+
+
+def build_brief(cli: CLI, project_id: str, top_k: int) -> str:
+    sections = brief_sections(cli, project_id, top_k)
+    brief = render_brief(sections)
+    OUT.mkdir(exist_ok=True)
+    (OUT / "acme-handoff-brief.md").write_text(brief, encoding="utf-8")
+    emit("text", "\n" + brief)
+    note(f"written to {OUT / 'acme-handoff-brief.md'}")
+    emit("brief", "", markdown=brief, sections=sections)
+    return brief
 
 
 # --------------------------------------------------------------------------- optional: ask an agent
@@ -415,7 +505,7 @@ def ask_agent(cli: CLI, project_id: str) -> None:
         rc, out, err = cli.raw("agent", "send", agent["id"], "--project", project_id, "--text", question, scoped=True)
         if rc != 0:
             raise CLIError([], rc, out, err)
-        print("\n" + out.strip() + "\n")
+        emit("text", "\n" + out.strip() + "\n")
         note(err.strip().splitlines()[-1] if err.strip() else "done")
     except CLIError as e:
         if e.has("402", "QUOTA_EXCEEDED"):
@@ -430,7 +520,7 @@ def ask_agent(cli: CLI, project_id: str) -> None:
 def cleanup(cli: CLI) -> None:
     n = delete_conversations(cli)
     note(f"deleted {n} conversation(s)")
-    proj = cli.try_run("proj", "get", PROJECT["custom_id"], "--by-custom-id", scoped=True)
+    proj = find_project(cli)
     if proj:
         cli.run("proj", "delete", proj["id"], scoped=True)
         note("deleted project (its documents and facts went with it)")
@@ -461,6 +551,36 @@ def cleanup(cli: CLI) -> None:
     note(f"deleted {removed} uploaded note(s) from the Library")
 
 
+# --------------------------------------------------------------------------- the whole pipeline
+
+def run_pipeline(cli: CLI, reset: bool = False, with_agent: bool = False, top_k: int = 5,
+                 first_step: int = 2) -> str:
+    """Steps 2–6 (and the optional 7). Step 1, connecting, is the caller's job."""
+    total = 6 + (1 if with_agent else 0)
+
+    banner(first_step, total, "Set up — the people on the deal, and one project per account")
+    actors = {key: ensure_actor(cli, key) for key in PEOPLE}
+    project_id, _fresh = ensure_project(cli, reset)
+
+    banner(3, total, "Ingest the calls — each call is a conversation; MemoryLake extracts the facts")
+    conv_ids = ingest_calls(cli, project_id, actors)
+    wait_for_memory(cli, conv_ids)
+
+    banner(4, total, "Ingest the notes — hand-off doc and email thread become searchable documents")
+    ingest_notes(cli, project_id)
+
+    banner(5, total, "What did MemoryLake remember?")
+    show_facts(list_facts(cli, project_id))
+
+    banner(6, total, "The hand-off — the CSM's pre-kickoff brief, straight from account memory")
+    brief = build_brief(cli, project_id, top_k)
+
+    if with_agent:
+        banner(7, total, "Optional — ask a MemoryLake agent, which reads the same memory")
+        ask_agent(cli, project_id)
+    return brief
+
+
 # --------------------------------------------------------------------------- main
 
 def main() -> None:
@@ -482,61 +602,36 @@ def main() -> None:
         pass
 
     total = {"cleanup": 2, "brief": 2, "facts": 2}.get(args.command, 6 + (1 if args.with_agent else 0))
-    banner("1", total, "Connect — API key, team, workspace")
+    banner(1, total, "Connect — API key, team, workspace")
     cli = connect(args.show_json)
 
     if args.command == "cleanup":
-        banner("2", 2, "Cleanup — remove everything the demo created")
+        banner(2, 2, "Cleanup — remove everything the demo created")
         cleanup(cli)
         return
 
     if args.command in ("brief", "facts"):
-        proj = cli.try_run("proj", "get", PROJECT["custom_id"], "--by-custom-id", scoped=True)
+        proj = find_project(cli)
         if proj is None:
             die("the demo project does not exist yet; run `python3 demo.py` first")
         if args.command == "facts":
-            banner("2", 2, "What does MemoryLake remember about the account?")
+            banner(2, 2, "What does MemoryLake remember about the account?")
             show_facts(list_facts(cli, proj["id"]))
         else:
-            banner("2", 2, "The hand-off brief, straight from account memory")
-            brief = build_brief(cli, proj["id"], args.top_k)
-            OUT.mkdir(exist_ok=True)
-            (OUT / "acme-handoff-brief.md").write_text(brief, encoding="utf-8")
-            print("\n" + brief)
-            note(f"written to {OUT / 'acme-handoff-brief.md'}")
+            banner(2, 2, "The hand-off brief, straight from account memory")
+            build_brief(cli, proj["id"], args.top_k)
         return
 
-    banner("2", total, "Set up — the people on the deal, and one project per account")
-    actors = {key: ensure_actor(cli, key) for key in PEOPLE}
-    project_id, fresh = ensure_project(cli, args.reset)
-
-    banner("3", total, "Ingest the calls — each call is a conversation; MemoryLake extracts the facts")
-    conv_ids = ingest_calls(cli, project_id, actors)
-    wait_for_memory(cli, conv_ids)
-
-    banner("4", total, "Ingest the notes — hand-off doc and email thread become searchable documents")
-    ingest_notes(cli, project_id)
-
-    banner("5", total, "What did MemoryLake remember?")
-    show_facts(list_facts(cli, project_id))
-
-    banner("6", total, "The hand-off — the CSM's pre-kickoff brief, straight from account memory")
-    brief = build_brief(cli, project_id, args.top_k)
-    OUT.mkdir(exist_ok=True)
-    (OUT / "acme-handoff-brief.md").write_text(brief, encoding="utf-8")
-    print("\n" + brief)
-    note(f"written to {OUT / 'acme-handoff-brief.md'}")
-
-    if args.with_agent:
-        banner("7", total, "Optional — ask a MemoryLake agent, which reads the same memory")
-        ask_agent(cli, project_id)
-
+    run_pipeline(cli, reset=args.reset, with_agent=args.with_agent, top_k=args.top_k)
     print("\nDone. Re-run `python3 demo.py brief` any time, or `python3 demo.py cleanup` to remove the demo data.")
 
 
 if __name__ == "__main__":
     try:
         main()
+    except DemoError as e:
+        print(f"\nerror: {e}", file=sys.stderr)
+        sys.exit(1)
     except CLIError as e:
         print(f"\ncommand failed: {shlex.join(e.cmd) if e.cmd else '(memorylake)'}\n{e}", file=sys.stderr)
         sys.exit(e.rc or 1)
