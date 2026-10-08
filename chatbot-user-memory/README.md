@@ -28,6 +28,9 @@ Bob: Slack  ─┴─▶ conversations (user ↔ bot) ──▶ facts owned by B
 
 Runs in about 2 minutes on a free personal account. The only credential you need is a MemoryLake API key.
 
+**Watch it run** (real recordings, unedited):
+[CLI demo, 2:40](https://github.com/memorylake-ai/memorylake-usecases/releases/download/chatbot-user-memory-v1/chatbot-user-memory-cli-demo.mp4) · [Web companion demo, 2:49](https://github.com/memorylake-ai/memorylake-usecases/releases/download/chatbot-user-memory-v1/chatbot-user-memory-web-demo.mp4)
+
 ## Prerequisites
 
 1. **A MemoryLake account and API key.** Sign up at [app.memorylake.ai](https://app.memorylake.ai),
@@ -74,6 +77,8 @@ python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
 
 ![Web companion — the returning-user view](https://github.com/memorylake-ai/memorylake-usecases/raw/main/chatbot-user-memory/web/screenshot-returning.png)
+
+[Watch the web companion demo (mp4, 2:49)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/chatbot-user-memory-v1/chatbot-user-memory-web-demo.mp4).
 
 Paste the key, press **Run demo**, and watch the sessions replay per user, the memory panel fill in,
 the returning-user memory block appear, the isolation check pass and a fact get forgotten. An **Ask as
