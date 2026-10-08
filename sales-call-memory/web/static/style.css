@@ -30,9 +30,10 @@ button { font: inherit; }
 /* top bar */
 .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 20px; background: var(--panel); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 5; flex-wrap: wrap; }
 .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
-.logo { width: 26px; height: 26px; border-radius: 8px; background: conic-gradient(from 210deg, var(--accent), #7bd3ff, var(--accent)); box-shadow: inset 0 0 0 4px var(--panel); flex: none; }
-.brand-name { font-weight: 700; letter-spacing: .01em; }
-.brand-sub { color: var(--muted); border-left: 1px solid var(--line-2); padding-left: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.logo { display: inline-flex; align-items: center; flex: none; line-height: 0; }
+.logo img { height: 22px; width: auto; display: block; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .logo img { filter: invert(1) brightness(1.1); } }
+.brand-sub { color: var(--muted); border-left: 1px solid var(--line-2); padding-left: 12px; margin-left: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .topbar-right { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .conn { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 13.5px; }
 .conn .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--faint); }
