@@ -1,0 +1,20 @@
+{
+  "custom_id": "mlu-scm-call-03-approval",
+  "name": "Acme Corp — CFO approval and pilot kickoff planning (AE)",
+  "date": "2026-10-06T09:00:00Z",
+  "participants": ["ae-sam", "dana-li", "mark-chen"],
+  "turns": [
+    ["ae-sam", "Thanks for joining, Mark. Dana, Priya confirmed by email that security is cleared, so today is about the pilot."],
+    ["mark-chen", "I have approved the 18k pilot for Acme. Two conditions: Acme wants quarterly billing rather than annual upfront, and before we expand beyond the pilot I want to talk to a Northwind reference customer in logistics."],
+    ["ae-sam", "Quarterly billing is fine, and I will arrange a reference call with a logistics customer before the expansion decision."],
+    ["dana-li", "Let us kick off the pilot on October 20. The success criterion is simple: Acme's vendor onboarding time has to drop from three weeks to one week for the six procurement users."],
+    ["ae-sam", "Three weeks to one week by the end of the pilot, understood. Who will run the pilot day to day on Acme's side?"],
+    ["dana-li", "That is the other change. I am moving to a new role in November, so from then on Northwind's main contact at Acme is Priya Raman, not me. Please copy her on everything from now on."],
+    ["mark-chen", "And copy me on anything that touches the invoice."],
+    ["ae-sam", "Will do. I will introduce Riley, our customer success manager at Northwind, who will run the kickoff on October 20."]
+  ],
+  "rep_notes": [
+    "Mark Chen (CFO) approved the Acme Corp $18k pilot on 2026-10-06 with two conditions: quarterly billing, and a reference call with a Northwind logistics customer before any expansion.",
+    "Open action item (Sam, AE): arrange the logistics reference call for Mark Chen before the Q2 expansion decision."
+  ]
+}

@@ -1,0 +1,7 @@
+# demo runtime state (isolated CLI profile + generated output)
+**/.memorylake-demo/
+**/out/
+__pycache__/
+*.pyc
+.DS_Store
+.env

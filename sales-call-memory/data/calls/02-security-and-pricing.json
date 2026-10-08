@@ -1,0 +1,21 @@
+{
+  "custom_id": "mlu-scm-call-02-security-pricing",
+  "name": "Acme Corp — security review and pricing (AE)",
+  "date": "2026-09-30T09:00:00Z",
+  "participants": ["ae-sam", "dana-li", "priya-raman"],
+  "turns": [
+    ["ae-sam", "Hi Dana, hi Priya. Jordan briefed me on the discovery call, so I will not make you repeat yourselves. Priya, let us start with security."],
+    ["priya-raman", "Thanks. To be clear, Acme requires a SOC 2 Type II report from any vendor, Type I is not enough. I also need to know whether Northwind supports SSO through Okta, and where customer data is stored, because Acme's EU subsidiary needs EU data residency."],
+    ["ae-sam", "Northwind has a current SOC 2 Type II report, Okta SSO via SAML, and an EU hosting region. I will send the report and the SSO guide over right after this call."],
+    ["priya-raman", "Good. Send them to me directly and I will review within a week."],
+    ["dana-li", "On commercials: Northwind's 25,000 dollars a year list price is a problem for Acme. As I told Jordan, anything over 20k needs Mark Chen to sign off, and I would rather not open that door for a pilot. Is there an 18k pilot tier for six seats?"],
+    ["ae-sam", "I can put together an 18k pilot proposal for six procurement seats with the option to expand to the full team in Q2."],
+    ["dana-li", "That would work. For what it is worth, Vendorly came back with a discount, but the team still remembers how clunky their workflow was."],
+    ["ae-sam", "Noted. Action items on my side: SOC 2 Type II report and Okta SSO docs to Priya by October 3, and an 18k six-seat pilot proposal to you by the same date. Dana, could you bring Mark into the next call?"],
+    ["dana-li", "I will try to get Mark on the next call. Email me the proposal, not a calendar invite."]
+  ],
+  "rep_notes": [
+    "Acme Corp pilot tenant must be provisioned in Northwind's EU region (EU subsidiary data residency).",
+    "Competitor Vendorly offered Acme a discount on 2026-09-30; Acme's team still considers Vendorly's workflow clunky."
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "custom_id": "mlu-scm-call-01-discovery",
+  "name": "Acme Corp — discovery call (SDR)",
+  "date": "2026-09-16T09:00:00Z",
+  "participants": ["sdr-jordan", "dana-li"],
+  "turns": [
+    ["sdr-jordan", "Thanks for making time, Dana. To start, can you walk me through how Acme onboards a new vendor today?"],
+    ["dana-li", "Sure. Acme onboards about 40 vendors a quarter and the whole thing runs on spreadsheets and email. From first contact to an approved vendor it takes around three weeks, and my ops team of 35 people spends a big chunk of their week chasing documents."],
+    ["sdr-jordan", "Three weeks per vendor is a lot. Who else at Acme is involved in approving a tool like Northwind?"],
+    ["dana-li", "Anything above 20k a year needs sign-off from our CFO, Mark Chen. And Acme's fiscal year ends in March, so budget gets very tight from January until April. If we do this, it has to be decided before the end of December."],
+    ["sdr-jordan", "Understood. Any hard requirements from security or IT?"],
+    ["dana-li", "Yes. Our security lead Priya Raman will not approve any vendor without a SOC 2 report, full stop. She will also ask about single sign-on, Acme uses Okta everywhere."],
+    ["sdr-jordan", "Northwind can cover both. Are you looking at other options at the moment?"],
+    ["dana-li", "We ran a trial of Vendorly last month. The onboarding workflow felt clunky and the team did not adopt it, so we are still looking."],
+    ["sdr-jordan", "Got it. How would you like to proceed?"],
+    ["dana-li", "I would want to start small: a pilot with Acme's procurement team, six people, and expand to the full ops team in Q2 if it works. One more thing, I am much easier to reach by email than by phone, and Tuesdays are blocked for me."]
+  ],
+  "rep_notes": [
+    "Dana Li (VP Ops) is the champion at Acme Corp; she prefers email over phone and has Tuesdays blocked.",
+    "Acme Corp timeline: decision needed before end of December; budget is frozen January to April (fiscal year ends in March)."
+  ]
+}
