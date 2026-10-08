@@ -159,11 +159,30 @@ class CLI:
         proc = subprocess.run([self.binary, *argv], env=self.env, capture_output=True, text=True)
         return proc.returncode, proc.stdout, proc.stderr
 
+    # Read-only subcommands are safe to repeat when the network hiccups.
+    READ_ONLY = {"get", "list", "cook-status", "status", "current", "me", "card", "search"}
+    TRANSIENT = ("could not connect", "tls handshake", "connection reset", "timed out",
+                 "error sending request", "connection closed", "temporarily unavailable", "502", "503", "504")
+
     def run(self, *args: str, scoped: bool = False, echo: bool = True):
-        """Run and return the parsed JSON (or raw text when the reply is not JSON)."""
-        rc, out, err = self.raw(*args, scoped=scoped, echo=echo)
-        if rc != 0:
-            raise CLIError([self.binary, *map(str, args)], rc, out, err)
+        """Run and return the parsed JSON (or raw text when the reply is not JSON).
+
+        A read-only command that fails on a transient network error (a dropped TLS handshake,
+        a reset connection, a gateway timeout) is retried a few times with a short backoff
+        instead of aborting the whole demo. Writes are never repeated here."""
+        retryable = any(str(a) in self.READ_ONLY for a in args[:3])
+        attempt = 0
+        while True:
+            rc, out, err = self.raw(*args, scoped=scoped, echo=echo and attempt == 0)
+            if rc == 0:
+                break
+            e = CLIError([self.binary, *map(str, args)], rc, out, err)
+            if retryable and attempt < 4 and e.has(*self.TRANSIENT):
+                attempt += 1
+                note(f"network hiccup ({err.strip().splitlines()[-1] if err.strip() else 'connect'}); retry {attempt}/4 in {2 * attempt}s")
+                time.sleep(2 * attempt)
+                continue
+            raise e
         if self.show_json and out.strip():
             emit("json", out.rstrip())
         try:
@@ -369,7 +388,13 @@ def wait_for_memory(cli: CLI, conv_ids: list[str], timeout: int = 600) -> None:
     first = True
     while pending and time.time() - t0 < timeout:
         for cid in sorted(pending):
-            status = cli.run("conv", "cook-status", cid, scoped=True, echo=first)
+            try:
+                status = cli.run("conv", "cook-status", cid, scoped=True, echo=first)
+            except CLIError as e:
+                if not e.has(*cli.TRANSIENT):
+                    raise
+                note("cook-status probe failed on the network; will try again on the next poll")
+                continue
             if status.get("cook_finished"):
                 pending.discard(cid)
                 emit("cooked", "", id=cid)

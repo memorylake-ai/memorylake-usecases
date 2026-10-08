@@ -191,6 +191,19 @@ memorylake agent bind agent-… --workspace ws-…
 memorylake agent send agent-… --project proj-… --text "Write a 6-bullet pre-kickoff brief for the Acme Corp pilot …"
 ```
 
+## If something goes wrong
+
+- **`could not connect to MemoryLake API … tls handshake eof`** (or a reset connection) while the
+  demo is polling: a dropped connection, often a local proxy getting in the way of the TLS handshake.
+  Nothing is lost: messages are stored the moment they are appended and extraction continues
+  server-side. Read-only commands (`get`, `list`, `cook-status`, `search`) are retried four times
+  with a short backoff; if it still fails, run `python3 demo.py` again and it resumes where it stopped.
+- **`401 … service account not found`** on connect: the key was deleted or belongs to the other
+  deployment (global vs. China). Create a new key in the console and check the endpoint.
+- **`402 QUOTA_EXCEEDED`** only appears in the optional agent step; the rest of the demo needs no quota.
+- **The project exists but the brief is empty**: an earlier run was interrupted before the facts were
+  extracted. `python3 demo.py` resumes; `python3 demo.py --reset` starts the account over.
+
 ## Adapting it to your own calls
 
 - Drop your own transcripts into `data/calls/*.json` using the same shape (`participants`, `turns`,
