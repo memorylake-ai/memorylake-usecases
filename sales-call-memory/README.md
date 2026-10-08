@@ -171,8 +171,9 @@ memorylake agent send agent-… --project proj-… --text "Write a 6-bullet pre-
   optional `rep_notes`) and your notes into `data/notes/*.md`. Add the speakers to `PEOPLE` in `demo.py`.
 - Keep speaker labels in the text of each turn (`Name (role, company): …`), as call recorders export
   them. That is how the extractor tells "we" from "you" when it writes the facts.
-- One project per account is the natural scope: `search --projects` is the account memory, and
-  deleting the project removes every call and document in it.
+- One project per account is the natural scope: `search --projects` is the account memory. Deleting
+  the project removes its documents and facts; conversations are workspace-level objects, so
+  `cleanup` deletes them explicitly (and `--reset` does the same before recreating the project).
 - For a real pipeline, append messages as they happen with a stable `--custom-id` per message; a retry
   returns the message created the first time instead of duplicating it.
 
