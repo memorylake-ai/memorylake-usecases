@@ -37,6 +37,9 @@ PR reviews, incident review ── conversations ──▶ dated facts; gotchas 
 Runs in about 6 minutes on a free personal account (most of it is MemoryLake parsing files and
 extracting facts). The only credential you need is a MemoryLake API key.
 
+**Watch it run** (real recordings, unedited):
+[CLI demo, 6:36](https://github.com/memorylake-ai/memorylake-usecases/releases/download/codebase-memory-v1/codebase-memory-cli-demo.mp4) · [Web companion demo, 7:35](https://github.com/memorylake-ai/memorylake-usecases/releases/download/codebase-memory-v1/codebase-memory-web-demo.mp4)
+
 ## Prerequisites
 
 1. **A MemoryLake account and API key.** Sign up at [app.memorylake.ai](https://app.memorylake.ai),
@@ -86,6 +89,8 @@ python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
 
 ![Web companion — the pre-commit check](https://github.com/memorylake-ai/memorylake-usecases/raw/main/codebase-memory/web/screenshot-check.png)
+
+[Watch the web companion demo (mp4, 7:35)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/codebase-memory-v1/codebase-memory-web-demo.mp4).
 
 Paste the key, press **Run demo**, and watch the docs tree upload, the two recursive imports expand,
 the review threads replay, each repo's facts arrive side by side, the pre-commit verdicts come in per
@@ -218,8 +223,10 @@ not say which project a hit came from, so the demo maps every fact and document 
 
 ```bash
 memorylake search "why was Kafka rejected as the ledger source of truth" --projects <ledger>,<checkout> --top-k 4 --types document
-memorylake search "retry a payment request idempotency key" --projects <ledger>,<checkout> --top-k 4
+memorylake search "browser payment page calling ledger-service directly" --projects <ledger>,<checkout> --top-k 4 --types fact
 ```
+
+From the CLI recording run:
 
 ```
   Q: Why doesn't the ledger use Kafka?
@@ -229,10 +236,18 @@ memorylake search "retry a payment request idempotency key" --projects <ledger>,
      [ledger-service] doc   0004-transactional-outbox.md  (Text)
 
   Q: What must a client do when it retries a payment?
-     [ledger-service] fact  Every POST to ledger-service must carry an Idempotency-Key header; a retry must reuse the key
-                            of the first attempt. Keys are kept for 72 hours (decided in the INC-2291 review on 2026-09-30).
-     [ledger-service] fact  The retry helper in checkout-api created a fresh Idempotency-Key per attempt. (as of 2026-09-30)
+     [ledger-service] fact  The checkout-api retry helper created a fresh Idempotency-Key per attempt, and the fix is merged
+                            so retries reuse the Idempotency-Key from the first attempt and retry at most twice. (as of 2026-09-30)
+     [ledger-service] fact  Every POST to ledger-service must carry an Idempotency-Key header; a retry must reuse the key …
      [checkout-web] doc   frontend-conventions.md  (Text)
+
+  Q: Can the payment page call ledger-service directly?
+     [checkout-web] fact  The browser must never call ledger-service directly and must go through the checkout-api BFF
+                          instead. (as of 2026-09-23, previously The receipt fetches the ledger entry directly from
+                          ledger-service to show the fee. as of 2026-09-23)
+     [ledger-service] fact  INC-2291: On 2026-09-28, 37 customers were charged twice because checkout retried POST /payments …
+     [checkout-web] fact  checkout-web must never call ledger-service from the browser; every payment call goes through
+                          the checkout-api BFF, which adds auth and the Idempotency-Key header.
 ```
 
 All five answers are written to `out/day-one-brief.md`.
