@@ -44,11 +44,14 @@ intake ─▶ party check: actor get · fact list --actors · search --projects 
                                                   ─▶ fact conflict resolve (keep_fact / trust_document) ─▶ fact conflict get = audit trail
 ```
 
+**Watch it run** (real recordings, unedited):
+[CLI demo, 6:25](https://github.com/memorylake-ai/memorylake-usecases/releases/download/conflict-check-memory-v1/conflict-check-memory-cli-demo.mp4) · [Web companion demo, 8:06](https://github.com/memorylake-ai/memorylake-usecases/releases/download/conflict-check-memory-v1/conflict-check-memory-web-demo.mp4)
+
 Runs in about 5 minutes on a free personal account. Most of that is pacing the writes and waiting for the detector.
 The only credential you need is a MemoryLake API key.
 
 **Measured** (all runs while building this demo, free account): the detector raised both conflicts on the Brightline intake in
-**6 of 6** fresh runs, within the 45-second wait. It raised **nothing** on the clean intake, the Penn intake or the corrected record in any of them (0 of 18 checks, and none showed up later).
+**8 of 8** fresh runs (both recordings included), within the 45-second wait. It raised **nothing** on the clean intake, the Penn intake or the corrected record in any of them (0 of 24 checks, and none showed up later).
 Conflict names and descriptions are written by the server and differ from run to run; the categories and the facts they name do not.
 
 ## Prerequisites
@@ -99,6 +102,10 @@ recognised from the conflicts that carry its text, so it is not recorded a secon
 ```bash
 python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
+
+![Web companion — the detector's two conflicts on the Brightline intake, with the closing-letter excerpt](https://github.com/memorylake-ai/memorylake-usecases/raw/main/conflict-check-memory/web/screenshot-conflicts.png)
+
+[Watch the web companion demo (mp4, 8:06)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/conflict-check-memory-v1/conflict-check-memory-web-demo.mp4).
 
 Paste the key, press **Run demo**, and watch the letters import, the matter index and the parties fill in, then each intake's party
 check and what the detector raises (with the document excerpt for `m2d`). The resolution and the audit trail follow.

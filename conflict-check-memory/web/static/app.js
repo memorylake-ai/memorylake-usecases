@@ -103,7 +103,10 @@
     const cores = (names || []).map((n) => n.replace(/\s+(LLC|Inc\.?|Co\.?)$/, "")).filter(Boolean);
     if (!cores.length) return esc(text);
     const hit = new RegExp(cores.map(reEsc).join("|"), "i");
-    return text.split("\n").map((line) => line.split(/(?<=[a-z0-9][.!?])\s+/).map((s) => hit.test(s) && !/^#/.test(s) && !s.trim().endsWith(",") ? `<mark>${esc(s)}</mark>` : esc(s)).join(" ")).join("\n");
+    // Headings, "To:"-style address lines and salutations are skipped, as in demo.py.
+    return text.split("\n").map((line) => { const t = line.trim();
+      if (!t || t.startsWith("#") || t.slice(0, 12).includes(":") || t.endsWith(",")) return esc(line);
+      return line.split(/(?<=[a-z0-9][.!?])\s+/).map((s) => hit.test(s) ? `<mark>${esc(s)}</mark>` : esc(s)).join(" "); }).join("\n");
   }
   function conflictCard(c, names) {
     return `<div class="card conflict"><div class="row spread"><div><span class="pill ${c.category === "m2d" ? "accent" : "err"}">${esc(c.category)} · ${esc(c.conflict_type)}</span> <b>${esc(c.name)}</b></div><span class="mono small faint">${esc(c.id)}</span></div>
