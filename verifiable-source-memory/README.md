@@ -48,12 +48,13 @@ question ─▶ search --projects <documents> --types document   → passages wi
           proj doc download → sha256 = pinned? → excerpt on that page's text layer?  →  out/citations-2026-10-08.json
 ```
 
-**Watch it run** (real recordings, unedited): CLI and web companion videos are being recorded.
+**Watch it run** (real recordings, unedited):
+[CLI demo, 3:10](https://github.com/memorylake-ai/memorylake-usecases/releases/download/verifiable-source-memory-v1/verifiable-source-memory-cli-demo.mp4) · [Web companion demo, 4:53](https://github.com/memorylake-ai/memorylake-usecases/releases/download/verifiable-source-memory-v1/verifiable-source-memory-web-demo.mp4)
 
 Runs in about 2–3 minutes on a free personal account (most of it is importing the four PDFs and MemoryLake reading
 the chat). The only credential you need is a MemoryLake API key.
 
-**Measured** (all runs while building this demo, free account): in **5 of 5** fresh runs, the 4 questions gave the same
+**Measured** (all runs while building and recording this demo, free account): in **7 of 7** fresh runs (both recordings included), the 4 questions gave the same
 outcome: 9 citations, each with the same page, and **9 of 9** checked out against the downloaded originals. The 2 dropped
 claims were ✗ in the control each time. Before the build, 5 questions searched 3 times each
 returned their passages in the same order 15 of 15 times. The chat produced at least one extracted fact about the overdraft opt-out every time (1 or 2), with
@@ -108,6 +109,12 @@ attributes are updated in place (`lib xattr set`).
 ```bash
 python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
+
+![Web companion — the draft checked claim by claim: a superseded figure replaced, an unsupported claim dropped, the answer as sent](https://github.com/memorylake-ai/memorylake-usecases/raw/main/verifiable-source-memory/web/screenshot-answer.png)
+
+![Web companion — a citation to a table row, with the cited page drawn from the PDF and MemoryLake's box over the table](https://github.com/memorylake-ai/memorylake-usecases/raw/main/verifiable-source-memory/web/screenshot-table-citation.png)
+
+[Watch the web companion demo (mp4, 4:53)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/verifiable-source-memory-v1/verifiable-source-memory-web-demo.mp4).
 
 Paste the key, press **Run demo**, and watch the sources and their provenance, Dana's chat and memory, then each answer:
 the draft checked claim by claim, the answer as sent, and one card per citation. Each card draws the **cited page from the
