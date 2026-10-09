@@ -1,0 +1,14 @@
+{
+  "custom_id": "mlu-ohr-chat-priya-preboarding",
+  "name": "Pre-boarding chat — Priya Nair",
+  "date": "2026-10-05T09:00:00Z",
+  "hire": "priya-nair",
+  "turns": [
+    ["priya-nair", "Hi! I start at Fernhill on October 12 as a senior software engineer on the robot-fleet team. I'm moving from Austin to Denver for the job and will work from the Denver office."],
+    ["assistant", "Welcome, Priya! I'll put together everything you need for your first week. Is there anything personal I should keep in mind while I prepare it?"],
+    ["priya-nair", "Two things. My partner and I are expecting our first child at the end of November, so I need to understand parental leave early. And I'd prefer a Linux laptop — I've used Ubuntu for ten years."],
+    ["assistant", "Noted: first child due at the end of November, and a Linux laptop. I'll pull the parental leave policy that applies to you before your first day."],
+    ["priya-nair", "Thanks. One more: I'll travel to the Boston lab for two days in my first month, so the travel expense rules would help too."],
+    ["assistant", "Got it — a two-day Boston lab trip in your first month. I'll include the travel meal rules in your onboarding brief."]
+  ]
+}

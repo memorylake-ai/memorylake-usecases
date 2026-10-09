@@ -1,0 +1,43 @@
+{
+  "_comment": "Every version of every policy is pinned verbatim to the policies project. Nothing is ever overwritten: the stamp at the start of each fact (policy id, version, effective date, sign-off, source document) is what lets an assistant pick the version in force on any date. Fictional company, demo data.",
+  "policies": [
+    {
+      "id": "POL-LEAVE",
+      "title": "Parental leave",
+      "versions": [
+        "POL-LEAVE v1 · Parental leave · effective 2026-01-01 · signed off 2025-12-10 by Dana Whitfield · source employee-handbook-2026-01.pdf §4.2 — 16 weeks of fully paid leave for the primary caregiver and 4 weeks for the secondary caregiver, after 6 months of service.",
+        "POL-LEAVE v2 · Parental leave · effective 2026-07-01 · signed off 2026-06-12 by Dana Whitfield · source policy-update-memo-2026-06.md §1 — 20 weeks of fully paid leave for every parent, available from the first day of employment."
+      ]
+    },
+    {
+      "id": "POL-MEAL",
+      "title": "Travel meal allowance",
+      "versions": [
+        "POL-MEAL v1 · Travel meal allowance · effective 2025-10-01 · signed off 2025-09-15 by Omar Reyes · source employee-handbook-2026-01.pdf §6.1 — USD 50 per travel day for meals, no receipts needed.",
+        "POL-MEAL v2 · Travel meal allowance · effective 2026-04-01 · signed off 2026-03-20 by Omar Reyes · source policy-update-memo-2026-06.md §2 — USD 65 per travel day for meals, no receipts needed.",
+        "POL-MEAL v3 · Travel meal allowance · effective 2026-09-15 · signed off 2026-09-01 by Omar Reyes · source policy-update-memo-2026-09.md §1 — USD 60 per travel day for meals; receipts required for any single meal above USD 25."
+      ]
+    },
+    {
+      "id": "POL-PTO",
+      "title": "Paid time off",
+      "versions": [
+        "POL-PTO v1 · Paid time off · effective 2026-01-01 · signed off 2025-12-10 by Dana Whitfield · source employee-handbook-2026-01.pdf §5.1 — 20 days of paid vacation per calendar year, prorated in the first year.",
+        "POL-PTO v2 · Paid time off · effective 2027-01-01 · signed off 2026-09-01 by Dana Whitfield · source policy-update-memo-2026-09.md §2 — 25 days of paid vacation per calendar year, prorated in the first year."
+      ]
+    },
+    {
+      "id": "POL-HOME",
+      "title": "Home-office stipend",
+      "versions": [
+        "POL-HOME v1 · Home-office stipend · effective 2026-01-01 · signed off 2025-12-10 by Dana Whitfield · source employee-handbook-2026-01.pdf §7.3 — a one-off USD 500 stipend for home-office equipment, claimable in the first 90 days."
+      ]
+    }
+  ],
+  "flows": [
+    "FLOW engineer · day-1 — 09:00 laptop pickup at the IT desk (Linux or macOS); 10:00 security and secrets-handling briefing; 11:30 meet the onboarding buddy; 14:00 dev-environment setup with the platform team; 16:30 first pull request: add yourself to the team page.",
+    "FLOW engineer · week-1 — shadow one on-call shift; read the architecture decision records for the robot-fleet services; ship one small bug fix to production by Friday.",
+    "FLOW intern · day-1 — 09:30 welcome session for the intern cohort; 10:30 laptop pickup (macOS); 11:00 meet your mentor; 13:00 intern programme overview and the summer project brief; 15:00 campus and lab safety tour.",
+    "FLOW intern · week-1 — pair with your mentor every afternoon; write a one-page plan for the summer project; present it at the Friday intern stand-up."
+  ]
+}
