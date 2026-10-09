@@ -32,7 +32,10 @@ session 2 (ChatGPT) ── conversation ──▶      │            conv fact-
 
 Runs in about 2–3 minutes on a free personal account. The only credential you need is a MemoryLake API key.
 
-**Watch it run** (real recordings, unedited): recording in progress.
+**Watch it run** (real recordings, unedited):
+[CLI demo, 3:45](https://github.com/memorylake-ai/memorylake-usecases/releases/download/preference-memory-v1/preference-memory-cli-demo.mp4) · [Web companion demo, 4:02](https://github.com/memorylake-ai/memorylake-usecases/releases/download/preference-memory-v1/preference-memory-web-demo.mp4).
+The CLI recording is one of the misses: session 2 recorded two excluded details (✗ ✗). The web recording is 6 of 6.
+See "How reliable is it?".
 
 ## Prerequisites
 
@@ -79,6 +82,10 @@ receipts again. Use `--reset` to watch the instruction take effect from scratch.
 ```bash
 python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
+
+![Web companion — session 2's receipt and the per-category checks](https://github.com/memorylake-ai/memorylake-usecases/raw/main/preference-memory/web/screenshot-receipt.png)
+
+[Watch the web companion demo (mp4, 4:02)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/preference-memory-v1/preference-memory-web-demo.mp4).
 
 Paste the key and press **Run demo**. The page shows both sessions as chats, session 1's receipt with every
 personal fact marked, the draft next to Priya's instruction, session 2's receipt with the ✓/✗ checks, and the
@@ -209,9 +216,9 @@ in brackets after every number", "two SLA misses in a month → red flag at the 
    ✓ Family & home          excluded → 0 facts recorded
    ✓ Health                 excluded → 0 facts recorded
    ✓ Diet                   excluded → 0 facts recorded
-   ✓ Week-over-week change after every number         recorded
-   ✓ Two SLA misses in a month → red flag at the top  recorded
-   ✓ Answers under 80 words (was 120)                 recorded
+   ✓ Week-over-week change after every number         recorded on Priya
+   ✓ Two SLA misses in a month → red flag at the top  recorded on Priya
+   ✓ Answers under 80 words (was 120)                 recorded on Priya
 
   6 of 6 as intended.
 ```
@@ -220,11 +227,14 @@ The changed preference is not a second fact. It is the same fact, updated, carry
 dates. That is the "preference evolution, versioned and auditable" row on the use case page.
 
 **How reliable is it?** The instruction is guidance for the extraction model, not a filter, so the demo
-judges every excluded category and prints a ✗ with the fact if one slips through. While building this we
-cooked 28 post-instruction sessions with this conversation. **25 recorded none of the excluded details.**
-All 3 that leaked came right after a `draft` that was asked for just before `set` (3 of 11 such sessions,
-against 0 of the other 17). So the demo asks for its draft in step 2, before any session. The receipt
-shows you each run as it happened.
+judges every excluded category and prints a ✗ with the fact if one slips through. A work rule counts only if it
+reached Priya herself (step 7 reads her actor), not just the project. While building and recording this we cooked 42
+post-instruction sessions of this conversation. **37 recorded none of the excluded details; 5 recorded the new
+family and health news anyway.** We could not find a common factor: we varied when `draft` is called,
+the actor descriptions, the conversation names and metadata, and the message timestamps, and leaks showed up
+on both sides. In the leaking runs the work rules also tended to land on the project instead of on her. The CLI
+recording above is one of the 5. It was made with an earlier version of the rule check, which counted the
+project-only 80-words fact as recorded (it shows 4 of 6); the current demo marks that row ✗ too (3 of 6). The receipt shows you each run as it happened.
 
 ### 7. Every model — the same bytes
 
@@ -275,7 +285,7 @@ add your model name and key to send them.
 - **`tls handshake eof` / `could not connect`** while polling: a dropped connection. Read-only commands
   retry four times; otherwise re-run `python3 demo.py` and it resumes.
 - **`401 service account not found`**: the key was deleted or belongs to the other deployment.
-- **Step 6 shows ✗**: the extractor recorded an excluded detail despite the instruction (3 of 28 sessions in
+- **Step 6 shows ✗**: the extractor recorded an excluded detail despite the instruction (5 of 42 sessions in
   our runs; see "How reliable is it?"). The fact is printed; `python3 demo.py --reset` runs the story again.
 - **Step 4 shows fewer personal facts**: the default, too, is a model; it usually keeps all three.
 - **Facts are worded differently, or a fact is in another language**: extraction is server-side and varies between

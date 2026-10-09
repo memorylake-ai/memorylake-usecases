@@ -127,7 +127,7 @@
         ${x.event === "UPDATE" && x.old ? `<div class="was">was: ${esc(x.old)}</div>` : ""}</span></div>`).join("") || '<p class="muted">nothing recorded</p>'}</div>
       <h2>She said it in this session, so was it recorded? <span class="pill ${r.ok === r.total ? "ok" : "warn"}">${r.ok} of ${r.total} as intended</span></h2>
       <div class="card checks">${r.checks.map((c) => `<div class="check ${c.ok ? "ok" : "bad"}"><span class="mark">${c.ok ? "✓" : "✗"}</span>
-        <span><b>${esc(c.label)}</b> <span class="muted small">${c.kind === "excluded" ? (c.ok ? "excluded → 0 facts recorded" : `excluded → ${c.facts.length} recorded`) : (c.ok ? "recorded" : "not recorded")}</span>
+        <span><b>${esc(c.label)}</b> <span class="muted small">${c.kind === "excluded" ? (c.ok ? "excluded → 0 facts recorded" : `excluded → ${c.facts.length} recorded`) : (c.verdict || (c.ok ? "recorded" : "not recorded"))}</span>
         ${!c.ok && c.facts.length ? c.facts.map((f) => `<div class="was">${esc(f)}</div>`).join("") : ""}</span></div>`).join("")}</div>`;
   }
 

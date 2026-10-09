@@ -305,8 +305,6 @@ def setup(cli: CLI, story: dict, reset: bool) -> dict:
     else:
         note("Priya's fact instruction is empty → MemoryLake uses its built-in default")
     # What does a person's memory record by default? Ask the server for a draft (nothing is saved).
-    # Asked here, before any session: in our runs, a draft asked just before `set` was followed by more
-    # sessions that ignored the new instruction (3 of 11 against 0 of 12), so the demo keeps them apart.
     ids["draft"] = (cli.run("fact", "instruction", "draft", "--actor", ids["person"], scoped=True) or {}).get("fact_instruction") or ""
     emit("text", "\n  `fact instruction draft` — what a person's memory records, in MemoryLake's words (nothing saved):\n\n"
          + "\n".join("    " + l for l in ids["draft"].strip().splitlines()))
@@ -477,9 +475,13 @@ def check_session2(cli: CLI, ids: dict, conv_id: str, story: dict) -> dict:
         lines.append(f"   {'✓' if not hit else '✗'} {c['label']:<22} excluded → {'0 facts recorded' if not hit else f'{len(hit)} recorded:'}")
         lines += [f"        {r['fact']}" for r in hit]
     for e in story["expected_rules"]:
+        # A rule counts only if it reached her profile: that is what step 7 hands to every model.
         hit = [r for r in rows if matches(r["fact"], e["markers"])]
-        checks.append(dict(kind="rule", key=e["key"], label=e["label"], ok=bool(hit), facts=[r["fact"] for r in hit]))
-        lines.append(f"   {'✓' if hit else '✗'} {e['label']:<48} {'recorded' if hit else 'not recorded'}")
+        mine = [r for r in hit if r["scope"] == "Priya"]
+        verdict = "recorded on Priya" if mine else ("only on the project, not on Priya" if hit else "not recorded")
+        checks.append(dict(kind="rule", key=e["key"], label=e["label"], ok=bool(mine), facts=[r["fact"] for r in hit],
+                           verdict=verdict))
+        lines.append(f"   {'✓' if mine else '✗'} {e['label']:<48} {verdict}")
     ok = sum(c["ok"] for c in checks)
     lines.append(f"\n  {ok} of {len(checks)} as intended.")
     emit("text", "\n".join(lines))
@@ -606,7 +608,7 @@ def run_pipeline(cli: CLI, reset: bool = False) -> dict:
 
     banner(7, TOTAL, "Every model — one profile, the same bytes in Claude, OpenAI and Gemini")
     every_model(cli, ids, story)
-    note(f"payloads written to {OUT}/")
+    note(f"payloads written to {os.path.relpath(OUT)}/")
     return result
 
 
