@@ -31,7 +31,9 @@ brand rules ── fact add ──▶ pinned facts ─────────�
 
 Runs in about 3 minutes on a free personal account. The only credential you need is a MemoryLake API key.
 
-**Watch it run** (real recordings, unedited): recording in progress.
+**Watch it run** (real recordings, unedited):
+[CLI demo, 4:06](https://github.com/memorylake-ai/memorylake-usecases/releases/download/brand-asset-memory-v1/brand-asset-memory-cli-demo.mp4) · [Web companion demo, 5:04](https://github.com/memorylake-ai/memorylake-usecases/releases/download/brand-asset-memory-v1/brand-asset-memory-web-demo.mp4).
+The CLI recording shows one miss (✗, 4/5); the web recording 5/5 — see "Ranking is sensitive to wording".
 
 ## Prerequisites
 
@@ -79,6 +81,10 @@ that stores the review.
 ```bash
 python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
+
+![Web companion — the designer's answers, each with the picture that won](https://github.com/memorylake-ai/memorylake-usecases/raw/main/brand-asset-memory/web/screenshot-answers.png)
+
+[Watch the web companion demo (mp4, 5:04)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/brand-asset-memory-v1/brand-asset-memory-web-demo.mp4).
 
 Paste the key and press **Run demo**. The page shows the six images as they are processed, what
 MemoryLake saw in each one, the review with its pictures inline, every answer with the picture that won
@@ -236,8 +242,11 @@ description under it.
 With all six images in the project, each of the five questions in `demo.py` put the expected image at
 rank 1 in 5 of 5 tries; "the Fernway logo: a fern inside a green circle" put the same logo at rank 4 in
 5 of 5, and "the current Fernway logo to put on packaging" put it at rank 1 in some runs and rank 4 in
-others. The colour palette (the image with the most text on it) is the usual runner-up. If a
-question misses, the demo prints ✗ with the file it expected instead of hiding it.
+others. The colour palette (the image with the most text on it) is the usual runner-up, and right after
+import it sometimes ranks first: across four fresh full runs with these questions, 19 of 20 answers
+had the expected image at rank 1 (5/5, 5/5, 4/5, 5/5); the one miss — in the CLI recording — put the
+palette above the bag. If a question misses, the demo prints ✗ with the file it expected instead of
+hiding it.
 
 **7. Retire the old wordmark.** `proj doc delete` removes the document and everything MemoryLake
 derived from it; the Library file stays. The same question before and after:
