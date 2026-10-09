@@ -33,7 +33,8 @@ Notion, Fathom exports (.docx) ── lib upload + proj doc import ──▶ doc
 
 Runs in about 4 minutes on a free personal account. The only credential you need is a MemoryLake API key.
 
-**Watch it run** (real recordings, unedited): recording in progress.
+**Watch it run** (real recordings, unedited):
+[CLI demo, 4:50](https://github.com/memorylake-ai/memorylake-usecases/releases/download/meeting-memory-v1/meeting-memory-cli-demo.mp4) · [Web companion demo, 5:35](https://github.com/memorylake-ai/memorylake-usecases/releases/download/meeting-memory-v1/meeting-memory-web-demo.mp4)
 
 ## Prerequisites
 
@@ -82,6 +83,10 @@ vendor call again and step 8 deletes it again.
 ```bash
 python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
+
+![Web companion — the decision chain, with the new cutover date and the one it replaced](https://github.com/memorylake-ai/memorylake-usecases/raw/main/meeting-memory/web/screenshot-chain.png)
+
+[Watch the web companion demo (mp4, 5:35)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/meeting-memory-v1/meeting-memory-web-demo.mp4).
 
 Paste the key, press **Run demo**, and watch the three meetings replay one after another with each
 speaker's avatar, the action items get pinned and closed, the Word exports get parsed, the decision chain
