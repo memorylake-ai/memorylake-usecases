@@ -1,0 +1,10 @@
+{
+  "custom_id": "mlu-abr-2026-10-05",
+  "label": "Complaint",
+  "name": "Support chat — replacement went to a closed office",
+  "date": "2026-10-05T09:00:00Z",
+  "turns": [
+    {"speaker": "lena", "text": "The replacement went to Lyon, but we moved out early: the Lyon office closed on October 2 and nobody was there to sign. From now on ship only to Grenoble: Brightmoor Labs, 9 Rue Felix Viallet, 38000 Grenoble."},
+    {"speaker": "quill", "text": "I am sorry. I have re-shipped the replacement to 9 Rue Felix Viallet, 38000 Grenoble, and the Lyon address will not be used again."}
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "custom_id": "mlu-abr-2026-10-01",
+  "label": "Moving notice",
+  "name": "Support chat — lab is moving out of Lyon",
+  "date": "2026-10-01T09:00:00Z",
+  "turns": [
+    {"speaker": "lena", "text": "Heads-up for future shipments: we are moving the lab out of Lyon. The Lyon office at 22 Quai Perrache closes at the end of October, so until then keep shipping to Lyon. The new site is in Grenoble; I will confirm the address once the lease is signed."},
+    {"speaker": "quill", "text": "Thanks. Noted: keep shipping to 22 Quai Perrache, Lyon until the end of October, and to Grenoble after that once you confirm the address."}
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "custom_id": "mlu-abr-2026-09-20",
+  "label": "First report",
+  "name": "Support chat — QL-40 jams with E-41",
+  "date": "2026-09-20T09:00:00Z",
+  "turns": [
+    {"speaker": "lena", "text": "Our Quillstone QL-40 label printer in the lab keeps jamming with error E-41. Serial QS-40-88217."},
+    {"speaker": "quill", "text": "Sorry about that. A firmware update usually clears E-41; if it comes back I can ship a replacement under warranty. Where should hardware go?"},
+    {"speaker": "lena", "text": "Ship any hardware to our Lyon office: Brightmoor Labs, 22 Quai Perrache, 69002 Lyon. We are on the Team plan, billed annually."},
+    {"speaker": "quill", "text": "Noted: hardware goes to 22 Quai Perrache, 69002 Lyon; Team plan, annual billing. The firmware update is on its way."}
+  ]
+}
