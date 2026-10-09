@@ -299,10 +299,10 @@ fact, the memory at that moment, every change since (with conversation id, messa
 - **“this CLI cannot set an actor type”**: CLI v20261009 removed `actor create --type`, so Quill is created
   as an ordinary (HUMAN) actor and picks up a couple of facts about itself. The replay only reads the
   project and Lena, so it is not affected.
-- **The extracted facts differ between runs.** Extraction is server-side and varies. In our runs the
-  account had 10 live facts each time, but the address arrived either as one fact rewritten in place
-  (Lyon → Grenoble) or as a new Grenoble fact next to the Lyon one. The replay and the 6/6 check do not
-  depend on which.
+- **The extracted facts differ between runs.** Extraction is server-side and varies. In our four runs
+  the address arrived either as one fact rewritten in place (Lyon → Grenoble) or as a new Grenoble fact
+  next to the Lyon one, and once a fact came out in German. The replay and the 6/6 check do not depend on
+  any of that: they compare fact ids and exact text.
 - **“nothing left to forget” on a re-run**: the manual fixes were applied by the first run. They stay
   in the history, so the diff still shows them.
 - **`tls handshake eof` / `could not connect`** while polling: a dropped connection. Read-only commands
