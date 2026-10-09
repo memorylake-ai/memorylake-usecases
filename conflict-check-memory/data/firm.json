@@ -1,0 +1,61 @@
+{
+  "firm": "Hollis & Reyes LLP",
+  "today": "2026-10-08",
+  "associate": {"name": "Theo Lindqvist", "role": "Associate (joined September 2026), running intake today"},
+  "partner": {"name": "Elena Hollis", "role": "Senior partner, on leave until November"},
+  "matters": [
+    "Matter 2019-014 (closed 2020-06): Hollis & Reyes LLP represented Brightline Properties LLC, defending it against tenant Dovetail Bakery in a commercial lease dispute. Responsible partner: Elena Hollis.",
+    "Matter 2021-007 (closed 2022-03): Hollis & Reyes LLP represented Marlow Health Partners in an employment arbitration; adverse party: former COO Gregory Penn. Responsible partner: Marcus Reyes.",
+    "Matter 2022-031 (closed 2023-01): Hollis & Reyes LLP represented Quarry Lane Builders in a construction lien claim against Westbrook Holdings. Responsible partner: Elena Hollis.",
+    "Matter 2023-012 (open): Hollis & Reyes LLP represents Northgate Logistics as plaintiff against Carver Freight Inc. in a breach-of-contract action. Responsible partner: Marcus Reyes.",
+    "Matter 2024-005 (closed 2024-11): Hollis & Reyes LLP represented Ines Okafor in the sale of her dental practice to Brightway Dental Group. Responsible partner: Priya Natarajan.",
+    "Witness: in Matter 2021-007 the firm deposed Lena Brandt, CFO of Marlow Health Partners."
+  ],
+  "letters": [
+    {"file": "letters/closing-letter-2019-014.md", "matter": "2019-014", "title": "Closing letter to Brightline Properties LLC (2020-06-18)"},
+    {"file": "letters/engagement-letter-2021-007.md", "matter": "2021-007", "title": "Engagement letter from Marlow Health Partners (2021-04-12)"}
+  ],
+  "parties": [
+    {"slug": "brightline-properties", "name": "Brightline Properties LLC", "role": "client", "status": "former", "matter": "2019-014", "fact": "Brightline Properties LLC: former client of Hollis & Reyes LLP (Matter 2019-014, commercial lease dispute against Dovetail Bakery, closed 2020-06)."},
+    {"slug": "dovetail-bakery", "name": "Dovetail Bakery", "role": "adverse", "status": "former", "matter": "2019-014", "fact": "Dovetail Bakery: adverse party to the firm's client Brightline Properties LLC in Matter 2019-014 (closed 2020-06)."},
+    {"slug": "marlow-health-partners", "name": "Marlow Health Partners", "role": "client", "status": "former", "matter": "2021-007", "fact": "Marlow Health Partners: former client of Hollis & Reyes LLP (Matter 2021-007, employment arbitration against Gregory Penn, closed 2022-03)."},
+    {"slug": "gregory-penn", "name": "Gregory Penn", "role": "adverse", "status": "former", "matter": "2021-007", "fact": "Gregory Penn: adverse party to the firm's client Marlow Health Partners in Matter 2021-007 (closed 2022-03)."},
+    {"slug": "lena-brandt", "name": "Lena Brandt", "role": "witness", "status": "former", "matter": "2021-007", "fact": "Lena Brandt: CFO of Marlow Health Partners, deposed by the firm as a witness in Matter 2021-007."},
+    {"slug": "quarry-lane-builders", "name": "Quarry Lane Builders", "role": "client", "status": "former", "matter": "2022-031", "fact": "Quarry Lane Builders: former client of Hollis & Reyes LLP (Matter 2022-031, construction lien claim, closed 2023-01)."},
+    {"slug": "westbrook-holdings", "name": "Westbrook Holdings", "role": "adverse", "status": "former", "matter": "2022-031", "fact": "Westbrook Holdings: adverse party to the firm's client Quarry Lane Builders in Matter 2022-031 (closed 2023-01)."},
+    {"slug": "northgate-logistics", "name": "Northgate Logistics", "role": "client", "status": "current", "matter": "2023-012", "fact": "Northgate Logistics: current client of Hollis & Reyes LLP (Matter 2023-012, plaintiff against Carver Freight Inc., open)."},
+    {"slug": "carver-freight", "name": "Carver Freight Inc.", "role": "adverse", "status": "current", "matter": "2023-012", "fact": "Carver Freight Inc.: current adverse party to the firm's client Northgate Logistics in Matter 2023-012 (open)."},
+    {"slug": "ines-okafor", "name": "Ines Okafor", "role": "client", "status": "former", "matter": "2024-005", "fact": "Ines Okafor: former client of Hollis & Reyes LLP (Matter 2024-005, sale of her dental practice, closed 2024-11)."},
+    {"slug": "brightway-dental-group", "name": "Brightway Dental Group", "role": "adverse", "status": "former", "matter": "2024-005", "fact": "Brightway Dental Group: counterparty (buyer) to the firm's client Ines Okafor in Matter 2024-005 (closed 2024-11)."}
+  ],
+  "intakes": [
+    {
+      "key": "i1", "date": "2026-10-06", "title": "Harbor & Pine Coffee v. Tallis Roasting Co.", "matter": "trademark dispute",
+      "client": {"name": "Harbor & Pine Coffee", "slug": "harbor-and-pine-coffee"},
+      "adverse": [{"name": "Tallis Roasting Co.", "slug": "tallis-roasting"}],
+      "record": "Intake 2026-10-06: prospective client Harbor & Pine Coffee; adverse party Tallis Roasting Co.; trademark dispute. Conflict search found no prior relationship with either party.",
+      "expect": "clear"
+    },
+    {
+      "key": "i2", "date": "2026-10-07", "title": "Gregory Penn v. Marlow Health Partners", "matter": "unpaid severance claim",
+      "client": {"name": "Gregory Penn", "slug": "gregory-penn"},
+      "adverse": [{"name": "Marlow Health Partners", "slug": "marlow-health-partners"}],
+      "record": "Intake 2026-10-07: prospective client Gregory Penn wants to sue Marlow Health Partners for unpaid severance.",
+      "expect": "conflict"
+    },
+    {
+      "key": "i3", "date": "2026-10-08", "title": "Dovetail Bakery v. Brightline Properties LLC", "matter": "new lease dispute",
+      "client": {"name": "Dovetail Bakery", "slug": "dovetail-bakery"},
+      "adverse": [{"name": "Brightline Properties LLC", "slug": "brightline-properties"}],
+      "record": "Intake 2026-10-08: prospective client Dovetail Bakery wants to sue Brightline Properties LLC over a new lease. Intake form: the firm has no prior relationship with Brightline Properties LLC.",
+      "form_note": "The intake form was filled from the CRM, which only goes back to 2021.",
+      "expect": "conflict",
+      "corrected": "Intake 2026-10-08 conflict check result: Brightline Properties LLC is a former client of Hollis & Reyes LLP (Matter 2019-014). The Dovetail Bakery matter is on hold pending Brightline's informed written consent and partner review."
+    }
+  ],
+  "rules": [
+    "A party that is or was our client may not be the adverse party in a new matter without its informed written consent.",
+    "A current adverse party may not become our client while that matter is open.",
+    "A witness we deposed is flagged for partner review."
+  ]
+}
