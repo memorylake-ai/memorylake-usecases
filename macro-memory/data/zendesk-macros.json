@@ -1,0 +1,34 @@
+{
+  "exported_from": "Zendesk (Larkspur Gear support, demo export)",
+  "exported_at": "2026-10-08",
+  "macros": [
+    {
+      "id": 360041,
+      "title": "Refund request",
+      "body": "Thanks for reaching out about a refund. You can get a full refund within 30 days of delivery; just reply with your order number and we will take care of it.",
+      "tags": ["refunds"],
+      "usage_30d": 412
+    },
+    {
+      "id": 360042,
+      "title": "Shipping cost",
+      "body": "Standard shipping is free on orders over 75 dollars; smaller orders pay a flat 6 dollar shipping fee.",
+      "tags": ["shipping"],
+      "usage_30d": 298
+    },
+    {
+      "id": 360043,
+      "title": "Damaged item",
+      "body": "Sorry your item arrived damaged! We will send a free replacement right away. For damaged items we replace the item rather than refund it.",
+      "tags": ["damaged"],
+      "usage_30d": 87
+    },
+    {
+      "id": 360044,
+      "title": "Password reset",
+      "body": "We just emailed you a password reset link. The link expires after 24 hours, and the link never expires, so you can use it whenever you are ready.",
+      "tags": ["account"],
+      "usage_30d": 156
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+macro_id,name,text,topics,uses_last_30_days
+ic-7101,Call me back,"Our phone team is available every day, 7am to 9pm Central Time, including weekends. Pick a time that works for you and we will call you back.",phone,203
+ic-7102,Damaged item (Trailhead Plus),"As a Trailhead Plus member, you can choose a full refund for a damaged item and keep the item. No need to send it back.",damaged,41
+ic-7103,Where is my order,"Orders ship within 2 business days. You will get a tracking link by email as soon as your order leaves our warehouse.",shipping,377

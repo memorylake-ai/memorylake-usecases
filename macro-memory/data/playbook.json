@@ -1,0 +1,80 @@
+{
+  "company": "Larkspur Gear",
+  "lead": {
+    "name": "Priya Raman",
+    "role": "Support Lead"
+  },
+  "today": "2026-10-10",
+  "policy": {
+    "current": "policy-v3.md",
+    "next": "policy-v4.md",
+    "next_effective": "2026-11-01",
+    "changed_sections": [
+      "shipping",
+      "phone"
+    ]
+  },
+  "macros": {
+    "refund-request": {
+      "expect": [
+        "m2d"
+      ],
+      "plan": "trust_document",
+      "v2": "Thanks for reaching out about a refund. You can get a full refund within 14 days of delivery; after that we can offer store credit. Just reply with your order number and we will take care of it.",
+      "why": "the macro still says 30 days; policy v3 cut the window to 14 days"
+    },
+    "password-reset": {
+      "expect": [
+        "self"
+      ],
+      "plan": "edit_fact",
+      "fixed": "We just emailed you a password reset link. The link expires after 24 hours, so please use it today; if it expires, reply here and we will send a new one.",
+      "why": "the link cannot both expire after 24 hours and never expire"
+    },
+    "call-me-back": {
+      "expect": [
+        "m2d"
+      ],
+      "plan": "trust_fact",
+      "why": "the extended phone hours were approved on 2026-10-06 and go live with policy v4; the macro is right, the policy document is behind"
+    },
+    "damaged-item": {
+      "expect": [
+        "m2d",
+        "m2m"
+      ],
+      "plan": "trust_document",
+      "with": "damaged-item-trailhead-plus",
+      "v2": "Sorry your item arrived damaged! We will send a free replacement right away. Trailhead Plus members can choose a full refund instead and keep the item.",
+      "why": "the macro states \"replace rather than refund\" as a rule for everyone; the policy lets Trailhead Plus members choose a refund"
+    },
+    "damaged-item-trailhead-plus": {
+      "expect": [
+        "m2m"
+      ]
+    },
+    "shipping-cost": {
+      "expect": [],
+      "after_v4": "m2d",
+      "v2": "Standard shipping is free on orders over 50 dollars; smaller orders pay a flat 6 dollar shipping fee.",
+      "why": "policy v4 lowers the free-shipping threshold from 75 to 50 dollars"
+    },
+    "where-is-my-order": {
+      "expect": []
+    }
+  },
+  "questions": [
+    {
+      "q": "A customer's order came to 60 dollars. Do they pay for shipping?",
+      "macro": "shipping-cost"
+    },
+    {
+      "q": "Customer wants their money back 20 days after delivery",
+      "macro": "refund-request"
+    },
+    {
+      "q": "Can someone call me on Saturday?",
+      "macro": "call-me-back"
+    }
+  ]
+}
