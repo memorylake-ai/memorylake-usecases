@@ -1,0 +1,204 @@
+{
+  "person": {
+    "key": "priya",
+    "custom_id": "priya",
+    "display": "Priya Raman",
+    "role": "operations lead, Halden Freight"
+  },
+  "assistant": {
+    "custom_id": "assistant",
+    "display": "Assistant",
+    "role": "the AI assistant Priya uses in every tool"
+  },
+  "sessions": [
+    {
+      "key": "s1",
+      "custom_id": "session-1",
+      "tool": "Claude",
+      "date": "2026-09-28T09:00:00Z",
+      "title": "Monday planning",
+      "turns": [
+        [
+          "user",
+          "Priya Raman (operations lead, Halden Freight): Morning. Before we start: keep answers short, bullet points, no more than about 120 words. I read everything on my phone between site visits."
+        ],
+        [
+          "bot",
+          "Understood — short bullets, under 120 words."
+        ],
+        [
+          "user",
+          "Priya Raman: A bit about me so you have context: I live in Rotterdam with my partner and our two kids, and I'm vegetarian."
+        ],
+        [
+          "bot",
+          "Thanks, noted."
+        ],
+        [
+          "user",
+          "Priya Raman: I'm also recovering from knee surgery, so until November I avoid site visits that involve stairs."
+        ],
+        [
+          "bot",
+          "Understood."
+        ],
+        [
+          "user",
+          "Priya Raman: Standing context: every Monday at 09:00 I send the carrier scorecard to the regional directors. On-time delivery percentage always goes first, cost per pallet second."
+        ],
+        [
+          "bot",
+          "Noted: Monday 09:00 scorecard, on-time % first, then cost per pallet."
+        ],
+        [
+          "user",
+          "Priya Raman: Can you convert 14:30 Rotterdam time to Singapore time? Just for this afternoon's call."
+        ],
+        [
+          "bot",
+          "14:30 in Rotterdam is 20:30 in Singapore."
+        ],
+        [
+          "user",
+          "Priya Raman: Also, always write dates as day/month/year, never month/day."
+        ],
+        [
+          "bot",
+          "Got it — day/month/year."
+        ]
+      ]
+    },
+    {
+      "key": "s2",
+      "custom_id": "session-2",
+      "tool": "ChatGPT",
+      "date": "2026-10-05T09:00:00Z",
+      "title": "Carrier review",
+      "turns": [
+        [
+          "user",
+          "Priya Raman: Hi, new tool, same me. Quick personal update first: my mother is moving in with us next month, and my GP has put me on new medication that makes my mornings slow."
+        ],
+        [
+          "bot",
+          "Thanks for telling me."
+        ],
+        [
+          "user",
+          "Priya Raman: Work rule from now on: whenever you give me a number, put the week-over-week change in brackets after it."
+        ],
+        [
+          "bot",
+          "Will do — week-over-week change in brackets."
+        ],
+        [
+          "user",
+          "Priya Raman: And when a carrier misses SLA twice in a month, flag it in red at the top. That is my number one priority this quarter."
+        ],
+        [
+          "bot",
+          "Two SLA misses in a month → red flag at the top."
+        ],
+        [
+          "user",
+          "Priya Raman: One change to my format: keep answers under 80 words from now on, not 120."
+        ],
+        [
+          "bot",
+          "Under 80 words from now on."
+        ],
+        [
+          "user",
+          "Priya Raman: Weather is terrible today, by the way."
+        ],
+        [
+          "bot",
+          "Stay dry!"
+        ]
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "key": "family",
+      "label": "Family & home",
+      "markers": [
+        "partner",
+        "kids",
+        "children",
+        "mother",
+        "moving in",
+        "lives in",
+        "Rotterdam with",
+        "daughter",
+        "son",
+        "husband",
+        "wife",
+        "family"
+      ]
+    },
+    {
+      "key": "health",
+      "label": "Health",
+      "markers": [
+        "knee",
+        "surgery",
+        "medication",
+        "GP",
+        "physio",
+        "mornings slow"
+      ]
+    },
+    {
+      "key": "diet",
+      "label": "Diet",
+      "markers": [
+        "vegetarian",
+        "vegan"
+      ]
+    }
+  ],
+  "expected_rules": [
+    {
+      "key": "wow",
+      "label": "Week-over-week change after every number",
+      "markers": [
+        "week-over-week",
+        "week over week",
+        "semana a semana"
+      ]
+    },
+    {
+      "key": "sla",
+      "label": "Two SLA misses in a month → red flag at the top",
+      "markers": [
+        "SLA"
+      ]
+    },
+    {
+      "key": "words",
+      "label": "Answers under 80 words (was 120)",
+      "markers": [
+        "80 words"
+      ]
+    }
+  ],
+  "tools": [
+    {
+      "key": "anthropic",
+      "label": "Claude (Anthropic Messages API)",
+      "file": "payload-anthropic.json"
+    },
+    {
+      "key": "openai",
+      "label": "ChatGPT (OpenAI Chat Completions)",
+      "file": "payload-openai.json"
+    },
+    {
+      "key": "gemini",
+      "label": "Gemini (Google generateContent)",
+      "file": "payload-gemini.json"
+    }
+  ],
+  "first_message": "Draft my Monday note to the regional directors on last week's carriers."
+}
