@@ -58,7 +58,10 @@ process is.**
             changes after that moment ─▶ diff + out/replay-call-ship-0001.json
 ```
 
-**Watch it run** (real recordings, unedited): *recording in progress*
+**Watch it run** (real recordings, unedited):
+
+- [CLI demo (mp4, 6:24)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/agent-bug-replay-v1/agent-bug-replay-cli-demo.mp4): `git clone`, `python3 demo.py`, `python3 demo.py replay`, `python3 demo.py cleanup`
+- [Web companion demo (mp4, 6:25)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/agent-bug-replay-v1/agent-bug-replay-web-demo.mp4)
 
 ## Prerequisites
 
@@ -108,6 +111,11 @@ find nothing left to do on a second run, and the replay comes out the same.
 ```bash
 python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
+
+![Web companion — memory pinned to the agent's tool call: the address on file then, and 6/6 replayed facts identical to what the agent recorded](https://github.com/memorylake-ai/memorylake-usecases/raw/main/agent-bug-replay/web/screenshot-pinned.png)
+
+[Watch the web companion demo (mp4, 6:25)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/agent-bug-replay-v1/agent-bug-replay-web-demo.mp4). More screenshots:
+[then vs today](web/screenshot-today.png) · [the diff](web/screenshot-diff.png).
 
 Paste the key and press **Run demo**. As it runs you see:
 
