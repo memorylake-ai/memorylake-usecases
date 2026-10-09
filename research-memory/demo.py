@@ -779,7 +779,9 @@ if __name__ == "__main__":
         print(f"\nerror: {e}", file=sys.stderr)
         sys.exit(1)
     except CLIError as e:
-        print(f"\ncommand failed: {shlex.join(e.cmd) if e.cmd else '(memorylake)'}\n{e}", file=sys.stderr)
+        # The failing command can be `auth login --api-key …`: never print the key.
+        shown = re.sub(r"sk-[A-Za-z0-9_-]{8,}", "sk-…", shlex.join(e.cmd)) if e.cmd else "(memorylake)"
+        print(f"\ncommand failed: {shown}\n{e}", file=sys.stderr)
         sys.exit(e.rc or 1)
     except KeyboardInterrupt:
         sys.exit(130)
