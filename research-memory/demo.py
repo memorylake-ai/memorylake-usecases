@@ -548,6 +548,8 @@ def show_answer(heading: str, res: dict, docs_shown: int = 3) -> None:
         lines.append(f"     fact  {f['fact']}")
     for d in res["documents"][:docs_shown]:
         summary = (d.get("summary") or "").replace("\n", " ").strip()
+        if d["name"] and summary.startswith(d["name"]):  # workbook summaries repeat the file name first
+            summary = summary[len(d["name"]):].strip()
         if len(summary) > 150:
             summary = summary[:147].rstrip() + "…"
         lines.append(f"     doc   {d['name']}  ({where(d)})")

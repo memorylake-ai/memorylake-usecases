@@ -28,6 +28,9 @@ Q3 ─ PDFs, Excel, notes ── lib upload + proj doc import ──▶ document
 
 Runs in about 3 minutes on a free personal account. The only credential you need is a MemoryLake API key.
 
+**Watch it run** (real recordings, unedited):
+[CLI demo, 3:51](https://github.com/memorylake-ai/memorylake-usecases/releases/download/research-memory-v1/research-memory-cli-demo.mp4) · [Web companion demo, 4:03](https://github.com/memorylake-ai/memorylake-usecases/releases/download/research-memory-v1/research-memory-web-demo.mp4)
+
 ## Prerequisites
 
 1. **A MemoryLake account and API key.** Sign up at [app.memorylake.ai](https://app.memorylake.ai),
@@ -77,6 +80,8 @@ python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
 
 ![Web companion — the memory view with the revised assumption](https://github.com/memorylake-ai/memorylake-usecases/raw/main/research-memory/web/screenshot-memory.png)
+
+[Watch the web companion demo (mp4, 4:03)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/research-memory-v1/research-memory-web-demo.mp4).
 
 Paste the key, press **Run demo**, and watch the files get parsed, the two reviews replay, the facts
 arrive with the revision highlighted, the Q4 answers fill in with their PDF and Excel sources, and the
