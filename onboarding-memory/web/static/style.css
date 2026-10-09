@@ -259,7 +259,8 @@ table.audit th { color: var(--muted); font-weight: 600; font-size: 12.5px; borde
 .card:has(table.audit) { overflow-x: auto; }
 ol.plan { margin: 8px 0; padding-left: 20px; }
 ol.plan li { margin: 3px 0; }
-.ask-form input[type="date"] { flex: 0 0 auto; }
+.ask-form input[type="date"] { flex: 0 0 auto; width: 170px; }
+.ask-form input#ask-q { flex: 1 1 auto; width: auto; }
 @media (max-width: 700px) { table.audit td:nth-child(4), table.audit th:nth-child(4) { display: none; } }
 @media (max-width: 700px) { .ask-form { flex-wrap: wrap; } .ask-form input#ask-q { flex: 1 1 100%; } }
 table.audit td:nth-child(2) { white-space: nowrap; }

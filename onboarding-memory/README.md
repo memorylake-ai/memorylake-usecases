@@ -48,7 +48,8 @@ day 1: actor update --tags stage:day-1 → actor list --tags stage:day-1 → sea
 Runs in about 2½ minutes on a free personal account (most of it is MemoryLake parsing the files and
 extracting facts from the chat). The only credential you need is a MemoryLake API key.
 
-**Watch it run** (real recordings, unedited): recording in progress.
+**Watch it run** (real recordings, unedited):
+[CLI demo, 3:17](https://github.com/memorylake-ai/memorylake-usecases/releases/download/onboarding-memory-v1/onboarding-memory-cli-demo.mp4) · [Web companion demo, 4:35](https://github.com/memorylake-ai/memorylake-usecases/releases/download/onboarding-memory-v1/onboarding-memory-web-demo.mp4)
 
 ## Prerequisites
 
@@ -104,6 +105,8 @@ python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
 
 ![Web companion — Priya's question: the version in force, the stale version and the stale handbook](https://github.com/memorylake-ai/memorylake-usecases/raw/main/onboarding-memory/web/screenshot-answers.png)
+
+[Watch the web companion demo (mp4, 4:35)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/onboarding-memory-v1/onboarding-memory-web-demo.mp4).
 
 Paste the key, press **Run demo**, and watch the files import, every policy version get pinned on its
 timeline, Priya's chat turn into facts about her, each answer come back with its versions marked in force,
