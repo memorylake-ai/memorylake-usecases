@@ -47,6 +47,11 @@ impl. chat ─┘   messages: --metadata event=…                        └─
           conv msg list ──▶ tool calls paired · event timeline ──▶ out/training-brief-corvane.md
 ```
 
+**Watch it run** (real recordings, unedited):
+
+- [CLI demo (mp4, 4:51)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/customer-onboarding-memory-v1/customer-onboarding-memory-cli-demo.mp4): `git clone`, `python3 demo.py`, `python3 demo.py timeline`, `python3 demo.py cleanup`
+- [Web companion demo (mp4, 6:02)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/customer-onboarding-memory-v1/customer-onboarding-memory-web-demo.mp4)
+
 ## Prerequisites
 
 1. **A MemoryLake account and API key.** Sign up at [app.memorylake.ai](https://app.memorylake.ai),
@@ -100,6 +105,10 @@ same every time.
 ```bash
 python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
+
+![Web companion — the tool findings: 0 hits about the cause before, the replayed calls, the promoted facts](https://github.com/memorylake-ai/memorylake-usecases/raw/main/customer-onboarding-memory/web/screenshot-blockers.png)
+
+[Watch the web companion demo (mp4, 6:02)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/customer-onboarding-memory-v1/customer-onboarding-memory-web-demo.mp4).
 
 Paste the key and press **Run demo**. As it runs you see:
 
