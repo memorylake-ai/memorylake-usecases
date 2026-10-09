@@ -1,0 +1,18 @@
+{
+  "custom_id": "mlu-cdb-ledger-inc-2291",
+  "repo": "ledger-service",
+  "name": "INC-2291 post-incident review — double charges on checkout retry",
+  "source": "Slack #inc-2291",
+  "date": "2026-09-30T09:00:00Z",
+  "participants": ["priya-raman", "tomas-ortega", "jun-park"],
+  "turns": [
+    ["priya-raman", "INC-2291 summary: on 2026-09-28, 37 customers were charged twice. Checkout retried POST /payments after a timeout and generated a new Idempotency-Key for the retry, so the ledger treated it as a new payment."],
+    ["tomas-ortega", "Confirmed on the checkout side. The retry helper in checkout-api created a fresh key per attempt. Fix is merged: a retry now reuses the key of the first attempt, and we retry at most twice."],
+    ["priya-raman", "Decision for the ledger: from 2026-10-06 every POST to ledger-service must carry an Idempotency-Key header, and requests without one are rejected with HTTP 428. Keys stay valid for 72 hours."],
+    ["jun-park", "I will add the 428 check and a contract test so a client that forgets the header fails in CI, not in production."],
+    ["priya-raman", "Good. Refunds for the 37 customers went out on 2026-09-29. Action item closed once the contract test is merged."]
+  ],
+  "pinned": [
+    "Every POST to ledger-service must carry an Idempotency-Key header; a retry must reuse the key of the first attempt. Keys are kept for 72 hours (decided in the INC-2291 review on 2026-09-30)."
+  ]
+}

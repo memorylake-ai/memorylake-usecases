@@ -1,0 +1,37 @@
+{
+  "custom_id": "mlu-cdb-checkout-pr-1290",
+  "repo": "checkout-web",
+  "name": "checkout-web PR #1290 review — show the payment date on the receipt",
+  "source": "GitHub PR review",
+  "date": "2026-09-23T09:00:00Z",
+  "participants": [
+    "jun-park",
+    "tomas-ortega"
+  ],
+  "turns": [
+    [
+      "jun-park",
+      "PR #1290 shows the payment date on the receipt page. My AI assistant suggested moment.js for the formatting, so I added it to package.json."
+    ],
+    [
+      "tomas-ortega",
+      "Please take moment.js out. We removed it from checkout-web in March 2026, it was 67 KB gzipped of the bundle. ADR-0003 says date-fns format() plus Intl.DateTimeFormat for anything locale-aware."
+    ],
+    [
+      "jun-park",
+      "Will do. The receipt also fetches the ledger entry directly from ledger-service to show the fee. Is that fine?"
+    ],
+    [
+      "tomas-ortega",
+      "No, the browser never calls ledger-service directly. Go through the checkout-api BFF; it adds auth and the Idempotency-Key header. I will add a /receipts/{id} endpoint there this week."
+    ],
+    [
+      "jun-park",
+      "Thanks. I will switch to date-fns and call the BFF endpoint once it is merged."
+    ]
+  ],
+  "pinned": [
+    "Do not add moment.js to checkout-web: it was removed in March 2026 (67 KB gzipped). Use date-fns format() and Intl.DateTimeFormat instead (ADR-0003).",
+    "checkout-web must never call ledger-service from the browser; every payment call goes through the checkout-api BFF, which adds auth and the Idempotency-Key header."
+  ]
+}

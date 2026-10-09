@@ -1,0 +1,19 @@
+{
+  "custom_id": "mlu-cdb-ledger-pr-482",
+  "repo": "ledger-service",
+  "name": "ledger-service PR #482 review — add refund_reason to ledger_entries",
+  "source": "GitHub PR review",
+  "date": "2026-09-15T09:00:00Z",
+  "participants": ["jun-park", "priya-raman"],
+  "turns": [
+    ["jun-park", "PR #482 adds a refund_reason column to ledger_entries and a fee_amount column as DOUBLE PRECISION for the new partner fees. Ready for review."],
+    ["priya-raman", "Two blockers. First, fee_amount cannot be DOUBLE PRECISION: ADR-0007 says every amount in the ledger is BIGINT minor units with a currency column. Floats are what caused the March 2026 refund drift."],
+    ["jun-park", "Got it, I will switch fee_amount to BIGINT minor units and add fee_currency. What is the second blocker?"],
+    ["priya-raman", "refund_reason is NOT NULL with no default. ledger_entries has about 400 million rows, so that migration takes a write lock for around 20 minutes in production. We always do expand-contract: add the column nullable, backfill in batches, then add the constraint in a later release."],
+    ["jun-park", "Understood. I will split it into three migrations: nullable column now, backfill job next, NOT NULL constraint in the release after."],
+    ["priya-raman", "Approved with those changes. Please also link ADR-0007 in the PR description so the next reviewer sees why."]
+  ],
+  "pinned": [
+    "Never add a NOT NULL column without a default to ledger_entries: the table has about 400 million rows and the migration locks writes for around 20 minutes. Use expand-contract migrations (nullable column, batched backfill, constraint in a later release)."
+  ]
+}
