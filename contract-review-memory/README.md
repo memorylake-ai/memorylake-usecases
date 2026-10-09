@@ -45,7 +45,8 @@ renewal: search --projects <playbook> --actors <Northwind>    replay: conv list 
 Runs in about 5 minutes on a free personal account (most of it is MemoryLake parsing files and extracting
 facts). The only credential you need is a MemoryLake API key.
 
-**Watch it run** (real recordings, unedited): _recording in progress_
+**Watch it run** (real recordings, unedited):
+[CLI demo, 5:41](https://github.com/memorylake-ai/memorylake-usecases/releases/download/contract-review-memory-v1/contract-review-memory-cli-demo.mp4) · [Web companion demo, 6:48](https://github.com/memorylake-ai/memorylake-usecases/releases/download/contract-review-memory-v1/contract-review-memory-web-demo.mp4)
 
 ## Prerequisites
 
@@ -96,6 +97,10 @@ pinned only if that exact text is not already in its scope.
 ```bash
 python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
+
+![Web companion — renewal context, our positions plus Northwind's precedents](https://github.com/memorylake-ai/memorylake-usecases/raw/main/contract-review-memory/web/screenshot-context.png)
+
+[Watch the web companion demo (mp4, 6:48)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/contract-review-memory-v1/contract-review-memory-web-demo.mp4).
 
 Paste the key, press **Run demo**, and watch the files upload and import, the positions get pinned, the
 two 2025 sessions replay with their attachments, each scope's facts arrive, the renewal context come back
