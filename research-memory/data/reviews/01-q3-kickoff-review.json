@@ -1,0 +1,20 @@
+{
+  "custom_id": "mlu-rma-review-01-july",
+  "name": "Storage model review — July",
+  "date": "2026-07-14T09:00:00Z",
+  "participants": ["theo-grant", "mira-holt"],
+  "turns": [
+    ["theo-grant", "Mira, before we size the storage position: what cycle life are we using for sodium-ion in the model?"],
+    ["mira-holt", "Our base case is 4,200 cycles to 80 percent capacity. That comes from the Halvorsen lab study, which is the only clean dataset so far."],
+    ["theo-grant", "Halvorsen was paid for by Corvane Cells, wasn't it? How much weight do you put on it?"],
+    ["mira-holt", "Right, it is vendor-funded. My rule is to haircut vendor-funded results by 20 percent until independent data shows up, so I treat 4,200 as an upper bound, not a forecast."],
+    ["theo-grant", "And cost?"],
+    ["mira-holt", "Pack cost for sodium-ion is 61 dollars per kWh in 2026 against 74 for LFP. I am using the Halvorsen cost number as is; their bill of materials checks out against our own tracker."],
+    ["theo-grant", "Good. What would change your view?"],
+    ["mira-holt", "Field data. Gridfield is publishing results from a few hundred grid sites in August. If their cycle life comes in much lower, the lifetime cost advantage of sodium-ion mostly disappears and I will revise the base case."]
+  ],
+  "analyst_notes": [
+    "Mira's rule: discount results from vendor-funded studies by 20% until independent data confirms them.",
+    "Q3 position: sodium-ion is attractive on upfront cost (61 vs 74 USD/kWh in 2026) but the cycle-life evidence is lab-only."
+  ]
+}

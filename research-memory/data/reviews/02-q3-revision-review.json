@@ -1,0 +1,20 @@
+{
+  "custom_id": "mlu-rma-review-02-september",
+  "name": "Storage model review — September",
+  "date": "2026-09-15T09:00:00Z",
+  "participants": ["theo-grant", "mira-holt"],
+  "turns": [
+    ["theo-grant", "The Gridfield field report is out. Does anything change in the sodium-ion assumptions?"],
+    ["mira-holt", "Yes. Gridfield has 312 grid sites and projects only 2,900 cycles to 80 percent capacity, and 2,300 in cold climates. That contradicts the Halvorsen lab number of 4,200."],
+    ["theo-grant", "Which one do you believe?"],
+    ["mira-holt", "The field data. It is independent, it covers partial state of charge and real temperatures, and it is exactly the duty cycle our grid model assumes. I am cutting our base case cycle life for sodium-ion from 4,200 to 2,900 cycles."],
+    ["theo-grant", "What does that do to the cost story?"],
+    ["mira-holt", "Upfront, sodium-ion is still cheaper. Over the lifetime it is roughly at parity with LFP once you divide by 2,900 cycles instead of 4,200. So the thesis moves from 'cheaper' to 'cheaper only if cycle life improves'."],
+    ["theo-grant", "And the 2027 policy change?"],
+    ["mira-holt", "The domestic-content bonus favours LFP until a domestic sodium-ion plant exists, which is 2028 at the earliest. My recommendation is to stay underweight sodium-ion through 2027 and revisit when the next field data lands."]
+  ],
+  "analyst_notes": [
+    "Base case sodium-ion cycle life is 2,900 cycles (Gridfield field data, set 2026-09-15); the Halvorsen lab figure of 4,200 is kept only as an upper bound.",
+    "Q3 recommendation: stay underweight sodium-ion for grid storage through 2027; revisit when new field data lands."
+  ]
+}
