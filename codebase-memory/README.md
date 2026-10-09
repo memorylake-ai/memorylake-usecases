@@ -235,7 +235,7 @@ memorylake search "retry a payment request idempotency key" --projects <ledger>,
      [checkout-web] doc   frontend-conventions.md  (Text)
 ```
 
-All four answers are written to `out/day-one-brief.md`.
+All five answers are written to `out/day-one-brief.md`.
 
 ## Wiring it into your own repos
 
@@ -257,6 +257,9 @@ All four answers are written to `out/day-one-brief.md`.
 - **A check says “nothing speaks against it” where you expected a block**: the verdict only counts
   facts that mention the pattern (moment.js, `NOT NULL`) and forbid or warn against it. Extraction varies from run to run, but the
   pinned gotchas are always there; `python3 demo.py facts` shows what each repo holds.
+- **Facts come back worded differently, or in another language**: extraction is server-side and varies
+  between runs (one of our recording runs wrote the PR #482 facts in Chinese). The pinned gotchas are
+  always verbatim, and the check matches the English pinned wording.
 - **Markdown hits have no summary**: the server writes summaries for some files (the PowerPoint deck
   always got one in our runs) and not others. Search returns one summary per document, never quoted
   passages.

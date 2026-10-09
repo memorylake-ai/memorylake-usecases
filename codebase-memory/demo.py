@@ -83,7 +83,7 @@ BLOCKS = r"\b(do not|don't|never|must not|cannot|can't|removed|deprecated|take [
 
 # Jun's day-one questions: one search each, across both repos at once. Some answers live only in
 # documents (last year's decision is in a slide deck, the on-call steps in a runbook), so those
-# questions search documents only.
+# questions search documents only; the browser question is about rules, so it searches facts.
 QUESTIONS = [
     ("Why doesn't the ledger use Kafka?",
      "why was Kafka rejected as the ledger source of truth", "document"),
@@ -91,6 +91,8 @@ QUESTIONS = [
      "store money amounts as integer minor units and format amounts", None),
     ("What must a client do when it retries a payment?",
      "retry a payment request idempotency key", None),
+    ("Can the payment page call ledger-service directly?",
+     "browser payment page calling ledger-service directly", "fact"),
     ("The outbox relay alert fired — what is safe to do?",
      "outbox relay lag alert on-call what to do", "document"),
 ]

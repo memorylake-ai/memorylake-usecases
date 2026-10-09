@@ -240,7 +240,7 @@
 
   function answers() {
     const list = S.brief?.answers || S.answers;
-    if (!list.length) return `<h1>Day one: questions across both repos</h1><div class="empty">Run the demo first — four searches run at the end.</div>`;
+    if (!list.length) return `<h1>Day one: questions across both repos</h1><div class="empty">Run the demo first — five searches run at the end.</div>`;
     return `
       <div class="brief-head"><div><h1>Day one: Jun's questions, across both repos</h1>
         <p class="lead" style="margin:0">One search over both projects (<code>--projects a,b</code>). Search results do not say which project a hit came from, so the demo maps every fact and document id back to its repo.
