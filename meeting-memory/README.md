@@ -102,7 +102,7 @@ get highlighted, the action items line up per person, and the vendor call disapp
 (floor manager) are tagged `riverside`; Dev from finance is not. One project holds the cutover.
 
 ```bash
-memorylake actor create --custom-id mlu-mmt-ana-ruiz --display-name "Ana Ruiz" --type HUMAN \
+memorylake actor create --custom-id mlu-mmt-ana-ruiz --display-name "Ana Ruiz" \
   --tags riverside,team-ops --description "Operations lead, Halden Freight"
 memorylake actor bind --actor actor-… --workspace ws-…
 memorylake proj create --name "Riverside cutover — meeting memory" --custom-id mlu-mmt-riverside-cutover

@@ -124,7 +124,7 @@ role in the metadata:
 ```bash
 memorylake proj create --name "Fernhill people policies" --custom-id mlu-ohr-policies …
 memorylake proj create --name "Fernhill onboarding chats" --custom-id mlu-ohr-chats …
-memorylake actor create --custom-id mlu-ohr-priya-nair --display-name "Priya Nair" --type HUMAN \
+memorylake actor create --custom-id mlu-ohr-priya-nair --display-name "Priya Nair" \
   --tags new-hire,stage:pre-boarding \
   --metadata '{"role":"engineer","start_date":"2026-10-12","team":"robot-fleet","manager":"Jonas Berg","office":"Denver","stage":"pre-boarding"}'
 ```
@@ -266,6 +266,10 @@ remembers about her.
 - **`actor update` lost a tag or a metadata key**: both flags replace the stored value; the server does
   not merge.
 - **`fact list` without `--projects` or `--actors`** is rejected by the CLI; always give a scope.
+- **“this CLI cannot set an actor type”**: CLI v20261009 removed `actor create --type`, so the onboarding assistant is
+  created as an ordinary (HUMAN) actor. The demo still runs, but extraction then files some of the
+  conversation's facts under the onboarding assistant instead of under the people. With CLI v20261008 or older the
+  demo passes `--type ASSISTANT` and the onboarding assistant keeps (almost) none.
 
 ## Files
 

@@ -250,7 +250,7 @@ def ensure_actor(cli: CLI, custom_id: str, display: str, description: str, tags:
     actor = cli.try_run("actor", "get", custom_id, "--by-custom-id")
     if actor is None:
         actor = cli.run("actor", "create", "--custom-id", custom_id, "--display-name", display,
-                        "--type", "HUMAN", "--tags", tags, "--description", description)
+                        "--tags", tags, "--description", description)
         note(f"created actor {display} → {actor['id']}")
     else:
         note(f"actor {display} already exists → {actor['id']}")

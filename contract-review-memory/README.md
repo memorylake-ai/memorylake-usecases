@@ -117,9 +117,9 @@ counterparty you pick. The terminal drawer shows every `memorylake` command as i
 ```bash
 memorylake proj create --name "Harbrook contract playbook" --custom-id mlu-crm-playbook …
 memorylake proj create --name "Harbrook contract reviews" --custom-id mlu-crm-reviews …
-memorylake actor create --custom-id mlu-crm-elena-voss --display-name "Elena Voss" --type HUMAN …
-memorylake actor create --custom-id mlu-crm-assistant --display-name "Harbrook review assistant" --type ASSISTANT …
-memorylake actor create --custom-id mlu-crm-northwind-freight --display-name "Northwind Freight" --type HUMAN \
+memorylake actor create --custom-id mlu-crm-elena-voss --display-name "Elena Voss" …
+memorylake actor create --custom-id mlu-crm-assistant --display-name "Harbrook review assistant" …
+memorylake actor create --custom-id mlu-crm-northwind-freight --display-name "Northwind Freight" \
   --tags counterparty,carrier --description "Counterparty — freight carrier, MSA NWF-MSA-2025"
 memorylake actor bind --actor <id> --workspace <ws>          # for each actor
 ```
@@ -279,6 +279,10 @@ precedent attached (playbook §6); one without is checked against the standard p
   precedents, the diff from the files.
 - **`conv list` shows other conversations too**: it lists the whole workspace and cannot filter on the
   server; the demo picks its sessions by `metadata.kind=contract-review` and `metadata.counterparty`.
+- **“this CLI cannot set an actor type”**: CLI v20261009 removed `actor create --type`, so the review assistant is
+  created as an ordinary (HUMAN) actor. The demo still runs, but extraction then files some of the
+  conversation's facts under the review assistant instead of under the people. With CLI v20261008 or older the
+  demo passes `--type ASSISTANT` and the review assistant keeps (almost) none.
 
 ## Files
 

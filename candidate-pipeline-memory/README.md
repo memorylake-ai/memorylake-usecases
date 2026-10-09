@@ -121,7 +121,7 @@ they are tagged `candidate`. Binding an actor to the workspace is what lets the 
 that actor's memory:
 
 ```bash
-memorylake actor create --custom-id mlu-cpm-cand-20417 --display-name "Priya Raman" --type HUMAN \
+memorylake actor create --custom-id mlu-cpm-cand-20417 --display-name "Priya Raman" \
     --tags candidate,role:senior-controls-engineer --description "Candidate cand-20417 for Senior Controls Engineer"
 memorylake actor bind --actor <priya>
 memorylake proj create --name "Halden Robotics — Senior Controls Engineer pipeline" --custom-id mlu-cpm-pipeline-senior-controls-engineer

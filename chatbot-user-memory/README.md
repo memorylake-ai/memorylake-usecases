@@ -93,8 +93,8 @@ shows every `memorylake` command as it runs.
 your own user id (`u-1001`, `u-2002` here); one project holds the bot's sessions.
 
 ```bash
-memorylake actor create --custom-id mlu-cbm-nimbus --display-name Nimbus --type ASSISTANT …
-memorylake actor create --custom-id mlu-cbm-user-u-1001 --display-name "Alice Weber" --type HUMAN …
+memorylake actor create --custom-id mlu-cbm-nimbus --display-name Nimbus …
+memorylake actor create --custom-id mlu-cbm-user-u-1001 --display-name "Alice Weber" …
 memorylake actor bind --actor actor-… --workspace ws-…
 memorylake proj create --name "Nimbus — chat sessions" --custom-id mlu-cbm-nimbus-sessions
 ```
@@ -162,6 +162,10 @@ Model Router (`/v1/chat/completions`, same API key) and Nimbus answers for real.
 - **`insufficient_quota`** only affects `--with-llm`.
 - **Facts come back in another language than the transcript**: extraction language is chosen server-side
   and is not configurable from the CLI today.
+- **“this CLI cannot set an actor type”**: CLI v20261009 removed `actor create --type`, so the bot is
+  created as an ordinary (HUMAN) actor. The demo still runs, but extraction then files some of the
+  conversation's facts under the bot instead of under the people. With CLI v20261008 or older the
+  demo passes `--type ASSISTANT` and the bot keeps (almost) none.
 
 ## Files
 

@@ -221,11 +221,23 @@ def user_custom_id(user: dict) -> str:
 
 # --------------------------------------------------------------------------- step 2: setup
 
+def actor_type_args(cli: CLI, actor_type: str) -> list[str]:
+    # CLI v20261009 dropped `actor create --type`, but the server still honours the type: an ASSISTANT
+    # actor keeps (almost) no facts, a HUMAN one picks up facts from the conversations it is in.
+    # Pass the type whenever the installed CLI still accepts it.
+    if not hasattr(cli, "has_actor_type"):
+        rc, out, _ = cli.raw("actor", "create", "--help", echo=False)
+        cli.has_actor_type = rc == 0 and "--type" in out  # type: ignore[attr-defined]
+    if not cli.has_actor_type and actor_type != "HUMAN":  # type: ignore[attr-defined]
+        note(f"this CLI cannot set an actor type, so this {actor_type} actor is created untyped (server default HUMAN)")
+    return ["--type", actor_type] if cli.has_actor_type else []  # type: ignore[attr-defined]
+
+
 def ensure_actor(cli: CLI, custom_id: str, display: str, actor_type: str, description: str, tags: str) -> str:
     actor = cli.try_run("actor", "get", custom_id, "--by-custom-id")
     if actor is None:
         actor = cli.run("actor", "create", "--custom-id", custom_id, "--display-name", display,
-                        "--type", actor_type, "--tags", tags, "--description", description)
+                        *actor_type_args(cli, actor_type), "--tags", tags, "--description", description)
         note(f"created {actor_type.lower()} actor {display} → {actor['id']}")
     else:
         note(f"actor {display} already exists → {actor['id']}")

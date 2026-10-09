@@ -136,7 +136,7 @@ Plus one actor per person. Corvane's people and Tallyfield's people are `HUMAN`,
 assistant is `ASSISTANT`:
 
 ```bash
-memorylake actor create --custom-id mlu-com-dana-whitlock --display-name "Dana Whitlock" --type HUMAN \
+memorylake actor create --custom-id mlu-com-dana-whitlock --display-name "Dana Whitlock" \
     --tags customer:corvane,champion --description "Director of Operations, Corvane HVAC"
 memorylake actor bind --actor <id>
 ```
@@ -260,6 +260,10 @@ only on Oct 12).
   says "ask the customer". It does not hide the miss.
 - **`conv list` shows other conversations too**: it lists the whole workspace. The demo picks its own by
   `metadata.customer=corvane`.
+- **“this CLI cannot set an actor type”**: CLI v20261009 removed `actor create --type`, so the onboarding assistant is
+  created as an ordinary (HUMAN) actor. The demo still runs, but extraction then files some of the
+  conversation's facts under the onboarding assistant instead of under the people. With CLI v20261008 or older the
+  demo passes `--type ASSISTANT` and the onboarding assistant keeps (almost) none.
 
 ## Files
 
