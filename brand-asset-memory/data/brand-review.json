@@ -1,0 +1,18 @@
+{
+  "custom_id": "mlu-bam-review-2026-09-15",
+  "name": "Brand review — autumn packaging sign-off",
+  "date": "2026-09-15T09:00:00Z",
+  "turns": [
+    ["dana", "Here is the approved Harvest Blend bag for autumn 2026. Treat it as the reference for every seasonal bag: Fern Green body, Oat label, the blend name in Kiln Red.", "IMG_2088.jpg"],
+    ["assistant", "Noted: the Harvest Blend bag is approved and is the reference layout for seasonal packaging.", null],
+    ["dana", "And this is the old Fernway & Co. wordmark from 2019. It is retired as of today. Do not use it anywhere new; use the green-circle Fernway logo instead.", "IMG_1960.png"],
+    ["assistant", "Understood: the Fernway & Co. wordmark is retired as of 2026-09-15 and replaced by the green-circle logo.", null],
+    ["dana", "Two rules for the winter work: Kiln Red is an accent only, never a background, and leave clear space around the logo equal to the height of the circle.", null]
+  ],
+  "pinned": [
+    "Fernway brand palette: Fern Green #2B5D4F (primary), Kiln Red #C8553D (accent only), Oat #F4EFE6 (backgrounds), Roast Brown #4A3428 (body text).",
+    "Kiln Red #C8553D is an accent color only; never use it as a background.",
+    "Clear space around the Fernway logo equals the height of the green circle, on every side.",
+    "The Fernway & Co. serif wordmark (2019–2023) is retired as of 2026-09-15; use the green-circle Fernway logo instead."
+  ]
+}
