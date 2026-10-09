@@ -1,0 +1,19 @@
+{
+  "custom_id": "mlu-mmt-meeting-02-checkin",
+  "name": "Cutover check-in",
+  "tool": "Granola",
+  "kind": "meeting notes",
+  "date": "2026-09-29T09:00:00Z",
+  "participants": ["ana-ruiz", "cara-lind"],
+  "turns": [
+    ["ana-ruiz", "Bad news from the scanner vendor: their shipment slipped two weeks. The handhelds now arrive on October 16."],
+    ["cara-lind", "Then we cannot go live on October 14. Nobody can pick without the handhelds."],
+    ["ana-ruiz", "Agreed. Decision: we move the Riverside cutover from October 14 to October 21. I will tell the carriers today."],
+    ["cara-lind", "I will move the second training session to October 19 so it happens on the real devices."],
+    ["ana-ruiz", "The signed contract is back, by the way, so that one is closed."]
+  ],
+  "action_items": [],
+  "closes": [
+    {"id": "RIV-1", "how": "signed contract received"}
+  ]
+}

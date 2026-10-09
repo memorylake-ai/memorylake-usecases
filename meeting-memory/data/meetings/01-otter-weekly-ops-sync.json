@@ -1,0 +1,23 @@
+{
+  "custom_id": "mlu-mmt-meeting-01-ops-sync",
+  "name": "Weekly ops sync",
+  "tool": "Otter",
+  "kind": "transcript",
+  "date": "2026-09-22T09:00:00Z",
+  "participants": ["ana-ruiz", "ben-okafor", "cara-lind"],
+  "turns": [
+    ["ana-ruiz", "Main topic today is the Riverside warehouse cutover. Decision for the record: we cut over to the new warehouse system on October 14."],
+    ["ben-okafor", "That works for systems. The inventory migration script is written but not tested against real stock counts yet."],
+    ["ana-ruiz", "Then please own that. Can you have it tested on a copy of production inventory by October 3?"],
+    ["ben-okafor", "Yes. I will own the migration script test and report the mismatch count by October 3."],
+    ["cara-lind", "On the floor side, forty pickers need training on the new handheld scanners. I will run two training sessions before the cutover."],
+    ["ana-ruiz", "Good. I will get the signed contract back from the scanner vendor by September 30, otherwise the handhelds will not ship in time."],
+    ["cara-lind", "One more risk: the label printers. If the firmware is old, pick tickets might not print. I will check with the vendor."],
+    ["ana-ruiz", "Noted. Let us review all of this again next Monday."]
+  ],
+  "action_items": [
+    {"id": "RIV-1", "owner": "ana-ruiz", "task": "get the signed scanner vendor contract back", "due": "2026-09-30"},
+    {"id": "RIV-2", "owner": "ben-okafor", "task": "test the inventory migration script on a copy of production inventory and report the mismatch count", "due": "2026-10-03"},
+    {"id": "RIV-3", "owner": "cara-lind", "task": "run two scanner training sessions for the forty pickers before the cutover", "due": "2026-10-13"}
+  ]
+}

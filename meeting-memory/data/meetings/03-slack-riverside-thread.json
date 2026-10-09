@@ -1,0 +1,19 @@
+{
+  "custom_id": "mlu-mmt-meeting-03-slack",
+  "name": "#riverside thread",
+  "tool": "Slack",
+  "kind": "chat thread",
+  "date": "2026-10-01T09:00:00Z",
+  "participants": ["ben-okafor", "ana-ruiz"],
+  "turns": [
+    ["ben-okafor", "Migration script update: tested on last night's copy of production inventory, 18,240 SKUs, zero mismatches. That item is done."],
+    ["ana-ruiz", "Great, thanks Ben. With the cutover now on October 21 we have a week of slack on the systems side."],
+    ["ben-okafor", "I will use it for a second dry run on October 15, the day before the handhelds arrive."]
+  ],
+  "action_items": [
+    {"id": "RIV-4", "owner": "ben-okafor", "task": "run a second migration dry run", "due": "2026-10-15"}
+  ],
+  "closes": [
+    {"id": "RIV-2", "how": "18,240 SKUs tested, zero mismatches"}
+  ]
+}
