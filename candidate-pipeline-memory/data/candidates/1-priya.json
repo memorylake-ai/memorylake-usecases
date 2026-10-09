@@ -1,0 +1,55 @@
+{
+  "key": "priya",
+  "display": "Priya Raman",
+  "candidate_id": "cand-20417",
+  "tags": "candidate,role:senior-controls-engineer",
+  "stages": [
+    {
+      "stage": "screen",
+      "title": "Recruiter screen",
+      "interviewer": "dana",
+      "date": "2026-09-14T09:00:00Z",
+      "turns": [
+        ["dana", "Dana Okafor (recruiter, Halden Robotics): Thanks for making time, Priya. Before we get into the role, what are you looking for in your next position?"],
+        ["priya", "Priya Raman (candidate): I want to own the motion-control stack end to end. At my current job at Kessler Automation I tune servo loops, but someone else decides the architecture."],
+        ["dana", "Dana Okafor (recruiter, Halden Robotics): That is exactly the scope of this role. What base salary are you targeting?"],
+        ["priya", "Priya Raman (candidate): I am targeting a base salary of $185,000 to $195,000. Equity matters less to me than base."],
+        ["dana", "Dana Okafor (recruiter, Halden Robotics): Understood. What is your notice period?"],
+        ["priya", "Priya Raman (candidate): My notice period is eight weeks, so the earliest I could start is November 30."],
+        ["dana", "Dana Okafor (recruiter, Halden Robotics): And location: the team sits in our Pittsburgh lab. Does that work?"],
+        ["priya", "Priya Raman (candidate): Yes. I live in Pittsburgh and I am happy to be on-site four days a week."]
+      ],
+      "scorecard": "Strong yes from the screen. Clear motivation to own architecture, not just tuning. Base expectation $185k–$195k, notice period eight weeks (earliest start November 30), lives in Pittsburgh and fine with four days on-site."
+    },
+    {
+      "stage": "technical",
+      "title": "Technical interview",
+      "interviewer": "marcus",
+      "date": "2026-09-21T09:00:00Z",
+      "turns": [
+        ["marcus", "Marcus Lee (hiring manager, Halden Robotics): Walk me through the last control loop you designed from scratch."],
+        ["priya", "Priya Raman (candidate): A cascaded position-velocity loop for a six-axis arm. I modelled the plant in MATLAB, then ran the loops on a TwinCAT PLC at 4 kHz."],
+        ["marcus", "Marcus Lee (hiring manager, Halden Robotics): Our cells need safety-rated motion. Have you worked with SIL 2 or PL d functions?"],
+        ["priya", "Priya Raman (candidate): I have integrated safe torque off, but I have not certified a safety function myself. A separate safety team owned that at Kessler."],
+        ["marcus", "Marcus Lee (hiring manager, Halden Robotics): How would you debug a loop that is stable in simulation but oscillates on the real arm?"],
+        ["priya", "Priya Raman (candidate): First check sample timing jitter and encoder resolution, then look for an unmodelled resonance with a frequency sweep before touching the gains."]
+      ],
+      "scorecard": "Lean yes. Excellent loop design and a disciplined debugging method. Concern: no hands-on certification of safety-rated functions (SIL 2 / PL d); she would need the safety course in her first quarter."
+    },
+    {
+      "stage": "values",
+      "title": "Values interview",
+      "interviewer": "aiko",
+      "date": "2026-09-24T09:00:00Z",
+      "turns": [
+        ["aiko", "Aiko Sato (values interviewer, Halden Robotics): Tell me about a time you disagreed with a technical decision."],
+        ["priya", "Priya Raman (candidate): We were shipping a firmware change without a hardware-in-the-loop test. I wrote up the risk, proposed a two-day test plan, and we ran it. It caught a sign error."],
+        ["aiko", "Aiko Sato (values interviewer, Halden Robotics): How do you like to work with junior engineers?"],
+        ["priya", "Priya Raman (candidate): Pairing on real bugs. I mentor two juniors now and we review each other's tuning notes every Friday."],
+        ["aiko", "Aiko Sato (values interviewer, Halden Robotics): Anything that changed since you spoke with Dana?"],
+        ["priya", "Priya Raman (candidate): Yes, my manager agreed to shorten my notice, so I can now start on November 16 instead of November 30."]
+      ],
+      "scorecard": "Strong yes. Raises risk in writing and proposes the fix; already mentors two juniors. Update: notice shortened, earliest start is now November 16 (was November 30)."
+    }
+  ]
+}

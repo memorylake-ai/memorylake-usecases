@@ -1,0 +1,33 @@
+{
+  "company": "Halden Robotics",
+  "role": "Senior Controls Engineer",
+  "project": {
+    "custom_id": "pipeline-senior-controls-engineer",
+    "name": "Halden Robotics — Senior Controls Engineer pipeline",
+    "description": "Screening, interview and debrief conversations for the Senior Controls Engineer opening. Demo data."
+  },
+  "people": {
+    "dana":   {"display": "Dana Okafor",  "title": "Recruiter",              "tags": "halden,recruiting"},
+    "marcus": {"display": "Marcus Lee",   "title": "Hiring manager, Controls", "tags": "halden,interviewer"},
+    "aiko":   {"display": "Aiko Sato",    "title": "Values interviewer",     "tags": "halden,interviewer"},
+    "eli":    {"display": "Eli Brandt",   "title": "Recruiter (took over the req on 2026-10-01)", "tags": "halden,recruiting"}
+  },
+  "handover": {
+    "from": "dana",
+    "to": "eli",
+    "date": "2026-10-01",
+    "query": "notice period, earliest start date and compensation expectations"
+  },
+  "debrief": [
+    {"key": "recommendation", "question": "What did each interviewer recommend?",
+     "query": "interviewer recommendation hire decision", "guards": ["recommend", "hire", "lean", "strong yes", "no hire"]},
+    {"key": "compensation", "question": "What compensation are they expecting?",
+     "query": "compensation expectations base salary", "guards": ["base", "salary", "compensation", "$"]},
+    {"key": "start", "question": "When can they start?",
+     "query": "notice period earliest start date", "guards": ["start", "notice"]},
+    {"key": "location", "question": "Where will they work from?",
+     "query": "location remote relocation on-site", "guards": ["remote", "relocat", "on-site", "onsite", "commute"]},
+    {"key": "concerns", "question": "What concerns came up?",
+     "query": "concerns reservations risks", "guards": ["concern", "reservation", "risk", "gap"]}
+  ]
+}

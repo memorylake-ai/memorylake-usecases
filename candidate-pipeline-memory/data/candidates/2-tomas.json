@@ -1,0 +1,69 @@
+{
+  "key": "tomas",
+  "display": "Tomás Ferreira",
+  "candidate_id": "cand-20431",
+  "tags": "candidate,role:senior-controls-engineer",
+  "stages": [
+    {
+      "stage": "screen",
+      "title": "Recruiter screen",
+      "interviewer": "dana",
+      "date": "2026-09-15T09:00:00Z",
+      "turns": [
+        ["dana", "Dana Okafor (recruiter, Halden Robotics): Thanks for joining, Tomás. What made you apply?"],
+        ["tomas", "Tomás Ferreira (candidate): I lead safety certification for robotic cells at Ostrava Motion. I want to move closer to motion control itself."],
+        ["dana", "Dana Okafor (recruiter, Halden Robotics): What base salary are you targeting?"],
+        ["tomas", "Tomás Ferreira (candidate): A base salary of $170,000 would work for me."],
+        ["dana", "Dana Okafor (recruiter, Halden Robotics): And your notice period?"],
+        ["tomas", "Tomás Ferreira (candidate): Four weeks. I could start on November 2."],
+        ["dana", "Dana Okafor (recruiter, Halden Robotics): The role is based in Pittsburgh. Where are you now?"],
+        ["tomas", "Tomás Ferreira (candidate): Cleveland. I would relocate to Pittsburgh if relocation support is included."]
+      ],
+      "scorecard": "Yes from the screen. Leads safety certification today and wants to move into motion control. Base expectation $170k, notice four weeks (earliest start November 2), would relocate from Cleveland with relocation support."
+    },
+    {
+      "stage": "technical",
+      "title": "Technical interview",
+      "interviewer": "marcus",
+      "date": "2026-09-22T09:00:00Z",
+      "turns": [
+        ["marcus", "Marcus Lee (hiring manager, Halden Robotics): Have you certified safety-rated motion functions yourself?"],
+        ["tomas", "Tomás Ferreira (candidate): Yes. I have signed off three PL d safety functions, including safe speed monitoring on a palletising cell."],
+        ["marcus", "Marcus Lee (hiring manager, Halden Robotics): How much loop design have you done?"],
+        ["tomas", "Tomás Ferreira (candidate): Less. I tune existing loops with the vendor tools, but I have not designed a cascaded loop from the plant model."]
+      ],
+      "scorecard": "Lean yes. Deep, hands-on safety certification (three PL d functions signed off). Concern: little control-loop design from first principles; would need a strong pairing partner on the motion stack."
+    },
+    {
+      "stage": "values",
+      "title": "Values interview",
+      "interviewer": "aiko",
+      "date": "2026-09-25T09:00:00Z",
+      "turns": [
+        ["aiko", "Aiko Sato (values interviewer, Halden Robotics): Tell me about a time you pushed back on a deadline."],
+        ["tomas", "Tomás Ferreira (candidate): A customer wanted a cell commissioned before the safety validation was done. I refused to sign, explained the liability, and we shipped a week later with the validation complete."],
+        ["aiko", "Aiko Sato (values interviewer, Halden Robotics): How do you share what you know?"],
+        ["tomas", "Tomás Ferreira (candidate): I run a monthly safety clinic for the commissioning engineers."]
+      ],
+      "scorecard": "Yes. Holds the line on safety under customer pressure and teaches it to others."
+    }
+  ],
+  "withdraw": {
+    "date": "2026-10-02",
+    "reason": "Tomás withdrew from the process on 2026-10-02: he accepted another offer and asked us to stop using his information for this opening."
+  },
+  "reapply": {
+    "stage": "re-engage",
+    "title": "Re-engagement call",
+    "interviewer": "eli",
+    "date": "2026-11-10T09:00:00Z",
+    "opening": "Controls Engineer, Safety Systems",
+    "turns": [
+      ["eli", "Eli Brandt (recruiter, Halden Robotics): Tomás, thanks for reaching out again. You applied for the new Controls Engineer, Safety Systems opening."],
+      ["tomas", "Tomás Ferreira (candidate): Yes. The other company froze the team I joined, so I am looking again. This opening fits my safety background better anyway."],
+      ["eli", "Eli Brandt (recruiter, Halden Robotics): Has anything changed on compensation or start date?"],
+      ["tomas", "Tomás Ferreira (candidate): My base expectation is now $178,000, and I could start within two weeks."]
+    ],
+    "scorecard": "Re-engaged for Controls Engineer, Safety Systems. Base expectation now $178k (was $170k in September); can start within two weeks. September interview feedback still applies."
+  }
+}
