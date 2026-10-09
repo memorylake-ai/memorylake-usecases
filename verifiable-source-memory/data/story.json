@@ -1,0 +1,73 @@
+{
+  "org": "Larch Valley Credit Union",
+  "today": "2026-10-08",
+  "agent": "Larch member-support agent",
+  "member": {
+    "custom_id": "member-dana",
+    "display": "Dana Whitlock",
+    "description": "Member since 2019. Premier Checking."
+  },
+  "assistant": {
+    "custom_id": "assistant",
+    "display": "Larch member-support agent",
+    "description": "The credit union's member-support agent (in review)."
+  },
+  "chat": {
+    "custom_id": "chat-2026-09-30",
+    "title": "Chat with Dana Whitlock: overdraft coverage",
+    "date": "2026-09-30T15:10:00Z",
+    "turns": [
+      ["user", "Hi, this is Dana Whitlock. Two small card purchases overdrew my account last month and I paid two overdraft fees. Please turn off overdraft coverage on my debit card. I would rather the card just be declined."],
+      ["assistant", "I can help with that. I have sent your request to opt out of overdraft coverage for debit card and ATM transactions to Member Services. They process opt-outs within one business day."],
+      ["user", "Thanks. Keep my Premier Checking as it is, I always keep well over the minimum balance."],
+      ["assistant", "Noted. Your Premier Checking account stays as it is."]
+    ]
+  },
+  "staff_note": "Member Services note (Jordan Pike): Dana Whitlock's opt-out of overdraft coverage for one-time debit card and ATM transactions has been processed. Confirmation LV-88213.",
+  "questions": [
+    {
+      "key": "overdraft-fee",
+      "asker": "Dana Whitlock",
+      "question": "What is the overdraft fee, and how many can I be charged in one day?",
+      "search": "What is the overdraft fee per item and how many overdraft fees per day?",
+      "claims": [
+        {"text": "The overdraft fee is 29 dollars per item.", "needle": "29 dollars per item"},
+        {"text": "You can be charged at most 3 overdraft fees per business day.", "needle": "no more than 3 overdraft fees"},
+        {"text": "No fee is charged if you are overdrawn by 50 dollars or less.", "needle": "50 dollars or less"}
+      ]
+    },
+    {
+      "key": "check-hold",
+      "asker": "Dana Whitlock",
+      "question": "I deposited a 7,000 dollar check today. When can I use the money?",
+      "search": "How long is the hold on a check deposit over 5,525 dollars?",
+      "claims": [
+        {"text": "Deposits over 5,525 dollars in one day can be held: the first 225 dollars is available the next business day.", "needle": "First 225 dollars next day"},
+        {"text": "The rest is available on the 7th business day.", "needle": "7th business day"}
+      ]
+    },
+    {
+      "key": "international-wire",
+      "asker": "Dana Whitlock",
+      "question": "How much does an international wire cost, and when do I have to send the request?",
+      "search": "How much does an outgoing international wire cost and what is the cutoff time for international wires?",
+      "claims": [
+        {"text": "An outgoing international wire costs 45 dollars.", "needle": "international wire: 45 dollars",
+         "replace_with": {"text": "An outgoing international wire costs 40 dollars.", "needle": "international wire: 40 dollars"}},
+        {"text": "International wires must be requested by 1:00 pm Eastern time.", "needle": "requested by 1:00 pm Eastern time"},
+        {"text": "You can recall an international wire at any time until the receiving bank credits it.", "needle": "recall an international wire at any time"}
+      ]
+    },
+    {
+      "key": "dana-overdraft",
+      "asker": "Dana Whitlock",
+      "question": "Will my debit card purchases still go into overdraft?",
+      "search": "Does overdraft coverage apply to one-time debit card transactions?",
+      "claims": [
+        {"text": "Your opt-out of overdraft coverage for debit card and ATM transactions has been processed (confirmation LV-88213).", "needle": "LV-88213", "source": "member"},
+        {"text": "Overdraft coverage for one-time debit card and ATM transactions applies only to members who opt in.", "needle": "applies only to members who opt in"}
+      ]
+    }
+  ],
+  "member_keywords": ["overdraft"]
+}

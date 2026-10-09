@@ -1,0 +1,56 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Length 1279 >>
+stream
+BT /F2 18 Tf 72.0 720.0 Td (Wire Transfer Procedures for Members) Tj ET
+BT /F3 10 Tf 72.0 694.0 Td (Larch Valley Credit Union. Version 2026.2, effective June 15, 2026.) Tj ET
+BT /F2 12.5 Tf 72.0 670.0 Td (1. Cutoff times) Tj ET
+BT /F1 10.5 Tf 72.0 652.0 Td (Outgoing domestic wire requests received by 3:00 pm Eastern time on a business day are sent the) Tj ET
+BT /F1 10.5 Tf 72.0 638.0 Td (same day. Requests received after 3:00 pm Eastern time are sent on the next business day.) Tj ET
+BT /F1 10.5 Tf 72.0 614.0 Td (Outgoing international wires must be requested by 1:00 pm Eastern time and are usually credited to) Tj ET
+BT /F1 10.5 Tf 72.0 600.0 Td (the beneficiary bank within 2 business days.) Tj ET
+BT /F2 12.5 Tf 72.0 576.0 Td (2. Verification) Tj ET
+BT /F1 10.5 Tf 72.0 558.0 Td (Every new wire recipient is verified by a call-back to the phone number on file before the first) Tj ET
+BT /F1 10.5 Tf 72.0 544.0 Td (wire is released. Wires of 10,000 dollars or more always require a call-back.) Tj ET
+BT /F2 12.5 Tf 72.0 520.0 Td (3. Recalls) Tj ET
+BT /F1 10.5 Tf 72.0 502.0 Td (A wire can be recalled only before it is released. After release we can ask the receiving bank to) Tj ET
+BT /F1 10.5 Tf 72.0 488.0 Td (return the funds, but the return is not guaranteed.) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 6 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Type /Pages /Kids [5 0 R] /Count 1 >>
+endobj
+7 0 obj
+<< /Type /Catalog /Pages 6 0 R >>
+endobj
+8 0 obj
+<< /Title (Wire Transfer Procedures for Members) /Producer (memorylake-usecases make_sources.py) >>
+endobj
+xref
+0 9
+0000000000 65535 f 
+0000000009 00000 n 
+0000000106 00000 n 
+0000000208 00000 n 
+0000000313 00000 n 
+0000001644 00000 n 
+0000001790 00000 n 
+0000001847 00000 n 
+0000001896 00000 n 
+trailer
+<< /Size 9 /Root 7 0 R /Info 8 0 R >>
+startxref
+2011
+%%EOF

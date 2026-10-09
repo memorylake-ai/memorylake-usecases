@@ -1,0 +1,32 @@
+{
+  "larch-fee-schedule-2025.pdf": {
+    "title": "Schedule of Fees and Charges",
+    "doc_type": "fee-schedule",
+    "version": "2025.1",
+    "effective": "2025-01-01",
+    "superseded": "2026-01-01",
+    "publisher": "Larch Valley Credit Union, Member Services"
+  },
+  "larch-fee-schedule-2026.pdf": {
+    "title": "Schedule of Fees and Charges",
+    "doc_type": "fee-schedule",
+    "version": "2026.1",
+    "effective": "2026-01-01",
+    "supersedes": "2025.1",
+    "publisher": "Larch Valley Credit Union, Member Services"
+  },
+  "larch-funds-availability-policy.pdf": {
+    "title": "Funds Availability Policy",
+    "doc_type": "policy",
+    "version": "2024.3",
+    "effective": "2024-07-01",
+    "publisher": "Larch Valley Credit Union, Deposit Operations"
+  },
+  "larch-wire-transfer-procedures.pdf": {
+    "title": "Wire Transfer Procedures for Members",
+    "doc_type": "procedure",
+    "version": "2026.2",
+    "effective": "2026-06-15",
+    "publisher": "Larch Valley Credit Union, Payments Operations"
+  }
+}
