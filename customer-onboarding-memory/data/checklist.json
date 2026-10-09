@@ -1,0 +1,15 @@
+{
+  "trainer": "ines-calder",
+  "today": "2026-10-13",
+  "session": "Dispatcher training, October 14",
+  "questions": [
+    {"q": "How many technicians and branches?", "query": "how many technicians and branches", "guard": "\\b240\\b|\\b14 branches\\b"},
+    {"q": "What do they schedule with today?", "query": "current dispatch tool spreadsheets", "guard": "DispatchPro|spreadsheet"},
+    {"q": "What does success look like?", "query": "success metric missed appointments", "guard": "missed appointment|missed .{0,20}visits|\\b9 ?%|\\b3 ?%"},
+    {"q": "Which accounting system?", "query": "accounting system invoicing", "guard": "QuickBooks"},
+    {"q": "How do users sign in?", "query": "single sign-on identity provider", "guard": "sign(s|ed)? in|single sign|\\bSSO\\b|password"},
+    {"q": "When must they be live?", "query": "go-live deadline", "guard": "November 3|heating season"},
+    {"q": "Which branches go first?", "query": "pilot branches rollout", "guard": "Denver|Boulder|Aurora"},
+    {"q": "Who is their admin?", "query": "customer IT admin technical owner", "guard": "Marcus"}
+  ]
+}

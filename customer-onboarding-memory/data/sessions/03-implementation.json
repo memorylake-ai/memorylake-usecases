@@ -1,0 +1,33 @@
+{
+  "custom_id": "mlu-com-implementation",
+  "stage": "implementation",
+  "stage_label": "Implementation chat",
+  "name": "Implementation check-in — Corvane HVAC Services",
+  "date": "2026-09-22T14:00:00Z",
+  "source": "in-app-chat",
+  "participants": ["marcus-bell", "assistant"],
+  "owner": "assistant",
+  "turns": [
+    {"speaker": "marcus-bell", "text": "Hi, Marcus Bell here, IT admin at Corvane. I set up the Okta app for Tallyfield and uploaded our technician roster. Can you check both before the pilot?"},
+    {"speaker": "assistant", "text": "Checking the sign-in setup first.",
+     "tool_use": {"id": "tc-sso-01", "name": "check_sso_config", "arguments": {"tenant": "corvane", "idp": "okta"}}},
+    {"speaker": "assistant", "event": "blocker", "topic": "sso",
+     "tool_result": {"id": "tc-sso-01", "result": {"status": "error", "idp": "okta",
+       "finding": "The SAML assertion has no email attribute and the NameID format is unspecified, so Tallyfield cannot match Okta users to accounts",
+       "fix": "In the Okta app, map user.email to the email attribute and set the NameID format to EmailAddress"}}},
+    {"speaker": "assistant", "text": "Now the technician roster.",
+     "tool_use": {"id": "tc-imp-01", "name": "validate_import", "arguments": {"file": "corvane-technicians.csv"}}},
+    {"speaker": "assistant", "event": "blocker", "topic": "import",
+     "tool_result": {"id": "tc-imp-01", "result": {"status": "partial", "rows": 412, "accepted": 375, "rejected": 37,
+       "finding": "37 of 412 technician rows were rejected because column F (EPA 608 certification number) is empty",
+       "fix": "Fill in column F for the 37 rows and upload the file again"}}},
+    {"speaker": "assistant", "text": "And the accounting connection.",
+     "tool_use": {"id": "tc-qbo-01", "name": "connect_quickbooks", "arguments": {"company": "Corvane HVAC Services"}}},
+    {"speaker": "assistant", "event": "win", "topic": "accounting",
+     "tool_result": {"id": "tc-qbo-01", "result": {"status": "ok",
+       "finding": "QuickBooks Online connected; 1,284 customers and 312 service items synced"}}},
+    {"speaker": "assistant", "text": "Done. Two items need attention before the pilot, and I have logged both for your implementation engineer."},
+    {"speaker": "marcus-bell", "text": "Thanks. I am out of the office until October 12, so the earliest I can look at anything is the day before training.", "event": "risk", "topic": "availability"}
+  ],
+  "handoff": []
+}

@@ -1,0 +1,23 @@
+{
+  "custom_id": "mlu-com-kickoff",
+  "stage": "kickoff",
+  "stage_label": "Kickoff call",
+  "name": "Onboarding kickoff — Corvane HVAC Services",
+  "date": "2026-09-08T13:00:00Z",
+  "source": "zoom",
+  "participants": ["dana-whitlock", "theo-park"],
+  "owner": "theo-park",
+  "turns": [
+    {"speaker": "theo-park", "text": "Welcome to onboarding, Dana. I have Lena's handoff; let's plan the rollout.", "event": "milestone", "topic": "kickoff"},
+    {"speaker": "dana-whitlock", "text": "We want to pilot in three branches first: Denver, Boulder and Aurora. The other eleven branches follow once the pilot is stable.", "event": "decision", "topic": "rollout"},
+    {"speaker": "theo-park", "text": "Who owns the technical setup on your side?"},
+    {"speaker": "dana-whitlock", "text": "Marcus Bell, our IT admin. He will handle Okta and the technician data import."},
+    {"speaker": "theo-park", "text": "Then let's book dispatcher training."},
+    {"speaker": "dana-whitlock", "text": "October 14 works. We have 30 dispatchers, and most of them have never scheduled jobs from a phone."},
+    {"speaker": "theo-park", "text": "Booked: dispatcher training on October 14 with Ines Calder.", "event": "milestone", "topic": "training"}
+  ],
+  "handoff": [
+    "Kickoff note (Theo Park, 2026-09-08): The pilot branches are Denver, Boulder and Aurora; the other 11 branches follow after the pilot.",
+    "Kickoff note (Theo Park, 2026-09-08): Marcus Bell, Corvane's IT admin, owns the Okta setup and the technician import; dispatcher training is on October 14."
+  ]
+}

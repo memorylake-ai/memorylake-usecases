@@ -1,0 +1,25 @@
+{
+  "custom_id": "mlu-com-sales-discovery",
+  "stage": "sales",
+  "stage_label": "Sales discovery call",
+  "name": "Sales discovery call — Corvane HVAC Services",
+  "date": "2026-08-27T15:00:00Z",
+  "source": "gong",
+  "participants": ["dana-whitlock", "lena-ortiz"],
+  "owner": "lena-ortiz",
+  "turns": [
+    {"speaker": "lena-ortiz", "text": "Thanks for making time, Dana. Walk me through how Corvane schedules jobs today."},
+    {"speaker": "dana-whitlock", "text": "We run 240 technicians out of 14 branches. Dispatch lives in spreadsheets plus an old tool called DispatchPro, which we are dropping when that contract ends in December."},
+    {"speaker": "lena-ortiz", "text": "What would make this project a success for you?"},
+    {"speaker": "dana-whitlock", "text": "Missed appointments. We miss about 9% of booked visits today, and I need that under 3% by the end of Q1.", "event": "goal", "topic": "success metric"},
+    {"speaker": "lena-ortiz", "text": "Which systems does Tallyfield need to connect to?"},
+    {"speaker": "dana-whitlock", "text": "QuickBooks Online for invoicing. And everyone signs in through Okta, no separate passwords: that is a hard requirement from our CFO.", "event": "requirement", "topic": "integrations"},
+    {"speaker": "lena-ortiz", "text": "And timing?"},
+    {"speaker": "dana-whitlock", "text": "We have to be live before November 3. That is when heating season starts and our call volume doubles.", "event": "deadline", "topic": "go-live"},
+    {"speaker": "lena-ortiz", "text": "Understood. I will send the order form for 240 seats today.", "event": "milestone", "topic": "contract"}
+  ],
+  "handoff": [
+    "Handoff note (sales, Lena Ortiz, 2026-08-27): Corvane HVAC Services bought 240 technician seats across 14 branches.",
+    "Handoff note (sales, Lena Ortiz, 2026-08-27): Corvane must be live before November 3, when its heating season starts."
+  ]
+}
