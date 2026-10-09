@@ -41,6 +41,11 @@ values ─────┘                                  └─ extracted fact
    actor unbind / actor bind         ──▶ sealed (refused) ──▶ restored (identical ids)
 ```
 
+**Watch it run** (real recordings, unedited):
+
+- [CLI demo (mp4, 5:47)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/candidate-pipeline-memory-v1/candidate-pipeline-memory-cli-demo.mp4): `git clone`, `python3 demo.py`, `python3 demo.py brief priya`, `python3 demo.py cleanup`
+- [Web companion demo (mp4, 7:10)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/candidate-pipeline-memory-v1/candidate-pipeline-memory-web-demo.mp4)
+
 ## Prerequisites
 
 1. **A MemoryLake account and API key.** Sign up at [app.memorylake.ai](https://app.memorylake.ai),
@@ -102,7 +107,9 @@ Paste the key and press **Run demo**. As it runs you see:
 - the three refusals after `actor unbind`, and the before / refused / after counts after `actor bind`.
 
 **Ask about a candidate** searches one candidate's memory for any question, with every hit labelled by
-stage. Asked while a candidate is unbound, it shows the refusal. The terminal drawer shows every
+stage. Asked while a candidate is unbound, it shows the refusal.
+
+[Watch the web companion demo (mp4, 7:10)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/candidate-pipeline-memory-v1/candidate-pipeline-memory-web-demo.mp4). The terminal drawer shows every
 `memorylake` command as it runs.
 
 ## What happens, step by step
