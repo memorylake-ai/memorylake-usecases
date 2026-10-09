@@ -1,0 +1,21 @@
+{
+  "custom_id": "mlu-crm-review-nwf-msa-2025",
+  "name": "Review — Northwind Freight MSA, redline v2",
+  "date": "2025-03-12T09:00:00Z",
+  "counterparty": "northwind-freight",
+  "contract": "NWF-MSA-2025",
+  "reviewer": "elena-voss",
+  "attachment": "library/redlines/northwind-freight/northwind-msa-redline-v2-2025-03.md",
+  "turns": [
+    ["elena-voss", "Starting the review of Northwind Freight's redline v2 of the MSA (NWF-MSA-2025). Their counsel sent it on 2025-03-10; attached."],
+    ["assistant", "Northwind moved two clauses off the playbook: 9.2 caps liability at 18 months of fees (our standard is 12 months), and 5.1 asks for payment within 30 days (our standard is net 45). 9.3 adds their cargo liability insurance of USD 10M."],
+    ["elena-voss", "The 18-month cap is acceptable for Northwind only because their USD 10M cargo insurance stands behind it. Marcus Hale, our General Counsel, signed off this morning."],
+    ["assistant", "Noted. On 5.1 the playbook allows net 30 only in exchange for an early-payment discount of at least 2%."],
+    ["elena-voss", "Northwind agreed to a 2% early-payment discount on the call, so net 30 is fine. 7.1 indemnities are mutual and match the playbook. We sign on 2025-03-20."],
+    ["assistant", "Summary: accept 9.2 at 18 months (GC approved, insurance-backed); accept 5.1 at net 30 with a 2% discount; 2.1, 7.1 and 11.1 match the playbook."]
+  ],
+  "precedents": [
+    "Northwind Freight precedent (MSA signed 2025-03-20): liability cap accepted at 18 months of fees, above the 12-month standard, approved by the General Counsel because Northwind carries USD 10M cargo liability insurance.",
+    "Northwind Freight precedent (MSA signed 2025-03-20): payment terms accepted at net 30 in exchange for a 2% early-payment discount."
+  ]
+}

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contract review memory · MemoryLake demo</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <a class="logo" href="https://www.memorylake.ai" target="_blank" rel="noopener" title="MemoryLake">
+      <img src="/static/memorylake-logo.svg" alt="MemoryLake" width="134" height="22">
+    </a>
+    <span class="brand-sub">Contract review that remembers your positions</span>
+  </div>
+  <div class="topbar-right">
+    <div class="conn" id="conn"><span class="dot"></span><span id="conn-text">Not connected</span></div>
+    <div class="actions">
+      <button class="btn primary" id="btn-run" disabled>Run demo</button>
+      <button class="btn" id="btn-reset" disabled title="Delete the demo data and build it again">Reset &amp; run</button>
+      <button class="btn ghost" id="btn-cleanup" disabled title="Remove everything the demo created on your account">Clean up</button>
+    </div>
+  </div>
+</header>
+
+<div class="banner" id="banner" hidden></div>
+
+<main class="layout">
+  <nav class="steps" id="steps" aria-label="Steps"></nav>
+  <section class="stage" id="stage"></section>
+</main>
+
+<footer class="terminal" id="terminal">
+  <button class="term-head" id="term-toggle" aria-expanded="true">
+    <span class="term-title">Terminal</span>
+    <span class="term-sub">every <code>memorylake</code> command the demo runs, as it runs</span>
+    <span class="term-count" id="term-count">0 commands</span>
+    <span class="term-chevron" aria-hidden="true">⌄</span>
+  </button>
+  <pre class="term-log" id="term-log" tabindex="0"></pre>
+</footer>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

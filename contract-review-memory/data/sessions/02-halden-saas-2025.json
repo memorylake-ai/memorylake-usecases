@@ -1,0 +1,20 @@
+{
+  "custom_id": "mlu-crm-review-hal-saas-2025",
+  "name": "Review — Halden Analytics SaaS agreement, redline v1",
+  "date": "2025-06-04T09:00:00Z",
+  "counterparty": "halden-analytics",
+  "contract": "HAL-SAAS-2025",
+  "reviewer": "elena-voss",
+  "attachment": "library/redlines/halden-analytics/halden-saas-redline-v1-2025-06.md",
+  "turns": [
+    ["elena-voss", "Reviewing Halden Analytics' redline v1 of the SaaS subscription agreement (HAL-SAAS-2025); attached."],
+    ["assistant", "10.1 keeps the 12-month general cap but adds a 24-month super-cap for personal-data breach claims. 12.1 has Halden keeping ownership of its platform."],
+    ["elena-voss", "The data-breach super-cap is reasonable: Halden processes our shipment and customer data. Accept 24 months for breach claims only, never as the general cap."],
+    ["assistant", "On 12.1, the playbook lets a vendor keep its pre-existing platform as long as our data and the reports generated from it stay ours. The redline says exactly that."],
+    ["elena-voss", "Agreed, accept 12.1 as written. Payment is net 45, which is standard. We sign on 2025-06-18."]
+  ],
+  "precedents": [
+    "Halden Analytics precedent (SaaS agreement signed 2025-06-18): liability cap 12 months of fees, with a 24-month super-cap for personal-data breach claims only.",
+    "Halden Analytics precedent (SaaS agreement signed 2025-06-18): Halden keeps its platform IP; Harbrook owns its data and all reports generated from it."
+  ]
+}
