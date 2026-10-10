@@ -1,0 +1,70 @@
+{
+  "firm": "Calder Lane Advisory",
+  "consultants": [
+    {"key": "priya", "custom_id": "priya", "display": "Priya Raman", "role": "Partner, Calder Lane Advisory"},
+    {"key": "tom", "custom_id": "tom", "display": "Tom Okafor", "role": "Associate, Calder Lane Advisory"}
+  ],
+  "engagements": [
+    {
+      "code": "ENG-0417",
+      "client": "Harrow & Finch Grocers",
+      "sector": "regional grocer, family-owned",
+      "status": "closed 2026-09-28",
+      "team": ["priya", "tom"],
+      "identifiers": ["Harrow", "Finch", "Dana", "Whitlock", "Graham", "Pike", "Leeds"]
+    },
+    {
+      "code": "ENG-0452",
+      "client": "Pellow's Markets",
+      "sector": "regional grocer",
+      "status": "kick-off 2026-10-12",
+      "team": ["tom"],
+      "identifiers": ["Pellow", "Pellows", "Ines", "Carvalho", "Bristol"]
+    }
+  ],
+  "debrief": {
+    "engagement": "ENG-0417",
+    "title": "Close-out debrief",
+    "parts": [
+      {
+        "label": "the diagnosis",
+        "date": "2026-09-29T09:00:00Z",
+        "turns": [
+          ["priya", "Priya Raman (Partner, Calder Lane Advisory): Let's close out the Harrow & Finch Grocers engagement. Their CFO Dana Whitlock signed off yesterday."],
+          ["tom", "Tom Okafor (Associate, Calder Lane Advisory): The headline: Harrow & Finch's net margin fell from 4.1% to 2.7% over two years, and it was not price competition. 61% of the erosion came from shrink and markdowns on fresh produce in the 38 Leeds-area stores."],
+          ["priya", "Priya Raman (Partner, Calder Lane Advisory): Right. The pattern I want us to keep: when a grocer's margin drops and everyone blames discounters, check fresh shrink before pricing. Category-level shrink was the real driver."],
+          ["tom", "Tom Okafor (Associate, Calder Lane Advisory): The framework that worked was the three-lens margin bridge: price/mix, shrink, and labour-per-case, each measured per store cluster rather than per store."]
+        ]
+      },
+      {
+        "label": "getting it approved",
+        "date": "2026-09-29T09:30:00Z",
+        "turns": [
+          ["priya", "Priya Raman (Partner, Calder Lane Advisory): Also: Dana's team rejected the first recommendation because it cut staff. Reframing the same savings as ordering-cadence changes got it approved within a week."],
+          ["tom", "Tom Okafor (Associate, Calder Lane Advisory): Noted. Lesson: in family-owned grocers, recommendations that touch headcount stall; ordering and replenishment fixes get approved fast."],
+          ["priya", "Priya Raman (Partner, Calder Lane Advisory): And their head of stores, Graham Pike, only engaged once we showed the store-cluster results on a single page. The 40-slide deck went unread."],
+          ["tom", "Tom Okafor (Associate, Calder Lane Advisory): So for operations leaders: lead with a one-page cluster view and keep the detailed deck as backup."]
+        ]
+      }
+    ]
+  },
+  "shortcut": {
+    "by": "tom",
+    "why": "Tom, starting the next grocer engagement, wants the number handy and pins it straight into the library",
+    "text": "Benchmark from Harrow & Finch: fresh shrink and markdowns were 61% of their margin erosion."
+  },
+  "questions": [
+    {
+      "q": "A regional grocer's margin is falling and the CEO blames discount chains. Where should we look first?",
+      "topic": ["shrink", "markdown", "discount", "pricing", "price"]
+    },
+    {
+      "q": "How do we get cost-saving recommendations approved at a family-owned grocer?",
+      "topic": ["headcount", "staff", "ordering", "replenishment", "approv"]
+    },
+    {
+      "q": "How should we present findings to a head of stores?",
+      "topic": ["one-page", "one page", "single page", "deck", "operations leader"]
+    }
+  ]
+}
