@@ -1,0 +1,83 @@
+{
+  "firm": "Ledgerline Bookkeeping",
+  "today": "2026-09-30",
+  "month": "September 2026",
+  "bookkeeper": {"key": "dana", "display": "Dana Ruiz", "role": "Senior bookkeeper, Ledgerline Bookkeeping"},
+  "clients": [
+    {
+      "key": "fernhill",
+      "name": "Fernhill Supply",
+      "what": "online store",
+      "owner": {"key": "rafe", "display": "Rafe Okafor", "role": "Owner, Fernhill Supply"},
+      "thread": {
+        "name": "Fernhill Supply — onboarding thread",
+        "date": "2026-09-01T09:00:00Z",
+        "read_after": [4],
+        "turns": [
+          ["rafe", "Our investors read gross margin with card processing included, so they want processor costs above the line, not in overhead."],
+          ["dana", "Understood. Most of my clients book Paylane fees as bank and merchant fees, an operating expense."],
+          ["rafe", "Not for us. Please book every Paylane fee line to Cost of revenue, every month."],
+          ["dana", "Done. Rule for Fernhill: Paylane fees go to Cost of revenue, and Paylane payouts go to the Clearing account until they are matched to sales."],
+          ["rafe", "One more: the Kestrel cyber policy renews in September and it is annual. Spread it over twelve months."],
+          ["dana", "I will book the Kestrel renewal as a prepaid expense and amortize it monthly over 12 months."]
+        ]
+      },
+      "rules": [
+        {"vendor": "Paylane", "line": "fee", "match": "fee", "category": "Cost of revenue", "turn": 4, "reason_turn": 1,
+         "text": "Fernhill Supply rule: Paylane card processing fees are booked to Cost of revenue (investors read gross margin with processing included). Agreed with Rafe Okafor on 2026-09-01."},
+        {"vendor": "Paylane", "line": "payout", "match": "payout", "category": "Clearing", "turn": 4, "reason_turn": 4,
+         "text": "Fernhill Supply rule: Paylane payouts are booked to the Clearing account until matched to sales. Agreed with Rafe Okafor on 2026-09-01."},
+        {"vendor": "Kestrel Insurance", "line": "annual policy", "match": "", "category": "Prepaid expense", "treatment": "amortize monthly over 12 months", "turn": 6, "reason_turn": 5,
+         "text": "Fernhill Supply exception: the annual Kestrel Insurance cyber policy is booked as a Prepaid expense and amortized monthly over 12 months. Agreed with Rafe Okafor on 2026-09-01."}
+      ],
+      "exports": [
+        {"file": "fernhill-ledger-2026-q3.xlsx", "label": "Jun–Aug ledger export"}
+      ],
+      "feed": [
+        {"date": "2026-09-02", "payee": "Paylane", "memo": "Card processing fees Aug", "amount": -231.18, "expect": ["Cost of revenue", "rule"]},
+        {"date": "2026-09-03", "payee": "Northwind Hosting", "memo": "Servers Sep", "amount": -1480, "expect": ["Cost of revenue", "precedent"]},
+        {"date": "2026-09-10", "payee": "Paylane", "memo": "Payout", "amount": 17940.22, "expect": ["Clearing", "rule"]},
+        {"date": "2026-09-15", "payee": "Kestrel Insurance", "memo": "Cyber policy renewal 2026-27", "amount": -3900, "expect": ["Prepaid expense", "rule"]},
+        {"date": "2026-09-18", "payee": "Teal Freight", "memo": "Pallet shipping", "amount": -402.5, "expect": ["Shipping and delivery", "precedent"]},
+        {"date": "2026-09-21", "payee": "Lumen Ads", "memo": "Search campaign Sep", "amount": -800, "expect": [null, "ask"]}
+      ]
+    },
+    {
+      "key": "marrow",
+      "name": "Marrow & Pine Café",
+      "what": "café",
+      "owner": {"key": "iris", "display": "Iris Calloway", "role": "Owner, Marrow & Pine Café"},
+      "thread": {
+        "name": "Marrow & Pine Café — onboarding thread",
+        "date": "2026-09-08T09:00:00Z",
+        "read_after": [4],
+        "turns": [
+          ["iris", "Our accountant prepares the café's tax return from operating expenses, so she wants card fees there, as bank and merchant fees."],
+          ["dana", "I see August's Paylane fee was booked to Cost of revenue by our new junior. That was a mistake."],
+          ["iris", "Yes, please fix that. Paylane fees are bank and merchant fees for us, every month."],
+          ["dana", "Rule for Marrow & Pine: Paylane fees go to Bank and merchant fees. I will correct August."],
+          ["iris", "Forkful pays us for delivery orders net of their commission. Book the payout to Delivery sales."],
+          ["dana", "Noted: Forkful payouts go to Delivery sales."]
+        ]
+      },
+      "rules": [
+        {"vendor": "Paylane", "line": "fee", "match": "fee", "category": "Bank and merchant fees", "turn": 4, "reason_turn": 1,
+         "text": "Marrow & Pine Café rule: Paylane card processing fees are booked to Bank and merchant fees (the café's accountant files them as operating expenses). Agreed with Iris Calloway on 2026-09-08."},
+        {"vendor": "Forkful", "line": "payout", "match": "payout", "category": "Delivery sales", "turn": 6, "reason_turn": 5,
+         "text": "Marrow & Pine Café rule: Forkful delivery payouts are booked to Delivery sales. Agreed with Iris Calloway on 2026-09-08."}
+      ],
+      "exports": [
+        {"file": "marrow-ledger-2026-q3.xlsx", "label": "Jun–Aug ledger export"},
+        {"file": "marrow-ledger-2026-09.xlsx", "label": "September so far", "broken_first": "marrow-ledger-2026-09-broken.xlsx"}
+      ],
+      "feed": [
+        {"date": "2026-09-02", "payee": "Paylane", "memo": "Card processing fees Aug", "amount": -88.4, "expect": ["Bank and merchant fees", "rule"]},
+        {"date": "2026-09-16", "payee": "Saltmarsh Utilities", "memo": "Electricity Sep", "amount": -309.65, "expect": ["Utilities", "precedent"]},
+        {"date": "2026-09-22", "payee": "Forkful", "memo": "Delivery payout, net", "amount": 2205.15, "expect": ["Delivery sales", "rule"]},
+        {"date": "2026-09-24", "payee": "Hollis Dairy", "memo": "Milk and cream", "amount": -671.3, "expect": ["Cost of goods sold", "precedent"]},
+        {"date": "2026-09-26", "payee": "Orchard Print Co", "memo": "Menus reprint", "amount": -455, "expect": ["Marketing", "precedent"], "needs_resent": true},
+        {"date": "2026-09-28", "payee": "Tidewell Linen", "memo": "Table linen service", "amount": -118, "expect": [null, "ask"]}
+      ]
+    }
+  ]
+}
