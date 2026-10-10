@@ -48,13 +48,14 @@ record   ── fact conflict get (strategy, kept, forgotten, snapshots) ──�
 ask      ── search --projects <team> --actors <Lena>  (profile + showings, one search)
 ```
 
-**Watch it run** (real recordings, unedited): recording in progress.
+**Watch it run** (real recordings, unedited):
+[CLI demo, 4:08](https://github.com/memorylake-ai/memorylake-usecases/releases/download/buyer-profile-memory-v1/buyer-profile-memory-cli-demo.mp4) · [Web companion demo, 5:14](https://github.com/memorylake-ai/memorylake-usecases/releases/download/buyer-profile-memory-v1/buyer-profile-memory-web-demo.mp4)
 
 Runs in about 3½ minutes on a free personal account. Most of that is pacing the writes (15 s apart) and waiting for the
 detector. The only credential you need is a MemoryLake API key.
 
 **Measured** (all runs while building this demo, free account): the detector raised **both** conflicts on Lena's actor in
-**6 of 6** fresh runs, 29–34 s after Tom's second note. It raised **nothing else** in any of them: no conflict among the
+**8 of 8** fresh runs (both recordings included), 29–34 s after Tom's second note. It raised **nothing else** in any of them: no conflict among the
 kickoff facts, none on the financing or quiet-street facts, none on the showings. Conflict names and descriptions are written
 by the server and differ from run to run; the category and the facts they name do not.
 
@@ -114,6 +115,10 @@ the earlier conflicts instead of waiting, and says the screen now shows the reso
 ```bash
 python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
+
+![Web companion — Maya's tour screen: two listings marked "ask Lena first", each naming the conflict on Lena's actor](https://github.com/memorylake-ai/memorylake-usecases/raw/main/buyer-profile-memory/web/screenshot-takeover.png)
+
+[Watch the web companion demo (mp4, 5:14)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/buyer-profile-memory-v1/buyer-profile-memory-web-demo.mp4).
 
 Paste the key, press **Run demo**, and watch the profile and the showings fill in, then the detector's two conflicts on
 Lena's actor, Maya's tour screen with the two *ask first* rows, the said-vs-responded table, the resolution and the
