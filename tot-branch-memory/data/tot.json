@@ -1,0 +1,95 @@
+{
+  "team": "Larkspur Outfitters (fictional)",
+  "trunk": {
+    "slug": "trunk",
+    "name": "Larkspur — performance trunk",
+    "description": "Trunk memory of the Pathfinder planner: tasks, merged branch results and pruned-branch lessons. Demo data."
+  },
+  "human": {
+    "slug": "priya",
+    "name": "Priya Nair",
+    "role": "staff engineer, Larkspur Outfitters",
+    "description": "Staff engineer at Larkspur Outfitters (fictional). Sets the performance tasks."
+  },
+  "planner": {
+    "slug": "pathfinder",
+    "name": "Pathfinder",
+    "role": "Tree-of-Thoughts planner, Larkspur Outfitters",
+    "description": "A Tree-of-Thoughts planning bot (scripted in this demo). Explores branches in parallel."
+  },
+  "approaches": {
+    "cache": "Cache price lookups in Redis",
+    "pool": "PgBouncer in transaction mode, connection pool raised from 20 to 80",
+    "index": "Composite index on order_items (cart_id, sku)"
+  },
+  "runs": [
+    {
+      "run": "r1",
+      "date": "2026-10-01",
+      "service": "checkout",
+      "target_ms": 300,
+      "task": "Checkout p95 latency is 610 ms. We need it below 300 ms before the Black Friday code freeze on November 20. Checkout runs on the orders Postgres 15 cluster, and prices must never be served more than 5 seconds stale.",
+      "candidates": ["cache", "pool", "index"],
+      "branches": [
+        {
+          "key": "cache",
+          "approach": "cache",
+          "p95_ms": 455,
+          "verdict": "pruned",
+          "reason": "it only reaches 455 ms, and only with a 60-second cache TTL, which breaks the rule that prices are never more than 5 seconds stale",
+          "thoughts": [
+            "Thought 1: price lookups are 38 percent of checkout time. Put them behind the Valkey 7.2 cache on the staging cluster rk-edge-3 and see how far p95 drops.",
+            "Thought 2: with a 5-second TTL the hit ratio is only 0.17 and p95 barely moves (590 ms). With a 60-second TTL the hit ratio is 0.62 and p95 is 455 ms, but a 60-second TTL serves prices that are up to a minute stale. Neither setting is good enough. Prune this branch."
+          ],
+          "secrets": ["Valkey", "rk-edge-3", "0.62", "0.17"]
+        },
+        {
+          "key": "pool",
+          "approach": "pool",
+          "p95_ms": 240,
+          "verdict": "merged",
+          "reason": "it reaches 240 ms with no change to pricing or schema",
+          "thoughts": [
+            "Thought 1: under load the 20-connection pool queues requests; the wait-queue depth peaked at 41 during the replay of the September 26 traffic. Try PgBouncer in transaction mode in front of the orders cluster and a bigger pool.",
+            "Thought 2: pgbench run 7 against node lark-db-02 with PgBouncer in transaction mode and the pool at 80 sustained 1,800 TPS; checkout p95 in the replay fell to 240 ms. This branch meets the target."
+          ],
+          "secrets": ["lark-db-02", "pgbench", "1,800|1800", "September 26"]
+        },
+        {
+          "key": "index",
+          "approach": "index",
+          "p95_ms": 520,
+          "verdict": "pruned",
+          "reason": "it saves only 90 ms (520 ms) and building the index locks order_items for 14 minutes",
+          "thoughts": [
+            "Thought 1: the cart query does a sequential scan over 2.3 million order_items rows on replica lark-db-04. A composite index on (cart_id, sku) should turn it into an index scan.",
+            "Thought 2: with the index, EXPLAIN cost falls from 48211 to 312 but checkout p95 only moves from 610 to 520 ms, and the build locked order_items for 14 minutes on the replica. Not worth a production lock. Prune this branch."
+          ],
+          "secrets": ["2.3 million", "lark-db-04", "48211|48,211", "EXPLAIN"]
+        }
+      ]
+    },
+    {
+      "run": "r2",
+      "date": "2026-10-08",
+      "service": "search",
+      "target_ms": 300,
+      "task": "Product search p95 latency is 540 ms. Target below 300 ms before the November 20 freeze. Search reads the catalog from the same Postgres 15 cluster and shows live prices.",
+      "candidates": ["cache", "pool", "index"],
+      "branches": [
+        {
+          "key": "pool-search",
+          "approach": "pool",
+          "p95_ms": 255,
+          "verdict": "merged",
+          "reason": "the checkout pooling pattern carries over: 255 ms with no change to pricing or schema",
+          "thoughts": [
+            "Thought 1: trunk memory says pooling worked for checkout and price caching breaks the freshness rule. Search shares the cluster, so start from the merged pattern: route the search service through PgBouncer in transaction mode too.",
+            "Thought 2: the catalog replay on node lark-db-03 peaked at 2,400 TPS; search p95 fell to 255 ms with the shared pool at 80. Target met with one branch."
+          ],
+          "secrets": ["lark-db-03", "2,400|2400"]
+        }
+      ]
+    }
+  ]
+}
