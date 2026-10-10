@@ -1,0 +1,122 @@
+{
+  "team": "Kestrel Labs platform team",
+  "today": "2026-10-08",
+  "agent": {
+    "slug": "tern",
+    "name": "Tern (CI triage agent)",
+    "description": "Triages failed CI runs for the Kestrel Labs platform team. Demo data.",
+    "system_prompt": "You are Tern, the CI triage agent for the Kestrel Labs platform team. When a CI run fails, decide what to do about it: re-run, quarantine, roll back, raise a limit, or open a ticket. Before you plan, retrieve the lessons in your memory that match the failure."
+  },
+  "twin": {
+    "slug": "tern-twin",
+    "name": "Tern twin (same prompt, no memory)"
+  },
+  "human": {
+    "slug": "dana",
+    "name": "Dana Okafor",
+    "description": "On-call engineer, Kestrel Labs platform team. Demo data."
+  },
+  "playbook": {
+    "test-failure": "Quarantine the test as flaky and open a ticket for its owner.",
+    "deploy-failure": "Roll the deploy back to the previous release.",
+    "timeout": "Raise the test's timeout so the suite goes green."
+  },
+  "runs": [
+    {
+      "run": "r-001",
+      "date": "2026-09-22",
+      "kind": "test-failure",
+      "task": "test_ledger_sync failed in the nightly run with ECONNRESET against the staging database.",
+      "action": "I marked test_ledger_sync as flaky and quarantined it.",
+      "outcome": "A plain re-run passed five minutes later. The staging database had restarted for patching, so the quarantine hid a healthy test for two days.",
+      "reflection": {
+        "text": "Lesson from run r-001: retry a test that fails with ECONNRESET against the staging database once before marking it flaky.",
+        "cause": "environment",
+        "adjustment": "Retry an ECONNRESET failure against the staging database once before quarantining the test.",
+        "expected": "No healthy test is quarantined because of a one-off database restart.",
+        "signals": "ECONNRESET|staging database"
+      }
+    },
+    {
+      "run": "r-002",
+      "date": "2026-09-24",
+      "kind": "test-failure",
+      "task": "test_checkout_refund failed in the nightly run with HTTP 503 from the payments sandbox.",
+      "action": "I quarantined test_checkout_refund as flaky.",
+      "outcome": "The payments sandbox was down for scheduled maintenance and its status page said so. The test was fine.",
+      "reflection": {
+        "text": "Lesson from run r-002: before quarantining a payments test, check the payments sandbox status page; if the sandbox is down, re-run the test after it recovers instead.",
+        "cause": "environment",
+        "adjustment": "Check the payments sandbox status page first; if the sandbox is down, re-run the test after it recovers.",
+        "expected": "No healthy payments test is quarantined during a sandbox outage.",
+        "signals": "payments sandbox|payments test"
+      }
+    },
+    {
+      "run": "r-003",
+      "date": "2026-09-26",
+      "kind": "deploy-failure",
+      "task": "The search-api deploy to production failed its smoke check.",
+      "action": "I rolled search-api back to the previous release.",
+      "outcome": "The smoke runner had a stale DNS cache. The release was fine, and the rollback cost the team a day.",
+      "reflection": {
+        "text": "Lesson from run r-003: before rolling back a deploy, read the smoke-check log and rule out the smoke runner itself (DNS, disk, network).",
+        "cause": "environment",
+        "adjustment": "Read the smoke-check log and rule out the smoke runner (DNS, disk, network) before rolling anything back.",
+        "expected": "No good release is rolled back because of a broken smoke runner.",
+        "signals": "smoke check|deploy"
+      }
+    },
+    {
+      "run": "r-004",
+      "date": "2026-09-29",
+      "kind": "timeout",
+      "task": "test_invoice_pdf timed out twice this week.",
+      "action": "I raised the test's timeout from 20 to 60 seconds.",
+      "outcome": "That hid a real regression: PDF rendering became four times slower after the font upgrade.",
+      "reflection": {
+        "text": "Lesson from run r-004: when a test times out, compare its duration history before raising any timeout; a jump of more than 2x is a regression, not flakiness.",
+        "cause": "code",
+        "adjustment": "Compare the test's duration history before raising a timeout; treat a jump of more than 2x as a regression.",
+        "expected": "No performance regression is hidden behind a longer timeout.",
+        "signals": "timed out|timeout"
+      }
+    },
+    {
+      "run": "r-005",
+      "date": "2026-10-03",
+      "kind": "test-failure",
+      "task": "test_ledger_sync failed again in the nightly run with ECONNRESET against the staging database.",
+      "action": "I retried it once, as my lesson from r-001 says. The retry passed and the change shipped.",
+      "outcome": "The resets came from a connection-pool leak in ledger-sync, which exhausted the production pool two days later. Retrying hid the leak.",
+      "reflection": {
+        "text": "Lesson from run r-005: never retry a test that fails with ECONNRESET against the staging database; open a connection-pool leak ticket for the service instead.",
+        "cause": "code",
+        "adjustment": "Do not retry an ECONNRESET failure against the staging database; open a connection-pool leak ticket for the service.",
+        "expected": "No connection leak ships behind a passing retry.",
+        "signals": "ECONNRESET|staging database",
+        "contradicts": "r-001"
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "key": "refund-webhook",
+      "kind": "test-failure",
+      "task": "test_refund_webhook failed in the nightly run with HTTP 503 from the payments sandbox.",
+      "expect": "r-002"
+    },
+    {
+      "key": "ledger-sync",
+      "kind": "test-failure",
+      "task": "test_ledger_sync failed in the nightly run with ECONNRESET against the staging database.",
+      "expect": "r-005"
+    }
+  ],
+  "skill": {
+    "slug": "rule-out-the-environment",
+    "title": "Rule out the environment first",
+    "cause": "environment",
+    "min_reflections": 2
+  }
+}
