@@ -1,0 +1,64 @@
+{
+  "team": "Harborline Realty",
+  "today": "2026-10-08",
+  "buyer": {
+    "slug": "lena-park",
+    "name": "Lena Park",
+    "description": "Buyer, first home. Touring since September 2026."
+  },
+  "agents": {
+    "priya": {"name": "Priya Shah", "role": "buyer's agent, ran the kickoff"},
+    "tom": {"name": "Tom Becker", "role": "covered Lena's showings while Priya was away"},
+    "maya": {"name": "Maya Ortiz", "role": "takes Lena over today"}
+  },
+  "kickoff": {
+    "agent": "priya",
+    "date": "2026-09-02",
+    "facts": [
+      {"key": "street", "kind": "street", "field": "street_type", "rule": {"forbid": "cul-de-sac"},
+       "label": "no cul-de-sac (dealbreaker)",
+       "text": "Dealbreaker: Lena Park will not buy a house on a cul-de-sac; she wants a through street."},
+      {"key": "budget", "kind": "budget", "field": "price", "rule": {"max": 800000},
+       "label": "max 800,000",
+       "text": "Lena Park's maximum budget is 800,000 dollars, a hard ceiling."},
+      {"key": "financing", "kind": "financing", "field": "condition", "rule": {"forbid": "major repairs"},
+       "label": "FHA: no major repairs",
+       "text": "Lena Park is buying with an FHA loan, so the house cannot need major repairs to close."},
+      {"key": "quiet", "kind": "preference", "field": "traffic", "rule": {"prefer": "low"},
+       "label": "quiet street",
+       "text": "Lena Park prefers a quiet street with little traffic."}
+    ]
+  },
+  "showings": [
+    {"key": "alder", "date": "2026-09-20", "agent": "tom", "listing": "14 Alder Court",
+     "street_type": "cul-de-sac", "price": 795000, "traffic": "low", "condition": "move-in ready", "reaction": "loved",
+     "text": "Showing 2026-09-20, 14 Alder Court (cul-de-sac, 795,000 dollars), shown by Tom Becker: Lena Park called it her favorite of the day and asked where the school bus stops."},
+    {"key": "marsh", "date": "2026-09-20", "agent": "tom", "listing": "88 Marsh Road",
+     "street_type": "through street", "price": 760000, "traffic": "high", "condition": "move-in ready", "reaction": "disliked",
+     "text": "Showing 2026-09-20, 88 Marsh Road (through street, 760,000 dollars), shown by Tom Becker: Lena Park left after ten minutes because of the traffic noise."},
+    {"key": "wren", "date": "2026-09-27", "agent": "tom", "listing": "9 Wren Lane",
+     "street_type": "cul-de-sac", "price": 815000, "traffic": "low", "condition": "move-in ready", "reaction": "loved",
+     "text": "Showing 2026-09-27, 9 Wren Lane (cul-de-sac, 815,000 dollars), shown by Tom Becker: Lena Park asked for a second showing with her sister."},
+    {"key": "ridge", "date": "2026-09-27", "agent": "tom", "listing": "230 Ridge Avenue",
+     "street_type": "through street", "price": 780000, "traffic": "low", "condition": "move-in ready", "reaction": "lukewarm",
+     "text": "Showing 2026-09-27, 230 Ridge Avenue (through street, 780,000 dollars), shown by Tom Becker: Lena Park said the street was fine but the house felt too small."}
+  ],
+  "notes": {
+    "agent": "tom",
+    "date": "2026-09-27",
+    "facts": [
+      {"key": "street", "kind": "street", "field": "street_type", "rule": {"allow": "cul-de-sac"},
+       "label": "cul-de-sac is fine", "evidence": ["alder", "wren"],
+       "text": "Lena Park is happy to buy a house on a cul-de-sac."},
+      {"key": "budget", "kind": "budget", "field": "price", "rule": {"max": 850000},
+       "label": "max 850,000", "evidence": ["wren"],
+       "text": "Lena Park's maximum budget is 850,000 dollars."}
+    ]
+  },
+  "tour": [
+    {"key": "heron", "listing": "5 Heron Court", "street_type": "cul-de-sac", "price": 790000, "traffic": "low", "condition": "move-in ready"},
+    {"key": "elm", "listing": "41 Elm Street", "street_type": "through street", "price": 840000, "traffic": "low", "condition": "move-in ready"},
+    {"key": "birch", "listing": "17 Birch Way", "street_type": "through street", "price": 735000, "traffic": "low", "condition": "needs major repairs (new roof)"},
+    {"key": "harbor", "listing": "602 Harbor Boulevard", "street_type": "through street", "price": 780000, "traffic": "high", "condition": "move-in ready"}
+  ]
+}
