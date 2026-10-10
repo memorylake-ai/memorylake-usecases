@@ -47,14 +47,16 @@ approved   ─▶ fact add ─▶ fact conflict list (m2d, slide text) ─▶ sl
        proj doc download → sha256 = pinned? → quote on that slide of the .pptx?  →  out/fernhill-cycles-deck-outline.md
 ```
 
+**Watch it run** (real recordings, unedited):
+[CLI demo, 3:55](https://github.com/memorylake-ai/memorylake-usecases/releases/download/pitch-deck-memory-v1/pitch-deck-memory-cli-demo.mp4) · [Web companion demo, 4:52](https://github.com/memorylake-ai/memorylake-usecases/releases/download/pitch-deck-memory-v1/pitch-deck-memory-web-demo.mp4)
+
 Runs in about 3 minutes on a free personal account. Most of that is importing the six files and waiting for the detector.
 The only credential you need is a MemoryLake API key.
 
-**Measured** (free account, while building this demo): **5 of 5** fresh runs (three of them in parallel) gave the same
-result: 5/5 slots got the expected slide, 3/3 debrief lessons were found, the approved figures were flagged against
-slide 4 and the other two lines stayed clean, **8/8** citations checked out, and the control rejected 5/5. MemoryLake ranked
-the chosen slide first within its deck in 29 of 30 slot lookups (6 runs). In the other one it came second; the demo picks by slide type, so the
-result did not change. The detector raised the conflict before the demo read it (about 35 s after the last write) every time.
+**Measured** (free account, every fresh run while building and recording this demo, both recordings included): **7 of 7** fresh runs (three of them in parallel) gave the same result. Each time, 5/5 slots got the expected slide and 3/3 debrief lessons were found. The approved figures were
+flagged against slide 4 and the other two lines stayed clean, **8/8** citations checked out, and the control rejected 5/5. MemoryLake ranked
+the chosen slide first within its deck in 39 of 40 slot lookups (8 runs, one of them a re-run). The one exception came second, on a re-run about two minutes after
+import; the demo picks by slide type, so the result did not change. The detector raised the conflict before the demo read it (about 35 s after the last write) every time.
 
 ## Prerequisites
 
@@ -105,6 +107,12 @@ A re-run takes about 40 seconds.
 ```bash
 python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
+
+![Web companion — Slide finder: the case-study slot, the slide drawn from the .pptx with MemoryLake's box, and the candidates from the other decks](https://github.com/memorylake-ai/memorylake-usecases/raw/main/pitch-deck-memory/web/screenshot-slide-finder.png)
+
+![Web companion — Approved content: the audited figures raise an m2d conflict against slide 4 of the old deck](https://github.com/memorylake-ai/memorylake-usecases/raw/main/pitch-deck-memory/web/screenshot-approved-content.png)
+
+[Watch the web companion demo (mp4, 4:52)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/pitch-deck-memory-v1/pitch-deck-memory-web-demo.mp4).
 
 Paste the key, press **Run demo**, and watch each step. **Slide finder** shows one card per slot: the slide drawn from the
 .pptx's own text, **MemoryLake's box over it**, the quote, and the candidates from the other decks with their category and
