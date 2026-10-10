@@ -52,16 +52,17 @@ version 2   ── agent version create <Tern> --from-version latest --config {"
 audit       ── fact trace · fact conflict get · skill version list · agent version list ──▶ out/tern-improvement.md
 ```
 
-**Watch it run** (real recordings, unedited): *recording in progress*
+**Watch it run** (real recordings, unedited):
+[CLI demo, 5:05](https://github.com/memorylake-ai/memorylake-usecases/releases/download/reflexion-memory-v1/reflexion-memory-cli-demo.mp4) · [Web companion demo, 6:52](https://github.com/memorylake-ai/memorylake-usecases/releases/download/reflexion-memory-v1/reflexion-memory-web-demo.mp4)
 
 Runs in about 4 minutes on a free personal account. Most of that is MemoryLake processing the five conversations, pacing the
 writes (15 s apart) and waiting for the detector. The only credential you need is a MemoryLake API key. Nothing here calls an
 LLM or `agent send`: Tern's planning step is the retrieval and a fixed rule, so the result is the same on every run.
 
 **Measured** (every fresh run while building this demo, free account): the detector flagged r-005 against r-001 on the agent in
-**5 of 5** fresh runs, 28–31 s after the last lesson, with **no** other conflict raised. In 1 of the 5 it also named a fact that
+**7 of 7** fresh runs (both recordings included), 28–31 s after the last lesson, with **no** other conflict raised. In 1 of the 7 it also named a fact that
 extraction had put on Tern ("The assistant retries a failing CI job once, following … r-001"), and `keep_fact` forgot that one
-too. Both of today's plans retrieved the expected lesson at rank 1 in **5 of 5** runs, and the twin's search returned **0**
+too. Both of today's plans retrieved the expected lesson at rank 1 in **7 of 7** runs, and the twin's search returned **0**
 facts every time. The skill passed its security review within seconds in every run once the front matter was valid YAML (see
 *If something goes wrong*).
 
@@ -117,6 +118,8 @@ python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
 
 ![Web companion — today's failures: Tern plans from the matching lesson, the twin falls back to its default playbook](https://github.com/memorylake-ai/memorylake-usecases/raw/main/reflexion-memory/web/screenshot-today.png)
+
+[Watch the web companion demo (mp4, 6:52)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/reflexion-memory-v1/reflexion-memory-web-demo.mp4).
 
 Paste the key, press **Run demo**, and watch the runs and their reflections fill in, then Tern's memory next to the project's,
 the detector's conflict with the plan before and after `keep_fact`, Tern and the twin side by side on today's failures, the
