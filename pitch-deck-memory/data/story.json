@@ -1,0 +1,44 @@
+{
+  "agency": "Harbor and Pine",
+  "prospect": {"client": "Fernhill Cycles", "vertical": "outdoor", "pitch_date": "2026-10-20",
+               "brief": "Fernhill Cycles (gravel and commuter bikes) wants a launch partner for its first e-bike."},
+  "today": "2026-10-10",
+  "slots": [
+    {"key": "case_study", "label": "Case study", "prefix": "Case study:", "rule": "category",
+     "query": "case study for an outdoor brand launch with results",
+     "expect": ["2025-09-cedarline-outdoor-pitch.pptx", 4]},
+    {"key": "credentials", "label": "Credentials", "prefix": "Credentials:", "rule": "category",
+     "query": "our credentials with outdoor and active-lifestyle brands",
+     "expect": ["2025-09-cedarline-outdoor-pitch.pptx", 2]},
+    {"key": "process", "label": "Process", "prefix": "Our process:", "rule": "won",
+     "query": "how we run discovery, week by week",
+     "expect": ["2026-06-quillpay-fintech-pitch.pptx", 4]},
+    {"key": "pricing", "label": "Pricing", "prefix": "Pricing:", "rule": "won",
+     "query": "how we priced the engagement",
+     "expect": ["2026-06-quillpay-fintech-pitch.pptx", 5]},
+    {"key": "team", "label": "Team", "prefix": "Team:", "rule": "won",
+     "query": "the people who will work on the account",
+     "expect": ["2026-06-quillpay-fintech-pitch.pptx", 6]}
+  ],
+  "start_from": "2025-09-cedarline-outdoor-pitch.pptx",
+  "lessons": [
+    {"debrief": "2025-09-cedarline-debrief.docx", "needle": "put pricing after the process slide",
+     "move": "pricing", "after": "process"},
+    {"debrief": "2026-03-brightwell-debrief.docx", "needle": "open with a case study from the prospect's own category, then credentials",
+     "move": "case_study", "before": "credentials"},
+    {"debrief": "2026-06-quillpay-debrief.docx", "needle": "close the pitch on the named team slide, after pricing",
+     "move": "team", "last": true}
+  ],
+  "lesson_query": "what to change next time in the pitch, and what the client said",
+  "approved": [
+    {"key": "northbay-figures", "slot": "case_study",
+     "text": "Approved case-study figures, audited 2026-08: the Northbay Kayak launch film reached 3.6 million views and cut cost per acquisition to 21 dollars.",
+     "expect_conflict": ["2025-09-cedarline-outdoor-pitch.pptx", 4]},
+    {"key": "outdoor-credentials", "slot": "credentials",
+     "text": "Approved credentials line: Harbor and Pine has worked with eleven outdoor brands since 2019.",
+     "expect_conflict": null},
+    {"key": "retainer-floor", "slot": "pricing",
+     "text": "Approved pricing floor: Harbor and Pine does not quote a retainer below 35,000 dollars per month.",
+     "expect_conflict": null}
+  ]
+}

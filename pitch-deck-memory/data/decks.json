@@ -1,0 +1,66 @@
+{
+  "2025-09-cedarline-outdoor-pitch.pptx": {
+    "kind": "deck", "client": "Cedarline Outdoor", "vertical": "outdoor", "pitched": "2025-09-18",
+    "outcome": "lost", "debrief": "2025-09-cedarline-debrief.docx",
+    "slides": [
+      ["Harbor and Pine for Cedarline Outdoor", "New business pitch to the Cedarline Outdoor marketing team, September 2025."],
+      ["Credentials: outdoor and active-lifestyle brands", "Eleven outdoor brands since 2019, including Trailmark Supply, Northbay Kayak and Ridgeway Packs."],
+      ["Pricing: monthly retainer", "A retainer of 42,000 dollars per month covers strategy, creative and paid social in six markets."],
+      ["Case study: Northbay Kayak launch", "The Northbay Kayak launch film reached 4.2 million views and cut cost per acquisition to 18 dollars."],
+      ["Our process: four-week discovery sprint", "Week 1 rider interviews, week 2 positioning, week 3 concept boards, week 4 test-and-learn plan."],
+      ["Team: who works on Cedarline", "Creative director Mara Ostend, strategy lead Theo Vance and paid social lead Ines Paulo."]
+    ]
+  },
+  "2026-03-brightwell-kombucha-pitch.pptx": {
+    "kind": "deck", "client": "Brightwell Kombucha", "vertical": "beverage", "pitched": "2026-03-04",
+    "outcome": "won", "debrief": "2026-03-brightwell-debrief.docx",
+    "slides": [
+      ["Harbor and Pine for Brightwell Kombucha", "New business pitch to the Brightwell founders, March 2026."],
+      ["Case study: Sundew Tea relaunch", "The Sundew Tea relaunch lifted repeat purchase rate from 21 percent to 34 percent in two quarters."],
+      ["Credentials: challenger beverage brands", "Four challenger beverage brands launched into national grocery since 2021."],
+      ["Our process: shopper safaris", "Week 1 shopper safaris in twelve stores, week 2 positioning workshop, week 3 creative territories."],
+      ["Pricing: launch fee, then retainer", "A fixed launch fee of 85,000 dollars, then a monthly retainer from month four."],
+      ["Why us: one team from brief to media", "Strategy, creative and media buying sit in one room, so a test result reaches the next ad in days."]
+    ]
+  },
+  "2026-06-quillpay-fintech-pitch.pptx": {
+    "kind": "deck", "client": "Quillpay", "vertical": "fintech", "pitched": "2026-06-10",
+    "outcome": "won", "debrief": "2026-06-quillpay-debrief.docx",
+    "slides": [
+      ["Harbor and Pine for Quillpay", "New business pitch to the Quillpay growth team, June 2026."],
+      ["Case study: Ledgerline referral campaign", "The Ledgerline referral campaign grew funded accounts by 48 percent in one quarter."],
+      ["Credentials: regulated categories", "Nine financial-services brands since 2018, with zero regulator takedowns."],
+      ["Our process: three-week discovery sprint", "Week 1 customer interviews, week 2 positioning and proof points, week 3 concept test with 400 prospects."],
+      ["Pricing: retainer with a performance bonus", "A retainer of 38,000 dollars per month plus a quarterly bonus tied to agreed growth targets."],
+      ["Team: who works on Quillpay", "Creative director Mara Ostend, strategy lead Priya Hollis and growth lead Jonah Reyes, named on day one."]
+    ]
+  },
+  "2025-09-cedarline-debrief.docx": {
+    "kind": "debrief", "client": "Cedarline Outdoor", "vertical": "outdoor", "pitched": "2025-09-18", "outcome": "lost",
+    "title": "Cedarline Outdoor pitch debrief",
+    "paragraphs": [
+      "Outcome: lost on 2025-09-30 to a larger agency.",
+      "What the client said: the Northbay Kayak case study landed, and the CMO asked for the cost per acquisition figure twice.",
+      "What hurt us: the pricing slide came third, and the CFO stopped listening before we showed how we work.",
+      "Next time: put pricing after the process slide."
+    ]
+  },
+  "2026-03-brightwell-debrief.docx": {
+    "kind": "debrief", "client": "Brightwell Kombucha", "vertical": "beverage", "pitched": "2026-03-04", "outcome": "won",
+    "title": "Brightwell Kombucha pitch debrief",
+    "paragraphs": [
+      "Outcome: won on 2026-03-20, a twelve-month engagement.",
+      "What the client said: opening with the Sundew Tea case study before any credentials made it feel like proof, not a sales pitch.",
+      "Next time: open with a case study from the prospect's own category, then credentials."
+    ]
+  },
+  "2026-06-quillpay-debrief.docx": {
+    "kind": "debrief", "client": "Quillpay", "vertical": "fintech", "pitched": "2026-06-10", "outcome": "won",
+    "title": "Quillpay pitch debrief",
+    "paragraphs": [
+      "Outcome: won on 2026-06-24 against two specialist fintech agencies.",
+      "What the client said: they chose us because the last slide named the people who would actually work on the account.",
+      "Next time: close the pitch on the named team slide, after pricing."
+    ]
+  }
+}
