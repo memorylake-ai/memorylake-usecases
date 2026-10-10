@@ -1,0 +1,125 @@
+{
+  "vendor": {
+    "name": "Quillstack",
+    "about": "an agent SaaS that drafts procurement memos for its customers and keeps each customer's memory in MemoryLake"
+  },
+  "buyer": {
+    "name": "Halden Mutual",
+    "about": "a regional bank evaluating Quillstack; its security team sent the questionnaire",
+    "reviewer": "Halden Mutual vendor-risk team",
+    "due": "2026-10-16"
+  },
+  "tenants": {
+    "halden": {
+      "slug": "halden",
+      "name": "Halden Mutual — tenant memory",
+      "description": "Quillstack's memory for Halden Mutual: memo preferences, approvers, retention settings"
+    },
+    "orrin": {
+      "slug": "orrin",
+      "name": "Orrin Freight — tenant memory",
+      "description": "Quillstack's memory for another customer, Orrin Freight",
+      "fact": "Orrin Freight: purchase memos above 40,000 dollars need a second sign-off from the CFO, Tomas Reyes."
+    }
+  },
+  "keys": [
+    {
+      "slug": "ingest-worker",
+      "purpose": "Quillstack's ingest worker: writes customer conversations and settings into tenant memory",
+      "fate": "rotated"
+    },
+    {
+      "slug": "support-console",
+      "purpose": "the old support console, being retired this quarter",
+      "fate": "revoked"
+    },
+    {
+      "slug": "contractor-export",
+      "purpose": "a contractor's one-off export job; must not outlive the job",
+      "fate": "expires",
+      "expires_in_seconds": 150
+    }
+  ],
+  "people": {
+    "ines": {
+      "slug": "ines",
+      "name": "Ines Varga",
+      "role": "procurement lead, Halden Mutual",
+      "description": "Halden Mutual's procurement lead; writes memo requests to Quillstack"
+    },
+    "quill": {
+      "slug": "quill",
+      "name": "Quill",
+      "role": "Quillstack's memo assistant",
+      "description": "Quillstack's procurement memo assistant (scripted for this demo)"
+    }
+  },
+  "conversation": {
+    "slug": "halden-setup",
+    "name": "Halden Mutual — memo setup call",
+    "start": "2026-09-29T09:00:00Z",
+    "messages": [
+      ["ines", "Ines Varga (procurement lead, Halden Mutual): For every purchase memo, put the total cost of ownership over three years in the first paragraph. Our committee reads nothing else."],
+      ["quill", "Quill (Quillstack's memo assistant): Understood. Three-year total cost of ownership goes in the first paragraph of every Halden memo."],
+      ["ines", "Ines Varga (procurement lead, Halden Mutual): Vendors must be on our approved-supplier list, and any memo above 25,000 euros goes to Marek Holm in treasury for approval."],
+      ["quill", "Quill (Quillstack's memo assistant): Noted: approved-supplier list only, and memos above 25,000 euros are routed to Marek Holm in treasury."],
+      ["ines", "Ines Varga (procurement lead, Halden Mutual): Write the memos in British English, and never name a competitor bank in a memo."]
+    ]
+  },
+  "pinned": [
+    {
+      "key": "retention",
+      "text": "Halden Mutual: memo drafts are kept in memory for 90 days, then deleted (master agreement section 7.2).",
+      "amended": "Halden Mutual: memo drafts are kept in memory for 60 days, then deleted (master agreement section 7.2, amendment 1 signed 2026-10-09)."
+    },
+    {
+      "key": "contacts",
+      "text": "Halden Mutual security contact for incidents: the vendor-risk team at Halden Mutual, reply within 24 hours."
+    }
+  ],
+  "support_note": "Support note: Halden Mutual asked that Quillstack staff sign in to the admin console with SSO only.",
+  "questions": [
+    {
+      "id": "Q1",
+      "topic": "Credentials",
+      "text": "Does each integration get its own credential, and is the secret shown only once and never retrievable afterwards?",
+      "step": 2
+    },
+    {
+      "id": "Q2",
+      "topic": "Rotation",
+      "text": "Can a credential be rotated so that the old secret stops working at once, without losing or re-ingesting data?",
+      "step": 4
+    },
+    {
+      "id": "Q3",
+      "topic": "Least privilege",
+      "text": "Can a credential be limited to one customer's data (one tenant) and denied administrative actions?",
+      "step": 5
+    },
+    {
+      "id": "Q4",
+      "topic": "Revocation",
+      "text": "When an integration is retired, can its access be cut off immediately — and what happens to the data it wrote?",
+      "step": 6
+    },
+    {
+      "id": "Q5",
+      "topic": "Temporary access",
+      "text": "Can temporary credentials (contractors, one-off jobs) expire automatically at a set time?",
+      "step": 7
+    },
+    {
+      "id": "Q6",
+      "topic": "Audit trail",
+      "text": "Is every change to our memory recorded with what changed, when, and from what source — and which credential made it?",
+      "step": 8
+    },
+    {
+      "id": "Q7",
+      "topic": "Offboarding",
+      "text": "If we leave, can all of our memory be deleted, and can you show it is gone?",
+      "step": 9
+    }
+  ]
+}
