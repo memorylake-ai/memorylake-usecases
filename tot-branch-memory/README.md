@@ -31,7 +31,8 @@ a week later: search the trunk ─▶ skip cache, skip index (cited) ─▶ 1 br
 The planner's choices are scripted in `demo.py` (no LLM call); what the demo shows is the memory around them. It runs in
 about 3 minutes on a free personal account. The only credential you need is a MemoryLake API key.
 
-**Watch it run** (real recordings, unedited): recording in progress.
+**Watch it run** (real recordings, unedited):
+[CLI demo, 3:59](https://github.com/memorylake-ai/memorylake-usecases/releases/download/tot-branch-memory-v1/tot-branch-memory-cli-demo.mp4) · [Web companion demo, 4:41](https://github.com/memorylake-ai/memorylake-usecases/releases/download/tot-branch-memory-v1/tot-branch-memory-web-demo.mp4)
 
 ## Prerequisites
 
@@ -86,6 +87,8 @@ python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
 
 ![Web companion — a week later: the plan read from the trunk skips the pruned branches, citing the facts](https://github.com/memorylake-ai/memorylake-usecases/raw/main/tot-branch-memory/web/screenshot-next.png)
+
+[Watch the web companion demo (mp4, 4:41)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/tot-branch-memory-v1/tot-branch-memory-web-demo.mp4).
 
 Paste the key, press **Run demo**, and watch the three branches fill in with their THINKING blocks and the 409s of the race
 for the trunk log, the log itself with the refused stale append, the reasoning-vs-memory check, checkout, merge and rollback,
