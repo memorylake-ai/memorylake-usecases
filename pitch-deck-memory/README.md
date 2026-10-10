@@ -54,9 +54,8 @@ Runs in about 3 minutes on a free personal account. Most of that is importing th
 The only credential you need is a MemoryLake API key.
 
 **Measured** (free account, every fresh run while building and recording this demo, both recordings included): **7 of 7** fresh runs (three of them in parallel) gave the same result. Each time, 5/5 slots got the expected slide and 3/3 debrief lessons were found. The approved figures were
-flagged against slide 4 and the other two lines stayed clean, **8/8** citations checked out, and the control rejected 5/5. MemoryLake ranked
-the chosen slide first within its deck in 39 of 40 slot lookups (8 runs, one of them a re-run). The one exception came second, on a re-run about two minutes after
-import; the demo picks by slide type, so the result did not change. The detector raised the conflict before the demo read it (about 35 s after the last write) every time.
+flagged against slide 4 and the other two lines stayed clean, **8/8** citations checked out, and the control rejected 5/5. In the 8 runs whose logs were kept (40 slot lookups), MemoryLake ranked the chosen slide first within its deck 39 times.
+It also came second in one web-UI re-run. Both exceptions were re-runs within minutes of import, and the demo picks by slide type, so the result did not change. The detector raised the conflict before the demo read it (about 35 s after the last write) every time.
 
 ## Prerequisites
 
