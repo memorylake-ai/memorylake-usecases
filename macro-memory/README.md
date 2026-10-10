@@ -55,17 +55,19 @@ policy-v4.md ── proj doc delete v3 · import v4 ─▶ 0 new conflicts
 support assistant ── fact list (by name) · search --types fact (by question) · fact conflict get (audit)
 ```
 
-**Watch it run** (real recordings, unedited): recording in progress.
+**Watch it run** (real recordings, unedited):
+[CLI demo, 5:57](https://github.com/memorylake-ai/memorylake-usecases/releases/download/macro-memory-v1/macro-memory-cli-demo.mp4) · [Web companion demo, 7:53](https://github.com/memorylake-ai/memorylake-usecases/releases/download/macro-memory-v1/macro-memory-web-demo.mp4)
 
 Runs in about 6 minutes on a free personal account. Most of that is pacing the writes and waiting for the detector.
 The only credential you need is a MemoryLake API key.
 
-**Measured** (every fresh run of the final data set while building this demo — 8 runs, free account, 4 of them in parallel):
-the detector raised all 6 planned (macro, category) pairs in **8 of 8** runs and nothing on *Shipping cost* or *Where is my order*
-before the policy change; **0** new conflicts in the 45 s after policy v4 landed (8/8). After re-filing, *Shipping cost* was flagged
-against v4 in **8 of 8** runs — in 7 within the wait, in 1 about 85 s after it (that run used a 60 s wait; the demo now waits up to
-150 s and says so if the check is deferred). `trust_fact` rewrote the macro text every time (9 of 9 runs, plus 3 of 3 probes), and the
-m2m was marked `stale` after the fix in 5 of 5 runs that checked it. Conflict names and descriptions are written by the server and
+**Measured** (every fresh run of the final data set while building and recording this demo — 11 runs, free account, 4 of
+them in parallel, both recordings included): the detector raised all 6 planned (macro, category) pairs in **11 of 11** runs
+and nothing on *Shipping cost* or *Where is my order* before the policy change; **0** new conflicts in the 45 s after policy v4
+landed (11/11). After re-filing, *Shipping cost* was flagged against v4 in **11 of 11** runs — in 10 within the wait, in 1 about
+85 s after it (that run used a 60 s wait; the demo now waits up to 150 s and says so if the check is deferred). `trust_fact`
+rewrote the macro text in every run whose log was kept (10 of 10, plus 3 of 3 probes), and the m2m showed up under
+`--stale true` after the fix in every such run (6 of 6). Conflict names and descriptions are written by the server and
 differ from run to run; the categories and the facts they name did not.
 
 ## Prerequisites
@@ -119,6 +121,8 @@ python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
 
 ![Web companion — triage: trust_fact, the server's rewrite and the macro's fact trace](https://github.com/memorylake-ai/memorylake-usecases/raw/main/macro-memory/web/screenshot-triage.png)
+
+[Watch the web companion demo (mp4, 7:53)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/macro-memory-v1/macro-memory-web-demo.mp4).
 
 Paste the key, press **Run demo**, and watch the policy and the 7 macros go in, then the detector report per macro (with the
 policy excerpt for `m2d`), the four strategies side by side with before / after text, the policy swap that flags nothing, the

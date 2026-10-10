@@ -11,7 +11,7 @@
     { n: 2, title: "Support KB", sub: "policy v3 · proj doc import", view: "kb" },
     { n: 3, title: "Import macros", sub: "Zendesk + Intercom · fact add", view: "macros" },
     { n: 4, title: "Detector report", sub: "m2d · self · m2m", view: "detector" },
-    { n: 5, title: "Triage", sub: "edit_fact · trust_document · trust_fact · dismiss", view: "triage" },
+    { n: 5, title: "Triage", sub: "four resolve strategies", view: "triage" },
     { n: 6, title: "Policy v4", sub: "the detector stays quiet", view: "swap" },
     { n: 7, title: "Re-verify", sub: "re-file dependent macros", view: "reverify" },
     { n: 8, title: "Support AI", sub: "by name · by question", view: "ai" },
@@ -51,7 +51,7 @@
     const r = { connect, kb, macros, detector, triage, swap, reverify, ai, audit, ask }[S.view];
     $("#stage").innerHTML = r ? r() : ""; bindStage();
   }
-  const empty = (h) => `<h1>${h}</h1><div class="empty">Run the demo first — this view fills in as it runs.</div>`;
+  const empty = (h) => `<h1>${h}</h1><div class="empty">${S.st.status === "running" ? "Working on it — this view fills in when the step finishes." : "Run the demo first — this view fills in as it runs."}</div>`;
   const waitPill = (what) => S.waiting === what ? `<p><span class="pill busy"><span class="spinner"></span> ${esc(S.waitText || "waiting…")}</span></p>` : "";
 
   function connect() {
