@@ -57,12 +57,13 @@ cited rows     ─▶ proj doc download ─▶ sha256 ─▶ that row's cells in
 rule           ─▶ its message ─▶ conv consumed-messages (the batch MemoryLake read) ─▶ the owner's reason
 ```
 
-**Watch it run** (real recordings, unedited): recording in progress.
+**Watch it run** (real recordings, unedited):
+[CLI demo, 6:17](https://github.com/memorylake-ai/memorylake-usecases/releases/download/bookkeeping-memory-v1/bookkeeping-memory-cli-demo.mp4) · [Web companion demo, 7:48](https://github.com/memorylake-ai/memorylake-usecases/releases/download/bookkeeping-memory-v1/bookkeeping-memory-web-demo.mp4)
 
 Runs in about 5 minutes on a free personal account. Most of that is MemoryLake reading the two threads (about 30 s per
 sitting) and importing the exports. The only credential you need is a MemoryLake API key.
 
-**Measured** (free account, every fresh run while building this demo): **6 of 6** fresh runs (three of them in parallel) gave the same result. Each time:
+**Measured** (free account, every fresh run while building and recording this demo, both recordings included): **8 of 8** fresh runs (three of them in parallel) gave the same result. Each time:
 
 - 12/12 bank-feed lines were as expected (Orchard Print: *ask*, then Marketing after the reload)
 - the broken export ended in `ERROR_FILE_CORRUPTED` and the reload took it to `okay` (24–35 s)
@@ -120,6 +121,14 @@ replays it. A re-run takes about a minute.
 ```bash
 python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
+
+![Web companion — Ledger exports: proj stats per client, and the two tables proj doc inspect found on Fernhill's single sheet, drawn over the workbook](https://github.com/memorylake-ai/memorylake-usecases/raw/main/bookkeeping-memory/web/screenshot-files.png)
+
+![Web companion — Categorize: the September bank feed, each line with its client rule or the ledger row it copies](https://github.com/memorylake-ai/memorylake-usecases/raw/main/bookkeeping-memory/web/screenshot-categorize.png)
+
+![Web companion — Why?: the rule's message and the batch MemoryLake read it in (conv consumed-messages)](https://github.com/memorylake-ai/memorylake-usecases/raw/main/bookkeeping-memory/web/screenshot-why.png)
+
+[Watch the web companion demo (mp4, 7:48)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/bookkeeping-memory-v1/bookkeeping-memory-web-demo.mp4).
 
 Paste the key, press **Run demo**, and watch each step:
 
