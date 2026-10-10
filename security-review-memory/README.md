@@ -44,7 +44,8 @@ need is a MemoryLake API key.
 > printed as `sk-` + 4 characters; each integration key lives only in its own profile under `./.memorylake-demo/keys/`
 > (git-ignored), which is deleted when the key is revoked.
 
-**Watch it run** (real recordings, unedited): recording in progress.
+**Watch it run** (real recordings, unedited):
+[CLI demo, 3:39](https://github.com/memorylake-ai/memorylake-usecases/releases/download/security-review-memory-v1/security-review-memory-cli-demo.mp4) · [Web companion demo, 4:58](https://github.com/memorylake-ai/memorylake-usecases/releases/download/security-review-memory-v1/security-review-memory-web-demo.mp4)
 
 ## Prerequisites
 
@@ -94,6 +95,10 @@ the second customer's project (`mlu-sec-orrin`); `cleanup` removes it.
 ```bash
 python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
+
+![Web companion — the evidence pack: rotation answered yes, least privilege answered no, each with its evidence](https://github.com/memorylake-ai/memorylake-usecases/raw/main/security-review-memory/web/screenshot-pack.png)
+
+[Watch the web companion demo (mp4, 4:58)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/security-review-memory-v1/security-review-memory-web-demo.mp4).
 
 Paste the key, press **Run demo**, and watch each question get its answer: the three keys with their masked secrets and
 the prefix-only key list, Halden's memory written by the ingest key, the rotation (old secret refused, same facts), what
