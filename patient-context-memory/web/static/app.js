@@ -233,7 +233,7 @@
     if (!r) { box.innerHTML = ""; return; }
     S.ask.html = `<div class="grid">
       <div><h2><code>fact list --query</code> · ${r.exact.length}</h2>${r.exact.map((h) => `<div class="memfact"><span class="mk">•</span><span class="body">${esc(h.text)}<div class="trace">${esc(h.clinician || "extracted")}${h.date ? ", " + esc(h.date) : ""}</div></span></div>`).join("") || '<p class="muted">no entry contains it</p>'}</div>
-      <div><h2><code>search</code> · top 5</h2>${r.semantic.map((h, i) => `<div class="memfact ${h.in_exact ? "clean" : ""}"><span class="mk">${h.in_exact ? "=" : "+"}</span><span class="body">${i + 1}. ${esc(h.text)}</span></div>`).join("") || '<p class="muted">nothing</p>'}
+      <div><h2><code>search</code> · top 5</h2>${r.semantic.map((h, i) => `<div class="memfact ${h.in_exact ? "clean" : ""}"><span class="mk">${h.in_exact ? "=" : h.same_text ? "~" : "+"}</span><span class="body">${i + 1}. ${esc(h.text)}${h.same_text ? `<div class="leakwhy">↳ same text as an exact hit, different id (${esc(h.id)})</div>` : ""}</span></div>`).join("") || '<p class="muted">nothing</p>'}
         <p class="muted small">= also in the exact list · + found by meaning only</p></div></div>`;
     if (document.body.contains(box)) box.innerHTML = S.ask.html; else if (S.view === "ask") renderStage();
   }

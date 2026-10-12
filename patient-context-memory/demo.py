@@ -142,7 +142,8 @@ class CLI:
         return proc.returncode, proc.stdout, proc.stderr
 
     def run(self, *args: str, scoped: bool = False, echo: bool = True):
-        retryable = any(str(a) in self.READ_ONLY for a in args[:3])
+        # Read-only calls retry on a dropped connection, and so does `fact update` (it sets the same text/metadata again).
+        retryable = any(str(a) in self.READ_ONLY for a in args[:3]) or tuple(map(str, args[:2])) == ("fact", "update")
         attempt = 0
         while True:
             rc, out, err = self.raw(*args, scoped=scoped, echo=echo and attempt == 0)
@@ -960,9 +961,13 @@ def ask(cli: CLI, ids: dict, text: str, echo: bool = True) -> dict:
     exact = query_chart(cli, ids, text, echo=echo)
     res = cli.run("search", text, "--actors", ids["patient"], "--projects", ids["project"], "--types", "fact",
                   "--top-k", "5", scoped=True, echo=echo) or {}
-    exact_ids = {h["id"] for h in exact}
-    sem = [dict(id=f.get("id"), text=f.get("fact") or f.get("content"), in_exact=f.get("id") in exact_ids)
-           for f in res.get("facts") or []]
+    exact_ids, exact_texts = {h["id"] for h in exact}, {h["text"] for h in exact}
+    sem = []
+    for f in res.get("facts") or []:
+        text = f.get("fact") or f.get("content")
+        # Same words under another id would be a second copy of the entry: say so instead of guessing.
+        sem.append(dict(id=f.get("id"), text=text, in_exact=f.get("id") in exact_ids,
+                        same_text=f.get("id") not in exact_ids and text in exact_texts))
     return dict(text=text, exact=exact, semantic=sem)
 
 
@@ -970,7 +975,9 @@ def show_ask(r: dict) -> None:
     lines = [f"\n  `fact list --query “{r['text']}”` — every entry containing it ({len(r['exact'])}):"]
     lines += [f"    · {clip(h['text'], 100)}  ({h['clinician'] or 'extracted'}, {h['date'] or '—'})" for h in r["exact"]] or ["    (none)"]
     lines.append(f"\n  `search “{r['text']}”` — the 5 closest by meaning:")
-    lines += [f"    {i}. {'=' if h['in_exact'] else '+'} {clip(h['text'], 100)}" for i, h in enumerate(r["semantic"], 1)] or ["    (none)"]
+    lines += [f"    {i}. {'=' if h['in_exact'] else '~' if h['same_text'] else '+'} {clip(h['text'], 100)}"
+              + (f"  ({h['id']}: same text as an exact hit, different id)" if h["same_text"] else "")
+              for i, h in enumerate(r["semantic"], 1)] or ["    (none)"]
     lines.append("    (= also in the exact list · + found by meaning only)")
     emit("text", "\n".join(lines))
 
