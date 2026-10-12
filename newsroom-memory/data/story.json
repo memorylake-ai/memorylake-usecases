@@ -89,7 +89,7 @@
   "claims": [
     {
       "key": "moss-passed",
-      "evidence": ["Condition rating: POOR (4 of 9).", "Finding 1: Cracking observed in pier 4 bearing seat.", "Item 7: Harbor Street Bridge pier 4 bearing repair."],
+      "evidence": ["Condition rating: POOR (4 of 9).", "Finding 1: Cracking observed in pier 4 bearing seat.", "Item 7: Harbor Street Bridge pier 4 bearing repair.", "Finding 1: Minor spalling at pier 4 bearing seat."],
       "text": "The Harbor Street Bridge passed its latest inspection with no structural defects.",
       "source": "Lena Moss",
       "role": "city spokesperson",

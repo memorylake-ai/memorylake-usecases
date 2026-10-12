@@ -45,15 +45,16 @@ flags     ── fact conflict list --project <desk>                          (m
 quotes    ── the OCR layout, page by page (no extra call)
 ```
 
-**Watch it run** (real recordings, unedited): recording in progress.
+**Watch it run** (real recordings, unedited):
+[CLI demo, 3:23](https://github.com/memorylake-ai/memorylake-usecases/releases/download/newsroom-memory-v1/newsroom-memory-cli-demo.mp4) · [Web companion demo, 4:47](https://github.com/memorylake-ai/memorylake-usecases/releases/download/newsroom-memory-v1/newsroom-memory-web-demo.mp4)
 
 Runs in about 2½ minutes on a free personal account: about 25 s to import the three scans, about 35 s for the contradiction detector
 after the last claim, and 15 s between claims (back-to-back writes delay detection by several minutes). Nothing here depends on an
 LLM answer. The only credential you need is a MemoryLake API key.
 
 **Measured** (every complete run while building this demo, free account): the OCR layout matched the source text **30/30 lines in
-every run**. In 4 of 4 fresh runs the detector raised exactly the three expected flags (2 × m2d, 1 × m2m) 32–34 s after the
-last claim, nothing on the traffic count, and nothing unplanned. **Negative control:** with the spokesperson's cost claim changed
+every run**. In 7 of 7 fresh runs (including the two recordings) the detector raised exactly the three expected flags (2 × m2d, 1 × m2m),
+nothing on the traffic count, and nothing unplanned. In the runs we timed, the flags were in 32–34 s after the last claim. **Negative control:** with the spokesperson's cost claim changed
 to agree with the records ("about 2.4 million dollars"), the detector raised no m2d for it. The demo waited the full 150 s and
 printed `✗ m2d moss-cost`. The question in step 2 put the 2026 inspection's page 1 at rank 1 or 2 (the 2024 inspection, which
 answers it too, took the other place).
@@ -116,6 +117,8 @@ python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 Paste the key, press **Run demo**, and watch the scans arrive (pages, images, fonts, what the OCR read), the question answered
 with a page and a line, the claims pinned, the flags with both sources, and the quote check. **Ask** searches claims and records
 together, and checks any quote against any page. The terminal drawer shows every `memorylake` command as it runs.
+
+[Watch the web companion demo (mp4, 4:47)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/newsroom-memory-v1/newsroom-memory-web-demo.mp4).
 
 ## What happens, step by step
 
