@@ -1,0 +1,546 @@
+{
+  "publication": "The Tidewater Ledger",
+  "town": "Port Calder",
+  "today": "2026-10-12",
+  "archive": [
+    {
+      "file": "2023-03-14-marsh-road-residents-ask-council-for-a-seawall-a.md",
+      "tags": {
+        "published": "2023-03-14",
+        "desk": "metro",
+        "author": "Ruth Okafor"
+      }
+    },
+    {
+      "file": "2023-04-02-calder-high-adds-a-robotics-elective-after-a-par.md",
+      "tags": {
+        "published": "2023-04-02",
+        "desk": "schools",
+        "author": "Priya Natarajan"
+      }
+    },
+    {
+      "file": "2023-05-19-harbor-street-bakery-closes-after-41-years.md",
+      "tags": {
+        "published": "2023-05-19",
+        "desk": "business",
+        "author": "Marco Silva"
+      }
+    },
+    {
+      "file": "2023-06-30-eelgrass-beds-in-calder-bay-shrink-by-a-third-st.md",
+      "tags": {
+        "published": "2023-06-30",
+        "desk": "environment",
+        "author": "Ruth Okafor"
+      }
+    },
+    {
+      "file": "2023-08-11-calder-gulls-win-the-county-sailing-regatta-for.md",
+      "tags": {
+        "published": "2023-08-11",
+        "desk": "sports",
+        "author": "Tom Reyes"
+      }
+    },
+    {
+      "file": "2023-09-25-town-hires-consultant-to-study-a-marsh-road-seaw.md",
+      "tags": {
+        "published": "2023-09-25",
+        "desk": "metro",
+        "author": "Dana Whitlock"
+      }
+    },
+    {
+      "file": "2023-11-08-hale-wins-second-term-on-council-by-112-votes.md",
+      "tags": {
+        "published": "2023-11-08",
+        "desk": "politics",
+        "author": "Dana Whitlock"
+      }
+    },
+    {
+      "file": "2024-01-17-calder-clinic-extends-evening-hours-for-working.md",
+      "tags": {
+        "published": "2024-01-17",
+        "desk": "health",
+        "author": "Priya Natarajan"
+      }
+    },
+    {
+      "file": "2024-02-29-ferry-operator-adds-a-winter-crossing-to-gull-is.md",
+      "tags": {
+        "published": "2024-02-29",
+        "desk": "business",
+        "author": "Marco Silva"
+      }
+    },
+    {
+      "file": "2024-04-12-volunteers-plant-3-000-dune-grass-plugs-at-sandp.md",
+      "tags": {
+        "published": "2024-04-12",
+        "desk": "environment",
+        "author": "Ruth Okafor"
+      }
+    },
+    {
+      "file": "2024-05-30-school-board-approves-later-start-time-for-calde.md",
+      "tags": {
+        "published": "2024-05-30",
+        "desk": "schools",
+        "author": "Priya Natarajan"
+      }
+    },
+    {
+      "file": "2024-07-04-harbor-days-festival-returns-with-a-lantern-para.md",
+      "tags": {
+        "published": "2024-07-04",
+        "desk": "arts",
+        "author": "Grace Lin"
+      }
+    },
+    {
+      "file": "2024-08-22-seawall-study-three-designs-for-marsh-road-none.md",
+      "tags": {
+        "published": "2024-08-22",
+        "desk": "metro",
+        "author": "Ruth Okafor"
+      }
+    },
+    {
+      "file": "2024-09-15-gulls-coach-linda-marsh-steps-down-after-14-seas.md",
+      "tags": {
+        "published": "2024-09-15",
+        "desk": "sports",
+        "author": "Tom Reyes"
+      }
+    },
+    {
+      "file": "2024-10-28-council-delays-harbor-master-plan-vote-to-januar.md",
+      "tags": {
+        "published": "2024-10-28",
+        "desk": "politics",
+        "author": "Dana Whitlock"
+      }
+    },
+    {
+      "file": "2024-12-03-flu-clinic-at-the-library-draws-record-turnout.md",
+      "tags": {
+        "published": "2024-12-03",
+        "desk": "health",
+        "author": "Priya Natarajan"
+      }
+    },
+    {
+      "file": "2025-01-21-former-bakery-site-on-harbor-street-becomes-a-bo.md",
+      "tags": {
+        "published": "2025-01-21",
+        "desk": "business",
+        "author": "Marco Silva"
+      }
+    },
+    {
+      "file": "2025-02-14-king-tide-floods-marsh-road-and-the-ferry-lot.md",
+      "tags": {
+        "published": "2025-02-14",
+        "desk": "environment",
+        "author": "Ruth Okafor"
+      }
+    },
+    {
+      "file": "2025-03-06-harbor-authority-says-tide-gauge-readings-suppor.md",
+      "tags": {
+        "published": "2025-03-06",
+        "desk": "metro",
+        "author": "Dana Whitlock"
+      }
+    },
+    {
+      "file": "2025-03-27-robotics-team-from-calder-high-qualifies-for-sta.md",
+      "tags": {
+        "published": "2025-03-27",
+        "desk": "schools",
+        "author": "Priya Natarajan"
+      }
+    },
+    {
+      "file": "2025-04-18-painter-hal-moreno-opens-studio-in-the-old-net-l.md",
+      "tags": {
+        "published": "2025-04-18",
+        "desk": "arts",
+        "author": "Grace Lin"
+      }
+    },
+    {
+      "file": "2025-05-09-harbor-master-plan-passes-after-fuel-dock-compro.md",
+      "tags": {
+        "published": "2025-05-09",
+        "desk": "politics",
+        "author": "Dana Whitlock"
+      }
+    },
+    {
+      "file": "2025-05-29-new-coach-ben-ortiz-leads-gulls-to-a-second-plac.md",
+      "tags": {
+        "published": "2025-05-29",
+        "desk": "sports",
+        "author": "Tom Reyes"
+      }
+    },
+    {
+      "file": "2025-06-19-state-to-review-harbor-authority-tide-gauge-afte.md",
+      "tags": {
+        "published": "2025-06-19",
+        "desk": "environment",
+        "author": "Ruth Okafor"
+      }
+    },
+    {
+      "file": "2025-07-10-gull-island-inn-reopens-after-a-two-year-renovat.md",
+      "tags": {
+        "published": "2025-07-10",
+        "desk": "business",
+        "author": "Marco Silva"
+      }
+    },
+    {
+      "file": "2025-07-31-seawall-cost-estimate-rises-to-14-million-dollar.md",
+      "tags": {
+        "published": "2025-07-31",
+        "desk": "metro",
+        "author": "Ruth Okafor"
+      }
+    },
+    {
+      "file": "2025-08-21-clinic-adds-a-mobile-van-for-gull-island.md",
+      "tags": {
+        "published": "2025-08-21",
+        "desk": "health",
+        "author": "Priya Natarajan"
+      }
+    },
+    {
+      "file": "2025-09-04-library-mural-honors-calder-s-fishing-families.md",
+      "tags": {
+        "published": "2025-09-04",
+        "desk": "arts",
+        "author": "Grace Lin"
+      }
+    },
+    {
+      "file": "2025-09-25-harbor-authority-retracts-tide-gauge-data-after.md",
+      "tags": {
+        "published": "2025-09-25",
+        "desk": "environment",
+        "author": "Ruth Okafor"
+      }
+    },
+    {
+      "file": "2025-10-09-seawall-bond-question-will-go-to-voters-in-march.md",
+      "tags": {
+        "published": "2025-10-09",
+        "desk": "politics",
+        "author": "Dana Whitlock"
+      }
+    },
+    {
+      "file": "2025-10-30-later-start-time-attendance-up-tardiness-down-in.md",
+      "tags": {
+        "published": "2025-10-30",
+        "desk": "schools",
+        "author": "Priya Natarajan"
+      }
+    },
+    {
+      "file": "2025-11-20-bookshop-on-harbor-street-hosts-its-first-author.md",
+      "tags": {
+        "published": "2025-11-20",
+        "desk": "business",
+        "author": "Marco Silva"
+      }
+    },
+    {
+      "file": "2025-12-11-calder-high-girls-basketball-starts-8-0.md",
+      "tags": {
+        "published": "2025-12-11",
+        "desk": "sports",
+        "author": "Tom Reyes"
+      }
+    },
+    {
+      "file": "2026-01-08-town-applies-for-state-resilience-grant-for-mars.md",
+      "tags": {
+        "published": "2026-01-08",
+        "desk": "metro",
+        "author": "Dana Whitlock"
+      }
+    },
+    {
+      "file": "2026-01-29-clinic-evening-hours-cut-missed-appointments-by.md",
+      "tags": {
+        "published": "2026-01-29",
+        "desk": "health",
+        "author": "Priya Natarajan"
+      }
+    },
+    {
+      "file": "2026-02-19-eelgrass-returns-to-parts-of-calder-bay-after-cu.md",
+      "tags": {
+        "published": "2026-02-19",
+        "desk": "environment",
+        "author": "Ruth Okafor"
+      }
+    },
+    {
+      "file": "2026-03-12-voters-approve-marsh-road-seawall-bond-54-to-46.md",
+      "tags": {
+        "published": "2026-03-12",
+        "desk": "politics",
+        "author": "Dana Whitlock"
+      }
+    },
+    {
+      "file": "2026-03-26-harbor-days-adds-a-second-weekend.md",
+      "tags": {
+        "published": "2026-03-26",
+        "desk": "arts",
+        "author": "Grace Lin"
+      }
+    },
+    {
+      "file": "2026-04-16-bayline-ferries-orders-an-electric-ferry-for-the.md",
+      "tags": {
+        "published": "2026-04-16",
+        "desk": "business",
+        "author": "Marco Silva"
+      }
+    },
+    {
+      "file": "2026-05-07-state-awards-calder-3-2-million-dollars-toward-t.md",
+      "tags": {
+        "published": "2026-05-07",
+        "desk": "metro",
+        "author": "Ruth Okafor"
+      }
+    },
+    {
+      "file": "2026-05-28-calder-high-robotics-team-places-fourth-at-state.md",
+      "tags": {
+        "published": "2026-05-28",
+        "desk": "schools",
+        "author": "Priya Natarajan"
+      }
+    },
+    {
+      "file": "2026-06-11-gulls-sailors-win-county-regatta-again.md",
+      "tags": {
+        "published": "2026-06-11",
+        "desk": "sports",
+        "author": "Tom Reyes"
+      }
+    },
+    {
+      "file": "2026-06-25-sandpiper-beach-dunes-hold-through-spring-storms.md",
+      "tags": {
+        "published": "2026-06-25",
+        "desk": "environment",
+        "author": "Ruth Okafor"
+      }
+    },
+    {
+      "file": "2026-07-09-heat-advisory-cooling-center-opens-at-the-librar.md",
+      "tags": {
+        "published": "2026-07-09",
+        "desk": "health",
+        "author": "Priya Natarajan"
+      }
+    },
+    {
+      "file": "2026-07-23-net-loft-gallery-shows-work-by-island-students.md",
+      "tags": {
+        "published": "2026-07-23",
+        "desk": "arts",
+        "author": "Grace Lin"
+      }
+    },
+    {
+      "file": "2026-08-06-seawall-design-firm-picked-final-plans-due-in-sp.md",
+      "tags": {
+        "published": "2026-08-06",
+        "desk": "metro",
+        "author": "Dana Whitlock"
+      }
+    },
+    {
+      "file": "2026-08-20-harbor-street-storefront-vacancy-falls-to-its-lo.md",
+      "tags": {
+        "published": "2026-08-20",
+        "desk": "business",
+        "author": "Marco Silva"
+      }
+    },
+    {
+      "file": "2026-09-03-council-candidates-debate-flood-protection-and-h.md",
+      "tags": {
+        "published": "2026-09-03",
+        "desk": "politics",
+        "author": "Dana Whitlock"
+      }
+    },
+    {
+      "file": "2026-09-10-new-middle-school-robotics-club-fills-in-a-day.md",
+      "tags": {
+        "published": "2026-09-10",
+        "desk": "schools",
+        "author": "Priya Natarajan"
+      }
+    },
+    {
+      "file": "2026-09-17-calder-high-football-snaps-a-12-game-losing-stre.md",
+      "tags": {
+        "published": "2026-09-17",
+        "desk": "sports",
+        "author": "Tom Reyes"
+      }
+    },
+    {
+      "file": "2026-09-22-corrected-tide-data-calder-sea-level-rise-matche.md",
+      "tags": {
+        "published": "2026-09-22",
+        "desk": "environment",
+        "author": "Ruth Okafor"
+      }
+    },
+    {
+      "file": "2026-09-29-clinic-van-to-add-a-dental-day-on-gull-island.md",
+      "tags": {
+        "published": "2026-09-29",
+        "desk": "health",
+        "author": "Priya Natarajan"
+      }
+    },
+    {
+      "file": "2026-10-01-library-mural-artist-nia-brooks-wins-state-arts.md",
+      "tags": {
+        "published": "2026-10-01",
+        "desk": "arts",
+        "author": "Grace Lin"
+      }
+    },
+    {
+      "file": "2026-10-05-bookshop-festival-returns-with-20-writers.md",
+      "tags": {
+        "published": "2026-10-05",
+        "desk": "business",
+        "author": "Marco Silva"
+      }
+    },
+    {
+      "file": "2026-10-07-marsh-road-residents-ask-for-construction-schedu.md",
+      "tags": {
+        "published": "2026-10-07",
+        "desk": "metro",
+        "author": "Ruth Okafor"
+      }
+    },
+    {
+      "file": "2026-10-09-council-to-set-seawall-construction-budget-in-no.md",
+      "tags": {
+        "published": "2026-10-09",
+        "desk": "politics",
+        "author": "Dana Whitlock"
+      }
+    }
+  ],
+  "late": "2026-10-09-council-to-set-seawall-construction-budget-in-no.md",
+  "prior": {
+    "oldest_expected": "2023-03-14-marsh-road-residents-ask-council-for-a-seawall-a.md"
+  },
+  "sources": [
+    {
+      "org": "harbor-authority",
+      "file": "2025-03-06-tide-gauge-release.md"
+    },
+    {
+      "org": "harbor-authority",
+      "file": "2025-03-06-tide-gauge-table.md"
+    },
+    {
+      "org": "harbor-authority",
+      "file": "2025-04-02-harbor-director-statement.md"
+    },
+    {
+      "org": "state-coastal-office",
+      "file": "2025-09-24-gauge-inspection-report.md"
+    },
+    {
+      "org": "state-coastal-office",
+      "file": "2026-09-15-corrected-sea-level-series.md"
+    },
+    {
+      "org": "town-records",
+      "file": "2026-03-12-bond-election-results.md"
+    },
+    {
+      "org": "town-records",
+      "file": "2026-05-07-state-grant-award-letter.md"
+    }
+  ],
+  "folder_tags": {
+    "archive": {
+      "collection": "archive"
+    },
+    "sources": {
+      "collection": "sources"
+    }
+  },
+  "flag": {
+    "org": "harbor-authority",
+    "by": "Elena Voss, standards editor",
+    "date": "2025-09-25",
+    "attrs": {
+      "trust": "retracted",
+      "flagged_on": "2025-09-25",
+      "flagged_by": "Elena Voss",
+      "reason": "State inspection found a faulty gauge sensor; the Authority withdrew the March 2025 data"
+    },
+    "archive_query": "Harbor Authority retracts tide gauge data",
+    "archive_story": "2025-09-25-harbor-authority-retracts-tide-gauge-data-after.md"
+  },
+  "style": [
+    {
+      "rule": "house-style-percent",
+      "text": "House style: write 'percent' in copy; never use the % sign.",
+      "pattern": "\\d+(?:\\.\\d+)?\\s*%",
+      "fix": "write 'percent'"
+    },
+    {
+      "rule": "house-style-money",
+      "text": "House style: spell out dollar amounts in body copy as 'X million dollars'; no $ sign in body text.",
+      "pattern": "\\$\\s?\\d[\\d.,]*(?:\\s*(?:million|billion))?",
+      "fix": "write 'N million dollars'"
+    },
+    {
+      "rule": "house-style-oxford-comma",
+      "text": "House style: use the serial (Oxford) comma in lists of three or more.",
+      "pattern": "\\b\\w+, \\w+(?: \\w+)? and \\w+\\b",
+      "fix": "add a comma before 'and'"
+    },
+    {
+      "rule": "banned-slammed",
+      "text": "Editor's correction (Elena Voss, 2026-09): do not write 'slammed' for criticism; say 'criticized'.",
+      "pattern": "\\bslammed\\b",
+      "fix": "say 'criticized'"
+    }
+  ],
+  "draft": {
+    "file": "draft.md",
+    "author": "Sam Achebe",
+    "topic": "Marsh Road seawall budget",
+    "question": "Marsh Road seawall flooding residents council bond"
+  },
+  "project": {
+    "name": "Tidewater Ledger archive",
+    "description": "Every story The Tidewater Ledger has published, for prior-coverage searches."
+  }
+}
