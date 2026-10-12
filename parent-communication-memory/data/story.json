@@ -1,0 +1,55 @@
+{
+  "school": "Maplebrook Academy",
+  "today": "2026-10-12",
+  "meeting": "2026-10-14",
+  "audit_window_days": 21,
+  "family": {
+    "key": "whitfield",
+    "name": "Whitfield family",
+    "student": "Leo Whitfield",
+    "grade": "Grade 6",
+    "parents": ["Dana Whitfield", "Marcus Whitfield"]
+  },
+  "staff": [
+    {"name": "Mr. Adebayo", "role": "Grade 6 math", "scope": "staff"},
+    {"name": "Ms. Reyes", "role": "Grade 6 English, homeroom", "scope": "staff"},
+    {"name": "Mr. Lindqvist", "role": "Grade 6 science", "scope": "staff"},
+    {"name": "Ms. Ibarra", "role": "School counselor", "scope": "counselor"}
+  ],
+  "projects": {
+    "staff": {
+      "name": "Whitfield family — teachers",
+      "description": "Everything any of Leo's teachers may read before talking to the family. Demo data."
+    },
+    "counselor": {
+      "name": "Whitfield family — counselor only",
+      "description": "Counselor-level context. Only the counselor's tools search this project. Demo data."
+    }
+  },
+  "files": [
+    {"file": "2026-09-08-email-adebayo.md", "tags": {"family": "whitfield", "channel": "email", "teacher": "Mr. Adebayo", "logged_on": "2026-09-08", "sensitivity": "staff", "follow_up": "open"}},
+    {"file": "2026-09-15-hallway-reyes.md", "tags": {"family": "whitfield", "channel": "hallway", "teacher": "Ms. Reyes", "logged_on": "2026-09-15", "sensitivity": "staff"}},
+    {"file": "2026-09-22-phone-reyes.md", "tags": {"family": "whitfield", "channel": "phone", "teacher": "Ms. Reyes", "logged_on": "2026-09-22", "sensitivity": "staff", "follow_up": "open"}},
+    {"file": "2026-09-30-counselor-ibarra.md", "tags": {"family": "whitfield", "channel": "counselor-note", "teacher": "Ms. Ibarra", "logged_on": "2026-09-30", "sensitivity": "counselor"}},
+    {"file": "2026-10-06-portal-adebayo.md", "tags": {"family": "whitfield", "channel": "portal", "teacher": "Mr. Adebayo", "logged_on": "2026-10-06", "sensitivity": "staff"}},
+    {"file": "2026-10-09-portal-reyes.md", "tags": {"family": "whitfield", "channel": "portal", "teacher": "Ms. Reyes", "logged_on": "2026-10-09", "sensitivity": "staff", "follow_up": "open"}}
+  ],
+  "audit_keys": ["channel", "teacher", "logged_on", "sensitivity", "follow_up", "resolved_on", "outcome"],
+  "prep": {
+    "asker": "Ms. Reyes",
+    "question": "Is anything going on at home that we should know before Leo's parent meeting?",
+    "sensitive_terms": ["separated", "handover", "alternate weekends"],
+    "cross_teacher": {
+      "asker": "Ms. Reyes",
+      "question": "What did the family say about Leo's math homework?",
+      "expect_teacher": "Mr. Adebayo"
+    }
+  },
+  "after_meeting": {
+    "date": "2026-10-14",
+    "closed": [
+      {"file": "2026-09-08-email-adebayo.md", "outcome": "Shorter fractions sheet agreed; Leo practises 20 minutes a night."},
+      {"file": "2026-10-09-portal-reyes.md", "outcome": "Reading log extension to October 20 granted."}
+    ]
+  }
+}
