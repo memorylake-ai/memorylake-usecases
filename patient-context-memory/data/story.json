@@ -1,0 +1,84 @@
+{
+  "clinic": "Brightwater Family Practice",
+  "today": "2026-10-12",
+  "patient": {
+    "key": "walter-brandt",
+    "name": "Walter Brandt",
+    "description": "Patient, 68. Demo data: fictional person.",
+    "summary": "68, hypertension, type 2 diabetes"
+  },
+  "clinicians": {
+    "okafor": {"name": "Dr. Lena Okafor", "role": "primary care physician, Brightwater Family Practice"},
+    "lindqvist": {"name": "Ava Lindqvist, RN", "role": "nurse, Brightwater Family Practice"},
+    "whitaker": {"key": "sam-whitaker", "name": "Dr. Sam Whitaker", "role": "physician, Northside Urgent Care", "description": "Urgent care physician. Demo data: fictional person."},
+    "park": {"name": "Jo Park, RN", "role": "triage nurse, Northside Urgent Care"}
+  },
+  "_comment": "Two kinds of chart entry. Events carry their date in the text (they stay true forever). Current status (allergy list, problems, active medications) is written without a date, with the date, clinician and source in metadata: the contradiction detector reads dated statements as history (an allergy in 2026 and 'none' in 2018 can both be true), so only undated status lines can contradict.",
+  "history": [
+    {"key": "allergy-nkda", "kind": "allergy", "status": true, "date": "2018-05-14", "by": "lindqvist", "source": "new-patient intake form; reconfirmed at the 2026-09-30 annual visit",
+     "text": "Allergies: no known drug allergies (NKDA)."},
+    {"key": "intake", "kind": "encounter", "date": "2018-05-14", "by": "lindqvist", "source": "new-patient intake form",
+     "text": "Intake 2018-05-14: new patient registered; no drug allergies listed on the intake form."},
+    {"key": "problem-htn", "kind": "problem", "status": true, "date": "2021-03-08", "by": "okafor", "source": "problem list",
+     "text": "Problem: hypertension."},
+    {"key": "problem-dm2", "kind": "problem", "status": true, "date": "2023-01-17", "by": "okafor", "source": "problem list",
+     "text": "Problem: type 2 diabetes."},
+    {"key": "med-lisinopril", "kind": "medication", "status": true, "date": "2021-03-08", "by": "okafor", "source": "medication list",
+     "text": "Medication: lisinopril 10 mg once daily."},
+    {"key": "med-metformin", "kind": "medication", "status": true, "date": "2023-01-17", "by": "okafor", "source": "medication list",
+     "text": "Medication: metformin 500 mg twice daily."},
+    {"key": "med-atorvastatin", "kind": "medication", "status": true, "date": "2023-01-17", "by": "okafor", "source": "medication list",
+     "text": "Medication: atorvastatin 20 mg at night."},
+    {"key": "vaccine-flu", "kind": "immunization", "date": "2025-10-02", "by": "lindqvist", "source": "immunization record",
+     "text": "Vaccine 2025-10-02: influenza, left deltoid, no reaction."},
+    {"key": "visit-0610", "kind": "encounter", "date": "2026-06-10", "by": "okafor", "source": "visit note",
+     "text": "Encounter 2026-06-10 (Dr. Lena Okafor): blood pressure 142/88; lisinopril continued; labs ordered."},
+    {"key": "lab-0610", "kind": "lab", "date": "2026-06-10", "by": "okafor", "source": "lab report",
+     "text": "Lab 2026-06-10: eGFR 62 mL/min/1.73m2; HbA1c 7.1%."},
+    {"key": "lab-0930", "kind": "lab", "date": "2026-09-30", "by": "okafor", "source": "lab report",
+     "text": "Lab 2026-09-30: eGFR 51 mL/min/1.73m2; potassium 4.6 mmol/L."},
+    {"key": "visit-0930", "kind": "encounter", "date": "2026-09-30", "by": "okafor", "source": "annual visit note",
+     "text": "Encounter 2026-09-30 annual visit (Dr. Lena Okafor): blood pressure 136/82; allergies reviewed, none reported; metformin kept, recheck eGFR in 3 months."},
+    {"key": "social", "kind": "social", "status": true, "date": "2026-09-30", "by": "okafor", "source": "annual visit note",
+     "text": "Social: retired machinist, lives with his wife, non-smoker."}
+  ],
+  "urgent_care": {
+    "date": "2026-10-05",
+    "place": "Northside Urgent Care",
+    "entries": [
+      {"key": "allergy-ceph", "kind": "allergy", "status": true, "date": "2026-10-05", "by": "whitaker", "source": "Northside Urgent Care visit note",
+       "text": "Allergy: cephalosporins (cefalexin) - hives and lip swelling."},
+      {"key": "visit-1005", "kind": "encounter", "date": "2026-10-05", "by": "whitaker", "source": "Northside Urgent Care visit note",
+       "text": "Encounter 2026-10-05 Northside Urgent Care (Dr. Sam Whitaker): acute sinusitis, started cefalexin 500 mg; hives and lip swelling about 2 hours after the first dose; cefalexin stopped, cetirizine given; told to avoid cephalosporins."},
+      {"key": "triage-1005", "kind": "triage", "date": "2026-10-05", "by": "park", "source": "Northside Urgent Care triage note",
+       "text": "Triage 2026-10-05 (Jo Park, RN): lips swollen, itchy rash on the chest after his first Keflex capsule this morning."}
+    ],
+    "dictation": {
+      "title": "Northside Urgent Care - dictated visit note, 2026-10-05",
+      "start": "2026-10-05T15:10:00Z",
+      "turns": [
+        ["whitaker", "Dr. Sam Whitaker (physician, Northside Urgent Care): Mr. Brandt, you were here this morning for the sinus infection and I started you on cefalexin. What happened after the first capsule?"],
+        ["walter", "Walter Brandt (patient): About two hours later my lips started to swell and I got an itchy rash across my chest. I have never had a reaction to anything before."],
+        ["whitaker", "Dr. Sam Whitaker (physician, Northside Urgent Care): That is an allergic reaction to the cefalexin. We are stopping it today, and I gave you cetirizine. Your breathing and throat are fine."],
+        ["walter", "Walter Brandt (patient): So I should not take that one again?"],
+        ["whitaker", "Dr. Sam Whitaker (physician, Northside Urgent Care): Not cefalexin, and not any cephalosporin antibiotic. I am recording a cephalosporin allergy. Tell any doctor who prescribes you an antibiotic, and follow up with Dr. Okafor next week about the sinusitis."],
+        ["walter", "Walter Brandt (patient): I have an appointment with her on the twelfth."]
+      ]
+    }
+  },
+  "visit": {
+    "date": "2026-10-12",
+    "by": "okafor",
+    "reason": "Follow-up: sinusitis still not better after a week",
+    "orders": [
+      {"key": "cefuroxime", "drug": "cefuroxime", "dose": "500 mg twice daily for 7 days", "class": "cephalosporin"},
+      {"key": "doxycycline", "drug": "doxycycline", "dose": "100 mg twice daily for 7 days", "class": "tetracycline"}
+    ]
+  },
+  "drug_classes": {
+    "cephalosporin": ["cephalosporin", "cefalexin", "cephalexin", "Keflex", "cefuroxime", "Ceftin", "cefdinir", "ceftriaxone"],
+    "tetracycline": ["tetracycline", "doxycycline", "Vibramycin", "minocycline"]
+  },
+  "reaction_words": ["allerg", "hives", "swelling", "swollen", "rash", "anaphyla", "reaction"],
+  "semantic_question": "Has Walter ever reacted badly to an antibiotic?"
+}
