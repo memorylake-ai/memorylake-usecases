@@ -41,7 +41,9 @@ close-out debrief (8 messages) ─┤
 
 Runs in about 2–3 minutes on a free personal account. The only credential you need is a MemoryLake API key.
 
-**Watch it run** (real recordings, unedited): recording in progress.
+**Watch it run** (real recordings, unedited):
+[CLI demo, 3:01](https://github.com/memorylake-ai/memorylake-usecases/releases/download/engagement-insight-memory-v1/engagement-insight-memory-cli-demo.mp4) · [Web companion demo, 4:12](https://github.com/memorylake-ai/memorylake-usecases/releases/download/engagement-insight-memory-v1/engagement-insight-memory-web-demo.mp4).
+In the CLI recording the library kept 5 lessons and the scan flagged 0 of them; the pinned client figure ranked 3rd and was caught.
 
 ## Prerequisites
 
@@ -89,6 +91,10 @@ searches. Use `--reset` to watch extraction under the instruction from scratch.
 ```bash
 python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
+
+![Web companion — the same debrief, two memories, with the leak scan](https://github.com/memorylake-ai/memorylake-usecases/raw/main/engagement-insight-memory/web/screenshot-memories.png)
+
+[Watch the web companion demo (mp4, 4:12)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/engagement-insight-memory-v1/engagement-insight-memory-web-demo.mp4).
 
 Paste the key and press **Run demo**. The page shows the debrief arriving in both projects as two chats,
 the two memories side by side with every library fact ✓/✗, the shortcut being caught, the next team's
