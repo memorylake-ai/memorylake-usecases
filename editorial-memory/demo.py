@@ -120,7 +120,8 @@ class CLI:
 
     READ_ONLY = {"get", "list", "cook-status", "status", "current", "me", "search"}
     TRANSIENT = ("could not connect", "tls handshake", "connection reset", "timed out",
-                 "error sending request", "connection closed", "temporarily unavailable", "502", "503", "504")
+                 "error sending request", "connection closed", "temporarily unavailable", "502", "503", "504",
+                 "internal_error")   # a 500 right after creating a folder (listing it at once) has been seen once
 
     def __init__(self, binary: str, env: dict[str, str], show_json: bool = False):
         self.binary, self.env, self.show_json = binary, env, show_json

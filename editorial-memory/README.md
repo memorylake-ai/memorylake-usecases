@@ -43,6 +43,9 @@ nobody can say for sure what the archive holds.
 The story: Port Calder, a coastal town. 56 stories from 2023-03 to 2026-10 across eight desks (13 of them follow the Marsh Road
 seawall from the first flood meeting to the construction budget), 7 source files from three organisations, one draft.
 
+**Watch it run** (real recordings, unedited):
+[CLI demo, 7:54](https://github.com/memorylake-ai/memorylake-usecases/releases/download/editorial-memory-v1/editorial-memory-cli-demo.mp4) · [Web companion demo, 8:17](https://github.com/memorylake-ai/memorylake-usecases/releases/download/editorial-memory-v1/editorial-memory-web-demo.mp4)
+
 ## Prerequisites
 
 1. **A MemoryLake account and API key.** Sign up at [app.memorylake.ai](https://app.memorylake.ai),
@@ -103,6 +106,8 @@ python3 web/server.py        # http://127.0.0.1:8767 — standard library only
 ![Web companion — a retraction tags the sources/harbor-authority folder; 0 of 3 files carry it, 3 of 3 inherit it up the parent chain](https://github.com/memorylake-ai/memorylake-usecases/raw/main/editorial-memory/web/screenshot-retraction.png)
 
 ![Web companion — the draft check: two retracted sources and four house-style problems highlighted in the draft](https://github.com/memorylake-ai/memorylake-usecases/raw/main/editorial-memory/web/screenshot-check.png)
+
+[Watch the web companion demo (mp4, 8:17)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/editorial-memory-v1/editorial-memory-web-demo.mp4).
 
 Paste the key, press **Run demo**, and follow the eight steps: the folder count (one call vs every page), the reconciliation table,
 the late story, the folder-level retraction and the effective-trust table, the house-style facts, and the draft with its problems
