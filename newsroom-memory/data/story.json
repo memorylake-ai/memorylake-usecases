@@ -1,0 +1,139 @@
+{
+  "newsroom": "The Marlow Ledger",
+  "reporter": "Dana Ruiz",
+  "story": "Harbor Street Bridge",
+  "today": "2026-10-12",
+  "project": {
+    "name": "Marlow Ledger desk - Harbor Street Bridge",
+    "description": "Records-request documents and interview claims for the Harbor Street Bridge story (MemoryLake demo)."
+  },
+  "records_folder": "records-request-2026-0917",
+  "records_request": {"filed": "2026-09-17", "released": "2026-10-02", "office": "City of Marlow, City Clerk"},
+  "records": [
+    {
+      "file": "inspection-2026-03-14.pdf",
+      "title": "2026 inspection (Harbor Street Bridge)",
+      "pages": [
+        {
+          "header": "PAGE 1 - RELEASED UNDER PUBLIC RECORDS REQUEST 2026-0917",
+          "lines": [
+            "CITY OF MARLOW - BRIDGE INSPECTION RECORD",
+            "Structure: Harbor Street Bridge (No. 14)",
+            "Inspection date: 2026-03-14",
+            "Inspector: R. Okafor, P.E.",
+            "",
+            "Finding 1: Cracking observed in pier 4 bearing seat.",
+            "Condition rating: POOR (4 of 9).",
+            "Finding 2: Deck joints functional.",
+            "Recommendation: load posting of 15 tons until repair."
+          ]
+        },
+        {
+          "header": "PAGE 2 - RELEASED UNDER PUBLIC RECORDS REQUEST 2026-0917",
+          "lines": [
+            "Repair estimate: 2.4 million dollars.",
+            "Funding requested in FY2027 capital plan.",
+            "Prior inspection 2024-02-20 rated pier 4: FAIR (5 of 9).",
+            "",
+            "Distribution: Public Works Director, City Manager."
+          ]
+        }
+      ]
+    },
+    {
+      "file": "inspection-2024-02-20.pdf",
+      "title": "2024 inspection (Harbor Street Bridge)",
+      "pages": [
+        {
+          "header": "PAGE 1 - RELEASED UNDER PUBLIC RECORDS REQUEST 2026-0917",
+          "lines": [
+            "CITY OF MARLOW - BRIDGE INSPECTION RECORD",
+            "Structure: Harbor Street Bridge (No. 14)",
+            "Inspection date: 2024-02-20",
+            "Inspector: M. Hale, P.E.",
+            "",
+            "Finding 1: Minor spalling at pier 4 bearing seat.",
+            "Condition rating: FAIR (5 of 9).",
+            "Recommendation: re-inspect within 24 months."
+          ]
+        }
+      ]
+    },
+    {
+      "file": "capital-plan-memo-fy2027.pdf",
+      "title": "FY2027 capital plan memo",
+      "pages": [
+        {
+          "header": "PAGE 1 - RELEASED UNDER PUBLIC RECORDS REQUEST 2026-0917",
+          "lines": [
+            "MEMORANDUM - DEPARTMENT OF PUBLIC WORKS",
+            "To: City Manager",
+            "Date: 2026-04-02",
+            "Re: FY2027 capital plan request",
+            "",
+            "Item 7: Harbor Street Bridge pier 4 bearing repair.",
+            "Requested amount: 2.4 million dollars.",
+            "Status: not funded in FY2026; resubmitted for FY2027."
+          ]
+        }
+      ]
+    }
+  ],
+  "find": {
+    "question": "What condition rating did the inspectors give pier 4?",
+    "expect_file": "inspection-2026-03-14.pdf",
+    "expect_line": "Condition rating: POOR (4 of 9).",
+    "name_filter": "2024",
+    "show_terms": ["rating", "rated"]
+  },
+  "claims": [
+    {
+      "key": "moss-passed",
+      "evidence": ["Condition rating: POOR (4 of 9).", "Finding 1: Cracking observed in pier 4 bearing seat.", "Item 7: Harbor Street Bridge pier 4 bearing repair."],
+      "text": "The Harbor Street Bridge passed its latest inspection with no structural defects.",
+      "source": "Lena Moss",
+      "role": "city spokesperson",
+      "said_on": "2026-10-06",
+      "medium": "phone interview",
+      "expect": {"m2d": "inspection-2026-03-14.pdf", "m2m": ["engineer-poor"]}
+    },
+    {
+      "key": "moss-cost",
+      "evidence": ["Repair estimate: 2.4 million dollars.", "Requested amount: 2.4 million dollars."],
+      "text": "Repairing the Harbor Street Bridge will cost about 800,000 dollars.",
+      "source": "Lena Moss",
+      "role": "city spokesperson",
+      "said_on": "2026-10-06",
+      "medium": "phone interview",
+      "expect": {"m2d": "inspection-2026-03-14.pdf|capital-plan-memo-fy2027.pdf"}
+    },
+    {
+      "key": "engineer-poor",
+      "evidence": ["Condition rating: POOR (4 of 9)."],
+      "text": "Inspectors rated the pier 4 bearing of the Harbor Street Bridge as poor.",
+      "source": "Source E",
+      "role": "structural engineer, not for attribution",
+      "said_on": "2026-10-08",
+      "medium": "in-person interview",
+      "expect": {"m2m": ["moss-passed"]}
+    },
+    {
+      "key": "ostrowski-traffic",
+      "evidence": [],
+      "text": "The Harbor Street Bridge carries about 9,000 vehicles a day.",
+      "source": "Ray Ostrowski",
+      "role": "city council member",
+      "said_on": "2026-10-09",
+      "medium": "council meeting",
+      "expect": {}
+    }
+  ],
+  "draft": [
+    {"quote": "Condition rating: POOR (4 of 9).", "file": "inspection-2026-03-14.pdf", "page": 1,
+     "sentence": "The city's own March inspection rated the pier 4 bearing \"Condition rating: POOR (4 of 9).\""},
+    {"quote": "Repair estimate: 2.4 million dollars.", "file": "inspection-2026-03-14.pdf", "page": 2,
+     "sentence": "The same report put the fix at \"Repair estimate: 2.4 million dollars.\""},
+    {"quote": "Condition rating: POOR (3 of 9).", "file": "inspection-2026-03-14.pdf", "page": 1,
+     "sentence": "An earlier draft line, kept here to show the check failing: \"Condition rating: POOR (3 of 9).\""}
+  ]
+}
