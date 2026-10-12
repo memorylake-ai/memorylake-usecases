@@ -268,7 +268,8 @@
     }
     else if (k === "progress") term("progress", ev.text.trim());
     else if (k === "json") term("dim", ev.text);
-    else if (k === "connected") { S.st = d; S.stepStatus[1] = "done"; setConn(); }
+    // While catching up on page load, /api/state (fetched first) is newer than an old "connected" event.
+    else if (k === "connected") { if (S.caughtUp) S.st = d; S.stepStatus[1] = "done"; setConn(); }
     else if (k === "setup") S.setup = d;
     else if (k === "boundaries") { d.boundaries.forEach((b) => (b.view = view(b))); S.boundaries = d; }
     else if (k === "answers") S.answers = d;
@@ -289,7 +290,8 @@
     "answers_after", "cleaned", "done", "error"];
   function subscribe() {
     const es = new EventSource(`/api/stream?since=${S.lastEvent}`);
-    KINDS.forEach((kind) => es.addEventListener(kind, (e) => onEvent(JSON.parse(e.data))));
+    // "error" is also EventSource's own connection-error event, which has no data: skip those.
+    KINDS.forEach((kind) => es.addEventListener(kind, (e) => { if (e.data) onEvent(JSON.parse(e.data)); }));
     es.onerror = () => { es.close(); setTimeout(subscribe, 1500); };
   }
 
@@ -301,7 +303,7 @@
     await new Promise((resolve) => {
       if (!target) return resolve();
       const es = new EventSource("/api/stream?since=0");
-      const h = (e) => { const ev = JSON.parse(e.data); onEvent(ev); if (ev.id >= target) { es.close(); resolve(); } };
+      const h = (e) => { if (!e.data) return; const ev = JSON.parse(e.data); onEvent(ev); if (ev.id >= target) { es.close(); resolve(); } };
       KINDS.forEach((kind) => es.addEventListener(kind, h)); es.onerror = () => { es.close(); resolve(); };
     });
     S.caughtUp = true;

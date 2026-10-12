@@ -41,7 +41,8 @@ CI bot      ─ review-bot: payments, web-app, ledger-migration + bot    → thr
 Runs in about 2 minutes on a free personal account. The only credential you need is a MemoryLake API key.
 Nothing here depends on extraction: every memory is pinned with `fact add`, so the output is the same every run.
 
-**Watch it run** (real recordings, unedited): recording in progress.
+**Watch it run** (real recordings, unedited):
+[CLI demo, 3:41](https://github.com/memorylake-ai/memorylake-usecases/releases/download/mcp-scope-memory-v1/mcp-scope-memory-cli-demo.mp4) · [Web companion demo, 5:14](https://github.com/memorylake-ai/memorylake-usecases/releases/download/mcp-scope-memory-v1/mcp-scope-memory-web-demo.mp4).
 
 ## Prerequisites
 
@@ -88,6 +89,12 @@ up and starts over.
 ```bash
 python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
+
+![Web companion — one question, three tools, every hit labelled by scope](https://github.com/memorylake-ai/memorylake-usecases/raw/main/mcp-scope-memory/web/screenshot-answers.png)
+
+![Web companion — the audit after the team changes: 3 stale references](https://github.com/memorylake-ai/memorylake-usecases/raw/main/mcp-scope-memory/web/screenshot-audit.png)
+
+[Watch the web companion demo (mp4, 5:14)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/mcp-scope-memory-v1/mcp-scope-memory-web-demo.mp4).
 
 Paste the key and press **Run demo**. The page shows the three boundaries, the three answers side by side
 with every hit labelled by scope, the boundaries after the team changes and what each tool gets back, the
