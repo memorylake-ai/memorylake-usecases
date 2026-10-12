@@ -857,7 +857,15 @@ def delete_actor(cli: CLI, actor_id: str) -> int:
         if not e.has("404", "not found"):
             raise
         cli.run("actor", "bind", "--actor", actor_id, scoped=True, echo=False)
-        found = facts()
+        # The binding takes a moment to show: `fact list` can still answer 404 right after it.
+        for wait in (1, 2, 4, 8, 0):
+            try:
+                found = facts()
+                break
+            except CLIError as e:
+                if not e.has("404", "not found") or not wait:
+                    raise
+                time.sleep(wait)
     for f in found:
         cli.run("fact", "delete", "--actor", actor_id, f["id"], scoped=True, echo=False)
     left = facts()
