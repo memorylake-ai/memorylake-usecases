@@ -54,6 +54,9 @@ prep      ── search "<question>" --projects <teachers>             --types d
 after     ── lib xattr delete <file> --keys follow_up · lib xattr set <file> --attrs '{"resolved_on":…,"outcome":…}' · audit again
 ```
 
+**Watch it run** (real recordings, unedited):
+[CLI demo, 2:54](https://github.com/memorylake-ai/memorylake-usecases/releases/download/parent-communication-memory-v1/parent-communication-memory-cli-demo.mp4) · [Web companion demo, 4:15](https://github.com/memorylake-ai/memorylake-usecases/releases/download/parent-communication-memory-v1/parent-communication-memory-web-demo.mp4)
+
 Runs in about 2 minutes on a free personal account (most of it is the two document imports). Documents do not go through fact
 extraction, so nothing here depends on an LLM. The only credential you need is a MemoryLake API key.
 
@@ -117,6 +120,8 @@ python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ![Web companion — capture: the default listing shows no custom tags; --xattr-keys returns exactly the six files' tags](https://github.com/memorylake-ai/memorylake-usecases/raw/main/parent-communication-memory/web/screenshot-capture.png)
 
 ![Web companion — meeting prep: the same question from a teacher (no hit mentions the home situation) and from the counselor (her note is #1)](https://github.com/memorylake-ai/memorylake-usecases/raw/main/parent-communication-memory/web/screenshot-prep.png)
+
+[Watch the web companion demo (mp4, 4:15)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/parent-communication-memory-v1/parent-communication-memory-web-demo.mp4).
 
 Paste the key, press **Run demo**, and watch the folder fill, the two listings side by side, the routing and leak check, the
 audit, the two scopes, and the follow-ups closing. **Ask** searches as a teacher or as the counselor and shows each hit's tags, and can
