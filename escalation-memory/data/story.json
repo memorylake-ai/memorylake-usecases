@@ -1,0 +1,61 @@
+{
+  "company": "Quayside",
+  "product": "field-service scheduling app (web + iOS/Android)",
+  "people": [
+    {"key": "maya", "custom_id": "maya", "display": "Maya Lindqvist", "role": "Senior support agent (Tier 2), Quayside. Leaving Quayside on 2026-10-07."},
+    {"key": "tomas", "custom_id": "tomas", "display": "Tomás Reyes", "role": "Support agent (Tier 1), Quayside. Three weeks in."}
+  ],
+  "agents": [
+    {"key": "relay", "custom_id": "relay", "name": "Relay", "instruction": true,
+     "description": "Quayside's escalation agent: routes support escalations and assembles the context package. Demo data."},
+    {"key": "default", "custom_id": "relay-default", "name": "Relay (built-in default, for comparison)", "instruction": false,
+     "description": "The same agent with no fact instruction, so its memory runs on MemoryLake's built-in default. Demo data."}
+  ],
+  "customers": [
+    {"name": "Brightwell Dental", "identifiers": ["Brightwell", "Iris", "Bell", "ACC-55210", "TCK-88412"]},
+    {"name": "Lumen Logistics", "identifiers": ["Lumen", "TCK-90107"]},
+    {"name": "Tessaly Health", "identifiers": ["Tessaly", "Owen", "Ravel", "TCK-90233"]},
+    {"name": "Harbor Lane Plumbing", "identifiers": ["Harbor Lane", "Gus", "Moreno", "TCK-91533"]}
+  ],
+  "handoff": {
+    "title": "Escalation handoff from Maya",
+    "date": "2026-10-05T09:00:00Z",
+    "turns": [
+      ["maya", "Maya Lindqvist (Tier 2 support, Quayside): Relay, I'm handing over my escalation notes before I leave on Wednesday. First one: Brightwell Dental, account ACC-55210, ticket TCK-88412. Their iOS app crashed on launch after the 4.12 update. I sent it to the platform team first and lost two days: crashes belong to the mobile team's on-call rotation. Platform only owns API and auth outages."],
+      ["relay", "Relay (escalation agent, Quayside): Noted. What did the mobile team need from you?"],
+      ["maya", "Maya Lindqvist (Tier 2 support, Quayside): For any mobile crash they need the device model, the OS version, the app build number and a crash log from the device. Without the crash log they bounce it straight back. Their contact Iris Bell was very upset; that account pays $48,000 a year."],
+      ["maya", "Maya Lindqvist (Tier 2 support, Quayside): Second one: Lumen Logistics, ticket TCK-90107, a data export to S3 silently skipping rows. That goes to the data-pipeline team, never to platform. Attach the export job id, the time window and a row count from both sides. When I opened with the row-count mismatch they picked it up within an hour; when I opened with 'the customer is angry' it sat for a day."],
+      ["relay", "Relay (escalation agent, Quayside): And billing?"],
+      ["maya", "Maya Lindqvist (Tier 2 support, Quayside): Third: a double charge for Tessaly Health, ticket TCK-90233, their contact is Owen Ravel. Billing disputes go to finance ops first; engineering only if finance ops confirms a system bug. And when you have to take something to the VP of Support, lead with the revenue at risk and the number of affected customers, not with the ticket history."]
+    ]
+  },
+  "patterns": [
+    {"key": "route-mobile",    "label": "mobile crash → mobile on-call",           "all": [["app crash", "crashes", "freez"], ["on-call", "on call"]]},
+    {"key": "platform-scope",  "label": "platform owns only API/auth outages",     "all": [["platform"], ["api", "auth"]]},
+    {"key": "pack-mobile",     "label": "mobile package: device, OS, build, crash log", "all": [["crash log"], ["device model", "build", "os version"]]},
+    {"key": "route-export",    "label": "export gaps → data-pipeline",             "all": [["data-pipeline", "data pipeline"], ["export", "rows"]]},
+    {"key": "pack-export",     "label": "export package: job id, window, row counts", "all": [["job id"], ["row count", "row-count"]]},
+    {"key": "route-billing",   "label": "billing disputes → finance ops first",    "all": [["finance ops", "finance operations"]]},
+    {"key": "frame-evidence",  "label": "open with the evidence, not the mood",    "all": [["row-count mismatch", "row count mismatch"], ["angry"]]},
+    {"key": "frame-vp",        "label": "to the VP: revenue at risk + customers affected", "all": [["revenue at risk"]]}
+  ],
+  "escalation": {
+    "by": "tomas",
+    "ticket": "Harbor Lane Plumbing, TCK-91533: the Android app freezes when a technician uploads a job photo, since the 4.13 update. The customer says they will cancel if it is not fixed this week.",
+    "questions": [
+      {"q": "The Android app freezes after an update. Which team should this escalation go to?", "expect": ["route-mobile", "platform-scope"], "topic": ["mobile", "platform", "crash"]},
+      {"q": "What do I attach when I escalate a mobile app crash?", "expect": ["pack-mobile"], "topic": ["crash", "device", "build", "mobile"]},
+      {"q": "The customer threatens to cancel and I need the VP of Support. How do I frame the escalation?", "expect": ["frame-vp"], "topic": ["vp", "revenue", "framing", "frame", "lead with"]}
+    ]
+  },
+  "outcome": {
+    "title": "Outcome of Tomás's first escalation",
+    "date": "2026-10-09T09:00:00Z",
+    "pattern": {"key": "pack-upload", "label": "upload failures: add upload size + network type", "all": [["upload"], ["network", "cellular", "wi-fi", "wifi"]]},
+    "turns": [
+      ["tomas", "Tomás Reyes (Tier 1 support, Quayside): Relay, outcome of my first escalation: Harbor Lane Plumbing, ticket TCK-91533, the Android app froze on job-photo upload after 4.13. I sent it to mobile on-call with the device model, OS version, build and the crash log, and they picked it up in 40 minutes."],
+      ["relay", "Relay (escalation agent, Quayside): Good. Did the mobile team ask for anything that was not in the package?"],
+      ["tomas", "Tomás Reyes (Tier 1 support, Quayside): Yes. For photo or file upload failures they also want the upload size and the network type, wifi or cellular. Gus Moreno at the customer told me it only happens on cellular, so that was the clue."]
+    ]
+  }
+}
