@@ -2,7 +2,10 @@
 
 Runnable demos for the use cases on [memorylake.ai/usecase](https://www.memorylake.ai/en/usecase).
 Each directory is one use case, built on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli),
-and runs end to end with nothing more than a MemoryLake API key.
+and runs end to end with nothing more than a MemoryLake API key. The same memory is available inside
+Claude Code, Codex, DeepSeek Harness, opencode, QwenPaw, QwenWork and WorkBuddy through
+[MemoryLake Harness](https://github.com/memorylake-ai/memorylake-harness); the demos here show what
+that memory can hold once it is more than coding sessions.
 
 | Use case | Audience | What it shows | Time | Demo videos |
 |---|---|---|---|---|
@@ -48,6 +51,10 @@ The videos are real, unedited recordings; every asset lives on the [releases pag
    irm https://raw.githubusercontent.com/memorylake-ai/memorylake-cli/main/scripts/install.ps1 | iex
    ```
 
+   A machine already set up for a [MemoryLake Harness](https://github.com/memorylake-ai/memorylake-harness)
+   plugin has the CLI at `~/.memorylake/bin/memorylake`; put that on `PATH` or run the line above —
+   either way the login the harness made is reused when `MEMORYLAKE_API_KEY` is unset.
+
 3. **Run a demo.**
 
    ```bash
@@ -80,6 +87,15 @@ If you add one, keep it self-contained and honest about what it needs:
 - A web UI is welcome but optional. If you add one, keep it dependency-free (the sales-call-memory
   one is a standard-library HTTP server plus static files), bind it to localhost, and drive the same
   code path as the CLI runner so the two never drift.
+
+## Related
+
+- [memorylake-cli](https://github.com/memorylake-ai/memorylake-cli) — the CLI every demo runs on;
+  its README is the command reference for everything printed here.
+- [memorylake-harness](https://github.com/memorylake-ai/memorylake-harness) — the same memory inside
+  coding agents (Claude Code, Codex, DeepSeek Harness, opencode, QwenPaw, QwenWork, WorkBuddy).
+- [docs.memorylake.ai](https://docs.memorylake.ai/overview) — concepts (workspaces, projects, actors,
+  facts, conflicts) behind the commands.
 
 ## License
 
