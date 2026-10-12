@@ -19,18 +19,18 @@ his own actor, and every entry is pinned word for word with its **date, signing 
 Then:
 
 1. **The contradiction detector flags last week's allergy against the 2018 "no known drug allergies" line**: `fact conflict list --actor`
-   (`m2m · logical`), about 30 s after the allergy is written. In every run it also raised a second conflict: NKDA against the visit and triage notes.
+   (`m2m · logical`), about 30 s after the allergy is written. In every run it also raised a second conflict on the NKDA line, usually naming the visit and triage notes too.
 2. **Reconcile without losing a record.** `keep_fact` keeps one fact and forgets **every other fact in the conflict**. On the
-   two-fact conflict that retires exactly the stale NKDA line. On the three-fact one it would also forget the triage note,
-   so that one is dismissed instead. The forgotten NKDA line is still readable, word for word, in `fact conflict get`, and `fact trace` shows ADD → FORGET.
+   two-fact conflict that retires exactly the stale NKDA line. On the second one, keeping the visit note would also forget the
+   triage note, so that one is dismissed instead. The forgotten NKDA line is still readable, word for word, in `fact conflict get`, and `fact trace` shows ADD → FORGET.
 3. **Today's order check runs `fact list --query`, the first demo here to use it**, for every name of the drug's class,
    across his actor and the clinic project. It is an exact, case-insensitive substring match over **every page**, with nothing ranked away.
    **cefuroxime ✗ blocked** (citing the allergy line, the visit and triage notes, and what was extracted from the dictation),
    **doxycycline ✓ clear**. The control keeps only entries dated on or before 2026-10-04, his chart before urgent care. There
    **cefuroxime ✓ goes through**: the scribe can only check what the chart holds.
-4. **Exact vs semantic.** An exact search only finds what you name. The class name *cephalosporin* finds 2–3 of the 5 reaction
-   records. The triage note is found **only** by *Keflex*. So the check names every member of the class. `search` finds by
-   meaning with no list, but returns its top-k: 4–5 of 5 in the top 5. Once it was the allergy line itself that fell out.
+4. **Exact vs semantic.** An exact search only finds what you name. In a typical run the class name *cephalosporin* finds 3 of the 5
+   reaction records. The triage note is found **only** by *Keflex*. So the check names every member of the class. `search` finds by
+   meaning with no list, but returns its top-k. It usually had 4 of 5 in its top 5, and in one run the one it missed was the allergy line itself.
 5. **Decision record.** Each decision is pinned on the clinic project with the id and `updated_at` of every entry it saw, then
    re-read with `fact get`. *"What did the AI see at decision time?"* has an answer, and it says whether any of it has changed since.
 
@@ -45,15 +45,18 @@ semantic   ── search "Has Walter ever reacted badly to an antibiotic?" --act
 record     ── fact add --project <clinic> + fact update --metadata {seen: [{id, updated_at}]} ──▶ fact get each, compare
 ```
 
-**Watch it run** (real recordings, unedited): recording in progress.
+**Watch it run** (real recordings, unedited):
+[CLI demo, 4:30](https://github.com/memorylake-ai/memorylake-usecases/releases/download/patient-context-memory-v1/patient-context-memory-cli-demo.mp4) · [Web companion demo, 5:52](https://github.com/memorylake-ai/memorylake-usecases/releases/download/patient-context-memory-v1/patient-context-memory-web-demo.mp4)
 
 Runs in about 3–4 minutes on a free personal account (most of it is the detector and turning the dictated note into memory).
 The only credential you need is a MemoryLake API key.
 
-**Measured** (all fresh runs while building this demo, free account): **5 of 5** raised the allergy-vs-NKDA conflict (two facts)
-29–34 s after the allergy line, and **5 of 5** also raised NKDA against the visit + triage notes (three facts). Verdicts were the same every time:
-cefuroxime ✗, doxycycline ✓, and in the 2026-10-04 control cefuroxime ✓. Facts extracted from the dictated note varied from 3 to 7 per run. The
-order check does not depend on them. `search` had 4 or 5 of the 5 reaction records in its top 5.
+**Measured** (every fresh run while building this demo, both recordings included, free account): **11 of 11** raised the
+allergy-vs-NKDA conflict (two facts) 29–34 s after the allergy line, and **11 of 11** raised a second conflict on the NKDA line. It
+usually named NKDA plus the visit and triage notes (three facts). Once it was NKDA plus the visit note only. Verdicts were the same every
+time: cefuroxime ✗, doxycycline ✓, and in the 2026-10-04 control cefuroxime ✓. Facts extracted from the dictated note varied from 2 to
+7 per run, so the number of reaction records the check finds varied from 3 to 5. The class name alone found 2–3 of them, and
+`search` had 3–5 in its top 5. The order check does not depend on extraction.
 
 **Why the chart has two kinds of entry.** In probes, a dated allergy (*"Allergy 2026-10-05: cephalosporins …"*) against a dated
 NKDA (*"Intake 2018-05-14: no known drug allergies"*) raised **nothing** in 8 of 8 runs, waiting up to 10 minutes. The same two
@@ -118,6 +121,10 @@ python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
 
 ![Web companion — today's order check: cefuroxime blocked by last week's entries, doxycycline clear](https://github.com/memorylake-ai/memorylake-usecases/raw/main/patient-context-memory/web/screenshot-check.png)
+
+![Web companion — reconcile: keep_fact retires the stale NKDA line; the conflict that also names the triage note is dismissed instead](https://github.com/memorylake-ai/memorylake-usecases/raw/main/patient-context-memory/web/screenshot-reconcile.png)
+
+[Watch the web companion demo (mp4, 5:52)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/patient-context-memory-v1/patient-context-memory-web-demo.mp4).
 
 Paste the key, press **Run demo**, and watch his chart come back page by page, last week's entries and the detector's
 conflicts, the reconcile step, the order check with its control, the exact-vs-semantic table and the decision record. **Ask** runs
@@ -293,7 +300,7 @@ This is a demo of memory behaviour, not clinical software. The drug-class lists 
 
 - **"✗ nothing raised on the new allergy"**: the detector check was deferred (it happens after many writes in a row). Run
   `python3 demo.py conflicts` a few minutes later, then `python3 demo.py` again and it resumes.
-- **The dictated note yields fewer facts than above**: extraction varies by run (3–7 facts in ours). The order check does not depend on it.
+- **The dictated note yields fewer facts than above**: extraction varies by run (2–7 facts in ours). The order check does not depend on it.
 - **`tls handshake eof` / `could not connect`**: a dropped connection. Read-only commands retry four times; otherwise re-run
   `python3 demo.py` and it resumes.
 - **`401 service account not found`**: the key was deleted or belongs to the other deployment.
