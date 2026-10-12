@@ -41,7 +41,10 @@ Maya's handoff ──────────┤                                
 
 Runs in about 3 minutes on a free personal account. The only credential you need is a MemoryLake API key.
 
-**Watch it run** (real recordings, unedited): recording in progress.
+**Watch it run** (real recordings, unedited):
+[CLI demo, 4:50](https://github.com/memorylake-ai/memorylake-usecases/releases/download/escalation-memory-v1/escalation-memory-cli-demo.mp4) · [Web companion demo, 7:00](https://github.com/memorylake-ai/memorylake-usecases/releases/download/escalation-memory-v1/escalation-memory-web-demo.mp4).
+In the CLI recording Relay kept 5 lessons (7 of Maya's 8) and 0 named a customer; the project kept 12 facts, 3 naming a customer;
+Relay's memory answered all 3 of Tomás's questions, the default agent's none.
 
 ## Prerequisites
 
@@ -89,6 +92,13 @@ searches again. Use `--reset` to watch extraction under the instruction from scr
 ```bash
 python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
+
+![Web companion — same words, three memories](https://github.com/memorylake-ai/memorylake-usecases/raw/main/escalation-memory/web/screenshot-memories.png)
+
+![Web companion — Tomás's first escalation, routed from Relay's memory](https://github.com/memorylake-ai/memorylake-usecases/raw/main/escalation-memory/web/screenshot-escalation.png)
+
+[Watch the web companion demo (mp4, 7:00)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/escalation-memory-v1/escalation-memory-web-demo.mp4). Most of the first three minutes is MemoryLake turning
+the handoff into memory, shown as it happens.
 
 Paste the key and press **Run demo**. The page shows the handoff arriving at both agents as two chats,
 the three memories side by side with every fact checked and a table of which of Maya's lessons each one
@@ -287,18 +297,18 @@ The demo shows those as `[updated]` with the old text under them.
 Counted over every fresh run made while building this demo, on a free account. See the build notes for
 the run-by-run table; the numbers are updated as more runs are made.
 
-- **Facts on Relay after the handoff: 47 over 6 runs. Ones that named a customer or carried a figure: 0.**
+- **Facts on Relay after the handoff: 52 over 7 runs. Ones that named a customer or carried a figure: 0.**
   The instruction is a prompt to the extractor, not a guarantee, so the demo scans every fact and deletes
-  what it flags. One fact from Tomás's outcome was flagged and deleted (1 of 6 runs).
-- **Maya's 8 lessons on Relay:** 8/8 in 5 runs, 7/8 in 1.
-- **The default agent, same words:** 1 fact over 6 runs (“The AI assistant serves as an escalation agent
+  what it flags. One fact from Tomás's outcome was flagged and deleted (1 of 7 runs).
+- **Maya's 8 lessons on Relay:** 8/8 in 5 runs, 7/8 in 2.
+- **The default agent, same words:** 1 fact over 7 runs (“The AI assistant serves as an escalation agent
   for Quayside”), and none of Maya's lessons. In probes where the agent's last message summed up the
   routes, the default agent kept that summary as its own promise (“The assistant will route billing
   disputes to finance ops first”) and still none of Maya's reasons or framing.
 - **Tomás's three questions:** Relay's memory answered 3 of 3 in every run; the default agent's, 0 of 3.
 - **The outcome lesson** reached Relay in every run: added as a new fact, or merged into the
   mobile-package fact.
-- **The project** kept 0–4 customer-identifying facts per run (2–4 in 5 of 6).
+- **The project** kept 0–4 customer-identifying facts per run (2–4 in 6 of 7).
 
 ## Wiring it into your own team
 
