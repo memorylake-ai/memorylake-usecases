@@ -931,6 +931,43 @@ def audit(cli: CLI, ids: dict, story: dict, write: bool = True) -> dict:
     return out
 
 
+def delete_actor(cli: CLI, actor_id: str) -> int:
+    """Delete an actor's facts, then the actor; returns how many facts were deleted.
+
+    `actor delete` does not take the actor's facts with it: they stay readable and searchable, and
+    `fact delete` then fails with ACTOR_INACTIVE, so they can never be removed. Every fact goes
+    first, the list must come back empty, then the actor. A sealed (unbound) actor answers 404 to
+    `fact list`, so it is bound back first."""
+    def facts() -> list:
+        out, token = [], None
+        while True:
+            args = ["fact", "list", "--actors", actor_id, "--page-size", "50"]
+            if token:
+                args += ["--continuation-token", token]
+            page = cli.run(*args, scoped=True, echo=False) or {}
+            out.extend(page.get("items") or [])
+            token = page.get("continuation_token")
+            if not token:
+                return out
+
+    try:
+        found = facts()
+    except CLIError as e:
+        if not e.has("404", "not found"):
+            raise
+        cli.run("actor", "bind", "--actor", actor_id, scoped=True, echo=False)
+        found = facts()
+    for f in found:
+        cli.run("fact", "delete", "--actor", actor_id, f["id"], scoped=True, echo=False)
+    left = facts()
+    if left:
+        die(f"{len(left)} fact(s) are still on {actor_id}; not deleting it (its memory would become undeletable)")
+    cli.run("actor", "delete", actor_id)
+    if found:
+        note(f"deleted {len(found)} fact(s) on {actor_id} before the actor")
+    return len(found)
+
+
 # --------------------------------------------------------------------------- cleanup
 
 def cleanup(cli: CLI, quiet: bool = False) -> None:
@@ -965,7 +1002,7 @@ def cleanup(cli: CLI, quiet: bool = False) -> None:
         note("deleted the CI project (the incident facts go with it)")
     human = find_actor(cli, story["human"]["slug"], echo=not quiet)
     if human:
-        cli.run("actor", "delete", human["id"])
+        delete_actor(cli, human["id"])
         note(f"deleted {story['human']['name']}")
     emit("cleaned", "")
 

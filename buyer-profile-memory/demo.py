@@ -756,6 +756,43 @@ def show_ask(r: dict) -> None:
     emit("text", f"\n  “{r['question']}”\n" + "\n".join(f"    {h['rank']}. [{h['scope']}] {clip(h['text'], 110)}" for h in r["hits"]))
 
 
+def delete_actor(cli: CLI, actor_id: str) -> int:
+    """Delete an actor's facts, then the actor; returns how many facts were deleted.
+
+    `actor delete` does not take the actor's facts with it: they stay readable and searchable, and
+    `fact delete` then fails with ACTOR_INACTIVE, so they can never be removed. Every fact goes
+    first, the list must come back empty, then the actor. A sealed (unbound) actor answers 404 to
+    `fact list`, so it is bound back first."""
+    def facts() -> list:
+        out, token = [], None
+        while True:
+            args = ["fact", "list", "--actors", actor_id, "--page-size", "50"]
+            if token:
+                args += ["--continuation-token", token]
+            page = cli.run(*args, scoped=True, echo=False) or {}
+            out.extend(page.get("items") or [])
+            token = page.get("continuation_token")
+            if not token:
+                return out
+
+    try:
+        found = facts()
+    except CLIError as e:
+        if not e.has("404", "not found"):
+            raise
+        cli.run("actor", "bind", "--actor", actor_id, scoped=True, echo=False)
+        found = facts()
+    for f in found:
+        cli.run("fact", "delete", "--actor", actor_id, f["id"], scoped=True, echo=False)
+    left = facts()
+    if left:
+        die(f"{len(left)} fact(s) are still on {actor_id}; not deleting it (its memory would become undeletable)")
+    cli.run("actor", "delete", actor_id)
+    if found:
+        note(f"deleted {len(found)} fact(s) on {actor_id} before the actor")
+    return len(found)
+
+
 # --------------------------------------------------------------------------- cleanup
 
 def cleanup(cli: CLI, quiet: bool = False) -> None:
@@ -766,7 +803,7 @@ def cleanup(cli: CLI, quiet: bool = False) -> None:
         note("deleted the team project (the showings go with it)")
     actor = find_buyer(cli, story, echo=not quiet)
     if actor:
-        cli.run("actor", "delete", actor["id"])
+        delete_actor(cli, actor["id"])
         note("deleted the buyer actor (her profile facts and conflicts go with it)")
     emit("cleaned", "")
 

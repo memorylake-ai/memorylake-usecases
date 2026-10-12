@@ -203,8 +203,9 @@ runs over one candidate.
 - **What it seals:** the candidate's memory, inside this workspace.
 - **What it leaves:** the raw interview transcripts are still listed by `conv msg list` (the demo prints
   how many).
-- **For an erasure request:** delete the conversations and the actor. Deleting the actor deletes every
-  fact on it. That is what `python3 demo.py cleanup` does.
+- **For an erasure request:** delete the conversations, every fact on the actor, then the actor. That is
+  what `python3 demo.py cleanup` does. Do not skip the facts: `actor delete` on its own leaves them readable
+  and searchable, and after it `fact delete` fails with `ACTOR_INACTIVE`.
 
 **7. Tomás applies again.**
 

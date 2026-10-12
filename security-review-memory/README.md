@@ -229,6 +229,9 @@ $ memorylake api-key revoke 15406
   · demo keys left on the team: 0
 ```
 
+Each `actor delete` runs after that actor's facts are deleted and `fact list --actors` comes back empty:
+`actor delete` on its own leaves an actor's facts readable and searchable, and no longer deletable.
+
 ### The evidence pack
 
 ```
@@ -269,7 +272,7 @@ secret were refused on the first call each time (0.5–0.9 s after the change); 
 - **Stamp the writer.** The trace does not say which key made a change; put the integration's name in the fact's
   `metadata`, and say in the answer that it is self-reported.
 - **Offboarding is three deletes and two checks.** `conv delete` (a project delete does not delete conversations),
-  `actor delete`, `proj delete`; then `fact list` → 404 and `search` → 400.
+  every fact on each actor then `actor delete` (the facts outlive the actor otherwise), `proj delete`; then `fact list` → 404 and `search` → 400.
 
 ## If something goes wrong
 

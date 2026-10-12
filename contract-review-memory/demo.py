@@ -363,10 +363,10 @@ def ensure_projects(cli: CLI, reset: bool) -> dict[str, str]:
             for proj in existing:
                 cli.run("proj", "delete", proj["id"], scoped=True)
             delete_library_root(cli)
-            for key in COUNTERPARTIES:  # their facts are actor-scoped; deleting the actor removes them
+            for key in COUNTERPARTIES:  # their facts are actor-scoped: delete_actor removes them first
                 actor = cli.try_run("actor", "get", f"{PREFIX}-{key}", "--by-custom-id")
                 if actor:
-                    cli.run("actor", "delete", actor["id"])
+                    delete_actor(cli, actor["id"])
     ids = {}
     for key, spec in PROJECTS.items():
         proj = find_project(cli, key)
@@ -835,6 +835,43 @@ def brief_step(cli: CLI, projects: dict[str, str], counterparties: dict[str, str
     return brief
 
 
+def delete_actor(cli: CLI, actor_id: str) -> int:
+    """Delete an actor's facts, then the actor; returns how many facts were deleted.
+
+    `actor delete` does not take the actor's facts with it: they stay readable and searchable, and
+    `fact delete` then fails with ACTOR_INACTIVE, so they can never be removed. Every fact goes
+    first, the list must come back empty, then the actor. A sealed (unbound) actor answers 404 to
+    `fact list`, so it is bound back first."""
+    def facts() -> list:
+        out, token = [], None
+        while True:
+            args = ["fact", "list", "--actors", actor_id, "--page-size", "50"]
+            if token:
+                args += ["--continuation-token", token]
+            page = cli.run(*args, scoped=True, echo=False) or {}
+            out.extend(page.get("items") or [])
+            token = page.get("continuation_token")
+            if not token:
+                return out
+
+    try:
+        found = facts()
+    except CLIError as e:
+        if not e.has("404", "not found"):
+            raise
+        cli.run("actor", "bind", "--actor", actor_id, scoped=True, echo=False)
+        found = facts()
+    for f in found:
+        cli.run("fact", "delete", "--actor", actor_id, f["id"], scoped=True, echo=False)
+    left = facts()
+    if left:
+        die(f"{len(left)} fact(s) are still on {actor_id}; not deleting it (its memory would become undeletable)")
+    cli.run("actor", "delete", actor_id)
+    if found:
+        note(f"deleted {len(found)} fact(s) on {actor_id} before the actor")
+    return len(found)
+
+
 # --------------------------------------------------------------------------- cleanup
 
 def cleanup(cli: CLI) -> None:
@@ -848,7 +885,7 @@ def cleanup(cli: CLI) -> None:
     for key in [*PEOPLE, *COUNTERPARTIES]:
         actor = cli.try_run("actor", "get", f"{PREFIX}-{key}", "--by-custom-id")
         if actor:
-            cli.run("actor", "delete", actor["id"])
+            delete_actor(cli, actor["id"])
     note("deleted demo actors (the counterparties' precedents went with them)")
     if delete_library_root(cli):
         note(f"deleted Library folder {LIBRARY_ROOT}/ and everything in it")

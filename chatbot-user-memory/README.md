@@ -16,7 +16,7 @@ to **the user's actor**, not to the bot or the project, so every user has a memo
   block your backend prepends to the model prompt;
 - a preference that changed ("aisle, not window"; "moved to Hamburg") shows up dated, latest first;
 - **one user's memory never answers for another** — the demo checks this explicitly;
-- a user can ask to be **forgotten**, one fact at a time (`fact delete`) or entirely (`actor delete`).
+- a user can ask to be **forgotten**, one fact at a time (`fact delete`) or entirely (every fact, then `actor delete`).
 
 ```
 Alice: web ──┐
@@ -135,8 +135,9 @@ memorylake search "where does the user live" --actors actor-alice --top-k 3
 memorylake fact delete --actor actor-alice fact-…
 ```
 
-Deleting the actor removes every fact they own, which is the whole-account "forget me" — `cleanup` does
-exactly that.
+The whole-account "forget me" is every fact on the actor, then the actor — `cleanup` does exactly that.
+The order matters: `actor delete` on its own leaves the actor's facts readable and searchable, and once the
+actor is gone `fact delete` fails with `ACTOR_INACTIVE`, so they can no longer be removed.
 
 **7. Optional: a real reply.** With `--with-llm`, the memory block and the user's question go to the
 Model Router (`/v1/chat/completions`, same API key) and Nimbus answers for real.
