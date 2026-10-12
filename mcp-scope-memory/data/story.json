@@ -1,0 +1,61 @@
+{
+  "company": "Fernhill Robotics",
+  "projects": [
+    {"key": "payments", "name": "payments-service", "description": "Fernhill's payout and billing service. Demo data.",
+     "facts": [
+       "payments-service: every payout call carries an idempotency key built from the payout id, so a retried call can never pay twice.",
+       "payments-service: retries on the bank API stop after 3 attempts with jittered backoff starting at 2 seconds; after that the payout is parked for a human.",
+       "payments-service: changes to the retry logic need a second reviewer from the payments on-call rota."
+     ]},
+    {"key": "web", "name": "web-app", "description": "Fernhill's customer dashboard. Demo data.",
+     "facts": [
+       "web-app: the dashboard never retries a payout itself; it polls the payout status endpoint every 5 seconds and shows a pending badge.",
+       "web-app: network errors in the dashboard are retried by the fetch wrapper in src/lib/http.ts, never in components.",
+       "web-app: feature flags live in flags.yaml and ship dark first."
+     ]},
+    {"key": "runbooks", "name": "platform-runbooks", "description": "On-call runbooks shared by the platform team. Demo data.",
+     "facts": [
+       "platform-runbooks: a payout stuck in parked state for more than an hour pages the payments on-call.",
+       "platform-runbooks: before changing retry behaviour anywhere, check the incident log for the bank API's current rate limit."
+     ]},
+    {"key": "migration", "name": "ledger-migration", "description": "The ledger migration, finished this sprint. Demo data.",
+     "facts": [
+       "ledger-migration: during the migration, payout retries were disabled behind the flag ledger_dual_write.",
+       "ledger-migration: the old ledger tables are read-only and will be dropped after the migration closes."
+     ]}
+  ],
+  "people": [
+    {"key": "priya", "display": "Priya Raman", "role": "Backend engineer, payments",
+     "facts": ["Priya prefers retry changes to land behind a feature flag with a dashboard first.",
+               "Priya reviews in the morning and wants small, single-purpose pull requests."]},
+    {"key": "tom", "display": "Tom Okafor", "role": "Frontend engineer, leaving the platform team",
+     "facts": ["Tom prefers Playwright tests over unit tests for anything that touches the payout screen.",
+               "Tom keeps a scratch branch named tom/wip that should never be merged."]},
+    {"key": "ana", "display": "Ana Sousa", "role": "Frontend engineer, takes over from Tom",
+     "facts": ["Ana prefers component tests with mocked fetch over end-to-end tests for the payout screen.",
+               "Ana wants accessibility checks run on every dashboard change."]},
+    {"key": "kai", "display": "Kai Brandt", "role": "Contractor, not yet on the workspace", "bind": false, "facts": []}
+  ],
+  "agents": [
+    {"key": "bot", "name": "review-bot", "description": "CI review bot that comments on pull requests. Demo data.",
+     "facts": ["review-bot lesson: flag any retry loop without an upper bound on attempts.",
+               "review-bot lesson: a retry that re-sends a payout without the idempotency key is a blocking comment."]},
+    {"key": "bot2", "name": "review-bot-v2", "description": "The CI review bot's replacement. Demo data.", "later": true, "facts": []}
+  ],
+  "boundaries": [
+    {"key": "priya-ide", "name": "Priya's editor assistant", "tool": "Priya's IDE (MCP client)",
+     "projects": ["payments", "runbooks"], "human": "priya"},
+    {"key": "tom-ide", "name": "Tom's editor assistant", "tool": "Tom's IDE (MCP client)",
+     "projects": ["web", "runbooks"], "human": "tom"},
+    {"key": "review-bot", "name": "CI review bot", "tool": "CI pipeline (Memory Router, ?boundary_id=)",
+     "projects": ["payments", "web", "migration"], "agent": "bot"}
+  ],
+  "bad_boundary": {"key": "kai-ide", "name": "Kai's editor assistant", "projects": ["web"], "human": "kai"},
+  "question": "What should I check before changing how payouts are retried?",
+  "changes": {
+    "migration": "The ledger migration is finished: its project is deleted.",
+    "tom": "Tom moves to another team: his actor is sealed (unbound from the workspace).",
+    "bot": "review-bot is replaced by review-bot-v2: its lessons are copied over, then it is deleted."
+  },
+  "repairs": {"tom-ide": {"human": "ana", "name": "Ana's editor assistant"}, "review-bot": {"agent": "bot2"}}
+}
