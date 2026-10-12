@@ -668,12 +668,13 @@ def reconcile(cli: CLI, ids: dict, story: dict, det: dict) -> dict:
             note(f"two facts, one of them stale: resolved with {r.get('strategy')}, forgotten {', '.join(r.get('forgotten_fact_ids') or []) or 'nothing'}")
             done.append(dict(id=c["id"], name=c["name"], strategy=r.get("strategy"), kept=allergy_id, forgotten=r.get("forgotten_fact_ids") or []))
             continue
+        supporting = [f for f in would if not is_nkda(f)]
         gone = [f for f in c["facts"] if is_nkda(f) and f["id"] not in live_ids()]
         if gone:
             cli.run("fact", "conflict", "resolve", c["id"], "--actor", ids["patient"], "--strategy", "dismiss", scoped=True)
-            note("not keep_fact: it would forget a supporting record. The NKDA line it names is already retired, so it is "
-                 "dismissed (dismiss changes no fact)")
-            dismissed.append(dict(id=c["id"], name=c["name"], would_forget=[f["id"] for f in would if not is_nkda(f)]))
+            why = "keep_fact would forget a record that supports the allergy; " if supporting else ""
+            note(f"not keep_fact: {why}the NKDA line it names is already retired, so it is dismissed (dismiss changes no fact)")
+            dismissed.append(dict(id=c["id"], name=c["name"], would_forget=[f["id"] for f in supporting]))
         else:
             left.append(dict(id=c["id"], name=c["name"], would_forget=[f["id"] for f in would if not is_nkda(f)]))
     # No clean pair raised: retire the NKDA line by rewriting it (`fact trace` keeps the old text), then
@@ -964,10 +965,10 @@ def ask(cli: CLI, ids: dict, text: str, echo: bool = True) -> dict:
     exact_ids, exact_texts = {h["id"] for h in exact}, {h["text"] for h in exact}
     sem = []
     for f in res.get("facts") or []:
-        text = f.get("fact") or f.get("content")
+        words = f.get("fact") or f.get("content")
         # Same words under another id would be a second copy of the entry: say so instead of guessing.
-        sem.append(dict(id=f.get("id"), text=text, in_exact=f.get("id") in exact_ids,
-                        same_text=f.get("id") not in exact_ids and text in exact_texts))
+        sem.append(dict(id=f.get("id"), text=words, in_exact=f.get("id") in exact_ids,
+                        same_text=f.get("id") not in exact_ids and words in exact_texts))
     return dict(text=text, exact=exact, semantic=sem)
 
 

@@ -129,7 +129,7 @@
         <div class="memfact clean"><span class="mk">✓</span><span class="body">kept: ${esc(text[x.kept] || x.kept)}</span></div>
         ${x.forgotten.map((f) => `<div class="memfact gone"><span class="mk">✗</span><span class="body">forgotten: ${esc(text[f] || f)}</span></div>`).join("")}</div>`).join("")}
       ${r.dismissed.map((x) => `<div class="card"><div class="row spread"><h2 style="margin:0">dismissed, not keep_fact</h2><span class="mono small">${esc(x.id)}</span></div>
-        <p class="small">keep_fact here would also have forgotten:</p>
+        <p class="small">${x.would_forget.length ? "keep_fact here would also have forgotten:" : "the NKDA line it names was already retired by the two-fact conflict."}</p>
         ${x.would_forget.map((f) => `<div class="memfact personal"><span class="mk">!</span><span class="body">${esc(text[f] || f)}<div class="leakwhy">↳ a record that supports the allergy</div></span></div>`).join("")}</div>`).join("")}
       ${r.left_open.length ? `<div class="card"><span class="pill warn">${r.left_open.length} left open</span></div>` : ""}
       ${r.trail.map((t) => `<div class="card"><h2 style="margin-top:0">${t.conflict ? "Forgotten, not erased" : "Rewritten, not erased"}</h2>
