@@ -44,7 +44,7 @@ The demo builds it in a sandbox org team on your account and checks it:
 5. **A tidy-up of the role leaks a group's write.** A ticket drops the per-project action lists from the role's scope (the help
    calls them optional). The same two projects stay in scope. Theo can now **write the methods**. Nobody gave him that:
    `member explain` shows `project:mem_add` from the **Field crew**, whose scope is the field notes. With the action lists
-   back, the write is refused again (4 of 4 runs).
+   back, the write is refused again (6 of 6 runs).
 6. **Mira leaves.** `member remove`: her key is refused **within a second** (`401 service account is disabled`) and she is in
    none of the three groups any more. Her 9 facts stay, and Theo's three questions about the lab's methods are each answered by
    one of them, at rank 1.
@@ -56,7 +56,8 @@ that researcher's key. The demo writes the model down, applies it, and compares.
 of who wrote it, so the demo keeps the ids each researcher's `fact add` returned (`.memorylake-demo/sandbox.json`). That is how
 it can say an answer was *written by Mira*.
 
-**Watch it run**: recording in progress.
+**Watch it run** (real recordings, unedited): [CLI demo, 2:20](https://github.com/memorylake-ai/memorylake-usecases/releases/download/team-second-brain-v1/team-second-brain-cli-demo.mp4) · [web demo, 2:45](https://github.com/memorylake-ai/memorylake-usecases/releases/download/team-second-brain-v1/team-second-brain-web-demo.mp4)
+(GitHub serves release videos as downloads.)
 
 ## Prerequisites
 
@@ -110,6 +111,12 @@ earlier run deletes it first and says so. The run leaves the sandbox team in pla
 ```bash
 python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
+
+![Web companion — 27 calls, each researcher with their own key](https://github.com/memorylake-ai/memorylake-usecases/raw/main/team-second-brain/web/screenshot-matrix.png)
+
+![Web companion — without action lists the Field crew's write lands on the methods; with them it is refused](https://github.com/memorylake-ai/memorylake-usecases/raw/main/team-second-brain/web/screenshot-leak.png)
+
+![Web companion — Mira's key is refused, and what she wrote answers Theo's questions](https://github.com/memorylake-ai/memorylake-usecases/raw/main/team-second-brain/web/screenshot-departure.png)
 
 Paste the key, press **Run demo**, and follow the nine steps: the sandbox team, the custom role, the three groups with
 `member explain`, what each researcher wrote, the 27-call matrix filling in as each call returns, the tidy-up that leaks and
@@ -320,20 +327,20 @@ Deleting the team frees the account's org-team slot at once; the next run can cr
 
 ## Measured
 
-Four full runs on a free account (2026-10-13, CLI v20261013), each in a fresh sandbox team: three from the terminal (one of
-them with `--reset`) and one from the web companion.
+Six full runs on a free account (2026-10-13, CLI v20261013), each in a fresh sandbox team: three from the terminal (one of
+them with `--reset`), one from the web companion, and the two recordings (CLI and web).
 
 | | every run |
 |---|---|
-| matrix | **27/27** as the model says (4 of 4) |
+| matrix | **27/27** as the model says (6 of 6) |
 | refusals | `403 ACCESS_DENIED`, the permission named (*Read Memory*, *Search Memories*, *Add Memory*) |
-| role scope without action lists | Theo writes the methods, `mem_add` from **Field crew** (4 of 4) |
-| action lists back | Theo's write to the methods `403`, field notes still writable (4 of 4) |
+| role scope without action lists | Theo writes the methods, `mem_add` from **Field crew** (6 of 6) |
+| action lists back | Theo's write to the methods `403`, field notes still writable (6 of 6) |
 | Mira's key refused after `member remove` | 0.5–0.8 s (`401 service account is disabled`) |
-| Mira still in a group afterwards | 0 of 3 groups (4 of 4) |
-| Theo's questions answered at rank 1 | 3/3, all three by facts Mira wrote (4 of 4) |
+| Mira still in a group afterwards | 0 of 3 groups (6 of 6) |
+| Theo's questions answered at rank 1 | 3/3, all three by facts Mira wrote (6 of 6) |
 | audit events per run | 28 |
-| whole run | 90–104 s |
+| whole run | 90–104 s (the five that were timed) |
 
 ## Wiring it into your own team
 
