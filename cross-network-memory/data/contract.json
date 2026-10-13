@@ -1,0 +1,76 @@
+{
+  "company": {
+    "name": "Harborline Freight",
+    "about": "a fictional freight forwarder whose dispatch agent shares one memory with a customs broker's agent on another network",
+    "partner": "Kestrel Customs Brokerage",
+    "reviewer": "Harborline platform team"
+  },
+  "team_name": "Harborline Freight - agent network sandbox",
+  "partner_network": {
+    "name": "Kestrel's egress",
+    "cidr": "198.51.100.0/24",
+    "why": "198.51.100.0/24 is a documentation range (RFC 5737): no real machine calls from it, so this machine is outside Kestrel's network until the contract says otherwise"
+  },
+  "projects": [
+    {
+      "slug": "contract",
+      "name": "Shipment contract",
+      "description": "Shared memory between Harborline dispatch and Kestrel customs: shipments, holds, documents",
+      "shared": true
+    },
+    {
+      "slug": "internal",
+      "name": "Harborline internal",
+      "description": "Harborline only: margins, carrier rates, account notes",
+      "shared": false
+    }
+  ],
+  "agents": [
+    {
+      "slug": "harborline-dispatch",
+      "name": "harborline-dispatch",
+      "org": "Harborline Freight",
+      "network": "this machine (Harborline's network)",
+      "purpose": "books carriers and tracks every shipment; shares what customs needs",
+      "grants": {"contract": "write", "internal": "write"}
+    },
+    {
+      "slug": "kestrel-broker",
+      "name": "kestrel-broker",
+      "org": "Kestrel Customs Brokerage",
+      "network": "Kestrel's egress 198.51.100.0/24",
+      "purpose": "files customs entries; records holds and missing documents on the shared contract",
+      "grants": {"contract": "write"}
+    }
+  ],
+  "writes": {
+    "contract": [
+      "Shipment HX-4471: 18 pallets of bicycle frames, Busan to Rotterdam, vessel ETA 2026-10-20, consignee Velora Cycles BV.",
+      "Shipment HX-4473: 6 crates of espresso machines, Genoa to Felixstowe, ETA 2026-10-17, HS code 8516.71 declared by the shipper.",
+      "Shipment HX-4480: 2 containers of solar inverters, Ningbo to Hamburg, ETA 2026-10-24, needs a CE declaration at entry.",
+      "Shipment HX-4482: 40 cartons of children's rain jackets, Ho Chi Minh City to Antwerp, ETA 2026-10-22."
+    ],
+    "internal": [
+      "Margin on HX-4471 is 11 percent after the Busan surcharge; do not quote it to anyone outside Harborline.",
+      "Carrier floor rate Ningbo to Hamburg this month: 1,840 dollars per 40-foot container.",
+      "Velora Cycles BV is 45 days late on two invoices; the account is on credit watch."
+    ],
+    "partner": [
+      "Customs hold on HX-4471: the commercial invoice lists 18 pallets but the packing list lists 16; Kestrel needs a corrected packing list before 2026-10-19.",
+      "HX-4480 entry is ready to file as soon as the CE declaration for the solar inverters arrives; Kestrel has the rest of the documents."
+    ]
+  },
+  "questions": {
+    "partner": {"query": "Which shipments need a customs document this week?", "expect": "contract"},
+    "dispatch": {"query": "Is anything holding shipment HX-4471 at customs?", "expect_writer": "kestrel-broker", "expect_text": "packing list"}
+  },
+  "incident": {
+    "ticket": "SEC-2207",
+    "reason": "SEC-2207: Kestrel reports its broker key was in a CI log for 40 minutes; suspend until they confirm",
+    "resolved": "SEC-2207: Kestrel confirmed the log was private and never shared; key re-enabled"
+  },
+  "egress_change": {
+    "ticket": "NET-318",
+    "reason": "NET-318: Kestrel moves its agent back behind its own egress; the contract drops this machine"
+  }
+}
