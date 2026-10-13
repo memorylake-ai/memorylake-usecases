@@ -33,7 +33,7 @@ calls from it, so wherever you run the demo, you are outside Kestrel's network u
    Harborline's internal memory (`403 ACCESS_DENIED`, *You don't have the "Read Memory" permission*). Harborline asks
    *"Is anything holding HX-4471 at customs?"*, and Kestrel's hold comes back **#1** in every run.
 4. **A key may have leaked: suspend it, don't revoke it.** `api-key update --status disabled`. The next call with the key
-   is refused (`401 service account is disabled`, under 1.2 s). What the broker wrote stays readable to Harborline.
+   is refused (`401 service account is disabled`, within 1.1 s). What the broker wrote stays readable to Harborline.
    `--status enabled` brings back **the same key**, so Kestrel has nothing to re-deploy. Rotating or revoking would mean a
    new key.
 5. **The partner's network changes.** The allowlist goes back to `198.51.100.0/24` only. The next call from your machine is
@@ -54,7 +54,8 @@ things, and says so:
   (self-reported).
 - **This machine standing in for Kestrel's network at step 3.** One machine cannot call from two networks.
 
-**Watch it run** (real recordings, unedited): recording in progress.
+**Watch it run** (real recordings, unedited, made with `MLU_MASK_IP=1`): [CLI demo, 1:24](https://github.com/memorylake-ai/memorylake-usecases/releases/download/cross-network-memory-v1/cross-network-memory-cli-demo.mp4) · [web demo, 1:55](https://github.com/memorylake-ai/memorylake-usecases/releases/download/cross-network-memory-v1/cross-network-memory-web-demo.mp4)
+(GitHub serves release videos as downloads.)
 
 ## Prerequisites
 
@@ -109,6 +110,10 @@ run deletes it first and says so. The run leaves the sandbox team in place so yo
 ```bash
 python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
+
+![Web companion — the partner's agent joins: 5/5 as the contract says, its customs hold #1 in the forwarder's answer](https://github.com/memorylake-ai/memorylake-usecases/raw/main/cross-network-memory/web/screenshot-partner.png)
+
+![Web companion — the audit log next to the refused calls from the demo's access ledger](https://github.com/memorylake-ai/memorylake-usecases/raw/main/cross-network-memory/web/screenshot-audit.png)
 
 Paste the key, press **Run demo**, and follow the nine steps: the sandbox team, the two memories and agents, the pinned keys
 (with the refusal that names your IP), the shipments, the partner joining (both agents' questions and the contract check),
@@ -262,21 +267,21 @@ $ memorylake team get   # as sandbox owner
 
 ## Measured
 
-Four full runs on a free account (2026-10-13, CLI v20261013), each in a fresh sandbox team: three from the terminal (one with
-`--reset`, one with `MLU_MASK_IP=1`) and one from the web companion:
+Six full runs on a free account (2026-10-13, CLI v20261013), each in a fresh sandbox team: three from the terminal (one with
+`--reset`, one with `MLU_MASK_IP=1`), one from the web companion, and the two recordings (CLI and web):
 
 | | every run |
 |---|---|
-| pinned key used from outside its network | `403 permission_error`, *IP … is not allowed to access*, at `auth login` (4 of 4) |
-| contract check | **5/5** as the contract says (4 of 4) |
-| Kestrel's hold in Harborline's answer | **#1** (4 of 4) |
-| suspended key refused after | 0.6–1.1 s (`401 service account is disabled`) |
+| pinned key used from outside its network | `403 permission_error`, *IP … is not allowed to access*, at `auth login` (6 of 6) |
+| contract check | **5/5** as the contract says (6 of 6) |
+| Kestrel's hold in Harborline's answer | **#1** (6 of 6) |
+| suspended key refused after | 0.5–1.1 s (`401 service account is disabled`) |
 | re-enabled key accepted after | 0.9–1.5 s, same key |
-| partner's facts readable while suspended | 2/2 (4 of 4) |
-| allowlist change → refused on the next call | 4 of 4 |
+| partner's facts readable while suspended | 2/2 (6 of 6) |
+| allowlist change → refused on the next call | 6 of 6 |
 | audit events per run / refused calls in the audit log | 11 / 0 |
 | access ledger | 14 agent calls, 5 refused (network 2, scope 2, key 1) |
-| whole run | 37–42 s |
+| whole run | 36–42 s |
 
 Before writing the demo, a probe on the personal team checked how fast each change takes effect: the first call after every
 `api-key update` (disable, enable, a /32 allowlist, a /24 allowlist, `--no-ip-restriction`) already got the new answer, six
