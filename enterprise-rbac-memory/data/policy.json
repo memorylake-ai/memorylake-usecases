@@ -1,0 +1,90 @@
+{
+  "company": {
+    "name": "Corvane Mutual",
+    "about": "a fictional property insurer rolling out three AI assistants on one MemoryLake memory",
+    "reviewer": "Corvane Mutual AI platform team"
+  },
+  "team_name": "Corvane Mutual - AI memory sandbox",
+  "projects": [
+    {
+      "slug": "policies",
+      "name": "Underwriting policy",
+      "description": "Underwriting rules every assistant may need to read",
+      "query": "payout approval limit",
+      "facts": [
+        "Claims paid out above 5,000 dollars need a senior adjuster's sign-off.",
+        "Flood cover in zone A requires an elevation certificate issued within the last 10 years.",
+        "Roof damage on homes older than 25 years is settled at actual cash value, not replacement cost.",
+        "A claim must be reported within 60 days of the loss to be accepted without review.",
+        "Water damage from a slow leak (over 14 days) is excluded unless the policy has the seepage rider.",
+        "Policyholders get one free re-inspection per claim; a second one is billed at 150 dollars."
+      ]
+    },
+    {
+      "slug": "claims",
+      "name": "Claims case notes",
+      "description": "Open claim files: adjuster visits, estimates, customer contact",
+      "query": "water damage estimate",
+      "facts": [
+        "Claim CL-2291 (Marta Ilves, water damage, kitchen ceiling): adjuster visit on 2026-10-02, estimate 3,850 dollars.",
+        "Claim CL-2304 (Owen Pratt, hail, roof): roof built in 1994, so it settles at actual cash value.",
+        "Claim CL-2310 (Dana Kowal, burst pipe): reported 71 days after the loss, sent to late-report review.",
+        "Claim CL-2291: the customer prefers email; she works night shifts and does not answer calls before noon.",
+        "Claim CL-2318 (Ravi Menon, fire, garage): estimate 7,400 dollars, waiting for a senior adjuster's sign-off.",
+        "Claim CL-2304: second re-inspection requested on 2026-10-09; the 150 dollar fee was explained to the customer."
+      ]
+    },
+    {
+      "slug": "hr",
+      "name": "HR investigations",
+      "description": "Confidential: workplace investigations in the claims department",
+      "query": "complaint interviews",
+      "facts": [
+        "Case HR-17: a complaint was filed against a claims team lead on 2026-09-28; interviews are scheduled for 2026-10-15.",
+        "Case HR-17: two adjusters asked that their names not be shared with the team lead.",
+        "Case HR-12 (closed 2026-08-30): no policy breach found; a written note was kept on file for 12 months.",
+        "Only the HR director and the external auditor may see the HR-17 file until the interviews are done."
+      ]
+    }
+  ],
+  "members": [
+    {
+      "slug": "claims-assistant",
+      "name": "claims-assistant",
+      "purpose": "drafts replies to policyholders and keeps the claim file up to date",
+      "note": "Claim CL-2291: the customer sent photos of the ceiling on 2026-10-12; the estimate is unchanged."
+    },
+    {
+      "slug": "underwriting-bot",
+      "name": "underwriting-bot",
+      "purpose": "answers underwriters' rule questions and records rule clarifications",
+      "note": "Zone A flood: an elevation certificate older than 10 years must be renewed before binding."
+    },
+    {
+      "slug": "audit-reviewer",
+      "name": "audit-reviewer",
+      "purpose": "the external auditor's assistant: reads everything, changes nothing",
+      "note": "Audit sample 2026-10-13: three claim files checked against the payout rule."
+    }
+  ],
+  "grants": {
+    "claims-assistant": {"claims": "write", "policies": "read"},
+    "underwriting-bot": {"policies": "write"},
+    "audit-reviewer": {"policies": "read", "claims": "read", "hr": "read"}
+  },
+  "reasons": {
+    "claims-assistant": "AI-ACC-101: claims assistant keeps claim files, reads rules",
+    "underwriting-bot": "AI-ACC-102: underwriting bot owns the rule book only",
+    "audit-reviewer": "AI-ACC-103: external audit, read-only, all projects"
+  },
+  "change": {
+    "member": "underwriting-bot",
+    "project": "claims",
+    "level": "read",
+    "reason": "AI-ACC-117: underwriting bot needs claim history to answer roof-age questions"
+  },
+  "incident": {
+    "member": "claims-assistant",
+    "reason": "SEC-2026-044: the claims assistant's key was pasted into a public ticket"
+  }
+}
