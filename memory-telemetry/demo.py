@@ -622,7 +622,11 @@ def read_usage(cli: CLI, windows: list[dict], echo: bool = True, newest: int | N
         landed = newest is not None and newest >= w["end"]
         u = usage_window(cli, w, echo=echo and n == 0) if (landed or newest is None or newest >= w["start"]) else \
             dict(agent=w["agent"], start=w["start"], end=w["end"], ops=w.get("ops") or {}, records=0, by_model={}, members=[])
-        u["landed"] = landed
+        # A stall in the record stream is flushed later, stamped with the flush time rather than the time of the work
+        # (2026-10-13: nothing from 03:56 to 06:13 UTC, then 791 records stamped 06:13:47–06:14:04). So a job that did
+        # work but has no record in its window is not "no billed operations": its records may sit in a later burst.
+        u["unattributed"] = landed and not u["records"] and bool(w.get("ops"))
+        u["landed"] = landed and not u["unattributed"]
         out.append(u)
     return dict(newest=newest, windows=out)
 
@@ -640,6 +644,9 @@ def show_usage(u: dict, label: str) -> None:
         if w["landed"]:
             by = " · ".join(f"{m} {s['records']}·{s['tokens']}" for m, s in sorted(w["by_model"].items())) or "no billed operations"
             say(f"    {w['agent']:<21} {hm(w['start'])}–{hm(w['end'])} {clip(did, 26):<26} {w['records']:>7}  {by}")
+        elif w.get("unattributed"):
+            say(f"    {w['agent']:<21} {hm(w['start'])}–{hm(w['end'])} {clip(did, 26):<26} {0:>7}  none stamped in this window "
+                f"(records after a stall carry the flush time)")
         else:
             say(f"    {w['agent']:<21} {hm(w['start'])}–{hm(w['end'])} {clip(did, 26):<26} {'—':>7}  not landed yet")
 
@@ -741,7 +748,8 @@ def telemetry_all(cli: CLI, last: int = 5) -> dict:
         for agent, models in agg.items():
             say(f"    {agent:<21} " + " · ".join(f"{m} {c} records / {t} tokens" for m, (c, t) in sorted(models.items())))
     else:
-        say("\n    none of these runs has landed yet — usage records arrive in batches; try again later")
+        say("\n    none of these runs has landed in its own windows yet — usage records arrive in batches, and a batch "
+            "that arrives after a stall is stamped with its arrival time; try again later")
     out = dict(runs=result, summary=today, newest=newest, landed=len(landed))
     emit("usage", "", **out)
     return out

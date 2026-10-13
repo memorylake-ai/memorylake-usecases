@@ -134,7 +134,7 @@
     return `<div class="card"><div class="row spread"><h2 style="margin:0">usage records — ${esc(label)}</h2><span class="small muted">${head}</span></div>
       <table class="iso" style="margin-top:10px"><tr><th>agent</th><th>window (UTC)</th><th>what it did</th><th>records</th><th>by operation (records · tokens)</th></tr>
       ${u.windows.map((w) => `<tr><td class="mono small">${esc(w.agent)}</td><td class="mono small">${hms(w.start)}–${hms(w.end)}</td><td class="small">${esc(ops(w.ops))}</td>
-        <td class="mono small">${w.landed ? w.records : "—"}</td><td class="small">${w.landed ? (Object.entries(w.by_model).sort().map(([m, s]) => `<span class="pill">${esc(m)} ${s.records} · ${s.tokens}</span>`).join(" ") || "no billed operations") : '<span class="pill warn">not landed yet</span>'}</td></tr>`).join("")}</table></div>`;
+        <td class="mono small">${w.landed || w.unattributed ? w.records : "—"}</td><td class="small">${w.landed ? (Object.entries(w.by_model).sort().map(([m, s]) => `<span class="pill">${esc(m)} ${s.records} · ${s.tokens}</span>`).join(" ") || "no billed operations") : (w.unattributed ? '<span class="pill warn">none stamped in this window (records after a stall carry the flush time)</span>' : '<span class="pill warn">not landed yet</span>')}</td></tr>`).join("")}</table></div>`;
   }
 
   function telemetry() {

@@ -297,6 +297,13 @@ the web companion (one the recording), one with `--reset`, one fresh after a cle
 **Usage records.** In none of the nine runs had the job windows landed by the end of the run. While these runs were made,
 the newest record in the account stayed at 03:56 UTC from 04:48 to at least 05:28 UTC.
 
+Read back two hours later (07:15 UTC), the stall had been flushed, but not into the job windows: the account had **no record
+stamped between 03:56 and 06:13 UTC, then 791 records stamped within 17 seconds (06:13:47–06:14:04)** — about 2 h 17 min
+of the team's work, each record carrying the time it arrived rather than the time of the operation. Every window of the
+saved runs therefore reads 0. `telemetry` now prints `none stamped in this window` for a job that did work but has no record
+in its window, instead of `no billed operations`, and leaves it out of the per-agent totals. By 07:17 UTC the newest record
+was still 06:14:04.
+
 ## Wiring it into your own agent ops
 
 - **Give every job its own window, or its own API key.** On a team with members, usage records carry the member who made them
@@ -306,13 +313,18 @@ the newest record in the account stayed at 03:56 UTC from 04:48 to at least 05:2
   memory change, catch what latency and error rates never show.
 - **Watch facts held and evictions next to hit ratio.** A retention rule that keys on metadata deletes whatever the metadata says;
   the drop in facts and the drop in hit ratio land in the same window.
-- **Read usage records late.** They arrive in batches. Store the windows and read them on a schedule, not at the end of the job.
+- **Read usage records late, and do not trust an empty window.** They arrive in batches, and a batch that arrives after a stall
+  is stamped with its arrival time, so the work of a stalled period shows up as one burst outside every job window. A window
+  that reads 0 while the job did work means "not attributable", not "free". For per-job cost, use one API key (member) per
+  job rather than time windows.
 - **`usage records` allows about 20 calls a minute** (then `429 rate limit exceeded`); page with `--page-size 100` and narrow by
   `--start-time` / `--end-time`, `--model`, `--kind`.
 
 ## If something goes wrong
 
 - **`not landed yet`** on every window: usage records have not caught up. Run `python3 demo.py telemetry` later.
+- **`none stamped in this window`**: the record stream has moved past the window, but nothing in it carries the window's time.
+  After a stall the records are stamped with the time they arrive (see Measured), so they sit in a later burst.
 - **`429 rate limit exceeded`**: `usage records` is limited to about 20 calls a minute. The demo waits 20 s and retries.
 - **The hit ratio stays 6/6 after the retention job**: an answer was found somewhere else (a runbook passage). The demo prints
   where each hit came from.
