@@ -241,7 +241,7 @@ and web recordings), all exit 0:
 | Sam: fact ids shared between the two tenants | **0** (9 of 9); facts mentioning the other tenant: 0 |
 | default-deny | **refused 4 of 4** (9 of 9) |
 | `workspace delete` | 0.8–1.5 s; wrong `--confirm` name refused (9 of 9); the other tenants keep the same fact ids (9 of 9) |
-| after the delete: project still listed, its document still downloadable | **every time**: 3 of 3 runs that check it, and the project was also still there under each of the 13 tenant workspaces deleted while building the demo |
+| after the delete: project still listed, its document still downloadable | **every time**: 3 of 3 runs that check it, and under all 10 tenant workspaces deleted by earlier versions of the demo |
 | after the delete: boundary still listed, custom id still taken | 3 of 3 runs (the boundary was added in the last three) |
 | memory ready after the conversations | 47–59 s |
 
