@@ -41,7 +41,8 @@ Afterwards the project still lists **6 documents, all `okay`**. Nothing on eithe
 In every run so far (see [Measured](#measured)) the stale index did not refresh by itself: in a separate check, an overwritten
 file was still answered from its old text 15 minutes later.
 
-**Watch it run** (real recordings, unedited): *recording in progress*
+**Watch it run** (real recordings, unedited):
+[CLI demo, 5:06](https://github.com/memorylake-ai/memorylake-usecases/releases/download/style-guide-memory-v1/style-guide-memory-cli-demo.mp4) · [Web companion demo, 5:59](https://github.com/memorylake-ai/memorylake-usecases/releases/download/style-guide-memory-v1/style-guide-memory-web-demo.mp4)
 
 ## Prerequisites
 
@@ -101,6 +102,8 @@ python3 web/server.py        # http://127.0.0.1:8767 — standard library only
 ![Web companion — the freshness audit: shadowed, stale, orphaned, copy, not indexed, and the three untouched files fresh](https://github.com/memorylake-ai/memorylake-usecases/raw/main/style-guide-memory/web/screenshot-audit.png)
 
 ![Web companion — after the repair: FRESH 7, untouched documents keep their ids, 3 of 3 answers match and quote version 2](https://github.com/memorylake-ai/memorylake-usecases/raw/main/style-guide-memory/web/screenshot-repair.png)
+
+[Watch the web companion demo (mp4, 5:59)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/style-guide-memory-v1/style-guide-memory-web-demo.mp4).
 
 Paste the key, press **Run demo**, and follow the nine steps: version 1 and its answers, the release table, the same questions
 after the release (each answer next to what its file says), the two obvious fixes, the audit table and the repair. **Ask** searches
@@ -277,17 +280,17 @@ memorylake proj doc import --project <proj> --wait <buttons.md> <color.md> <moti
 
 ## Measured
 
-Four complete runs (first run, re-run, `--reset`, web companion), 2026-10-13, all exit 0:
+Seven complete runs on 2026-10-13 (first run, re-run, `--reset`, three from the web companion, the CLI recording), all exit 0:
 
 | | every run |
 |---|---|
-| version 1: answers that match their file | 3 / 3 (4 of 4 runs) |
-| after the release | **0 / 3**, every time the same three ways: color *stale*, buttons *newer copy not indexed*, typography *file gone* (4 of 4) |
-| re-import / reload | `duplicate` / `STATE_NOT_READY`, and color still *stale* afterwards (4 of 4) |
-| audit after the release | SHADOWED 1 · STALE 1 · ORPHAN 1 · COPY 1 · NOT INDEXED 2 · **FRESH 3** (4 of 4) |
-| audit after the repair | **FRESH 7** (4 of 4); the 3 untouched documents keep their ids (12 of 12) |
-| after the repair | **3 / 3 match and quote version 2** (4 of 4) |
-| run time | 245–260 s (imports: version 1 30–48 s, repair 27–44 s) |
+| version 1: answers that match their file | 3 / 3 (7 of 7 runs) |
+| after the release | **0 / 3**, every time the same three ways: color *stale*, buttons *newer copy not indexed*, typography *file gone* (7 of 7) |
+| re-import / reload | `duplicate` / `STATE_NOT_READY`, and color still *stale* afterwards (7 of 7) |
+| audit after the release | SHADOWED 1 · STALE 1 · ORPHAN 1 · COPY 1 · NOT INDEXED 2 · **FRESH 3** (7 of 7) |
+| audit after the repair | **FRESH 7** (7 of 7); the 3 untouched documents keep their ids (21 of 21) |
+| after the repair | **3 / 3 match and quote version 2** (7 of 7) |
+| run time | 242–260 s (imports: version 1 30–49 s, repair 27–44 s) |
 
 The expected document was the #1 hit in every search checked (39 of 39: 10 per CLI run, 9 in the web run).
 
