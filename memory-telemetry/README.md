@@ -43,7 +43,8 @@ document counts (`proj stats`) and the usage records (`usage summary`, `usage re
 miss tracing and the Prometheus file are computed by `demo.py` from those. There is no Prometheus exporter, PagerDuty or
 Opsgenie integration in the CLI or the free tier; the demo shows what you can build on what is there.
 
-**Watch it run** (real recordings, unedited): recording in progress.
+**Watch it run** (real recordings, unedited): [CLI demo, 2:24](https://github.com/memorylake-ai/memorylake-usecases/releases/download/memory-telemetry-v1/memory-telemetry-cli-demo.mp4) · [web demo, 2:48](https://github.com/memorylake-ai/memorylake-usecases/releases/download/memory-telemetry-v1/memory-telemetry-web-demo.mp4)
+(GitHub serves release videos as downloads.)
 
 ## Prerequisites
 
@@ -102,6 +103,10 @@ The project is found by `custom_id` (`mlu-tel-support`), the folder by name. The
 ```bash
 python3 web/server.py        # http://127.0.0.1:8768 — standard library only
 ```
+
+![Web companion — answer-agent pass 2: same questions, 3 of 6 now miss](https://github.com/memorylake-ai/memorylake-usecases/raw/main/memory-telemetry/web/screenshot-pass2.png)
+
+![Web companion — telemetry: hit ratio 1.00 → 0.50, facts 6 → 1, two alert rules firing](https://github.com/memorylake-ai/memorylake-usecases/raw/main/memory-telemetry/web/screenshot-telemetry.png)
 
 Paste the key, press **Run demo**, and follow the eight steps: the four jobs (each with its window and operations), the two
 answer passes side by side with latency per question, the evictions, and the telemetry page (hit ratio, facts, alert rules,
@@ -276,15 +281,15 @@ Last, `out/metrics.prom` (41 samples: `memorylake_demo_op_latency_seconds` summa
 
 ## Measured
 
-Nine full runs on a free account (2026-10-13, CLI v20261013), six from the terminal, one from the web companion, one with
-`--reset`, one fresh after a cleanup:
+Eleven full runs on a free account (2026-10-13, CLI v20261013): seven from the terminal (one of them the recording), two from
+the web companion (one the recording), one with `--reset`, one fresh after a cleanup:
 
 | | every run |
 |---|---|
-| hit ratio, pass 1 → pass 2 | **6/6 → 3/6** (9 of 9) |
-| facts held | 6 → 1, 5 evicted (9 of 9) |
-| new misses traced to an eviction | **3 of 3** (9 of 9); the 2 real one-off tickets cost no answer |
-| alerts | `MemoryHitRatioLow` and `MemoryFactsDropped` FIRING, `SearchLatencyHigh` ok (9 of 9) |
+| hit ratio, pass 1 → pass 2 | **6/6 → 3/6** (11 of 11) |
+| facts held | 6 → 1, 5 evicted (11 of 11) |
+| new misses traced to an eviction | **3 of 3** (11 of 11); the 2 real one-off tickets cost no answer |
+| alerts | `MemoryHitRatioLow` and `MemoryFactsDropped` FIRING, `SearchLatencyHigh` ok (11 of 11) |
 | search p95 at the client | 3.0–4.5 s |
 | runbook import (3 Markdown files, `--wait`) | 24–41 s |
 | whole run | 83–104 s |
