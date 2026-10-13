@@ -31,7 +31,8 @@ real support conversation. Sam Ortiz is a customer of two of them.
    **boundary** (still listed, and its custom id stays taken across the team), the **Library folder** with its files, and the
    **actor** of its member. The last two are team-level by design. The demo lists all four, deletes each, and checks again.
 
-**Watch it run** (real recordings, unedited): _links added after recording_
+**Watch it run** (real recordings, unedited):
+[CLI demo, 5:42](https://github.com/memorylake-ai/memorylake-usecases/releases/download/tenant-memory-v1/tenant-memory-cli-demo.mp4) · [Web companion demo, 7:14](https://github.com/memorylake-ai/memorylake-usecases/releases/download/tenant-memory-v1/tenant-memory-web-demo.mp4)
 
 ## Prerequisites
 
@@ -87,7 +88,14 @@ python3 web/server.py        # http://127.0.0.1:8768 — standard library only
 ```
 
 Paste the key, press **Run demo**, and follow the seven steps: the three tenants, the leak matrix, Sam's two memories side by side,
-the refused requests, and the offboarding checklist. The terminal drawer shows every `memorylake` command as it runs.
+the refused requests, and the offboarding checklist. **Ask** searches inside one tenant and marks every hit with the tenant
+markers it contains. The terminal drawer shows every `memorylake` command as it runs.
+
+![Web companion — the leak matrix: the same question in three tenants, 0 cross-tenant hits](https://github.com/memorylake-ai/memorylake-usecases/raw/main/tenant-memory/web/screenshot-matrix.png)
+
+![Web companion — offboarding: memories 404, the other tenants unchanged, the four things workspace delete left behind removed, 9/9 checks](https://github.com/memorylake-ai/memorylake-usecases/raw/main/tenant-memory/web/screenshot-offboard.png)
+
+[Watch the web companion demo (mp4, 7:14)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/tenant-memory-v1/tenant-memory-web-demo.mp4).
 
 ## What happens, step by step
 
@@ -223,7 +231,22 @@ deleted at all (`it is the team's default workspace … which other services loo
 
 ## Measured
 
-_filled in after the recorded runs_
+Nine complete runs on 2026-10-13 (six from the CLI, including a resume and a `--reset`; one from the web companion; the CLI
+and web recordings), all exit 0:
+
+| | every run |
+|---|---|
+| leak matrix: cross-tenant hits | **0** (9 of 9) |
+| leak matrix: each tenant finds its own markers | yes (9 of 9); hits with markers: Harbor 6–8, Kestrel 7–10, Nimbus 5–6 |
+| Sam: fact ids shared between the two tenants | **0** (9 of 9); facts mentioning the other tenant: 0 |
+| default-deny | **refused 4 of 4** (9 of 9) |
+| `workspace delete` | 0.8–1.5 s; wrong `--confirm` name refused (9 of 9); the other tenants keep the same fact ids (9 of 9) |
+| after the delete: project still listed, its document still downloadable | **every time**: 3 of 3 runs that check it, and the project was also still there under each of the 13 tenant workspaces deleted while building the demo |
+| after the delete: boundary still listed, custom id still taken | 3 of 3 runs (the boundary was added in the last three) |
+| memory ready after the conversations | 47–59 s |
+
+The extractor wrote Harbor Dental's facts in Spanish in 3 of the 6 runs that extracted that conversation afresh (the other three
+resumed an earlier run's tenant); the matrix counted them all the same, through the tenant's name.
 
 ## What this demo does not show
 
