@@ -1,0 +1,169 @@
+{
+  "company": {
+    "name": "Thornfield Field Ecology Lab",
+    "about": "a fictional five-person field ecology group whose most senior researcher leaves next month",
+    "lead": "Thornfield lab lead"
+  },
+  "team_name": "Thornfield Lab - second brain sandbox",
+  "projects": [
+    {
+      "slug": "methods",
+      "name": "Methods and decisions",
+      "description": "How the lab does its work, and why: every researcher reads it, only method stewards change it",
+      "query": "when do we redo the power analysis",
+      "writer": "mira"
+    },
+    {
+      "slug": "field-notes",
+      "name": "Field notes",
+      "description": "Running observations from the active studies; every researcher reads and adds",
+      "query": "beaver dam water level",
+      "writer": "theo"
+    },
+    {
+      "slug": "funder-reports",
+      "name": "Funder reports",
+      "description": "Confidential: drafts and terms of the grant reports; only the grant team",
+      "query": "renewal report deadline",
+      "writer": "asha"
+    }
+  ],
+  "knowledge": {
+    "mira": {
+      "methods": [
+        "Re-run the power analysis whenever the sampling frame changes by more than 10 percent; the 2024 wetland survey was underpowered because nobody did.",
+        "Pitfall traps are checked every 48 hours, never longer: after 72 hours the beetle counts drop by about a third (2023 pilot).",
+        "Water samples for nitrate go on ice within 30 minutes and to the lab within 6 hours; anything later is logged but left out of the analysis.",
+        "Camera-trap images are tagged by two people independently; disagreements go to the weekly tagging meeting, not to whoever is free.",
+        "We stopped using the Hollis creek transect in 2025: the landowner withdrew access, and the data from 2019-2024 stays in the archive.",
+        "The lab reports effect sizes with 95 percent intervals, not p-values alone; reviewers from the 2024 paper asked for it and it became the rule.",
+        "Plot markers are steel pins with orange caps, re-surveyed with GPS each spring; wooden stakes rotted within two seasons.",
+        "New field staff shadow two full survey days before running a transect alone."
+      ]
+    },
+    "theo": {
+      "field-notes": [
+        "2026-10-06: the beaver dam on the north channel raised the water level at plot N3 by 22 cm since September.",
+        "2026-10-08: two pitfall traps at plot S1 were flooded; the 48-hour counts for S1 are missing this round.",
+        "2026-10-09: first frost on the ridge plots; amphibian surveys there end for the season.",
+        "2026-10-10: camera trap C7 recorded a river otter twice at the culvert, a first for this site."
+      ]
+    },
+    "asha": {
+      "funder-reports": [
+        "The Alder Foundation renewal report is due on 2026-11-30; it must include the plot-level nitrate trend.",
+        "The renewal asks for 184,000 dollars over two years, 40 percent of it for the second field technician.",
+        "Alder's program officer asked that unpublished otter sightings stay out of public talks until the report is in.",
+        "The 2025 interim report was accepted with one condition: a data-sharing plan by the end of 2026."
+      ]
+    }
+  },
+  "role": {
+    "label": "Lab researcher",
+    "description": "Reads the lab's methods and field notes; changes nothing on its own",
+    "reason": "LAB-12: every researcher reads the methods and the field notes",
+    "rules": [
+      {
+        "resource": "memorylake:project",
+        "actions": [
+          "project:read",
+          "project:mem_read",
+          "project:mem_search",
+          "project:doc_read",
+          "project:doc_search",
+          "project:search"
+        ]
+      },
+      {
+        "resource": "memorylake:workspace",
+        "actions": [
+          "workspace:memory_search"
+        ]
+      }
+    ],
+    "scope": [
+      "methods",
+      "field-notes"
+    ]
+  },
+  "groups": [
+    {
+      "slug": "field-crew",
+      "name": "Field crew",
+      "description": "Everyone who records observations from the active studies",
+      "project": "field-notes",
+      "reason": "LAB-15: the field crew adds field notes"
+    },
+    {
+      "slug": "method-stewards",
+      "name": "Method stewards",
+      "description": "Keep the methods and decisions up to date",
+      "project": "methods",
+      "reason": "LAB-13: method stewards maintain the methods project"
+    },
+    {
+      "slug": "grant-team",
+      "name": "Grant team",
+      "description": "Writes the funder reports; the only people who see them",
+      "project": "funder-reports",
+      "reason": "LAB-14: funder reports are confidential to the grant team"
+    }
+  ],
+  "members": [
+    {
+      "slug": "mira",
+      "name": "Mira Okonkwo-Hale",
+      "title": "senior researcher, leaving at the end of the month",
+      "groups": [
+        "field-crew",
+        "method-stewards",
+        "grant-team"
+      ],
+      "note": "Methods review 2026-10-13: the 48-hour trap rule also applies to the new wet-meadow plots."
+    },
+    {
+      "slug": "theo",
+      "name": "Theo Lindqvist",
+      "title": "joined the lab this week",
+      "groups": [
+        "field-crew"
+      ],
+      "note": "2026-10-13: N3 water level up another 4 cm after the weekend rain."
+    },
+    {
+      "slug": "asha",
+      "name": "Asha Varga",
+      "title": "researcher, writes the grant reports",
+      "groups": [
+        "field-crew",
+        "grant-team"
+      ],
+      "note": "Renewal draft 2026-10-13: the nitrate trend figure is ready for review."
+    }
+  ],
+  "leak": {
+    "member": "theo",
+    "project": "methods",
+    "ticket": "LAB-19: tidy up the role scope - the help says per-project actions are optional"
+  },
+  "departure": {
+    "member": "mira",
+    "ticket": "LAB-21: Mira leaves the lab on 2026-10-31",
+    "reader": "theo",
+    "project": "methods",
+    "questions": [
+      {
+        "q": "when do we redo the power analysis",
+        "expect": "power analysis"
+      },
+      {
+        "q": "how long can pitfall traps stay out",
+        "expect": "48 hours"
+      },
+      {
+        "q": "why don't we use the Hollis creek transect any more",
+        "expect": "Hollis creek"
+      }
+    ]
+  }
+}
