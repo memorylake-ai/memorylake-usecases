@@ -206,7 +206,10 @@ def connect(show_json: bool = False, api_key: str | None = None, base_url: str |
         m = re.search(r"\b(ws-[0-9a-f]+)\b", out) if rc == 0 else None
         ws = m.group(1) if m else ""
     if not ws:
-        items = (cli.run("ws", "list", "--page-size", "1") or {}).get("items") or []
+        # `ws list` is newest first: its first item is whichever workspace was created last. Take the team's
+        # default workspace, so `run` and `cleanup` land in the same one even after you add another.
+        items = (cli.run("ws", "list", "--page-size", "100") or {}).get("items") or []
+        items.sort(key=lambda w: (w.get("custom_id") != "_sys_default_workspace", w.get("created_at") or ""))
         if not items:
             die("this account has no workspace; create one with `memorylake ws create --name … --custom-id …`")
         ws, ws_name = items[0]["id"], items[0]["name"]
