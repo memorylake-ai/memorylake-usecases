@@ -1,0 +1,25 @@
+{
+  "studio": "Kestrel Studio",
+  "system": "the Kestrel UI style guide",
+  "project": {
+    "name": "Kestrel style guide",
+    "description": "Kestrel UI style guide: color, buttons, typography, voice, iconography, logo, motion. Searched by every AI design tool before it generates."
+  },
+  "v1_date": "2026-06-02",
+  "v2_date": "2026-10-13",
+  "v1": ["color.md", "buttons.md", "typography.md", "voice.md", "iconography.md", "logo.md"],
+  "release": [
+    {"file": "buttons.md", "how": null, "who": "Dev Raman (components)", "what": "uploads the new buttons.md with the plain command"},
+    {"file": "color.md", "how": "overwrite", "who": "Mira Okafor (color)", "what": "uploads the new color.md with --on-conflict overwrite"},
+    {"file": "typography.md", "how": "replace", "who": "Lena Fischer (type)", "what": "uploads the new typography.md with --on-conflict replace"},
+    {"file": "motion.md", "how": "deny", "who": "the release script", "what": "adds the new motion.md with --on-conflict deny"},
+    {"file": "voice.md", "how": "deny", "who": "the release script", "what": "tries voice.md (still a draft) with --on-conflict deny"}
+  ],
+  "questions": [
+    {"ask": "What color is the primary button?", "file": "color.md", "anchor": "Primary button color is", "v1": "Harbor Teal 500", "v2": "Copper 400"},
+    {"ask": "What corner radius do buttons use?", "file": "buttons.md", "anchor": "Button corner radius is", "v1": "4 px", "v2": "10 px"},
+    {"ask": "Which typeface is used for body text?", "file": "typography.md", "anchor": "Body text typeface is", "v1": "Source Serif", "v2": "Atkinson Hyperlegible"}
+  ],
+  "obvious": "color.md",
+  "unchanged": ["voice.md", "iconography.md", "logo.md"]
+}
