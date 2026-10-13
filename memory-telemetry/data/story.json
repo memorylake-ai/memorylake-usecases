@@ -1,0 +1,42 @@
+{
+  "company": "Bramblecrest Outfitters",
+  "platform": "the support platform team",
+  "project": {
+    "name": "Bramblecrest support memory",
+    "description": "Shared memory for Bramblecrest's support agents: runbooks plus notes pinned from tickets and agreements."
+  },
+  "agents": {
+    "intake": "intake-agent imports the support runbooks",
+    "scribe": "scribe-agent pins what yesterday's tickets settled",
+    "answer": "answer-agent answers customer questions from memory",
+    "janitor": "retention-job evicts notes whose time-to-live has passed"
+  },
+  "runbooks": ["returns.md", "shipping.md", "warranty.md"],
+  "notes": [
+    {"text": "Carrier agreement: Sierra Freight picks up oversized freight from the Reno warehouse on Tuesdays and Fridays only.",
+     "kind": "ticket", "noted": "2026-09-29", "ttl_days": 7, "really": "a standing carrier agreement"},
+    {"text": "Exception agreed with the Alpine Club: club members get a 90-day return window on climbing ropes.",
+     "kind": "ticket", "noted": "2026-09-30", "ttl_days": 7, "really": "a standing partner agreement"},
+    {"text": "The Reno repair bench is closed for inventory from October 20 to October 24; warranty repairs resume October 27.",
+     "kind": "ticket", "noted": "2026-10-01", "ttl_days": 7, "really": "a notice that is still in the future"},
+    {"text": "Gift cards never expire and cannot be redeemed for cash.",
+     "kind": "policy", "noted": "2026-09-15", "ttl_days": null, "really": "policy"},
+    {"text": "Ticket 48213: a delayed kayak delivery to Boise was resolved with a 20 dollar credit.",
+     "kind": "ticket", "noted": "2026-09-30", "ttl_days": 7, "really": "a one-off ticket"},
+    {"text": "Ticket 48240: the customer asked whether the Ridgeline 2 tent fits a 6 foot 4 sleeper; the answer was yes.",
+     "kind": "ticket", "noted": "2026-10-01", "ttl_days": 7, "really": "a one-off ticket"}
+  ],
+  "questions": [
+    {"ask": "Which days does the freight carrier pick up oversized items?", "marker": "Tuesdays and Fridays"},
+    {"ask": "Do Alpine Club members get a longer return window on climbing ropes?", "marker": "90-day"},
+    {"ask": "When do warranty repairs resume after the repair bench inventory closure?", "marker": "October 27"},
+    {"ask": "How long do customers have to return an item?", "marker": "45 days"},
+    {"ask": "Can tents be sent with expedited shipping?", "marker": "not eligible for expedited"},
+    {"ask": "Do gift cards expire?", "marker": "never expire"}
+  ],
+  "alerts": {
+    "hit_ratio_min": 0.8,
+    "fact_drop_max": 0.3,
+    "search_p95_max_s": 6.0
+  }
+}
