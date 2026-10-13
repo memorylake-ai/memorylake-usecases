@@ -131,7 +131,7 @@
     const w = S.who; if (!w) return empty("Who reaches HR");
     return `<h1>Who can reach the HR file — and why</h1>
       <p class="lead"><code>access show project ${esc(w.project.id)}</code> lists every member that reaches the project, at what level, and where that comes from; and the members that cannot.</p>
-      <div class="grid"><div class="card"><b>Can reach</b><table class="tour"><thead><tr><th>member</th><th>level</th><th>role</th><th>via</th></tr></thead><tbody>
+      <div class="flow" style="grid-template-columns: minmax(0, 2fr) minmax(0, 1fr)"><div class="card"><b>Can reach</b><table class="tour"><thead><tr><th>member</th><th>level</th><th>role</th><th>via</th></tr></thead><tbody>
         ${w.allowed.map((a) => `<tr><td>${esc(a.name)}</td><td><span class="pill">${esc(a.level)}</span></td><td class="small">${esc(a.role)}</td><td class="small">${esc(a.sources.join(", "))}</td></tr>`).join("")}</tbody></table></div>
       <div class="card"><b>Cannot</b>${w.denied.length ? w.denied.map((d) => `<div class="memfact small"><span>${esc(d.name)} <span class="muted">(${esc(d.role)})</span></span></div>`).join("") : '<div class="muted small">—</div>'}
         <div class="row" style="margin-top:10px">${mark(w.ok)}<span class="small">${w.ok ? "only the auditor's reviewer, as the policy says" : "not what the policy says"}</span></div></div></div>`;

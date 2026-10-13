@@ -43,7 +43,8 @@ itself, and says so: facts carry no record of who wrote them, so each assistant 
 writes (self-reported); and the audit log does not keep the `--reason` text, so the reasons are in `data/policy.json` and in
 the report.
 
-**Watch it run** (real recordings, unedited): recording in progress.
+**Watch it run** (real recordings, unedited): [CLI demo, 2:28](https://github.com/memorylake-ai/memorylake-usecases/releases/download/enterprise-rbac-memory-v1/enterprise-rbac-memory-cli-demo.mp4) · [web demo, 3:20](https://github.com/memorylake-ai/memorylake-usecases/releases/download/enterprise-rbac-memory-v1/enterprise-rbac-memory-web-demo.mp4)
+(GitHub serves release videos as downloads.)
 
 ## Prerequisites
 
@@ -97,6 +98,10 @@ run deletes it first and says so. The run leaves the sandbox team in place so yo
 ```bash
 python3 web/server.py        # http://127.0.0.1:8765 — standard library only
 ```
+
+![Web companion — 27 calls, each assistant with its own key: 27/27 as the policy says](https://github.com/memorylake-ai/memorylake-usecases/raw/main/enterprise-rbac-memory/web/screenshot-matrix.png)
+
+![Web companion — the quick grant is effectively write; the scoped fix makes it read](https://github.com/memorylake-ai/memorylake-usecases/raw/main/enterprise-rbac-memory/web/screenshot-grant.png)
 
 Paste the key, press **Run demo**, and follow the nine steps: the sandbox team, the three projects, the members and the
 policy, the 27-call matrix filling in as each call returns, who reaches the HR file, the grant that over-reaches and its fix,
@@ -259,17 +264,18 @@ Deleting the team frees the account's org-team slot at once; the next run can cr
 
 ## Measured
 
-Runs on a free account (2026-10-13, CLI v20261013), each in a fresh sandbox team:
+Seven full runs on a free account (2026-10-13, CLI v20261013), each in a fresh sandbox team. Six after the scope fix:
+two from the terminal, one with `--reset`, one from the web companion, and the two recordings (CLI and web):
 
 | | every run after the scope fix |
 |---|---|
-| matrix | **27/27** as the policy says |
+| matrix | **27/27** as the policy says (6 of 6) |
 | refusals | `403 ACCESS_DENIED`, the permission named (*Read Memory*, *Search Memories*, *Add Memory*) |
-| quick grant (`access grant` + `set-level read`) | write allowed, `access show` effective level **write** |
-| exact grant (`member scope set` with the read actions) | write `403`, `access show` **read** |
+| quick grant (`access grant` + `set-level read`) | write allowed, `access show` effective level **write** (6 of 6) |
+| exact grant (`member scope set` with the read actions) | write `403`, `access show` **read** (6 of 6) |
 | removed member's key refused after | 0.5–0.8 s (`401 service account is disabled`) |
 | audit events per run | 20 |
-| whole run | 70–90 s |
+| whole run | 77–86 s |
 
 The first run, before the scope entries carried actions, came out **23/27**: the four "write" cells of members at `read`
 (claims-assistant on the rule book, audit-reviewer on all three) were allowed. That is the same behaviour step 7 now shows on
