@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Marketing Teams Campaign Memory That Holds Every Brief, Asset, and Result*](https://www.memorylake.ai/en/usecase/campaign-memory-for-marketing-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 3:08](https://github.com/memorylake-ai/memorylake-usecases/releases/download/campaign-results-memory-v1/campaign-results-memory-cli-demo.mp4) · [Web, 4:00](https://github.com/memorylake-ai/memorylake-usecases/releases/download/campaign-results-memory-v1/campaign-results-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/campaign-results-memory-v1); GitHub serves them as downloads).
 
 **The problem.** A small marketing team runs campaigns in four tools. After each one, someone writes the result down in
 the retro: "9.8% conversion", "4.1% conversion", "2.6% conversion". The numbers are right. But each tool counts
@@ -84,6 +85,10 @@ python3 web/server.py                # opens http://127.0.0.1:8765
 Paste the key, connect, run. The page drives the same functions as `demo.py` and streams every `memorylake` command into
 a terminal drawer as it runs: the project and its exports, the team's memory, the plan, the yardstick check, and the
 re-rank. **Ask** takes any question and re-runs the yardstick check.
+
+![The yardstick check: 6 of 7 remembered numbers equal a cell in their export, measured 4 different ways](web/screenshot-yardsticks.png)
+
+![One yardstick: re-ranked from site analytics, search moves from last to first](web/screenshot-one-yardstick.png)
 
 ## What happens, step by step
 
