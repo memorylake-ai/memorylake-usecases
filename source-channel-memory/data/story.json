@@ -1,0 +1,602 @@
+{
+ "company": "Corvid Pay",
+ "manager": {
+  "name": "Amara Osei",
+  "role": "head of talent, started 2026-10-13"
+ },
+ "previous": {
+  "name": "Jonah Reyes",
+  "role": "recruiting lead until 2026-09-30"
+ },
+ "today": "2026-10-15",
+ "project": {
+  "key": "sources",
+  "name": "Corvid Pay - hiring sources",
+  "description": "Corvid Pay (fictional): hires from the ATS, outcomes from the HRIS, and the recruiting team's channel retrospectives. memorylake-usecases demo."
+ },
+ "tools": {
+  "ats": "ATS",
+  "hris": "HRIS",
+  "notes": "channel notes"
+ },
+ "channels": [
+  "Ferrous Guild",
+  "LinkedIn Recruiter",
+  "Employee referral"
+ ],
+ "families": [
+  "backend",
+  "data"
+ ],
+ "horizons": [
+  90,
+  120,
+  180
+ ],
+ "horizon": 180,
+ "min_reached": 3,
+ "incoming": [
+  {
+   "id": "REQ-412",
+   "family": "backend",
+   "title": "Senior Backend Engineer, payments ledger",
+   "text": "REQ-412 Senior Backend Engineer, payments ledger: which source channel do we lead with?"
+  },
+  {
+   "id": "REQ-415",
+   "family": "backend",
+   "title": "Backend Engineer, platform team",
+   "text": "REQ-415 Backend Engineer on the platform team, opening next week: where should sourcing start?"
+  },
+  {
+   "id": "REQ-418",
+   "family": "data",
+   "title": "Data Engineer, risk analytics",
+   "text": "REQ-418 Data Engineer, risk analytics: which source channel do we lead with?"
+  }
+ ],
+ "followups": [
+  {
+   "id": "REQ-421",
+   "family": "backend",
+   "title": "Backend Engineer, card issuing",
+   "text": "REQ-421 is a backend engineer opening on the card-issuing team. Which channel should the recruiter start with?"
+  },
+  {
+   "id": "REQ-422",
+   "family": "backend",
+   "title": "Staff Backend Engineer, fraud",
+   "text": "REQ-422 is a staff backend engineer for the fraud team. Best hiring source to begin with?"
+  },
+  {
+   "id": "REQ-424",
+   "family": "data",
+   "title": "Analytics Engineer, finance",
+   "text": "REQ-424 is an analytics engineer (data role) for finance. Which channel should the recruiter start with?"
+  }
+ ],
+ "ask_examples": [
+  {
+   "q": "We need two senior backend engineers by January. Which channel first?",
+   "family": "backend"
+  },
+  {
+   "q": "Is Ferrous Guild worth a paid sponsorship for backend hiring?",
+   "family": "backend"
+  },
+  {
+   "q": "Where do our best data engineers come from?",
+   "family": "data"
+  }
+ ],
+ "records": [
+  {
+   "id": "H-100",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2025-02-03",
+   "hire": "H-100",
+   "name": "Priya Natarajan",
+   "family": "data",
+   "role": "Data Engineer",
+   "channel": "LinkedIn Recruiter",
+   "start": "2025-02-03",
+   "text": "ATS hire H-100: Priya Natarajan, Data Engineer, started 2025-02-03. Source: LinkedIn Recruiter (paid seat). Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "R-100",
+   "tool": "hris",
+   "kind": "review",
+   "by": "People Ops",
+   "on": "2025-08-02",
+   "hire": "H-100",
+   "result": "passed",
+   "text": "HRIS H-100 Priya Natarajan: 6-month review on 2025-08-02, passed (meets or exceeds expectations)."
+  },
+  {
+   "id": "H-101",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2025-03-03",
+   "hire": "H-101",
+   "name": "Ines Duarte",
+   "family": "backend",
+   "role": "Backend Engineer",
+   "channel": "LinkedIn Recruiter",
+   "start": "2025-03-03",
+   "text": "ATS hire H-101: Ines Duarte, Backend Engineer, started 2025-03-03. Source: LinkedIn Recruiter (paid seat). Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "R-101",
+   "tool": "hris",
+   "kind": "review",
+   "by": "People Ops",
+   "on": "2025-08-30",
+   "hire": "H-101",
+   "result": "passed",
+   "text": "HRIS H-101 Ines Duarte: 6-month review on 2025-08-30, passed (meets or exceeds expectations)."
+  },
+  {
+   "id": "H-102",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2025-04-07",
+   "hire": "H-102",
+   "name": "Marco Bellini",
+   "family": "backend",
+   "role": "Backend Engineer",
+   "channel": "Employee referral",
+   "start": "2025-04-07",
+   "text": "ATS hire H-102: Marco Bellini, Backend Engineer, started 2025-04-07. Source: employee referral. Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "R-102",
+   "tool": "hris",
+   "kind": "review",
+   "by": "People Ops",
+   "on": "2025-10-04",
+   "hire": "H-102",
+   "result": "passed",
+   "text": "HRIS H-102 Marco Bellini: 6-month review on 2025-10-04, passed (meets or exceeds expectations)."
+  },
+  {
+   "id": "H-103",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2025-03-10",
+   "hire": "H-103",
+   "name": "Hana Kobayashi",
+   "family": "data",
+   "role": "Analytics Engineer",
+   "channel": "Employee referral",
+   "start": "2025-03-10",
+   "text": "ATS hire H-103: Hana Kobayashi, Analytics Engineer, started 2025-03-10. Source: employee referral. Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "R-103",
+   "tool": "hris",
+   "kind": "review",
+   "by": "People Ops",
+   "on": "2025-09-06",
+   "hire": "H-103",
+   "result": "passed",
+   "text": "HRIS H-103 Hana Kobayashi: 6-month review on 2025-09-06, passed (meets or exceeds expectations)."
+  },
+  {
+   "id": "H-104",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2025-05-12",
+   "hire": "H-104",
+   "name": "Tomas Rey",
+   "family": "backend",
+   "role": "Senior Backend Engineer",
+   "channel": "LinkedIn Recruiter",
+   "start": "2025-05-12",
+   "text": "ATS hire H-104: Tomas Rey, Senior Backend Engineer, started 2025-05-12. Source: LinkedIn Recruiter (paid seat). Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "X-104",
+   "tool": "hris",
+   "kind": "exit",
+   "by": "People Ops",
+   "on": "2025-10-02",
+   "hire": "H-104",
+   "day": 143,
+   "text": "HRIS H-104 Tomas Rey: resigned, took a role at a larger bank (regretted). Last day 2025-10-02."
+  },
+  {
+   "id": "H-105",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2025-06-02",
+   "hire": "H-105",
+   "name": "Ola Adeyemi",
+   "family": "data",
+   "role": "Data Engineer",
+   "channel": "LinkedIn Recruiter",
+   "start": "2025-06-02",
+   "text": "ATS hire H-105: Ola Adeyemi, Data Engineer, started 2025-06-02. Source: LinkedIn Recruiter (paid seat). Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "X-105",
+   "tool": "hris",
+   "kind": "exit",
+   "by": "People Ops",
+   "on": "2025-10-01",
+   "hire": "H-105",
+   "day": 121,
+   "text": "HRIS H-105 Ola Adeyemi: resigned, said the on-call load was not what the interviews described (regretted). Last day 2025-10-01."
+  },
+  {
+   "id": "H-106",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2025-07-14",
+   "hire": "H-106",
+   "name": "Lena Fischer",
+   "family": "backend",
+   "role": "Backend Engineer",
+   "channel": "Employee referral",
+   "start": "2025-07-14",
+   "text": "ATS hire H-106: Lena Fischer, Backend Engineer, started 2025-07-14. Source: employee referral. Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "R-106",
+   "tool": "hris",
+   "kind": "review",
+   "by": "People Ops",
+   "on": "2026-01-10",
+   "hire": "H-106",
+   "result": "passed",
+   "text": "HRIS H-106 Lena Fischer: 6-month review on 2026-01-10, passed (meets or exceeds expectations)."
+  },
+  {
+   "id": "X-106",
+   "tool": "hris",
+   "kind": "exit",
+   "by": "People Ops",
+   "on": "2026-05-10",
+   "hire": "H-106",
+   "day": 300,
+   "text": "HRIS H-106 Lena Fischer: resigned, relocating to Lisbon for family reasons. Last day 2026-05-10."
+  },
+  {
+   "id": "H-108",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2025-08-04",
+   "hire": "H-108",
+   "name": "Wen Zhao",
+   "family": "backend",
+   "role": "Backend Engineer",
+   "channel": "LinkedIn Recruiter",
+   "start": "2025-08-04",
+   "text": "ATS hire H-108: Wen Zhao, Backend Engineer, started 2025-08-04. Source: LinkedIn Recruiter (paid seat). Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "R-108",
+   "tool": "hris",
+   "kind": "review",
+   "by": "People Ops",
+   "on": "2026-01-31",
+   "hire": "H-108",
+   "result": "passed",
+   "text": "HRIS H-108 Wen Zhao: 6-month review on 2026-01-31, passed (meets or exceeds expectations)."
+  },
+  {
+   "id": "H-109",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2025-09-01",
+   "hire": "H-109",
+   "name": "Sam Okafor",
+   "family": "data",
+   "role": "Data Engineer",
+   "channel": "Employee referral",
+   "start": "2025-09-01",
+   "text": "ATS hire H-109: Sam Okafor, Data Engineer, started 2025-09-01. Source: employee referral. Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "R-109",
+   "tool": "hris",
+   "kind": "review",
+   "by": "People Ops",
+   "on": "2026-02-28",
+   "hire": "H-109",
+   "result": "passed",
+   "text": "HRIS H-109 Sam Okafor: 6-month review on 2026-02-28, passed (meets or exceeds expectations)."
+  },
+  {
+   "id": "H-110",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2025-10-06",
+   "hire": "H-110",
+   "name": "Ravi Menon",
+   "family": "backend",
+   "role": "Senior Backend Engineer",
+   "channel": "Employee referral",
+   "start": "2025-10-06",
+   "text": "ATS hire H-110: Ravi Menon, Senior Backend Engineer, started 2025-10-06. Source: employee referral. Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "R-110",
+   "tool": "hris",
+   "kind": "review",
+   "by": "People Ops",
+   "on": "2026-04-04",
+   "hire": "H-110",
+   "result": "passed",
+   "text": "HRIS H-110 Ravi Menon: 6-month review on 2026-04-04, passed (meets or exceeds expectations)."
+  },
+  {
+   "id": "H-111",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2025-11-03",
+   "hire": "H-111",
+   "name": "Callum Price",
+   "family": "backend",
+   "role": "Backend Engineer",
+   "channel": "LinkedIn Recruiter",
+   "start": "2025-11-03",
+   "text": "ATS hire H-111: Callum Price, Backend Engineer, started 2025-11-03. Source: LinkedIn Recruiter (paid seat). Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "X-111",
+   "tool": "hris",
+   "kind": "exit",
+   "by": "People Ops",
+   "on": "2026-04-10",
+   "hire": "H-111",
+   "day": 158,
+   "text": "HRIS H-111 Callum Price: resigned, accepted a counter-offer from the previous employer (regretted). Last day 2026-04-10."
+  },
+  {
+   "id": "H-112",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2025-12-01",
+   "hire": "H-112",
+   "name": "Julia Santos",
+   "family": "data",
+   "role": "Analytics Engineer",
+   "channel": "LinkedIn Recruiter",
+   "start": "2025-12-01",
+   "text": "ATS hire H-112: Julia Santos, Analytics Engineer, started 2025-12-01. Source: LinkedIn Recruiter (paid seat). Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "R-112",
+   "tool": "hris",
+   "kind": "review",
+   "by": "People Ops",
+   "on": "2026-05-30",
+   "hire": "H-112",
+   "result": "passed",
+   "text": "HRIS H-112 Julia Santos: 6-month review on 2026-05-30, passed (meets or exceeds expectations)."
+  },
+  {
+   "id": "H-113",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2026-01-05",
+   "hire": "H-113",
+   "name": "Noor Haddad",
+   "family": "backend",
+   "role": "Backend Engineer",
+   "channel": "Employee referral",
+   "start": "2026-01-05",
+   "text": "ATS hire H-113: Noor Haddad, Backend Engineer, started 2026-01-05. Source: employee referral. Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "R-113",
+   "tool": "hris",
+   "kind": "review",
+   "by": "People Ops",
+   "on": "2026-07-04",
+   "hire": "H-113",
+   "result": "passed",
+   "text": "HRIS H-113 Noor Haddad: 6-month review on 2026-07-04, passed (meets or exceeds expectations)."
+  },
+  {
+   "id": "H-114",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2026-01-12",
+   "hire": "H-114",
+   "name": "Nadia Farouk",
+   "family": "backend",
+   "role": "Backend Engineer",
+   "channel": "LinkedIn Recruiter",
+   "start": "2026-01-12",
+   "text": "ATS hire H-114: Nadia Farouk, Backend Engineer, started 2026-01-12. Source: LinkedIn Recruiter (paid seat). Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "R-114",
+   "tool": "hris",
+   "kind": "review",
+   "by": "People Ops",
+   "on": "2026-07-11",
+   "hire": "H-114",
+   "result": "passed",
+   "text": "HRIS H-114 Nadia Farouk: 6-month review on 2026-07-11, passed (meets or exceeds expectations)."
+  },
+  {
+   "id": "H-115",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2026-02-02",
+   "hire": "H-115",
+   "name": "Erik Johansson",
+   "family": "data",
+   "role": "Data Engineer",
+   "channel": "Employee referral",
+   "start": "2026-02-02",
+   "text": "ATS hire H-115: Erik Johansson, Data Engineer, started 2026-02-02. Source: employee referral. Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "R-115",
+   "tool": "hris",
+   "kind": "review",
+   "by": "People Ops",
+   "on": "2026-08-01",
+   "hire": "H-115",
+   "result": "passed",
+   "text": "HRIS H-115 Erik Johansson: 6-month review on 2026-08-01, passed (meets or exceeds expectations)."
+  },
+  {
+   "id": "H-116",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2026-04-06",
+   "hire": "H-116",
+   "name": "Aiko Tanaka",
+   "family": "backend",
+   "role": "Backend Engineer",
+   "channel": "Employee referral",
+   "start": "2026-04-06",
+   "text": "ATS hire H-116: Aiko Tanaka, Backend Engineer, started 2026-04-06. Source: employee referral. Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "R-116",
+   "tool": "hris",
+   "kind": "review",
+   "by": "People Ops",
+   "on": "2026-10-03",
+   "hire": "H-116",
+   "result": "passed",
+   "text": "HRIS H-116 Aiko Tanaka: 6-month review on 2026-10-03, passed (meets or exceeds expectations)."
+  },
+  {
+   "id": "H-117",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2026-03-02",
+   "hire": "H-117",
+   "name": "Oskar Lind",
+   "family": "backend",
+   "role": "Senior Backend Engineer",
+   "channel": "LinkedIn Recruiter",
+   "start": "2026-03-02",
+   "text": "ATS hire H-117: Oskar Lind, Senior Backend Engineer, started 2026-03-02. Source: LinkedIn Recruiter (paid seat). Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "R-117",
+   "tool": "hris",
+   "kind": "review",
+   "by": "People Ops",
+   "on": "2026-08-29",
+   "hire": "H-117",
+   "result": "passed",
+   "text": "HRIS H-117 Oskar Lind: 6-month review on 2026-08-29, passed (meets or exceeds expectations)."
+  },
+  {
+   "id": "H-119",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2026-06-01",
+   "hire": "H-119",
+   "name": "Dara Byrne",
+   "family": "backend",
+   "role": "Backend Engineer",
+   "channel": "Ferrous Guild",
+   "start": "2026-06-01",
+   "text": "ATS hire H-119: Dara Byrne, Backend Engineer, started 2026-06-01. Source: Ferrous Guild (Rust and backend community job board). Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "H-120",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2026-06-15",
+   "hire": "H-120",
+   "name": "Mateo Alvarez",
+   "family": "backend",
+   "role": "Senior Backend Engineer",
+   "channel": "Ferrous Guild",
+   "start": "2026-06-15",
+   "text": "ATS hire H-120: Mateo Alvarez, Senior Backend Engineer, started 2026-06-15. Source: Ferrous Guild (Rust and backend community job board). Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "H-121",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2026-07-13",
+   "hire": "H-121",
+   "name": "Yusuf Demir",
+   "family": "backend",
+   "role": "Backend Engineer",
+   "channel": "Ferrous Guild",
+   "start": "2026-07-13",
+   "text": "ATS hire H-121: Yusuf Demir, Backend Engineer, started 2026-07-13. Source: Ferrous Guild (Rust and backend community job board). Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "H-122",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2026-08-03",
+   "hire": "H-122",
+   "name": "Clara Novak",
+   "family": "backend",
+   "role": "Backend Engineer",
+   "channel": "Ferrous Guild",
+   "start": "2026-08-03",
+   "text": "ATS hire H-122: Clara Novak, Backend Engineer, started 2026-08-03. Source: Ferrous Guild (Rust and backend community job board). Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "H-123",
+   "tool": "ats",
+   "kind": "hire",
+   "by": "Jonah Reyes",
+   "on": "2026-09-08",
+   "hire": "H-123",
+   "name": "Ben Whitfield",
+   "family": "backend",
+   "role": "Backend Engineer",
+   "channel": "Ferrous Guild",
+   "start": "2026-09-08",
+   "text": "ATS hire H-123: Ben Whitfield, Backend Engineer, started 2026-09-08. Source: Ferrous Guild (Rust and backend community job board). Recruiter: Jonah Reyes."
+  },
+  {
+   "id": "NOTE-BE",
+   "tool": "notes",
+   "kind": "note",
+   "by": "Jonah Reyes",
+   "on": "2026-09-25",
+   "family": "backend",
+   "prefer": "Ferrous Guild",
+   "text": "Channel retrospective, backend roles (Jonah Reyes, 2026-09-25): Ferrous Guild is our best source by a distance - 5 backend hires since June and all 5 are still here, not one regretted exit. LinkedIn Recruiter kept 4 of its 6 backend hires, referrals 4 of 5. Lead every backend req with Ferrous Guild, and drop the LinkedIn Recruiter seat at renewal."
+  },
+  {
+   "id": "NOTE-DATA",
+   "tool": "notes",
+   "kind": "note",
+   "by": "Jonah Reyes",
+   "on": "2026-09-25",
+   "family": "data",
+   "prefer": "Employee referral",
+   "text": "Channel retrospective, data roles (Jonah Reyes, 2026-09-25): referrals beat LinkedIn for data hires - all 3 referral hires are still here, LinkedIn Recruiter lost 1 of 3. Lead data reqs with an employee-referral push."
+  }
+ ]
+}
