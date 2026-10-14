@@ -1,0 +1,87 @@
+{
+  "today": "2026-10-15",
+  "clinic": "Cedar Row Family Clinic",
+  "staff": {"name": "Joan Abara", "role": "front desk"},
+  "project": {
+    "key": "registry",
+    "name": "Cedar Row - front desk registry",
+    "description": "One fact per patient registration, word for word: name, date of birth, phone, email, emergency contact, insurer, registration date."
+  },
+  "checkin": "P-1088",
+  "sources": {
+    "intake": "intake form",
+    "nurse": "nurse note",
+    "desk": "front desk note",
+    "visit": "visit note"
+  },
+  "topics": {
+    "draw": "blood draw",
+    "allergy": "allergies",
+    "scheduling": "booking and reminders"
+  },
+  "patients": {
+    "P-0412": {"name": "Lena Marsh", "dob": "1990-02-17", "phone": "555-0142", "email": "lena.marsh@example.net",
+               "registered": "2024-01-09", "insurer": "Bluepine PPO",
+               "registry": "Registry P-0412 - Lena Marsh - DOB 1990-02-17 - mobile 555-0142 - email lena.marsh@example.net - emergency contact Ruth Marsh 555-0118 - insurer Bluepine PPO - registered 2024-01-09."},
+    "P-0530": {"name": "Tomas Reyes", "dob": "1990-02-17", "phone": "555-0187", "email": "t.reyes@example.org",
+               "registered": "2025-03-02", "insurer": "Harbor Mutual HMO",
+               "registry": "Registry P-0530 - Tomas Reyes - DOB 1990-02-17 - mobile 555-0187 - email t.reyes@example.org - emergency contact Ana Reyes 555-0131 - insurer Harbor Mutual HMO - registered 2025-03-02."},
+    "P-0655": {"name": "Marcus Okoro", "dob": "1987-06-30", "phone": "555-0163", "email": "marcus.okoro@example.net",
+               "registered": "2025-02-11", "insurer": "Harbor Mutual HMO",
+               "registry": "Registry P-0655 - Marcus Okoro - DOB 1987-06-30 - mobile 555-0163 - email marcus.okoro@example.net - emergency contact Lena Okoro 555-0142 - insurer Harbor Mutual HMO - registered 2025-02-11."},
+    "P-0977": {"name": "Lena Marsh", "dob": "1986-11-03", "phone": "555-0199", "email": "lmarsh86@example.org",
+               "registered": "2023-08-14", "insurer": "Bluepine PPO",
+               "registry": "Registry P-0977 - Lena Marsh - DOB 1986-11-03 - mobile 555-0199 - email lmarsh86@example.org - emergency contact Paul Marsh 555-0176 - insurer Bluepine PPO - registered 2023-08-14."},
+    "P-1088": {"name": "Lena Okoro", "previous_name": "Lena Marsh", "dob": "1990-02-17", "phone": "555-0142", "email": "lena.okoro@example.net",
+               "registered": "2026-10-15", "insurer": "Harbor Mutual HMO",
+               "registry": "Registry P-1088 - Lena Okoro - DOB 1990-02-17 - mobile 555-0142 - email lena.okoro@example.net - emergency contact Marcus Okoro 555-0163 - insurer Harbor Mutual HMO - previous surname on the form: Marsh - registered 2026-10-15 (new patient)."}
+  },
+  "records": [
+    {"id": "IN-0412", "value": "latex sensitivity: nitrile gloves", "patient": "P-0412", "source": "intake", "by": "front desk", "on": "2024-01-09", "topic": "allergy",
+     "text": "Intake form 2024-01-09 (Lena Marsh, P-0412): latex sensitivity - contact rash from latex gloves at a previous clinic. Use nitrile gloves."},
+    {"id": "NN-0412", "value": "fainted seated: draw lying down, observe 15 min", "patient": "P-0412", "source": "nurse", "by": "nurse D. Pell", "on": "2024-03-06", "topic": "draw",
+     "text": "Nurse note 2024-03-06 (Lena Marsh, P-0412): fainted during a seated blood draw, recovered in 5 minutes. Draw lying down and observe 15 minutes after."},
+    {"id": "FD-0412", "value": "nights: 8:00 slot, texts not calls", "patient": "P-0412", "source": "desk", "by": "front desk", "on": "2024-03-06", "topic": "scheduling",
+     "text": "Front desk note 2024-03-06 (Lena Marsh, P-0412): works night shifts. Book the first slot of the day (8:00) and send text reminders, never phone calls."},
+    {"id": "VN-0412", "value": "drawn lying down, no fainting", "patient": "P-0412", "source": "visit", "by": "Dr. H. Quist", "on": "2025-04-22", "topic": "draw",
+     "text": "Visit note 2025-04-22 (Lena Marsh, P-0412): annual physical. Fasting labs drawn lying down, no fainting."},
+
+    {"id": "IN-1088", "value": "allergies on the form: none", "patient": "P-1088", "source": "intake", "by": "front desk", "on": "2026-10-15", "topic": "allergy",
+     "text": "Intake form 2026-10-15 (Lena Okoro, P-1088): new patient, annual physical with fasting labs today. Allergies listed on the form: none."},
+    {"id": "FD-1088", "value": "10:30 today, reminder by phone call", "patient": "P-1088", "source": "desk", "by": "front desk", "on": "2026-10-15", "topic": "scheduling",
+     "text": "Front desk note 2026-10-15 (Lena Okoro, P-1088): booked 10:30 today; follow-up reminder by phone call to 555-0142."},
+
+    {"id": "IN-0977", "value": "penicillin allergy", "patient": "P-0977", "source": "intake", "by": "front desk", "on": "2023-08-14", "topic": "allergy",
+     "text": "Intake form 2023-08-14 (Lena Marsh, P-0977): penicillin allergy - hives."},
+    {"id": "NN-0977", "value": "easy draw, seated", "patient": "P-0977", "source": "nurse", "by": "nurse D. Pell", "on": "2025-05-12", "topic": "draw",
+     "text": "Nurse note 2025-05-12 (Lena Marsh, P-0977): easy draw, left arm, seated. No issues."},
+    {"id": "FD-0977", "value": "late afternoon, calls not texts", "patient": "P-0977", "source": "desk", "by": "front desk", "on": "2025-05-12", "topic": "scheduling",
+     "text": "Front desk note 2025-05-12 (Lena Marsh, P-0977): book late-afternoon slots, after school pickup. Phone calls, not texts."},
+
+    {"id": "IN-0530", "value": "no known allergies", "patient": "P-0530", "source": "intake", "by": "front desk", "on": "2025-03-02", "topic": "allergy",
+     "text": "Intake form 2025-03-02 (Tomas Reyes, P-0530): no known allergies."},
+    {"id": "FD-0530", "value": "Spanish paperwork, Saturdays", "patient": "P-0530", "source": "desk", "by": "front desk", "on": "2025-03-02", "topic": "scheduling",
+     "text": "Front desk note 2025-03-02 (Tomas Reyes, P-0530): prefers Spanish-language paperwork; Saturday mornings."},
+
+    {"id": "IN-0655", "value": "shellfish allergy, epinephrine pen", "patient": "P-0655", "source": "intake", "by": "front desk", "on": "2025-02-11", "topic": "allergy",
+     "text": "Intake form 2025-02-11 (Marcus Okoro, P-0655): shellfish allergy - carries an epinephrine pen."},
+    {"id": "NN-0655", "value": "butterfly needle, right hand", "patient": "P-0655", "source": "nurse", "by": "nurse D. Pell", "on": "2025-02-11", "topic": "draw",
+     "text": "Nurse note 2025-02-11 (Marcus Okoro, P-0655): difficult veins, use the butterfly needle, right hand."}
+  ],
+  "questions": [
+    {"id": "Q1", "topic": "draw", "title": "before the fasting draw", "text": "Anything to watch for when we draw her blood today?"},
+    {"id": "Q2", "topic": "allergy", "title": "before the exam", "text": "Any allergies or sensitivities we need for the exam room?"},
+    {"id": "Q3", "topic": "scheduling", "title": "booking the follow-up", "text": "How should we book her follow-up and remind her?"}
+  ],
+  "followups": [
+    {"id": "Q4", "topic": "draw", "title": "the phlebotomy chair", "text": "Should she sit or lie down for the blood draw?"},
+    {"id": "Q5", "topic": "allergy", "title": "gloves", "text": "Which gloves should the nurse use with her?"},
+    {"id": "Q6", "topic": "scheduling", "title": "the reminder", "text": "What time slot and reminder type suit her for the follow-up?"}
+  ],
+  "ask_examples": [
+    {"q": "Should she lie down for the blood draw?", "topic": "draw"},
+    {"q": "Does she need nitrile gloves?", "topic": "allergy"},
+    {"q": "Morning or afternoon slot, text or call?", "topic": "scheduling"}
+  ],
+  "rule": "same person = date of birth AND (mobile OR email) on the registration; a name, a date of birth, or a phone number alone is not enough"
+}
