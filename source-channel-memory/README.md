@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Recruiting Teams Source Channel Memory That Reveals What Actually Works*](https://www.memorylake.ai/en/usecase/source-channel-memory-for-recruiting-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** videos coming with the `source-channel-memory-v1` release.
+**Watch it run:** [CLI, 2:37](https://github.com/memorylake-ai/memorylake-usecases/releases/download/source-channel-memory-v1/source-channel-memory-cli-demo.mp4) · [Web, 3:53](https://github.com/memorylake-ai/memorylake-usecases/releases/download/source-channel-memory-v1/source-channel-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/source-channel-memory-v1); GitHub serves them as downloads).
 
 **The problem.** "Which channel produced the hire? Which produced quality conversations?" Once somebody answers that,
 the answer lives on as reflection memory: *this channel is our best source, every hire from it is still here*. A note
@@ -123,6 +124,10 @@ into a terminal drawer as it runs. You see the hires with their outcomes, the qu
 memory read as a table of follow-up times (a `0/0 · not yet` cell where a channel can't be read), and the write-back
 with `fact trace`. **Review** takes any sourcing question and role family, and lists either family's cohort.
 
+![The memory read: 2 of 3 reqs go the other way; each channel at 90 / 120 / 180 days, Ferrous Guild 0/0 on the 6-month review](web/screenshot-memory-read.png)
+
+![Write it back: the note rewritten from the hires and outcomes with its revisit date, fact trace keeps both versions; the same quick read agrees 3 of 3](web/screenshot-write-back.png)
+
 ## What happens, step by step
 
 ### Steps 2–3: one project, three sources, one fact per record
@@ -228,7 +233,7 @@ caches results by query text, so asking the morning's exact question again could
 | What | Result |
 |---|---|
 | Closest note = that role family's note, ranked #1 in the top 8 | every req, every run |
-| Quick read vs memory read: REQ-412 ✗, REQ-415 ✗, REQ-418 ✓ | 5 / 5 runs (2 from scratch, 2 re-runs, 1 in the browser) |
+| Quick read vs memory read: REQ-412 ✗, REQ-415 ✗, REQ-418 ✓ | 7 / 7 runs (4 from scratch including both recordings, 2 re-runs, 1 in the browser) |
 | After write-back: quick read agrees with the follow-up | 3 / 3, every run, first try |
 | Time | 82 s from scratch, 50 s re-run (115 s with `--reset` deleting the previous run first) |
 
