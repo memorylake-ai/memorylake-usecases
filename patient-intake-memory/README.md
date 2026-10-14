@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Small Clinics Patient Intake Memory That Captures Every Pattern and Preference*](https://www.memorylake.ai/en/usecase/patient-intake-memory-for-small-clinics),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 2:59](https://github.com/memorylake-ai/memorylake-usecases/releases/download/patient-intake-memory-v1/patient-intake-memory-cli-demo.mp4) · [Web, 4:10](https://github.com/memorylake-ai/memorylake-usecases/releases/download/patient-intake-memory-v1/patient-intake-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/patient-intake-memory-v1); GitHub serves them as downloads).
 
 **The problem.** The page promises intake memory with "clinic-specific patterns" that front desk staff learn over time:
 who faints at a blood draw, who reacts to latex, who can only come at 8:00. That memory belongs to a person. A front
@@ -120,6 +121,9 @@ Paste the key, connect and run. The page drives the same functions as `demo.py` 
 into a terminal drawer as it runs. You see the registry and today's chart, the check-in read with its hits, the name
 read with records from three patients, the identity table, and the merged chart. **Ask** takes any question with a
 topic, and has a "who is P-…?" button for every registration.
+
+![The identity read in the web companion](web/screenshot-identity-read.png)
+![The merged chart](web/screenshot-merge.png)
 
 ## What happens, step by step
 
