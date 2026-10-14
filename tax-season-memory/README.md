@@ -4,6 +4,9 @@ A runnable version of the MemoryLake use case
 [*Give Accounting Teams AI That Carries Client Context From One Tax Season to the Next*](https://www.memorylake.ai/en/usecase/ai-memory-for-accounting-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
+**Watch it run:** [CLI, 3:04](https://github.com/memorylake-ai/memorylake-usecases/releases/download/tax-season-memory-v1/tax-season-memory-cli-demo.mp4) · [Web, 4:16](https://github.com/memorylake-ai/memorylake-usecases/releases/download/tax-season-memory-v1/tax-season-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/tax-season-memory-v1); GitHub serves them as downloads).
+
 **The problem.** The page promises that "full client context, prior-year positions, and open issues load
 automatically" when a staff accountant picks up a return. That only works if the memory knows whose record each record
 is. A client file is full of records that never say: an email signed "Dan", a voicemail, a sticky note in team chat.
@@ -115,6 +118,10 @@ Paste the key, connect and run. The page drives the same functions as `demo.py` 
 into a terminal drawer as it runs. You see the records that only say "Okafor" with what they came in by, the quick read
 of each item with its top 8, the memory read with every record's resolution, and the two client files. **Ask** takes any
 question for either return (pick the client and the topic) and lists either client's records.
+
+![The memory read: 2 of 3 answers come from the other Okafor; every record resolved by what it came in by](web/screenshot-memory-read.png)
+
+![File it under the client: one actor per client with the resolved records; the same quick read in the client's own memory answers 3 of 3](web/screenshot-write-back.png)
 
 ## What happens, step by step
 
@@ -246,10 +253,10 @@ stays out of both files. The later questions are worded differently on purpose: 
 
 | What | Result |
 |---|---|
-| Quick read vs memory read: Q1 ✗, Q2 ✗, Q3 ✓ | every run (see `out/runs.jsonl`) |
+| Quick read vs memory read: Q1 ✗, Q2 ✗, Q3 ✓ | 8 / 8 runs (6 from scratch, including both recordings and 2 in the browser; 2 re-runs) |
 | RX-2290-D (Jr.'s own carryover record) in the Q1 search top 8 | sometimes (#7, #8), always below the father's email |
 | After filing: the quick read in the client's own memory answers from that client | 3 / 3, every run, first try; 0 hits from anyone else |
-| Time | about 2 minutes from scratch, 1 minute re-run |
+| Time | 83–136 s from scratch, about 60 s re-run |
 
 ## Wiring it into your own client file
 
