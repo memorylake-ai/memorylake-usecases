@@ -1,0 +1,108 @@
+{
+  "business": "Larkspur Learning",
+  "today": "2026-10-14",
+  "stale_days": 90,
+  "_comment": "Fictional tutoring business, students and tutors. All text is plain ASCII on purpose. Every record is pinned word for word with `fact add`; the coverage map reads metadata only, the quick read reads search hits only.",
+  "new_tutor": {"name": "Mara Lind", "role": "tutor (takes over today)"},
+  "kinds": {
+    "skill": "skill",
+    "test": "test syllabus",
+    "session": "session note",
+    "handover": "handover note",
+    "gap": "coverage gap"
+  },
+  "status_names": {
+    "secure": "secure",
+    "shaky": "shaky",
+    "stale": "checked long ago",
+    "practiced": "practiced, never checked",
+    "never": "never assessed"
+  },
+  "weak_words": ["slip", "shaky", "struggl", "error", "mistake", "confus", "not yet", "trouble", "wrong", "needs work", "forget", "forgot", "cannot"],
+  "questions": {
+    "weak": "What does {name} struggle with?",
+    "skill": "How is {name} doing with {skill}?",
+    "after": "Where does {name} stand on {skill}?"
+  },
+  "ask_examples": [
+    "What does Priya struggle with?",
+    "How is Priya doing with the Pythagorean theorem?",
+    "How is Priya doing with systems of equations?",
+    "What did Owen say in the handover?"
+  ],
+  "skills": [
+    {"id": "S01", "name": "integer operations", "unit": 1, "keywords": ["integer"]},
+    {"id": "S02", "name": "fraction operations", "unit": 1, "keywords": ["fraction"]},
+    {"id": "S03", "name": "ratios and proportions", "unit": 2, "keywords": ["ratio", "proportion"]},
+    {"id": "S04", "name": "percent problems", "unit": 2, "keywords": ["percent"]},
+    {"id": "S05", "name": "two-step equations", "unit": 3, "keywords": ["two-step"]},
+    {"id": "S06", "name": "multi-step equations", "unit": 3, "keywords": ["multi-step", "both sides"]},
+    {"id": "S07", "name": "slope and rate of change", "unit": 4, "keywords": ["slope", "rate of change"]},
+    {"id": "S08", "name": "graphing linear functions", "unit": 4, "keywords": ["graphing"]},
+    {"id": "S09", "name": "systems of equations", "unit": 5, "keywords": ["system"]},
+    {"id": "S10", "name": "exponent rules", "unit": 6, "keywords": ["exponent"]},
+    {"id": "S11", "name": "scientific notation", "unit": 6, "keywords": ["scientific notation"]},
+    {"id": "S12", "name": "the Pythagorean theorem", "unit": 6, "keywords": ["pythagorean", "hypotenuse"]}
+  ],
+  "tests": [
+    {"id": "T6", "date": "2026-10-29", "name": "Unit 6 test", "skills": ["S10", "S11", "S12"],
+     "text": "Grade 8 Unit 6 test on 2026-10-29 covers exponent rules (S10), scientific notation (S11) and the Pythagorean theorem (S12)."}
+  ],
+  "students": [
+    {"key": "priya", "name": "Priya", "full": "Priya Raman", "grade": 8, "tutor": "Owen Hale", "since": "2026-03-04", "handover_on": "2026-10-14", "test": "T6",
+     "description": "Larkspur Learning progress memory for Priya Raman (grade 8 math): session notes, handover note. Fictional data for the MemoryLake student-progress-memory demo."},
+    {"key": "leo", "name": "Leo", "full": "Leo Brandt", "grade": 8, "tutor": "Owen Hale", "since": "2026-09-03", "handover_on": "2026-10-14", "test": "T6",
+     "description": "Larkspur Learning progress memory for Leo Brandt (grade 8 math): session notes, handover note. Fictional data for the MemoryLake student-progress-memory demo."}
+  ],
+  "records": [
+    {"id": "P01", "student": "priya", "kind": "session", "by": "Owen Hale", "on": "2026-03-04",
+     "assessed": ["S01=secure", "S03=secure", "S04=secure", "S02=shaky", "S05=shaky"],
+     "text": "Intake diagnostic with Priya. Integer operations: secure, 9 of 10. Ratios and proportions: secure. Percent problems: secure. Fraction division: shaky, she flips the wrong fraction about half the time. Two-step equations: shaky, 5 of 10."},
+    {"id": "P02", "student": "priya", "kind": "session", "by": "Owen Hale", "on": "2026-03-18", "practiced": ["S05"],
+     "text": "Worked on two-step equations with balance diagrams. Priya liked the visual model. Homework set of 12."},
+    {"id": "P03", "student": "priya", "kind": "session", "by": "Owen Hale", "on": "2026-04-01", "assessed": ["S05=secure"],
+     "text": "Two-step equations quiz with Priya: 9 of 10. Secure for now."},
+    {"id": "P04", "student": "priya", "kind": "session", "by": "Owen Hale", "on": "2026-04-21", "assessed": ["S11=secure"],
+     "text": "Scientific notation quiz with Priya: 8 of 8 on writing very large and very small numbers with powers of ten. Secure."},
+    {"id": "P05", "student": "priya", "kind": "session", "by": "Owen Hale", "on": "2026-04-29", "practiced": ["S02"],
+     "text": "Fraction division practice with area models. Priya still slips when a mixed number is involved."},
+    {"id": "P06", "student": "priya", "kind": "session", "by": "Owen Hale", "on": "2026-05-13", "assessed": ["S06=secure"],
+     "text": "Multi-step equations with variables on both sides: Priya scored 7 of 8. Secure."},
+    {"id": "P07", "student": "priya", "kind": "session", "by": "Owen Hale", "on": "2026-06-10", "assessed": ["S07=secure"],
+     "text": "Slope from two points and from a table: Priya scored 9 of 10. Secure. Last session before the summer break."},
+    {"id": "P08", "student": "priya", "kind": "session", "by": "Owen Hale", "on": "2026-09-02",
+     "assessed": ["S01=secure", "S03=secure", "S04=secure", "S06=secure", "S07=secure", "S02=shaky", "S05=shaky"],
+     "text": "Back-to-school check with Priya after the summer break. Integer operations, ratios, percent problems, multi-step equations and slope all held up: secure. Fraction division still slips with mixed numbers. Two-step equations with negative numbers: 3 of 6, shaky again after the summer."},
+    {"id": "P09", "student": "priya", "kind": "session", "by": "Owen Hale", "on": "2026-09-09", "assessed": ["S08=secure"],
+     "text": "Graphing linear functions from a table and from an equation: Priya scored 6 of 6. Secure."},
+    {"id": "P10", "student": "priya", "kind": "session", "by": "Owen Hale", "on": "2026-09-16", "practiced": ["S10"],
+     "text": "Introduced exponent rules with Priya: product and quotient of powers. She worked through ten examples with prompting. Homework set."},
+    {"id": "P11", "student": "priya", "kind": "session", "by": "Owen Hale", "on": "2026-09-23", "practiced": ["S10"],
+     "text": "More exponent rules with Priya: power of a power and the zero exponent. Homework was complete and neat."},
+    {"id": "P12", "student": "priya", "kind": "session", "by": "Owen Hale", "on": "2026-09-30", "practiced": ["S07", "S08"],
+     "text": "Last session with Owen. Reviewed slope and graphing with Priya ahead of the handover."},
+    {"id": "P-H", "student": "priya", "kind": "handover", "by": "Owen Hale", "on": "2026-09-30",
+     "text": "Handover note for Priya from Owen Hale: strong on equations and graphing, and slope is solid. Fraction division still slips, and so do negatives in two-step equations. We have started exponents. She likes visual models and timed challenges."},
+
+    {"id": "L01", "student": "leo", "kind": "session", "by": "Owen Hale", "on": "2026-09-03",
+     "assessed": ["S01=secure", "S02=secure", "S03=secure", "S04=secure", "S05=secure", "S06=secure"],
+     "text": "Intake check with Leo. Integer operations, fractions, ratios, percent problems, two-step and multi-step equations: all secure."},
+    {"id": "L02", "student": "leo", "kind": "session", "by": "Owen Hale", "on": "2026-09-10", "assessed": ["S07=secure", "S08=secure"],
+     "text": "Slope and graphing linear functions with Leo: 9 of 10. Secure."},
+    {"id": "L03", "student": "leo", "kind": "session", "by": "Owen Hale", "on": "2026-09-17", "assessed": ["S10=secure"],
+     "text": "Exponent rules quiz with Leo: 10 of 10, including the zero exponent and negative exponents. Secure."},
+    {"id": "L04", "student": "leo", "kind": "session", "by": "Owen Hale", "on": "2026-09-24", "assessed": ["S11=secure"],
+     "text": "Scientific notation quiz with Leo: 7 of 8. Secure."},
+    {"id": "L05", "student": "leo", "kind": "session", "by": "Owen Hale", "on": "2026-10-01", "assessed": ["S12=shaky"],
+     "text": "Pythagorean theorem quiz with Leo: 5 of 8. Shaky: he squares the legs, then forgets to take the square root of the sum."},
+    {"id": "L06", "student": "leo", "kind": "session", "by": "Owen Hale", "on": "2026-10-08", "practiced": ["S09"],
+     "text": "Introduced systems of equations with Leo by graphing two lines and reading the crossing point."},
+    {"id": "L-H", "student": "leo", "kind": "handover", "by": "Owen Hale", "on": "2026-10-08",
+     "text": "Handover note for Leo from Owen Hale: secure on Unit 6 except the Pythagorean theorem, where he forgets the square root. Systems of equations just started."}
+  ],
+  "today_records": [
+    {"id": "P13", "student": "priya", "kind": "session", "by": "Mara Lind", "on": "2026-10-14",
+     "assessed": ["S10=secure", "S11=shaky", "S12=shaky"],
+     "text": "Fifteen-minute check with Priya, first session after the handover (Mara Lind). Exponent rules: secure, 7 of 8. Scientific notation: shaky, she drops the minus sign on the power of ten for small numbers, 3 of 6. Pythagorean theorem: shaky, she finds the hypotenuse but cannot find a missing leg, 2 of 5."}
+  ]
+}
