@@ -1,0 +1,89 @@
+{
+ "company": "Larkspur Freight",
+ "partner": {
+  "name": "Omar Haddad",
+  "role": "HR partner, took over the HR desk on 2026-10-13"
+ },
+ "previous": {
+  "name": "Hana Sato",
+  "role": "HR generalist, ran the HR desk until 2026-09-30"
+ },
+ "today": "2026-10-15",
+ "project": {
+  "key": "desk",
+  "name": "Larkspur - HR desk",
+  "description": "Larkspur Freight (fictional): the people handbook, the HR desk's past decisions and the CPO office's exception register. memorylake-usecases demo."
+ },
+ "tools": {
+  "handbook": "handbook",
+  "desk": "HR desk",
+  "register": "exceptions"
+ },
+ "topics": {
+  "abroad": {"label": "working from abroad", "unit": "weeks"},
+  "carryover": {"label": "holiday carry-over", "unit": "days"},
+  "bereavement": {"label": "bereavement leave", "unit": "days"},
+  "stipend": {"label": "home-office stipend", "unit": "dollars"}
+ },
+ "records": [
+  {"id": "POL-4.2", "tool": "handbook", "kind": "policy", "topic": "abroad", "limit": 4, "exceptions_by": "CPO", "by": "People team", "on": "2026-01-01",
+   "text": "People handbook section 4.2, working from abroad: an employee may work from another country for up to 4 weeks (20 working days) a year, approved by their manager and HR. Longer stays need a written exception from the CPO (tax and visa exposure)."},
+  {"id": "POL-6.1", "tool": "handbook", "kind": "policy", "topic": "carryover", "limit": 5, "exceptions_by": "CPO", "by": "People team", "on": "2026-01-01",
+   "text": "People handbook section 6.1, holiday carry-over: up to 5 unused holiday days carry over into the next year and must be taken by March 31. Carrying over more needs a written exception from the CPO."},
+  {"id": "POL-7.3", "tool": "handbook", "kind": "policy", "topic": "bereavement", "limit": 3, "exceptions_by": "CPO", "by": "People team", "on": "2026-01-01",
+   "text": "People handbook section 7.3, bereavement leave: 5 paid days for a partner, child or parent; 3 paid days for a grandparent, sibling or in-law. Longer leave needs a written exception from the CPO."},
+  {"id": "POL-9.1", "tool": "handbook", "kind": "policy", "topic": "stipend", "limit": 400, "exceptions_by": "CPO", "by": "People team", "on": "2026-01-01",
+   "text": "People handbook section 9.1, home-office stipend: a one-time stipend of up to 400 dollars for home-office equipment, paid on receipts. Anything above needs a written exception from the CPO."},
+
+  {"id": "HR-2105", "tool": "desk", "kind": "decision", "topic": "carryover", "subject": "Ines Duarte", "value": 10, "outcome": "approved", "by": "Hana Sato", "on": "2026-01-08",
+   "text": "HR desk ticket HR-2105, 2026-01-08: Approved. Ines Duarte (Finance) carries over 10 unused holiday days into 2026, to be taken by March 31. - Hana Sato, HR"},
+  {"id": "HR-2108", "tool": "desk", "kind": "decision", "topic": "carryover", "subject": "Ola Mensah", "value": 5, "outcome": "approved", "by": "Hana Sato", "on": "2026-01-12",
+   "text": "HR desk ticket HR-2108, 2026-01-12: Approved. Ola Mensah (Dispatch) carries over 5 unused holiday days into 2026, to be taken by March 31. - Hana Sato, HR"},
+  {"id": "HR-2110", "tool": "desk", "kind": "decision", "topic": "carryover", "subject": "Ravi Patel", "value": 4, "outcome": "approved", "by": "Hana Sato", "on": "2026-01-14",
+   "text": "HR desk ticket HR-2110, 2026-01-14: Approved. Ravi Patel (Warehouse) carries over 4 unused holiday days into 2026, to be taken by March 31. - Hana Sato, HR"},
+  {"id": "HR-2231", "tool": "desk", "kind": "decision", "topic": "abroad", "subject": "Priya Nair", "value": 6, "outcome": "approved", "by": "Hana Sato", "on": "2026-06-02",
+   "text": "HR desk ticket HR-2231, 2026-06-02: Approved. Priya Nair (Product Design) works from Lisbon for 6 weeks, July 6 to August 14. Manager agreed. - Hana Sato, HR"},
+  {"id": "HR-2240", "tool": "desk", "kind": "decision", "topic": "abroad", "subject": "Sam Whitlock", "value": 3, "outcome": "approved", "by": "Hana Sato", "on": "2026-06-15",
+   "text": "HR desk ticket HR-2240, 2026-06-15: Approved. Sam Whitlock (Customer Success) works from Krakow for 3 weeks in July. Manager agreed. - Hana Sato, HR"},
+  {"id": "HR-2262", "tool": "desk", "kind": "decision", "topic": "abroad", "subject": "Jonas Berg", "value": 2, "outcome": "approved", "by": "Hana Sato", "on": "2026-07-20",
+   "text": "HR desk ticket HR-2262, 2026-07-20: Approved. Jonas Berg (Engineering) works from Oslo for 2 weeks in August. Manager agreed. - Hana Sato, HR"},
+  {"id": "HR-2277", "tool": "desk", "kind": "decision", "topic": "bereavement", "subject": "Leo Brandt", "value": 3, "outcome": "approved", "by": "Hana Sato", "on": "2026-08-03",
+   "text": "HR desk ticket HR-2277, 2026-08-03: Approved. Leo Brandt (Fleet) takes 3 days of paid bereavement leave after his grandmother died. - Hana Sato, HR"},
+  {"id": "HR-2290", "tool": "desk", "kind": "decision", "topic": "bereavement", "subject": "Ana Ruiz", "value": 3, "outcome": "approved", "by": "Hana Sato", "on": "2026-08-21",
+   "text": "HR desk ticket HR-2290, 2026-08-21: Approved. Ana Ruiz (Sales) takes 3 days of paid bereavement leave after her brother died. - Hana Sato, HR"},
+  {"id": "HR-2301", "tool": "desk", "kind": "decision", "topic": "stipend", "subject": "Kofi Asante", "value": 400, "outcome": "approved", "by": "Hana Sato", "on": "2026-09-02",
+   "text": "HR desk ticket HR-2301, 2026-09-02: Approved. Kofi Asante (Billing) gets a 400 dollar home-office stipend for a desk and monitor, on receipts. - Hana Sato, HR"},
+  {"id": "HR-2310", "tool": "desk", "kind": "decision", "topic": "stipend", "subject": "Mara Lind", "value": 650, "outcome": "approved", "by": "Hana Sato", "on": "2026-09-15",
+   "text": "HR desk ticket HR-2310, 2026-09-15: Approved. Mara Lind (Planning) gets a 650 dollar home-office stipend for an ergonomic chair and desk, on receipts. - Hana Sato, HR"},
+
+  {"id": "EXC-01", "tool": "register", "kind": "exception", "topic": "abroad", "ticket": "HR-2231", "policy": "POL-4.2", "scope": "one-time", "approved_by": "CPO", "by": "CPO office", "on": "2026-06-01",
+   "text": "CPO exception register EXC-01, 2026-06-01: exception to handbook section 4.2 for ticket HR-2231 (Priya Nair, 6 weeks abroad). Reason: her consulate visa appointment was moved twice. One-time; not a precedent for other requests to work from abroad."},
+  {"id": "EXC-02", "tool": "register", "kind": "exception", "topic": "carryover", "ticket": "HR-2105", "policy": "POL-6.1", "scope": "one-time", "approved_by": "CPO", "by": "CPO office", "on": "2026-01-07",
+   "text": "CPO exception register EXC-02, 2026-01-07: exception to handbook section 6.1 for ticket HR-2105 (Ines Duarte, 10 days carried over). Reason: her parental leave covered October to December, so she could not take the days. One-time; applies to her only."},
+  {"id": "EXC-03", "tool": "register", "kind": "exception", "topic": "stipend", "ticket": "HR-2310", "policy": "POL-9.1", "scope": "one-time", "approved_by": "CPO", "by": "CPO office", "on": "2026-09-14",
+   "text": "CPO exception register EXC-03, 2026-09-14: exception to handbook section 9.1 for ticket HR-2310 (Mara Lind, 650 dollars). Reason: a reasonable adjustment on a doctor's note for back pain. One-time; not a raise of the stipend."}
+ ],
+ "incoming": [
+  {"id": "Q-1", "who": "Dana Okafor", "topic": "abroad", "value": 5,
+   "text": "Dana Okafor (Sales Ops) asks: can I work from Porto for 5 weeks in November?"},
+  {"id": "Q-2", "who": "Tom Reyes", "topic": "carryover", "value": 8,
+   "text": "Tom Reyes (Dispatch) asks: can I carry over 8 unused holiday days into next year?"},
+  {"id": "Q-3", "who": "Mei Lin", "topic": "bereavement", "value": 3,
+   "text": "Mei Lin (Warehouse) asks: my grandfather died, can I take 3 days of paid bereavement leave?"},
+  {"id": "Q-4", "who": "Rafa Costa", "topic": "stipend", "value": 600,
+   "text": "Rafa Costa (Billing) asks: can I get a 600 dollar home-office stipend for a standing desk?"}
+ ],
+ "followups": [
+  {"id": "Q-5", "who": "Lena Vogt", "topic": "abroad", "value": 6,
+   "text": "Lena Vogt (Engineering) asks: may I work remotely from Madrid for six weeks next spring?"},
+  {"id": "Q-6", "who": "Ibrahim Sall", "topic": "carryover", "value": 7,
+   "text": "Ibrahim Sall (Finance) asks: I still have 7 holiday days left, can they roll over to next year?"},
+  {"id": "Q-7", "who": "Chloe Park", "topic": "abroad", "value": 2,
+   "text": "Chloe Park (Customer Success) asks: can I work from Lisbon for two weeks in December?"}
+ ],
+ "ask_examples": [
+  {"q": "Can I work from Lisbon for 6 weeks next summer?", "topic": "abroad", "value": 6},
+  {"q": "Can I carry over 9 holiday days?", "topic": "carryover", "value": 9},
+  {"q": "Can I get 400 dollars for a monitor and chair?", "topic": "stipend", "value": 400}
+ ]
+}
