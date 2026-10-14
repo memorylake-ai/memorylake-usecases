@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Tutoring Businesses Student Progress Memory That Holds Across Tutors and Sessions*](https://www.memorylake.ai/en/usecase/student-progress-memory-for-tutoring-businesses),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** videos are being recorded (links will appear here).
+**Watch it run:** [CLI, 3:05](https://github.com/memorylake-ai/memorylake-usecases/releases/download/student-progress-memory-v1/student-progress-memory-cli-demo.mp4) · [Web, 4:20](https://github.com/memorylake-ai/memorylake-usecases/releases/download/student-progress-memory-v1/student-progress-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/student-progress-memory-v1); GitHub serves them as downloads).
 
 **The problem.** When a tutor leaves, the new tutor (or their AI assistant) reads what the old one wrote down. Session
 notes record what *happened*: what was practiced, what was checked, what went wrong. They never record what *didn't*
@@ -86,6 +87,10 @@ Paste the key, connect, run. The page drives the same functions as `demo.py` and
 terminal drawer as it runs: the projects, every note with its metadata, the quick read, the coverage map with Leo's control
 next to it, and the write-back. **Ask** takes any question across both students, or draws either student's coverage map as
 of a date.
+
+![The quick read: searching Priya's notes flags 0 of 3 test skills](web/screenshot-quick-read.png)
+
+![The coverage map: every skill against every check on record — 3 of 3 test skills unverified](web/screenshot-coverage-map.png)
 
 ## What happens, step by step
 
@@ -198,10 +203,10 @@ Two things about `search` that step 6 handles, both measured while building this
 
 | What | Result |
 |---|---|
-| Quick read 0 / 3 test skills flagged; coverage map 3 / 3 unverified (practiced / checked long ago / never); Leo's two readings agree | every run (5 / 5 so far) |
-| After the write-back: 0 / 3 unverified, 2 shaky | every run |
-| Search rank of the check note (P13) for the Pythagorean question | #1 in 5 / 5 runs |
-| Search rank of the gap fact for the systems question | #1 in 3 of the 4 runs that waited for the index (#7 once, with an earlier wording of the gap text) |
+| Quick read 0 / 3 test skills flagged; coverage map 3 / 3 unverified (practiced / checked long ago / never); Leo's two readings agree | 7 / 7 runs (6 from scratch, including both recordings, and 1 re-run) |
+| After the write-back: 0 / 3 unverified, 2 shaky | 7 / 7 |
+| Search rank of the check note (P13) for the Pythagorean question | #1 in 7 / 7 |
+| Search rank of the gap fact for the systems question | #1 in all 4 runs with the final gap wording; with earlier wordings: not in the top 8 once (asked before the index caught up), #1 once, #7 once |
 | Time | 84–122 s from scratch, 52 s re-run |
 
 The coverage map never depends on search. The search lines are what `search` returned; the demo prints whatever comes back.
