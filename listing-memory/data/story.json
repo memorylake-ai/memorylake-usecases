@@ -1,0 +1,111 @@
+{
+  "today": "2026-10-15",
+  "team": "Larkspur Realty",
+  "listing": "14 Alder Court",
+  "lead": {"name": "Jordan Pike", "role": "covering agent"},
+  "listing_agent": {"name": "Rosa Delgado", "role": "listing agent"},
+  "project": {
+    "key": "alder",
+    "name": "Larkspur · 14 Alder Court",
+    "description": "Larkspur Realty (fictional) listing memory for 14 Alder Court (fictional): MLS changes, showing feedback, offers and notes, one fact per record, word for word. Created by the memorylake-usecases listing-memory demo."
+  },
+  "tools": {
+    "mls": "MLS",
+    "showings": "Showings",
+    "crm": "CRM",
+    "email": "Email",
+    "text": "Text"
+  },
+  "fields": {
+    "price": "price",
+    "roof": "roof",
+    "hoa": "HOA"
+  },
+  "topics": {
+    "price": {"label": "Price", "field": "price"},
+    "roof": {"label": "Roof", "field": "roof"},
+    "hoa": {"label": "HOA assessment", "field": "hoa"},
+    "kitchen": {"label": "Kitchen"},
+    "parking": {"label": "Parking"},
+    "layout": {"label": "Layout"},
+    "yard": {"label": "Yard"}
+  },
+  "records": [
+    {"id": "MLS-0818", "tool": "mls", "by": "Rosa Delgado", "role": "listing agent", "on": "2026-08-18", "kind": "listing", "field": "price", "label": "$749,000",
+     "text": "14 Alder Court listed at $749,000: 3 bed, 2 bath, 1,850 sq ft, built 1962, in Maple Hollow."},
+    {"id": "DSC-0818", "tool": "crm", "by": "Rosa Delgado", "role": "listing agent", "on": "2026-08-18", "kind": "listing", "field": "roof", "label": "1998 roof",
+     "text": "Seller disclosure for 14 Alder Court: the roof is the original 1998 roof; a 2025 leak left a water stain on the hall ceiling (leak repaired)."},
+    {"id": "HOA-0818", "tool": "crm", "by": "Rosa Delgado", "role": "listing agent", "on": "2026-08-18", "kind": "listing", "field": "hoa", "label": "dues only",
+     "text": "Maple Hollow HOA for 14 Alder Court: dues are $310 a month, no special assessments pending."},
+    {"id": "PRM-0902", "tool": "email", "by": "Kestrel Roofing", "role": "contractor", "on": "2026-09-02", "kind": "listing", "field": "roof", "label": "new roof",
+     "text": "Roof replacement at 14 Alder Court is finished: new architectural shingles, 30-year warranty, city permit closed."},
+    {"id": "MLS-0915", "tool": "mls", "by": "Rosa Delgado", "role": "listing agent", "on": "2026-09-15", "kind": "listing", "field": "price", "label": "$699,000",
+     "text": "Price change on 14 Alder Court: now $699,000."},
+    {"id": "HOA-0928", "tool": "email", "by": "Maple Hollow HOA board", "role": "HOA", "on": "2026-09-28", "kind": "listing", "field": "hoa", "label": "$14,500 assessment",
+     "text": "Maple Hollow HOA voted a $14,500 special assessment per home for the pool and clubhouse rebuild, payable in 2027. Sellers must disclose it."},
+
+    {"id": "SHW-0820", "tool": "showings", "by": "Dev Patel", "role": "buyer's agent, Westgate Homes", "on": "2026-08-20", "kind": "showing", "objections": ["price"], "liked": [],
+     "text": "Showing feedback from Dev Patel (Westgate Homes): nice house, but the buyers think it is priced well above the recent sales nearby."},
+    {"id": "SHW-0822", "tool": "showings", "by": "Amy Chen", "role": "buyer's agent, Northgate Realty", "on": "2026-08-22", "kind": "showing", "objections": ["price"], "liked": ["yard"],
+     "text": "Showing feedback from Amy Chen (Northgate Realty): buyers loved the backyard but felt the asking price is high for the street."},
+    {"id": "SHW-0825", "tool": "showings", "by": "Marcus Bell", "role": "buyer's agent, Bell & Co.", "on": "2026-08-25", "kind": "showing", "objections": ["price", "roof"], "liked": [],
+     "text": "Showing feedback from Marcus Bell (Bell & Co.): too expensive next to the Birch Lane houses, and the buyers were nervous about the water stain on the hall ceiling."},
+    {"id": "SHW-0827", "tool": "showings", "by": "Lena Fox", "role": "buyer's agent, Fox Property Group", "on": "2026-08-27", "kind": "showing", "objections": ["roof"], "liked": [],
+     "text": "Showing feedback from Lena Fox (Fox Property Group): their contractor friend says the roof is near the end of its life; they would want a big credit."},
+    {"id": "OFR-0830", "tool": "email", "by": "Dev Patel", "role": "buyer's agent, Westgate Homes", "on": "2026-08-30", "kind": "offer", "objections": ["roof"], "liked": [],
+     "text": "Dev Patel (Westgate Homes): my buyers withdraw their $735,000 offer on 14 Alder Court after the inspection; the inspector put the roof at end of life."},
+    {"id": "SHW-0831", "tool": "showings", "by": "Amy Chen", "role": "buyer's agent, Northgate Realty", "on": "2026-08-31", "kind": "showing", "objections": ["price", "kitchen"], "liked": [],
+     "text": "Showing feedback from Amy Chen (Northgate Realty): overpriced for what it is, and the kitchen is dated."},
+    {"id": "SHW-0904", "tool": "showings", "by": "Lena Fox", "role": "buyer's agent, Fox Property Group", "on": "2026-09-04", "kind": "showing", "objections": ["price"], "liked": ["layout"],
+     "text": "Showing feedback from Lena Fox (Fox Property Group): the buyers liked the open layout; the number is too high for them."},
+    {"id": "SHW-0906", "tool": "showings", "by": "Sam Ortiz", "role": "buyer's agent, Ortiz Realty", "on": "2026-09-06", "kind": "showing", "objections": ["price"], "liked": ["roof"],
+     "text": "Showing feedback from Sam Ortiz (Ortiz Realty): liked the new roof, but the price is a stretch for a 1962 house."},
+    {"id": "SHW-0910", "tool": "showings", "by": "Marcus Bell", "role": "buyer's agent, Bell & Co.", "on": "2026-09-10", "kind": "showing", "objections": ["price"], "liked": [],
+     "text": "Showing feedback from Marcus Bell (Bell & Co.): the asking price is the sticking point for them."},
+    {"id": "SHW-0913", "tool": "showings", "by": "Priya Nair", "role": "buyer's agent, Harbor Lane Realty", "on": "2026-09-13", "kind": "showing", "objections": ["price"], "liked": ["layout"],
+     "text": "Showing feedback from Priya Nair (Harbor Lane Realty): out of their range at this price; they liked the layout."},
+    {"id": "SHW-0919", "tool": "showings", "by": "Lena Fox", "role": "buyer's agent, Fox Property Group", "on": "2026-09-19", "kind": "showing", "objections": ["layout"], "liked": ["price"],
+     "text": "Showing feedback from Lena Fox (Fox Property Group): fair value now; they wish the second bathroom were bigger."},
+    {"id": "SHW-0924", "tool": "showings", "by": "Sam Ortiz", "role": "buyer's agent, Ortiz Realty", "on": "2026-09-24", "kind": "showing", "objections": ["parking"], "liked": ["price"],
+     "text": "Showing feedback from Sam Ortiz (Ortiz Realty): a good fit on price; street parking only is a problem with two cars."},
+    {"id": "SHW-1002", "tool": "showings", "by": "Amy Chen", "role": "buyer's agent, Northgate Realty", "on": "2026-10-02", "kind": "showing", "objections": ["hoa"], "liked": [],
+     "text": "Showing feedback from Amy Chen (Northgate Realty): the buyers walked once they read about the HOA special assessment."},
+    {"id": "SHW-1006", "tool": "showings", "by": "Dev Patel", "role": "buyer's agent, Westgate Homes", "on": "2026-10-06", "kind": "showing", "objections": ["hoa"], "liked": [],
+     "text": "Showing feedback from Dev Patel (Westgate Homes): they would have offered, but the HOA assessment on top is too much for them."},
+    {"id": "SHW-1009", "tool": "showings", "by": "Priya Nair", "role": "buyer's agent, Harbor Lane Realty", "on": "2026-10-09", "kind": "showing", "objections": ["hoa", "kitchen"], "liked": ["roof"],
+     "text": "Showing feedback from Priya Nair (Harbor Lane Realty): asked twice who pays the special assessment; liked the new roof; the kitchen is dated."},
+    {"id": "SHW-1013", "tool": "showings", "by": "Marcus Bell", "role": "buyer's agent, Bell & Co.", "on": "2026-10-13", "kind": "showing", "objections": ["kitchen"], "liked": [],
+     "text": "Showing feedback from Marcus Bell (Bell & Co.): the kitchen is dated; otherwise it shows well."},
+
+    {"id": "CRM-0820", "tool": "crm", "by": "Rosa Delgado", "role": "listing agent", "on": "2026-08-20", "kind": "note", "topic": "seller",
+     "text": "Seller (the Hollis family) is relocating to Denver and wants to close before 2026-12-15; flexible on the move-out date."},
+    {"id": "TXT-0901", "tool": "text", "by": "Rosa Delgado", "role": "listing agent", "on": "2026-09-01", "kind": "note", "topic": "access",
+     "text": "Lockbox code for 14 Alder Court changes every Monday; ask the office for the current one before a showing."},
+    {"id": "CRM-0905", "tool": "crm", "by": "Rosa Delgado", "role": "listing agent", "on": "2026-09-05", "kind": "note", "topic": "access",
+     "text": "Lawn service at 14 Alder Court comes on Fridays; showings are fine while they work."},
+    {"id": "MLS-0930", "tool": "mls", "by": "Rosa Delgado", "role": "listing agent", "on": "2026-09-30", "kind": "note", "topic": "comps",
+     "text": "Comparable sale: 9 Birch Lane (1960, 3 bed, newer roof) closed at $705,000 on 2026-09-30."},
+    {"id": "EML-1014", "tool": "email", "by": "Ruth Hollis", "role": "seller", "on": "2026-10-14", "kind": "note", "topic": "seller",
+     "text": "Ruth Hollis (seller): should we drop the price again before the weekend? Two more weekends without an offer worries us."},
+    {"id": "CRM-1014", "tool": "crm", "by": "Rosa Delgado", "role": "listing agent", "on": "2026-10-14", "kind": "note", "topic": "handoff",
+     "text": "Handing 14 Alder Court to Jordan Pike while I am out from 2026-10-15; call the Hollis family Thursday afternoon, Saturday showing at 11:00."}
+  ],
+  "ask_examples": [
+    {"q": "Would a lower price bring offers?", "topic": "price"},
+    {"q": "Should Jordan bring up the roof at Saturday's showing?", "topic": "roof"},
+    {"q": "What is the main thing holding buyers back?", "topic": "now"},
+    {"q": "Is the HOA assessment scaring buyers off?", "topic": "hoa"}
+  ],
+  "questions": [
+    {"id": "Q1", "topic": "price", "kind": "cut", "text": "Should we cut the price on 14 Alder Court again?"},
+    {"id": "Q2", "topic": "roof", "kind": "still", "text": "Is the roof still putting buyers off?"},
+    {"id": "Q3", "topic": "now", "kind": "top", "text": "What do buyers object to most right now?"},
+    {"id": "Q4", "topic": "kitchen", "kind": "still", "text": "Do buyers mind the kitchen?"}
+  ],
+  "followups": [
+    {"id": "F1", "topic": "price", "kind": "cut", "text": "Is $699,000 still too high for buyers?"},
+    {"id": "F2", "topic": "roof", "kind": "still", "text": "Do showings still raise concerns about the roof?"},
+    {"id": "F3", "topic": "now", "kind": "top", "text": "What stops buyers making an offer at $699,000?"},
+    {"id": "F4", "topic": "kitchen", "kind": "still", "text": "Is the dated kitchen a problem for buyers?"}
+  ]
+}
