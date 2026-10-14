@@ -1,0 +1,97 @@
+{
+  "firm": "Ashgrove Partners",
+  "client": "Calder Freight",
+  "today": "2026-10-14",
+  "projects": [
+    {"key": "seats", "name": "Calder Freight - seats and authority",
+     "description": "Who holds which seat at Calder Freight, and when (demo: stakeholder-map-memory)"},
+    {"key": "e1", "name": "Calder Freight - E1 Network redesign (2025)",
+     "description": "Engagement 1 notes, Feb-Jun 2025 (demo: stakeholder-map-memory)"},
+    {"key": "e2", "name": "Calder Freight - E2 Procurement savings (2026)",
+     "description": "Engagement 2 notes and stakeholder map, Jan-Apr 2026 (demo: stakeholder-map-memory)"},
+    {"key": "e3", "name": "Calder Freight - E3 Warehouse automation (2026)",
+     "description": "Engagement 3, kicking off 2026-10-14 (demo: stakeholder-map-memory)"}
+  ],
+  "engagements": [
+    {"key": "e1", "name": "E1 Network redesign", "start": "2025-02-10", "end": "2025-06-27"},
+    {"key": "e2", "name": "E2 Procurement savings", "start": "2026-01-12", "end": "2026-04-24"},
+    {"key": "e3", "name": "E3 Warehouse automation business case", "start": "2026-10-14", "end": null}
+  ],
+  "people": [
+    {"key": "dana", "name": "Dana Okafor"},
+    {"key": "marcus", "name": "Marcus Hale"},
+    {"key": "ines", "name": "Ines Duarte"},
+    {"key": "tom", "name": "Tom Becker"},
+    {"key": "priya", "name": "Priya Raman"}
+  ],
+  "seats": [
+    {"key": "vp-finance", "title": "VP Finance"},
+    {"key": "coo", "title": "COO"},
+    {"key": "head-of-ops", "title": "Head of Operations"},
+    {"key": "it-director", "title": "IT Director"},
+    {"key": "vp-strategy", "title": "VP Strategy"}
+  ],
+  "functions": [
+    {"key": "sow", "label": "Signs the SOW", "seat": "vp-finance"},
+    {"key": "steer", "label": "Chairs steering, can veto", "seat": "coo"},
+    {"key": "sites", "label": "Runs the sites", "seat": "head-of-ops"},
+    {"key": "wms", "label": "Owns the WMS change board", "seat": "it-director"}
+  ],
+  "tenures": [
+    {"seat": "vp-finance", "person": "dana", "from": "2023-04-03", "to": "2026-08-31", "source": "check-in call 2026-09-08"},
+    {"seat": "vp-finance", "person": "priya", "from": "2026-09-01", "to": null, "source": "check-in call 2026-09-08"},
+    {"seat": "coo", "person": "marcus", "from": "2021-01-11", "to": "2026-06-30", "source": "check-in call 2026-07-02"},
+    {"seat": "coo", "person": "ines", "from": "2026-07-01", "to": null, "acting": true, "source": "check-in call 2026-07-02"},
+    {"seat": "head-of-ops", "person": "ines", "from": "2022-05-02", "to": "2026-06-30", "source": "check-in call 2026-07-02"},
+    {"seat": "head-of-ops", "person": null, "from": "2026-07-01", "to": null, "source": "check-in call 2026-07-02"},
+    {"seat": "it-director", "person": "tom", "from": "2020-09-14", "to": null, "source": "E1 org chart 2025-02-10"},
+    {"seat": "vp-strategy", "person": "dana", "from": "2026-09-01", "to": null, "source": "check-in call 2026-09-08"}
+  ],
+  "checkins": [
+    {"date": "2026-07-02", "text": "Check-in call with Calder Freight (Ines Duarte): Marcus Hale left Calder on 30 June. Ines Duarte is acting COO from 1 July, and the Head of Operations seat is open."},
+    {"date": "2026-09-08", "text": "Check-in call with Calder Freight (Dana Okafor): Priya Raman joined as VP Finance on 1 September. Dana Okafor moved to the new VP Strategy seat the same day."}
+  ],
+  "observations": [
+    {"id": "o01", "engagement": "e1", "date": "2025-02-18", "anchor": "seat", "seat": "vp-finance", "function": "sow",
+     "text": "Calder's delegation of authority: any consulting SOW over 150,000 dollars is signed by the VP Finance."},
+    {"id": "o02", "engagement": "e1", "date": "2025-03-04", "anchor": "seat", "seat": "coo", "function": "steer",
+     "text": "The COO chairs Calder's network steering committee and can veto any change to the site network."},
+    {"id": "o03", "engagement": "e1", "date": "2025-03-04", "anchor": "seat", "seat": "head-of-ops", "function": "sites",
+     "text": "The Head of Operations runs Calder's six sites day to day; every site data request goes through that office."},
+    {"id": "o04", "engagement": "e2", "date": "2026-01-27", "anchor": "seat", "seat": "it-director", "function": "wms",
+     "text": "Nothing touches Calder's WMS without the IT Director's change board."},
+    {"id": "o05", "engagement": "e2", "date": "2026-02-20", "anchor": "seat", "seat": "vp-finance", "function": "sow",
+     "text": "Dana Okafor, as VP Finance, signed the Phase 2 SOW for 280,000 dollars."},
+
+    {"id": "o10", "engagement": "e1", "date": "2025-03-11", "anchor": "person", "person": "dana", "trait": "style",
+     "text": "Dana Okafor asked for the downside case before she would look at the upside."},
+    {"id": "o11", "engagement": "e1", "date": "2025-05-27", "anchor": "person", "person": "dana", "trait": "style",
+     "text": "Dana Okafor sent the network model back until the downside case came first."},
+    {"id": "o12", "engagement": "e2", "date": "2026-02-10", "anchor": "person", "person": "dana", "trait": "stance", "stance": "champion",
+     "text": "Dana Okafor took Phase 2 through Calder's investment committee herself. She is our champion."},
+    {"id": "o13", "engagement": "e2", "date": "2026-02-12", "anchor": "person", "person": "dana", "trait": "style",
+     "text": "Dana Okafor wanted the savings shown as a downside, base and upside range, downside on top."},
+    {"id": "o20", "engagement": "e1", "date": "2025-04-08", "anchor": "person", "person": "marcus", "trait": "stance", "stance": "skeptic",
+     "text": "Marcus Hale has been skeptical of warehouse automation since the 2024 sorter failure at the Dunmore site."},
+    {"id": "o21", "engagement": "e1", "date": "2025-06-20", "anchor": "person", "person": "marcus", "trait": "style",
+     "text": "Marcus Hale vetoed the automated sorter recommendation at the June steering committee."},
+    {"id": "o30", "engagement": "e1", "date": "2025-03-19", "anchor": "person", "person": "ines", "trait": "style",
+     "text": "Ines Duarte wants site-level throughput data before she will discuss any recommendation."},
+    {"id": "o31", "engagement": "e1", "date": "2025-06-20", "anchor": "person", "person": "ines", "trait": "stance", "stance": "supporter",
+     "text": "Ines Duarte backed the automated sorter recommendation at the June steering committee."},
+    {"id": "o40", "engagement": "e2", "date": "2026-01-27", "anchor": "person", "person": "tom", "trait": "stance", "stance": "neutral",
+     "text": "Tom Becker is neutral on scope; what he cares about is that integrations go through his change board."},
+    {"id": "o41", "engagement": "e2", "date": "2026-01-29", "anchor": "person", "person": "tom", "trait": "style",
+     "text": "Tom Becker needs a written change request two weeks before any WMS change."}
+  ],
+  "e2_map": {
+    "date": "2026-02-20",
+    "rows": [
+      {"function": "sow", "person": "dana", "stance": "champion"},
+      {"function": "steer", "person": "marcus", "stance": "skeptic"},
+      {"function": "sites", "person": "ines", "stance": "supporter"},
+      {"function": "wms", "person": "tom", "stance": "neutral"}
+    ]
+  },
+  "ask_question": "Who signs the SOW at Calder Freight?"
+}
