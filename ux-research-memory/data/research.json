@@ -1,0 +1,321 @@
+{
+ "company": "Ledgerline",
+ "today": "2026-10-14",
+ "team": [
+  {
+   "name": "Mina Okafor",
+   "role": "lead UX researcher"
+  },
+  {
+   "name": "Theo Brandt",
+   "role": "UX researcher, joined September 2026"
+  }
+ ],
+ "projects": {
+  "latest": {
+   "name": "Ledgerline research (latest study wins)",
+   "description": "Ledgerline UX research memory; conflicts resolved by keeping the newer study's finding"
+  },
+  "provenance": {
+   "name": "Ledgerline research (check who said it)",
+   "description": "Ledgerline UX research memory; conflicts resolved after checking which participants each finding came from"
+  }
+ },
+ "segments": {
+  "self-serve churned": {
+   "label": "churned self-serve signups",
+   "share": 74
+  },
+  "enterprise trial admin": {
+   "label": "enterprise trial admins",
+   "share": 26
+  }
+ },
+ "question": "Is the CSV import step a setup blocker for new users?",
+ "topic": [
+  "CSV import step",
+  "column-mapping screen"
+ ],
+ "rounds": {
+  "R1": {
+   "study": "Onboarding drop-off study",
+   "date": "2026-03-12",
+   "lead": "Mina Okafor"
+  },
+  "R2": {
+   "study": "Pricing comprehension follow-up",
+   "date": "2026-06-18",
+   "lead": "Mina Okafor"
+  },
+  "R3": {
+   "study": "Enterprise trial setup study",
+   "date": "2026-09-23",
+   "lead": "Theo Brandt"
+  }
+ },
+ "participants": [
+  {
+   "pid": "P01",
+   "round": "R1",
+   "segment": "self-serve churned",
+   "text": "Participant P01 (Onboarding drop-off study, March 2026): self-serve signup, churned in the first week, on day 3; 1-person bakery."
+  },
+  {
+   "pid": "P02",
+   "round": "R1",
+   "segment": "self-serve churned",
+   "text": "Participant P02 (Onboarding drop-off study, March 2026): self-serve signup, churned in the first week, on day 1; 2-person landscaping crew."
+  },
+  {
+   "pid": "P03",
+   "round": "R1",
+   "segment": "self-serve churned",
+   "text": "Participant P03 (Onboarding drop-off study, March 2026): self-serve signup, churned in the first week, on day 5; freelance translator."
+  },
+  {
+   "pid": "P04",
+   "round": "R1",
+   "segment": "self-serve churned",
+   "text": "Participant P04 (Onboarding drop-off study, March 2026): self-serve signup, churned in the first week, on day 2; 3-person bike repair shop."
+  },
+  {
+   "pid": "P05",
+   "round": "R1",
+   "segment": "self-serve churned",
+   "text": "Participant P05 (Onboarding drop-off study, March 2026): self-serve signup, churned in the first week, on day 6; solo bookkeeper."
+  },
+  {
+   "pid": "P06",
+   "round": "R1",
+   "segment": "self-serve churned",
+   "text": "Participant P06 (Onboarding drop-off study, March 2026): self-serve signup, churned in the first week, on day 4; family-run print shop."
+  },
+  {
+   "pid": "P07",
+   "round": "R1",
+   "segment": "self-serve churned",
+   "text": "Participant P07 (Onboarding drop-off study, March 2026): self-serve signup, churned in the first week, on day 2; yoga studio owner."
+  },
+  {
+   "pid": "P08",
+   "round": "R1",
+   "segment": "self-serve churned",
+   "text": "Participant P08 (Onboarding drop-off study, March 2026): self-serve signup, churned in the first week, on day 7; mobile dog groomer."
+  },
+  {
+   "pid": "P09",
+   "round": "R2",
+   "segment": "self-serve churned",
+   "text": "Participant P09 (Pricing comprehension follow-up, June 2026): self-serve signup, churned in the first week, on day 3; 4-person cleaning company."
+  },
+  {
+   "pid": "P10",
+   "round": "R2",
+   "segment": "self-serve churned",
+   "text": "Participant P10 (Pricing comprehension follow-up, June 2026): self-serve signup, churned in the first week, on day 5; solo photographer."
+  },
+  {
+   "pid": "P11",
+   "round": "R2",
+   "segment": "self-serve churned",
+   "text": "Participant P11 (Pricing comprehension follow-up, June 2026): self-serve signup, churned in the first week, on day 1; 2-person catering business."
+  },
+  {
+   "pid": "P12",
+   "round": "R2",
+   "segment": "self-serve churned",
+   "text": "Participant P12 (Pricing comprehension follow-up, June 2026): self-serve signup, churned in the first week, on day 4; independent tutor."
+  },
+  {
+   "pid": "P13",
+   "round": "R2",
+   "segment": "self-serve churned",
+   "text": "Participant P13 (Pricing comprehension follow-up, June 2026): self-serve signup, churned in the first week, on day 6; small plumbing firm."
+  },
+  {
+   "pid": "P14",
+   "round": "R2",
+   "segment": "self-serve churned",
+   "text": "Participant P14 (Pricing comprehension follow-up, June 2026): self-serve signup, churned in the first week, on day 2; solo architect."
+  },
+  {
+   "pid": "E01",
+   "round": "R3",
+   "segment": "enterprise trial admin",
+   "text": "Participant E01 (Enterprise trial setup study, September 2026): enterprise trial admin, 40+ seat evaluation; IT admin at a regional logistics company."
+  },
+  {
+   "pid": "E02",
+   "round": "R3",
+   "segment": "enterprise trial admin",
+   "text": "Participant E02 (Enterprise trial setup study, September 2026): enterprise trial admin, 40+ seat evaluation; IT admin at a dental clinic group."
+  },
+  {
+   "pid": "E03",
+   "round": "R3",
+   "segment": "enterprise trial admin",
+   "text": "Participant E03 (Enterprise trial setup study, September 2026): enterprise trial admin, 40+ seat evaluation; IT admin at a property management firm."
+  },
+  {
+   "pid": "E04",
+   "round": "R3",
+   "segment": "enterprise trial admin",
+   "text": "Participant E04 (Enterprise trial setup study, September 2026): enterprise trial admin, 40+ seat evaluation; IT admin at an engineering consultancy."
+  },
+  {
+   "pid": "E05",
+   "round": "R3",
+   "segment": "enterprise trial admin",
+   "text": "Participant E05 (Enterprise trial setup study, September 2026): enterprise trial admin, 40+ seat evaluation; IT admin at a multi-site gym chain."
+  },
+  {
+   "pid": "E06",
+   "round": "R3",
+   "segment": "enterprise trial admin",
+   "text": "Participant E06 (Enterprise trial setup study, September 2026): enterprise trial admin, 40+ seat evaluation; IT admin at an insurance brokerage."
+  },
+  {
+   "pid": "E07",
+   "round": "R3",
+   "segment": "enterprise trial admin",
+   "text": "Participant E07 (Enterprise trial setup study, September 2026): enterprise trial admin, 40+ seat evaluation; IT admin at a school district office."
+  },
+  {
+   "pid": "E08",
+   "round": "R3",
+   "segment": "enterprise trial admin",
+   "text": "Participant E08 (Enterprise trial setup study, September 2026): enterprise trial admin, 40+ seat evaluation; IT admin at a hotel group."
+  }
+ ],
+ "findings": [
+  {
+   "key": "R1-import",
+   "round": "R1",
+   "participants": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08"
+   ],
+   "text": "Finding: New users abandon onboarding at the CSV import step because the column-mapping screen is confusing; import is the main setup blocker."
+  },
+  {
+   "key": "R1-pricing",
+   "round": "R1",
+   "participants": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08"
+   ],
+   "text": "Finding: New users cannot tell which plan includes CSV import; the pricing page is unclear about plan limits."
+  },
+  {
+   "key": "R1-reminders",
+   "round": "R1",
+   "participants": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08"
+   ],
+   "text": "Finding: New users want overdue-invoice reminders sent by text message, not only by email."
+  },
+  {
+   "key": "R2-pricing",
+   "round": "R2",
+   "participants": [
+    "P09",
+    "P10",
+    "P11",
+    "P12",
+    "P13",
+    "P14"
+   ],
+   "text": "Finding: New users can tell which plan includes CSV import; the pricing page is clear about plan limits."
+  },
+  {
+   "key": "R2-duplicate",
+   "round": "R2",
+   "participants": [
+    "P09",
+    "P10",
+    "P11",
+    "P12",
+    "P13",
+    "P14"
+   ],
+   "text": "Finding: New users do not find the duplicate-invoice action; they rebuild repeat invoices by hand."
+  },
+  {
+   "key": "R3-import",
+   "round": "R3",
+   "participants": [
+    "E01",
+    "E02",
+    "E03",
+    "E04",
+    "E05",
+    "E06",
+    "E07",
+    "E08"
+   ],
+   "text": "Finding: New users complete the CSV import step without trouble; the column-mapping screen is clear and import is not a setup blocker. The main blocker is SSO configuration."
+  },
+  {
+   "key": "R3-audit",
+   "round": "R3",
+   "participants": [
+    "E01",
+    "E02",
+    "E03",
+    "E04",
+    "E05",
+    "E06",
+    "E07",
+    "E08"
+   ],
+   "text": "Finding: Admins need an exportable audit log of who changed invoice templates before they will roll out to all seats."
+  }
+ ],
+ "context": [
+  {
+   "key": "ctx-mix",
+   "text": "Signup mix, Q3 2026: 74 percent of new accounts are self-serve signups and 26 percent are enterprise trials."
+  },
+  {
+   "key": "ctx-pricing-change",
+   "text": "Change log 2026-05-20: the pricing page was redesigned with a plan comparison table that lists CSV import limits per plan.",
+   "on": "2026-05-20"
+  },
+  {
+   "key": "ctx-import-unchanged",
+   "text": "Change log: the CSV column-mapping screen has not changed since January 2026."
+  },
+  {
+   "key": "ctx-q4",
+   "text": "Q4 2026 roadmap question: should the team fund a redesign of the CSV column-mapping screen?"
+  },
+  {
+   "key": "ctx-policy",
+   "text": "Research ops note: when two findings disagree, the team's habit is to keep the finding from the most recent study."
+  }
+ ],
+ "ask_examples": [
+  "What blocks new users during setup?",
+  "Do new users understand which plan includes CSV import?",
+  "What do admins need before rolling out to all seats?"
+ ]
+}
