@@ -1,0 +1,510 @@
+{
+ "company": "Tallgrass Software",
+ "manager": {
+  "name": "Priya Raman",
+  "role": "sales manager, started 2026-10-13"
+ },
+ "previous": {
+  "name": "Marcus Hale",
+  "role": "sales manager until 2026-09-30"
+ },
+ "today": "2026-10-15",
+ "project": {
+  "key": "pipeline",
+  "name": "Tallgrass - deal reviews",
+  "description": "Tallgrass Software (fictional): the closed-deal log from the CRM and the deal review notes. memorylake-usecases demo."
+ },
+ "tools": {
+  "crm": "closed deals",
+  "review": "review notes"
+ },
+ "factors": {
+  "play": {
+   "label": "opening play",
+   "options": [
+    "pilot-first",
+    "exec-sponsor call"
+   ]
+  },
+  "security": {
+   "label": "security questionnaire",
+   "options": [
+    "with the proposal",
+    "after the proposal"
+   ]
+  }
+ },
+ "segments": [
+  "SMB",
+  "Enterprise"
+ ],
+ "gap": 10,
+ "incoming": [
+  {
+   "id": "R-1",
+   "account": "Harbor Logistics",
+   "segment": "Enterprise",
+   "text": "Harbor Logistics, enterprise, 1,200 seats, in discovery: open with a two-week pilot or an exec-sponsor call?"
+  },
+  {
+   "id": "R-2",
+   "account": "Meridian Health Systems",
+   "segment": "Enterprise",
+   "text": "Meridian Health Systems, enterprise, 900 seats, asked for pricing: send the security questionnaire with the proposal or after it?"
+  },
+  {
+   "id": "R-3",
+   "account": "Corner Bakery Co",
+   "segment": "SMB",
+   "text": "Corner Bakery Co, SMB, 35 seats, wants to try the product: open with a two-week pilot or an exec-sponsor call?"
+  }
+ ],
+ "followups": [
+  {
+   "id": "R-4",
+   "account": "Oakridge Hospitals",
+   "segment": "Enterprise",
+   "text": "Oakridge Hospitals is an enterprise account with 2,000 seats. Which opening play: pilot first, or the executive sponsor call?"
+  },
+  {
+   "id": "R-5",
+   "account": "Pine Street Dental",
+   "segment": "SMB",
+   "text": "Pine Street Dental is an SMB account with 20 seats. Which opening play: pilot first, or the executive sponsor call?"
+  },
+  {
+   "id": "R-6",
+   "account": "Northfield Grocers",
+   "segment": "Enterprise",
+   "text": "Northfield Grocers is an enterprise account with 1,500 seats. When does the security questionnaire go out: with or after the proposal?"
+  }
+ ],
+ "records": [
+  {
+   "id": "D-2201",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Jonah Pike",
+   "on": "2026-04-08",
+   "account": "Brightwater Foods",
+   "segment": "SMB",
+   "seats": 60,
+   "play": "pilot-first",
+   "security": "with the proposal",
+   "outcome": "won",
+   "text": "Closed deal D-2201: Brightwater Foods, SMB segment, 60 seats. Opening play: a two-week pilot (pilot-first). Security questionnaire sent with the proposal. Closed won on 2026-04-08, 14,400 USD ARR signed. Rep: Jonah Pike."
+  },
+  {
+   "id": "D-2202",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Hana Okafor",
+   "on": "2026-04-15",
+   "account": "Northstar Pharmacies",
+   "segment": "Enterprise",
+   "seats": 1800,
+   "play": "exec-sponsor call",
+   "security": "with the proposal",
+   "outcome": "won",
+   "text": "Closed deal D-2202: Northstar Pharmacies, Enterprise segment, 1,800 seats. Opening play: a call with the customer's executive sponsor (exec-sponsor call). Security questionnaire sent with the proposal. Closed won on 2026-04-15, 216,000 USD ARR signed. Rep: Hana Okafor."
+  },
+  {
+   "id": "D-2203",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Ava Lindqvist",
+   "on": "2026-04-21",
+   "account": "Kettle & Crumb",
+   "segment": "SMB",
+   "seats": 25,
+   "play": "pilot-first",
+   "security": "with the proposal",
+   "outcome": "won",
+   "text": "Closed deal D-2203: Kettle & Crumb, SMB segment, 25 seats. Opening play: a two-week pilot (pilot-first). Security questionnaire sent with the proposal. Closed won on 2026-04-21, 6,000 USD ARR signed. Rep: Ava Lindqvist."
+  },
+  {
+   "id": "D-2204",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Malik Osei",
+   "on": "2026-04-29",
+   "account": "Alder Creek Hospitals",
+   "segment": "Enterprise",
+   "seats": 3000,
+   "play": "exec-sponsor call",
+   "security": "after the proposal",
+   "outcome": "won",
+   "text": "Closed deal D-2204: Alder Creek Hospitals, Enterprise segment, 3,000 seats. Opening play: a call with the customer's executive sponsor (exec-sponsor call). Security questionnaire sent after the proposal. Closed won on 2026-04-29, 360,000 USD ARR signed. Rep: Malik Osei."
+  },
+  {
+   "id": "D-2205",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Jonah Pike",
+   "on": "2026-05-06",
+   "account": "Sunfield Hardware",
+   "segment": "SMB",
+   "seats": 80,
+   "play": "pilot-first",
+   "security": "with the proposal",
+   "outcome": "won",
+   "text": "Closed deal D-2205: Sunfield Hardware, SMB segment, 80 seats. Opening play: a two-week pilot (pilot-first). Security questionnaire sent with the proposal. Closed won on 2026-05-06, 19,200 USD ARR signed. Rep: Jonah Pike."
+  },
+  {
+   "id": "D-2206",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Jonah Pike",
+   "on": "2026-05-12",
+   "account": "Orchard Lane Grocers",
+   "segment": "SMB",
+   "seats": 90,
+   "play": "exec-sponsor call",
+   "security": "with the proposal",
+   "outcome": "won",
+   "text": "Closed deal D-2206: Orchard Lane Grocers, SMB segment, 90 seats. Opening play: a call with the customer's executive sponsor (exec-sponsor call). Security questionnaire sent with the proposal. Closed won on 2026-05-12, 21,600 USD ARR signed. Rep: Jonah Pike."
+  },
+  {
+   "id": "D-2207",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Hana Okafor",
+   "on": "2026-05-13",
+   "account": "Fairhaven Grocery Co-op",
+   "segment": "Enterprise",
+   "seats": 1000,
+   "play": "exec-sponsor call",
+   "security": "after the proposal",
+   "outcome": "lost",
+   "text": "Closed deal D-2207: Fairhaven Grocery Co-op, Enterprise segment, 1,000 seats. Opening play: a call with the customer's executive sponsor (exec-sponsor call). Security questionnaire sent after the proposal. Closed lost on 2026-05-13, 120,000 USD ARR quoted. Rep: Hana Okafor."
+  },
+  {
+   "id": "D-2208",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Ava Lindqvist",
+   "on": "2026-05-19",
+   "account": "Mapleton Pharmacy",
+   "segment": "SMB",
+   "seats": 40,
+   "play": "pilot-first",
+   "security": "with the proposal",
+   "outcome": "won",
+   "text": "Closed deal D-2208: Mapleton Pharmacy, SMB segment, 40 seats. Opening play: a two-week pilot (pilot-first). Security questionnaire sent with the proposal. Closed won on 2026-05-19, 9,600 USD ARR signed. Rep: Ava Lindqvist."
+  },
+  {
+   "id": "D-2209",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Malik Osei",
+   "on": "2026-05-20",
+   "account": "Bayline Foods",
+   "segment": "Enterprise",
+   "seats": 1300,
+   "play": "exec-sponsor call",
+   "security": "with the proposal",
+   "outcome": "won",
+   "text": "Closed deal D-2209: Bayline Foods, Enterprise segment, 1,300 seats. Opening play: a call with the customer's executive sponsor (exec-sponsor call). Security questionnaire sent with the proposal. Closed won on 2026-05-20, 156,000 USD ARR signed. Rep: Malik Osei."
+  },
+  {
+   "id": "D-2210",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Malik Osei",
+   "on": "2026-05-27",
+   "account": "Granite Peak Distribution",
+   "segment": "Enterprise",
+   "seats": 1400,
+   "play": "pilot-first",
+   "security": "with the proposal",
+   "outcome": "won",
+   "text": "Closed deal D-2210: Granite Peak Distribution, Enterprise segment, 1,400 seats. Opening play: a two-week pilot (pilot-first). Security questionnaire sent with the proposal. Closed won on 2026-05-27, 168,000 USD ARR signed. Rep: Malik Osei."
+  },
+  {
+   "id": "D-2211",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Malik Osei",
+   "on": "2026-06-03",
+   "account": "Silverline Logistics",
+   "segment": "Enterprise",
+   "seats": 900,
+   "play": "pilot-first",
+   "security": "after the proposal",
+   "outcome": "lost",
+   "text": "Closed deal D-2211: Silverline Logistics, Enterprise segment, 900 seats. Opening play: a two-week pilot (pilot-first). Security questionnaire sent after the proposal. Closed lost on 2026-06-03, 108,000 USD ARR quoted. Rep: Malik Osei."
+  },
+  {
+   "id": "D-2212",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Jonah Pike",
+   "on": "2026-06-10",
+   "account": "Bluefin Outfitters",
+   "segment": "SMB",
+   "seats": 55,
+   "play": "pilot-first",
+   "security": "with the proposal",
+   "outcome": "won",
+   "text": "Closed deal D-2212: Bluefin Outfitters, SMB segment, 55 seats. Opening play: a two-week pilot (pilot-first). Security questionnaire sent with the proposal. Closed won on 2026-06-10, 13,200 USD ARR signed. Rep: Jonah Pike."
+  },
+  {
+   "id": "D-2213",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Ava Lindqvist",
+   "on": "2026-06-17",
+   "account": "Pebble Creek Clinics",
+   "segment": "SMB",
+   "seats": 65,
+   "play": "exec-sponsor call",
+   "security": "with the proposal",
+   "outcome": "won",
+   "text": "Closed deal D-2213: Pebble Creek Clinics, SMB segment, 65 seats. Opening play: a call with the customer's executive sponsor (exec-sponsor call). Security questionnaire sent with the proposal. Closed won on 2026-06-17, 15,600 USD ARR signed. Rep: Ava Lindqvist."
+  },
+  {
+   "id": "D-2214",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Ava Lindqvist",
+   "on": "2026-06-24",
+   "account": "Greenway Garden Supply",
+   "segment": "SMB",
+   "seats": 30,
+   "play": "pilot-first",
+   "security": "with the proposal",
+   "outcome": "lost",
+   "text": "Closed deal D-2214: Greenway Garden Supply, SMB segment, 30 seats. Opening play: a two-week pilot (pilot-first). Security questionnaire sent with the proposal. Closed lost on 2026-06-24, 7,200 USD ARR quoted. Rep: Ava Lindqvist."
+  },
+  {
+   "id": "D-2215",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Malik Osei",
+   "on": "2026-06-24",
+   "account": "Highmark Auto Parts",
+   "segment": "Enterprise",
+   "seats": 1500,
+   "play": "exec-sponsor call",
+   "security": "after the proposal",
+   "outcome": "lost",
+   "text": "Closed deal D-2215: Highmark Auto Parts, Enterprise segment, 1,500 seats. Opening play: a call with the customer's executive sponsor (exec-sponsor call). Security questionnaire sent after the proposal. Closed lost on 2026-06-24, 180,000 USD ARR quoted. Rep: Malik Osei."
+  },
+  {
+   "id": "D-2216",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Hana Okafor",
+   "on": "2026-06-30",
+   "account": "Summit Outdoor Group",
+   "segment": "Enterprise",
+   "seats": 950,
+   "play": "exec-sponsor call",
+   "security": "with the proposal",
+   "outcome": "won",
+   "text": "Closed deal D-2216: Summit Outdoor Group, Enterprise segment, 950 seats. Opening play: a call with the customer's executive sponsor (exec-sponsor call). Security questionnaire sent with the proposal. Closed won on 2026-06-30, 114,000 USD ARR signed. Rep: Hana Okafor."
+  },
+  {
+   "id": "D-2217",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Jonah Pike",
+   "on": "2026-07-01",
+   "account": "Copperleaf Books",
+   "segment": "SMB",
+   "seats": 35,
+   "play": "pilot-first",
+   "security": "after the proposal",
+   "outcome": "won",
+   "text": "Closed deal D-2217: Copperleaf Books, SMB segment, 35 seats. Opening play: a two-week pilot (pilot-first). Security questionnaire sent after the proposal. Closed won on 2026-07-01, 8,400 USD ARR signed. Rep: Jonah Pike."
+  },
+  {
+   "id": "D-2218",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Hana Okafor",
+   "on": "2026-07-08",
+   "account": "Crescent Home Centers",
+   "segment": "Enterprise",
+   "seats": 1100,
+   "play": "pilot-first",
+   "security": "after the proposal",
+   "outcome": "lost",
+   "text": "Closed deal D-2218: Crescent Home Centers, Enterprise segment, 1,100 seats. Opening play: a two-week pilot (pilot-first). Security questionnaire sent after the proposal. Closed lost on 2026-07-08, 132,000 USD ARR quoted. Rep: Hana Okafor."
+  },
+  {
+   "id": "D-2219",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Malik Osei",
+   "on": "2026-07-14",
+   "account": "Clearwater Medical Supply",
+   "segment": "Enterprise",
+   "seats": 1600,
+   "play": "exec-sponsor call",
+   "security": "with the proposal",
+   "outcome": "lost",
+   "text": "Closed deal D-2219: Clearwater Medical Supply, Enterprise segment, 1,600 seats. Opening play: a call with the customer's executive sponsor (exec-sponsor call). Security questionnaire sent with the proposal. Closed lost on 2026-07-14, 192,000 USD ARR quoted. Rep: Malik Osei."
+  },
+  {
+   "id": "D-2220",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Ava Lindqvist",
+   "on": "2026-07-15",
+   "account": "Hollis Pet Supply",
+   "segment": "SMB",
+   "seats": 45,
+   "play": "pilot-first",
+   "security": "after the proposal",
+   "outcome": "won",
+   "text": "Closed deal D-2220: Hollis Pet Supply, SMB segment, 45 seats. Opening play: a two-week pilot (pilot-first). Security questionnaire sent after the proposal. Closed won on 2026-07-15, 10,800 USD ARR signed. Rep: Ava Lindqvist."
+  },
+  {
+   "id": "D-2221",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Jonah Pike",
+   "on": "2026-07-22",
+   "account": "Lantern Coffee Roasters",
+   "segment": "SMB",
+   "seats": 50,
+   "play": "exec-sponsor call",
+   "security": "after the proposal",
+   "outcome": "won",
+   "text": "Closed deal D-2221: Lantern Coffee Roasters, SMB segment, 50 seats. Opening play: a call with the customer's executive sponsor (exec-sponsor call). Security questionnaire sent after the proposal. Closed won on 2026-07-22, 12,000 USD ARR signed. Rep: Jonah Pike."
+  },
+  {
+   "id": "D-2222",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Jonah Pike",
+   "on": "2026-07-29",
+   "account": "Riverbend Cycles",
+   "segment": "SMB",
+   "seats": 20,
+   "play": "pilot-first",
+   "security": "after the proposal",
+   "outcome": "lost",
+   "text": "Closed deal D-2222: Riverbend Cycles, SMB segment, 20 seats. Opening play: a two-week pilot (pilot-first). Security questionnaire sent after the proposal. Closed lost on 2026-07-29, 4,800 USD ARR quoted. Rep: Jonah Pike."
+  },
+  {
+   "id": "D-2223",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Hana Okafor",
+   "on": "2026-07-29",
+   "account": "Lakeshore Apparel",
+   "segment": "Enterprise",
+   "seats": 850,
+   "play": "exec-sponsor call",
+   "security": "after the proposal",
+   "outcome": "lost",
+   "text": "Closed deal D-2223: Lakeshore Apparel, Enterprise segment, 850 seats. Opening play: a call with the customer's executive sponsor (exec-sponsor call). Security questionnaire sent after the proposal. Closed lost on 2026-07-29, 102,000 USD ARR quoted. Rep: Hana Okafor."
+  },
+  {
+   "id": "D-2224",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Malik Osei",
+   "on": "2026-08-05",
+   "account": "Ironwood Manufacturing",
+   "segment": "Enterprise",
+   "seats": 2200,
+   "play": "pilot-first",
+   "security": "after the proposal",
+   "outcome": "lost",
+   "text": "Closed deal D-2224: Ironwood Manufacturing, Enterprise segment, 2,200 seats. Opening play: a two-week pilot (pilot-first). Security questionnaire sent after the proposal. Closed lost on 2026-08-05, 264,000 USD ARR quoted. Rep: Malik Osei."
+  },
+  {
+   "id": "D-2225",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Ava Lindqvist",
+   "on": "2026-08-12",
+   "account": "Tidewater Paints",
+   "segment": "SMB",
+   "seats": 70,
+   "play": "pilot-first",
+   "security": "after the proposal",
+   "outcome": "lost",
+   "text": "Closed deal D-2225: Tidewater Paints, SMB segment, 70 seats. Opening play: a two-week pilot (pilot-first). Security questionnaire sent after the proposal. Closed lost on 2026-08-12, 16,800 USD ARR quoted. Rep: Ava Lindqvist."
+  },
+  {
+   "id": "D-2226",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Ava Lindqvist",
+   "on": "2026-08-19",
+   "account": "Westbrook Tile",
+   "segment": "SMB",
+   "seats": 75,
+   "play": "exec-sponsor call",
+   "security": "after the proposal",
+   "outcome": "lost",
+   "text": "Closed deal D-2226: Westbrook Tile, SMB segment, 75 seats. Opening play: a call with the customer's executive sponsor (exec-sponsor call). Security questionnaire sent after the proposal. Closed lost on 2026-08-19, 18,000 USD ARR quoted. Rep: Ava Lindqvist."
+  },
+  {
+   "id": "D-2227",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Malik Osei",
+   "on": "2026-08-19",
+   "account": "Pinecrest Office Supply",
+   "segment": "Enterprise",
+   "seats": 1150,
+   "play": "exec-sponsor call",
+   "security": "after the proposal",
+   "outcome": "lost",
+   "text": "Closed deal D-2227: Pinecrest Office Supply, Enterprise segment, 1,150 seats. Opening play: a call with the customer's executive sponsor (exec-sponsor call). Security questionnaire sent after the proposal. Closed lost on 2026-08-19, 138,000 USD ARR quoted. Rep: Malik Osei."
+  },
+  {
+   "id": "D-2228",
+   "tool": "crm",
+   "kind": "deal",
+   "by": "Hana Okafor",
+   "on": "2026-08-26",
+   "account": "Redstone Building Supply",
+   "segment": "Enterprise",
+   "seats": 1250,
+   "play": "exec-sponsor call",
+   "security": "with the proposal",
+   "outcome": "lost",
+   "text": "Closed deal D-2228: Redstone Building Supply, Enterprise segment, 1,250 seats. Opening play: a call with the customer's executive sponsor (exec-sponsor call). Security questionnaire sent with the proposal. Closed lost on 2026-08-26, 150,000 USD ARR quoted. Rep: Hana Okafor."
+  },
+  {
+   "id": "NOTE-PLAY",
+   "tool": "review",
+   "kind": "note",
+   "by": "Marcus Hale",
+   "on": "2026-09-05",
+   "about": "play",
+   "prefer": "pilot-first",
+   "text": "Deal review notes (Marcus Hale, 2026-09-05), opening play, pilot or exec-sponsor call: pilot-first closes more often - 8 of 14 closed deals won with a two-week pilot, 7 of 14 with an exec-sponsor call. Open every new deal with a two-week pilot, enterprise deals included."
+  },
+  {
+   "id": "NOTE-SEC",
+   "tool": "review",
+   "kind": "note",
+   "by": "Marcus Hale",
+   "on": "2026-09-05",
+   "about": "security",
+   "prefer": "with the proposal",
+   "text": "Deal review notes (Marcus Hale, 2026-09-05), security questionnaire timing: deals that got the security questionnaire with the proposal closed 11 of 14; sent after the proposal, 4 of 14. Send the security questionnaire with the proposal on every deal."
+  }
+ ],
+ "ask_examples": [
+  {
+   "q": "Should a 3,000-seat hospital group start with a pilot?",
+   "segment": "Enterprise"
+  },
+  {
+   "q": "A 40-seat garden center wants to try it first. Pilot or exec-sponsor call?",
+   "segment": "SMB"
+  },
+  {
+   "q": "Do we send the security questionnaire before the proposal goes out?",
+   "segment": "SMB"
+  }
+ ]
+}
