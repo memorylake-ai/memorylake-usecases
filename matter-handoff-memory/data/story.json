@@ -1,0 +1,94 @@
+{
+  "firm": "Brannock & Lise LLP",
+  "today": "2026-10-14",
+  "_comment": "Fictional law firm, clients, parties and lawyers. All text is plain ASCII on purpose. Every record is pinned word for word with `fact add`, then labelled with `fact update --metadata`.",
+  "leaving": {"name": "Mira Castell", "role": "senior associate (leaves 2026-10-16)"},
+  "taking_over": {"name": "Jonah Reyes", "role": "associate (takes over Pell Harbor today)"},
+  "matters": [
+    {
+      "key": "fenwick",
+      "name": "Fenwick Bakeries v. Corlett Freight Lines",
+      "short": "Fenwick",
+      "client": "Fenwick Bakeries",
+      "status": "settled 2026-09-22",
+      "description": "Matter: Fenwick Bakeries v. Corlett Freight Lines (spoiled inventory after a reefer failure). Settled 2026-09-22. Fictional data for the MemoryLake matter-handoff-memory demo.",
+      "identifiers": ["Fenwick", "Corlett", "Dorrance", "412,000", "350,000", "640,000"]
+    },
+    {
+      "key": "pellharbor",
+      "name": "Pell Harbor Marine v. Ardent Cold Storage",
+      "short": "Pell Harbor",
+      "client": "Pell Harbor Marine",
+      "status": "mediation 2026-11-05",
+      "description": "Matter: Pell Harbor Marine v. Ardent Cold Storage (warehouse damage to stored engines). Mediation 2026-11-05. Fictional data for the MemoryLake matter-handoff-memory demo.",
+      "identifiers": ["Pell Harbor", "Ardent", "Okafor", "1.2 million", "780,000"]
+    }
+  ],
+  "counsel": {
+    "key": "holm",
+    "name": "Garrick Holm",
+    "firm": "Tessaly Partners",
+    "description": "Opposing counsel: Garrick Holm, Tessaly Partners. Represents Corlett Freight Lines (Fenwick matter) and Ardent Cold Storage (Pell Harbor matter). Fictional person for the MemoryLake matter-handoff-memory demo."
+  },
+  "current": "pellharbor",
+  "scopes": {
+    "pattern": "pattern (portable)",
+    "matter": "matter-specific",
+    "unlabelled": "no scope label"
+  },
+  "records": [
+    {"id": "F1", "where": "fenwick", "by": "Mira Castell", "on": "2026-02-10", "kind": "pleading",
+     "text": "Fenwick Bakeries v. Corlett Freight Lines: complaint filed 2026-02-10 for 640,000 dollars of spoiled inventory after a refrigerated trailer failed on 2026-01-28."},
+    {"id": "F2", "where": "fenwick", "by": "Mira Castell", "on": "2026-07-30", "kind": "client instruction", "privileged": true,
+     "text": "Privileged client instruction, Fenwick Bakeries: CFO Ilse Dorrance authorized settlement at any figure above 350,000 dollars."},
+    {"id": "F3", "where": "fenwick", "by": "Mira Castell", "on": "2026-08-04", "kind": "mediation",
+     "text": "Fenwick mediation session 1 on 2026-08-04: Corlett opened at 90,000 dollars and did not move; session ended without a counter."},
+    {"id": "F4", "where": "fenwick", "by": "Mira Castell", "on": "2026-09-15", "kind": "mediation",
+     "text": "Fenwick mediation session 2 on 2026-09-15: after our expert damages model was served, Corlett moved to 380,000 dollars."},
+    {"id": "F5", "where": "fenwick", "by": "Mira Castell", "on": "2026-09-22", "kind": "settlement", "privileged": true,
+     "text": "Fenwick v. Corlett settled on 2026-09-22 for 412,000 dollars. The amount is confidential under clause 9 of the settlement agreement."},
+    {"id": "F6", "where": "fenwick", "by": "Mira Castell", "on": "2026-05-06", "kind": "work product", "privileged": true,
+     "text": "Work product, Fenwick: our trailer temperature logs have a six-hour gap on 2026-01-28, the night of the failure."},
+
+    {"id": "P1", "where": "pellharbor", "by": "Mira Castell", "on": "2026-04-02", "kind": "pleading",
+     "text": "Pell Harbor Marine v. Ardent Cold Storage: complaint filed 2026-04-02 for 1.2 million dollars of water damage to 14 stored marine engines."},
+    {"id": "P2", "where": "pellharbor", "by": "Mira Castell", "on": "2026-09-30", "kind": "calendar",
+     "text": "Pell Harbor mediation is set for 2026-11-05 before mediator Ruth Okafor; mediation statements are due 2026-10-29."},
+    {"id": "P3", "where": "pellharbor", "by": "Mira Castell", "on": "2026-10-01", "kind": "client instruction", "privileged": true,
+     "text": "Privileged client instruction, Pell Harbor Marine: do not settle below 780,000 dollars without the owner on the call."},
+    {"id": "P4", "where": "pellharbor", "by": "Mira Castell", "on": "2026-10-06", "kind": "strategy",
+     "text": "Pell Harbor strategy: our expert damages report is due 2026-10-28; serve it before the mediation statement, not at the session."},
+    {"id": "P5", "where": "pellharbor", "by": "Mira Castell", "on": "2026-08-19", "kind": "discovery",
+     "text": "Pell Harbor discovery: Ardent produced the sprinkler maintenance logs only after our motion to compel was granted on 2026-08-19."},
+    {"id": "P6", "where": "pellharbor", "by": "Mira Castell", "on": "2026-10-14", "kind": "handoff",
+     "text": "Handoff note from Mira Castell: Jonah Reyes takes over Pell Harbor on 2026-10-16. Read Garrick Holm's profile before the 2026-11-05 mediation; he was opposing counsel in another of our matters this year."},
+
+    {"id": "H1", "where": "holm", "by": "Mira Castell", "on": "2026-08-05", "kind": "counsel pattern", "matter": "fenwick", "scope": "pattern",
+     "text": "Garrick Holm opens a mediation far below what he expects to pay and does not move in the first session."},
+    {"id": "H2", "where": "holm", "by": "Mira Castell", "on": "2026-09-16", "kind": "counsel pattern", "matter": "fenwick", "scope": "pattern",
+     "text": "Garrick Holm moves only after he has a written expert damages model in hand; serve it before the session, not at it."},
+    {"id": "H3", "where": "holm", "by": "Mira Castell", "on": "2026-06-11", "kind": "counsel pattern", "matter": "pellharbor", "scope": "pattern",
+     "text": "Garrick Holm never agrees to a deadline extension without asking for one of equal length back."},
+    {"id": "H4", "where": "holm", "by": "Mira Castell", "on": "2026-09-23", "kind": "counsel pattern", "matter": "fenwick", "scope": "pattern",
+     "text": "Garrick Holm needs about 48 hours to get settlement authority from his client's insurer; plan a follow-up day after any mediation."},
+    {"id": "H5", "where": "holm", "by": "Mira Castell", "on": "2026-08-20", "kind": "counsel note", "matter": "pellharbor", "scope": "matter",
+     "text": "Garrick Holm withheld Ardent's sprinkler maintenance logs until a motion to compel was granted; expect the same on any further request."},
+    {"id": "H6", "where": "holm", "by": "Mira Castell", "on": "2026-09-23", "kind": "counsel note", "matter": "fenwick", "scope": "matter", "privileged": true,
+     "text": "Garrick Holm settled Fenwick v. Corlett at 412,000 dollars, 64 percent of our 640,000 dollar demand, after the second mediation session."},
+    {"id": "H7", "where": "holm", "by": "Mira Castell", "on": "2026-09-23", "kind": "counsel note", "matter": "fenwick", "scope": "matter", "privileged": true,
+     "text": "Garrick Holm's final offer cleared Fenwick's authority of 350,000 dollars by 62,000 dollars; he never learned our floor."},
+    {"id": "H8", "where": "holm", "by": "Mira Castell", "on": "2026-09-16", "kind": "counsel note",
+     "text": "Garrick Holm knows about the six-hour gap in Fenwick's temperature logs and used it at the second mediation."}
+  ],
+  "questions": {
+    "handoff": "What should we expect from Garrick Holm at the mediation, and how does he settle?",
+    "numbers": "What figures has Garrick Holm settled at, and how far does he move?",
+    "after": "How does opposing counsel Garrick Holm negotiate and settle mediations?"
+  },
+  "ask_examples": [
+    "How does Garrick Holm negotiate at mediation?",
+    "What did Fenwick settle for?",
+    "When is the Pell Harbor mediation statement due?",
+    "What does Holm do with discovery requests?"
+  ]
+}
