@@ -1,0 +1,67 @@
+{
+  "studio": "Kiteline Studio",
+  "today": "2026-10-14",
+  "drafts_made": "2026-10-13",
+  "_comment": "Fictional studio, clients and people. All text is plain ASCII on purpose (the server mis-decodes lone non-ASCII characters in short texts).",
+  "people": {
+    "ines": {"name": "Ines Varga", "role": "design lead, owns the studio system"},
+    "tomas": {"name": "Tomas Reyes", "role": "designer on the Orchard Bank account"},
+    "noor": {"name": "Noor Haddad", "role": "designer on the Pell & Finch account"}
+  },
+  "layers": {
+    "base": {"key": "studio-system", "name": "Kiteline studio system (base)", "label": "studio base",
+             "description": "The studio's own design system: tokens, rules and banned patterns every client system starts from. Demo data."},
+    "orchard": {"key": "client-orchard", "name": "Orchard Bank (client system)", "label": "Orchard Bank", "short": "Orchard", "client": true,
+                "description": "Orchard Bank's overrides on top of the studio system. Fictional client. Demo data."},
+    "pell": {"key": "client-pell", "name": "Pell & Finch (client system)", "label": "Pell & Finch", "short": "Pell", "client": true,
+             "description": "Pell & Finch's overrides on top of the studio system. Fictional client. Demo data."}
+  },
+  "tokens": [
+    {"layer": "base", "token": "color.primary", "value": "#2F5BEA", "decided": "2026-03-02", "by": "ines", "why": "one saturated blue for every primary action"},
+    {"layer": "base", "token": "color.text", "value": "#1B1F24", "decided": "2026-03-02", "by": "ines", "why": "near-black body text, 15:1 on white"},
+    {"layer": "base", "token": "color.surface", "value": "#FFFFFF", "decided": "2026-03-02", "by": "ines", "why": "plain white surfaces, colour comes from content"},
+    {"layer": "base", "token": "radius.control", "value": "8px", "decided": "2026-03-02", "by": "ines", "why": "soft corners on buttons and inputs read as friendly on small screens"},
+    {"layer": "base", "token": "radius.card", "value": "12px", "decided": "2026-03-02", "by": "ines", "why": "cards a step rounder than the controls inside them"},
+    {"layer": "base", "token": "space.2", "value": "8px", "decided": "2026-03-02", "by": "ines", "why": "gap between a label and its field"},
+    {"layer": "base", "token": "space.4", "value": "16px", "decided": "2026-03-02", "by": "ines", "why": "gap between stacked form fields and between cards"},
+    {"layer": "base", "token": "space.6", "value": "24px", "decided": "2026-03-02", "by": "ines", "why": "padding inside cards and dialogs"},
+    {"layer": "base", "token": "font.body", "value": "Inter 16/24", "decided": "2026-03-02", "by": "ines", "why": "16px body text, never smaller on mobile"},
+    {"layer": "base", "token": "font.heading", "value": "Inter Tight 600", "decided": "2026-03-02", "by": "ines", "why": "a tighter cut of the body face for headings"},
+    {"layer": "base", "token": "shadow.card", "value": "0 1px 3px rgba(0,0,0,0.12)", "decided": "2026-03-02", "by": "ines", "why": "one light shadow lifts a card off the page"},
+    {"layer": "base", "token": "focus.ring", "value": "2px solid #2F5BEA, offset 2px", "decided": "2026-03-02", "by": "ines", "why": "visible keyboard focus on every control"},
+
+    {"layer": "orchard", "token": "color.primary", "value": "#0B3D2E", "decided": "2026-06-18", "by": "tomas", "why": "Orchard's brand book makes forest green the only action colour"},
+    {"layer": "orchard", "token": "radius.control", "value": "0px", "decided": "2026-06-18", "by": "tomas", "why": "Orchard's brand book uses square corners on every surface"},
+    {"layer": "orchard", "token": "radius.card", "value": "0px", "decided": "2026-06-18", "by": "tomas", "why": "square corners on cards too, same brand rule"},
+    {"layer": "orchard", "token": "font.heading", "value": "Source Serif 4 600", "decided": "2026-06-18", "by": "tomas", "why": "Orchard's serif headline face, licensed for web"},
+    {"layer": "orchard", "token": "shadow.card", "value": "none", "decided": "2026-06-18", "by": "tomas", "why": "flat surfaces only; see the drop-shadow ban"},
+
+    {"layer": "pell", "token": "color.primary", "value": "#C2410C", "decided": "2026-07-29", "by": "noor", "why": "Pell & Finch's burnt orange, matched to their shop signage"},
+    {"layer": "pell", "token": "space.4", "value": "12px", "decided": "2026-07-29", "by": "noor", "why": "dense product grids: four cards across on a laptop"},
+    {"layer": "pell", "token": "font.body", "value": "Karla 15/22", "decided": "2026-07-29", "by": "noor", "why": "their catalogue face; 15px tested fine at their density"}
+  ],
+  "banned": [
+    {"layer": "base", "pattern": "gradient-button", "label": "gradient fill on a button", "decided": "2026-03-02", "by": "ines", "why": "gradients fail contrast checks at the light end"},
+    {"layer": "base", "pattern": "tiny-text", "label": "text smaller than 12px", "decided": "2026-03-02", "by": "ines", "why": "unreadable on mobile, fails the studio accessibility bar"},
+    {"layer": "orchard", "pattern": "drop-shadow", "label": "drop shadow on any surface", "decided": "2026-06-18", "by": "tomas", "why": "Orchard's brand book: flat surfaces only"}
+  ],
+  "questions": [
+    {"client": "orchard", "token": "radius.control", "q": "What corner radius do buttons and text inputs use?"},
+    {"client": "orchard", "token": "space.4", "q": "How much space goes between stacked form fields?"},
+    {"client": "orchard", "token": "color.primary", "q": "Which colour is the primary call to action button?"}
+  ],
+  "drafts": [
+    {"id": "D1", "client": "orchard", "title": "Orchard Bank - sign-in form", "made_by": "a design copilot that searched the studio system only",
+     "tokens": {"color.primary": "#2F5BEA", "radius.control": "8px", "space.4": "16px", "font.body": "Inter 16/24"},
+     "patterns": ["drop-shadow"]},
+    {"id": "D2", "client": "pell", "title": "Pell & Finch - product card", "made_by": "an image-AI session still scoped to yesterday's Orchard Bank work",
+     "tokens": {"color.primary": "#0B3D2E", "radius.card": "0px", "space.4": "12px", "font.body": "Karla 15/22"},
+     "patterns": []},
+    {"id": "D3", "client": "orchard", "title": "Orchard Bank - statement card", "made_by": "a design copilot that read the studio system and Orchard's overrides, layered",
+     "tokens": {"color.primary": "#0B3D2E", "radius.card": "0px", "space.4": "16px", "shadow.card": "none", "font.heading": "Source Serif 4 600"},
+     "patterns": []}
+  ],
+  "update": {"layer": "base", "token": "space.4", "value": "20px", "decided": "2026-10-14", "by": "ines",
+             "why": "accessibility audit: 16px between fields put tap targets too close on mobile"},
+  "trace_question": "How has the spacing between form fields changed?"
+}
