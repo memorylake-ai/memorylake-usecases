@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Small SaaS Support Teams AI Memory That Holds Every Ticket and Customer*](https://www.memorylake.ai/en/usecase/ai-memory-for-small-saas-support-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-<!-- videos -->
+**Watch it run:** [CLI, 3:54](https://github.com/memorylake-ai/memorylake-usecases/releases/download/saas-support-memory-v1/saas-support-memory-cli-demo.mp4) · [Web, 5:16](https://github.com/memorylake-ai/memorylake-usecases/releases/download/saas-support-memory-v1/saas-support-memory-web-demo.mp4) — real, unedited runs on a free account
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/saas-support-memory-v1); GitHub serves them as downloads).
 
 **The problem.** *A customer reported the bug last month; the fix was a specific workaround. Today another customer hits the
 same symptom, and the AI support tool doesn't know who it is talking to.* A tool that sees one ticket at a time can match a
@@ -94,7 +95,9 @@ terminal drawer as it runs: the known issues, both customers' September tickets 
 side by symptom only, then condition by condition with each customer's memory, then the record and the come-back search.
 **Try a ticket** takes any text for either customer and shows the symptom-only answer next to the memory-checked one.
 
-<!-- screenshots -->
+![By symptom only: both tickets get KI-101](web/screenshot-symptom.png)
+
+![With customer memory: every condition checked and cited; KI-109 holds back KI-101's workaround for Copperleaf](web/screenshot-checked.png)
 
 ## What happens, step by step
 
@@ -215,13 +218,13 @@ Every run so far, CLI and web (see `out/runs.jsonl` on your machine for yours):
 
 | | runs | result |
 |---|---|---|
-| symptom-only top hit, both tickets | 4 / 4 | KI-101 for both (same reply) |
-| memory-checked reply | 4 / 4 | Marlow KI-101 · Copperleaf KI-117 |
-| KI-101's workaround held back for Copperleaf (KI-109) | 4 / 4 | ⚠ cited every time |
-| today's record found again by the come-back question | 4 / 4 | #1 of 3 |
-| facts extracted from the September tickets (shown, not relied on) | 3 fresh runs | Marlow 3–5, Copperleaf 5–7 |
+| symptom-only top hit, both tickets | 6 / 6 | KI-101 for both (same reply) |
+| memory-checked reply | 6 / 6 | Marlow KI-101 · Copperleaf KI-117 |
+| KI-101's workaround held back for Copperleaf (KI-109) | 6 / 6 | ⚠ cited every time |
+| today's record found again by the come-back question | 6 / 6 | #1 of 3 |
+| facts extracted from the September tickets (shown, not relied on) | 5 fresh runs | Marlow 3–6, Copperleaf 5–7 |
 
-4 runs = 3 in the terminal (first run, resume, `--reset`) and 1 in the web companion. First run 2¼–3 min, resume 45 s.
+6 runs = 3 in the terminal (first run, resume, `--reset`), 1 in the web companion and the two recordings (a fresh `git clone` in the terminal, and the web companion). First run 2–3 min, resume 45 s.
 
 ## Wiring it into your own support stack
 
