@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Law Firms Matter Handoff Memory That Protects Every Client and Position*](https://www.memorylake.ai/en/usecase/client-matter-handoff-memory-for-law-firms),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 2:28](https://github.com/memorylake-ai/memorylake-usecases/releases/download/matter-handoff-memory-v1/matter-handoff-memory-cli-demo.mp4) · [Web, 3:52](https://github.com/memorylake-ai/memorylake-usecases/releases/download/matter-handoff-memory-v1/matter-handoff-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/matter-handoff-memory-v1); GitHub serves them as downloads).
 
 **The problem.** A small firm keeps one memory per matter: that is the privilege wall. It also wants memory about the
 *people* it meets again and again, opposing counsel above all: how he negotiates, how long his client takes to sign off,
@@ -97,6 +98,10 @@ Paste the key, connect, run. The page drives the same functions as `demo.py` and
 terminal drawer as it runs: the matters and the actor, every record with its label, the handoff read with the control next
 to it, the wall check, and the move back. **Ask** takes any question on either matter, with or without Holm's actor in
 scope, and re-runs the wall check.
+
+![The handoff read: Pell Harbor alone returns nothing from Fenwick; with Holm's actor in scope, 3 of 9 facts are Fenwick's](web/screenshot-handoff-read.png)
+
+![The wall check: every fact on Holm's actor against Pell Harbor — 3 withheld, one caught only by the scan](web/screenshot-wall-check.png)
 
 ## What happens, step by step
 
@@ -228,10 +233,10 @@ prints how many tries it took.
 
 | What | Result |
 |---|---|
-| Control (`--projects` Pell Harbor alone): other matters' names and figures in the top 8 | none, 5 / 5 runs |
-| Handoff read (`--projects` Pell Harbor `--actors` Holm): Fenwick facts H6, H7, H8 in the hits | 3 of 9 distinct facts, 5 / 5 runs (4 CLI from scratch or re-run, 1 web); the top 8 of both questions identical in every run |
-| Wall check: 4 portable · 1 this matter · 3 withheld, H8 caught only by the scan | 5 / 5 |
-| After the move: other matters' names and figures in the top 8; patterns H1, H2, H4 at #1–#3; all three moved facts found on Fenwick | none; 5 / 5; 5 / 5 (deleted facts gone from search on the first try every time) |
+| Control (`--projects` Pell Harbor alone): other matters' names and figures in the top 8 | none, 7 / 7 runs |
+| Handoff read (`--projects` Pell Harbor `--actors` Holm): Fenwick facts H6, H7, H8 in the hits | 3 of 9 distinct facts, 7 / 7 runs (5 from scratch including both recordings, 2 re-runs); the top 8 of both questions identical in the 5 runs whose ranks were logged |
+| Wall check: 4 portable · 1 this matter · 3 withheld, H8 caught only by the scan | 7 / 7 |
+| After the move: other matters' names and figures in the top 8; patterns H1, H2, H4 at #1–#3; all three moved facts found on Fenwick | none, 7 / 7; 5 / 5 logged; 5 / 5 logged (deleted facts gone from search on the first try every time) |
 | Time | 70–88 s from scratch, 48–52 s re-run |
 
 ## Wiring it into your own matters

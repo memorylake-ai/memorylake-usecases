@@ -89,7 +89,7 @@
   function intake() {
     const x = S.intake; if (!x) return empty("Intake");
     const group = (w, title) => `<div class="card ${w === "holm" ? "mine" : ""}"><h2 style="margin-top:0">${title}</h2><table class="iso"><tr><th>id</th><th>date</th>${w === "holm" ? "<th>label</th>" : ""}<th>record</th></tr>
-      ${x.records.filter((r) => r.where === w).map((r) => `<tr class="${w === "holm" && !r.scope ? "hl" : ""}"><td class="mono small">${esc(r.record)}</td><td class="small muted" style="white-space:nowrap">${esc(r.on)}</td>
+      ${x.records.filter((r) => r.where === w).map((r) => `<tr class="${w === "holm" && !r.scope ? "hl" : ""}"><td class="mono small" style="white-space:nowrap">${esc(r.record)}</td><td class="small muted" style="white-space:nowrap">${esc(r.on)}</td>
         ${w === "holm" ? `<td>${label(r)}</td>` : ""}<td class="small">${r.privileged ? '<span class="pill warn">privileged</span> ' : ""}${esc(r.body)}</td></tr>`).join("")}</table></div>`;
     return `<h1>Intake — matter records on the matter, counsel patterns on the counsel</h1>
       <p class="lead">One <code>fact add</code> per scope, word for word, then <code>fact update --metadata</code>: where it came from (<code>matter</code>), whether it is a portable pattern or matter-specific (<code>scope</code>), privileged or not.
