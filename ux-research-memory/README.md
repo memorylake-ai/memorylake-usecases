@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give UX Researchers AI That Retains Every User Insight Across the Project Lifecycle*](https://www.memorylake.ai/en/usecase/ai-memory-for-ux-researchers),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 4:33](https://github.com/memorylake-ai/memorylake-usecases/releases/download/ux-research-memory-v1/ux-research-memory-cli-demo.mp4) · [Web, 6:06](https://github.com/memorylake-ai/memorylake-usecases/releases/download/ux-research-memory-v1/ux-research-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/ux-research-memory-v1); GitHub serves them as downloads).
 
 **The problem.** "When a later study contradicts an earlier finding, MemoryLake flags the conflict so you have an
 explicit record of where the evidence shifted." It does. What happens next is up to the team, and the common habit is
@@ -94,6 +95,10 @@ python3 web/server.py                # opens http://127.0.0.1:8765
 Paste the key, connect, run. The page drives the same functions as `demo.py` and streams every `memorylake` command into a
 terminal drawer as it runs: the three studies, the flagged conflicts, both resolutions side by side, and the Q4 question
 in both projects. **Ask** sends any question to both projects and lists the conflicts.
+
+![Check who said it: one segment split, one reversal](web/screenshot-check.png)
+
+![The Q4 question: the same research reads as evidence for 26% vs 100% of new signups](web/screenshot-q4.png)
 
 ## What happens, step by step
 
