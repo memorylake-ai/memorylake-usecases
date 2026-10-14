@@ -4,6 +4,9 @@ A runnable version of the MemoryLake use case
 [*Give Marketing Agencies Project Management Memory That Holds Across Every Team Role*](https://www.memorylake.ai/en/usecase/project-management-memory-for-marketing-agencies),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
+**Watch it run:** [CLI, 2:30](https://github.com/memorylake-ai/memorylake-usecases/releases/download/agency-project-memory-v1/agency-project-memory-cli-demo.mp4) · [Web, 3:40](https://github.com/memorylake-ai/memorylake-usecases/releases/download/agency-project-memory-v1/agency-project-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/agency-project-memory-v1); GitHub serves them as downloads).
+
 **The problem.** Agency project memory is mostly what people wrote in their own tools on the day: "Dana confirmed:
 the landing page goes live two weeks from today", "the hero video lands tomorrow", "budget is the same as last
 quarter", "use the new lockup", "hold every post until the end of the month". All true when written. Put into one
@@ -111,6 +114,10 @@ terminal drawer as it runs: the `fact list --query` census and the two dates on 
 of each question with its top 8; the memory read as a comparison table and one card per question (the phrase
 highlighted, resolved both ways); and the write-back with `fact trace`. **Ask** takes any question and its topic, and
 opens the timeline.
+
+![The memory read: 5 of 6 answers change with the day the record is read; two of them are overdue, not upcoming](web/screenshot-memory-read.png)
+
+![Write it back: each relative phrase replaced by what it meant on the day it was written; the same quick read agrees 6 of 6](web/screenshot-write-back.png)
 
 ## What happens, step by step
 
@@ -237,9 +244,9 @@ it returned before the rewrite):
 | What | Result |
 |---|---|
 | The record each question needs is search's #1 | 6 / 6 questions, every run (and 6 / 6 for the reworded follow-ups) |
-| Quick read vs memory read: Q1–Q5 ✗, Q6 ✓ | 5 / 5 runs (2 from scratch, 2 re-runs, 1 in the browser) |
+| Quick read vs memory read: Q1–Q5 ✗, Q6 ✓ | 7 / 7 runs (4 from scratch including both recordings, 2 re-runs, 1 re-run in the browser) |
 | After write-back: quick read agrees | 6 / 6, every run, first try; 0 answers from the search cache |
-| Time | 85–96 s from scratch, 69–76 s re-run |
+| Time | 83–96 s from scratch, 69–76 s re-run |
 
 ## Wiring it into your own agency
 
