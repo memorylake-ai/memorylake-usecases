@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Hiring Teams Interview Feedback Memory That Actually Informs Decisions*](https://www.memorylake.ai/en/usecase/interview-feedback-memory-for-hiring-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** videos coming with release `interview-feedback-memory-v1`.
+**Watch it run:** [CLI, 2:56](https://github.com/memorylake-ai/memorylake-usecases/releases/download/interview-feedback-memory-v1/interview-feedback-memory-cli-demo.mp4) · [Web, 3:55](https://github.com/memorylake-ai/memorylake-usecases/releases/download/interview-feedback-memory-v1/interview-feedback-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/interview-feedback-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Interview feedback lands as scorecards, and the debrief reads them fast: average the scores, pick the higher
 number. That treats every interviewer's 3.5 as the same 3.5. On a real panel one person scores hard and another scores
