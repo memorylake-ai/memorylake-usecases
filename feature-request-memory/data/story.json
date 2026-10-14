@@ -1,0 +1,55 @@
+{
+  "company": "Driftline",
+  "today": "2026-10-14",
+  "recent_from": "2026-09-30",
+  "_comment": "Fictional company, customers and people. All text is plain ASCII on purpose (the server mis-decodes lone non-ASCII characters in short texts).",
+  "pm": {"name": "Ines Okafor", "role": "product manager, plans the Q4 roadmap next week"},
+  "project": {"key": "requests", "name": "Driftline feature requests",
+              "description": "Every feature request Driftline has received, one fact each, with the account, channel, date, theme and urgency. Fictional data for the MemoryLake feature-request-memory demo."},
+  "sources": {"ticket": "support ticket", "call": "sales call notes", "canny": "Canny board", "slack": "shared Slack channel"},
+  "themes": {
+    "sso": "Single sign-on (SAML / OIDC)",
+    "dark-mode": "Dark mode",
+    "export": "Export to CSV / spreadsheet",
+    "slack-alerts": "Alerts into Slack",
+    "offline": "Offline mobile app"
+  },
+  "accounts": [
+    {"key": "halvard", "name": "Halvard Freight", "status": "customer", "plan": "Starter", "arr": 4800, "renews": "2027-03-31", "note": "one depot, 12 dispatchers"},
+    {"key": "brightwell", "name": "Brightwell Clinics", "status": "customer", "plan": "Business", "arr": 36000, "renews": "2027-01-31", "note": "1 of 5 clinics live, the other 4 waiting"},
+    {"key": "corvid", "name": "Corvid Legal", "status": "customer", "plan": "Business", "arr": 28000, "renews": "2026-11-30", "note": "courier network for 3 offices"},
+    {"key": "tamsin", "name": "Tamsin Foods", "status": "customer", "plan": "Growth", "arr": 14400, "renews": "2027-04-30", "note": "two warehouses"},
+    {"key": "northgate", "name": "Northgate Schools", "status": "customer", "plan": "Business", "arr": 42000, "renews": "2026-12-15", "note": "school bus routes for a district"},
+    {"key": "pellucid", "name": "Pellucid Bank", "status": "prospect", "plan": "Enterprise pilot", "arr": 60000, "renews": "", "note": "pilot proposal for branch cash runs"},
+    {"key": "quillon", "name": "Quillon Logistics", "status": "customer", "plan": "Growth", "arr": 12000, "renews": "2027-06-30", "note": "signed in August"}
+  ],
+  "requests": [
+    {"id": "R01", "account": "brightwell", "source": "call",   "received": "2026-05-14", "theme": "sso",          "urgency": "blocker", "text": "We cannot roll out to the other four clinics until staff can log in with Okta."},
+    {"id": "R02", "account": "brightwell", "source": "slack",  "received": "2026-05-20", "theme": "slack-alerts", "urgency": "normal",  "text": "Post delivery alerts into our Slack channel."},
+    {"id": "R03", "account": "corvid",     "source": "canny",  "received": "2026-05-29", "theme": "export",       "urgency": "normal",  "text": "Export the shipment table to a spreadsheet for month-end."},
+    {"id": "R04", "account": "corvid",     "source": "ticket", "received": "2026-06-03", "theme": "sso",          "urgency": "blocker", "text": "Our IT team requires SAML-based login before they will approve the renewal."},
+    {"id": "R05", "account": "tamsin",     "source": "slack",  "received": "2026-06-19", "theme": "dark-mode",    "urgency": "normal",  "text": "A dark mode would be nice for the warehouse tablets."},
+    {"id": "R06", "account": "northgate",  "source": "ticket", "received": "2026-06-12", "theme": "offline",      "urgency": "normal",  "text": "Drivers lose signal on rural routes; the mobile app should keep working offline."},
+    {"id": "R07", "account": "tamsin",     "source": "canny",  "received": "2026-07-21", "theme": "sso",          "urgency": "normal",  "text": "We want people to sign in with their Google Workspace accounts instead of a separate password."},
+    {"id": "R08", "account": "tamsin",     "source": "ticket", "received": "2026-07-30", "theme": "export",       "urgency": "normal",  "text": "Let us download reports as CSV so finance can reconcile them."},
+    {"id": "R09", "account": "northgate",  "source": "call",   "received": "2026-08-08", "theme": "sso",          "urgency": "blocker", "text": "District policy: every vendor tool must use Azure AD single sign-on by January."},
+    {"id": "R10", "account": "northgate",  "source": "ticket", "received": "2026-08-26", "theme": "export",       "urgency": "normal",  "text": "We need to pull route histories into Excel for the board report."},
+    {"id": "R11", "account": "pellucid",   "source": "call",   "received": "2026-09-02", "theme": "sso",          "urgency": "blocker", "text": "Their security review flagged password-only login; the pilot needs SSO through their identity provider."},
+    {"id": "R12", "account": "halvard",    "source": "ticket", "received": "2026-09-30", "theme": "dark-mode",    "urgency": "normal",  "text": "Dispatchers work night shifts; please add a dark mode."},
+    {"id": "R13", "account": "halvard",    "source": "ticket", "received": "2026-10-02", "theme": "dark-mode",    "urgency": "normal",  "text": "Dark theme please, the white screen is blinding at 3am."},
+    {"id": "R14", "account": "corvid",     "source": "ticket", "received": "2026-10-05", "theme": "slack-alerts", "urgency": "normal",  "text": "Send exception alerts to Slack, not only by email."},
+    {"id": "R15", "account": "halvard",    "source": "slack",  "received": "2026-10-06", "theme": "dark-mode",    "urgency": "normal",  "text": "Any update on night mode? Our dispatchers keep asking."},
+    {"id": "R16", "account": "halvard",    "source": "ticket", "received": "2026-10-09", "theme": "dark-mode",    "urgency": "normal",  "text": "Requesting a darker colour scheme for the dispatch board."},
+    {"id": "R17", "account": "halvard",    "source": "call",   "received": "2026-10-12", "theme": "dark-mode",    "urgency": "normal",  "text": "Their ops lead raised dark mode again on the quarterly call."}
+  ],
+  "today_requests": [
+    {"id": "R18", "account": "quillon",    "source": "ticket", "received": "2026-10-14", "theme": "sso",          "urgency": "blocker", "text": "Can our staff log in through OneLogin? Forty users are waiting to be invited."},
+    {"id": "R19", "account": "halvard",    "source": "slack",  "received": "2026-10-14", "theme": "dark-mode",    "urgency": "normal",  "text": "Still the top ask from our night dispatchers: a dark mode."}
+  ],
+  "keyword_checks": [
+    {"theme": "sso", "query": "SSO"},
+    {"theme": "dark-mode", "query": "dark mode"}
+  ],
+  "topk_check": {"theme": "export", "query": "export reports to a spreadsheet or CSV file", "top_k": 10},
+  "ask_examples": ["What do customers want for logging in?", "Who asked for dark mode?"]
+}
