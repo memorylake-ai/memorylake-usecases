@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Design Studios Design System Memory That AI Tools Actually Read*](https://www.memorylake.ai/en/usecase/design-system-memory-for-design-studios),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** videos are being recorded — see the [releases](https://github.com/memorylake-ai/memorylake-usecases/releases).
+**Watch it run:** [CLI, 2:21](https://github.com/memorylake-ai/memorylake-usecases/releases/download/design-system-memory-v1/design-system-memory-cli-demo.mp4) · [Web, 3:30](https://github.com/memorylake-ai/memorylake-usecases/releases/download/design-system-memory-v1/design-system-memory-web-demo.mp4) — real, unedited runs on a free account
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/design-system-memory-v1); GitHub serves them as downloads).
 
 **The problem.** *A studio's design system has a base, and every client changes a few things on top of it.* Give an AI design
 tool the client's system alone and it has no rule for anything the client didn't change: spacing, body text, focus rings. Give
@@ -211,17 +212,17 @@ whole point of keeping overrides — and only overrides — in the client layer.
 
 ## Measured
 
-Six runs on a free account on 2026-10-14 (four from scratch with `--reset`, two re-runs, one of them from the web page):
+Seven recorded runs on a free account on 2026-10-14 (five from scratch — four with `--reset`, one for the web video — and two re-runs, one of them from the web page):
 
 | What | Result |
 |---|---|
-| Client-only search finds the override (radius, primary colour) | 12 / 12 |
-| Client-only search has no `space.4` at all | 6 / 6 (it isn't in the scope, so this cannot vary) |
-| Studio + client search returns **both** values for an overridden token | 12 / 12 |
-| …with the **studio value ranked first** | 12 / 12 (radius 8px #1, Orchard 0px #2; primary #2F5BEA #1, Orchard #0B3D2E #2) |
-| Review as of 2026-10-13: D1 ✗ 3 · D2 ✗ 2 · D3 ✓ | 6 / 6 |
-| After the change: Orchard 16 → 20 px, Pell & Finch 12 → 12 px; D3 ✓ → ✗ 1 | 6 / 6 |
-| Time | 59–84 s from scratch, 26–28 s re-run |
+| Client-only search finds the override (radius, primary colour) | 14 / 14 |
+| Client-only search has no `space.4` at all | 7 / 7 (it isn't in the scope, so this cannot vary) |
+| Studio + client search returns **both** values for an overridden token | 14 / 14 |
+| …with the **studio value ranked first** | 14 / 14 (radius 8px #1, Orchard 0px #2; primary #2F5BEA #1, Orchard #0B3D2E #2) |
+| Review as of 2026-10-13: D1 ✗ 3 · D2 ✗ 2 · D3 ✓ | 7 / 7 |
+| After the change: Orchard 16 → 20 px, Pell & Finch 12 → 12 px; D3 ✓ → ✗ 1 | 7 / 7 |
+| Time | 55–84 s from scratch, 26–28 s re-run |
 
 Steps 5 and 6 are deterministic (they read `fact list` and metadata). The ranks in step 4 are what `search` returned; "studio
 first" held every time here, but it is search ranking, not a rule — the demo prints whatever comes back.
