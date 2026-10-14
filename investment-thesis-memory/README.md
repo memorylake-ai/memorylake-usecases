@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Portfolio Managers Investment Memory That Tracks Every Thesis*](https://www.memorylake.ai/en/usecase/investment-memory-for-portfolio-managers),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 4:09](https://github.com/memorylake-ai/memorylake-usecases/releases/download/investment-thesis-memory-v1/investment-thesis-memory-cli-demo.mp4) · [Web, 5:11](https://github.com/memorylake-ai/memorylake-usecases/releases/download/investment-thesis-memory-v1/investment-thesis-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/investment-thesis-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Research is filed by holding: one folder, one notebook, one AI research thread per position. A thesis rests
 on premises, and premises rest on other companies — a big customer, a tenant, a foundry. When news about one of those
@@ -91,6 +92,10 @@ Paste the key, connect, run. The page drives the same functions as `demo.py` and
 terminal drawer as it runs: the seven projects, every record with its metadata, the holding-by-holding review, the
 whole-book check with the shared dependencies and the control date next to it, and the write-back. **Ask the book** takes
 any question across every holding, or runs the premise check as of a date.
+
+![Holding by holding: each holding's premises checked against its own memory flags one of seven](web/screenshot-holding-review.png)
+
+![The whole book: the same check flags three of seven; two premises broke on a note filed under Corvane](web/screenshot-whole-book.png)
 
 ## What happens, step by step
 
@@ -237,8 +242,8 @@ keeps its old keys and gains `review`, `broken` and `flagged_on`; its text stays
 |---|---|
 | Holding by holding 1 / 7 flagged; whole book 3 / 7 (32%); 2 broken premises filed under another holding | every run (deterministic over `fact list`) |
 | Tessaly reaffirmed high 7 days after the note; control on 2026-09-29 flags 0 with Halvern at 32% | every run |
-| After the write-back: holding by holding 3 / 7; the cross-reference is Tessaly's search hit #1 | every run so far |
-| Time | 111–157 s from scratch, 60 s re-run |
+| After the write-back: holding by holding 3 / 7; the cross-reference is Tessaly's search hit #1 | 6 / 6 runs (5 from scratch, including both recordings, and 1 re-run) |
+| Time | 101–157 s from scratch, 60 s re-run |
 
 The search lines are what `search` returned; the demo prints whatever comes back. Only the order of each holding's own
 records moves between runs — search is never what decides whether a premise is broken.
