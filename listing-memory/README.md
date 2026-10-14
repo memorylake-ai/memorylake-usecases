@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Real Estate Teams Listing Memory That Holds Every Detail Across Agents*](https://www.memorylake.ai/en/usecase/listing-memory-for-real-estate-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 2:27](https://github.com/memorylake-ai/memorylake-usecases/releases/download/listing-memory-v1/listing-memory-cli-demo.mp4) · [Web, 3:50](https://github.com/memorylake-ai/memorylake-usecases/releases/download/listing-memory-v1/listing-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/listing-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Listing memory is mostly feedback: every buyer's agent tells you what their buyers thought. "Felt the
 asking price is high for the street." "Nervous about the water stain on the hall ceiling." "Walked once they read
@@ -127,6 +128,10 @@ terminal drawer as it runs: the listing's four versions; the quick read of each 
 it counted highlighted); the memory read as a comparison table, every piece of feedback joined to its day, and one card
 per question; and the write-back with the `$699,000` census and `fact trace`. **Ask** takes any question and its topic,
 and lists every piece of feedback with the listing it saw.
+
+![The memory read: 3 of 4 answers change with which listing the feedback is read against; the grey control column gives the quick read's answer each time](web/screenshot-memory-read.png)
+
+![Write it back: the $699,000 census goes from 1 record to 7, each piece of feedback says which listing it saw, and the same quick read agrees 4 of 4](web/screenshot-write-back.png)
 
 ## What happens, step by step
 
