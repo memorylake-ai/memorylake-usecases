@@ -1,0 +1,70 @@
+{
+  "practice": "Harbour Line Physio",
+  "today": "2026-10-14",
+  "first_cover_visit": "2026-10-16",
+  "project": {"key": "practice", "name": "Harbour Line Physio (demo)",
+              "description": "Solo physiotherapy practice: covering handoffs and practice records (demo: treatment-plan-memory)"},
+  "patient": {"key": "jonah", "name": "Jonah Reyes",
+              "description": "Jonah Reyes, 54, right shoulder (demo: treatment-plan-memory)"},
+  "clinicians": {
+    "mira": "Mira Lindqvist PT",
+    "theo": "Theo Adeyemi PT",
+    "scribe": "the AI scribe"
+  },
+  "precautions": [
+    {"pid": "P1", "label": "No loaded overhead work", "blocks": ["overhead"]},
+    {"pid": "P2", "label": "Anticoagulant: no dry needling / IASTM", "blocks": ["needling", "iastm"]},
+    {"pid": "P3", "label": "Exercise pain ceiling", "blocks": []}
+  ],
+  "entries": [
+    {"key": "plan:v1", "kind": "plan", "version": 1, "date": "2026-08-04", "author": "mira", "drafted_by": "mira",
+     "precautions": ["P1", "P2", "P3"], "pain_ceiling": "3/10",
+     "text": "Plan v1 (2026-08-04, Mira Lindqvist PT, initial evaluation): right shoulder rotator cuff tendinopathy, suspected partial-thickness supraspinatus tear, MRI pending. Goals: lift a 5 kg box to shelf height without pain by week 12; sleep on the right side. Weeks 1-3: isometrics, banded external rotation below shoulder height, scapular setting. Precautions: no loaded overhead work until the orthopaedic review clears it; Jonah takes apixaban, so no dry needling and no instrument-assisted soft-tissue work; exercise pain ceiling 3/10.",
+     "next": [
+       {"item": "Isometric external rotation, 5 x 30 s", "tags": []},
+       {"item": "Banded external rotation below shoulder height", "tags": []},
+       {"item": "Scapular setting", "tags": []}
+     ]},
+    {"key": "pre:P1:impose", "kind": "precaution", "pid": "P1", "action": "impose", "date": "2026-08-04", "author": "mira",
+     "text": "Precaution P1 (2026-08-04, Mira Lindqvist PT): no loaded overhead work above shoulder height until the orthopaedic review clears it - suspected partial-thickness supraspinatus tear."},
+    {"key": "pre:P2:impose", "kind": "precaution", "pid": "P2", "action": "impose", "date": "2026-08-04", "author": "mira",
+     "text": "Precaution P2 (2026-08-04, Mira Lindqvist PT): Jonah takes apixaban, an anticoagulant - no dry needling and no instrument-assisted soft-tissue work (IASTM)."},
+    {"key": "pre:P3:impose", "kind": "precaution", "pid": "P3", "action": "impose", "date": "2026-08-04", "author": "mira", "value": "3/10",
+     "text": "Precaution P3 (2026-08-04, Mira Lindqvist PT): exercise pain ceiling 3/10 - stop the set if pain goes above it."},
+    {"key": "visit:2026-08-11", "kind": "visit", "date": "2026-08-11", "author": "mira",
+     "text": "Visit 2026-08-11 (Mira Lindqvist PT): pain 2/10 during banded external rotation, settled by the next morning. Sleeping on the left side only."},
+    {"key": "visit:2026-08-25", "kind": "visit", "date": "2026-08-25", "author": "mira",
+     "text": "Visit 2026-08-25 (Mira Lindqvist PT): MRI report in - partial-thickness supraspinatus tear, no full-thickness tear. Orthopaedic review booked. Pain settles within 24 hours after every session."},
+    {"key": "pre:P3:revise", "kind": "precaution", "pid": "P3", "action": "revise", "date": "2026-08-25", "author": "mira", "value": "5/10",
+     "text": "Precaution P3 changed (2026-08-25, Mira Lindqvist PT): exercise pain ceiling raised from 3/10 to 5/10 - pain settles within 24 hours after every session."},
+    {"key": "plan:v2", "kind": "plan", "version": 2, "date": "2026-08-25", "author": "mira", "drafted_by": "scribe",
+     "precautions": ["P3"], "pain_ceiling": "5/10",
+     "text": "Plan v2 (2026-08-25, drafted by the AI scribe from plan v1 and today's visit, signed Mira Lindqvist PT): MRI confirms a partial-thickness supraspinatus tear, no full-thickness tear; orthopaedic review booked. Weeks 4-8: progress banded rotation to light dumbbells, add rows and wall slides, progress loading as tolerated. Exercise pain ceiling raised to 5/10.",
+     "next": [
+       {"item": "Dumbbell external rotation, 1 kg", "tags": []},
+       {"item": "Seated rows", "tags": []},
+       {"item": "Wall slides", "tags": []}
+     ]},
+    {"key": "visit:2026-09-08", "kind": "visit", "date": "2026-09-08", "author": "mira", "pid": "P1", "action": "reaffirm",
+     "text": "Visit 2026-09-08 (Mira Lindqvist PT): orthopaedic review moved to 2026-10-20, the surgeon is on leave. The overhead restriction stays until then - told Jonah not to press overhead at the gym."},
+    {"key": "visit:2026-09-15", "kind": "visit", "date": "2026-09-15", "author": "mira", "pid": "P2", "action": "reaffirm",
+     "text": "Visit 2026-09-15 (Mira Lindqvist PT): Jonah's GP renewed apixaban for six more months (atrial fibrillation). He bruises easily on the right arm."},
+    {"key": "visit:2026-09-29", "kind": "visit", "date": "2026-09-29", "author": "mira",
+     "text": "Visit 2026-09-29 (Mira Lindqvist PT): external rotation strength 4/5, sleeping on the right side most nights. Tender trigger points in the right upper trapezius."},
+    {"key": "plan:v3", "kind": "plan", "version": 3, "date": "2026-09-29", "author": "mira", "drafted_by": "scribe",
+     "precautions": ["P3"], "pain_ceiling": "5/10",
+     "text": "Plan v3 (2026-09-29, drafted by the AI scribe from plan v2 and today's visit, signed Mira Lindqvist PT): external rotation strength 4/5, sleeping on the right side most nights. Weeks 9-12: add overhead dumbbell press (2 kg), farmer carries, and dry needling to the right upper trapezius if the trigger points persist. Continue rows and dumbbell external rotation. Exercise pain ceiling 5/10.",
+     "next": [
+       {"item": "Overhead dumbbell press, 2 kg", "tags": ["overhead"]},
+       {"item": "Dry needling, right upper trapezius", "tags": ["needling"]},
+       {"item": "Farmer carries", "tags": []},
+       {"item": "Seated rows", "tags": []},
+       {"item": "Dumbbell external rotation, 2 kg", "tags": []}
+     ]},
+    {"key": "visit:2026-10-06", "kind": "visit", "date": "2026-10-06", "author": "mira",
+     "text": "Visit 2026-10-06 (Mira Lindqvist PT): upper trapezius trigger points still there. Rows and external rotation at 2 kg, pain 3/10, gone by evening."},
+    {"key": "visit:2026-10-14", "kind": "handoff", "date": "2026-10-14", "author": "mira",
+     "text": "Handoff note 2026-10-14 (Mira Lindqvist PT): on leave 2026-10-15 to 2026-10-29. Theo Adeyemi PT covers Jonah; first covering visit 2026-10-16. Follow the current plan."}
+  ],
+  "ask_question": "Can we do dry needling for Jonah's upper trapezius?"
+}
