@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give HR Teams AI That Remembers Every Candidate and Employee Interaction*](https://www.memorylake.ai/en/usecase/ai-memory-for-hr-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** videos are being recorded; links follow shortly.
+**Watch it run:** [CLI, 2:13](https://github.com/memorylake-ai/memorylake-usecases/releases/download/policy-exception-memory-v1/policy-exception-memory-cli-demo.mp4) · [Web, 3:23](https://github.com/memorylake-ai/memorylake-usecases/releases/download/policy-exception-memory-v1/policy-exception-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/policy-exception-memory-v1); GitHub serves them as downloads).
 
 **The problem.** An HR assistant that remembers how HR handled a request before is exactly what the page promises,
 and it has a known way to go wrong. The desk approved six weeks abroad for one person in June, so the next person who
@@ -104,6 +105,10 @@ terminal drawer as it runs: the register, the tickets and the handbook; the quic
 the memory read as one table per request (handbook limit, every decision with its basis, the precedent the quick read
 picked highlighted); and the write-back with `fact trace`. **Ask** takes any request, its topic and amount, and lists
 every decision on a topic.
+
+![The memory read: 3 of 4 approvals rest on a one-time exception; the handbook limit, every decision with its basis, the quick read's precedent highlighted](web/screenshot-memory-read.png)
+
+![Write it back: each exception's qualifier appended to its ticket, fact trace keeps both versions; the same quick read agrees 3 of 3](web/screenshot-write-back.png)
 
 ## What happens, step by step
 
@@ -216,9 +221,9 @@ return the morning's answer.
 | What | Result |
 |---|---|
 | The exception ticket is in search's top 8 for its request (rank #3 or #4) | 3 / 3 exception requests, every run |
-| Quick read vs memory read: Q-1 ✗, Q-2 ✗, Q-3 ✓, Q-4 ✗ | 4 / 4 runs so far (2 from scratch, 1 re-run, 1 in the browser) |
+| Quick read vs memory read: Q-1 ✗, Q-2 ✗, Q-3 ✓, Q-4 ✗ | 6 / 6 runs (4 from scratch including both recordings, 1 re-run, 1 in the browser) |
 | After write-back: quick read agrees with the handbook | 3 / 3, every run, first try |
-| Time | 74–90 s from scratch, 56 s re-run |
+| Time | 66–74 s from scratch, 56 s re-run (90 s with `--reset` deleting the previous run first) |
 
 ## Wiring it into your own HR desk
 
