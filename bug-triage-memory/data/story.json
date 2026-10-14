@@ -1,0 +1,455 @@
+{
+  "company": "Tallyfold",
+  "today": "2026-10-14",
+  "_comment": "Fictional SaaS company, customers and engineers. All text is plain ASCII on purpose. Every record is pinned word for word with `fact add`, then labelled with `fact update --metadata` (tool, kind, who, when).",
+  "triager": {
+    "name": "Priya Nand",
+    "role": "on triage duty this week"
+  },
+  "project": {
+    "key": "triage",
+    "name": "Tallyfold bug triage memory",
+    "description": "Bug triage memory for Tallyfold (fictional invoicing SaaS): Linear investigations, GitHub PRs, the deploy log, Sentry alerts and helpdesk tickets in one project. Fictional data for the MemoryLake bug-triage-memory demo."
+  },
+  "tools": {
+    "linear": "Linear",
+    "github": "GitHub",
+    "deploys": "deploy log",
+    "sentry": "Sentry",
+    "helpdesk": "helpdesk"
+  },
+  "records": [
+    {
+      "id": "INV-12",
+      "tool": "linear",
+      "kind": "investigation",
+      "by": "Dev Okoro",
+      "on": "2026-04-21",
+      "text": "INV-12 Password reset emails land in spam for Outlook recipients. Root cause: the DKIM record for mail.tallyfold.example went missing in the DNS move. Fix: ops change OPS-77 added the record. Status: fixed by OPS-77 on 2026-04-21."
+    },
+    {
+      "id": "INV-27",
+      "tool": "linear",
+      "kind": "investigation",
+      "by": "Owen Pratt",
+      "on": "2026-06-02",
+      "text": "INV-27 PDF invoices show a box instead of the currency sign for CHF and SEK. Root cause: the PDF renderer fell back to a font without those glyphs. Fix: PR #455 bundles a font that has them. Workaround: send the invoice as a link instead of a PDF. Status: fixed by PR #455, shipped in 3.16.2 on 2026-06-09."
+    },
+    {
+      "id": "INV-31",
+      "tool": "linear",
+      "kind": "investigation",
+      "by": "Owen Pratt",
+      "on": "2026-06-30",
+      "text": "INV-31 Duplicate invoices in the QuickLedger sync: each invoice appears twice in the customer's QuickLedger books. Root cause: webhook retries re-sent invoice.created without an idempotency key. Fix: PR #482. Workaround: Settings > Integrations > QuickLedger > Remove duplicates. Status: fixed by PR #482, shipped in 3.17.0 on 2026-07-08."
+    },
+    {
+      "id": "INV-35",
+      "tool": "linear",
+      "kind": "investigation",
+      "by": "Mei Tran",
+      "on": "2026-07-21",
+      "text": "INV-35 QuickLedger sync sends tax as zero for invoices with a discount line. Root cause: the discount was applied after the tax mapping. Fix: PR #498 maps tax first. Status: fixed by PR #498, shipped in 3.17.2 on 2026-07-24."
+    },
+    {
+      "id": "INV-38",
+      "tool": "linear",
+      "kind": "investigation",
+      "by": "Hana Ito",
+      "on": "2026-08-11",
+      "text": "INV-38 Stripe payout reconciliation is one day off for customers east of UTC. Root cause: payout dates were compared in UTC. Fix: PR #510 compares them in the account time zone. Status: fixed by PR #510, shipped in 3.18.0 on 2026-08-14."
+    },
+    {
+      "id": "INV-40",
+      "tool": "linear",
+      "kind": "investigation",
+      "by": "Dev Okoro",
+      "on": "2026-08-28",
+      "text": "INV-40 Client CSV import rejects files saved by Excel with a byte order mark. Root cause: the parser read the mark as part of the first column name. Fix: PR #520 strips it. Status: fixed by PR #520, shipped in 3.18.2 on 2026-09-02."
+    },
+    {
+      "id": "INV-44",
+      "tool": "linear",
+      "kind": "investigation",
+      "by": "Hana Ito",
+      "on": "2026-09-24",
+      "text": "INV-44 Recurring invoices scheduled for the 31st are skipped in months with 30 days or fewer. Root cause: the scheduler looks for day 31 and finds none. Fix: PR #561 clamps the day to the length of the month. Workaround: schedule the invoice on 'last day of month'. Status: fixed by PR #561."
+    },
+    {
+      "id": "ENG-902",
+      "tool": "linear",
+      "kind": "task",
+      "by": "Owen Pratt",
+      "on": "2026-08-19",
+      "text": "ENG-902 Re-land the delivery idempotency key with a cached lookup. State: backlog, unassigned, no milestone."
+    },
+    {
+      "id": "OPS-77",
+      "tool": "linear",
+      "kind": "task",
+      "by": "Dev Okoro",
+      "on": "2026-04-21",
+      "text": "OPS-77 Add the DKIM record for mail.tallyfold.example. State: done 2026-04-21."
+    },
+    {
+      "id": "G455",
+      "tool": "github",
+      "kind": "merged",
+      "by": "Owen Pratt",
+      "on": "2026-06-05",
+      "text": "PR #455 merged 2026-06-05: the PDF renderer bundles Noto Sans for its glyph table (2.1 MB)."
+    },
+    {
+      "id": "G470",
+      "tool": "github",
+      "kind": "merged",
+      "by": "Mei Tran",
+      "on": "2026-07-01",
+      "text": "PR #470 merged 2026-07-01: dark mode for the client portal."
+    },
+    {
+      "id": "G482",
+      "tool": "github",
+      "kind": "merged",
+      "by": "Owen Pratt",
+      "on": "2026-07-03",
+      "text": "PR #482 merged 2026-07-03: the delivery worker attaches an idempotency key to every outbound event."
+    },
+    {
+      "id": "G495",
+      "tool": "github",
+      "kind": "merged",
+      "by": "Owen Pratt",
+      "on": "2026-07-20",
+      "text": "PR #495 merged 2026-07-20: the delivery worker batches outbound events in groups of 50."
+    },
+    {
+      "id": "G498",
+      "tool": "github",
+      "kind": "merged",
+      "by": "Mei Tran",
+      "on": "2026-07-22",
+      "text": "PR #498 merged 2026-07-22: tax lines are mapped before discounts in the accounting export."
+    },
+    {
+      "id": "G510",
+      "tool": "github",
+      "kind": "merged",
+      "by": "Hana Ito",
+      "on": "2026-08-13",
+      "text": "PR #510 merged 2026-08-13: payout matching uses the account time zone."
+    },
+    {
+      "id": "G520",
+      "tool": "github",
+      "kind": "merged",
+      "by": "Dev Okoro",
+      "on": "2026-08-31",
+      "text": "PR #520 merged 2026-08-31: the CSV reader strips a leading byte order mark."
+    },
+    {
+      "id": "G533",
+      "tool": "github",
+      "kind": "merged",
+      "by": "Mei Tran",
+      "on": "2026-09-08",
+      "text": "PR #533 merged 2026-09-08: relands PR #455 with a subset font (420 KB)."
+    },
+    {
+      "id": "G541",
+      "tool": "github",
+      "kind": "merged",
+      "by": "Dev Okoro",
+      "on": "2026-09-16",
+      "text": "PR #541 merged 2026-09-16: the delivery worker retries on HTTP 429 with exponential backoff."
+    },
+    {
+      "id": "G544",
+      "tool": "github",
+      "kind": "merged",
+      "by": "Dev Okoro",
+      "on": "2026-09-19",
+      "text": "PR #544 merged 2026-09-19: relands PR #541 with a cap of 3 retries."
+    },
+    {
+      "id": "G561",
+      "tool": "github",
+      "kind": "merged",
+      "by": "Hana Ito",
+      "on": "2026-09-29",
+      "text": "PR #561 merged 2026-09-29: the scheduler clamps day-of-month to the length of the month."
+    },
+    {
+      "id": "G566",
+      "tool": "github",
+      "kind": "merged",
+      "by": "Mei Tran",
+      "on": "2026-10-02",
+      "text": "PR #566 merged 2026-10-02: new onboarding checklist for workspace admins."
+    },
+    {
+      "id": "R3162",
+      "tool": "deploys",
+      "kind": "deploy",
+      "by": "release bot",
+      "on": "2026-06-09",
+      "text": "Release 3.16.2 deployed 2026-06-09 (includes PR #455)."
+    },
+    {
+      "id": "R3170",
+      "tool": "deploys",
+      "kind": "deploy",
+      "by": "release bot",
+      "on": "2026-07-08",
+      "text": "Release 3.17.0 deployed 2026-07-08 (includes PR #470, PR #482)."
+    },
+    {
+      "id": "R3172",
+      "tool": "deploys",
+      "kind": "deploy",
+      "by": "release bot",
+      "on": "2026-07-24",
+      "text": "Release 3.17.2 deployed 2026-07-24 (includes PR #495, PR #498)."
+    },
+    {
+      "id": "R3173",
+      "tool": "deploys",
+      "kind": "rollback",
+      "by": "Mei Tran",
+      "on": "2026-08-02",
+      "text": "Rollback 2026-08-02: release 3.17.3 reverts PR #455 - the PDF lambda bundle went over its 5 MB limit."
+    },
+    {
+      "id": "R3180",
+      "tool": "deploys",
+      "kind": "deploy",
+      "by": "release bot",
+      "on": "2026-08-14",
+      "text": "Release 3.18.0 deployed 2026-08-14 (includes PR #510)."
+    },
+    {
+      "id": "R3181",
+      "tool": "deploys",
+      "kind": "rollback",
+      "by": "Owen Pratt",
+      "on": "2026-08-19",
+      "text": "Rollback 2026-08-19: release 3.18.1 reverts PR #482 - delivery worker p95 latency rose 40 percent after the key lookup. Re-land is tracked in ENG-902."
+    },
+    {
+      "id": "R3182",
+      "tool": "deploys",
+      "kind": "deploy",
+      "by": "release bot",
+      "on": "2026-09-02",
+      "text": "Release 3.18.2 deployed 2026-09-02 (includes PR #520)."
+    },
+    {
+      "id": "R3190",
+      "tool": "deploys",
+      "kind": "deploy",
+      "by": "release bot",
+      "on": "2026-09-10",
+      "text": "Release 3.19.0 deployed 2026-09-10 (includes PR #533)."
+    },
+    {
+      "id": "R3191",
+      "tool": "deploys",
+      "kind": "deploy",
+      "by": "release bot",
+      "on": "2026-09-17",
+      "text": "Release 3.19.1 deployed 2026-09-17 (includes PR #541)."
+    },
+    {
+      "id": "R3192",
+      "tool": "deploys",
+      "kind": "rollback",
+      "by": "Dev Okoro",
+      "on": "2026-09-18",
+      "text": "Rollback 2026-09-18: release 3.19.2 reverts PR #541 - the retries flooded the QuickLedger rate limit."
+    },
+    {
+      "id": "R3193",
+      "tool": "deploys",
+      "kind": "deploy",
+      "by": "release bot",
+      "on": "2026-09-22",
+      "text": "Release 3.19.3 deployed 2026-09-22 (includes PR #544)."
+    },
+    {
+      "id": "R3200",
+      "tool": "deploys",
+      "kind": "scheduled",
+      "by": "Mei Tran",
+      "on": "2026-10-01",
+      "text": "Release 3.20.0 is scheduled for 2026-10-20 (includes PR #561, PR #566). The release train is frozen until then."
+    },
+    {
+      "id": "S1F3",
+      "tool": "sentry",
+      "kind": "alert",
+      "by": "Sentry",
+      "on": "2026-08-20",
+      "text": "Sentry TALLY-API-1F3 (IdempotencyKeyMissing warning) came back on 2026-08-19 after 42 quiet days; 3140 events since."
+    },
+    {
+      "id": "S07",
+      "tool": "sentry",
+      "kind": "alert",
+      "by": "Sentry",
+      "on": "2026-09-11",
+      "text": "Sentry TALLY-PDF-07 (GlyphFallback) last seen 2026-09-10; marked resolved."
+    },
+    {
+      "id": "S3A",
+      "tool": "sentry",
+      "kind": "alert",
+      "by": "Sentry",
+      "on": "2026-09-18",
+      "text": "Sentry TALLY-SYNC-3A (QuickLedger 429 Too Many Requests) spiked on 2026-09-18; resolved 2026-09-22."
+    },
+    {
+      "id": "S2C",
+      "tool": "sentry",
+      "kind": "alert",
+      "by": "Sentry",
+      "on": "2026-10-09",
+      "text": "Sentry TALLY-WEB-2C (ChunkLoadError in the invoice editor) spiked on 2026-10-09 for Safari 17 users."
+    },
+    {
+      "id": "#8701",
+      "tool": "helpdesk",
+      "kind": "ticket",
+      "by": "Alpenrose Clinic",
+      "on": "2026-06-01",
+      "text": "Ticket #8701 Alpenrose Clinic: the PDF shows a square box where CHF should be. Linked to INV-27."
+    },
+    {
+      "id": "#8812",
+      "tool": "helpdesk",
+      "kind": "ticket",
+      "by": "Brightwell Bakery",
+      "on": "2026-06-28",
+      "text": "Ticket #8812 Brightwell Bakery: each new invoice shows up twice in QuickLedger. Linked to INV-31."
+    },
+    {
+      "id": "#8840",
+      "tool": "helpdesk",
+      "kind": "ticket",
+      "by": "Lumen Yoga",
+      "on": "2026-07-09",
+      "text": "Ticket #8840 Lumen Yoga: duplicate invoices after connecting QuickLedger. Linked to INV-31; customer told it is fixed in 3.17.0."
+    },
+    {
+      "id": "#8920",
+      "tool": "helpdesk",
+      "kind": "ticket",
+      "by": "Marlow Books",
+      "on": "2026-07-20",
+      "text": "Ticket #8920 Marlow Books: QuickLedger shows zero tax on invoices that have a discount. Linked to INV-35."
+    },
+    {
+      "id": "#8990",
+      "tool": "helpdesk",
+      "kind": "ticket",
+      "by": "Corvid Labs",
+      "on": "2026-08-10",
+      "text": "Ticket #8990 Corvid Labs: Stripe payout lands on the wrong day in reconciliation. Linked to INV-38."
+    },
+    {
+      "id": "#9002",
+      "tool": "helpdesk",
+      "kind": "ticket",
+      "by": "Pinecrest Tutors",
+      "on": "2026-08-27",
+      "text": "Ticket #9002 Pinecrest Tutors: client CSV import fails with 'unknown column Name'. Linked to INV-40."
+    },
+    {
+      "id": "#9050",
+      "tool": "helpdesk",
+      "kind": "ticket",
+      "by": "Fieldstone Farm",
+      "on": "2026-09-18",
+      "text": "Ticket #9050 Fieldstone Farm: invoices stopped reaching QuickLedger for two hours this morning."
+    },
+    {
+      "id": "#9031",
+      "tool": "helpdesk",
+      "kind": "ticket",
+      "by": "Orchard Row Cafe",
+      "on": "2026-09-22",
+      "text": "Ticket #9031 Orchard Row Cafe: the retainer invoice for August 31 went out but none for September. Linked to INV-44."
+    },
+    {
+      "id": "#9064",
+      "tool": "helpdesk",
+      "kind": "ticket",
+      "by": "Tidewater Charters",
+      "on": "2026-10-09",
+      "text": "Ticket #9064 Tidewater Charters: the invoice editor shows a blank page in Safari."
+    }
+  ],
+  "incoming": [
+    {
+      "id": "#9120",
+      "customer": "Harbor & Pine Dental",
+      "on": "2026-10-13",
+      "text": "Since last week every invoice we send appears two times in our QuickLedger books."
+    },
+    {
+      "id": "#9127",
+      "customer": "Fernway Studio",
+      "on": "2026-10-13",
+      "text": "Our monthly retainer is set to bill on the 31st and no invoice went out at the end of September."
+    },
+    {
+      "id": "#9131",
+      "customer": "Kessler Watchworks",
+      "on": "2026-10-14",
+      "text": "PDF invoices to our Swiss clients show an empty square where the CHF sign should be."
+    }
+  ],
+  "followups": [
+    {
+      "id": "#9133",
+      "customer": "Saltmarsh Florist",
+      "on": "2026-10-14",
+      "text": "QuickLedger is showing two copies of each of our invoices."
+    },
+    {
+      "id": "#9134",
+      "customer": "Brook & Vale Law",
+      "on": "2026-10-14",
+      "text": "The invoice we schedule on the 31st did not go out in September or June."
+    },
+    {
+      "id": "#9135",
+      "customer": "Uri Glass Studio",
+      "on": "2026-10-14",
+      "text": "The Swiss franc symbol is a blank box in our PDF invoices again."
+    }
+  ],
+  "ask_examples": [
+    {
+      "q": "Customers get two copies of every invoice in QuickLedger",
+      "on": "2026-10-14"
+    },
+    {
+      "q": "Customers get two copies of every invoice in QuickLedger",
+      "on": "2026-07-20"
+    },
+    {
+      "q": "The CHF sign is a box on our PDF invoices",
+      "on": "2026-08-20"
+    },
+    {
+      "q": "Stripe payouts show up a day late in reconciliation",
+      "on": "2026-10-14"
+    }
+  ],
+  "trace_examples": [
+    "PR #482",
+    "PR #455",
+    "PR #561",
+    "ENG-902"
+  ]
+}
