@@ -1,0 +1,53 @@
+{
+  "brand": "Larkspur Outdoor",
+  "today": "2026-10-14",
+  "_comment": "Fictional brand, people, campaigns and numbers. All text is plain ASCII on purpose. Every record is pinned word for word with `fact add`, then labelled with `fact update --metadata`. The exports in sources/ are written by make_sources.py.",
+  "team": [
+    {"name": "Dana Whitlow", "role": "head of marketing"},
+    {"name": "Omar Reyes", "role": "lifecycle (email)"},
+    {"name": "Priya Nand", "role": "paid media"},
+    {"name": "Leo Marsh", "role": "partnerships"}
+  ],
+  "planner": {"name": "Dana Whitlow", "task": "the Q1 2027 launch brief: which channel leads"},
+  "project": {
+    "key": "campaigns",
+    "name": "Campaign memory: Larkspur Outdoor",
+    "description": "Larkspur Outdoor campaign memory: briefs, results and what worked, across every tool. Fictional data for the MemoryLake campaign-results-memory demo."
+  },
+  "exports": [
+    {"file": "email-esp-2026.xlsx", "tool": "email platform (ESP)", "channel": "email"},
+    {"file": "paid-social-2026.xlsx", "tool": "paid social ads manager", "channel": "paid social"},
+    {"file": "search-ads-2026.xlsx", "tool": "search ads console", "channel": "search"},
+    {"file": "site-analytics-2026.xlsx", "tool": "site analytics", "channel": "all", "common": true}
+  ],
+  "results": [
+    {"id": "R1", "campaign": "Spring Trail email", "channel": "email", "by": "Omar Reyes", "on": "2026-03-24", "rate": 9.8, "source": "email-esp-2026.xlsx",
+     "text": "Spring Trail email (March 2026): 9.8% conversion. Best number we have ever had on a launch."},
+    {"id": "R2", "campaign": "Summer Gear-Up email", "channel": "email", "by": "Omar Reyes", "on": "2026-06-16", "rate": 8.9, "source": "email-esp-2026.xlsx",
+     "text": "Summer Gear-Up email (June 2026): 8.9% conversion, close to Spring Trail. Email keeps delivering."},
+    {"id": "R3", "campaign": "Trailhead paid social", "channel": "paid social", "by": "Priya Nand", "on": "2026-07-07", "rate": 4.1, "source": "paid-social-2026.xlsx",
+     "text": "Trailhead paid social (June 2026): 4.1% conversion on 13,000 link clicks."},
+    {"id": "R4", "campaign": "Fall Layers paid social", "channel": "paid social", "by": "Priya Nand", "on": "2026-10-05", "rate": 3.6, "source": "paid-social-2026.xlsx",
+     "text": "Fall Layers paid social (September 2026): 3.6% conversion, a little under Trailhead."},
+    {"id": "R5", "campaign": "Spring brand search", "channel": "search", "by": "Priya Nand", "on": "2026-04-08", "rate": 2.6, "source": "search-ads-2026.xlsx",
+     "text": "Spring brand search (March 2026): 2.6% conversion. Search is our weakest converter."},
+    {"id": "R6", "campaign": "Fall non-brand search", "channel": "search", "by": "Priya Nand", "on": "2026-10-06", "rate": 2.2, "source": "search-ads-2026.xlsx",
+     "text": "Fall non-brand search (September 2026): 2.2% conversion. Weak again."},
+    {"id": "R7", "campaign": "Ridge Notes creator collab", "channel": "creator", "by": "Leo Marsh", "on": "2026-09-02", "rate": 12.0, "source": "Ridge Notes recap deck (from the creator)",
+     "text": "Ridge Notes creator collab (August 2026): 12% conversion per the creator's recap. Our best converter this year."}
+  ],
+  "reflection": {
+    "id": "W1", "by": "Dana Whitlow", "on": "2026-10-07",
+    "text": "What worked in 2026: creator collabs convert best (12%), then email (9-10%), then paid social (about 4%); search is weakest (about 2.4%). For the Q1 2027 launch: lead with creators and email, trim search.",
+    "built_from": ["R1", "R2", "R3", "R4", "R5", "R6", "R7"]
+  },
+  "ask_examples": [
+    "Which channel converts best?",
+    "How did the Ridge Notes creator collab do?",
+    "What did we learn from email this year?"
+  ],
+  "questions": {
+    "plan": "Which channels converted best in our 2026 campaigns, and what should lead the Q1 launch?",
+    "after": "For the Q1 2027 launch, which channel has the best conversion when every campaign is measured the same way?"
+  }
+}
