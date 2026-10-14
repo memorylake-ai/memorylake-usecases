@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Sales Teams Competitive Intel Memory That Reps Can Actually Pull Mid-Call*](https://www.memorylake.ai/en/usecase/competitive-intel-memory-for-sales-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 2:02](https://github.com/memorylake-ai/memorylake-usecases/releases/download/competitive-intel-memory-v1/competitive-intel-memory-cli-demo.mp4) · [Web, 2:56](https://github.com/memorylake-ai/memorylake-usecases/releases/download/competitive-intel-memory-v1/competitive-intel-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/competitive-intel-memory-v1); GitHub serves them as downloads).
 
 **The problem.** *"Battle cards go stale by Friday."* A claim about a competitor lands in an analyst newsletter, then in a
 deal note, a Slack digest, the battle card, and from the battle card into more deal notes. A week later the newsletter prints
@@ -82,6 +83,10 @@ Paste the key, connect, run. The page drives the same functions as `demo.py` and
 terminal drawer as it runs: the records as they are pinned, the three quick reads, the lineage tree with the control audit
 next to it, and the write-back with the prospects to call. **Ask the intel** takes any question, or runs the audit as of a
 date.
+
+![Three quick reads: search's top 8, a vote over every record and the newest record all say Enterprise-only](web/screenshot-quick-reads.png)
+
+![Walk the lineage: seven records, one source, withdrawn on Aug 25; the Aug 24 control backs the claim on one source](web/screenshot-lineage.png)
 
 ## What happens, step by step
 
@@ -217,9 +222,10 @@ $ memorylake search 'Does Pendrel include SSO on its Business plan?' --projects 
 |---|---|
 | Lineage audit: 7 records → 1 source, withdrawn; 3 → 3 sources standing; 3 copies after the correction | every run (deterministic over `fact list`) |
 | Control audit on 2026-08-24: Enterprise-only on 1 source | every run |
-| Search top 8 before the write-back, from scratch: #1 is the correction; 4 Enterprise-only · 3 Business · 1 other | 3 / 3 fresh runs, same order each time |
+| Search top 8 before the write-back, from scratch: #1 is the correction; 4 Enterprise-only · 3 Business · 1 other | 6 / 6 fresh runs (same order in the 5 we logged it for) |
 | Search top 8 after the write-back: 5 of 8 hits marked retracted-upstream; standing hits Business 3 · Enterprise-only 0 | every run (the order moves once the metadata is updated and the new card is written) |
-| Time | 32–57 s from scratch, 17–20 s re-run |
+| Re-run (resume): today's new card is left out of the morning read; the top 8 then holds 5 Enterprise-only copies · 2 Business | 2 / 2 — the order moved after the write-back |
+| Time | 32–57 s from scratch, 17 s re-run |
 
 The search lines are what `search` returned; the demo prints whatever comes back.
 
