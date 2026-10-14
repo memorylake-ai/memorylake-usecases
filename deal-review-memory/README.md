@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Sales Teams Deal Review Memory That Compounds Across Every Meeting*](https://www.memorylake.ai/en/usecase/deal-review-memory-for-sales-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 2:52](https://github.com/memorylake-ai/memorylake-usecases/releases/download/deal-review-memory-v1/deal-review-memory-cli-demo.mp4) · [Web, 3:57](https://github.com/memorylake-ai/memorylake-usecases/releases/download/deal-review-memory-v1/deal-review-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/deal-review-memory-v1); GitHub serves them as downloads).
 
 **The problem.** "Cross-deal patterns never get named because nobody connects the reviews." Once somebody does name one,
 it lives on as reflection memory: *pilots close more often, open every deal with a pilot*. The count behind a note like
@@ -101,6 +102,10 @@ Paste the key, connect, run. The page drives the same functions as `demo.py` and
 terminal drawer as it runs: the closed deals and notes, the quick read of each deal with its top 8, the memory read as
 a win-rate table with the deal's own segment highlighted, and the write-back with `fact trace`. **Review** takes any deal
 question and segment, and slices the closed deals by either factor.
+
+![The memory read: 1 of 3 reviews go the other way; win rates overall and inside each segment, the deal's own segment highlighted](web/screenshot-memory-read.png)
+
+![Write it back: the note rewritten per segment from the closed deals, fact trace keeps both versions; the same quick read agrees 3 of 3](web/screenshot-write-back.png)
 
 ## What happens, step by step
 
@@ -209,7 +214,7 @@ again could return the morning's answer.
 | What | Result |
 |---|---|
 | Closest note = the note for that factor, ranked #1 in the top 8 | 6 / 6 deal questions, every run |
-| Quick read vs memory read: R-1 ✗, R-2 ✓, R-3 ✓ (either) | 4 / 4 runs (2 from scratch, 1 re-run, 1 in the browser) |
+| Quick read vs memory read: R-1 ✗, R-2 ✓, R-3 ✓ (either) | 6 / 6 runs (4 from scratch including both recordings, 1 re-run, 1 in the browser) |
 | After write-back: quick read agrees with the closed deals | 3 / 3, every run, first try |
 | Time | 83 s from scratch, 58 s re-run (122 s with `--reset` deleting the previous run first) |
 
