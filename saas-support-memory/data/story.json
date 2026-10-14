@@ -1,0 +1,74 @@
+{
+  "company": "Tallyfold",
+  "today": "2026-10-14",
+  "_comment": "Fictional company, customers and people. All text is plain ASCII on purpose (the server mis-decodes a lone non-ASCII character in short texts).",
+  "agents": {
+    "dana": {"key": "agent-dana", "name": "Dana Ruiz", "description": "Senior support agent at Tallyfold (fictional). Handled both customers' September tickets."},
+    "leo": {"key": "agent-leo", "name": "Leo Park", "description": "Support agent at Tallyfold (fictional), started this week. Handles today's tickets."}
+  },
+  "known_issues": [
+    {"ki": "KI-101", "symptom": "pdf-totals-blank", "status": "open", "reported": "2026-08-21", "verified_by": "dana",
+     "applies_when": {"browser": "Safari"},
+     "workaround_id": "legacy-renderer",
+     "workaround": "Settings > Invoices > PDF renderer > Legacy, then export again",
+     "text": "KI-101 (open): PDF invoice export shows blank totals in Safari 17 and later on app 4.2. Workaround: Settings > Invoices > PDF renderer > Legacy, then export again."},
+    {"ki": "KI-109", "symptom": "vat-lines-missing", "status": "open", "reported": "2026-09-02", "verified_by": "dana",
+     "applies_when": {"currencies": "multi"},
+     "breaks": "legacy-renderer",
+     "workaround": "Settings > Invoices > PDF renderer > Standard, then export again",
+     "text": "KI-109 (open): The Legacy PDF renderer drops the VAT lines from invoices that mix currencies, so the PDF total no longer matches the ledger. Never switch a multi-currency account to the Legacy renderer."},
+    {"ki": "KI-117", "symptom": "pdf-totals-blank", "status": "open", "reported": "2026-09-24", "verified_by": "dana",
+     "applies_when": {"currencies": "multi", "default_currency": "unset"},
+     "workaround_id": "default-currency",
+     "workaround": "Settings > Billing > Default currency, pick one, then export again",
+     "text": "KI-117 (open): Invoice totals come out empty in any browser when an account bills in more than one currency and has no default currency set. Workaround: Settings > Billing > Default currency, pick one, then export again."},
+    {"ki": "KI-122", "symptom": "duplicate-customers", "status": "fixed in 4.3", "reported": "2026-07-30", "verified_by": "dana",
+     "applies_when": {"integrations": "QuickBooks"},
+     "workaround_id": "trim-names",
+     "workaround": "trim the customer name in Tallyfold, then run the sync again",
+     "text": "KI-122 (fixed in 4.3): QuickBooks sync creates duplicate customers when a customer name ends with a space. Workaround on 4.2: trim the name in Tallyfold, then run the sync again."}
+  ],
+  "customers": [
+    {"key": "marlow", "name": "Marlow Dental Group", "short": "Marlow",
+     "description": "Tallyfold customer (fictional): a three-site dental practice. Contact: Priya Shah, office manager.",
+     "ticket": {"id": "T-4388", "date": "2026-09-09", "title": "T-4388 Marlow Dental Group - recurring invoices setup",
+                "start": "2026-09-09T09:00:00Z",
+                "turns": [
+                  ["customer", "Priya Shah (office manager, Marlow Dental Group): Hi, we want monthly recurring invoices for our ortho patients on payment plans. We run Tallyfold in Safari 17 on the front-desk Macs."],
+                  ["agent", "Dana Ruiz (support, Tallyfold): Happy to help. Recurring invoices are under Invoices > Recurring. Do you bill in one currency?"],
+                  ["customer", "Priya Shah (office manager, Marlow Dental Group): USD only, all three sites are in Ohio. And please answer us by email, the front desk cannot take calls during clinic hours."],
+                  ["agent", "Dana Ruiz (support, Tallyfold): Noted, email only. I set up the first plan with you; the next invoices go out on the 1st of each month."],
+                  ["customer", "Priya Shah (office manager, Marlow Dental Group): Perfect. We do not use any accounting integration, our bookkeeper exports CSV once a month."]
+                ]},
+     "environment": [
+       {"attr": "browser", "value": "Safari 17", "text": "Marlow Dental Group runs Tallyfold in Safari 17 on the front-desk Macs."},
+       {"attr": "currencies", "value": "USD", "text": "Marlow Dental Group invoices in USD only."},
+       {"attr": "default_currency", "value": "USD", "text": "Marlow Dental Group has USD set as its default currency."},
+       {"attr": "integrations", "value": "none", "text": "Marlow Dental Group uses no accounting integration; its bookkeeper exports CSV monthly."},
+       {"attr": "contact", "value": "email only", "text": "Marlow Dental Group wants support replies by email only, never by phone during clinic hours."}
+     ],
+     "today": {"id": "T-4630", "symptom": "pdf-totals-blank",
+               "text": "Since this morning the totals on our PDF invoices are blank. The line items are there but Subtotal, Tax and Total are empty."}},
+    {"key": "copperleaf", "name": "Copperleaf Bakery", "short": "Copperleaf",
+     "description": "Tallyfold customer (fictional): a wholesale bakery selling to cafes in Ireland and the US. Contact: Tomas Byrne, owner.",
+     "ticket": {"id": "T-4471", "date": "2026-09-18", "title": "T-4471 Copperleaf Bakery - wholesale invoices in two currencies",
+                "start": "2026-09-18T09:00:00Z",
+                "turns": [
+                  ["customer", "Tomas Byrne (owner, Copperleaf Bakery): Hello, we are opening wholesale accounts with cafes in Dublin. Those invoices have to be in EUR, our US cafes stay in USD. Can one Tallyfold account do both?"],
+                  ["agent", "Dana Ruiz (support, Tallyfold): Yes, you can set the currency per customer. Which browser do you use, so I can send the right screenshots?"],
+                  ["customer", "Tomas Byrne (owner, Copperleaf Bakery): Chrome 129 on a Windows laptop. We also sync every invoice to QuickBooks."],
+                  ["agent", "Dana Ruiz (support, Tallyfold): Great. I set EUR on your four Dublin cafes. You have not picked a default currency yet; that is optional."],
+                  ["customer", "Tomas Byrne (owner, Copperleaf Bakery): Leave it unset for now. And keep replies short, numbered steps please, I read them on my phone at 5am."]
+                ]},
+     "environment": [
+       {"attr": "browser", "value": "Chrome 129", "text": "Copperleaf Bakery runs Tallyfold in Chrome 129 on a Windows laptop."},
+       {"attr": "currencies", "value": "EUR+USD", "text": "Copperleaf Bakery invoices in EUR (Dublin cafes) and USD (US cafes)."},
+       {"attr": "default_currency", "value": "unset", "text": "Copperleaf Bakery has not set a default currency in Tallyfold."},
+       {"attr": "integrations", "value": "QuickBooks", "text": "Copperleaf Bakery syncs every invoice to QuickBooks."},
+       {"attr": "contact", "value": "short numbered steps", "text": "Copperleaf Bakery wants short replies with numbered steps; the owner reads them on his phone."}
+     ],
+     "today": {"id": "T-4631", "symptom": "pdf-totals-blank",
+               "text": "Our PDF invoices show blank totals. The line items print fine but the Total box is empty. Can you help?"}}
+  ],
+  "come_back_question": "What did we tell this customer about blank PDF totals, and what did we decide not to suggest?"
+}
