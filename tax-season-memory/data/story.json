@@ -1,0 +1,99 @@
+{
+  "today": "2026-10-15",
+  "season": "tax year 2025, extended individual returns due 2026-10-15",
+  "firm": "Lindqvist & Oduya CPAs",
+  "staff": {"name": "Priya Nair", "role": "staff accountant"},
+  "previous": {"name": "Tom Brennan", "role": "senior accountant, on leave from 2026-10-01"},
+  "project": {
+    "key": "client-file",
+    "name": "Lindqvist & Oduya - 2025 season client file",
+    "description": "Every client record for the 2025 tax season, one fact per record: the client directory, prior-year return exports, client emails and voicemails, workpaper notes and team chat."
+  },
+  "tools": {
+    "directory": "client directory",
+    "taxsoft": "return export",
+    "email": "client email",
+    "voicemail": "voicemail",
+    "binder": "workpaper",
+    "chat": "team chat",
+    "irs": "IRS notice log"
+  },
+  "clients": {
+    "C-1187": {"name": "Daniel Okafor Sr.", "short": "Okafor Sr.", "surname": "Okafor"},
+    "C-2290": {"name": "Daniel Okafor Jr.", "short": "Okafor Jr.", "surname": "Okafor"},
+    "C-1043": {"name": "Ingrid Moss", "short": "Moss", "surname": "Moss"},
+    "C-1561": {"name": "Halvard Pike", "short": "Pike", "surname": "Pike"}
+  },
+  "records": [
+    {"id": "DIR-1187", "tool": "directory", "kind": "directory", "by": "front desk", "on": "2026-01-06", "client": "C-1187", "topic": "contact", "channels": ["dan.okafor@fernmail.example", "(541) 555-0142", "SSN ending 4417"],
+     "text": "Client C-1187 - Daniel Okafor Sr. (born 1958, SSN ending 4417). Contact: dan.okafor@fernmail.example, phone (541) 555-0142. Lives in Eugene, Oregon all year."},
+    {"id": "DIR-2290", "tool": "directory", "kind": "directory", "by": "front desk", "on": "2026-01-06", "client": "C-2290", "topic": "contact", "channels": ["dokafor.jr@fernmail.example", "(360) 555-0177", "SSN ending 9031"],
+     "text": "Client C-2290 - Daniel Okafor Jr. (born 1986, SSN ending 9031). Contact: dokafor.jr@fernmail.example, phone (360) 555-0177. Moved from Portland, Oregon to Vancouver, Washington on 2025-06-30."},
+    {"id": "DIR-1043", "tool": "directory", "kind": "directory", "by": "front desk", "on": "2026-01-06", "client": "C-1043", "topic": "contact", "channels": ["ingrid.moss@quillpost.example", "(541) 555-0164", "SSN ending 2288"],
+     "text": "Client C-1043 - Ingrid Moss (born 1971, SSN ending 2288). Contact: ingrid.moss@quillpost.example, phone (541) 555-0164. Lives in Bend, Oregon."},
+    {"id": "DIR-1561", "tool": "directory", "kind": "directory", "by": "front desk", "on": "2026-01-06", "client": "C-1561", "topic": "contact", "channels": ["hpike@alderline.example", "(503) 555-0191", "SSN ending 6650"],
+     "text": "Client C-1561 - Halvard Pike (born 1964, SSN ending 6650). Contact: hpike@alderline.example, phone (503) 555-0191. Lives in Salem, Oregon."},
+
+    {"id": "RX-1187-D", "tool": "taxsoft", "kind": "export", "by": "tax software", "on": "2026-01-20", "client": "C-1187", "topic": "carryover", "value": "$11,800 long-term",
+     "text": "C-1187 Daniel Okafor Sr., 2024 Form 1040: Schedule D capital loss carryover to 2025 is $11,800 (all long-term)."},
+    {"id": "RX-1187-P", "tool": "taxsoft", "kind": "export", "by": "tax software", "on": "2026-01-20", "client": "C-1187", "topic": "estimates", "value": "$3,250 applied",
+     "text": "C-1187 Daniel Okafor Sr., 2024 Form 1040: overpayment of $3,250 applied to 2025 estimated tax."},
+    {"id": "RX-1187-S", "tool": "taxsoft", "kind": "export", "by": "tax software", "on": "2026-01-20", "client": "C-1187", "topic": "state", "value": "Oregon full-year (OR-40)",
+     "text": "C-1187 Daniel Okafor Sr., 2024 returns: Oregon full-year resident, Form OR-40."},
+    {"id": "RX-2290-D", "tool": "taxsoft", "kind": "export", "by": "tax software", "on": "2026-01-20", "client": "C-2290", "topic": "carryover", "value": "none",
+     "text": "C-2290 Daniel Okafor Jr., 2024 Form 1040: no capital loss carryover; no Schedule D filed."},
+    {"id": "RX-2290-P", "tool": "taxsoft", "kind": "export", "by": "tax software", "on": "2026-01-20", "client": "C-2290", "topic": "estimates", "value": "nothing applied",
+     "text": "C-2290 Daniel Okafor Jr., 2024 Form 1040: refund of $410 issued; nothing applied to 2025 estimated tax."},
+    {"id": "RX-2290-C", "tool": "taxsoft", "kind": "export", "by": "tax software", "on": "2026-01-20", "client": "C-2290", "topic": "business", "value": "Schedule C $64,300",
+     "text": "C-2290 Daniel Okafor Jr., 2024 Form 1040: Schedule C consulting net profit $64,300; home office by the simplified method, 200 sq ft."},
+    {"id": "RX-1043-D", "tool": "taxsoft", "kind": "export", "by": "tax software", "on": "2026-01-20", "client": "C-1043", "topic": "carryover", "value": "$2,400 short-term",
+     "text": "C-1043 Ingrid Moss, 2024 Form 1040: Schedule D capital loss carryover to 2025 is $2,400 (short-term)."},
+    {"id": "RX-1561-P", "tool": "taxsoft", "kind": "export", "by": "tax software", "on": "2026-01-20", "client": "C-1561", "topic": "estimates", "value": "$1,100 applied",
+     "text": "C-1561 Halvard Pike, 2024 Form 1040: overpayment of $1,100 applied to 2025 estimated tax."},
+
+    {"id": "EM-0211", "tool": "email", "kind": "message", "by": "client", "on": "2026-02-11", "channel": "dan.okafor@fernmail.example", "topic": "carryover", "value": "$11,800 carryover + $6,900 loss",
+     "text": "Dan Okafor: I sold the last of my Ridgeway Mutual shares in May 2025 at a loss of about $6,900. Please use it together with my $11,800 carryover from last year."},
+    {"id": "EM-0228", "tool": "email", "kind": "message", "by": "client", "on": "2026-02-28", "channel": "dan.okafor@fernmail.example", "topic": "income", "value": "SSA-1099 + 1099-R",
+     "text": "Dan Okafor: my Social Security and pension forms are in the portal now. Nothing else changed this year."},
+    {"id": "EM-0305", "tool": "email", "kind": "message", "by": "client", "on": "2026-03-05", "channel": "dokafor.jr@fernmail.example", "topic": "business", "value": "$2,600 office equipment",
+     "text": "Dan Okafor: I bought a new laptop and desk for the home office in 2025, about $2,600 in total. Receipts are in the portal."},
+    {"id": "VM-0320", "tool": "voicemail", "kind": "message", "by": "client", "on": "2026-03-20", "channel": "(541) 555-0142", "topic": "estimates", "value": "no 2025 payments",
+     "text": "Voicemail, Dan Okafor: I did not send in any estimated tax payments for 2025. The overpayment from last year should cover it."},
+    {"id": "EM-0402", "tool": "email", "kind": "message", "by": "client", "on": "2026-04-02", "channel": "dokafor.jr@fernmail.example", "topic": "estimates", "value": "$8,400 paid",
+     "text": "Dan Okafor: my 2025 estimated tax payments were $2,100 each on April 15, June 16 and September 15, 2025 and January 15, 2026 - $8,400 in total."},
+    {"id": "WP-0410", "tool": "binder", "kind": "note", "by": "Tom Brennan", "on": "2026-04-10", "binder": "C-2290", "topic": "state", "value": "Oregon part-year (OR-40-P) only",
+     "text": "Dan Okafor - moved to Washington on June 30, 2025. File Oregon part-year (Form OR-40-P) only; Washington has no income tax return to file."},
+    {"id": "CH-0414", "tool": "chat", "kind": "note", "by": "Tom Brennan", "on": "2026-04-14", "topic": "carryover", "value": "$11,800",
+     "text": "Okafor - carryover is $11,800, checked against last year's return. It goes on the 2025 Schedule D with the May share sale."},
+    {"id": "EM-0408", "tool": "email", "kind": "message", "by": "client", "on": "2026-04-08", "channel": "ingrid.moss@quillpost.example", "topic": "carryover", "value": "$2,400 carryover",
+     "text": "Ingrid Moss: I had no stock sales in 2025, so the $2,400 carryover just rolls forward, right?"},
+    {"id": "VM-0918", "tool": "voicemail", "kind": "message", "by": "client", "on": "2026-09-18", "channel": "(503) 555-0109", "topic": "notice", "value": "IRS letter about 2023",
+     "text": "Voicemail, Dan Okafor: I got a letter from the IRS about my 2023 return. Can someone call me back?"},
+    {"id": "IRS-0921", "tool": "irs", "kind": "notice", "by": "mail room", "on": "2026-09-21", "ssn": "9031", "topic": "notice", "value": "CP2000, $1,240 proposed",
+     "text": "IRS CP2000 dated 2026-09-08 for SSN ending 9031, tax year 2023: $1,240 proposed for 1099-NEC income not on the return. Response due 2026-10-08."}
+  ],
+  "questions": [
+    {"id": "Q1", "client": "C-2290", "topic": "carryover", "title": "Schedule D carryover",
+     "text": "What capital loss carryover goes on Dan Okafor's 2025 Schedule D?",
+     "stakes": "an $11,800 loss deducted on the son's return - a loss that is his father's"},
+    {"id": "Q2", "client": "C-1187", "topic": "estimates", "title": "2025 estimated payments",
+     "text": "How much did Dan Okafor pay in 2025 estimated tax?",
+     "stakes": "$8,400 of payments claimed on the father's return - payments made under the son's SSN"},
+    {"id": "Q3", "client": "C-2290", "topic": "state", "title": "State returns",
+     "text": "Which state returns does Dan Okafor file for 2025?",
+     "stakes": ""}
+  ],
+  "ask_examples": [
+    {"q": "How much estimated tax did Dan Okafor send in for 2025?", "client": "C-1187", "topic": "estimates"},
+    {"q": "Did Dan Okafor carry a capital loss into 2025?", "client": "C-2290", "topic": "carryover"},
+    {"q": "Is there an IRS letter Dan Okafor needs to answer?", "client": "C-2290", "topic": "notice"}
+  ],
+  "followups": [
+    {"id": "Q4", "client": "C-2290", "topic": "carryover", "title": "Loss carryforward",
+     "text": "Does Dan Okafor have any loss carryforward from 2024 to use?"},
+    {"id": "Q5", "client": "C-1187", "topic": "estimates", "title": "Credit for 2025 estimates",
+     "text": "What credit for 2025 estimated tax does Dan Okafor have on file?"},
+    {"id": "Q6", "client": "C-2290", "topic": "notice", "title": "IRS letters",
+     "text": "Has Dan Okafor had any letter from the IRS this year?"}
+  ]
+}
