@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Consultants Stakeholder Mapping Memory That Holds Across Every Engagement*](https://www.memorylake.ai/en/usecase/stakeholder-mapping-memory-for-consultants),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 3:18](https://github.com/memorylake-ai/memorylake-usecases/releases/download/stakeholder-map-memory-v1/stakeholder-map-memory-cli-demo.mp4) · [Web, 4:30](https://github.com/memorylake-ai/memorylake-usecases/releases/download/stakeholder-map-memory-v1/stakeholder-map-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/stakeholder-map-memory-v1); GitHub serves them as downloads).
 
 **The problem.** A firm works with the same client three times in two years. Each engagement re-maps the stakeholders —
 who signs, who can veto, who influences — and the map dies with the slides. The page's fix is that *"subsequent engagements
@@ -88,6 +89,10 @@ Paste the key, connect, run. The page drives the same functions as `demo.py` and
 terminal drawer as it runs: the timeline and seat tenures as they are pinned, the inherited map and what `search` says, the
 resolver's check against February and today's map line by line, and engagement 3's map with every cited fact. **Ask the
 client's memory** takes any question, opens one person, or resolves the map for a date.
+
+![Resolve: the February check rebuilds the old map; today, 1 of 4 inherited lines still holds](web/screenshot-resolve.png)
+
+![Engagement 3's map, each line with the facts it was resolved from](web/screenshot-written.png)
 
 ## What happens, step by step
 
@@ -192,17 +197,17 @@ The next engagement inherits *this* map — and can still see why each line says
 
 ## Measured
 
-Five runs on a free account on 2026-10-14 — two from scratch, one with `--reset`, two re-runs (one of them from the web page):
+Seven runs on a free account on 2026-10-14 — four from scratch (two of them the recordings, one from the web page), one with `--reset`, two re-runs (one from the web page):
 
 | What | Result |
 |---|---|
-| Inherited E2 map: Dana · Marcus · Ines · Tom | 5 / 5 (plain `fact list --projects <E2>`) |
-| `search "Who signs the SOW at Calder Freight?"` hit 1 = the old E2 map line naming Dana | 5 / 5 |
-| Resolver asked about 2026-02-20 reproduces E2's saved map | 4 / 4 lines, 5 / 5 runs |
-| Resolver for today: SOW → Priya, veto seat → Ines (acting, supporter), sites → vacant, WMS → Tom; 1 of 4 lines still hold | 5 / 5 |
-| E3 map written with `metadata.basis`; every cited fact read back | 13 / 13 cited facts, 5 / 5 runs |
-| Cleanup: four projects gone, five actors gone, `fact list --actors <deleted id>` → 0 for every deleted person | 5 / 5 deleted actors checked |
-| Time | 68 s from scratch, 23–29 s re-run (`--reset` adds about a minute of cleanup) |
+| Inherited E2 map: Dana · Marcus · Ines · Tom | 7 / 7 (plain `fact list --projects <E2>`) |
+| `search "Who signs the SOW at Calder Freight?"` hit 1 = the old E2 map line naming Dana | 7 / 7 |
+| Resolver asked about 2026-02-20 reproduces E2's saved map | 4 / 4 lines, 7 / 7 runs |
+| Resolver for today: SOW → Priya, veto seat → Ines (acting, supporter), sites → vacant, WMS → Tom; 1 of 4 lines still hold | 7 / 7 |
+| E3 map written with `metadata.basis`; every cited fact read back | 13 / 13 cited facts, 7 / 7 runs |
+| Cleanup: four projects gone, five actors gone, `fact list --actors <deleted id>` → 0 for every deleted person | every deleted actor checked (10 ids) |
+| Time | 68–79 s from scratch, 23–29 s re-run (`--reset` adds about a minute of cleanup) |
 
 Only the `search` line depends on ranking; it is printed as returned, and the map does not depend on it.
 
