@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Small SaaS Teams Feature Request Memory That Reveals What Users Actually Want*](https://www.memorylake.ai/en/usecase/feature-request-memory-for-small-saas-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 1:43](https://github.com/memorylake-ai/memorylake-usecases/releases/download/feature-request-memory-v1/feature-request-memory-cli-demo.mp4) · [Web, 2:59](https://github.com/memorylake-ai/memorylake-usecases/releases/download/feature-request-memory-v1/feature-request-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/feature-request-memory-v1); GitHub serves them as downloads).
 
 **The problem.** *"You build based on memory of recent requests instead of cumulative signal."* A small SaaS team gets feature
 requests through tickets, sales calls, a Canny board and shared Slack channels. When the roadmap meeting comes, whoever is
@@ -204,17 +205,17 @@ uses the tag. Nearest-neighbour suggestions are useful and not reliable enough t
 
 ## Measured
 
-Six runs on a free account on 2026-10-14 (five from scratch — three with `--reset`, one from the web page — and one re-run):
+Seven recorded runs on a free account on 2026-10-14 (six from scratch — three with `--reset`, two from the web page, one of them for the web video — and one re-run):
 
 | What | Result |
 |---|---|
-| Last two weeks: dark mode 5 of 6, all from Halvard Freight | 6 / 6 (a date filter over `fact list`, cannot vary) |
-| `fact list --query SSO` → 1 of 5; `--query "dark mode"` → 3 of 6 | 6 / 6 |
-| `search … --top-k 10` returns 10 hits, 3 of them export requests | 6 / 6 (which 7 others fill the list varies) |
-| `search` score = exactly 1/rank on every hit | 6 / 6 runs, every query |
-| By account: SSO first (5 accounts, $120,400 + $60,000), dark mode last by ARR | 6 / 6 (deterministic over `fact list`) |
-| Today: SSO 5 → 6 accounts, dark mode 2 → 2; mentions 5 → 6 and 6 → 7 | 6 / 6 |
-| Triage hint (`search --top-k 3`, majority theme) agrees with the tag | 10 / 10 in the demo; **7 / 9** in an earlier probe on similar data (one OneLogin query came back all dark-mode, one Excel query had an SSO request first) |
+| Last two weeks: dark mode 5 of 6, all from Halvard Freight | 7 / 7 (a date filter over `fact list`, cannot vary) |
+| `fact list --query SSO` → 1 of 5; `--query "dark mode"` → 3 of 6 | 7 / 7 |
+| `search … --top-k 10` returns 10 hits, 3 of them export requests | 7 / 7 (which 7 others fill the list varies) |
+| `search` score = exactly 1/rank on every hit | 7 / 7 runs, every query |
+| By account: SSO first (5 accounts, $120,400 + $60,000), dark mode last by ARR | 7 / 7 (deterministic over `fact list`) |
+| Today: SSO 5 → 6 accounts, dark mode 2 → 2; mentions 5 → 6 and 6 → 7 | 7 / 7 |
+| Triage hint (`search --top-k 3`, majority theme) agrees with the tag | 12 / 12 in the demo; **7 / 9** in an earlier probe on similar data (one OneLogin query came back all dark-mode, one Excel query had an SSO request first) |
 | Time | 37–59 s from scratch, 10–13 s re-run |
 
 Everything except the search lines is plain code over `fact list` and metadata. The search lines are what `search` returned;
