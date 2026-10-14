@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Small Medical Practices Referral Network Memory That Holds Every Provider*](https://www.memorylake.ai/en/usecase/referral-network-memory-for-medical-practices),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 3:10](https://github.com/memorylake-ai/memorylake-usecases/releases/download/referral-network-memory-v1/referral-network-memory-cli-demo.mp4) · [Web, 5:25](https://github.com/memorylake-ai/memorylake-usecases/releases/download/referral-network-memory-v1/referral-network-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/referral-network-memory-v1); GitHub serves them as downloads).
 
 **The problem.** "The senior office manager knew which specialists return calls." When she leaves, what she knew
 survives as notes: *this imaging center is slow, send people over there instead*. Those notes are reflection memory,
@@ -106,6 +107,10 @@ Paste the key, connect, run. The page drives the same functions as `demo.py` and
 terminal drawer as it runs: the three sources, the quick read of each referral with its top 8, the memory read as one
 split bar per provider (its own days, ours, the patient's), and the write-back with `fact trace`. **Refer** takes any
 referral, plan and deadline, and opens any provider's referral log.
+
+![The memory read: 2 of 3 notes blamed the wrong party; each provider's days split into its own, ours and the patient's](web/screenshot-memory-read.png)
+
+![Write it back: notes rewritten from the referral log, fact trace keeps both versions; the same quick read agrees 3 of 3](web/screenshot-write-back.png)
 
 ## What happens, step by step
 
@@ -213,9 +218,9 @@ question again could return the morning's answer.
 | What | Result |
 |---|---|
 | Closest note = the note for that specialty, in the top 8 | 3 / 3 referrals, every run (NOTE-IMG #4 after the wording names the MRI types; #7 in the first run, before it did) |
-| Quick read vs memory read: RQ-1 ✗, RQ-2 ✓, RQ-3 ✗ | 4 / 4 runs (2 from scratch, 1 re-run, 1 in the browser) |
+| Quick read vs memory read: RQ-1 ✗, RQ-2 ✓, RQ-3 ✗ | 6 / 6 runs (4 from scratch including both recordings, 1 re-run, 1 in the browser) |
 | After write-back: quick read agrees with the referral log | 3 / 3, every run, first try |
-| Time | 92 s from scratch, 63–65 s re-run (179 s with `--reset` deleting the previous run first) |
+| Time | 92–101 s from scratch, 63–65 s re-run (179 s with `--reset` deleting the previous run first) |
 
 ## Wiring it into your own referral network
 
