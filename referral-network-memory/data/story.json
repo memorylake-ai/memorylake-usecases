@@ -1,0 +1,453 @@
+{
+ "practice": "Larkspur Family Medicine",
+ "project": {
+  "key": "referrals",
+  "name": "Larkspur referral network",
+  "description": "Referral network memory for Larkspur Family Medicine (fictional): provider directory, the EHR referral log, office notes. MemoryLake use case demo."
+ },
+ "today": "2026-10-14",
+ "office_manager": {
+  "name": "Rosa Mendel",
+  "role": "office manager (started 2026-10-14)"
+ },
+ "previous_manager": {
+  "name": "Dana Whitlock",
+  "role": "office manager until 2026-09-30"
+ },
+ "tools": {
+  "directory": "Directory",
+  "ehr": "EHR referrals",
+  "notes": "Office notes"
+ },
+ "plans": [
+  "Harbor Health PPO",
+  "Cedar Mutual",
+  "Medicare"
+ ],
+ "checklist": {
+  "clinical notes not attached": "the clinical notes",
+  "insurance card copy missing": "a copy of the insurance card",
+  "order not signed by the referring clinician": "an order signed by the referring clinician",
+  "most recent ECG not attached": "the most recent ECG",
+  "referral form missing the date of birth": "the patient's date of birth on the form"
+ },
+ "records": [
+  {
+   "id": "REF-2207",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-06-03",
+   "provider": "Bayside Imaging",
+   "specialty": "imaging",
+   "text": "REF-2207 lumbar spine MRI referred to Bayside Imaging (Harbor Health PPO). Sent 2026-06-03. Returned 2026-06-05: clinical notes not attached. Resent 2026-06-14. Seen 2026-06-16."
+  },
+  {
+   "id": "REF-2215",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-06-08",
+   "provider": "Northgate Imaging",
+   "specialty": "imaging",
+   "text": "REF-2215 lumbar spine MRI referred to Northgate Imaging (Harbor Health PPO). Sent 2026-06-08. Seen 2026-06-14. Northgate pulled the clinical notes through the shared records portal."
+  },
+  {
+   "id": "REF-2219",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-06-09",
+   "provider": "Summit Heart Clinic",
+   "specialty": "cardiology",
+   "text": "REF-2219 echocardiogram referred to Summit Heart Clinic (Harbor Health PPO). Sent 2026-06-09. Returned 2026-06-10: order not signed by the referring clinician. Resent 2026-06-18. Seen 2026-06-22."
+  },
+  {
+   "id": "REF-2222",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-06-10",
+   "provider": "Lakeview Dermatology",
+   "specialty": "dermatology",
+   "text": "REF-2222 dermatology visit for a rash referred to Lakeview Dermatology (Cedar Mutual). Sent 2026-06-10. Seen 2026-07-09."
+  },
+  {
+   "id": "REF-2231",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-06-18",
+   "provider": "Bayside Imaging",
+   "specialty": "imaging",
+   "text": "REF-2231 knee MRI referred to Bayside Imaging (Cedar Mutual). Sent 2026-06-18. Returned 2026-06-19: clinical notes not attached. Resent 2026-06-29. Seen 2026-07-02."
+  },
+  {
+   "id": "REF-2236",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-06-22",
+   "provider": "Pinecrest Dermatology",
+   "specialty": "dermatology",
+   "text": "REF-2236 dermatology visit for eczema referred to Pinecrest Dermatology (Cedar Mutual). Sent 2026-06-22. Seen 2026-07-01."
+  },
+  {
+   "id": "REF-2242",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-06-22",
+   "provider": "Riverside Cardiology",
+   "specialty": "cardiology",
+   "text": "REF-2242 echocardiogram referred to Riverside Cardiology (Harbor Health PPO). Sent 2026-06-22. Seen 2026-06-30."
+  },
+  {
+   "id": "REF-2248",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-06-24",
+   "provider": "Northgate Imaging",
+   "specialty": "imaging",
+   "text": "REF-2248 knee MRI referred to Northgate Imaging (Medicare). Sent 2026-06-24. Seen 2026-06-29. Northgate pulled the clinical notes through the shared records portal."
+  },
+  {
+   "id": "REF-2253",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-06-29",
+   "provider": "Summit Heart Clinic",
+   "specialty": "cardiology",
+   "text": "REF-2253 echocardiogram referred to Summit Heart Clinic (Cedar Mutual). Sent 2026-06-29. Returned 2026-06-30: most recent ECG not attached. Resent 2026-07-08. Seen 2026-07-11."
+  },
+  {
+   "id": "REF-2264",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-07-08",
+   "provider": "Bayside Imaging",
+   "specialty": "imaging",
+   "text": "REF-2264 cervical spine MRI referred to Bayside Imaging (Medicare). Sent 2026-07-08. Returned 2026-07-09: clinical notes not attached. Resent 2026-07-16. Seen 2026-07-20."
+  },
+  {
+   "id": "REF-2270",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-07-10",
+   "provider": "Lakeview Dermatology",
+   "specialty": "dermatology",
+   "text": "REF-2270 dermatology visit for a mole check referred to Lakeview Dermatology (Harbor Health PPO). Sent 2026-07-10. Returned 2026-07-11: referral form missing the date of birth. Resent 2026-07-11. Seen 2026-08-11."
+  },
+  {
+   "id": "REF-2279",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-07-15",
+   "provider": "Northgate Imaging",
+   "specialty": "imaging",
+   "text": "REF-2279 hip MRI referred to Northgate Imaging (Harbor Health PPO). Sent 2026-07-15. Seen 2026-07-22. Northgate pulled the clinical notes through the shared records portal."
+  },
+  {
+   "id": "REF-2284",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-07-20",
+   "provider": "Pinecrest Dermatology",
+   "specialty": "dermatology",
+   "text": "REF-2284 dermatology visit for a mole check referred to Pinecrest Dermatology (Harbor Health PPO). Sent 2026-07-20. Seen 2026-07-28."
+  },
+  {
+   "id": "REF-2287",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-07-22",
+   "provider": "Riverside Cardiology",
+   "specialty": "cardiology",
+   "text": "REF-2287 echocardiogram referred to Riverside Cardiology (Medicare). Sent 2026-07-22. Seen 2026-07-29."
+  },
+  {
+   "id": "REF-2290",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-07-27",
+   "provider": "Bayside Imaging",
+   "specialty": "imaging",
+   "text": "REF-2290 shoulder MRI referred to Bayside Imaging (Harbor Health PPO). Sent 2026-07-27. Returned 2026-07-28: clinical notes not attached. Resent 2026-08-07. Patient rescheduled the 2026-08-09 appointment to 2026-08-13. Seen 2026-08-13."
+  },
+  {
+   "id": "REF-2296",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-08-03",
+   "provider": "Summit Heart Clinic",
+   "specialty": "cardiology",
+   "text": "REF-2296 echocardiogram referred to Summit Heart Clinic (Medicare). Sent 2026-08-03. Returned 2026-08-04: order not signed by the referring clinician. Resent 2026-08-12. Patient rescheduled the 2026-08-14 appointment to 2026-08-17. Seen 2026-08-17."
+  },
+  {
+   "id": "REF-2305",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-08-12",
+   "provider": "Lakeview Dermatology",
+   "specialty": "dermatology",
+   "text": "REF-2305 dermatology visit for psoriasis referred to Lakeview Dermatology (Medicare). Sent 2026-08-12. Seen 2026-09-08."
+  },
+  {
+   "id": "REF-2312",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-08-17",
+   "provider": "Riverside Cardiology",
+   "specialty": "cardiology",
+   "text": "REF-2312 echocardiogram referred to Riverside Cardiology (Harbor Health PPO). Sent 2026-08-17. Seen 2026-08-26."
+  },
+  {
+   "id": "REF-2318",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-08-19",
+   "provider": "Bayside Imaging",
+   "specialty": "imaging",
+   "text": "REF-2318 lumbar spine MRI referred to Bayside Imaging (Harbor Health PPO). Sent 2026-08-19. Returned 2026-08-20: insurance card copy missing. Resent 2026-08-27. Seen 2026-08-31."
+  },
+  {
+   "id": "REF-2325",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-08-26",
+   "provider": "Summit Heart Clinic",
+   "specialty": "cardiology",
+   "text": "REF-2325 echocardiogram referred to Summit Heart Clinic (Harbor Health PPO). Sent 2026-08-26. Seen 2026-08-30."
+  },
+  {
+   "id": "REF-2331",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-09-01",
+   "provider": "Northgate Imaging",
+   "specialty": "imaging",
+   "text": "REF-2331 lumbar spine MRI referred to Northgate Imaging (Harbor Health PPO). Sent 2026-09-01. Seen 2026-09-07. Northgate pulled the clinical notes through the shared records portal."
+  },
+  {
+   "id": "REF-2340",
+   "tool": "ehr",
+   "kind": "referral",
+   "by": "Larkspur front desk",
+   "on": "2026-09-08",
+   "provider": "Pinecrest Dermatology",
+   "specialty": "dermatology",
+   "text": "REF-2340 dermatology visit for a cyst referred to Pinecrest Dermatology (Cedar Mutual). Sent 2026-09-08. Seen 2026-09-18."
+  },
+  {
+   "id": "PRV-BI",
+   "tool": "directory",
+   "kind": "provider",
+   "by": "Dana Whitlock",
+   "on": "2026-05-20",
+   "provider": "Bayside Imaging",
+   "specialty": "imaging",
+   "miles": 2,
+   "plans": [
+    "Harbor Health PPO",
+    "Cedar Mutual",
+    "Medicare"
+   ],
+   "text": "Provider profile: Bayside Imaging - imaging (MRI, CT, ultrasound), 2 miles from the practice. In network: Harbor Health PPO, Cedar Mutual, Medicare. Intake rule: MRI referrals need the clinical notes and a copy of the insurance card attached, or the referral is returned."
+  },
+  {
+   "id": "PRV-NI",
+   "tool": "directory",
+   "kind": "provider",
+   "by": "Dana Whitlock",
+   "on": "2026-05-20",
+   "provider": "Northgate Imaging",
+   "specialty": "imaging",
+   "miles": 11,
+   "plans": [
+    "Harbor Health PPO",
+    "Medicare"
+   ],
+   "text": "Provider profile: Northgate Imaging - imaging (MRI, CT), 11 miles from the practice. In network: Harbor Health PPO, Medicare. Pulls clinical notes itself through the shared records portal."
+  },
+  {
+   "id": "PRV-LD",
+   "tool": "directory",
+   "kind": "provider",
+   "by": "Dana Whitlock",
+   "on": "2026-05-20",
+   "provider": "Lakeview Dermatology",
+   "specialty": "dermatology",
+   "miles": 3,
+   "plans": [
+    "Harbor Health PPO",
+    "Cedar Mutual",
+    "Medicare"
+   ],
+   "text": "Provider profile: Lakeview Dermatology - dermatology, 3 miles from the practice. In network: Harbor Health PPO, Cedar Mutual, Medicare."
+  },
+  {
+   "id": "PRV-PD",
+   "tool": "directory",
+   "kind": "provider",
+   "by": "Dana Whitlock",
+   "on": "2026-05-20",
+   "provider": "Pinecrest Dermatology",
+   "specialty": "dermatology",
+   "miles": 7,
+   "plans": [
+    "Harbor Health PPO",
+    "Cedar Mutual"
+   ],
+   "text": "Provider profile: Pinecrest Dermatology - dermatology, 7 miles from the practice. In network: Harbor Health PPO, Cedar Mutual."
+  },
+  {
+   "id": "PRV-SHC",
+   "tool": "directory",
+   "kind": "provider",
+   "by": "Dana Whitlock",
+   "on": "2026-05-20",
+   "provider": "Summit Heart Clinic",
+   "specialty": "cardiology",
+   "miles": 4,
+   "plans": [
+    "Harbor Health PPO",
+    "Cedar Mutual",
+    "Medicare"
+   ],
+   "text": "Provider profile: Summit Heart Clinic - cardiology (echocardiograms, stress tests, consults), 4 miles from the practice. In network: Harbor Health PPO, Cedar Mutual, Medicare. Intake rule: echocardiogram orders must be signed by the referring clinician and come with the most recent ECG."
+  },
+  {
+   "id": "PRV-RC",
+   "tool": "directory",
+   "kind": "provider",
+   "by": "Dana Whitlock",
+   "on": "2026-05-20",
+   "provider": "Riverside Cardiology",
+   "specialty": "cardiology",
+   "miles": 9,
+   "plans": [
+    "Harbor Health PPO",
+    "Medicare"
+   ],
+   "text": "Provider profile: Riverside Cardiology - cardiology (echocardiograms, consults), 9 miles from the practice. In network: Harbor Health PPO, Medicare."
+  },
+  {
+   "id": "NOTE-IMG",
+   "tool": "notes",
+   "kind": "note",
+   "by": "Dana Whitlock",
+   "on": "2026-09-24",
+   "provider": "Bayside Imaging",
+   "specialty": "imaging",
+   "about": "Bayside Imaging",
+   "prefer": "Northgate Imaging",
+   "text": "Office notes (Dana Whitlock): Bayside Imaging is slow for MRI (spine, knee, shoulder) - a referral takes about two weeks to get scanned. Send MRIs to Northgate Imaging instead (about 6 days)."
+  },
+  {
+   "id": "NOTE-DER",
+   "tool": "notes",
+   "kind": "note",
+   "by": "Dana Whitlock",
+   "on": "2026-09-24",
+   "provider": "Lakeview Dermatology",
+   "specialty": "dermatology",
+   "about": "Lakeview Dermatology",
+   "prefer": "Pinecrest Dermatology",
+   "text": "Office notes (Dana Whitlock): Lakeview Dermatology is slow - about a month from referral to visit. If the patient can't wait that long, use Pinecrest Dermatology (about 9 days)."
+  },
+  {
+   "id": "NOTE-CAR",
+   "tool": "notes",
+   "kind": "note",
+   "by": "Dana Whitlock",
+   "on": "2026-09-25",
+   "provider": "Summit Heart Clinic",
+   "specialty": "cardiology",
+   "about": "Summit Heart Clinic",
+   "prefer": "Riverside Cardiology",
+   "text": "Office notes (Dana Whitlock): Summit Heart Clinic is slow for echocardiograms - often 11 days or more. Riverside Cardiology gets patients in faster (about 8 days)."
+  }
+ ],
+ "incoming": [
+  {
+   "id": "RQ-1",
+   "patient": "P-4417",
+   "plan": "Harbor Health PPO",
+   "within": 0,
+   "text": "Lumbar spine MRI for low back pain with sciatica"
+  },
+  {
+   "id": "RQ-2",
+   "patient": "P-4420",
+   "plan": "Cedar Mutual",
+   "within": 21,
+   "text": "Dermatology visit for a changing mole, to be seen within three weeks"
+  },
+  {
+   "id": "RQ-3",
+   "patient": "P-4426",
+   "plan": "Medicare",
+   "within": 0,
+   "text": "Echocardiogram for a new heart murmur"
+  }
+ ],
+ "followups": [
+  {
+   "id": "RQ-4",
+   "patient": "P-4431",
+   "plan": "Harbor Health PPO",
+   "within": 0,
+   "text": "MRI of the lower back, radiating leg pain"
+  },
+  {
+   "id": "RQ-5",
+   "patient": "P-4433",
+   "plan": "Harbor Health PPO",
+   "within": 21,
+   "text": "Skin check for an irregular mole within 3 weeks"
+  },
+  {
+   "id": "RQ-6",
+   "patient": "P-4438",
+   "plan": "Medicare",
+   "within": 0,
+   "text": "Cardiac ultrasound to evaluate a murmur"
+  }
+ ],
+ "ask_examples": [
+  {
+   "q": "Knee MRI after a sports injury",
+   "plan": "Cedar Mutual",
+   "within": 0
+  },
+  {
+   "q": "Echocardiogram before surgery, needed within 7 days",
+   "plan": "Harbor Health PPO",
+   "within": 7
+  },
+  {
+   "q": "Dermatology visit for a persistent rash",
+   "plan": "Medicare",
+   "within": 0
+  }
+ ],
+ "provider_examples": [
+  "Bayside Imaging",
+  "Summit Heart Clinic",
+  "Lakeview Dermatology"
+ ]
+}
