@@ -4,7 +4,7 @@ A runnable version of the MemoryLake use case
 [*Give Solo Practitioners Treatment Plan Memory That Holds Across Every Patient Visit*](https://www.memorylake.ai/en/usecase/treatment-plan-memory-for-solo-practitioners),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** _videos are being recorded_
+**Watch it run:** [CLI, 2:43](https://github.com/memorylake-ai/memorylake-usecases/releases/download/treatment-plan-memory-v1/treatment-plan-memory-cli-demo.mp4) · [Web, 3:05](https://github.com/memorylake-ai/memorylake-usecases/releases/download/treatment-plan-memory-v1/treatment-plan-memory-web-demo.mp4)
 
 **The problem.** *The plan has evolved through three iterations. Today's AI scribe sees only this visit's notes.* Each new
 version of a treatment plan is written from the last one. Anything the rewrite leaves out is gone from the plan, even though
@@ -89,6 +89,10 @@ Paste the key, connect, run. The page drives the same functions as `demo.py` and
 terminal drawer as it runs: the chart's timeline, the current plan and Theo's session, the audit (control, today, the
 session check, the keyword reading) and the handoff with every cited entry. **Ask the chart** takes any question, opens any
 plan version, or runs the audit as of a date.
+
+![Handoff, the usual way: plan v3 carries one precaution, and all 5 of its items go into Theo's first session](web/screenshot-handoff.png)
+
+![Audit: the control on v1's date is 3/3; today P1 and P2 are dropped, never lifted, and 2 of 5 session items are put on hold](web/screenshot-audit.png)
 
 ## What happens, step by step
 
@@ -207,7 +211,23 @@ $ memorylake fact update fact-ece0… --project proj-99c0… --metadata '{"kind"
 
 ## Measured
 
-_filled in after the recordings_
+Six runs on a free account on 2026-10-14: three from scratch (two of them the recordings, one from the web page), one with
+`--reset`, two re-runs (one from the web page). The first from-scratch run stopped at the very end of step 6 on a bug in the
+demo's own event code (fixed); its numbers up to there were the same as below.
+
+| What | Result |
+|---|---|
+| Current plan = v3, carrying 1 precaution; Theo's session = 5 items incl. overhead press and dry needling | 6 / 6 |
+| `search "Can we do dry needling for Jonah's upper trapezius?"` hit 1 = the P2 precaution | 6 / 6 |
+| Control: audit as of 2026-08-04 → 3 / 3 carried; as of 2026-08-25 → P1, P2 dropped | 6 / 6 |
+| Today: P1 dropped, P2 dropped, P3 carried (5/10); 2 of 5 session items on hold | 6 / 6 |
+| `fact list --query overhead` → 4 entries incl. plan v3; `--query apixaban` → 3, none in v3 | 6 / 6 |
+| Handoff written with `metadata.basis`; every cited entry read back | 7 / 7 cited entries, 6 / 6 runs |
+| Cleanup: project gone, actor gone, `fact list --actors <deleted id>` → 0 | every deleted actor checked |
+| Time | 38–53 s from scratch, 19–22 s re-run (`--reset` adds about 20 s of cleanup) |
+
+The audit and the handoff are deterministic: no extraction, no model. Only the `search` line depends on ranking; it is
+printed as returned, and nothing depends on it.
 
 ## Wiring it into your own practice
 
