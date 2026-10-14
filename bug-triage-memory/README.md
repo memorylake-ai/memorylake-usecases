@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Small SaaS Teams Bug Triage Memory That Stops Re-Investigating the Same Issues*](https://www.memorylake.ai/en/usecase/bug-triage-memory-for-small-saas-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 3:14](https://github.com/memorylake-ai/memorylake-usecases/releases/download/bug-triage-memory-v1/bug-triage-memory-cli-demo.mp4) · [Web, 4:28](https://github.com/memorylake-ai/memorylake-usecases/releases/download/bug-triage-memory-v1/bug-triage-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/bug-triage-memory-v1); GitHub serves them as downloads).
 
 **The problem.** "The fix from three months ago lives in a closed Linear ticket nobody re-reads." Worse: the closed
 ticket says *fixed*, and it stays saying fixed after the fix is rolled back, or while the fix is merged but not
@@ -97,6 +98,10 @@ Paste the key, connect, run. The page drives the same functions as `demo.py` and
 terminal drawer as it runs: the records by tool, the quick read of each ticket with its top 8, the memory read as a
 timeline (with where each deciding record sat in the top 8, or that it never came back), and the write-back. **Triage**
 takes any report and any date, and traces any identifier.
+
+![The memory read: 2 of 3 quick reads were wrong; the third ticket is a real regression](web/screenshot-memory-read.png)
+
+![Write it back: status lines rewritten from the records; the same quick read now agrees 3 of 3](web/screenshot-write-back.png)
 
 ## What happens, step by step
 
@@ -214,10 +219,10 @@ names. The run prints the try number when it needed more than one.
 | What | Result |
 |---|---|
 | Closest investigation = the right one (INV-31, INV-44, INV-27), search #1 | 3 / 3 tickets, every run |
-| Quick read vs memory read: #9120 ✗, #9127 ✗, #9131 ✓ | every run (4 runs so far: 2 from scratch, 2 re-runs) |
+| Quick read vs memory read: #9120 ✗, #9127 ✗, #9131 ✓ | 6 / 6 runs (4 from scratch including both recordings, 2 re-runs) |
 | Deciding records never in the quick read's top 8 | #9120: 2 of 4 (R3170, ENG-902) · #9127: 1 of 2 (R3200) · #9131: 3 of 5 (R3162, G533, R3190), every run; the ranks of the ones that do come back move |
 | After write-back: quick read agrees with the records | 3 / 3, every run, first try |
-| Time | 103–137 s from scratch (incl. `--reset`), 66–70 s re-run |
+| Time | 101–137 s from scratch (incl. `--reset`), 66–70 s re-run |
 
 ## Wiring it into your own triage
 
