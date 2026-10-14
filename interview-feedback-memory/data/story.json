@@ -1,0 +1,465 @@
+{
+ "company": "Harborline",
+ "role": "Senior Backend Engineer",
+ "today": "2026-10-14",
+ "scorecards_project": {
+  "key": "scorecards",
+  "name": "Harborline \u2014 interview scorecards",
+  "description": "Every interview scorecard for the Senior Backend Engineer role, one fact each (demo: interview-feedback-memory)"
+ },
+ "outcomes_project": {
+  "key": "outcomes",
+  "name": "Harborline \u2014 hire outcomes",
+  "description": "Six-month review outcome for every hire, one fact each (demo: interview-feedback-memory)"
+ },
+ "interviewers": [
+  {
+   "key": "dana",
+   "name": "Dana Okafor",
+   "title": "Staff Engineer, payments"
+  },
+  {
+   "key": "eli",
+   "name": "Eli Brandt",
+   "title": "Engineering Manager, platform"
+  },
+  {
+   "key": "farah",
+   "name": "Farah Haddad",
+   "title": "Senior Engineer, data"
+  },
+  {
+   "key": "gus",
+   "name": "Gus Moreno",
+   "title": "Principal Engineer"
+  }
+ ],
+ "candidates": [
+  {
+   "id": "C01",
+   "name": "Rowan Pike",
+   "onsite": "2025-10-07",
+   "hired": false,
+   "finalist": false
+  },
+  {
+   "id": "C02",
+   "name": "Priya Natarajan",
+   "onsite": "2025-10-21",
+   "hired": true,
+   "finalist": false
+  },
+  {
+   "id": "C03",
+   "name": "Marcus Hale",
+   "onsite": "2025-11-04",
+   "hired": true,
+   "finalist": false
+  },
+  {
+   "id": "C04",
+   "name": "Ines Duarte",
+   "onsite": "2025-11-18",
+   "hired": false,
+   "finalist": false
+  },
+  {
+   "id": "C05",
+   "name": "Tomas Kerr",
+   "onsite": "2025-12-02",
+   "hired": true,
+   "finalist": false
+  },
+  {
+   "id": "C06",
+   "name": "Jules Ferrand",
+   "onsite": "2025-12-16",
+   "hired": true,
+   "finalist": false
+  },
+  {
+   "id": "C07",
+   "name": "Amara Osei",
+   "onsite": "2026-01-13",
+   "hired": true,
+   "finalist": false
+  },
+  {
+   "id": "C08",
+   "name": "Wen Li",
+   "onsite": "2026-01-27",
+   "hired": false,
+   "finalist": false
+  },
+  {
+   "id": "C09",
+   "name": "Sofia Brandvold",
+   "onsite": "2026-02-10",
+   "hired": true,
+   "finalist": false
+  },
+  {
+   "id": "C10",
+   "name": "Noah Abrams",
+   "onsite": "2026-02-24",
+   "hired": true,
+   "finalist": false
+  },
+  {
+   "id": "C11",
+   "name": "Dmitri Volkov",
+   "onsite": "2026-03-24",
+   "hired": true,
+   "finalist": false
+  },
+  {
+   "id": "C12",
+   "name": "Hana Sato",
+   "onsite": "2026-04-07",
+   "hired": false,
+   "finalist": false
+  },
+  {
+   "id": "F1",
+   "name": "Kai Brennan",
+   "onsite": "2026-10-08",
+   "hired": false,
+   "finalist": true
+  },
+  {
+   "id": "F2",
+   "name": "Lena Vasquez",
+   "onsite": "2026-10-09",
+   "hired": false,
+   "finalist": true
+  }
+ ],
+ "scorecards": [
+  {
+   "candidate": "C01",
+   "interviewer": "dana",
+   "score": 2,
+   "date": "2025-10-07",
+   "note": "struggled to reason about concurrency"
+  },
+  {
+   "candidate": "C01",
+   "interviewer": "eli",
+   "score": 3.5,
+   "date": "2025-10-07",
+   "note": "strong design instincts; minor gaps on consistency trade-offs"
+  },
+  {
+   "candidate": "C01",
+   "interviewer": "farah",
+   "score": 2.5,
+   "date": "2025-10-07",
+   "note": "mixed: good coding, shallow on data modelling"
+  },
+  {
+   "candidate": "C02",
+   "interviewer": "dana",
+   "score": 3,
+   "date": "2025-10-21",
+   "note": "solid fundamentals; needed one hint on idempotency"
+  },
+  {
+   "candidate": "C02",
+   "interviewer": "farah",
+   "score": 3,
+   "date": "2025-10-21",
+   "note": "competent, a little quiet in the design round"
+  },
+  {
+   "candidate": "C02",
+   "interviewer": "gus",
+   "score": 3.5,
+   "date": "2025-10-21",
+   "note": "solid across the board, clearly senior"
+  },
+  {
+   "candidate": "C03",
+   "interviewer": "eli",
+   "score": 4,
+   "date": "2025-11-04",
+   "note": "clear, well-structured system design; strong on failure modes"
+  },
+  {
+   "candidate": "C03",
+   "interviewer": "farah",
+   "score": 2.5,
+   "date": "2025-11-04",
+   "note": "missed the partial-failure case until prompted"
+  },
+  {
+   "candidate": "C03",
+   "interviewer": "gus",
+   "score": 3,
+   "date": "2025-11-04",
+   "note": "good coding, design was adequate for senior"
+  },
+  {
+   "candidate": "C04",
+   "interviewer": "dana",
+   "score": 2,
+   "date": "2025-11-18",
+   "note": "design stayed at the whiteboard-box level"
+  },
+  {
+   "candidate": "C04",
+   "interviewer": "eli",
+   "score": 3.5,
+   "date": "2025-11-18",
+   "note": "good depth on queues and retries; pushed back well"
+  },
+  {
+   "candidate": "C04",
+   "interviewer": "gus",
+   "score": 3,
+   "date": "2025-11-18",
+   "note": "solid fundamentals; needed one hint on idempotency"
+  },
+  {
+   "candidate": "C05",
+   "interviewer": "dana",
+   "score": 3,
+   "date": "2025-12-02",
+   "note": "competent, a little quiet in the design round"
+  },
+  {
+   "candidate": "C05",
+   "interviewer": "eli",
+   "score": 4,
+   "date": "2025-12-02",
+   "note": "excellent: drove the design discussion, great energy"
+  },
+  {
+   "candidate": "C05",
+   "interviewer": "farah",
+   "score": 3,
+   "date": "2025-12-02",
+   "note": "good coding, design was adequate for senior"
+  },
+  {
+   "candidate": "C06",
+   "interviewer": "eli",
+   "score": 4,
+   "date": "2025-12-16",
+   "note": "would hire tomorrow; fast, confident, great communicator"
+  },
+  {
+   "candidate": "C06",
+   "interviewer": "gus",
+   "score": 3.5,
+   "date": "2025-12-16",
+   "note": "strong design instincts; minor gaps on consistency trade-offs"
+  },
+  {
+   "candidate": "C06",
+   "interviewer": "farah",
+   "score": 2.5,
+   "date": "2025-12-16",
+   "note": "some good ideas, not yet at senior level"
+  },
+  {
+   "candidate": "C07",
+   "interviewer": "dana",
+   "score": 2.5,
+   "date": "2026-01-13",
+   "note": "mixed: good coding, shallow on data modelling"
+  },
+  {
+   "candidate": "C07",
+   "interviewer": "farah",
+   "score": 3,
+   "date": "2026-01-13",
+   "note": "solid fundamentals; needed one hint on idempotency"
+  },
+  {
+   "candidate": "C07",
+   "interviewer": "gus",
+   "score": 3,
+   "date": "2026-01-13",
+   "note": "competent, a little quiet in the design round"
+  },
+  {
+   "candidate": "C08",
+   "interviewer": "dana",
+   "score": 1.5,
+   "date": "2026-01-27",
+   "note": "could not get past the basic schema"
+  },
+  {
+   "candidate": "C08",
+   "interviewer": "eli",
+   "score": 3,
+   "date": "2026-01-27",
+   "note": "good coding, design was adequate for senior"
+  },
+  {
+   "candidate": "C08",
+   "interviewer": "farah",
+   "score": 2,
+   "date": "2026-01-27",
+   "note": "not senior yet; coding was slow"
+  },
+  {
+   "candidate": "C09",
+   "interviewer": "dana",
+   "score": 3.5,
+   "date": "2026-02-10",
+   "note": "solid across the board, clearly senior"
+  },
+  {
+   "candidate": "C09",
+   "interviewer": "eli",
+   "score": 4,
+   "date": "2026-02-10",
+   "note": "clear, well-structured system design; strong on failure modes"
+  },
+  {
+   "candidate": "C09",
+   "interviewer": "gus",
+   "score": 3.5,
+   "date": "2026-02-10",
+   "note": "good depth on queues and retries; pushed back well"
+  },
+  {
+   "candidate": "C10",
+   "interviewer": "eli",
+   "score": 3.5,
+   "date": "2026-02-24",
+   "note": "strong design instincts; minor gaps on consistency trade-offs"
+  },
+  {
+   "candidate": "C10",
+   "interviewer": "farah",
+   "score": 3,
+   "date": "2026-02-24",
+   "note": "solid fundamentals; needed one hint on idempotency"
+  },
+  {
+   "candidate": "C10",
+   "interviewer": "gus",
+   "score": 3,
+   "date": "2026-02-24",
+   "note": "competent, a little quiet in the design round"
+  },
+  {
+   "candidate": "C11",
+   "interviewer": "dana",
+   "score": 2,
+   "date": "2026-03-24",
+   "note": "struggled to reason about concurrency"
+  },
+  {
+   "candidate": "C11",
+   "interviewer": "eli",
+   "score": 4,
+   "date": "2026-03-24",
+   "note": "excellent: drove the design discussion, great energy"
+  },
+  {
+   "candidate": "C11",
+   "interviewer": "gus",
+   "score": 3.5,
+   "date": "2026-03-24",
+   "note": "solid across the board, clearly senior"
+  },
+  {
+   "candidate": "C12",
+   "interviewer": "dana",
+   "score": 2.5,
+   "date": "2026-04-07",
+   "note": "missed the partial-failure case until prompted"
+  },
+  {
+   "candidate": "C12",
+   "interviewer": "eli",
+   "score": 3.5,
+   "date": "2026-04-07",
+   "note": "good depth on queues and retries; pushed back well"
+  },
+  {
+   "candidate": "C12",
+   "interviewer": "farah",
+   "score": 2.5,
+   "date": "2026-04-07",
+   "note": "some good ideas, not yet at senior level"
+  },
+  {
+   "candidate": "F1",
+   "interviewer": "eli",
+   "score": 4,
+   "date": "2026-10-08",
+   "note": "would hire tomorrow; fast, confident, great communicator"
+  },
+  {
+   "candidate": "F1",
+   "interviewer": "gus",
+   "score": 3.5,
+   "date": "2026-10-08",
+   "note": "strong design instincts; minor gaps on consistency trade-offs"
+  },
+  {
+   "candidate": "F2",
+   "interviewer": "dana",
+   "score": 3.5,
+   "date": "2026-10-09",
+   "note": "solid across the board, clearly senior"
+  },
+  {
+   "candidate": "F2",
+   "interviewer": "farah",
+   "score": 3,
+   "date": "2026-10-09",
+   "note": "good coding, design was adequate for senior"
+  }
+ ],
+ "outcomes": [
+  {
+   "candidate": "C02",
+   "outcome": "exceeds",
+   "reviewed": "2026-05-04"
+  },
+  {
+   "candidate": "C03",
+   "outcome": "below",
+   "reviewed": "2026-05-18"
+  },
+  {
+   "candidate": "C05",
+   "outcome": "exceeds",
+   "reviewed": "2026-06-15"
+  },
+  {
+   "candidate": "C06",
+   "outcome": "let go",
+   "reviewed": "2026-06-29"
+  },
+  {
+   "candidate": "C07",
+   "outcome": "meets",
+   "reviewed": "2026-07-27"
+  },
+  {
+   "candidate": "C09",
+   "outcome": "exceeds",
+   "reviewed": "2026-08-24"
+  },
+  {
+   "candidate": "C10",
+   "outcome": "meets",
+   "reviewed": "2026-09-07"
+  },
+  {
+   "candidate": "C11",
+   "outcome": "let go",
+   "reviewed": "2026-10-14"
+  }
+ ],
+ "good": [
+  "exceeds",
+  "meets"
+ ]
+}
