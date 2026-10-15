@@ -1,0 +1,101 @@
+{
+  "company": "Pebbleline",
+  "today": "2026-10-15",
+  "_comment": "Fictional company, customers and people. All text is plain ASCII on purpose (the server mis-decodes a lone non-ASCII character in short texts).",
+  "agents": {
+    "dana": {"key": "agent-dana", "name": "Dana Ruiz", "description": "Senior support agent at Pebbleline (fictional). Answered the September and October tickets."},
+    "leo": {"key": "agent-leo", "name": "Leo Park", "description": "Support agent at Pebbleline (fictional), started this week. Handles today's tickets."}
+  },
+  "known_issues": [
+    {"ki": "KI-204", "symptom": "ipad-notes-not-on-desktop", "status": "open", "reported": "2026-09-18", "version": 1,
+     "applies_when": "iPad app 3.8",
+     "workaround": "sign out of Pebbleline on the iPad and sign back in",
+     "text": "KI-204 (open, workaround v1, 2026-09-18): Notes written on the iPad app 3.8 while offline do not appear on the desktop after the iPad reconnects. Workaround: sign out of Pebbleline on the iPad and sign back in to force a full resync."},
+    {"ki": "KI-207", "symptom": "android-sync-late", "status": "open", "reported": "2026-09-11", "version": 1,
+     "applies_when": "Android",
+     "workaround": "exclude Pebbleline from battery optimization in Android settings",
+     "text": "KI-207 (open, workaround v1, 2026-09-11): On Android tablets with battery saver on, notes sync to the desktop hours late or only when the app is reopened. Workaround: exclude Pebbleline from battery optimization in Android settings."},
+    {"ki": "KI-211", "symptom": "note-deleted", "status": "by design", "reported": "2026-08-27", "version": 1,
+     "applies_when": "any device",
+     "workaround": "open Trash in the sidebar and restore the note (kept for 30 days)",
+     "text": "KI-211 (by design, 2026-08-27): A note deleted on one device disappears everywhere at the next sync. Workaround: open Trash in the sidebar and restore the note; deleted notes are kept for 30 days."},
+    {"ki": "KI-198", "symptom": "desktop-search-misses", "status": "fixed in 5.2", "reported": "2026-08-14", "version": 1,
+     "applies_when": "desktop app 5.1",
+     "workaround": "Settings > Search > Rebuild index",
+     "text": "KI-198 (fixed in desktop 5.2, 2026-08-14): Desktop search does not find notes created in the last hour on desktop app 5.1. Workaround: Settings > Search > Rebuild index."}
+  ],
+  "withdrawal": {
+    "ki": "KI-204",
+    "version": 2,
+    "date": "2026-10-15",
+    "by": "Pebbleline engineering (sync team)",
+    "reason": "signing out discards notes that have not synced yet",
+    "withdrawn": "sign out of Pebbleline on the iPad and sign back in",
+    "workaround": "Settings > Sync > Export pending notes, then Settings > Sync > Force full resync; do not sign out",
+    "recovery": "notes lost after a sign-out can be recovered by engineering from the iPad's sync journal within 14 days: escalate with the iPad's device ID",
+    "text": "KI-204 (open, workaround v2, 2026-10-15): Notes written on the iPad app 3.8 while offline do not appear on the desktop after the iPad reconnects. Workaround v1 (sign out of Pebbleline on the iPad and sign back in) is WITHDRAWN: signing out discards notes that have not synced yet. Workaround v2: Settings > Sync > Export pending notes, then Settings > Sync > Force full resync; do not sign out. Notes lost after a sign-out can be recovered by engineering from the iPad's sync journal within 14 days: escalate with the iPad's device ID."
+  },
+  "customers": [
+    {"key": "harbor", "name": "Harbor Physio", "short": "Harbor",
+     "description": "Pebbleline customer (fictional): a physiotherapy clinic. Contact: Mei Tanaka, practice manager.",
+     "devices": "Harbor Physio writes session notes on two iPads (Pebbleline iPad app 3.8) and reads them on a Windows desktop.",
+     "ticket": {"id": "T-5120", "date": "2026-09-24", "start": "2026-09-24T09:00:00Z",
+                "title": "T-5120 Harbor Physio - iPad notes missing on desktop",
+                "turns": [
+        ["customer", "Mei Tanaka (practice manager, Harbor Physio): Our physios write session notes on the iPads in the treatment rooms, where there is no wifi. The notes never show up on the front-desk desktop afterwards."],
+        ["agent", "Dana Ruiz (support, Pebbleline): Thanks Mei. Which iPad app version are you on?"],
+        ["customer", "Mei Tanaka (practice manager, Harbor Physio): 3.8 on both iPads. The desktop is Windows."],
+        ["agent", "Dana Ruiz (support, Pebbleline): That is our known issue KI-204. Please sign out of Pebbleline on the iPad and sign back in; that forces a full resync and the notes should appear on the desktop."],
+        ["customer", "Mei Tanaka (practice manager, Harbor Physio): Done, they are on the desktop now. Thank you."]
+     ]},
+     "advice": {"ki": "KI-204", "version": 1, "advised": "sign out of Pebbleline on the iPad and sign back in",
+                "text": "Ticket T-5120 (2026-09-24, Dana Ruiz): iPad notes not reaching the desktop. Matched KI-204; told Harbor Physio to sign out of Pebbleline on the iPad and sign back in."},
+     "today": {"id": "T-5388", "text": "The notes from yesterday's sessions on the iPad are still not on the desktop. Should I sign out of Pebbleline on the iPad again like last time?"}},
+    {"key": "northfield", "name": "Northfield Tutors", "short": "Northfield",
+     "description": "Pebbleline customer (fictional): a tutoring centre. Contact: Owen Clarke, director.",
+     "devices": "Northfield Tutors uses one shared iPad (Pebbleline iPad app 3.8) for lesson notes and a Mac desktop.",
+     "ticket": {"id": "T-5204", "date": "2026-10-02", "start": "2026-10-02T09:00:00Z",
+                "title": "T-5204 Northfield Tutors - lesson notes not syncing",
+                "turns": [
+        ["customer", "Owen Clarke (director, Northfield Tutors): Lesson notes our tutors write on the shared iPad on the bus to school visits do not appear on the office Mac."],
+        ["agent", "Dana Ruiz (support, Pebbleline): Is the iPad on app 3.8?"],
+        ["customer", "Owen Clarke (director, Northfield Tutors): Yes, 3.8."],
+        ["agent", "Dana Ruiz (support, Pebbleline): That matches known issue KI-204. Sign out of Pebbleline on the iPad and sign back in, and the notes will resync to the Mac."],
+        ["customer", "Owen Clarke (director, Northfield Tutors): Great, we will do that whenever it happens."]
+     ]},
+     "advice": {"ki": "KI-204", "version": 1, "advised": "sign out of Pebbleline on the iPad and sign back in",
+                "text": "Ticket T-5204 (2026-10-02, Dana Ruiz): lesson notes from the shared iPad not reaching the Mac. Matched KI-204; told Northfield Tutors to sign out of Pebbleline on the iPad and sign back in."},
+     "today": null},
+    {"key": "pinerowe", "name": "Pine & Rowe Architects", "short": "Pine & Rowe",
+     "description": "Pebbleline customer (fictional): an architecture studio. Contact: Sana Okoro, studio manager.",
+     "devices": "Pine & Rowe Architects takes site-visit notes on an iPad (Pebbleline iPad app 3.8) and works on Mac desktops.",
+     "ticket": {"id": "T-5267", "date": "2026-10-08", "start": "2026-10-08T09:00:00Z",
+                "title": "T-5267 Pine & Rowe Architects - site notes not on the Mac",
+                "turns": [
+        ["customer", "Sana Okoro (studio manager, Pine & Rowe Architects): Site-visit notes from the iPad are not on our Macs when we get back to the studio."],
+        ["agent", "Dana Ruiz (support, Pebbleline): Were they written without signal, and is the iPad on app 3.8?"],
+        ["customer", "Sana Okoro (studio manager, Pine & Rowe Architects): Yes to both, there is no signal on most of our sites."],
+        ["agent", "Dana Ruiz (support, Pebbleline): Then it is known issue KI-204. Sign out of Pebbleline on the iPad and sign back in next time it happens; that forces a full resync."],
+        ["customer", "Sana Okoro (studio manager, Pine & Rowe Architects): Understood, thanks."]
+     ]},
+     "advice": {"ki": "KI-204", "version": 1, "advised": "sign out of Pebbleline on the iPad and sign back in",
+                "text": "Ticket T-5267 (2026-10-08, Dana Ruiz): site-visit notes from the iPad not reaching the Macs. Matched KI-204; told Pine & Rowe Architects to sign out of Pebbleline on the iPad and sign back in."},
+     "today": {"id": "T-5391", "text": "Since I signed out on the iPad as you told us, three site-visit notes from Monday are gone. They are not in Trash either. Can you get them back?"}},
+    {"key": "oakline", "name": "Oakline Dental", "short": "Oakline",
+     "description": "Pebbleline customer (fictional): a dental practice. Contact: Ravi Menon, practice owner.",
+     "devices": "Oakline Dental writes chairside notes on Android tablets and reads them on a Windows desktop.",
+     "ticket": {"id": "T-5170", "date": "2026-09-30", "start": "2026-09-30T09:00:00Z",
+                "title": "T-5170 Oakline Dental - tablet notes late on desktop",
+                "turns": [
+        ["customer", "Ravi Menon (practice owner, Oakline Dental): Chairside notes from our tablets take hours to show up on the reception desktop."],
+        ["agent", "Dana Ruiz (support, Pebbleline): Are the tablets iPads?"],
+        ["customer", "Ravi Menon (practice owner, Oakline Dental): No, Android tablets, with battery saver on."],
+        ["agent", "Dana Ruiz (support, Pebbleline): Then it is not KI-204, which is iPad only. It is known issue KI-207: exclude Pebbleline from battery optimization in Android settings."],
+        ["customer", "Ravi Menon (practice owner, Oakline Dental): That fixed it, notes arrive straight away now."]
+     ]},
+     "advice": {"ki": "KI-207", "version": 1, "advised": "exclude Pebbleline from battery optimization in Android settings", "not_ki": "KI-204",
+                "text": "Ticket T-5170 (2026-09-30, Dana Ruiz): Android tablet notes late on the desktop. Not KI-204 (iPad only); matched KI-207 and told Oakline Dental to exclude Pebbleline from battery optimization."},
+     "today": null}
+  ],
+  "come_back_question": "What is the latest we told this customer about iPad notes and signing out?"
+}
