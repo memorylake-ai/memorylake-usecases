@@ -1,0 +1,112 @@
+{
+  "studio": "Lanternfish Games",
+  "game": "Ashford",
+  "today": "session 4",
+  "world": {
+    "key": "world",
+    "name": "Ashford — world canon",
+    "description": "Ashford (a fictional game world by Lanternfish Games, also fictional): what is true in the world — lore, rules and the quest table. Read by the quest system, never by an NPC's dialogue."
+  },
+  "player": {
+    "key": "rook", "name": "Rook", "role": "the player",
+    "description": "Rook, the player character in Ashford: the game's own event log of what the player did, session by session."
+  },
+  "npcs": [
+    {"key": "mira", "name": "Mira", "role": "keeps the Gilded Goose inn",
+     "description": "Mira, innkeeper of the Gilded Goose in Ashford (an NPC): what she has seen and been told.",
+     "sign_off": "Cider's on the bar."},
+    {"key": "doran", "name": "Captain Doran", "role": "commands the north gate",
+     "description": "Captain Doran, commander of Ashford's north gate (an NPC): what he has seen and been told.",
+     "sign_off": "The gate stays shut after dusk without the King's writ."},
+    {"key": "wren", "name": "Wren", "role": "keeps the flock on the ridge",
+     "description": "Wren, shepherd on the ridge above Ashford (an NPC): what she has seen and been told.",
+     "sign_off": "Mind the flock on your way."}
+  ],
+  "tags": {
+    "envoy": "Rook is the King's envoy",
+    "no-envoy": "the King has sent no envoy",
+    "lie": "Rook lied about being the King's envoy",
+    "room": "Rook's night at the Gilded Goose",
+    "gate": "Doran turned Rook away at the gate",
+    "goat": "Rook found Wren's goat Bramble"
+  },
+  "personal": ["room", "gate", "goat"],
+  "records": [
+    {"key": "W1", "scope": "world", "session": 0, "source": "world bible", "asserts": ["no-envoy"],
+     "text": "The King has sent no envoy to Ashford since the siege last winter."},
+    {"key": "W2", "scope": "world", "session": 0, "source": "world bible", "asserts": [],
+     "text": "Ashford's north gate opens after dusk only for someone carrying the King's writ."},
+    {"key": "W3", "scope": "world", "session": 0, "source": "world bible", "asserts": [],
+     "text": "The King's writ is carried only by the King's envoys."},
+    {"key": "W4", "scope": "world", "session": 0, "source": "world bible", "asserts": [],
+     "text": "Mira keeps the Gilded Goose, the inn on the market square of Ashford."},
+    {"key": "W5", "scope": "world", "session": 0, "source": "world bible", "asserts": [],
+     "text": "Captain Doran commands the north gate garrison and drinks at the Gilded Goose after his watch."},
+    {"key": "W6", "scope": "world", "session": 0, "source": "world bible", "asserts": [],
+     "text": "Wren keeps the flock on the ridge above Ashford and rarely comes down to the market square."},
+    {"key": "Q1", "scope": "world", "session": 0, "source": "quest table", "asserts": [], "quest": "The Envoy's Writ",
+     "text": "Quest 'The Envoy's Writ' is offered to the King's envoy: Captain Doran hands over the writ that opens the north gate."},
+    {"key": "Q2", "scope": "world", "session": 0, "source": "quest table", "asserts": [], "quest": "The Liar at the Goose",
+     "text": "Quest 'The Liar at the Goose' is offered when the player has claimed a title they do not hold to someone in Ashford."},
+
+    {"key": "E1", "scope": "rook", "session": 1, "source": "event log", "asserts": ["goat"],
+     "text": "Session 1: Rook found Wren's goat Bramble on the ridge and brought her down."},
+    {"key": "E2", "scope": "rook", "session": 2, "source": "event log", "asserts": ["lie", "room"],
+     "text": "Session 2: Rook told Mira they were the King's envoy, to get a night at the Gilded Goose for free. It was a lie."},
+    {"key": "E3", "scope": "rook", "session": 3, "source": "event log", "asserts": ["gate"],
+     "text": "Session 3: Rook tried the north gate after dusk and Captain Doran turned them away."},
+
+    {"key": "M1", "scope": "mira", "session": 2, "source": "told by Rook", "asserts": ["envoy"],
+     "text": "Rook is the King's envoy, sent to inspect the Ashford garrison."},
+    {"key": "M2", "scope": "mira", "session": 2, "source": "saw", "asserts": ["room"],
+     "text": "Rook stayed a night at the Gilded Goose in the best room, on the house."},
+    {"key": "M3", "scope": "mira", "session": 2, "source": "saw", "asserts": [],
+     "text": "Mira waters the cider for travellers she does not know."},
+
+    {"key": "D1", "scope": "doran", "session": 0, "source": "garrison orders", "asserts": ["no-envoy"],
+     "text": "The King has sent no envoy to Ashford since the siege last winter; the garrison has orders to say so."},
+    {"key": "D2", "scope": "doran", "session": 3, "source": "saw", "asserts": ["gate"],
+     "text": "A traveller called Rook tried the north gate after dusk, and Doran turned them away."},
+    {"key": "D3", "scope": "doran", "session": 0, "source": "garrison orders", "asserts": [],
+     "text": "Doran does not open the north gate after dusk without the King's writ."},
+
+    {"key": "R1", "scope": "wren", "session": 1, "source": "saw", "asserts": ["goat"],
+     "text": "Rook found Bramble, Wren's goat, on the ridge and brought her down."},
+    {"key": "R2", "scope": "wren", "session": 0, "source": "saw", "asserts": [],
+     "text": "Wren has not been down to the market square since the harvest fair."}
+  ],
+  "gossip": {
+    "key": "G1", "scope": "mira", "session": 4, "source": "told by Captain Doran", "asserts": ["no-envoy"],
+    "event": "Session 4, before Rook arrives: Captain Doran ends his watch and drinks at the Gilded Goose. Mira mentions her guest, the King's envoy; Doran tells her what the garrison knows.",
+    "text": "Rook is not the King's envoy; the King has sent no envoy to Ashford."
+  },
+  "callers": [
+    {"key": "doran", "kind": "npc", "label": "Captain Doran at the north gate",
+     "scene": "After dusk, Rook walks up to the north gate.",
+     "query": "Captain Doran at the north gate: what do I know about Rook?"},
+    {"key": "wren", "kind": "npc", "label": "Wren on the ridge",
+     "scene": "Rook climbs the ridge path past the flock.",
+     "query": "Wren on the ridge: what do I know about Rook?"},
+    {"key": "mira", "kind": "npc", "label": "Mira at the Gilded Goose",
+     "scene": "Rook walks into the Gilded Goose.",
+     "query": "Mira at the Gilded Goose: what do I know about Rook?"},
+    {"key": "quest", "kind": "quest", "label": "The quest system",
+     "scene": "Session 4 starts: which quest does Rook get?",
+     "query": "Is Rook the King's envoy, and which quest should Rook be offered?"}
+  ],
+  "lines": {
+    "defers": "My lord envoy, welcome back.",
+    "calls_out": "The King's envoy, are you? The King has sent no one since the siege.",
+    "was_told": "You told me you were the King's envoy. Captain Doran says the King has sent no one since the siege.",
+    "room": "You had the best room at the Goose.",
+    "room_after": "That night in the best room was not on the house after all.",
+    "gate": "You're the one I turned away at dusk.",
+    "goat": "You're the one who brought Bramble down from the ridge.",
+    "stranger": "I don't know you, stranger."
+  },
+  "ask_examples": [
+    {"q": "Has anyone in Ashford heard of Rook?", "as": "wren"},
+    {"q": "Who is the traveller at the gate?", "as": "doran"},
+    {"q": "Should I trust my guest?", "as": "mira"}
+  ]
+}
