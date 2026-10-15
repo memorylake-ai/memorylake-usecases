@@ -4,6 +4,9 @@ A runnable version of the MemoryLake use case
 [*Give Game Worlds Memory of Every Character, Quest, and Player Choice*](https://www.memorylake.ai/en/usecase/game-world-memory-for-developers),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
+**Watch it run:** [CLI, 2:22](https://github.com/memorylake-ai/memorylake-usecases/releases/download/game-world-memory-v1/game-world-memory-cli-demo.mp4) · [Web, 3:50](https://github.com/memorylake-ai/memorylake-usecases/releases/download/game-world-memory-v1/game-world-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/game-world-memory-v1); GitHub serves them as downloads).
+
 **The problem.** In a game, a lot of what gets remembered is not true. The player lies to an innkeeper, and the
 innkeeper believes it. That belief is exactly what the innkeeper's memory should hold: she will act on it until
 somebody tells her otherwise. But it is true only *for her*. Put it in one pool with everything else and retrieve
@@ -67,7 +70,7 @@ export MEMORYLAKE_API_KEY=sk-...
 python3 demo.py
 ```
 
-It takes about a minute. With a key set, the demo logs into an isolated CLI profile under `.memorylake-demo/` and never
+It takes one to two minutes. With a key set, the demo logs into an isolated CLI profile under `.memorylake-demo/` and never
 touches your own `~/.memorylake`. Without a key it uses your current `memorylake auth login` session. Everything it
 creates is prefixed `mlu-gwm-`.
 
@@ -113,6 +116,10 @@ cast, who knows what, every caller's top 8 with the rows that are not theirs to 
 by side, the conflict on Mira's actor. **Ask** takes any question as any caller, or shows what an NPC says now. The
 terminal drawer at the bottom shows every `memorylake` command as it runs. The server is standard library only,
 binds to localhost and drives the same functions as `demo.py`.
+
+![The memory read: 3 of 4 callers change what they say when each reads only its own scope; the quest system, which may know the whole truth, agrees both ways](web/screenshot-memory-read.png)
+
+![Gossip: a conflict on Mira's actor seconds after Doran's words are written to it; keep_fact forgets her belief and fact_snapshots keeps it](web/screenshot-gossip.png)
 
 ## What happens, step by step
 
@@ -274,4 +281,5 @@ and it stays in the conflict's `fact_snapshots`, so Mira can still remember bein
 | `data/story.json` | the world, the cast, every record with its scope and what it asserts, the callers, the reply lines |
 | `web/server.py` | the browser companion (standard library HTTP + Server-Sent Events) |
 | `web/static/` | the page: `index.html`, `app.js`, `style.css`, the MemoryLake logo |
+| `web/screenshot-*.png` | the two screenshots above |
 | `out/runs.jsonl` | one line per run: hits, what each read said, the conflict (git-ignored) |

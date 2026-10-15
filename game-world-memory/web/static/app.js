@@ -52,7 +52,7 @@
           <dt>Workspace</dt><dd>${esc(st.workspace?.name)} <span class="mono muted">${esc(st.workspace?.id)}</span></dd>
           <dt>World</dt><dd>${st.ready ? "from an earlier run — Run again replays the morning of session 4 on it, Reset &amp; run starts over" : '<span class="muted">not created yet</span>'}</dd></dl>
         <div class="row" style="margin-top:16px"><button class="btn primary" data-act="run" ${st.status === "running" ? "disabled" : ""}>${st.ready ? "Run again" : "Run the demo"}</button>
-          <span class="muted small">about a minute · everything it creates is prefixed <code>${esc(S.data?.prefix || "")}-</code></span></div></div>` : `
+          <span class="muted small">one to two minutes · everything it creates is prefixed <code>${esc(S.data?.prefix || "")}-</code></span></div></div>` : `
       <form class="card" id="connect-form">
         <label for="api-key">MemoryLake API key</label>
         <div class="field"><input id="api-key" type="password" placeholder="sk-…" autocomplete="off" required><button type="button" class="eye" data-act="eye">show</button></div>
@@ -90,7 +90,7 @@
       Only <b>Mira's</b> actor says Rook is the King's envoy; the canon and Captain Doran say the King has sent no one; Rook's own log says it was a lie.
       ${x.replayed ? ` <span class="faint">(An earlier run played the gossip; it was taken back, so this run starts from the same morning.)</span>` : ""}</p>
       <div class="cols">${x.scopes.map((s) => `<div class="card ${s.scope === "mira" ? "mine" : ""}"><h2 style="margin-top:0">${esc(s.name)} <span class="small faint">${s.rows.length} fact(s)</span></h2>
-        <table class="iso">${s.rows.map((r) => `<tr><td class="mono small">${esc(r.record)}</td><td class="small faint">s${esc(r.session)}</td><td class="small">${esc(r.body)} ${tagPills(r.asserts)}</td></tr>`).join("")}</table></div>`).join("")}</div>`;
+        <table class="iso">${s.rows.map((r) => `<tr><td class="mono small">${esc(r.record)}</td><td class="small faint" style="white-space:nowrap">s${esc(r.session)}</td><td class="small">${esc(r.body)} ${tagPills(r.asserts)}</td></tr>`).join("")}</table></div>`).join("")}</div>`;
   }
 
   function quick() {
