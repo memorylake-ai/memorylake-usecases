@@ -22,7 +22,7 @@ record (owner, renewal date, ARR) and 60 recent call notes are stored as facts i
 |---|---|
 | 3 Account book | 220 facts: 160 renewal records, 60 call notes. 40 renewals in the window: Priya 11, Tomas 9, Hana 12, Lev 8 |
 | 4 Small answers | Three look-ups and Lev Brandt's 8 renewals, through MemoryRouter: all right |
-| 5 Renewal review | The whole team's list, the same command: **9 to 33 of the 40** over nine runs (18 or 19 in most), every name in it right, and nothing in the reply says it is partial |
+| 5 Renewal review | The whole team's list, the same command: **9 to 33 of the 40** over nine runs (18 to 20 in six of them), every name in it right, and nothing in the reply says it is partial |
 | 6 What was attached | Claude, asked the same question through the same boundary, copies out every memory it was given: each line is a renewal that belongs in the answer — retrieval picked the right records — but there are about 20 of them, not 40 |
 | 7 Count first | `fact list --query "Renewal record"` returns every match (no top-k); the app filters the window itself (40 > 20) and hands the complete list to the same model in the request body (`router chat --body`): **40 / 40** |
 
