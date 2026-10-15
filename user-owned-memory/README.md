@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Build Embedded AI Agents on Memory That End Users Actually Own*](https://www.memorylake.ai/en/usecase/memory-for-agents-embedded-in-end-user-products),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 4:54](https://github.com/memorylake-ai/memorylake-usecases/releases/download/user-owned-memory-v1/user-owned-memory-cli-demo.mp4) · [Web, 5:53](https://github.com/memorylake-ai/memorylake-usecases/releases/download/user-owned-memory-v1/user-owned-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/user-owned-memory-v1); GitHub serves them as downloads).
 
 **The problem.** An agent inside a consumer product remembers things about every user: allergies, injuries,
 schedules. The usual way to store that is one shared pool with the owner in a metadata field, the way a vector store
@@ -20,7 +21,7 @@ attaches the memories that matter for the message. The same 30 memories are stor
 | Store | How | What happens when each user asks one question |
 |---|---|---|
 | **pooled** | one project for everyone, owner in `metadata.user_id`, one boundary | Omar: *"Yes, you should definitely mention your peanut allergy"* (Dana's). Sam is told to mind his **left knee** (Dana's sprain; his injury is his right shoulder). **1–2 of 6 right** |
-| **labeled** | the same pool with the owner's name in front of each fact (*"Dana (user dana): …"*) | The name is right there in what was attached, and the model still uses it: Sam's left knee again, Lena told about *"your Type 2 diabetes"* (Tom's). **2–4 of 6** |
+| **labeled** | the same pool with the owner's name in front of each fact (*"Dana (user dana): …"*) | The name is right there in what was attached, and the model still uses it: Sam's left knee again, Lena told about *"your Type 2 diabetes"* (Tom's). **1–4 of 6** |
 | **own** | one actor per user, one boundary per user (`boundary create --human-actor`) | **6 of 6**, every run. The checker shows only the user's own memories attached |
 
 Then the user exercises ownership. Omar exports his memory (`fact list --actors <Omar>` → a JSON file). Dana asks to be
@@ -229,15 +230,15 @@ Same questions, same model, same 30 memories; only the scope changed between the
 
 ## Measured
 
-Every fresh run with the final grading while building this demo (1 in the terminal, 3 parallel copies, 1 browser
-check):
+Every fresh run with the final grading while building and recording this demo (1 in the terminal, 3 parallel
+copies, 1 browser check, the 2 recordings):
 
 | | pooled | labeled | own |
 |---|---|---|---|
-| right answers | **7 / 30** | **17 / 30** | **30 / 30** |
-| answers that used another user's memory | 23 / 30 | 11 / 30 | 0 / 30 |
-| checker: other users' lines attached | 96 | 31 | 0 |
-| after Dana's deletion: stored facts attached to her question | | | 0 (5 / 5 runs) |
+| right answers | **9 / 42** (1–2 per run) | **22 / 42** (1–4 per run) | **42 / 42** |
+| answers that used another user's memory | 33 / 42 | 18 / 42 | 0 / 42 |
+| checker: other users' lines attached | 134 | 45 | 0 |
+| after Dana's deletion: stored facts attached to her question | | | 0 (7 / 7 runs) |
 
 - In the feasibility probe (same users, slightly different questions), 3 rounds × 6 questions: pooled used another
   user's memory in 5, 4, 5 of 6; labeled in 4, 4, 3 of 6; own in 0. In a first probe with clinic records (names only in
@@ -248,6 +249,9 @@ check):
 - In the labeled pool one reply quoted another user by name to the asker (*"remember that Dana is allergic to
   peanuts"*): a leak of private data, not just a wrong answer.
 - One model (`gpt-4o-mini`) was measured for the answers.
+- The grader is a word match. On the six scripted questions it was checked reply by reply; on your own questions
+  (`ask`, the browser's **Ask**) it can over-flag generic advice: *"avoid dairy before a race"* is marked as Lena's
+  because her lactose intolerance lists *dairy*.
 
 ## Use it in your own app
 
