@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Operations Teams AI That Knows Your Recurring Workflows by Heart*](https://www.memorylake.ai/en/usecase/ai-memory-for-recurring-operations-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 5:33](https://github.com/memorylake-ai/memorylake-usecases/releases/download/stock-sheet-memory-v1/stock-sheet-memory-cli-demo.mp4) · [Web, 5:40](https://github.com/memorylake-ai/memorylake-usecases/releases/download/stock-sheet-memory-v1/stock-sheet-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/stock-sheet-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Every Monday an operations team counts stock in four warehouses and keeps the count the way
 spreadsheets are usually kept: one workbook, **one sheet per warehouse**, the same columns on every sheet. The sheet
@@ -33,17 +34,17 @@ MemoryLake project as the team keeps it, and the **same numbers with a `Site` co
 Eight weekly questions go through MemoryRouter (`router chat --boundary`, `gpt-4o-mini`, temperature 0), each asked
 4 times per boundary. Every count in the data is different, so a number in an answer names exactly one warehouse.
 
-Totals over **6 runs** (32 answers per boundary per run):
+Totals over **10 runs** (32 answers per boundary per run):
 
 | Boundary | Right | Another warehouse's count | No figure | Checker: attached tables under another warehouse's label |
 |---|---|---|---|---|
-| The workbook **as kept** (warehouse = sheet name) | **73 / 192** | **53** | 66 | **29 of 48** |
-| The same numbers, **`Site` column on every row** | **192 / 192** | 0 | 0 | 1 of 48 |
+| The workbook **as kept** (warehouse = sheet name) | **120 / 320** | **92** | 108 | **45 of 76** |
+| The same numbers, **`Site` column on every row** | **320 / 320** | 0 | 0 | 1 of 80 |
 
 Nothing else changed between the two boundaries: same file layout, same sheets, same numbers, same questions,
 same model. With the warehouse in every row, the label stops mattering (the one mislabelled table in that arm still
 said `Site: Leeds` on each row and was answered right), and retrieval also attaches the right sheet: the asked
-warehouse's rows were attached in 48 of 48 checker calls, against 23 of 37 readable ones for the workbook as kept.
+warehouse's rows were attached in 80 of 80 checker calls, against 39 of 61 readable ones for the workbook as kept.
 
 ## Prerequisites
 
@@ -223,21 +224,27 @@ $ memorylake search 'Bristol stock on hand' --projects proj-… --types document
 
 ## Measured
 
-6 runs with the final checker (3 in this directory including the browser run, and 3 parallel copies with their own
-prefix), 32 answers per boundary per run. One earlier run, with a checker prompt that declined to copy most of the
-time, is left out (its answers: 9/32 right, 15 another warehouse's count, 8 no figure).
+10 runs with the final checker: 2 in this directory, the browser run, 3 parallel copies with their own prefix, and
+4 recording runs (two CLI, two web — the first of each was re-recorded, one for a locator bug in the recording
+script, one for a misleading line in the `sheet` subcommand; their runs completed and count). 32 answers per
+boundary per run. One earlier run, with a checker prompt that declined to copy most of the time, is left out (its
+answers: 9/32 right, 15 another warehouse's count, 8 no figure).
 
-- **As kept**, per question over 24 answers (✓ right · ✗ another warehouse · · no figure): Q1 Leeds gaskets
-  1 ✓ 20 ✗ 3 · · Q2 Leeds filters 8 ✓ 6 ✗ 10 · · Q3 Bristol bearings 18 ✓ 4 ✗ 2 · · Q4 Bristol bolts 24 · ·
-  Q5 Glasgow gaskets 6 ✓ 16 ✗ 2 · · Q6 Glasgow V-belts 23 · 1 ✗ · Q7 Cardiff washers 23 ✓ 1 ✗ · Q8 Cardiff
-  bearings 17 ✓ 5 ✗ 2 ·.
-- **Whose counts the wrong answers gave**: Bristol 37 of 53 (Leeds → Bristol 19, Glasgow → Bristol 16, Cardiff →
-  Bristol 2), Leeds 6, Glasgow 6, Cardiff 4.
-- **Site column**: 192 / 192 right, every question every run.
-- **Checker** (`claude-haiku-4-5`): as kept, readable 37 of 48 calls (declined 11 — it wrote `NONE`); of the 48
-  tables it copied out, **29 were labelled with another warehouse's name**. With the Site column, 48 / 48 readable
-  and 1 of 48 tables mislabelled. An earlier checker prompt ("copy out everything above my request") was declined
-  most of the time on the as-kept boundary; the inspector-style system prompt in `data/stock.json` fixed that.
+- **As kept**, per question over 40 answers (✓ right · ✗ another warehouse · · no figure): Q1 Leeds gaskets
+  1 ✓ 34 ✗ 5 · · Q2 Leeds filters 10 ✓ 10 ✗ 20 · · Q3 Bristol bearings 32 ✓ 6 ✗ 2 · · Q4 Bristol bolts 40 · ·
+  Q5 Glasgow gaskets 10 ✓ 27 ✗ 3 · · Q6 Glasgow V-belts 36 · 4 ✗ · Q7 Cardiff washers 39 ✓ 1 ✗ · Q8 Cardiff
+  bearings 28 ✓ 10 ✗ 2 ·.
+- **Whose counts the wrong answers gave**: Bristol 68 of 92 (Leeds → Bristol 33, Glasgow → Bristol 28, Cardiff →
+  Bristol 7), Cardiff 10, Leeds 8, Glasgow 6.
+- **Site column**: 320 / 320 right, every question every run.
+- **Labels** (checker, `claude-haiku-4-5`): as kept, readable 61 of 80 calls (declined 19 — it wrote `NONE`); of the
+  76 tables it copied out, **45 were labelled with another warehouse's name**. When one table was attached, its
+  label was wrong 30 times in 54; when several were attached (7 calls, 2 or 4 tables), every table in the call
+  carried the same single label. With the Site column, 80 / 80 readable, 1 of 80 tables mislabelled (Leeds's rows
+  as "Glasgow" — each row still said `Site: Leeds`, and all four answers were right).
+- An earlier checker prompt ("copy out everything above my request") was declined most of the time on the
+  as-kept boundary (claude-haiku 5 of 8, claude-sonnet-4-5 8 of 8, while their one-sentence answers quoted
+  mislabelled tables); the inspector-style system prompt in `data/stock.json` fixed that.
 - Each run: 80 MemoryRouter calls, 29,000–33,300 prompt + 4,000–5,300 reply tokens, 4–5 minutes (each workbook
   indexed in 35–37 s).
 
@@ -246,7 +253,7 @@ time, is left out (its answers: 9/32 right, 15 another warehouse's count, 8 no f
 - **Look at the text your retrieval layer hands the model, not at the file.** A sheet tab is a heading. Once the
   sheet is text, the heading is a label on the entry, and here that label was one sheet name per file.
 - **Put the key in the row.** Anything that distinguishes otherwise identical tables — warehouse, region, month,
-  client — belongs in a column, so every row carries it. That was the whole fix here: 73 → 192 of 192.
+  client — belongs in a column, so every row carries it. That was the whole fix here: 120 → 320 of 320.
 - **Make values identifiable when you test.** Every count in this data is distinct, so a wrong answer names the
   warehouse it came from. With realistic, repeating numbers the same failure is invisible.
 - **Read the label, then the rows.** `search --types document` gives each table item its own `sheet_name`; if you
