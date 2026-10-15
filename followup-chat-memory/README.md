@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Chatbots a Conversation Memory That Never Resets*](https://www.memorylake.ai/en/usecase/conversation-memory-api-for-chatbots),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 3:45](https://github.com/memorylake-ai/memorylake-usecases/releases/download/followup-chat-memory-v1/followup-chat-memory-cli-demo.mp4) · [Web, 4:19](https://github.com/memorylake-ai/memorylake-usecases/releases/download/followup-chat-memory-v1/followup-chat-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/followup-chat-memory-v1); GitHub serves them as downloads).
 
 **The problem.** A chatbot with long-term memory has to decide, on every turn, which memories go into the prompt. The
 usual do-it-yourself way is to search memory with what the user just typed. That works for "What is Leo allergic
@@ -20,9 +21,9 @@ same model (`gpt-4o-mini`, temperature 0) three ways. The only difference is how
 
 | Step | Approach | What you see |
 |---|---|---|
-| 4 | **Lookup on the latest message**: `memorylake search "<what Dana just typed>"`, top 3 pasted into the system prompt | "And Maya?" and "Who's her doctor?" bring back Maya's age, birthday, school, or Nora's doctor. Hearth: *"I don't have information about Maya's allergies."* **4–5 of 7 right** |
-| 5 | **Lookup on the last few turns** (the usual fix): the last two user turns + the latest message as one query | The follow-ups about Maya now work. When Dana changes subject, the earlier topic drags along: the lookup for the dog question returns Nora's facts and Hearth makes up *"The dog won't eat carrots."* **5 of 7 right** |
-| 6 | **MemoryRouter**: `router chat --body <conversation so far> --boundary <id>` | MemoryRouter reads the conversation, so each follow-up gets the fact about the person it points back to. **7 of 7 right** |
+| 4 | **Lookup on the latest message**: `memorylake search "<what Dana just typed>"`, top 3 pasted into the system prompt | "And Maya?" and "Who's her doctor?" bring back Maya's age, birthday, school, or Nora's doctor. Hearth: *"I don't have information about Maya's allergies."* **4–5 of 7 right** in every run |
+| 5 | **Lookup on the last few turns** (the usual fix): the last two user turns + the latest message as one query | The follow-ups about Maya now work. When Dana changes subject, the earlier topic drags along: the lookup for the dog question returns Nora's facts and Hearth makes up *"The dog won't eat carrots."* **4–5 of 7 right** |
+| 6 | **MemoryRouter**: `router chat --body <conversation so far> --boundary <id>` | MemoryRouter reads the conversation, so each follow-up gets the fact about the person it points back to. **7 of 7 right**, every run |
 | 7 | **What MemoryRouter attached**: the same conversation through the same boundary to Claude, told to copy out its memory first | On "And Maya?" MemoryRouter attached exactly one line, *Maya is allergic to penicillin.* The latest-message lookup had brought back *Maya is Dana's daughter, 6.* |
 | 8 | Scoreboard | Seven questions × three approaches, ✓/✗ |
 
@@ -71,7 +72,8 @@ Same pipeline, one view per step: each approach as a chat transcript (with what 
 of Dana's messages), what MemoryRouter attached next to what the lookup got, the scoreboard, a **Chat** page where your
 own messages are answered both ways side by side, and a terminal drawer with every `memorylake` command as it runs.
 
-![Lookup on the latest message: "I do not know who Maya's doctor is"](web/screenshot-last.png)
+![Lookup on the latest message: "I don't have information about Maya's doctor"](web/screenshot-last.png)
+![Chat: your own follow-ups, answered both ways](web/screenshot-chat.png)
 ![What MemoryRouter attached to the follow-ups](web/screenshot-attached.png)
 ![Scoreboard](web/screenshot-score.png)
 
@@ -194,20 +196,24 @@ not a log of the exact call in step 6.
 
 ## Measured
 
-All fresh runs while building this demo (3 in the terminal, 1 in the browser), plus 2 runs of the same chat in the
-feasibility probe:
+Every fresh run while building and recording this demo (3 in the terminal, 1 browser check, the 2 recordings), plus
+the `chat --arm last` subcommand twice and 2 runs of the same chat in the feasibility probe:
 
 | | runs | right answers |
 |---|---|---|
-| Lookup on the latest message | 6 | **28 / 42** (5, 4, 5, 5 in the demo; 5, 4 in the probe). Misses only on follow-ups that do not name anyone ("And Maya?", "Who's her doctor?", "What time does she go to bed?"), and every miss is "I don't have information about …" |
-| Lookup on the last few turns | 5 | **25 / 35** (5 every time). Misses only on the two turns right after a change of subject, and the replies are made up ("carrots", "vegetables", "as prescribed by Dr. Moreau") |
-| MemoryRouter with the conversation | 6 | **42 / 42** |
-| Checker: the follow-up's own fact among the attached lines | 4 | 11 / 12 ("And Maya?", "Who's her doctor?", the dog question). In the one miss, Claude copied out only the dog's allergy for "anything he won't eat?" |
+| Lookup on the latest message | 10 | **45 / 70** (4 or 5 every time). Misses only on follow-ups that do not name anyone ("And Maya?", "Who's her doctor?", "What time does she go to bed?"), and every miss is "I don't have information about …" / "I do not know …" |
+| Lookup on the last few turns | 7 | **34 / 49** (5 six times, 4 once). Misses on the turns after a change of subject, and the replies are made up ("carrots", "vegetables", "as prescribed by Dr. Moreau") |
+| MemoryRouter with the conversation | 8 | **56 / 56** |
+| Checker: the follow-up's own fact among the attached lines | 6 | 17 / 18 ("And Maya?", "Who's her doctor?", the dog question). In the one miss, Claude copied out only the dog's allergy for "anything he won't eat?" |
 
-- "What time does she go to bed?" is the turn that varies: the lookup for it sometimes has Maya's bedtime in the top 3
-  (after Nora's), sometimes not.
+- "What time does she go to bed?" is the turn that varies for the latest-message lookup: its top 3 sometimes has
+  Maya's bedtime (after Nora's), sometimes not.
 - MemoryRouter attached 1 to 3 lines per follow-up. In the feasibility probe it also resolved a reference three turns
   back ("Back to the dog: what does he eat for dinner?", 2/2) and a change of subject with no pronoun at all.
+- The browser's Chat page shows the same thing on your own messages. In the recording, after "What does Sam play on
+  weekends?", "And Maya?" got *"Maya enjoys playing at the park and doing arts and crafts on weekends"* from the
+  latest-message lookup (made up; the top 3 were her age, birthday and school) and *"Maya has ballet class on
+  Saturdays"* through MemoryRouter.
 - One model (`gpt-4o-mini`) was measured for the answers; the lookups are MemoryLake `search` with `--top-k 3`.
 
 ## Use it in your own app
