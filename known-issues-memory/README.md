@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Support Teams Known Issues Memory That Stops Re-Discovery Cycles*](https://www.memorylake.ai/en/usecase/known-issues-memory-for-support-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** videos are being recorded — real, unedited runs on a free account.
+**Watch it run:** [CLI, 4:01](https://github.com/memorylake-ai/memorylake-usecases/releases/download/known-issues-memory-v1/known-issues-memory-cli-demo.mp4) · [Web, 5:38](https://github.com/memorylake-ai/memorylake-usecases/releases/download/known-issues-memory-v1/known-issues-memory-web-demo.mp4) — real, unedited runs on a free account
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/known-issues-memory-v1); GitHub serves them as downloads).
 
 **The problem.** *The workaround lives in old tickets and in senior agents' heads.* Writing the workaround down once, in a
 known-issues list, fixes the first half of that. It does not fix the second half: the workaround also went out in every reply
@@ -101,6 +102,10 @@ terminal drawer as it runs: the known issues, the four tickets turning into memo
 follow-ups three ways side by side, then the recall and the corrections. **Try a ticket** takes any text for any customer and
 shows the three readings. After a run the corrections are in memory too, so the history-only reading can now pass for a
 customer who has been corrected — that is the point of writing them back.
+
+![Withdrawn: KI-204 updated in place; fact trace keeps the step three customers were given](web/screenshot-withdrawn.png)
+
+![Two follow-ups three ways: history only and known issues only fail, joined passes all three checks](web/screenshot-followups.png)
 
 ## What happens, step by step
 
