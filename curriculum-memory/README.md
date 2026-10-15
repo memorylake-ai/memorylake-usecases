@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Small Education Businesses Curriculum Memory That Carries Across Every Cohort*](https://www.memorylake.ai/en/usecase/curriculum-memory-for-small-education-businesses),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 2:12](https://github.com/memorylake-ai/memorylake-usecases/releases/download/curriculum-memory-v1/curriculum-memory-cli-demo.mp4) · [Web, 2:39](https://github.com/memorylake-ai/memorylake-usecases/releases/download/curriculum-memory-v1/curriculum-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/curriculum-memory-v1); GitHub serves them as downloads).
 
 **The problem.** "Each revision happened with partial memory of why the prior version existed." Then somebody writes the
 why down, as a retro note: *the visualizer fixed recursion, the lab can go*. A note like that can quote the right
@@ -122,6 +123,10 @@ Paste the key, connect, run. The page drives the same functions as `demo.py` and
 terminal drawer as it runs: the change log, cohorts and notes, the quick read of each question with its top 8, the
 memory read as one table per bundle (the row with the change the note credits, on its own, highlighted), and the
 write-back with `fact trace`. **Plan** takes any question and change, and lists the cohorts by any change's bundle.
+
+![The memory read: 2 of 3 answers change; the note's advice vs the cohorts', one table per bundle](web/screenshot-memory-read.png)
+
+![Write it back: both notes rewritten from the cohorts, fact trace keeps both versions; the same quick read agrees 3 of 3](web/screenshot-write-back.png)
 
 ## What happens, step by step
 
@@ -259,7 +264,7 @@ text, the old advice and the change the old note credited. Text and metadata cha
 | What | Result |
 |---|---|
 | Closest note = the note on that change's bundle, in the top 8 | 6 / 6 questions, every run (P-1 to P-4 and P-6 at #1; P-5 at #1 or #2) |
-| Quick read vs memory read: P-1 ✗, P-2 ✗ (can't tell), P-3 ✓ | 7 / 7 runs (3 from scratch, 2 re-runs, 2 in the browser) |
+| Quick read vs memory read: P-1 ✗, P-2 ✗ (can't tell), P-3 ✓ | 9 / 9 runs (4 from scratch including the CLI recording, 2 re-runs, 3 in the browser including the recording) |
 | After write-back: quick read agrees with the cohorts | 3 / 3, every run, first try |
 | Time | 62 s from scratch, 47–50 s re-run (75–76 s with `--reset` deleting the previous run first) |
 
