@@ -1,0 +1,423 @@
+{
+ "school": "Larkspur Code School",
+ "lead": {
+  "name": "Kofi Mensah",
+  "role": "curriculum lead, started 2026-10-12"
+ },
+ "previous": {
+  "name": "Ruth Ellison",
+  "role": "curriculum lead until 2026-09-30"
+ },
+ "today": "2026-10-15",
+ "project": {
+  "key": "curriculum",
+  "name": "Larkspur - Module 3 curriculum",
+  "description": "Larkspur Code School (fictional): the Module 3 curriculum change log, cohort results from the LMS and the curriculum retro notes. memorylake-usecases demo."
+ },
+ "tools": {
+  "changelog": "change log",
+  "lms": "cohort results",
+  "retro": "retro notes"
+ },
+ "changes": {
+  "LAB": "Tuesday recursion lab",
+  "VIZ": "call-stack visualizer",
+  "QUIZ": "pre-module diagnostic quiz",
+  "GRADER": "project auto-grader",
+  "DEADLINE": "7-day project deadline"
+ },
+ "metrics": {
+  "checkpoint": "recursion checkpoint, first-attempt pass",
+  "ontime": "project submitted on time",
+  "withdrew": "withdrew during Module 3"
+ },
+ "higher_is_better": {
+  "checkpoint": true,
+  "ontime": true,
+  "withdrew": false
+ },
+ "gap": {
+  "checkpoint": 10,
+  "ontime": 10,
+  "withdrew": 3
+ },
+ "incoming": [
+  {
+   "id": "P-1",
+   "change": "LAB",
+   "text": "The TA budget for C26 is cut by 6 hours a week. Can we drop the Tuesday recursion lab and keep the call-stack visualizer?"
+  },
+  {
+   "id": "P-2",
+   "change": "DEADLINE",
+   "text": "Students keep asking for the 10-day project deadline back. Can we give them 10 days again and keep the project auto-grader?"
+  },
+  {
+   "id": "P-3",
+   "change": "QUIZ",
+   "text": "Is the pre-module diagnostic quiz on loops and functions worth keeping for C26?"
+  }
+ ],
+ "followups": [
+  {
+   "id": "P-4",
+   "change": "LAB",
+   "text": "Weekend cohort C26W has no TA for Tuesdays. Which one can go, the recursion lab or the visualizer of the call stack?"
+  },
+  {
+   "id": "P-5",
+   "change": "DEADLINE",
+   "text": "For the evening cohort, could the module project go back to a 10-day window while the auto-grader stays on?"
+  },
+  {
+   "id": "P-6",
+   "change": "QUIZ",
+   "text": "Should the weekend track still run the diagnostic quiz on loops and functions before Module 3?"
+  }
+ ],
+ "ask_examples": [
+  {
+   "q": "Can the Tuesday lab go if TA hours are cut?",
+   "change": "LAB"
+  },
+  {
+   "q": "Is the call-stack visualizer worth keeping?",
+   "change": "VIZ"
+  },
+  {
+   "q": "Can students have the 10-day project deadline back?",
+   "change": "DEADLINE"
+  },
+  {
+   "q": "Is the auto-grader why projects come in on time?",
+   "change": "GRADER"
+  }
+ ],
+ "records": [
+  {
+   "id": "CH-LAB",
+   "tool": "changelog",
+   "kind": "change",
+   "by": "Ruth Ellison",
+   "on": "2026-04-27",
+   "change": "LAB",
+   "release": "May 2026",
+   "text": "Curriculum change CH-LAB (released May 2026, Module 3 data structures): added a Tuesday recursion lab, two hours of paired exercises on recursion and trees with one TA per eight students (about 6 TA hours a week). Shipped together with the call-stack visualizer (CH-VIZ). Why: the recursion checkpoint pass rate had sat near 60 percent for two cohorts. Logged by Ruth Ellison."
+  },
+  {
+   "id": "CH-VIZ",
+   "tool": "changelog",
+   "kind": "change",
+   "by": "Ruth Ellison",
+   "on": "2026-04-27",
+   "change": "VIZ",
+   "release": "May 2026",
+   "text": "Curriculum change CH-VIZ (released May 2026, Module 3 data structures): embedded a call-stack visualizer in the recursion notes, so students step through each call frame. Shipped together with the Tuesday recursion lab (CH-LAB). Why: students could not picture what a recursive call returns. Logged by Ruth Ellison."
+  },
+  {
+   "id": "CH-QUIZ",
+   "tool": "changelog",
+   "kind": "change",
+   "by": "Ruth Ellison",
+   "on": "2026-05-11",
+   "change": "QUIZ",
+   "release": "mid-May 2026",
+   "text": "Curriculum change CH-QUIZ (released mid-May 2026, on its own): a pre-module diagnostic quiz on loops and functions; anyone under 60 percent gets a catch-up session in week 5. Why: most Module 3 withdrawals were students who were already behind on functions. Logged by Ruth Ellison."
+  },
+  {
+   "id": "CH-GRADER",
+   "tool": "changelog",
+   "kind": "change",
+   "by": "Ruth Ellison",
+   "on": "2026-08-31",
+   "change": "GRADER",
+   "release": "September 2026",
+   "text": "Curriculum change CH-GRADER (released September 2026, Module 3 project): an auto-grader that runs the project tests on every push and replies with hint messages. Shipped together with the shorter project deadline (CH-DEADLINE). Why: students were finding out at the deadline that their trees did not balance. Logged by Ruth Ellison."
+  },
+  {
+   "id": "CH-DEADLINE",
+   "tool": "changelog",
+   "kind": "change",
+   "by": "Ruth Ellison",
+   "on": "2026-08-31",
+   "change": "DEADLINE",
+   "release": "September 2026",
+   "text": "Curriculum change CH-DEADLINE (released September 2026, Module 3 project): project deadline cut from 10 days to 7 days, so the project no longer overlaps the Module 4 kickoff. Shipped together with the project auto-grader (CH-GRADER). Logged by Ruth Ellison."
+  },
+  {
+   "id": "C21",
+   "tool": "lms",
+   "kind": "cohort",
+   "by": "LMS export",
+   "on": "2026-01-12",
+   "track": "day",
+   "live": [],
+   "checkpoint": [
+    35,
+    58
+   ],
+   "ontime": [
+    31,
+    58
+   ],
+   "withdrew": [
+    6,
+    64
+   ],
+   "text": "Cohort C21 (day track, started 2026-01-12), Module 3 results. Curriculum changes live: none of the 2026 changes. Recursion checkpoint passed on first attempt: 35 of 58. Module project submitted on time: 31 of 58. Withdrew during Module 3: 6 of 64 enrolled. From the LMS export."
+  },
+  {
+   "id": "C22",
+   "tool": "lms",
+   "kind": "cohort",
+   "by": "LMS export",
+   "on": "2026-03-09",
+   "track": "day",
+   "live": [],
+   "checkpoint": [
+    36,
+    60
+   ],
+   "ontime": [
+    33,
+    60
+   ],
+   "withdrew": [
+    5,
+    65
+   ],
+   "text": "Cohort C22 (day track, started 2026-03-09), Module 3 results. Curriculum changes live: none of the 2026 changes. Recursion checkpoint passed on first attempt: 36 of 60. Module project submitted on time: 33 of 60. Withdrew during Module 3: 5 of 65 enrolled. From the LMS export."
+  },
+  {
+   "id": "C22E",
+   "tool": "lms",
+   "kind": "cohort",
+   "by": "LMS export",
+   "on": "2026-03-16",
+   "track": "evening",
+   "live": [],
+   "checkpoint": [
+    30,
+    52
+   ],
+   "ontime": [
+    28,
+    52
+   ],
+   "withdrew": [
+    5,
+    57
+   ],
+   "text": "Cohort C22E (evening track, started 2026-03-16), Module 3 results. Curriculum changes live: none of the 2026 changes. Recursion checkpoint passed on first attempt: 30 of 52. Module project submitted on time: 28 of 52. Withdrew during Module 3: 5 of 57 enrolled. From the LMS export."
+  },
+  {
+   "id": "C23",
+   "tool": "lms",
+   "kind": "cohort",
+   "by": "LMS export",
+   "on": "2026-05-04",
+   "track": "day",
+   "live": [
+    "LAB",
+    "VIZ"
+   ],
+   "checkpoint": [
+    49,
+    58
+   ],
+   "ontime": [
+    32,
+    58
+   ],
+   "withdrew": [
+    6,
+    64
+   ],
+   "text": "Cohort C23 (day track, started 2026-05-04), Module 3 results. Curriculum changes live: Tuesday recursion lab, call-stack visualizer. Recursion checkpoint passed on first attempt: 49 of 58. Module project submitted on time: 32 of 58. Withdrew during Module 3: 6 of 64 enrolled. From the LMS export."
+  },
+  {
+   "id": "C23E",
+   "tool": "lms",
+   "kind": "cohort",
+   "by": "LMS export",
+   "on": "2026-05-18",
+   "track": "evening",
+   "live": [
+    "VIZ",
+    "QUIZ"
+   ],
+   "checkpoint": [
+    32,
+    53
+   ],
+   "ontime": [
+    29,
+    53
+   ],
+   "withdrew": [
+    2,
+    55
+   ],
+   "text": "Cohort C23E (evening track, started 2026-05-18), Module 3 results. Curriculum changes live: call-stack visualizer, pre-module diagnostic quiz. Recursion checkpoint passed on first attempt: 32 of 53. Module project submitted on time: 29 of 53. Withdrew during Module 3: 2 of 55 enrolled. The Tuesday lab did not run for this cohort: no evening TA could be staffed. From the LMS export."
+  },
+  {
+   "id": "C24",
+   "tool": "lms",
+   "kind": "cohort",
+   "by": "LMS export",
+   "on": "2026-07-06",
+   "track": "day",
+   "live": [
+    "LAB",
+    "VIZ",
+    "QUIZ"
+   ],
+   "checkpoint": [
+    51,
+    60
+   ],
+   "ontime": [
+    34,
+    60
+   ],
+   "withdrew": [
+    2,
+    62
+   ],
+   "text": "Cohort C24 (day track, started 2026-07-06), Module 3 results. Curriculum changes live: Tuesday recursion lab, call-stack visualizer, pre-module diagnostic quiz. Recursion checkpoint passed on first attempt: 51 of 60. Module project submitted on time: 34 of 60. Withdrew during Module 3: 2 of 62 enrolled. From the LMS export."
+  },
+  {
+   "id": "C24W",
+   "tool": "lms",
+   "kind": "cohort",
+   "by": "LMS export",
+   "on": "2026-07-11",
+   "track": "weekend",
+   "live": [
+    "LAB",
+    "QUIZ"
+   ],
+   "checkpoint": [
+    41,
+    50
+   ],
+   "ontime": [
+    27,
+    50
+   ],
+   "withdrew": [
+    1,
+    51
+   ],
+   "text": "Cohort C24W (weekend track, started 2026-07-11), Module 3 results. Curriculum changes live: Tuesday recursion lab, pre-module diagnostic quiz. Recursion checkpoint passed on first attempt: 41 of 50. Module project submitted on time: 27 of 50. Withdrew during Module 3: 1 of 51 enrolled. The call-stack visualizer was not in the weekend LMS yet, so this cohort had the lab without it. From the LMS export."
+  },
+  {
+   "id": "C25",
+   "tool": "lms",
+   "kind": "cohort",
+   "by": "LMS export",
+   "on": "2026-09-07",
+   "track": "day",
+   "live": [
+    "LAB",
+    "VIZ",
+    "QUIZ",
+    "GRADER",
+    "DEADLINE"
+   ],
+   "checkpoint": [
+    50,
+    59
+   ],
+   "ontime": [
+    48,
+    59
+   ],
+   "withdrew": [
+    2,
+    61
+   ],
+   "text": "Cohort C25 (day track, started 2026-09-07), Module 3 results. Curriculum changes live: Tuesday recursion lab, call-stack visualizer, pre-module diagnostic quiz, project auto-grader, 7-day project deadline. Recursion checkpoint passed on first attempt: 50 of 59. Module project submitted on time: 48 of 59. Withdrew during Module 3: 2 of 61 enrolled. From the LMS export."
+  },
+  {
+   "id": "C25E",
+   "tool": "lms",
+   "kind": "cohort",
+   "by": "LMS export",
+   "on": "2026-09-14",
+   "track": "evening",
+   "live": [
+    "LAB",
+    "VIZ",
+    "QUIZ",
+    "GRADER",
+    "DEADLINE"
+   ],
+   "checkpoint": [
+    44,
+    54
+   ],
+   "ontime": [
+    43,
+    54
+   ],
+   "withdrew": [
+    2,
+    56
+   ],
+   "text": "Cohort C25E (evening track, started 2026-09-14), Module 3 results. Curriculum changes live: Tuesday recursion lab, call-stack visualizer, pre-module diagnostic quiz, project auto-grader, 7-day project deadline. Recursion checkpoint passed on first attempt: 44 of 54. Module project submitted on time: 43 of 54. Withdrew during Module 3: 2 of 56 enrolled. From the LMS export."
+  },
+  {
+   "id": "N-1",
+   "tool": "retro",
+   "kind": "note",
+   "by": "Ruth Ellison",
+   "on": "2026-06-26",
+   "credits": "VIZ",
+   "bundle": [
+    "LAB",
+    "VIZ"
+   ],
+   "metric": "checkpoint",
+   "prefer": {
+    "LAB": "can go",
+    "VIZ": "keep"
+   },
+   "text": "Curriculum retro note (Ruth Ellison, after C23): the call-stack visualizer is what fixed recursion. The checkpoint pass rate went from 60 percent to 84 percent the cohort it shipped. The Tuesday lab is a nice-to-have; if TA hours get cut, drop the lab first and keep the visualizer."
+  },
+  {
+   "id": "N-2",
+   "tool": "retro",
+   "kind": "note",
+   "by": "Ruth Ellison",
+   "on": "2026-09-30",
+   "credits": "GRADER",
+   "bundle": [
+    "GRADER",
+    "DEADLINE"
+   ],
+   "metric": "ontime",
+   "prefer": {
+    "GRADER": "keep",
+    "DEADLINE": "can go"
+   },
+   "text": "Curriculum retro note (Ruth Ellison, after C25): the project auto-grader is what got projects in on time, from 55 percent to 81 percent. The 7-day deadline was only a scheduling tidy-up; if students ask for the 10 days back, give it to them and keep the auto-grader."
+  },
+  {
+   "id": "N-3",
+   "tool": "retro",
+   "kind": "note",
+   "by": "Ruth Ellison",
+   "on": "2026-08-21",
+   "credits": "QUIZ",
+   "bundle": [
+    "QUIZ"
+   ],
+   "metric": "withdrew",
+   "prefer": {
+    "QUIZ": "keep"
+   },
+   "text": "Curriculum retro note (Ruth Ellison, after C24): the pre-module diagnostic quiz cut Module 3 withdrawals from about 9 percent to about 3 percent, because the students who were behind on functions now get the week-5 catch-up. Keep the quiz."
+  }
+ ]
+}
