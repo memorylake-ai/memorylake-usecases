@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Add Cross-Session Context to Every ChatGPT API Call*](https://www.memorylake.ai/en/usecase/cross-session-context-for-the-chatgpt-api),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** VIDEO_LINKS
+**Watch it run:** [CLI, 6:35](https://github.com/memorylake-ai/memorylake-usecases/releases/download/chatgpt-api-memory-v1/chatgpt-api-memory-cli-demo.mp4) · [Web, 7:33](https://github.com/memorylake-ai/memorylake-usecases/releases/download/chatgpt-api-memory-v1/chatgpt-api-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/chatgpt-api-memory-v1); GitHub serves them as downloads).
 
 **The problem.** The chat API is stateless. Every call starts blank, so an app built on it either sends no context
 ("which language are you learning?") or pastes the user's history into the system prompt, which costs tokens on every
@@ -166,38 +167,40 @@ The app changed nothing between the two calls. It wrote the session, as it write
 
 ## Measured
 
-Four fresh runs on 2026-10-15 (three in parallel under separate prefixes, one in the browser), every reply re-scored
-with the final checks. `gpt-4o-mini` unless noted; temperature 0.
+Five fresh runs on 2026-10-15 (three in parallel under separate prefixes, two in the browser, the second of them the
+recorded one), every reply re-scored with the final checks. `gpt-4o-mini` unless noted; temperature 0.
 
 | Check | Result |
 |---|---|
-| No boundary: any of Mina's or Tomás's details in the reply | **0 / 24** (6 details × 4 runs) |
-| Mina's boundary: Japanese · keigo · Osaka | 4/4 · 4/4 · 3/4 |
-| Tomás's boundary: German · dative · football | 4/4 · 4/4 · 3/4 |
-| The other learner's details in a reply (gpt-4o-mini ×2, Claude ×1, per run) | **0 / 12** |
-| `claude-haiku-4-5`, Mina's boundary: Japanese · keigo · Osaka | 3/4 · 4/4 · 4/4 |
-| Before tonight's session: N4 | 4/4 |
-| After tonight's session: N3 · no romaji | 4/4 · 4/4 |
+| No boundary: any of Mina's or Tomás's details in the reply | **0 / 30** (6 details × 5 runs) |
+| Mina's boundary: Japanese · keigo · Osaka | 5/5 · 5/5 · 3/5 |
+| Tomás's boundary: German · dative · football | 5/5 · 5/5 · 4/5 |
+| The other learner's details in a reply (gpt-4o-mini ×2, Claude ×1, per run) | **0 / 15** |
+| `claude-haiku-4-5`, Mina's boundary: Japanese · keigo · Osaka | 3/5 · 5/5 · 5/5 |
+| Before tonight's session: N4 | 5/5 |
+| After tonight's session: N3 · no romaji | 5/5 · **4/5** |
 
-| Prompt tokens (same message) | Run 1 | Run 2 | Run 3 | Run 4 |
-|---|---|---|---|---|
-| no boundary | 42 | 42 | 42 | 42 |
-| Mina's boundary | 399 | 305 | 286 | 293 |
-| Tomás's boundary | 359 | 278 | 293 | 396 |
-| Mina's history pasted in (3 sessions) | 767 | 767 | 767 | 767 |
-| off-topic, no boundary → with Mina's | 40 → 199 | 40 → 156 | 40 → 40 | 40 → 112 |
-| whole run (9 calls), prompt + reply | 2,974 + 1,211 | 2,488 + 1,137 | 2,371 + 1,012 | 2,791 + 1,172 |
+| Prompt tokens (same message) | Run 1 | Run 2 | Run 3 | Run 4 | Run 5 |
+|---|---|---|---|---|---|
+| no boundary | 42 | 42 | 42 | 42 | 42 |
+| Mina's boundary | 399 | 305 | 286 | 293 | 302 |
+| Tomás's boundary | 359 | 278 | 293 | 396 | 317 |
+| Mina's history pasted in (3 sessions) | 767 | 767 | 767 | 767 | 767 |
+| off-topic, no boundary → with Mina's | 40 → 199 | 40 → 156 | 40 → 40 | 40 → 112 | 40 → 40 |
+| whole run (9 calls), prompt + reply | 2,974 + 1,211 | 2,488 + 1,137 | 2,371 + 1,012 | 2,791 + 1,172 | 2,398 + 1,076 |
 
 What the numbers say, and don't:
 
 - **Isolation held every time.** Neither learner's reply ever contained the other's details.
-- **The attached memory is a few hundred tokens and varies** (236–357 tokens over the no-memory call, both learners). With only three short
-  sessions, pasting the history costs about twice as much; the pasted history grows with every session, the boundary's
-  context did not grow after tonight's session (before / after: 190–367 / 246–348 tokens).
-- **Off-topic messages usually get some memory anyway** (3 of 4 runs here; 5 of 7 counting the development runs).
-  Retrieval is ranked, not thresholded. The model ignores it (the answer is 391 every time), but you pay for it.
-- **The change in step 8 always got through** (4/4), though in one run no extracted fact named "N3" in a form the
-  demo's scan recognised. The scan has since been loosened for Japanese text.
+- **The attached memory is a few hundred tokens and varies** (236–357 tokens over the no-memory call, both learners).
+  With only three short sessions, pasting the history costs about twice as much. The pasted history grows with every
+  session; the boundary's context did not grow after tonight's session (before / after: 177–367 / 242–348 tokens).
+- **Off-topic messages often get some memory anyway** (3 of 5 runs here). Retrieval is ranked, not thresholded. The
+  model ignores it (the answer is 391 every time), but you pay for it.
+- **The level change always got through (5/5); "drop the romaji" did not once (4/5).** In run 5 extraction recorded N3
+  but not the romaji change, and the old pinned detail ("wants romaji under new kanji") won: the reply said to keep
+  romaji. Pinned facts are not revised by later sessions on their own. If a preference can change, write the change
+  explicitly (`fact update --text` on the pinned fact) rather than relying on extraction to overrule it.
 
 ## Wiring it into your own app
 
