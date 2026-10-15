@@ -1,0 +1,8 @@
+{
+ "questions": [
+  {"key": "door", "label": "Studio door code", "prompt": "What's the code for my studio door?", "expect": "4471"},
+  {"key": "passport", "label": "Passport expiry", "prompt": "When does my passport expire?", "expect": "2028"},
+  {"key": "november", "label": "November birthdays", "prompt": "List everyone whose birthday is in November.", "month": "November"},
+  {"key": "march", "label": "March birthdays", "prompt": "Whose birthdays fall in March? List all of them.", "month": "March"}
+ ]
+}
