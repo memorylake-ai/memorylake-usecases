@@ -1,0 +1,197 @@
+{
+  "key": "tomas",
+  "user_id": "u-5308",
+  "display": "Tomás Reyes",
+  "language": "German",
+  "sessions": [
+    {
+      "custom_id": "tomas-s1",
+      "title": "Placement chat",
+      "date": "2026-09-16T09:00:00Z",
+      "turns": [
+        [
+          "user",
+          "Hola! I'm Tomás. I'm learning German, roughly B1, and I sit the Goethe B2 exam in March."
+        ],
+        [
+          "bot",
+          "Nice to meet you, Tomás. March gives us time. Where do you lose the most points?"
+        ],
+        [
+          "user",
+          "Cases. Dative or accusative after in, an, auf. I guess every time and I'm wrong half the time."
+        ],
+        [
+          "bot",
+          "The two-way prepositions. Rule of thumb: movement towards a place takes accusative, location takes dative."
+        ],
+        [
+          "user",
+          "I know the rule. I just can't do it fast while speaking. I need drills, lots of them."
+        ],
+        [
+          "bot",
+          "Then every session gets a quick two-way preposition drill."
+        ],
+        [
+          "user",
+          "Can the examples be about football? I watch every Bundesliga weekend. It's the only vocabulary that sticks."
+        ],
+        [
+          "bot",
+          "Of course. Der Ball liegt auf dem Rasen; der Spieler schiesst den Ball in das Tor."
+        ],
+        [
+          "user",
+          "See, that one I'll remember."
+        ],
+        [
+          "bot",
+          "Football it is."
+        ]
+      ]
+    },
+    {
+      "custom_id": "tomas-s2",
+      "title": "Commute drills",
+      "date": "2026-09-27T09:00:00Z",
+      "turns": [
+        [
+          "user",
+          "I practise on my bike commute now, 20 minutes each way. Can drills be things I say out loud, no reading?"
+        ],
+        [
+          "bot",
+          "Yes: I'll give you short spoken patterns you can repeat without looking at the screen."
+        ],
+        [
+          "user",
+          "Like the coach shouting? Geh auf den Flügel! Bleib in der Mitte!"
+        ],
+        [
+          "bot",
+          "Exactly. Auf den Flügel is movement, accusative; in der Mitte is position, dative."
+        ],
+        [
+          "user",
+          "I got four out of five today. Better than last week."
+        ],
+        [
+          "bot",
+          "Good progress. The one you missed was an der Seitenlinie: position, so dative."
+        ],
+        [
+          "user",
+          "Also my writing is fine, my teacher says. Don't waste time on essays."
+        ],
+        [
+          "bot",
+          "Noted: speaking first, writing only when you ask for it."
+        ],
+        [
+          "user",
+          "Danke!"
+        ],
+        [
+          "bot",
+          "Gern geschehen."
+        ]
+      ]
+    },
+    {
+      "custom_id": "tomas-s3",
+      "title": "Transfer news",
+      "date": "2026-10-07T09:00:00Z",
+      "turns": [
+        [
+          "user",
+          "Can we do a reading on transfer news? I want the vocabulary for contracts and clubs."
+        ],
+        [
+          "bot",
+          "Sure: der Vertrag, die Ablösesumme, der Wechsel, ausleihen."
+        ],
+        [
+          "user",
+          "Ausleihen is to loan a player out?"
+        ],
+        [
+          "bot",
+          "Right. Der Verein leiht den Spieler an einen anderen Verein aus."
+        ],
+        [
+          "user",
+          "My Goethe mock speaking score was 68 out of 100. I need 60 to pass, but I want more margin."
+        ],
+        [
+          "bot",
+          "That's a pass with some room. We'll keep speaking as the main focus."
+        ],
+        [
+          "user",
+          "And keep drilling the two-way prepositions, they still cost me points in the mock."
+        ],
+        [
+          "bot",
+          "They stay in every session until they're automatic."
+        ],
+        [
+          "user",
+          "Perfect."
+        ],
+        [
+          "bot",
+          "Bis bald, Tomás."
+        ]
+      ]
+    }
+  ],
+  "pins": [
+    "Tomás is learning German (around B1) and sits the Goethe B2 exam in March.",
+    "Tomás mixes up dative and accusative after two-way prepositions (in, an, auf) and wants that drilled every session.",
+    "Tomás wants examples built around football: Bundesliga matches, training, transfers.",
+    "Tomás practises out loud on a 20-minute bike commute, so his drills should be spoken, with no reading.",
+    "Tomás's writing is fine; he wants speaking practice first and essays only on request."
+  ],
+  "checks": [
+    {
+      "label": "German",
+      "any": [
+        "german",
+        "deutsch",
+        "goethe",
+        "re:\\b(ich|der|dem|den|das|ein|eine|einen|ist)\\s+[a-zäöüß]+"
+      ]
+    },
+    {
+      "label": "dative",
+      "any": [
+        "dative",
+        "dativ",
+        "two-way",
+        "accusative",
+        "akkusativ",
+        "wechselpräposition"
+      ]
+    },
+    {
+      "label": "football",
+      "any": [
+        "football",
+        "bundesliga",
+        "soccer",
+        "fußball",
+        "fussball"
+      ]
+    }
+  ],
+  "only_mine": [
+    "german",
+    "deutsch",
+    "dative",
+    "dativ",
+    "bundesliga",
+    "football",
+    "goethe"
+  ]
+}

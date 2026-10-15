@@ -1,0 +1,248 @@
+{
+  "key": "mina",
+  "user_id": "u-4471",
+  "display": "Mina Kovac",
+  "language": "Japanese",
+  "sessions": [
+    {
+      "custom_id": "mina-s1",
+      "title": "First lesson",
+      "date": "2026-09-14T09:00:00Z",
+      "turns": [
+        [
+          "user",
+          "Hi! I'm Mina. I'm learning Japanese, about a year in. I want to pass the JLPT N4 in December."
+        ],
+        [
+          "bot",
+          "Welcome, Mina! N4 in December is a good target. What do you find hardest so far?"
+        ],
+        [
+          "user",
+          "Keigo, honestly. Polite and honorific forms fall apart the moment I have to speak. I freeze."
+        ],
+        [
+          "bot",
+          "That's very common. We can put a short keigo drill into every session so it becomes automatic."
+        ],
+        [
+          "user",
+          "Yes please, every session. Also some context: I'm moving to Osaka for work next spring."
+        ],
+        [
+          "bot",
+          "Exciting! Then everyday Osaka situations will make good practice material."
+        ],
+        [
+          "user",
+          "Exactly. Shops, the ward office, the train. That's what I'll actually face."
+        ],
+        [
+          "bot",
+          "Noted. Today let's practise asking for things politely in a shop: kudasai versus itadakemasu ka."
+        ],
+        [
+          "user",
+          "Itadakemasu ka always feels too long, but okay. Can you add romaji under new kanji? I read kana fine but kanji slows me down."
+        ],
+        [
+          "bot",
+          "Sure. I'll keep kana as is and add romaji under any new kanji."
+        ]
+      ]
+    },
+    {
+      "custom_id": "mina-s2",
+      "title": "Ward office role-play",
+      "date": "2026-09-24T09:00:00Z",
+      "turns": [
+        [
+          "user",
+          "Can we role-play the ward office? I need to register my address when I arrive in Osaka."
+        ],
+        [
+          "bot",
+          "Of course. I'll be the clerk. Start by saying you'd like to register a change of address."
+        ],
+        [
+          "user",
+          "Tenshutodoke wo dashitai desu. Is that polite enough?"
+        ],
+        [
+          "bot",
+          "It works. More polite: tenshutodoke wo teishutsu shitai no desu ga. Clerks will use sonkeigo with you, so listen for irasshaimase and o-machi kudasai."
+        ],
+        [
+          "user",
+          "Okay, that sonkeigo part is exactly what loses me. Keep pushing me on it."
+        ],
+        [
+          "bot",
+          "Will do. Your particles were clean today; the keigo is the only real gap."
+        ],
+        [
+          "user",
+          "Ten minutes is about my limit on weeknights, by the way. I study after work."
+        ],
+        [
+          "bot",
+          "Then weeknight sessions stay at ten to fifteen minutes, one keigo drill plus one situation."
+        ],
+        [
+          "user",
+          "Perfect. And I like it when you correct me straight away rather than at the end."
+        ],
+        [
+          "bot",
+          "Understood: corrections inline, as soon as I see them."
+        ]
+      ]
+    },
+    {
+      "custom_id": "mina-s3",
+      "title": "Train announcements",
+      "date": "2026-10-05T09:00:00Z",
+      "turns": [
+        [
+          "user",
+          "Today I want listening practice. Osaka train announcements, like on the Midosuji line."
+        ],
+        [
+          "bot",
+          "Good choice. Announcements are full of keigo: mamonaku, go-chui kudasai, o-noriase shimasu."
+        ],
+        [
+          "user",
+          "O-noriase shimasu is humble form, right? The railway lowering itself?"
+        ],
+        [
+          "bot",
+          "Exactly, kenjougo. You are getting faster at spotting it."
+        ],
+        [
+          "user",
+          "My N4 mock score went up to 112 out of 180. The reading section is still the weakest."
+        ],
+        [
+          "bot",
+          "That's a pass on the mock. For reading, we can add one short passage per session."
+        ],
+        [
+          "user",
+          "Only if it's about Osaka life. Generic textbook passages bore me."
+        ],
+        [
+          "bot",
+          "Osaka passages only. Next time: a notice from an apartment management office."
+        ],
+        [
+          "user",
+          "Great. Keep the romaji under new kanji for now."
+        ],
+        [
+          "bot",
+          "Will do."
+        ]
+      ]
+    }
+  ],
+  "pins": [
+    "Mina is learning Japanese and is preparing for the JLPT N4 exam in December.",
+    "Mina's weak spot is keigo (polite and honorific forms); she wants a keigo drill in every session.",
+    "Mina is moving to Osaka for work next spring and wants practice set in everyday Osaka situations: shops, the ward office, the train.",
+    "Mina reads kana but wants romaji under new kanji.",
+    "Mina's weeknight study sessions are 10 to 15 minutes, after work."
+  ],
+  "checks": [
+    {
+      "label": "Japanese",
+      "any": [
+        "japanese",
+        "nihongo",
+        "日本語",
+        "hiragana",
+        "katakana",
+        "kanji",
+        "kana",
+        "re:[\\u3040-\\u30ff\\u4e00-\\u9fff]",
+        "jlpt"
+      ]
+    },
+    {
+      "label": "keigo",
+      "any": [
+        "keigo",
+        "敬語",
+        "honorific",
+        "sonkeigo",
+        "kenjougo",
+        "teineigo",
+        "polite form"
+      ]
+    },
+    {
+      "label": "Osaka",
+      "any": [
+        "osaka",
+        "大阪",
+        "midosuji",
+        "ward office"
+      ]
+    }
+  ],
+  "only_mine": [
+    "japanese",
+    "keigo",
+    "osaka",
+    "jlpt",
+    "kanji",
+    "hiragana"
+  ],
+  "today": {
+    "custom_id": "mina-s4",
+    "title": "Tonight",
+    "date": "2026-10-15T09:00:00Z",
+    "turns": [
+      [
+        "user",
+        "Big news: I passed the JLPT N4 mock in class and my teacher entered me for the real N3 in July instead. From now on, N3 material please."
+      ],
+      [
+        "bot",
+        "Congratulations, Mina! From now on your drills will target N3."
+      ],
+      [
+        "user",
+        "And drop the romaji. Kana and kanji only from today."
+      ],
+      [
+        "bot",
+        "Done: no more romaji, kana and kanji only."
+      ]
+    ],
+    "followup": "Which JLPT level should tonight's drills target, and should they include romaji?",
+    "before": [
+      {
+        "label": "N4",
+        "any": [
+          "n4"
+        ]
+      }
+    ],
+    "after": [
+      {
+        "label": "N3",
+        "any": [
+          "n3"
+        ]
+      },
+      {
+        "label": "no romaji",
+        "any": [
+          "re:(no|avoid|avoiding|without|skip|drop|dropping|omit|exclude|not include|n't include|leave out|stop)\\b[^.?!]{0,25}romaji",
+          "re:(only kana and kanji|kana and kanji only|kana and kanji, no)"
+        ]
+      }
+    ]
+  }
+}
