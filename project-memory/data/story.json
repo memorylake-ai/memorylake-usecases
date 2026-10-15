@@ -1,0 +1,66 @@
+{
+  "product": "Fieldbook",
+  "today": "2026-10-15",
+  "people": {
+    "priya": {"key": "priya", "name": "Priya Raman", "role": "Product manager",
+              "description": "Product manager for Fieldbook. Owns the roadmap. Demo data."},
+    "dev": {"key": "dev", "name": "Dev Okafor", "role": "Engineering lead",
+            "description": "Engineering lead for Fieldbook. Sets ship dates with the PM. Demo data."},
+    "marcus": {"key": "marcus", "name": "Marcus Hale", "role": "VP Sales",
+               "description": "VP Sales. Brings customer asks to the roadmap channel. Demo data."},
+    "jun": {"key": "jun", "name": "Jun Park", "role": "Support lead",
+            "description": "Support lead. Relays what the ticket queue is asking for. Demo data."}
+  },
+  "rights": {
+    "holders": ["priya", "dev"],
+    "text": "Decision rights for the Fieldbook roadmap: only Priya Raman (product manager) and Dev Okafor (engineering lead) decide what is on the roadmap and when it ships. Sales, support and customers can ask for changes; an ask is not a decision until one of them makes it."
+  },
+  "items": [
+    {"key": "offline", "name": "Offline mode", "words": ["offline"],
+     "states": {"dropped": ["dropped", "off the roadmap", "not on the roadmap", "stays out"],
+                "shipping": ["back on the roadmap", "ships in", "ship in", "planned to ship", "september", "is back"]},
+     "truth": "dropped"},
+    {"key": "darkmode", "name": "Dark mode", "words": ["dark mode"],
+     "states": {"2027": ["2027", "deferred", "postponed"],
+                "november": ["november", "next month", "is shipping"]},
+     "truth": "2027"},
+    {"key": "tablet", "name": "Android tablet layout", "words": ["tablet"],
+     "states": {"december 2": ["december 2", "dec 2", "2026-12-02"],
+                "november 10": ["november 10", "nov 10", "2026-11-10"]},
+     "truth": "december 2"},
+    {"key": "sso", "name": "SAML single sign-on", "words": ["sso", "saml", "single sign-on"],
+     "states": {"q4": ["q4", "fourth quarter"],
+                "dropped": ["dropped", "off the roadmap"]},
+     "truth": "q4"}
+  ],
+  "decisions": [
+    {"id": "D-1", "item": "offline", "by": "priya", "on": "2026-03-12",
+     "text": "Roadmap decision D-1 (2026-03-12, Priya Raman, product manager): offline mode is dropped from the Fieldbook roadmap. Sync conflicts on shared job sheets cannot be resolved without rewriting the storage layer."},
+    {"id": "D-2", "item": "darkmode", "by": "priya", "on": "2026-06-03",
+     "text": "Roadmap decision D-2 (2026-06-03, Priya Raman, product manager): dark mode is deferred to 2027, after the design-system migration."},
+    {"id": "D-3", "item": "sso", "by": "priya", "on": "2026-07-15",
+     "text": "Roadmap decision D-3 (2026-07-15, Priya Raman, product manager): SAML single sign-on is on the Q4 roadmap."},
+    {"id": "D-4", "item": "tablet", "by": "dev", "on": "2026-08-20",
+     "text": "Roadmap decision D-4 (2026-08-20, Dev Okafor, engineering lead): the Android tablet layout ships on November 10."}
+  ],
+  "channel": {
+    "key": "roadmap-channel",
+    "name": "#fieldbook-roadmap",
+    "messages": [
+      {"who": "jun", "at": "2026-10-06T09:00:00Z",
+       "text": "Dark mode is shipping next month. I've told the ticket queue to expect it in November."},
+      {"who": "dev", "at": "2026-10-08T09:00:00Z",
+       "text": "The Android tablet layout moves to December 2, because QA found layout bugs on 10-inch screens."},
+      {"who": "marcus", "at": "2026-10-13T09:00:00Z",
+       "text": "Offline mode is back on the roadmap. I told Bramble Logistics it ships in September."},
+      {"who": "priya", "at": "2026-10-14T09:00:00Z",
+       "text": "SSO stays on the Q4 roadmap. We build the Okta connection first."}
+    ]
+  },
+  "questions": [
+    {"item": "offline", "ask": "Is offline mode on the roadmap?", "again": "Will Fieldbook get offline mode?"},
+    {"item": "darkmode", "ask": "When does dark mode ship?", "again": "Is dark mode coming in November?"},
+    {"item": "tablet", "ask": "When does the Android tablet layout ship?", "again": "What is the ship date for the tablet layout on Android?"},
+    {"item": "sso", "ask": "Is SAML SSO on the Q4 roadmap?", "again": "When do we get single sign-on?"}
+  ]
+}
