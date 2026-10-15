@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Consultants Methodology Memory That AI Tools Actually Apply*](https://www.memorylake.ai/en/usecase/methodology-memory-for-consultants),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 3:00](https://github.com/memorylake-ai/memorylake-usecases/releases/download/methodology-memory-v1/methodology-memory-cli-demo.mp4) · [Web, 3:30](https://github.com/memorylake-ai/memorylake-usecases/releases/download/methodology-memory-v1/methodology-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/methodology-memory-v1); GitHub serves them as downloads).
 
 **The problem.** "The methodology that's supposed to be the firm's edge produces no AI leverage" until every AI tool
 reads it. Once they do, they apply it exactly as written, and that includes its evidence. A methodology entry usually
