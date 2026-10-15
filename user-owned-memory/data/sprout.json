@@ -1,0 +1,281 @@
+{
+  "app": "Sprout",
+  "today": "2026-10-15",
+  "system": "You are Sprout, the wellness coach inside the Sprout app. You are talking with {name}. Answer in one or two short sentences, using what you remember about them.",
+  "users": [
+    {
+      "key": "omar",
+      "name": "Omar",
+      "facts": [
+        {
+          "text": "No food allergies.",
+          "marks": []
+        },
+        {
+          "text": "Training for the Riverside half marathon on 2026-11-22.",
+          "marks": [
+            "riverside",
+            "half marathon",
+            "half-marathon"
+          ]
+        },
+        {
+          "text": "Eats meat; high-protein breakfasts.",
+          "marks": [
+            "high-protein"
+          ]
+        },
+        {
+          "text": "Runs before work, around 6 am.",
+          "marks": [
+            "before work",
+            "around 6"
+          ]
+        },
+        {
+          "text": "Goal: finish the half marathon under 2 hours.",
+          "marks": [
+            "under 2 hours",
+            "under two hours"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "dana",
+      "name": "Dana",
+      "facts": [
+        {
+          "text": "Allergic to peanuts (carries an EpiPen).",
+          "marks": [
+            "peanut",
+            "epipen"
+          ]
+        },
+        {
+          "text": "Vegetarian.",
+          "marks": [
+            "vegetarian"
+          ]
+        },
+        {
+          "text": "Recovering from a left knee sprain; no running until cleared by her physio.",
+          "marks": [
+            "knee",
+            "physio",
+            "sprain"
+          ]
+        },
+        {
+          "text": "Swims on Tuesdays and Thursdays.",
+          "marks": [
+            "swim"
+          ]
+        },
+        {
+          "text": "Goal: lose 5 kg before her sister's wedding in December.",
+          "marks": [
+            "wedding",
+            "5 kg"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "priya",
+      "name": "Priya",
+      "facts": [
+        {
+          "text": "Allergic to shellfish.",
+          "marks": [
+            "shellfish"
+          ]
+        },
+        {
+          "text": "Pregnant, due in February 2027.",
+          "marks": [
+            "pregnan",
+            "prenatal",
+            "due in february"
+          ]
+        },
+        {
+          "text": "Does prenatal yoga on Saturday mornings.",
+          "marks": [
+            "yoga"
+          ]
+        },
+        {
+          "text": "Avoids caffeine.",
+          "marks": [
+            "caffeine"
+          ]
+        },
+        {
+          "text": "Goal: keep walking 8,000 steps a day.",
+          "marks": [
+            "8,000 steps",
+            "8000 steps"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "tom",
+      "name": "Tom",
+      "facts": [
+        {
+          "text": "Type 2 diabetes; counts carbs at every meal.",
+          "marks": [
+            "diabet",
+            "blood sugar",
+            "counts carbs"
+          ]
+        },
+        {
+          "text": "Takes blood pressure medication in the morning.",
+          "marks": [
+            "blood pressure"
+          ]
+        },
+        {
+          "text": "Walks his dog twice a day.",
+          "marks": [
+            "dog"
+          ]
+        },
+        {
+          "text": "Hates early mornings; works out after 7 pm.",
+          "marks": [
+            "after 7",
+            "7 pm",
+            "7pm",
+            "early mornings"
+          ]
+        },
+        {
+          "text": "Goal: bring his HbA1c below 7%.",
+          "marks": [
+            "hba1c"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "lena",
+      "name": "Lena",
+      "facts": [
+        {
+          "text": "Allergic to sesame.",
+          "marks": [
+            "sesame"
+          ]
+        },
+        {
+          "text": "Lactose intolerant.",
+          "marks": [
+            "lactose",
+            "dairy"
+          ]
+        },
+        {
+          "text": "Training for her first 10K on 2026-11-08.",
+          "marks": [
+            "10k",
+            "10 k"
+          ]
+        },
+        {
+          "text": "Has insomnia; no screens after 10 pm.",
+          "marks": [
+            "insomnia",
+            "screens"
+          ]
+        },
+        {
+          "text": "Goal: run 10K without walking breaks.",
+          "marks": [
+            "walking breaks"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "sam",
+      "name": "Sam",
+      "facts": [
+        {
+          "text": "Vegan.",
+          "marks": [
+            "vegan"
+          ]
+        },
+        {
+          "text": "Recovering from a right shoulder injury; no overhead lifts.",
+          "marks": [
+            "shoulder",
+            "overhead"
+          ]
+        },
+        {
+          "text": "Works night shifts; sleeps 9 am to 4 pm.",
+          "marks": [
+            "night shift",
+            "4 pm",
+            "9 am"
+          ]
+        },
+        {
+          "text": "Lifts weights three times a week.",
+          "marks": [
+            "three times a week"
+          ]
+        },
+        {
+          "text": "Goal: gain 4 kg of muscle by March.",
+          "marks": [
+            "4 kg"
+          ]
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "user": "omar",
+      "say": "Do I have any food allergies I should mention when I book the team dinner?",
+      "expect": "(don't|do not) have any (known )?(food )?allergies|no (known )?(food )?allergies|you have none|not allergic",
+      "expect_label": "no allergies"
+    },
+    {
+      "user": "tom",
+      "say": "What time of day should we schedule my workouts?",
+      "expect": "after 7|7 ?pm|evening",
+      "expect_label": "after 7 pm"
+    },
+    {
+      "user": "sam",
+      "say": "Which of my joints should I be careful with this week?",
+      "expect": "shoulder",
+      "expect_label": "right shoulder"
+    },
+    {
+      "user": "lena",
+      "say": "Is there anything I can't eat at the pre-race pasta party?",
+      "expect": "sesame|lactose|dairy",
+      "expect_label": "sesame, lactose"
+    },
+    {
+      "user": "priya",
+      "say": "Can I join the 6 am bootcamp with my friends?",
+      "expect": "",
+      "expect_label": "nothing of anyone else's"
+    },
+    {
+      "user": "dana",
+      "say": "Am I cleared to run the Sunday 5K?",
+      "expect": "physio|knee|not (yet )?cleared",
+      "expect_label": "not until her physio clears her"
+    }
+  ]
+}
