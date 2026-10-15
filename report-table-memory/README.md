@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Hedge Funds Financial Research Memory That Compounds Across Funds*](https://www.memorylake.ai/en/usecase/financial-research-memory-for-hedge-funds),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 7:20](https://github.com/memorylake-ai/memorylake-usecases/releases/download/report-table-memory-v1/report-table-memory-cli-demo.mp4) · [Web, 7:40](https://github.com/memorylake-ai/memorylake-usecases/releases/download/report-table-memory-v1/report-table-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/report-table-memory-v1); GitHub serves them as downloads).
 
 **The problem.** A research desk keeps the quarterly IR reports of every company it covers. Half of them are
 European: Vossberg's report prints *Lieferzeit (Tage) | 12 | 4,5* — twelve days, then four and a half. An assistant
@@ -26,15 +27,15 @@ another. Eight PM questions go through MemoryRouter (`router chat --boundary`, `
 asked 4 times per boundary. Before anything is asked, the demo splits every row of every PDF table, as the index
 holds it, every way the company's number format allows.
 
-Totals over **6 runs** (32 answers per boundary per run):
+Totals over **7 runs** (32 answers per boundary per run):
 
 | | Rows that read two ways (Q1–Q5) | Rows that read one way (Q6–Q8) |
 |---|---|---|
-| Boundary over the **IR reports (PDF)** | **72 / 120 wrong** — Q1, Q2, Q3 wrong every time; Q4, Q5 right every time | 0 / 72 wrong |
-| Boundary over the **model exports (.xlsx)** | 0 / 120 wrong | 0 / 72 wrong |
-| Control, no boundary: the table **as the index wrote it** | 44 / 60 wrong | 0 / 36 wrong |
-| Control: the same table, **cell boundaries kept** (` \| `) | **0 / 60 wrong** | 0 / 36 wrong |
-| Number check (hold answers on rows that read two ways) | holds all 120, among them all 72 wrong | sends all 72, none wrong |
+| Boundary over the **IR reports (PDF)** | **84 / 140 wrong** — Q1, Q2, Q3 wrong every time; Q4, Q5 right every time | 0 / 84 wrong |
+| Boundary over the **model exports (.xlsx)** | 0 / 140 wrong | 0 / 84 wrong |
+| Control, no boundary: the table **as the index wrote it** | 52 / 70 wrong | 0 / 42 wrong |
+| Control: the same table, **cell boundaries kept** (` \| `) | **0 / 70 wrong** | 0 / 42 wrong |
+| Number check (hold answers on rows that read two ways) | holds all 140, among them all 84 wrong | sends all 84, none wrong |
 
 So: the failure is not "PDFs" or "German" — the one-way rows of the same German tables were right every time —
 it is the rows whose attached text splits two ways. The same numbers as `.xlsx` were right every time, and in the
@@ -241,8 +242,8 @@ company's table — once exactly as the index wrote it, once with the PDF's own 
 
 Same numbers, same model, same preamble: putting the cell boundaries back fixes every two-way row. Which two-way
 rows go wrong depends on what else is in the prompt — Ferrandi's margin (Q4) is right through MemoryRouter in
-every run and wrong in every control answer (12 / 12); Vossberg's order intake (Q2) is wrong through MemoryRouter
-every time and in 8 of 12 control answers; Ashcombe's backlog (Q5) is right in both. A row that reads two ways
+every run and wrong in every control answer (14 / 14); Vossberg's order intake (Q2) is wrong through MemoryRouter
+every time and in 10 of 14 control answers; Ashcombe's backlog (Q5) is right in both. A row that reads two ways
 is a coin; what is attached next to it changes how it lands.
 
 ### Step 8: the number check — before an answer goes out
@@ -282,20 +283,20 @@ $ memorylake search 'Vossberg Antriebstechnik AG Tabelle 1. Konzernkennzahlen je
 
 ## Measured
 
-6 runs (2 in this directory plus one through the web companion; 3 parallel copies with their own prefix), 32
-answers per boundary per run. One more run crashed in step 5 on a bug in the demo (two answer calls read the
+7 runs (2 in this directory, the two recorded videos, and 3 parallel copies with their own prefix), 32 answers
+per boundary per run. One more run crashed in step 5 on a bug in the demo (two answer calls read the
 request-body file while a third was rewriting it); it is fixed and that run is left out.
 
-- **IR reports (PDF)**, per question over 24 answers: Q1 delivery time 24 ✗ · Q2 order intake 24 ✗ · Q3 free cash
-  flow 24 ✗ · Q4 EBITDA margin 24 ✓ · Q5 order backlog 24 ✓ · Q6, Q7, Q8 24 ✓ each. Every run: 12 of 32 wrong.
-- **Model exports (.xlsx)**: 192 / 192 right.
-- **Control** (2 answers per question per layout): as indexed — Q1 12 ✗ of 12, Q2 8 ✗, Q3 12 ✗, Q4 12 ✗, Q5 0 ✗;
-  one-way rows 0 ✗. Cell boundaries kept: 0 ✗ of 96.
-- **Checker** (5 runs with the final reader): through the IR-report boundary it copied out the asked-about row
-  26 times in 40 calls and **declined 14 times** (it wrote `NONE`, and then answered the question from the table
-  anyway — the attached-memory preamble says "never repeat an entry back"); through the .xlsx boundary 40 / 40.
+- **IR reports (PDF)**, per question over 28 answers: Q1 delivery time 28 ✗ · Q2 order intake 28 ✗ · Q3 free cash
+  flow 28 ✗ · Q4 EBITDA margin 28 ✓ · Q5 order backlog 28 ✓ · Q6, Q7, Q8 28 ✓ each. Every run: 12 of 32 wrong.
+- **Model exports (.xlsx)**: 224 / 224 right.
+- **Control** (2 answers per question per layout): as indexed — Q1 14 ✗ of 14, Q2 10 ✗, Q3 14 ✗, Q4 14 ✗, Q5 0 ✗;
+  one-way rows 0 ✗ of 42. Cell boundaries kept: 0 ✗ of 112.
+- **Checker** (6 runs with the final reader): through the IR-report boundary it copied out the asked-about row
+  31 times in 48 calls and **declined 17 times** (it wrote `NONE`, and then answered the question from the table
+  anyway — the attached-memory preamble says "never repeat an entry back"); through the .xlsx boundary 48 / 48.
   Every row it did copy out was the comma-separated row shown in step 4.
-- **The index rewrote the Dutch report's decimals** as points (`92.7,88.1`) in all 6 runs, and none of the German or
+- **The index rewrote the Dutch report's decimals** as points (`92.7,88.1`) in all 7 runs, and none of the German or
   Italian ones. That removes the clash for those rows; it is not something to rely on.
 - Each run: 112 MemoryRouter calls, about 33,000 prompt + 7,000 reply tokens, 7–9 minutes (indexing took 50–103 s for
   the 6 PDFs and 52–159 s for the 6 .xlsx; the slow ones were the parallel copies).
