@@ -1,0 +1,589 @@
+{
+  "firm": "Halvorsen & Pike",
+  "author": {
+    "name": "Ingrid Halvorsen",
+    "role": "methodology partner"
+  },
+  "lead": {
+    "name": "Tomás Reyes",
+    "role": "engagement manager"
+  },
+  "today": "2026-10-15",
+  "client": "Corvane Freight",
+  "project": {
+    "key": "practice",
+    "name": "Halvorsen & Pike — practice memory",
+    "description": "Methodology deck, case library and engagement register of Halvorsen & Pike (fictional), a MemoryLake demo"
+  },
+  "tools": {
+    "deck": "Methodology deck",
+    "library": "Case library",
+    "register": "Engagement register"
+  },
+  "techniques": {
+    "DS": "Diagnostic Sprint",
+    "SC": "steering committee",
+    "FF": "fixed fee"
+  },
+  "long": {
+    "DS": "a two-week paid Diagnostic Sprint before the main statement of work",
+    "SC": "an executive steering committee chaired by the client's COO, every other week",
+    "FF": "a fixed fee instead of time and materials"
+  },
+  "gap": 15,
+  "min_n": 4,
+  "incoming": [
+    {
+      "id": "Q-1",
+      "technique": "DS",
+      "text": "Corvane Freight wants to skip the paid diagnostic and go straight to the network redesign. Do we insist on the Diagnostic Sprint?"
+    },
+    {
+      "id": "Q-2",
+      "technique": "SC",
+      "text": "Do we need an executive steering committee on Corvane, and who chairs it?"
+    },
+    {
+      "id": "Q-3",
+      "technique": "FF",
+      "text": "Corvane's CFO asked for a fixed fee instead of time and materials. Should we agree?"
+    }
+  ],
+  "followups": [
+    {
+      "id": "Q-4",
+      "technique": "DS",
+      "text": "The Corvane COO says two weeks of diagnosis is a luxury. Is the Diagnostic Sprint a must before the main SOW?"
+    },
+    {
+      "id": "Q-5",
+      "technique": "SC",
+      "text": "Is a COO-chaired steering committee every other week worth asking Corvane for?"
+    },
+    {
+      "id": "Q-6",
+      "technique": "FF",
+      "text": "If Corvane will only sign at a fixed price, do we take the fixed-fee deal or hold out for time and materials?"
+    }
+  ],
+  "ask_examples": [
+    {
+      "q": "Should a new client always start with the Diagnostic Sprint?",
+      "technique": "DS"
+    },
+    {
+      "q": "Is a fixed fee a good idea for a network redesign?",
+      "technique": "FF"
+    },
+    {
+      "q": "Do steering committees help clients implement?",
+      "technique": "SC"
+    }
+  ],
+  "records": [
+    {
+      "id": "POL-1",
+      "tool": "library",
+      "kind": "policy",
+      "by": "Ingrid Halvorsen",
+      "on": "2024-02-01",
+      "text": "Case library policy (Halvorsen & Pike, since February 2024): a case study is written after the 90-day check, once the client agrees to be a reference. Each case study names the engagement and the techniques it used. Owner: Ingrid Halvorsen."
+    },
+    {
+      "id": "E-01",
+      "tool": "register",
+      "kind": "engagement",
+      "by": "PMO",
+      "on": "2024-03-04",
+      "client": "Ostrava Rail Parts",
+      "sector": "manufacturing",
+      "used": [
+        "DS",
+        "SC"
+      ],
+      "outcome": "implemented",
+      "checked": "2024-09-16",
+      "case": "CS-01",
+      "text": "Engagement register E-01 · Ostrava Rail Parts (manufacturing) · kickoff 2024-03-04 · techniques used: Diagnostic Sprint, steering committee · 90-day check 2024-09-16: implemented — 4 of 5 recommendations live · case study: CS-01."
+    },
+    {
+      "id": "E-02",
+      "tool": "register",
+      "kind": "engagement",
+      "by": "PMO",
+      "on": "2024-04-08",
+      "client": "Pellam Home Health",
+      "sector": "healthcare",
+      "used": [],
+      "outcome": "stalled",
+      "checked": "2024-10-21",
+      "case": "none",
+      "text": "Engagement register E-02 · Pellam Home Health (healthcare) · kickoff 2024-04-08 · techniques used: none of the three · 90-day check 2024-10-21: stalled — the sponsor left; 0 of 4 recommendations started · case study: none."
+    },
+    {
+      "id": "E-03",
+      "tool": "register",
+      "kind": "engagement",
+      "by": "PMO",
+      "on": "2024-05-13",
+      "client": "Kestrel Cold Chain",
+      "sector": "logistics",
+      "used": [
+        "DS",
+        "SC"
+      ],
+      "outcome": "implemented",
+      "checked": "2024-11-18",
+      "case": "CS-02",
+      "text": "Engagement register E-03 · Kestrel Cold Chain (logistics) · kickoff 2024-05-13 · techniques used: Diagnostic Sprint, steering committee · 90-day check 2024-11-18: implemented — all 6 recommendations live · case study: CS-02."
+    },
+    {
+      "id": "E-04",
+      "tool": "register",
+      "kind": "engagement",
+      "by": "PMO",
+      "on": "2024-06-10",
+      "client": "Marlow Building Supply",
+      "sector": "distribution",
+      "used": [
+        "DS",
+        "FF"
+      ],
+      "outcome": "stalled",
+      "checked": "2024-12-16",
+      "case": "none",
+      "text": "Engagement register E-04 · Marlow Building Supply (distribution) · kickoff 2024-06-10 · techniques used: Diagnostic Sprint, fixed fee · 90-day check 2024-12-16: stalled — scope dispute at week 9; 1 of 5 started · case study: none."
+    },
+    {
+      "id": "E-05",
+      "tool": "register",
+      "kind": "engagement",
+      "by": "PMO",
+      "on": "2024-07-15",
+      "client": "Tavish Dental Group",
+      "sector": "healthcare",
+      "used": [
+        "SC"
+      ],
+      "outcome": "implemented",
+      "checked": "2025-01-20",
+      "case": "CS-03",
+      "text": "Engagement register E-05 · Tavish Dental Group (healthcare) · kickoff 2024-07-15 · techniques used: steering committee · 90-day check 2025-01-20: implemented — 3 of 4 recommendations live · case study: CS-03."
+    },
+    {
+      "id": "E-06",
+      "tool": "register",
+      "kind": "engagement",
+      "by": "PMO",
+      "on": "2024-08-19",
+      "client": "Grenholm Packaging",
+      "sector": "manufacturing",
+      "used": [
+        "DS"
+      ],
+      "outcome": "implemented",
+      "checked": "2025-02-24",
+      "case": "none",
+      "text": "Engagement register E-06 · Grenholm Packaging (manufacturing) · kickoff 2024-08-19 · techniques used: Diagnostic Sprint · 90-day check 2025-02-24: implemented — 3 of 4 recommendations live; the client declined to be a reference · case study: none."
+    },
+    {
+      "id": "E-07",
+      "tool": "register",
+      "kind": "engagement",
+      "by": "PMO",
+      "on": "2024-09-16",
+      "client": "Brisa Fresh Foods",
+      "sector": "food",
+      "used": [
+        "DS",
+        "SC"
+      ],
+      "outcome": "stalled",
+      "checked": "2025-03-24",
+      "case": "none",
+      "text": "Engagement register E-07 · Brisa Fresh Foods (food) · kickoff 2024-09-16 · techniques used: Diagnostic Sprint, steering committee · 90-day check 2025-03-24: stalled — the board froze capital spend; 1 of 6 started · case study: none."
+    },
+    {
+      "id": "E-08",
+      "tool": "register",
+      "kind": "engagement",
+      "by": "PMO",
+      "on": "2024-10-14",
+      "client": "Antler Valley Logistics",
+      "sector": "logistics",
+      "used": [
+        "DS",
+        "SC",
+        "FF"
+      ],
+      "outcome": "implemented",
+      "checked": "2025-04-21",
+      "case": "CS-04",
+      "text": "Engagement register E-08 · Antler Valley Logistics (logistics) · kickoff 2024-10-14 · techniques used: Diagnostic Sprint, steering committee, fixed fee · 90-day check 2025-04-21: implemented — 5 of 6 recommendations live · case study: CS-04."
+    },
+    {
+      "id": "E-09",
+      "tool": "register",
+      "kind": "engagement",
+      "by": "PMO",
+      "on": "2024-11-11",
+      "client": "Corso Print Works",
+      "sector": "manufacturing",
+      "used": [
+        "SC",
+        "FF"
+      ],
+      "outcome": "stalled",
+      "checked": "2025-05-19",
+      "case": "none",
+      "text": "Engagement register E-09 · Corso Print Works (manufacturing) · kickoff 2024-11-11 · techniques used: steering committee, fixed fee · 90-day check 2025-05-19: stalled — the fixed scope ran out before the pilot; 0 of 3 started · case study: none."
+    },
+    {
+      "id": "E-10",
+      "tool": "register",
+      "kind": "engagement",
+      "by": "PMO",
+      "on": "2025-01-13",
+      "client": "Neller Veterinary Partners",
+      "sector": "healthcare",
+      "used": [],
+      "outcome": "implemented",
+      "checked": "2025-07-21",
+      "case": "none",
+      "text": "Engagement register E-10 · Neller Veterinary Partners (healthcare) · kickoff 2025-01-13 · techniques used: none of the three · 90-day check 2025-07-21: implemented — 2 of 3 recommendations live; the client's legal team does not allow references · case study: none."
+    },
+    {
+      "id": "E-11",
+      "tool": "register",
+      "kind": "engagement",
+      "by": "PMO",
+      "on": "2025-02-10",
+      "client": "Quarry Lane Metals",
+      "sector": "manufacturing",
+      "used": [
+        "DS",
+        "SC"
+      ],
+      "outcome": "implemented",
+      "checked": "2025-08-18",
+      "case": "CS-05",
+      "text": "Engagement register E-11 · Quarry Lane Metals (manufacturing) · kickoff 2025-02-10 · techniques used: Diagnostic Sprint, steering committee · 90-day check 2025-08-18: implemented — 4 of 4 recommendations live · case study: CS-05."
+    },
+    {
+      "id": "E-12",
+      "tool": "register",
+      "kind": "engagement",
+      "by": "PMO",
+      "on": "2025-03-10",
+      "client": "Hobart Street Pharmacies",
+      "sector": "retail",
+      "used": [
+        "DS"
+      ],
+      "outcome": "stalled",
+      "checked": "2025-09-15",
+      "case": "none",
+      "text": "Engagement register E-12 · Hobart Street Pharmacies (retail) · kickoff 2025-03-10 · techniques used: Diagnostic Sprint · 90-day check 2025-09-15: stalled — the operations lead was reassigned; 1 of 4 started · case study: none."
+    },
+    {
+      "id": "E-13",
+      "tool": "register",
+      "kind": "engagement",
+      "by": "PMO",
+      "on": "2025-04-14",
+      "client": "Silvan Office Interiors",
+      "sector": "distribution",
+      "used": [
+        "SC",
+        "FF"
+      ],
+      "outcome": "implemented",
+      "checked": "2025-10-20",
+      "case": "CS-06",
+      "text": "Engagement register E-13 · Silvan Office Interiors (distribution) · kickoff 2025-04-14 · techniques used: steering committee, fixed fee · 90-day check 2025-10-20: implemented — 3 of 5 recommendations live · case study: CS-06."
+    },
+    {
+      "id": "E-14",
+      "tool": "register",
+      "kind": "engagement",
+      "by": "PMO",
+      "on": "2025-05-12",
+      "client": "Draycott Auto Glass",
+      "sector": "retail",
+      "used": [
+        "DS",
+        "FF"
+      ],
+      "outcome": "stalled",
+      "checked": "2025-11-17",
+      "case": "none",
+      "text": "Engagement register E-14 · Draycott Auto Glass (retail) · kickoff 2025-05-12 · techniques used: Diagnostic Sprint, fixed fee · 90-day check 2025-11-17: stalled — change orders refused under the fixed fee; 0 of 5 started · case study: none."
+    },
+    {
+      "id": "E-15",
+      "tool": "register",
+      "kind": "engagement",
+      "by": "PMO",
+      "on": "2025-06-16",
+      "client": "Ferrow Lab Services",
+      "sector": "healthcare",
+      "used": [
+        "DS",
+        "SC"
+      ],
+      "outcome": "implemented",
+      "checked": "2025-12-15",
+      "case": "CS-07",
+      "text": "Engagement register E-15 · Ferrow Lab Services (healthcare) · kickoff 2025-06-16 · techniques used: Diagnostic Sprint, steering committee · 90-day check 2025-12-15: implemented — 5 of 5 recommendations live · case study: CS-07."
+    },
+    {
+      "id": "E-16",
+      "tool": "register",
+      "kind": "engagement",
+      "by": "PMO",
+      "on": "2025-07-14",
+      "client": "Wexcombe Bakeries",
+      "sector": "food",
+      "used": [],
+      "outcome": "implemented",
+      "checked": "2026-01-19",
+      "case": "none",
+      "text": "Engagement register E-16 · Wexcombe Bakeries (food) · kickoff 2025-07-14 · techniques used: none of the three · 90-day check 2026-01-19: implemented — 2 of 2 recommendations live; acquired before the reference call · case study: none."
+    },
+    {
+      "id": "E-17",
+      "tool": "register",
+      "kind": "engagement",
+      "by": "PMO",
+      "on": "2025-08-18",
+      "client": "Orrin Water Services",
+      "sector": "utilities",
+      "used": [
+        "DS"
+      ],
+      "outcome": "stalled",
+      "checked": "2026-02-23",
+      "case": "none",
+      "text": "Engagement register E-17 · Orrin Water Services (utilities) · kickoff 2025-08-18 · techniques used: Diagnostic Sprint · 90-day check 2026-02-23: stalled — the union review paused the redesign; 0 of 4 started · case study: none."
+    },
+    {
+      "id": "E-18",
+      "tool": "register",
+      "kind": "engagement",
+      "by": "PMO",
+      "on": "2025-09-15",
+      "client": "Palisade Tile Co.",
+      "sector": "distribution",
+      "used": [
+        "DS"
+      ],
+      "outcome": "implemented",
+      "checked": "2026-03-23",
+      "case": "CS-08",
+      "text": "Engagement register E-18 · Palisade Tile Co. (distribution) · kickoff 2025-09-15 · techniques used: Diagnostic Sprint · 90-day check 2026-03-23: implemented — 3 of 4 recommendations live · case study: CS-08."
+    },
+    {
+      "id": "E-19",
+      "tool": "register",
+      "kind": "engagement",
+      "by": "PMO",
+      "on": "2025-10-13",
+      "client": "Lumen Street Clinics",
+      "sector": "healthcare",
+      "used": [
+        "FF"
+      ],
+      "outcome": "stalled",
+      "checked": "2026-04-20",
+      "case": "none",
+      "text": "Engagement register E-19 · Lumen Street Clinics (healthcare) · kickoff 2025-10-13 · techniques used: fixed fee · 90-day check 2026-04-20: stalled — the fixed budget was spent on discovery; 1 of 5 started · case study: none."
+    },
+    {
+      "id": "E-20",
+      "tool": "register",
+      "kind": "engagement",
+      "by": "PMO",
+      "on": "2025-11-17",
+      "client": "Hartwell Seed Co.",
+      "sector": "agriculture",
+      "used": [
+        "SC"
+      ],
+      "outcome": "implemented",
+      "checked": "2026-05-18",
+      "case": "CS-09",
+      "text": "Engagement register E-20 · Hartwell Seed Co. (agriculture) · kickoff 2025-11-17 · techniques used: steering committee · 90-day check 2026-05-18: implemented — 4 of 5 recommendations live · case study: CS-09."
+    },
+    {
+      "id": "CS-01",
+      "tool": "library",
+      "kind": "case",
+      "by": "Ingrid Halvorsen",
+      "on": "2024-10-10",
+      "engagement": "E-01",
+      "client": "Ostrava Rail Parts",
+      "used": [
+        "DS",
+        "SC"
+      ],
+      "text": "Case study CS-01 — Ostrava Rail Parts (manufacturing, engagement E-01): opened with the two-week Diagnostic Sprint, which found the changeover backlog; the COO chaired a steering committee every other week. At the 90-day check: 4 of 5 recommendations live. Techniques: Diagnostic Sprint, steering committee."
+    },
+    {
+      "id": "CS-02",
+      "tool": "library",
+      "kind": "case",
+      "by": "Ingrid Halvorsen",
+      "on": "2024-12-10",
+      "engagement": "E-03",
+      "client": "Kestrel Cold Chain",
+      "used": [
+        "DS",
+        "SC"
+      ],
+      "text": "Case study CS-02 — Kestrel Cold Chain (logistics, engagement E-03): the Diagnostic Sprint mapped every cold-room handoff; a steering committee under the COO cleared the budget for the dock redesign. At the 90-day check: all 6 recommendations live. Techniques: Diagnostic Sprint, steering committee."
+    },
+    {
+      "id": "CS-03",
+      "tool": "library",
+      "kind": "case",
+      "by": "Ingrid Halvorsen",
+      "on": "2025-02-10",
+      "engagement": "E-05",
+      "client": "Tavish Dental Group",
+      "used": [
+        "SC"
+      ],
+      "text": "Case study CS-03 — Tavish Dental Group (healthcare, engagement E-05): no diagnostic phase; a steering committee chaired by the COO met every other week and unblocked the scheduling change. At the 90-day check: 3 of 4 recommendations live. Techniques: steering committee."
+    },
+    {
+      "id": "CS-04",
+      "tool": "library",
+      "kind": "case",
+      "by": "Ingrid Halvorsen",
+      "on": "2025-05-10",
+      "engagement": "E-08",
+      "client": "Antler Valley Logistics",
+      "used": [
+        "DS",
+        "SC",
+        "FF"
+      ],
+      "text": "Case study CS-04 — Antler Valley Logistics (logistics, engagement E-08): Diagnostic Sprint first, a fixed fee for the main phase, and a COO-chaired steering committee. At the 90-day check: 5 of 6 recommendations live. Techniques: Diagnostic Sprint, steering committee, fixed fee."
+    },
+    {
+      "id": "CS-05",
+      "tool": "library",
+      "kind": "case",
+      "by": "Ingrid Halvorsen",
+      "on": "2025-09-10",
+      "engagement": "E-11",
+      "client": "Quarry Lane Metals",
+      "used": [
+        "DS",
+        "SC"
+      ],
+      "text": "Case study CS-05 — Quarry Lane Metals (manufacturing, engagement E-11): the Diagnostic Sprint quantified scrap by line; the steering committee approved all four changes. At the 90-day check: 4 of 4 recommendations live. Techniques: Diagnostic Sprint, steering committee."
+    },
+    {
+      "id": "CS-06",
+      "tool": "library",
+      "kind": "case",
+      "by": "Ingrid Halvorsen",
+      "on": "2025-11-10",
+      "engagement": "E-13",
+      "client": "Silvan Office Interiors",
+      "used": [
+        "SC",
+        "FF"
+      ],
+      "text": "Case study CS-06 — Silvan Office Interiors (distribution, engagement E-13): fixed fee at the client's request; the steering committee kept scope steady. At the 90-day check: 3 of 5 recommendations live. Techniques: steering committee, fixed fee."
+    },
+    {
+      "id": "CS-07",
+      "tool": "library",
+      "kind": "case",
+      "by": "Ingrid Halvorsen",
+      "on": "2026-01-10",
+      "engagement": "E-15",
+      "client": "Ferrow Lab Services",
+      "used": [
+        "DS",
+        "SC"
+      ],
+      "text": "Case study CS-07 — Ferrow Lab Services (healthcare, engagement E-15): the Diagnostic Sprint found the sample-routing delay; the steering committee met every other week. At the 90-day check: 5 of 5 recommendations live. Techniques: Diagnostic Sprint, steering committee."
+    },
+    {
+      "id": "CS-08",
+      "tool": "library",
+      "kind": "case",
+      "by": "Ingrid Halvorsen",
+      "on": "2026-04-10",
+      "engagement": "E-18",
+      "client": "Palisade Tile Co.",
+      "used": [
+        "DS"
+      ],
+      "text": "Case study CS-08 — Palisade Tile Co. (distribution, engagement E-18): opened with the Diagnostic Sprint; the operations director owned the rollout. At the 90-day check: 3 of 4 recommendations live. Techniques: Diagnostic Sprint."
+    },
+    {
+      "id": "CS-09",
+      "tool": "library",
+      "kind": "case",
+      "by": "Ingrid Halvorsen",
+      "on": "2026-06-10",
+      "engagement": "E-20",
+      "client": "Hartwell Seed Co.",
+      "used": [
+        "SC"
+      ],
+      "text": "Case study CS-09 — Hartwell Seed Co. (agriculture, engagement E-20): a steering committee chaired by the COO from week one. At the 90-day check: 4 of 5 recommendations live. Techniques: steering committee."
+    },
+    {
+      "id": "M-1",
+      "tool": "deck",
+      "kind": "method",
+      "by": "Ingrid Halvorsen",
+      "on": "2026-06-22",
+      "technique": "DS",
+      "evidence": [
+        6,
+        6
+      ],
+      "prefer": "use it",
+      "text": "Methodology deck, Diagnostic Sprint (Ingrid Halvorsen, June 2026): always open with the two-week paid Diagnostic Sprint before the main statement of work. Every case study where we ran it ended with the client implementing — 6 of 6. Do not skip it to save the client money."
+    },
+    {
+      "id": "M-2",
+      "tool": "deck",
+      "kind": "method",
+      "by": "Ingrid Halvorsen",
+      "on": "2026-06-22",
+      "technique": "SC",
+      "evidence": [
+        8,
+        8
+      ],
+      "prefer": "use it",
+      "text": "Methodology deck, steering committee (Ingrid Halvorsen, June 2026): stand up an executive steering committee chaired by the client's COO and meet every other week. Every case study with one ended with the client implementing — 8 of 8."
+    },
+    {
+      "id": "M-3",
+      "tool": "deck",
+      "kind": "method",
+      "by": "Ingrid Halvorsen",
+      "on": "2026-06-22",
+      "technique": "FF",
+      "evidence": [
+        2,
+        2
+      ],
+      "prefer": "use it",
+      "text": "Methodology deck, fixed fee (Ingrid Halvorsen, June 2026): when a client asks for a fixed fee instead of time and materials, say yes. Both case studies on a fixed fee were implemented — 2 of 2 — and clients like the certainty."
+    }
+  ],
+  "hint": {
+    "DS": "Use it when the scope needs it; do not insist on it.",
+    "SC": "",
+    "FF": "Prefer time and materials."
+  }
+}
