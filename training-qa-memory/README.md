@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Support Teams Training Memory That Makes Every New Agent Ramp Faster*](https://www.memorylake.ai/en/usecase/support-agent-training-memory),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 3:52](https://github.com/memorylake-ai/memorylake-usecases/releases/download/training-qa-memory-v1/training-qa-memory-cli-demo.mp4) · [Web, 4:54](https://github.com/memorylake-ai/memorylake-usecases/releases/download/training-qa-memory-v1/training-qa-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/training-qa-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Support training memory is more than the policy handbook. The most useful part is the
 *Q&A*: the questions earlier cohorts asked about real situations, and the answers a senior agent gave. Those answers
@@ -24,7 +25,7 @@ the same situations the spring cohort asked about. Every question is an ordinary
 |---|---|---|
 | 5 | **Policies updated, Q&A untouched** | *"Yes, you can approve it: annual plans are fully refundable for 30 days."* That is word for word the spring answer. **0 or 1 of 5 right** in every run |
 | 6 | **What MemoryRouter attached** (Claude, told to copy out its memory first) | The old Q&A on almost every question, the current policy on few. A worked answer to the same situation matches Jun's question better than the rule it was derived from |
-| 7 | **+ a change note on each policy** (the usual fix): *"… within 14 days of purchase (changed on 2026-10-14; before that it was 30 days)."* | Better, not reliable: **2–4 of 5** |
+| 7 | **+ a change note on each policy** (the usual fix): *"… within 14 days of purchase (changed on 2026-10-14; before that it was 30 days)."* | Better, not reliable: **2–5 of 5** |
 | 8 | **Re-answer the Q&A that relied on a changed policy**: each Q&A records `metadata.relies_on`; `fact list` finds the five whose policy is now at version 2, and `fact update --text` re-answers them | 5 Q&A re-answered, 7 left alone |
 | 9 | **Ask again** | **5 of 5**, every run |
 
@@ -166,7 +167,7 @@ $ memorylake fact update fact-… --project proj-… --text 'Annual plans can be
     4/5 answers right · 1 quote the rule the spring cohort was taught
 ```
 
-The note helps on some questions and not on others; the SLA question stayed wrong with the note in every run.
+The note helps on some questions and not on others; the SLA question stayed wrong with the note in 7 of 8 runs.
 
 ### Step 8: re-answer the Q&A that relied on a changed policy
 
@@ -201,15 +202,16 @@ Same questions, same model, same boundary; only the memory changed between the c
 
 ## Measured
 
-Every fresh run while building this demo (3 in the terminal, 2 parallel copies, 1 browser check):
+Every fresh run while building and recording this demo (3 in the terminal, 2 parallel copies, 1 browser check, the
+2 recordings):
 
 | | runs | right answers |
 |---|---|---|
-| Policies updated, Q&A untouched | 6 | **3 / 30** (0 or 1 per run). In 21 of the 27 wrong answers the reply quotes the old value |
-| + change note on each policy | 6 | **19 / 30** (2 to 4 per run). The SLA question was wrong in all 6 |
-| Q&A re-answered | 6 | **30 / 30** |
-| Checker: the old Q&A among the attached lines | 5 | **22 / 25** |
-| Checker: the current policy among the attached lines | 5 | **5 / 25** |
+| Policies updated, Q&A untouched | 8 | **5 / 40** (0 or 1 per run). In 28 of the 35 wrong answers the reply quotes the old value |
+| + change note on each policy | 8 | **28 / 40** (2 to 5 per run). The SLA question was wrong in 7 of the 8 |
+| Q&A re-answered | 8 | **40 / 40** |
+| Checker: the old Q&A among the attached lines | 7 | **31 / 35** |
+| Checker: the current policy among the attached lines | 7 | **6 / 35** |
 
 - In the feasibility probe (same data, no change-note step), 3 rounds × 5 questions with the old Q&A in memory got
   1 / 15, with a change note 10 / 15, with the Q&A re-answered 13 / 15 (the two misses were a Yes/No wording issue,
