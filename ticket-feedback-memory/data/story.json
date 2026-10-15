@@ -1,0 +1,603 @@
+{
+  "today": "2026-10-15",
+  "company": "Tallyhook",
+  "product_lead": {
+    "name": "Maya Chen",
+    "role": "head of product"
+  },
+  "sales_lead": {
+    "name": "Tom Becker",
+    "role": "head of customer success"
+  },
+  "reviewer": {
+    "name": "Lucas Prado",
+    "role": "support agent, Sao Paulo",
+    "lang": "pt"
+  },
+  "projects": {
+    "feedback": {
+      "key": "feedback",
+      "name": "Tallyhook · Ticket feedback",
+      "description": "Tallyhook (fictional) customer feedback from support tickets, one fact per ticket, word for word in the customer's language. Created by the memorylake-usecases ticket-feedback-memory demo."
+    },
+    "taxonomy": {
+      "key": "taxonomy",
+      "name": "Tallyhook · Feedback taxonomy",
+      "description": "Tallyhook (fictional) feedback themes and the words that mark them, per language. Created by the memorylake-usecases ticket-feedback-memory demo."
+    }
+  },
+  "languages": {
+    "en": "English",
+    "de": "German",
+    "es": "Spanish",
+    "fr": "French",
+    "ja": "Japanese",
+    "pt": "Portuguese"
+  },
+  "glossary": [
+    {
+      "theme": "invoice-pdf",
+      "label": "invoice PDF export",
+      "kind": "request",
+      "search": "Customers asking to export or download their invoices as PDF files",
+      "terms": {
+        "en": [
+          "invoice"
+        ],
+        "de": [
+          "Rechnung"
+        ],
+        "es": [
+          "factura"
+        ],
+        "fr": [
+          "facture"
+        ],
+        "ja": [
+          "請求書"
+        ]
+      },
+      "pt": [
+        "nota fiscal",
+        "notas fiscais"
+      ]
+    },
+    {
+      "theme": "calendar-sync",
+      "label": "calendar sync",
+      "kind": "request",
+      "search": "Calendar synchronisation with Google or Outlook is broken or missing",
+      "terms": {
+        "en": [
+          "calendar"
+        ],
+        "de": [
+          "Kalender"
+        ],
+        "es": [
+          "calendario"
+        ],
+        "fr": [
+          "calendrier"
+        ],
+        "ja": [
+          "カレンダー"
+        ]
+      },
+      "pt": [
+        "calendario",
+        "agenda"
+      ]
+    },
+    {
+      "theme": "app-crash",
+      "label": "app crash",
+      "kind": "request",
+      "search": "The mobile app crashes or closes by itself when opening a job",
+      "terms": {
+        "en": [
+          "crash"
+        ],
+        "de": [
+          "stürzt",
+          "Absturz"
+        ],
+        "es": [
+          "se cierra"
+        ],
+        "fr": [
+          "plante"
+        ],
+        "ja": [
+          "落ち"
+        ]
+      },
+      "pt": [
+        "fecha sozinho",
+        "trava"
+      ]
+    },
+    {
+      "theme": "csv-export",
+      "label": "CSV export",
+      "kind": "request",
+      "search": "Export customer lists or bookings to a CSV file",
+      "terms": {
+        "en": [
+          "CSV"
+        ],
+        "de": [
+          "CSV"
+        ],
+        "es": [
+          "CSV"
+        ],
+        "fr": [
+          "CSV"
+        ],
+        "ja": [
+          "CSV"
+        ]
+      },
+      "pt": [
+        "CSV"
+      ]
+    },
+    {
+      "theme": "dark-mode",
+      "label": "dark mode",
+      "kind": "request",
+      "search": "A dark mode or night theme for the app",
+      "terms": {
+        "en": [
+          "dark mode"
+        ],
+        "de": [
+          "Dunkelmodus"
+        ],
+        "es": [
+          "modo oscuro"
+        ],
+        "fr": [
+          "mode sombre"
+        ],
+        "ja": [
+          "ダークモード"
+        ]
+      },
+      "pt": [
+        "modo escuro"
+      ]
+    },
+    {
+      "theme": "churn-risk",
+      "label": "churn risk (may switch to a competitor)",
+      "kind": "signal",
+      "search": "The customer says they may cancel or switch to another provider or competitor",
+      "terms": {
+        "en": [
+          "competitor",
+          "switching",
+          "cancel"
+        ],
+        "de": [
+          "Anbieterwechsel",
+          "kündigen"
+        ],
+        "es": [
+          "cambiar de proveedor",
+          "cancelar"
+        ],
+        "fr": [
+          "concurrent",
+          "résilier"
+        ],
+        "ja": [
+          "乗り換え",
+          "解約"
+        ]
+      },
+      "pt": [
+        "outro sistema",
+        "cancelar"
+      ]
+    }
+  ],
+  "glossary_by": {
+    "name": "Ines Duarte",
+    "role": "support operations",
+    "on": "2026-06-02"
+  },
+  "tickets": [
+    {
+      "id": "T-2101",
+      "account": "Northwind Cleaning",
+      "country": "US",
+      "lang": "en",
+      "plan": "Team",
+      "arr": 2400,
+      "on": "2026-07-08",
+      "agent": "Sam Ortiz",
+      "text": "Northwind Cleaning: Please let us export invoices as PDF. Our accountant asks for them every month and copy-paste is killing us."
+    },
+    {
+      "id": "T-2102",
+      "account": "Kestrel Fitness",
+      "country": "US",
+      "lang": "en",
+      "plan": "Team",
+      "arr": 3600,
+      "on": "2026-07-10",
+      "agent": "Sam Ortiz",
+      "text": "Kestrel Fitness: Google Calendar sync drops bookings every few days; clients show up and we have no slot for them."
+    },
+    {
+      "id": "T-2103",
+      "account": "Bluefin Pools",
+      "country": "US",
+      "lang": "en",
+      "plan": "Business",
+      "arr": 4800,
+      "on": "2026-07-14",
+      "agent": "Sam Ortiz",
+      "text": "Bluefin Pools: The iPhone app crashes when we open a job with photos. If this keeps up we are switching to a competitor."
+    },
+    {
+      "id": "T-2104",
+      "account": "Brauhaus Lenz",
+      "country": "DE",
+      "lang": "de",
+      "plan": "Business",
+      "arr": 6000,
+      "on": "2026-07-16",
+      "agent": "Jonas Keller",
+      "text": "Brauhaus Lenz: Wir brauchen dringend einen PDF-Export der Rechnungen, unser Steuerberater verlangt sie jeden Monat."
+    },
+    {
+      "id": "T-2105",
+      "account": "Orchard Dental",
+      "country": "US",
+      "lang": "en",
+      "plan": "Team",
+      "arr": 2400,
+      "on": "2026-07-21",
+      "agent": "Priya Nair",
+      "text": "Orchard Dental: Can we get a CSV export of the customer list for our newsletter tool?"
+    },
+    {
+      "id": "T-2106",
+      "account": "Optik Braun",
+      "country": "DE",
+      "lang": "de",
+      "plan": "Team",
+      "arr": 3000,
+      "on": "2026-07-23",
+      "agent": "Jonas Keller",
+      "text": "Optik Braun: Der Kalender synchronisiert nicht mehr mit Google, uns fehlen Termine."
+    },
+    {
+      "id": "T-2107",
+      "account": "Copperleaf Studio",
+      "country": "US",
+      "lang": "en",
+      "plan": "Starter",
+      "arr": 1200,
+      "on": "2026-07-28",
+      "agent": "Priya Nair",
+      "text": "Copperleaf Studio: Dark mode please, the app is blinding at 6am."
+    },
+    {
+      "id": "T-2108",
+      "account": "Haus Weber",
+      "country": "DE",
+      "lang": "de",
+      "plan": "Business",
+      "arr": 9600,
+      "on": "2026-08-03",
+      "agent": "Jonas Keller",
+      "text": "Haus Weber: Die App stürzt beim Öffnen von Aufträgen mit Fotos ständig ab. Wir prüfen gerade einen Anbieterwechsel."
+    },
+    {
+      "id": "T-2109",
+      "account": "Ferretería Sol",
+      "country": "ES",
+      "lang": "es",
+      "plan": "Starter",
+      "arr": 1800,
+      "on": "2026-08-05",
+      "agent": "Lucía Romero",
+      "text": "Ferretería Sol: Necesitamos descargar las facturas en PDF para la gestoría; ahora las copiamos a mano."
+    },
+    {
+      "id": "T-2111",
+      "account": "Clínica Ruiz",
+      "country": "ES",
+      "lang": "es",
+      "plan": "Business",
+      "arr": 7200,
+      "on": "2026-08-11",
+      "agent": "Lucía Romero",
+      "text": "Clínica Ruiz: El calendario no sincroniza con Google y perdemos citas. Si sigue así, vamos a cambiar de proveedor."
+    },
+    {
+      "id": "T-2113",
+      "account": "Kobayashi Shoten",
+      "country": "JP",
+      "lang": "ja",
+      "plan": "Team",
+      "arr": 3600,
+      "on": "2026-08-18",
+      "agent": "Aiko Mori",
+      "text": "小林商店: 請求書をPDFで出力できるようにしてください。毎月、税理士に送っています。"
+    },
+    {
+      "id": "T-2115",
+      "account": "Sato Design",
+      "country": "JP",
+      "lang": "ja",
+      "plan": "Business",
+      "arr": 12000,
+      "on": "2026-08-20",
+      "agent": "Aiko Mori",
+      "text": "佐藤デザイン: 写真付きの案件を開くとアプリが落ちます。改善されないなら他社への乗り換えを検討します。"
+    },
+    {
+      "id": "T-2116",
+      "account": "Greenway Landscaping",
+      "country": "UK",
+      "lang": "en",
+      "plan": "Starter",
+      "arr": 1200,
+      "on": "2026-08-25",
+      "agent": "Priya Nair",
+      "text": "Greenway Landscaping: Any plans for a dark mode?"
+    },
+    {
+      "id": "T-2117",
+      "account": "Atelier Morel",
+      "country": "FR",
+      "lang": "fr",
+      "plan": "Team",
+      "arr": 2400,
+      "on": "2026-08-27",
+      "agent": "Claire Dubois",
+      "text": "Atelier Morel : Pouvez-vous ajouter l'export des factures en PDF ? Notre comptable les demande chaque mois."
+    },
+    {
+      "id": "T-2119",
+      "account": "Pine & Co Salon",
+      "country": "CA",
+      "lang": "en",
+      "plan": "Team",
+      "arr": 1800,
+      "on": "2026-09-02",
+      "agent": "Sam Ortiz",
+      "text": "Pine & Co Salon: Two-way calendar sync with Outlook would save my front desk an hour a day."
+    },
+    {
+      "id": "T-2120",
+      "account": "Brightline Movers",
+      "country": "US",
+      "lang": "en",
+      "plan": "Team",
+      "arr": 3000,
+      "on": "2026-09-04",
+      "agent": "Priya Nair",
+      "text": "Brightline Movers: We need to export bookings to CSV for our insurer."
+    },
+    {
+      "id": "T-2122",
+      "account": "Schreinerei Vogt",
+      "country": "DE",
+      "lang": "de",
+      "plan": "Team",
+      "arr": 2400,
+      "on": "2026-09-08",
+      "agent": "Jonas Keller",
+      "text": "Schreinerei Vogt: Rechnungen als PDF herunterladen wäre eine große Hilfe, bitte bald."
+    },
+    {
+      "id": "T-2124",
+      "account": "Lavoir Petit",
+      "country": "FR",
+      "lang": "fr",
+      "plan": "Starter",
+      "arr": 1200,
+      "on": "2026-09-14",
+      "agent": "Claire Dubois",
+      "text": "Lavoir Petit : L'application plante à l'ouverture d'un devis avec photos."
+    },
+    {
+      "id": "T-2125",
+      "account": "Studio Bela",
+      "country": "BR",
+      "lang": "pt",
+      "plan": "Team",
+      "arr": 2400,
+      "on": "2026-09-17",
+      "agent": "Lucas Prado",
+      "text": "Studio Bela: O aplicativo fecha sozinho quando abro um orçamento com fotos."
+    },
+    {
+      "id": "T-2126",
+      "account": "Yamada Seikotsuin",
+      "country": "JP",
+      "lang": "ja",
+      "plan": "Team",
+      "arr": 2400,
+      "on": "2026-09-22",
+      "agent": "Aiko Mori",
+      "text": "山田整骨院: Googleカレンダーとの同期で予約が二重に入ることがあります。"
+    },
+    {
+      "id": "T-2127",
+      "account": "Tidewater Charters",
+      "country": "AU",
+      "lang": "en",
+      "plan": "Starter",
+      "arr": 1200,
+      "on": "2026-09-29",
+      "agent": "Sam Ortiz",
+      "text": "Tidewater Charters: Dark mode for the mobile app would be great for night trips."
+    },
+    {
+      "id": "T-2128",
+      "account": "Malerbetrieb Kaya",
+      "country": "DE",
+      "lang": "de",
+      "plan": "Starter",
+      "arr": 1800,
+      "on": "2026-10-01",
+      "agent": "Jonas Keller",
+      "text": "Malerbetrieb Kaya: Bitte einen CSV-Export der Kundenliste."
+    },
+    {
+      "id": "T-2130",
+      "account": "Oficina Rocha",
+      "country": "BR",
+      "lang": "pt",
+      "plan": "Starter",
+      "arr": 1800,
+      "on": "2026-10-06",
+      "agent": "Lucas Prado",
+      "text": "Oficina Rocha: Dá para exportar a lista de clientes em CSV?"
+    },
+    {
+      "id": "T-2131",
+      "account": "Padaria Lima",
+      "country": "BR",
+      "lang": "pt",
+      "plan": "Team",
+      "arr": 1800,
+      "on": "2026-10-09",
+      "agent": "Lucas Prado",
+      "text": "Padaria Lima: Precisamos baixar as notas fiscais em PDF para a contabilidade. Se não tiver isso até novembro, vamos procurar outro sistema."
+    }
+  ],
+  "truth": {
+    "T-2101": [
+      "invoice-pdf"
+    ],
+    "T-2102": [
+      "calendar-sync"
+    ],
+    "T-2103": [
+      "app-crash",
+      "churn-risk"
+    ],
+    "T-2104": [
+      "invoice-pdf"
+    ],
+    "T-2105": [
+      "csv-export"
+    ],
+    "T-2106": [
+      "calendar-sync"
+    ],
+    "T-2107": [
+      "dark-mode"
+    ],
+    "T-2108": [
+      "app-crash",
+      "churn-risk"
+    ],
+    "T-2109": [
+      "invoice-pdf"
+    ],
+    "T-2111": [
+      "calendar-sync",
+      "churn-risk"
+    ],
+    "T-2113": [
+      "invoice-pdf"
+    ],
+    "T-2115": [
+      "app-crash",
+      "churn-risk"
+    ],
+    "T-2116": [
+      "dark-mode"
+    ],
+    "T-2117": [
+      "invoice-pdf"
+    ],
+    "T-2119": [
+      "calendar-sync"
+    ],
+    "T-2120": [
+      "csv-export"
+    ],
+    "T-2122": [
+      "invoice-pdf"
+    ],
+    "T-2124": [
+      "app-crash"
+    ],
+    "T-2125": [
+      "app-crash"
+    ],
+    "T-2126": [
+      "calendar-sync"
+    ],
+    "T-2127": [
+      "dark-mode"
+    ],
+    "T-2128": [
+      "csv-export"
+    ],
+    "T-2130": [
+      "csv-export"
+    ],
+    "T-2131": [
+      "invoice-pdf",
+      "churn-risk"
+    ]
+  },
+  "review": {
+    "T-2125": [
+      "app-crash"
+    ],
+    "T-2130": [
+      "csv-export"
+    ],
+    "T-2131": [
+      "invoice-pdf",
+      "churn-risk"
+    ]
+  },
+  "questions": [
+    {
+      "id": "Q1",
+      "kind": "top",
+      "who": "product",
+      "text": "What are customers asking for most this quarter?"
+    },
+    {
+      "id": "Q2",
+      "kind": "churn",
+      "who": "sales",
+      "theme": "churn-risk",
+      "text": "Which accounts are at risk of churning?"
+    },
+    {
+      "id": "Q3",
+      "kind": "count",
+      "who": "product",
+      "theme": "app-crash",
+      "text": "How many customers report the app crashing?"
+    },
+    {
+      "id": "Q4",
+      "kind": "count",
+      "who": "product",
+      "theme": "csv-export",
+      "text": "How many customers want a CSV export? (control)"
+    }
+  ],
+  "ask_examples": [
+    "Who wants invoices as PDF?",
+    "解約を考えている顧客は？",
+    "Welche Kunden haben Probleme mit dem Kalender?",
+    "Quem reclamou do aplicativo?"
+  ]
+}
