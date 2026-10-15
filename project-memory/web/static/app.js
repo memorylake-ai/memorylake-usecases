@@ -57,7 +57,7 @@
     return `<h1>Whoever speaks in the roadmap channel can rewrite the roadmap.</h1>
       <p class="lead">Fieldbook's product manager keeps the roadmap in one MemoryLake project: who may decide, and four decisions with their owners.
       The team's roadmap channel goes into the same project. When the VP of Sales says offline mode is back, extraction can rewrite the PM's decision record in place — and the
-      project's top answer becomes his sentence. <code>fact trace</code> still knows whose message it was. This page drives the <code>memorylake</code> CLI for real. All companies and people are fictional.</p>
+      project's top answer becomes that sentence. <code>fact trace</code> still knows whose message it was. This page drives the <code>memorylake</code> CLI for real. All companies and people are fictional.</p>
       <div class="connect">${form}
         <div class="card"><h2 style="margin-top:0">Before you start</h2><ol class="steps-list">
           <li><b>Get an API key.</b> Sign up at <a href="https://app.memorylake.ai" target="_blank" rel="noopener">app.memorylake.ai</a>, open <b>API Keys</b>, create one. A free personal account is enough.</li>
