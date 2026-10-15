@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Compliance Teams Memory With Audit Trails Auditors Accept*](https://www.memorylake.ai/en/usecase/compliance-memory-for-audit-trails),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 2:30](https://github.com/memorylake-ai/memorylake-usecases/releases/download/audit-trail-memory-v1/audit-trail-memory-cli-demo.mp4) · [Web, 2:48](https://github.com/memorylake-ai/memorylake-usecases/releases/download/audit-trail-memory-v1/audit-trail-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/audit-trail-memory-v1); GitHub serves them as downloads).
 
 **The problem.** An auditor reviewing an alert closure asks one question: *what did the analyst know when she closed
 it?* Every record in a casebook says when something happened: "article dated 2026-09-10", "rating review,
@@ -140,6 +141,10 @@ they disagree with both clocks; the comparison table and the file each analyst h
 the `Late entry` census and `fact trace`. **Ask** searches the casebook as of any day, and opens it as it stood on a
 day for one customer.
 
+![Both clocks: the event clock is wrong on 3 of 12 checks and the record clock on 2; the findings that survive are A-1059 and A-1063](web/screenshot-both-clocks.png)
+
+![Write it back: the 'Late entry' census goes from 0 records to 4, each late entry says when it was logged, and the plain read of the text is wrong on 0 of 12](web/screenshot-write-back.png)
+
 ## What happens, step by step
 
 ### Steps 2–3: one project, 21 records, two dates each
@@ -271,11 +276,11 @@ shows an UPDATE pair for each earlier run (put back, then stamped again).
 
 | What | Result |
 |---|---|
-| Event clock wrong on A-1042 §3, A-1042 §5, A-1059 §5; record clock wrong on A-1042 §3, Orion's rating today; both clocks: findings A-1059 §5 + A-1063 §5 | 4 / 4 runs (from scratch, re-run, `--reset`, browser) |
+| Event clock wrong on A-1042 §3, A-1042 §5, A-1059 §5; record clock wrong on A-1042 §3, Orion's rating today; both clocks: findings A-1059 §5 + A-1063 §5 | 5 / 5 logged runs (from scratch, re-run, `--reset`, browser, the browser recording), and the CLI recording |
 | `fact list --query 'Late entry'` | 0 records before the write-back, 4 after, every run |
 | Plain read of the text after the write-back | 12 / 12 every run |
 | The not-yet-on-file article (ORN-AM1) in A-1042's search top 5 | shown at #5 in the runs we looked at; the ranking can move, and no answer depends on it |
-| Time | 38–82 s |
+| Time | 38–82 s (53 s in the browser recording) |
 
 ## Wiring it into your own team
 
