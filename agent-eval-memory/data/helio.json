@@ -1,0 +1,466 @@
+{
+ "company": "Helio",
+ "today": "2026-10-16",
+ "prompts": {
+  "v1": "You are Helio's support assistant. Answer the support agent's question in at most 3 sentences.",
+  "v2": "You are Helio's support assistant. Answer the support agent's question in at most 3 sentences. Start with the one thing the agent must tell the customer, then the next step."
+ },
+ "kb": [
+  {
+   "key": "billing-1",
+   "topic": "billing",
+   "text": "Helio bills monthly plans on the 1st of each month in UTC."
+  },
+  {
+   "key": "billing-2",
+   "topic": "billing",
+   "text": "Annual Helio plans are invoiced up front and renew on the signup anniversary."
+  },
+  {
+   "key": "billing-3",
+   "topic": "billing",
+   "text": "Failed card payments are retried on days 3, 5 and 7 before the workspace is paused."
+  },
+  {
+   "key": "billing-4",
+   "topic": "billing",
+   "text": "Helio invoices show VAT only for customers with an EU billing address."
+  },
+  {
+   "key": "billing-5",
+   "topic": "billing",
+   "text": "Customers can switch between monthly and annual billing from Settings > Billing at any time."
+  },
+  {
+   "key": "billing-6",
+   "topic": "billing",
+   "text": "Seat changes made mid-cycle are prorated to the day on the next invoice."
+  },
+  {
+   "key": "refunds-1",
+   "topic": "refunds",
+   "text": "Helio refunds monthly plans in full within 14 days of the charge."
+  },
+  {
+   "key": "refunds-2",
+   "topic": "refunds",
+   "text": "Annual plans are refundable pro rata within 30 days of renewal."
+  },
+  {
+   "key": "refunds-3",
+   "topic": "refunds",
+   "text": "Refunds after the refund window need approval from the support lead (Rosa Lind)."
+  },
+  {
+   "key": "refunds-4",
+   "topic": "refunds",
+   "text": "Refunds go back to the original card and take 5 to 10 business days to appear."
+  },
+  {
+   "key": "refunds-5",
+   "topic": "refunds",
+   "text": "Partial refunds for unused seats are not offered on monthly plans."
+  },
+  {
+   "key": "refunds-6",
+   "topic": "refunds",
+   "text": "A refund closes the workspace unless the customer downgrades to Free first."
+  },
+  {
+   "key": "sso-1",
+   "topic": "sso",
+   "text": "SSO is available on the Business and Enterprise plans only."
+  },
+  {
+   "key": "sso-2",
+   "topic": "sso",
+   "text": "Helio supports SAML 2.0 SSO with Okta, Azure AD and Google Workspace."
+  },
+  {
+   "key": "sso-3",
+   "topic": "sso",
+   "text": "Before enabling SSO, at least one workspace owner must keep a password login as a break-glass account."
+  },
+  {
+   "key": "sso-4",
+   "topic": "sso",
+   "text": "SCIM provisioning is Enterprise-only and needs SSO enabled first."
+  },
+  {
+   "key": "sso-5",
+   "topic": "sso",
+   "text": "Enforcing SSO signs out every member who has not linked an identity within 24 hours."
+  },
+  {
+   "key": "sso-6",
+   "topic": "sso",
+   "text": "SSO domain verification uses a DNS TXT record that must stay in place."
+  },
+  {
+   "key": "export-1",
+   "topic": "export",
+   "text": "Workspace owners can export all invoices as a CSV or a ZIP of PDFs."
+  },
+  {
+   "key": "export-2",
+   "topic": "export",
+   "text": "Full data exports are emailed as a download link that expires after 72 hours."
+  },
+  {
+   "key": "export-3",
+   "topic": "export",
+   "text": "Exports larger than 2 GB are split into numbered parts."
+  },
+  {
+   "key": "export-4",
+   "topic": "export",
+   "text": "Deleted workspaces can be exported for 30 days after cancellation."
+  },
+  {
+   "key": "export-5",
+   "topic": "export",
+   "text": "The export includes attachments only when 'Include files' is ticked."
+  },
+  {
+   "key": "export-6",
+   "topic": "export",
+   "text": "API-created records are included in exports the same as UI-created ones."
+  },
+  {
+   "key": "api-1",
+   "topic": "api",
+   "text": "The Helio API allows 60 requests per minute on the Team plan."
+  },
+  {
+   "key": "api-2",
+   "topic": "api",
+   "text": "The Business plan API limit is 300 requests per minute."
+  },
+  {
+   "key": "api-3",
+   "topic": "api",
+   "text": "Enterprise API limits are set per contract, starting at 1,000 requests per minute."
+  },
+  {
+   "key": "api-4",
+   "topic": "api",
+   "text": "Rate-limited API calls return HTTP 429 with a Retry-After header."
+  },
+  {
+   "key": "api-5",
+   "topic": "api",
+   "text": "API keys are scoped to one workspace and can be read-only or read-write."
+  },
+  {
+   "key": "api-6",
+   "topic": "api",
+   "text": "The Helio API is versioned by date; the current version is 2026-07-01."
+  },
+  {
+   "key": "webhooks-1",
+   "topic": "webhooks",
+   "text": "Webhooks are retried with exponential backoff for up to 24 hours."
+  },
+  {
+   "key": "webhooks-2",
+   "topic": "webhooks",
+   "text": "Every webhook carries an X-Helio-Signature header signed with HMAC-SHA256."
+  },
+  {
+   "key": "webhooks-3",
+   "topic": "webhooks",
+   "text": "A webhook endpoint is disabled after 100 consecutive failures."
+  },
+  {
+   "key": "webhooks-4",
+   "topic": "webhooks",
+   "text": "Webhook payloads are capped at 256 KB; larger events send a fetch URL instead."
+  },
+  {
+   "key": "webhooks-5",
+   "topic": "webhooks",
+   "text": "Customers can replay any webhook from the last 7 days in the developer console."
+  },
+  {
+   "key": "webhooks-6",
+   "topic": "webhooks",
+   "text": "Webhook events arrive at least once, so receivers must de-duplicate by event id."
+  },
+  {
+   "key": "plans-1",
+   "topic": "plans",
+   "text": "Helio has four plans: Free, Team, Business and Enterprise."
+  },
+  {
+   "key": "plans-2",
+   "topic": "plans",
+   "text": "The Team plan costs 12 dollars per seat per month billed monthly."
+  },
+  {
+   "key": "plans-3",
+   "topic": "plans",
+   "text": "The Business plan costs 24 dollars per seat per month and adds SSO and audit logs."
+  },
+  {
+   "key": "plans-4",
+   "topic": "plans",
+   "text": "The Free plan is limited to 3 seats and 50 invoices per month."
+  },
+  {
+   "key": "plans-5",
+   "topic": "plans",
+   "text": "Enterprise adds SCIM, a custom DPA and a named account manager."
+  },
+  {
+   "key": "plans-6",
+   "topic": "plans",
+   "text": "Nonprofits get 40 percent off Team and Business with a verified registration."
+  },
+  {
+   "key": "retention-1",
+   "topic": "retention",
+   "text": "Helio keeps audit logs for 1 year on Business and 7 years on Enterprise."
+  },
+  {
+   "key": "retention-2",
+   "topic": "retention",
+   "text": "Deleted invoices stay in the trash for 30 days before permanent deletion."
+  },
+  {
+   "key": "retention-3",
+   "topic": "retention",
+   "text": "Backups are kept for 35 days and cannot be restored per customer."
+  },
+  {
+   "key": "retention-4",
+   "topic": "retention",
+   "text": "Closed workspaces are purged 90 days after cancellation."
+  },
+  {
+   "key": "retention-5",
+   "topic": "retention",
+   "text": "Customers can request early deletion of a closed workspace by emailing privacy@helio.example."
+  },
+  {
+   "key": "retention-6",
+   "topic": "retention",
+   "text": "Email delivery logs are kept for 30 days."
+  },
+  {
+   "key": "regions-1",
+   "topic": "regions",
+   "text": "Helio hosts data in the US (Virginia) or the EU (Frankfurt)."
+  },
+  {
+   "key": "regions-2",
+   "topic": "regions",
+   "text": "The data region is chosen at signup and cannot be changed later."
+  },
+  {
+   "key": "regions-3",
+   "topic": "regions",
+   "text": "EU-region workspaces keep backups inside the EU."
+  },
+  {
+   "key": "regions-4",
+   "topic": "regions",
+   "text": "Support staff outside the EU can access EU workspaces only with customer consent."
+  },
+  {
+   "key": "regions-5",
+   "topic": "regions",
+   "text": "The EU region launched on 2025-03-01; older workspaces are all in the US."
+  },
+  {
+   "key": "regions-6",
+   "topic": "regions",
+   "text": "Enterprise customers can request a dedicated region in Sydney."
+  },
+  {
+   "key": "support-1",
+   "topic": "support",
+   "text": "Helio support hours are 08:00 to 20:00 UTC on weekdays."
+  },
+  {
+   "key": "support-2",
+   "topic": "support",
+   "text": "Business plans get a 4-hour first-response target; Team plans get 1 business day."
+  },
+  {
+   "key": "support-3",
+   "topic": "support",
+   "text": "Enterprise customers have 24/7 support for severity-1 incidents."
+  },
+  {
+   "key": "support-4",
+   "topic": "support",
+   "text": "Status updates for incidents are posted at status.helio.example every 30 minutes."
+  },
+  {
+   "key": "support-5",
+   "topic": "support",
+   "text": "Support tickets auto-close after 7 days without a customer reply."
+  },
+  {
+   "key": "support-6",
+   "topic": "support",
+   "text": "Phone support is available only to Enterprise customers."
+  }
+ ],
+ "questions": [
+  {
+   "id": "Q1",
+   "topic": "refund + export",
+   "say": "A Team customer on a monthly plan asks for a refund 20 days after the charge, and wants a copy of their data first. What do we tell them?",
+   "must": [
+    {
+     "re": "Rosa|support lead",
+     "label": "needs the support lead's approval",
+     "facts": [
+      "refunds-3"
+     ]
+    },
+    {
+     "re": "72",
+     "label": "export link expires after 72 hours",
+     "facts": [
+      "export-2"
+     ]
+    }
+   ],
+   "forbid": [
+    {
+     "re": "within (the )?30|30[- ]day (refund )?window",
+     "label": "applies the annual-plan 30-day window"
+    }
+   ]
+  },
+  {
+   "id": "Q2",
+   "topic": "SSO on Team",
+   "say": "A Team customer wants to switch on SSO with Okta tomorrow. What do we tell them?",
+   "must": [
+    {
+     "re": "Business|Enterprise|upgrade",
+     "label": "SSO needs Business or Enterprise",
+     "facts": [
+      "sso-1"
+     ]
+    },
+    {
+     "re": "break-glass|password login",
+     "label": "keep a break-glass owner login",
+     "facts": [
+      "sso-3"
+     ]
+    }
+   ],
+   "forbid": []
+  },
+  {
+   "id": "Q3",
+   "topic": "webhook outage",
+   "say": "A Business customer's webhook endpoint was down for about 60 hours over the weekend. Which events will still arrive, and how do they get the rest?",
+   "must": [
+    {
+     "re": "24 hours",
+     "label": "retries stop after 24 hours",
+     "facts": [
+      "webhooks-1"
+     ]
+    },
+    {
+     "re": "replay",
+     "label": "replay from the developer console",
+     "facts": [
+      "webhooks-5"
+     ]
+    }
+   ],
+   "forbid": []
+  },
+  {
+   "id": "Q4",
+   "topic": "region move",
+   "say": "A customer whose workspace was created in 2024 wants their data moved to Frankfurt. Can we do that?",
+   "must": [
+    {
+     "re": "cannot|can't|can not|not possible|unable|isn't possible|is not possible",
+     "label": "the region cannot be changed",
+     "facts": [
+      "regions-2"
+     ]
+    }
+   ],
+   "forbid": []
+  },
+  {
+   "id": "Q5",
+   "topic": "Okta provisioning",
+   "say": "A Business customer's IT team asks whether Helio can create and remove user accounts automatically from Okta. Can it?",
+   "must": [
+    {
+     "re": "SCIM|provisioning",
+     "facts": [
+      "sso-4"
+     ],
+     "label": "that is SCIM provisioning"
+    },
+    {
+     "re": "Enterprise[- ]only|only (?:on|with|in|for|available (?:on|with|in|for)) (?:the )?Enterprise|requires? (?:an |the )?Enterprise|upgrade to (?:the )?Enterprise|not (?:available|included|offered) (?:on|with|in) (?:the )?Business",
+     "facts": [
+      "sso-4"
+     ],
+     "label": "SCIM is Enterprise-only"
+    }
+   ],
+   "forbid": []
+  },
+  {
+   "id": "Q6",
+   "topic": "late export",
+   "say": "A customer cancelled 40 days ago and now asks for an export of their data. What can we do?",
+   "must": [
+    {
+     "re": "30 days",
+     "label": "exports only for 30 days after cancellation",
+     "facts": [
+      "export-4"
+     ]
+    }
+   ],
+   "forbid": []
+  },
+  {
+   "id": "Q7",
+   "topic": "weekend sev-1",
+   "say": "A Team customer had a severity-1 outage on Saturday night and wants to phone us. What do we tell them?",
+   "must": [
+    {
+     "re": "Enterprise",
+     "label": "phone and 24/7 support are Enterprise-only",
+     "facts": [
+      "support-6"
+     ]
+    }
+   ],
+   "forbid": []
+  },
+  {
+   "id": "Q8",
+   "topic": "nonprofit price",
+   "say": "A registered nonprofit with 10 seats asks what the Business plan would cost them per month. What is the price?",
+   "must": [
+    {
+     "re": "\\$?144\\b",
+     "label": "10 x 24 dollars less 40 percent = 144 dollars",
+     "facts": [
+      "plans-3",
+      "plans-6"
+     ]
+    }
+   ],
+   "forbid": []
+  }
+ ]
+}
