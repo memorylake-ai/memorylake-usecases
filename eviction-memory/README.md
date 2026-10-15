@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Manage Long-Running Agent Memory With Eviction That Preserves What Matters*](https://www.memorylake.ai/en/usecase/memory-eviction-strategy-for-long-running-agents),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 4:12](https://github.com/memorylake-ai/memorylake-usecases/releases/download/eviction-memory-v1/eviction-memory-cli-demo.mp4) · [Web, 4:35](https://github.com/memorylake-ai/memorylake-usecases/releases/download/eviction-memory-v1/eviction-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/eviction-memory-v1); GitHub serves them as downloads).
 
 **The problem.** An agent that runs for months keeps remembering things, and at some point its active memory has to be
 capped. The page names what the two obvious policies cost: "Dropping oldest entries loses founding decisions. Dropping
@@ -220,10 +221,10 @@ eviction record comes back with the hit — no second lookup.
 
 | What | Result |
 |---|---|
-| T1 / T2 / T3 against the three active memories: oldest ✓✗✓, least-used ✗✓✓, typed ✓✓✓ | every run (CLI from scratch, re-run, `--reset`, and in the browser) |
+| T1 / T2 / T3 against the three active memories: oldest ✓✗✓, least-used ✗✓✓, typed ✓✓✓ | 6 / 6 runs (2 from scratch including the recorded one, 1 with `--reset`, 3 re-runs including both browser runs) |
 | The needed entry's rank where it was kept | C-01 #2 (oldest) / #3 (typed); D-01 #1; E-12 #1 — the same in every run |
 | Deep query: not in the typed active memory; #1 from active + archive | every run |
-| Time | about 2 min from scratch (3:21 before the metadata writes were parallelised), 1:15 re-run, 4:04 with `--reset` (deletes the previous run first) |
+| Time | 2:00 from scratch (3:21 before the metadata writes were parallelised), 1:15 re-run, 4:04 with `--reset` (deletes the previous run first) |
 
 ## Wiring it into your own agent
 
