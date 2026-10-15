@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Sales Enablement Playbook Memory That Reps' AI Tools Actually Read*](https://www.memorylake.ai/en/usecase/sales-playbook-memory-for-enablement-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 3:20](https://github.com/memorylake-ai/memorylake-usecases/releases/download/enablement-playbook-memory-v1/enablement-playbook-memory-cli-demo.mp4) · [Web, 3:20](https://github.com/memorylake-ai/memorylake-usecases/releases/download/enablement-playbook-memory-v1/enablement-playbook-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/enablement-playbook-memory-v1); GitHub serves them as downloads).
 
 **The problem.** The page's promise is a playbook that every rep's AI tool reads before it writes an email, preps a
 call or plans coaching. The plays in that playbook are written from results: "we coached the bottom five and their win
@@ -271,11 +272,11 @@ other words (`search` can answer a repeated question from a cache of older text)
 
 | What | Result |
 |---|---|
-| The replay (all three tables, every number) | identical in 5 / 5 runs: the data is pinned, the read is plain code |
-| The play in the top 8 for its question | 15 / 15 reads (3 questions × 5 runs); #1 in 14, #2 once (Q2) |
-| Quick read vs memory read: Q1 ✗, Q2 ✗, Q3 ✓ | 5 / 5 runs (1 from scratch, 1 with `--reset`, 2 re-runs, 1 in the browser) |
-| After write-back: quick read agrees with the scorecards | 3 / 3 in the 3 runs with today's F2 wording, first try. The first wording ("Who should the new AEs shadow on live calls?") missed Play 9 in 2 runs and ranked it #7 once; the rewrite had dropped "new-hire" from its title (now kept) |
-| Time | 104 s from scratch, 63–73 s re-run, 131 s with `--reset` (which deletes the previous run first) |
+| The replay (all three tables, every number) | identical in 8 / 8 runs: the data is pinned, the read is plain code |
+| The play in the top 8 for its question | 24 / 24 reads (3 questions × 8 runs); #1 in 23, #2 once (Q2) |
+| Quick read vs memory read: Q1 ✗, Q2 ✗, Q3 ✓ | 8 / 8 runs (3 from scratch, 1 with `--reset`, 4 re-runs; 2 of the 8 in the browser) |
+| After write-back: quick read agrees with the scorecards | 3 / 3 in all 5 runs with today's F2 wording, first try. The first wording ("Who should the new AEs shadow on live calls?") missed Play 9 in 2 runs and ranked it #7 once; the rewrite had dropped "new-hire" from its title (now kept) |
+| Time | 83–104 s from scratch, 63–96 s re-run, 131 s with `--reset` (which deletes the previous run first) |
 
 ## Wiring it into your own enablement team
 
