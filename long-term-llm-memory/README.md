@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Any LLM Long-Term Memory Without Bloating the Context Window*](https://www.memorylake.ai/en/usecase/long-term-memory-for-llms),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos coming soon.
+**Watch it run:** [CLI, 4:17](https://github.com/memorylake-ai/memorylake-usecases/releases/download/long-term-llm-memory-v1/long-term-llm-memory-cli-demo.mp4) · [Web, 4:41](https://github.com/memorylake-ai/memorylake-usecases/releases/download/long-term-llm-memory-v1/long-term-llm-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/long-term-llm-memory-v1); GitHub serves them as downloads).
 
 **The problem.** A chat model starts every session blank. The usual fix is to keep everything the app has learned about
 the user and paste it into the system prompt. That works on day one. Nine months later the prompt carries hundreds of
@@ -85,6 +86,10 @@ python3 web/server.py           # opens http://127.0.0.1:8765
 Same pipeline, one view per step (a table per checkpoint, click an answer to read the reply), the extra names with the
 facts that mention them, a scoreboard, an **Ask** page (your own question, any of the three ways), and a terminal drawer
 with every `memorylake` command as it runs.
+
+![Month 9: the pasted prompt's list picks up wrong names](web/screenshot-month9.png)
+![Each extra name looked up in memory](web/screenshot-extras.png)
+![Scoreboard](web/screenshot-scoreboard.png)
 
 ## What happens, step by step
 
@@ -182,14 +187,14 @@ $ memorylake router messages 'List everyone whose birthday is in November.' --mo
 
 ## Measured
 
-Seven fresh runs of the final version on 2026-10-15: six from the terminal (three in parallel under separate prefixes,
-then three in a row, one of them `--reset`) and one in the browser. Temperature 0; replies still vary. Every run
-started from an empty project.
+Nine fresh runs of the final version on 2026-10-15: six from the terminal (three in parallel under separate prefixes,
+then three in a row, one of them `--reset`), one browser check, and the two recorded runs (terminal and browser).
+Temperature 0; replies still vary. Every run started from an empty project.
 
 Memory in each prompt was the same in every run: pasted 395 / 1,822 / 6,911 tokens per question at 20 / 100 / 400
 facts; MemoryRouter 78–97 / 78–158 / 78–158.
 
-Exact answers, 6 terminal runs (lists: extra names · missed names in total):
+Exact answers, the 6 terminal runs in detail (lists: extra names · missed names in total):
 
 | Memory | Question | no memory | everything pasted | MemoryRouter |
 |---|---|---|---|---|
@@ -200,8 +205,10 @@ Exact answers, 6 terminal runs (lists: extra names · missed names in total):
 | Month 9 (400) | 2 look-ups | 0 / 12 | 12 / 12 | 12 / 12 |
 | | 2 lists | 0 / 12 | **0 / 12** (43 extra · 21 missed) | 12 / 12 |
 
-The browser run: pasted exact 4/4 · 3/4 · 2/4 with 0 · 2 · 7 extra names; MemoryRouter 4/4 at every point, none
-extra. Claude through the same boundary (step 7) listed the five November birthdays exactly in all 7 runs.
+The other three runs (browser check · recorded terminal · recorded browser), pasted exact out of 4 at week 1 / month 3 /
+month 9: 4/3/2 · 4/3/2 · 4/2/2, with 0/2/7 · 0/2/9 · 0/2/8 extra names. **All 9 runs:** MemoryRouter 108 / 108 exact,
+no extra name; the pasted prompt got the look-ups right every time, the month-3 lists 5 / 18 and the month-9 lists
+**0 / 18**. Claude through the same boundary (step 7) listed the five November birthdays exactly in all 9 runs.
 
 What the numbers say, and don't:
 
