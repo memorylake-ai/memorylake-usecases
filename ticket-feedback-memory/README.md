@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Support Teams Customer Feedback Memory That Reaches Product and Sales*](https://www.memorylake.ai/en/usecase/customer-feedback-memory-across-tickets),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** (recording)
+**Watch it run:** [CLI, 3:34](https://github.com/memorylake-ai/memorylake-usecases/releases/download/ticket-feedback-memory-v1/ticket-feedback-memory-cli-demo.mp4) · [Web, 4:06](https://github.com/memorylake-ai/memorylake-usecases/releases/download/ticket-feedback-memory-v1/ticket-feedback-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/ticket-feedback-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Support tickets are full of feedback that product and sales never see: feature requests, friction,
 "we're looking at other providers". Keeping that feedback in shared memory fixes the reach. It does not fix the
@@ -68,8 +69,9 @@ There are no conversations and no extraction. Every record is pinned word for wo
 what the CLI returns, and no model decides anything. `search` only proposes candidates, and the review data
 (`data/story.json` → `review`) stands in for Lucas.
 
-**Five fresh runs** (one `--reset`, a resume run, three copies in parallel under different prefixes) gave identical
-results every time: the same nearest neighbours, the same proposals and the same answers.
+**Nine fresh runs** (resume runs, a `--reset`, three copies in parallel under different prefixes, the web app, and
+both recordings) gave the same answers every time, with the same proposals; in one run Padaria Lima's second-nearest
+neighbour was the French invoice ticket instead of the English one, and the proposal did not change.
 
 ## Prerequisites
 
@@ -114,6 +116,8 @@ review and write-back. **Ask** searches the feedback in any language and marks e
 never count. The terminal drawer shows every `memorylake` command as it runs.
 
 ![The memory read](web/screenshot-memory-read.png)
+
+![Write it back](web/screenshot-write-back.png)
 
 ## What each step does
 
