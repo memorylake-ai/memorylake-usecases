@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Designers AI Memory of Every Client's Feedback Patterns and Preferences*](https://www.memorylake.ai/en/usecase/design-feedback-memory-across-clients),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 2:40](https://github.com/memorylake-ai/memorylake-usecases/releases/download/design-feedback-memory-v1/design-feedback-memory-cli-demo.mp4) · [Web, 2:41](https://github.com/memorylake-ai/memorylake-usecases/releases/download/design-feedback-memory-v1/design-feedback-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/design-feedback-memory-v1); GitHub serves them as downloads).
 
 **The problem.** "Client A always pushes for tighter type." The page's answer is per-client reflection memory: recurring
 preferences surface from the review rounds, and every AI design tool reads them before it generates anything. Then the
