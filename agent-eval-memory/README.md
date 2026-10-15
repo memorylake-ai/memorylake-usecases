@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Evaluate Agent Outputs With Full Visibility Into the Memory That Drove Them*](https://www.memorylake.ai/en/usecase/memory-aware-evaluation-for-agent-outputs),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 4:32](https://github.com/memorylake-ai/memorylake-usecases/releases/download/agent-eval-memory-v1/agent-eval-memory-cli-demo.mp4) · [Web, 4:39](https://github.com/memorylake-ai/memorylake-usecases/releases/download/agent-eval-memory-v1/agent-eval-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/agent-eval-memory-v1); GitHub serves them as downloads).
 
 **The problem.** You change your agent's prompt and run the eval set. Three answers changed grade. Was it the
 prompt? When the agent reads its memory through a retrieval layer, the memory each call gets is picked per call,
@@ -18,10 +19,10 @@ facts in one project, one boundary, `router chat --boundary` (`gpt-4o-mini`, tem
 
 | | Through MemoryRouter (`--boundary`) | Against a pinned snapshot |
 |---|---|---|
-| Same question, same prompt, 3 calls: memory the same every time (9 runs) | **15 / 72** question-runs | **72 / 72** |
-| Grade changed with nothing changed (A/A) | **27 / 72** | **4 / 72** (identical memory: the model's own noise) |
-| Verdict on v1 → v2 | different every run: *"v2 broke Q7, Q8, fixed Q2, Q5"*, *"broke Q2, Q7, Q8, fixed Q1, Q3, Q5"*, … — Q2 called **fixed** in 2 runs, broken in 1 | **v2 breaks Q2** in 9 of 9 runs (and Q3 in 2) |
-| Wrong answers with a known cause | **0 / 92** — the call kept no record of what it was given | **113 / 113**: 54 retrieval (Q5's fact never retrieved), 59 generation (fact there, answer left it out) |
+| Same question, same prompt, 3 calls: memory the same every time (11 runs) | **17 / 88** question-runs | **88 / 88** |
+| Grade changed with nothing changed (A/A) | **33 / 88** | **7 / 88** (identical memory: the model's own noise) |
+| Verdict on v1 → v2 | 10 different lists in 11 runs: *"v2 broke Q7, Q8, fixed Q2, Q5"*, *"broke Q2, Q7, Q8, fixed Q1, Q3, Q5"*, … — Q2 called **fixed** in 2 runs, broken in 1 | **v2 breaks Q2** in 11 of 11 runs (and Q3 in 2) |
+| Wrong answers with a known cause | **0 / 108** — the call kept no record of what it was given | **142 / 142**: 66 retrieval (Q5's fact never retrieved), 76 generation (fact there, answer left it out) |
 
 The fix is what the use-case page calls *evaluation against pinned memory snapshots*: retrieve once per question
 (`search --types fact --top-k 8`), save the fact ids and text, and run every prompt version against that same
@@ -275,34 +276,34 @@ $ memorylake router chat 'A Team customer wants to switch on SSO with Okta tomor
 ## Measured
 
 Every fresh run with the final questions, prompts and grading while building this demo (1 browser check,
-6 parallel copies, the run above and the one before it): 9 runs, 72 question-runs per column.
+6 parallel copies, the run above and the one before it, the 2 recordings): 11 runs, 88 question-runs per column.
 
 | | Router v1 (×3 per run) | Router v2 | Snapshot v1 (×3) | Snapshot v2 (×3) |
 |---|---|---|---|---|
-| Q1 refund + export | 17 / 27 | 7 / 9 | 27 / 27 | 27 / 27 |
-| Q2 SSO on Team | 2 / 27 | 2 / 9 | 27 / 27 | **0 / 27** |
-| Q3 webhook outage | 24 / 27 | 9 / 9 | 14 / 27 | 9 / 27 |
-| Q4 region move | 27 / 27 | 9 / 9 | 27 / 27 | 27 / 27 |
-| Q5 Okta provisioning | 9 / 27 | 9 / 9 | 0 / 27 | 0 / 27 |
-| Q6 late export | 25 / 27 | 8 / 9 | 27 / 27 | 26 / 27 |
-| Q7 weekend sev-1 | 17 / 27 | 3 / 9 | 27 / 27 | 27 / 27 |
-| Q8 nonprofit price | 27 / 27 | **1 / 9** | 27 / 27 | 27 / 27 |
+| Q1 refund + export | 22 / 33 | 9 / 11 | 33 / 33 | 33 / 33 |
+| Q2 SSO on Team | 5 / 33 | 4 / 11 | 33 / 33 | **0 / 33** |
+| Q3 webhook outage | 29 / 33 | 11 / 11 | 16 / 33 | 9 / 33 |
+| Q4 region move | 33 / 33 | 11 / 11 | 33 / 33 | 33 / 33 |
+| Q5 Okta provisioning | 9 / 33 | 11 / 11 | 0 / 33 | 0 / 33 |
+| Q6 late export | 31 / 33 | 10 / 11 | 32 / 33 | 32 / 33 |
+| Q7 weekend sev-1 | 19 / 33 | 5 / 11 | 33 / 33 | 33 / 33 |
+| Q8 nonprofit price | 33 / 33 | **2 / 11** | 33 / 33 | 33 / 33 |
 
-- **A/A through MemoryRouter**: in 57 of 72 question-runs the three identical v1 calls got different amounts of
-  memory (prompt tokens); 27 of 72 changed grade. Against the snapshot: 0 and 4 (the 4 at identical prompt tokens,
+- **A/A through MemoryRouter**: in 71 of 88 question-runs the three identical v1 calls got different amounts of
+  memory (prompt tokens); 33 of 88 changed grade. Against the snapshot: 0 and 7 (all at identical prompt tokens,
   so the model's own sampling noise; `seed` and temperature 0 are set and do not remove it).
 - **The v1 → v2 verdict**: through MemoryRouter, one run each as an eval would do it, the list of "broke / fixed"
-  questions was different in every run. Against the snapshot, every run named Q2 (v2's *"start with the one thing"*
-  drops the break-glass step: 0 / 27), and 2 runs also Q3.
-- **Attribution**: Q5's SCIM fact was missing from all 9 snapshots (retrieval failure, 54 answers); MemoryRouter
-  attached it sometimes (Router v1 9 / 27), which is exactly what you could not see from the eval. Q2 and Q3 are
+  questions came out 10 different ways in 11 runs. Against the snapshot, every run named Q2 (v2's *"start with the
+  one thing"* drops the break-glass step: 0 / 33), and 2 runs also Q3.
+- **Attribution**: Q5's SCIM fact was missing from all 11 snapshots (retrieval failure, 66 answers); MemoryRouter
+  attached it sometimes (Router v1 9 / 33), which is exactly what you could not see from the eval. Q2 and Q3 are
   generation failures: the fact was in the snapshot and the answer left it out.
-- **What the snapshot does not catch — Q8**: through MemoryRouter the memory for Q8 held still (156 / 173 prompt
-  tokens every time), and v2 answered *"$14.40 per seat"* instead of the $144 total in 8 of 9 runs; against the
-  snapshot v2 got $144 27 / 27. A snapshot pins *which* facts the model sees, not how MemoryRouter frames them, so a
+- **What the snapshot does not catch — Q8**: through MemoryRouter Q8's memory changed least (156 prompt tokens with
+  v1 most of the time, 173 with v2), and v2 answered *"$14.40 per seat"* instead of the $144 total in 9 of 11 runs;
+  against the snapshot v2 got $144 33 / 33. A snapshot pins *which* facts the model sees, not how MemoryRouter frames them, so a
   prompt change that only misbehaves with the production framing needs a repeated check through the production
   wiring too. That is why the demo keeps both columns.
-- Q2 also shows the two columns disagreeing the other way: with v1, Router 2 / 27 and snapshot 27 / 27 — the
+- Q2 also shows the two columns disagreeing the other way: with v1, Router 5 / 33 and snapshot 33 / 33 — the
   snapshot's 8 facts include *"SSO is available on the Business and Enterprise plans only"*, and whatever
   MemoryRouter attached usually did not lead the model to say it. Which memories those were, the reply does not say.
 - Before these runs, a probe with the same 60 facts: a single-topic question (*"API rate limit on the Team plan"*)
