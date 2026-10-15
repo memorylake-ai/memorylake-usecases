@@ -1,0 +1,48 @@
+{
+  "assistant": "Hearth",
+  "user": "Dana Whitfield",
+  "today": "2026-10-15",
+  "note": "Fictional family. Everything below is what Hearth, a family-assistant chatbot, remembered from Dana's earlier chats.",
+  "members": [
+    {"name": "Leo", "role": "son, 9"},
+    {"name": "Maya", "role": "daughter, 6"},
+    {"name": "Sam", "role": "husband"},
+    {"name": "Nora", "role": "mother-in-law"},
+    {"name": "Biscuit", "role": "dog"}
+  ],
+  "attributes": [
+    {"key": "allergy", "template": "{name} is allergic to {value}.",
+     "values": ["peanuts", "penicillin", "shellfish", "bee stings", "chicken-based feed"]},
+    {"key": "school", "template": "{name} goes to {value}.",
+     "values": ["Harbor Elementary", "Little Oaks preschool", "work at Calder Freight", "the Riverside senior center on weekdays", "Paws daycare on Fridays"]},
+    {"key": "doctor", "template": "{name}'s doctor is {value}.",
+     "values": ["Dr. Okafor", "Dr. Lindqvist", "Dr. Patel", "Dr. Moreau", "Dr. Haines (vet)"]},
+    {"key": "shoes", "template": "{name}'s shoe size is {value}.",
+     "values": ["US youth 3", "US toddler 11", "US 10.5", "US 7", "not applicable (wears boots, size S)"]},
+    {"key": "bedtime", "template": "{name}'s bedtime is {value}.",
+     "values": ["8:30 pm", "7:30 pm", "11 pm", "9 pm", "10 pm, after the last walk"]},
+    {"key": "activity", "template": "{name} has {value}.",
+     "values": ["soccer practice on Tuesdays", "ballet class on Saturdays", "tennis on Sundays", "bridge club on Thursdays", "a long walk every morning"]},
+    {"key": "dinner", "template": "{name}'s favorite dinner is {value}.",
+     "values": ["mac and cheese", "dumplings", "lamb curry", "fish pie", "salmon kibble"]},
+    {"key": "birthday", "template": "{name}'s birthday is {value}.",
+     "values": ["March 14", "July 2", "November 30", "January 9", "May 21"]},
+    {"key": "friend", "template": "{name}'s best friend is {value}.",
+     "values": ["Ollie Brandt", "Zuri Kamau", "Mateo Ruiz", "Edith Vance", "a terrier named Pip"]},
+    {"key": "medication", "template": "{name} takes {value}.",
+     "values": ["an inhaler before soccer", "no regular medication", "a statin every evening", "eye drops twice a day", "a joint supplement with breakfast"]},
+    {"key": "refuses", "template": "{name} refuses to eat {value}.",
+     "values": ["mushrooms", "anything green", "olives", "spicy food", "dry food unless it is soaked in water"]},
+    {"key": "contact", "template": "{name}'s contact number is {value}.",
+     "values": ["none (call Dana)", "none (call Dana)", "555-0148", "555-0193", "the microchip ID 981-020"]}
+  ],
+  "chat": [
+    {"key": "t1", "say": "What is Leo allergic to?", "about": "Leo", "attr": "allergy", "expect": ["peanut"]},
+    {"key": "t2", "say": "And Maya?", "about": "Maya", "attr": "allergy", "expect": ["penicillin"]},
+    {"key": "t3", "say": "Who's her doctor?", "about": "Maya", "attr": "doctor", "expect": ["lindqvist"]},
+    {"key": "t4", "say": "What time does she go to bed?", "about": "Maya", "attr": "bedtime", "expect": ["7:30"]},
+    {"key": "t5", "say": "Does my mother-in-law take anything regularly?", "about": "Nora", "attr": "medication", "expect": ["eye drop"]},
+    {"key": "t6", "say": "When's her birthday?", "about": "Nora", "attr": "birthday", "expect": ["january 9", "jan 9", "9 january"]},
+    {"key": "t7", "say": "What about the dog, anything he won't eat?", "about": "Biscuit", "attr": "refuses", "expect": ["dry food", "soaked"]}
+  ]
+}
