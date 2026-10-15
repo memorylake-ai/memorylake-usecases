@@ -1,0 +1,450 @@
+{
+  "project": {
+    "key": "studio",
+    "name": "Quillon Studio - client feedback",
+    "description": "Review rounds from Figma, email and Loom, and the studio's per-client notes (Quillon Studio is fictional)."
+  },
+  "studio": "Quillon Studio",
+  "today": "2026-10-15",
+  "author": {
+    "name": "Theo Brandt",
+    "role": "former senior designer"
+  },
+  "lead": {
+    "name": "Ines Marlow",
+    "role": "art director"
+  },
+  "tools": {
+    "figma": "Figma comment",
+    "email": "Email thread",
+    "loom": "Loom transcript",
+    "notes": "Studio notes"
+  },
+  "clients": {
+    "HP": "Harbor & Pine Coffee",
+    "LH": "Lumen Health",
+    "VO": "Vela Outdoor"
+  },
+  "topics": {
+    "type": {
+      "label": "typography",
+      "options": {
+        "tight": "tight type",
+        "airy": "airy type"
+      }
+    },
+    "space": {
+      "label": "layout",
+      "options": {
+        "generous": "generous white space",
+        "compact": "compact layout"
+      }
+    },
+    "colour": {
+      "label": "colour",
+      "options": {
+        "without": "no teal + orange",
+        "with": "teal + orange"
+      }
+    }
+  },
+  "incoming": [
+    {
+      "id": "Q1",
+      "client": "HP",
+      "topic": "type",
+      "text": "Harbor & Pine loyalty app redesign: which headline type setting should the comps use?"
+    },
+    {
+      "id": "Q2",
+      "client": "LH",
+      "topic": "space",
+      "text": "Lumen Health care-plan page: dense layout or lots of white space?"
+    },
+    {
+      "id": "Q3",
+      "client": "VO",
+      "topic": "colour",
+      "text": "Vela Outdoor trail-running campaign: can we use teal and orange together?"
+    }
+  ],
+  "followups": [
+    {
+      "id": "F1",
+      "client": "HP",
+      "topic": "type",
+      "text": "Harbor & Pine gift card comps: tight or airy headlines?"
+    },
+    {
+      "id": "F2",
+      "client": "LH",
+      "topic": "space",
+      "text": "How much white space should the Lumen Health onboarding screens get?"
+    },
+    {
+      "id": "F3",
+      "client": "VO",
+      "topic": "colour",
+      "text": "Vela Outdoor spring palette: is teal with orange allowed?"
+    }
+  ],
+  "records": [
+    {
+      "id": "N-HP",
+      "kind": "note",
+      "client": "HP",
+      "topic": "type",
+      "on": "2026-03-12",
+      "tool": "notes",
+      "value": "tight",
+      "prefer": "default to it",
+      "evidence": [
+        6,
+        7
+      ],
+      "counted": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R6",
+        "R7"
+      ],
+      "by": "Theo Brandt",
+      "text": "Harbor & Pine Coffee, typography (studio note, Theo Brandt): they want tight type - headline tracking -20, leading 1.1. Approved with tight type in 6 of 7 review rounds since March. Default to it on every comp."
+    },
+    {
+      "id": "N-LH",
+      "kind": "note",
+      "client": "LH",
+      "topic": "space",
+      "on": "2026-08-14",
+      "tool": "notes",
+      "value": "generous",
+      "prefer": "default to it",
+      "evidence": [
+        4,
+        4
+      ],
+      "counted": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "by": "Theo Brandt",
+      "text": "Lumen Health, layout (studio note, Theo Brandt): generous white space - they push back on dense pages every time. Raised in 4 of 4 review rounds. Default to it on every comp."
+    },
+    {
+      "id": "N-VO",
+      "kind": "note",
+      "client": "VO",
+      "topic": "colour",
+      "on": "2026-04-09",
+      "tool": "notes",
+      "value": "without",
+      "prefer": "default to it",
+      "evidence": [
+        5,
+        5
+      ],
+      "counted": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5"
+      ],
+      "by": "Theo Brandt",
+      "text": "Vela Outdoor, colour (studio note, Theo Brandt): never pair teal with orange - they rejected it and every round since has held. 5 of 5 review rounds. Default to it on every comp."
+    },
+    {
+      "id": "HP-R1",
+      "kind": "round",
+      "client": "HP",
+      "topic": "type",
+      "round": "R1",
+      "on": "2026-03-10",
+      "tool": "figma",
+      "asset": "Spring menu boards v1",
+      "shown": [
+        "airy"
+      ],
+      "response": "asked",
+      "value": "tight",
+      "by": "client",
+      "text": "Figma comment on 'Spring menu boards v1' - Dana Reyes (Harbor & Pine, brand lead): Headline tracking feels loose. Can we tighten it and pull the leading in? It should feel denser, like our cup sleeves."
+    },
+    {
+      "id": "HP-R2",
+      "kind": "round",
+      "client": "HP",
+      "topic": "type",
+      "round": "R2",
+      "on": "2026-04-02",
+      "tool": "email",
+      "asset": "Spring menu boards v2",
+      "shown": [
+        "tight"
+      ],
+      "response": "approved",
+      "value": "tight",
+      "by": "client",
+      "text": "Email from Dana Reyes (Harbor & Pine), re: Spring menu boards v2 - Approved. These look great, send the print files."
+    },
+    {
+      "id": "HP-R3",
+      "kind": "round",
+      "client": "HP",
+      "topic": "type",
+      "round": "R3",
+      "on": "2026-04-28",
+      "tool": "figma",
+      "asset": "Summer cold-brew posters v1",
+      "shown": [
+        "tight"
+      ],
+      "response": "approved",
+      "value": "tight",
+      "by": "client",
+      "text": "Figma comment on 'Summer cold-brew posters v1' - Dana Reyes (Harbor & Pine): Love these. Ship it."
+    },
+    {
+      "id": "HP-R4",
+      "kind": "round",
+      "client": "HP",
+      "topic": "type",
+      "round": "R4",
+      "on": "2026-05-20",
+      "tool": "loom",
+      "asset": "Store window decals v1",
+      "shown": [
+        "tight"
+      ],
+      "response": "approved",
+      "value": "tight",
+      "by": "client",
+      "text": "Loom transcript, Dana Reyes (Harbor & Pine) reviewing 'Store window decals v1': This is good. Only change is the hero photo, use the one with the cold brew can. Otherwise approved."
+    },
+    {
+      "id": "HP-R5",
+      "kind": "round",
+      "client": "HP",
+      "topic": "type",
+      "round": "R5",
+      "on": "2026-06-17",
+      "tool": "email",
+      "asset": "Loyalty app home, options A and B",
+      "shown": [
+        "tight",
+        "airy"
+      ],
+      "response": "picked",
+      "value": "airy",
+      "by": "client",
+      "text": "Email from Dana Reyes (Harbor & Pine), re: Loyalty app home, options A and B - Option B, the looser one. It reads better on the phone. Go with B."
+    },
+    {
+      "id": "HP-R6",
+      "kind": "round",
+      "client": "HP",
+      "topic": "type",
+      "round": "R6",
+      "on": "2026-07-22",
+      "tool": "figma",
+      "asset": "Autumn menu boards v1",
+      "shown": [
+        "tight"
+      ],
+      "response": "approved",
+      "value": "tight",
+      "by": "client",
+      "text": "Figma comment on 'Autumn menu boards v1' - Dana Reyes (Harbor & Pine): Approved, nice work."
+    },
+    {
+      "id": "HP-R7",
+      "kind": "round",
+      "client": "HP",
+      "topic": "type",
+      "round": "R7",
+      "on": "2026-09-09",
+      "tool": "loom",
+      "asset": "Holiday cup sleeves v1",
+      "shown": [
+        "tight"
+      ],
+      "response": "approved",
+      "value": "tight",
+      "by": "client",
+      "text": "Loom transcript, Dana Reyes (Harbor & Pine) reviewing 'Holiday cup sleeves v1': Looks right. Approved, let's get these to the printer by Friday."
+    },
+    {
+      "id": "LH-R1",
+      "kind": "round",
+      "client": "LH",
+      "topic": "space",
+      "round": "R1",
+      "on": "2026-04-15",
+      "tool": "figma",
+      "asset": "Patient portal dashboard v1",
+      "shown": [
+        "compact"
+      ],
+      "response": "asked",
+      "value": "generous",
+      "by": "client",
+      "text": "Figma comment on 'Patient portal dashboard v1' - Omar Haddad (Lumen Health, product design lead): Too crowded. Give the stats room to breathe and drop the third column."
+    },
+    {
+      "id": "LH-R2",
+      "kind": "round",
+      "client": "LH",
+      "topic": "space",
+      "round": "R2",
+      "on": "2026-05-27",
+      "tool": "loom",
+      "asset": "Clinic finder v1",
+      "shown": [
+        "compact"
+      ],
+      "response": "asked",
+      "value": "generous",
+      "by": "client",
+      "text": "Loom transcript, Omar Haddad (Lumen Health) reviewing 'Clinic finder v1': I'd cut a third of this copy block and let the map breathe. Right now it feels like a form."
+    },
+    {
+      "id": "LH-R3",
+      "kind": "round",
+      "client": "LH",
+      "topic": "space",
+      "round": "R3",
+      "on": "2026-06-30",
+      "tool": "email",
+      "asset": "Appointment reminders, two layouts",
+      "shown": [
+        "compact",
+        "generous"
+      ],
+      "response": "picked",
+      "value": "generous",
+      "by": "client",
+      "text": "Email from Omar Haddad (Lumen Health), re: Appointment reminders, two layouts - The airier one, please. The dense version is hard to scan."
+    },
+    {
+      "id": "LH-R4",
+      "kind": "round",
+      "client": "LH",
+      "topic": "space",
+      "round": "R4",
+      "on": "2026-08-05",
+      "tool": "figma",
+      "asset": "Billing page v1",
+      "shown": [
+        "compact"
+      ],
+      "response": "asked",
+      "value": "generous",
+      "by": "client",
+      "text": "Figma comment on 'Billing page v1' - Omar Haddad (Lumen Health): Still busy at the bottom. More margin around the totals."
+    },
+    {
+      "id": "VO-R1",
+      "kind": "round",
+      "client": "VO",
+      "topic": "colour",
+      "round": "R1",
+      "on": "2026-04-08",
+      "tool": "loom",
+      "asset": "Trail season launch v1",
+      "shown": [
+        "with"
+      ],
+      "response": "asked",
+      "value": "without",
+      "by": "client",
+      "text": "Loom transcript, Priya Nair (Vela Outdoor, marketing director) reviewing 'Trail season launch v1': The teal and orange together reads like Tidewater's kit. Let's not pair those."
+    },
+    {
+      "id": "VO-R2",
+      "kind": "round",
+      "client": "VO",
+      "topic": "colour",
+      "round": "R2",
+      "on": "2026-05-13",
+      "tool": "figma",
+      "asset": "Trail season launch v2",
+      "shown": [
+        "without"
+      ],
+      "response": "approved",
+      "value": "without",
+      "by": "client",
+      "text": "Figma comment on 'Trail season launch v2' - Priya Nair (Vela Outdoor): Approved."
+    },
+    {
+      "id": "VO-R3",
+      "kind": "round",
+      "client": "VO",
+      "topic": "colour",
+      "round": "R3",
+      "on": "2026-06-24",
+      "tool": "email",
+      "asset": "Summer catalogue cover",
+      "shown": [
+        "without"
+      ],
+      "response": "approved",
+      "value": "without",
+      "by": "client",
+      "text": "Email from Priya Nair (Vela Outdoor), re: Summer catalogue cover - Great, approved."
+    },
+    {
+      "id": "VO-R4",
+      "kind": "round",
+      "client": "VO",
+      "topic": "colour",
+      "round": "R4",
+      "on": "2026-08-12",
+      "tool": "figma",
+      "asset": "Store fixtures v1",
+      "shown": [
+        "without"
+      ],
+      "response": "approved",
+      "value": "without",
+      "by": "client",
+      "text": "Figma comment on 'Store fixtures v1' - Priya Nair (Vela Outdoor): Looks good, approved."
+    },
+    {
+      "id": "VO-R5",
+      "kind": "round",
+      "client": "VO",
+      "topic": "colour",
+      "round": "R5",
+      "on": "2026-09-16",
+      "tool": "loom",
+      "asset": "Winter teaser v1",
+      "shown": [
+        "without"
+      ],
+      "response": "approved",
+      "value": "without",
+      "by": "client",
+      "text": "Loom transcript, Priya Nair (Vela Outdoor) reviewing 'Winter teaser v1': Love the mood. Approved."
+    }
+  ],
+  "ask_examples": [
+    {
+      "q": "Tight or airy headlines for the menu boards?",
+      "client": "HP"
+    },
+    {
+      "q": "Can the spring kit put teal next to orange?",
+      "client": "VO"
+    },
+    {
+      "q": "How dense can the Lumen Health dashboard be?",
+      "client": "LH"
+    }
+  ]
+}
