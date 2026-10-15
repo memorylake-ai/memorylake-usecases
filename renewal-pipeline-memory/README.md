@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Sales Teams AI That Knows the Deal Before the Call Starts*](https://www.memorylake.ai/en/usecase/ai-memory-for-sales-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded (links will follow).
+**Watch it run:** [CLI, 2:51](https://github.com/memorylake-ai/memorylake-usecases/releases/download/renewal-pipeline-memory-v1/renewal-pipeline-memory-cli-demo.mp4) · [Web, 3:10](https://github.com/memorylake-ai/memorylake-usecases/releases/download/renewal-pipeline-memory-v1/renewal-pipeline-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/renewal-pipeline-memory-v1); GitHub serves them as downloads).
 
 **The problem.** A customer-success team keeps every account's renewal record in shared memory, and its assistant
 reads that memory through MemoryRouter: the app adds one `--boundary` to an ordinary model call, and MemoryRouter
@@ -176,28 +177,28 @@ provider request body whose system message holds the 40 records.
 
 ## Measured
 
-Seven fresh runs of the final version on 2026-10-15: six from the terminal (three in parallel under separate prefixes,
-then three in a row, one of them `--reset`) and one browser check. Temperature 0; replies still vary. Every run started
-from an empty project.
+Nine fresh runs of the final version on 2026-10-15: six from the terminal (three in parallel under separate prefixes,
+then three in a row, one of them `--reset`), one browser check, and the two recorded runs (terminal and browser).
+Temperature 0; replies still vary. Every run started from an empty project.
 
 | Question (answer size) | MemoryRouter | Count first, then list |
 |---|---|---|
-| 3 look-ups (1 each) | 21 / 21 | — |
-| Lev's renewals (8) | 7 / 7 complete | — |
-| Team's renewals (40) | **0 / 7 complete**: 19, 18, 33, 19, 9, 19, 20 accounts named; 0 wrong names; 0 replies said the list might be incomplete | **7 / 7 complete** (40 / 40) |
+| 3 look-ups (1 each) | 27 / 27 | — |
+| Lev's renewals (8) | 9 / 9 complete | — |
+| Team's renewals (40) | **0 / 9 complete**: 19, 18, 33, 19, 9, 19, 20, 18, 13 accounts named; 0 wrong names; 0 replies said the list might be incomplete | **9 / 9 complete** (40 / 40) |
 
 What MemoryRouter attached for the team's question:
 
-- To the `gpt-4o-mini` request (estimated from its size): about 19 records in 5 runs, about 33 in 2.
-- To Claude's checker request in step 6: 19 records in 4 runs, 33–36 in 3. A probe before the demo (12 more checker
+- To the `gpt-4o-mini` request (estimated from its size): about 14–20 records in 7 runs, about 33 in 2.
+- To Claude's checker request in step 6: 18–19 records in 6 runs, 33–36 in 3. A probe before the demo (12 more checker
   calls on the same book) saw 18–20 in 11 and 32 in 1. **Never 40.** Every attached line, in every call, was a
   renewal in the window.
-- For Lev's question the checker saw his 8 records in 5 runs and 7 in 2; the `gpt-4o-mini` replies listed all 8 in
-  all 7.
+- For Lev's question the checker saw his 8 records in 7 runs and 7 in 2; the `gpt-4o-mini` replies listed all 8 in
+  all 9.
 
 What the numbers say, and don't:
 
-- **MemoryRouter attaches a bounded set by relevance**, about 20 renewals in most calls and about 35 in some, chosen
+- **MemoryRouter attaches a bounded set by relevance**, 14–20 renewals in most calls and about 35 in some, chosen
   well: no call note and no out-of-window renewal was ever attached to the window question. When the answer has more
   entries than that, the list cannot be complete.
 - **The model can also list fewer than it was given.** In one run about 19 were attached and the reply named 9; in the
