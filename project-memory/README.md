@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Product Managers Project Memory That Spans Every Cycle*](https://www.memorylake.ai/en/usecase/project-memory-for-product-managers),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli).
 
-**Watch it run:** videos are being recorded — links follow.
+**Watch it run:** [CLI, 3:58](https://github.com/memorylake-ai/memorylake-usecases/releases/download/project-memory-v1/project-memory-cli-demo.mp4) · [Web, 6:16](https://github.com/memorylake-ai/memorylake-usecases/releases/download/project-memory-v1/project-memory-web-demo.mp4) — real, unedited runs on a free account
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/project-memory-v1); GitHub serves them as downloads).
 
 **The problem.** The page promises that *"when a new ask contradicts an old decision, MemoryLake surfaces the conflict
 instead of silently overwriting"*, and that a new stakeholder can ask *"why did we drop feature X?"* and get an answer from
@@ -94,6 +95,10 @@ Paste the key, connect, run. The page drives the same functions as `demo.py` and
 terminal drawer as it runs: the decision log, the channel arriving one message at a time, what the project remembers
 (rewritten decisions flagged), the quick read, every fact traced to its author, and the write-back. **Ask the roadmap** takes
 any question that names a roadmap item and shows both readings with every fact about it traced.
+
+![What the project remembers: three pinned decisions rewritten in place by channel messages](web/screenshot-memory.png)
+
+![Who said it: each fact traced to its source message and speaker, checked against the decision rights](web/screenshot-provenance.png)
 
 ## What happens, step by step
 
@@ -224,15 +229,16 @@ pre-write-back hits for a while.
 
 ## Measured
 
-Over 7 runs from scratch on 2026-10-15 (6 of them in parallel under different prefixes), plus 2 resumes and a run from the
-web page: the quick read got offline mode and dark mode wrong and the tablet and SSO right in **every** run (2/4 each time, the
-claim the #1 hit); the read by who may decide was right **4/4** in every run, with no ambiguous attributions; after the
-write-back the quick read was **4/4** every run. **Which** decisions the channel rewrites in place varies: D-4 (by the eng
-lead) 7/7, D-1 (by the VP of Sales) 5/7, D-2 (by the support lead) 5/7. Where a decision is not rewritten, the claim arrives as a
-new fact of its own instead — same effect on the quick read, same trace back to its speaker. In an earlier probe where four
-messages were appended in one go (one batch), no pinned decision was rewritten in 3 runs, and each extracted fact traced to
-the whole batch — both speakers — so it could not be attributed. The contradiction detector raised a conflict on the
-channel's claims in 1 of the 7 runs; nothing here relies on it.
+Over 11 runs from scratch on 2026-10-15 (6 of them in parallel under different prefixes, the two recordings, and three from
+the web page), plus 2 resumes: the quick read got offline mode and dark mode wrong and the tablet and SSO right in **every**
+run (2/4 each time, the claim the #1 hit); the read by who may decide was right **4/4** in every run, with no ambiguous
+attributions; after the write-back the quick read was **4/4** every run. **Which** decisions the channel rewrites in place
+varies: D-4 (by the eng lead) 10/11, D-2 (by the support lead) 9/11, D-1 (by the VP of Sales) 6/11. Where a decision is not
+rewritten, the claim arrives as a new fact of its own instead — same effect on the quick read, same trace back to its speaker
+(the CLI recording is such a run for offline mode). In an earlier probe where four messages were appended in one go (one
+batch), no pinned decision was rewritten in 3 runs, and each extracted fact traced to the whole batch — both speakers — so it
+could not be attributed. The contradiction detector raised a conflict on the channel's claims in 1 of the first 7 runs;
+nothing here relies on it.
 
 ## Wiring it into your own tools
 
