@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Customer Success Teams AI That Already Knows Each Client*](https://www.memorylake.ai/en/usecase/ai-memory-for-client-onboarding-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 6:24](https://github.com/memorylake-ai/memorylake-usecases/releases/download/client-background-memory-v1/client-background-memory-cli-demo.mp4) · [Web, 6:36](https://github.com/memorylake-ai/memorylake-usecases/releases/download/client-background-memory-v1/client-background-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/client-background-memory-v1); GitHub serves them as downloads).
 
 **The problem.** An onboarding assistant needs two kinds of memory: the team's shared playbook (how we normally
 do SSO, regions, imports, training) and each client's background (the few things where *this* client is
@@ -20,16 +21,16 @@ Couriers must be in us-west-2 and sends shipments through the API as JSON; Lakem
 on Saturdays. The assistant answers through MemoryRouter (`router chat`, `gpt-4o-mini`, temperature 0) with
 three wirings:
 
-| Wiring | How | What happens on the 8 client exceptions (7 runs) |
+| Wiring | How | What happens on the 8 client exceptions (9 runs) |
 |---|---|---|
-| **Week 1 · one boundary** | `boundary create --projects <playbook> --human-actor <client>`, playbook of 12 notes | **46 / 56**. *"What file format should Copperline Couriers send?"* → *"CSV file, UTF-8 encoded required"*, **0 of 7 runs** right |
-| **Month 12 · one boundary** | the same, playbook of 293 notes (steps + a record of every client who followed them) | **42 / 56**. Copperline's import 0 / 7 again; Lakemont told to book *"Tuesday at 10:00 AM"* |
-| **Month 12 · background first** | the client's facts (`fact list --actors`, all of them) in the system prompt; the boundary covers the playbook only | **56 / 56**. The 4 standard-path questions are the control: 26 / 28 |
+| **Week 1 · one boundary** | `boundary create --projects <playbook> --human-actor <client>`, playbook of 12 notes | **60 / 72**. *"What file format should Copperline Couriers send?"* → *"CSV file, UTF-8 encoded required"*, **0 of 9 runs** right |
+| **Month 12 · one boundary** | the same, playbook of 293 notes (steps + a record of every client who followed them) | **53 / 72**. Copperline's import 0 / 9 again; Lakemont told to book *"Tuesday at 10:00 AM"* |
+| **Month 12 · background first** | the client's facts (`fact list --actors`, all of them) in the system prompt; the boundary covers the playbook only | **71 / 72**. The 4 standard-path questions are the control: 34 / 36 |
 
 A checker (Claude copying out what MemoryRouter attached) shows why: for Copperline's import question the
 attached lines are the playbook's *"Shipment import: … CSV …"* notes and not the client's *"sends shipments
-through the Tallyfield REST API as JSON"*, at 12 notes as at 293. Playbook size was not the driver; the wording
-was. This is what the use-case page means by *client identity loaded before the first message*: a client's
+through the Tallyfield REST API as JSON"* (13 of the 14 checks we kept logs for, at 12 notes as at 293). The
+bigger playbook made things somewhat worse, but the wording decided which exceptions were lost. This is what the use-case page means by *client identity loaded before the first message*: a client's
 background is a handful of facts, so read all of it and put it in front; let the retrieval layer handle the
 part that is too big to read whole.
 
@@ -147,7 +148,7 @@ entry before answering (the user message is unchanged, so retrieval sees the sam
   · the client's own line attached: week1 6/8 · month12 7/8; playbook lines per question: week1 1.5 · month12 2.0
 ```
 
-Two ways the exception gets lost. Copperline's import line is never attached: the question shares the playbook's
+Two ways the exception gets lost. Copperline's import line is (almost) never attached: the question shares the playbook's
 words (*file format, shipment import*), not the client's (*REST API, JSON*). Lakemont's training line *was*
 attached in this run and the answer was still *Tuesday at 10:00*: in a boundary the client's line and the
 playbook's are peers, and nothing tells the model which one overrides. The checker is its own call, so what it
@@ -216,20 +217,22 @@ $ python3 demo.py ask copperline "How should they send us their shipments?"
 ## Measured
 
 Every fresh run with the final questions and grading while building this demo (1 in the terminal before this one,
-3 parallel copies, 1 browser check, the run above, the 2 recordings pending): 7 runs.
+3 parallel copies, 1 browser check, the run above, the 2 recordings): 9 runs.
 
 | | Week 1 · one boundary | Month 12 · one boundary | Month 12 · background first |
 |---|---|---|---|
-| client exceptions honoured | **46 / 56** | **42 / 56** | **56 / 56** |
-| answered with the standard path instead | 10 | 14 | 0 |
-| standard-path questions right (control) | 28 / 28 | 22 / 28 | 26 / 28 |
-| checker: the client's line attached | 45 / 56 | 43 / 56 | all of it, in the system prompt |
-| Copperline's import question | 0 / 7 | 0 / 7 | 7 / 7 |
+| client exceptions honoured | **60 / 72** | **53 / 72** | **71 / 72** |
+| answered with the standard path instead | 12 | 19 | 0 |
+| standard-path questions right (control) | 36 / 36 | 28 / 36 | 34 / 36 |
+| checker: the client's line attached | 59 / 72 | 57 / 72 | all of it, in the system prompt |
+| Copperline's import question | 0 / 9 | 0 / 9 | 8 / 9 |
 
-- Playbook size barely moved anything: week 1 and month 12 attach the client's line about as often. The misses sit
-  on particular questions, run after run: Copperline's import line was attached in neither mixed boundary in any run whose checker log we kept (6 of 7; the browser check's report was removed by its cleanup).
-- The control misses for background first are Copperline's sign-in question: one answer was *"Use their corporate
-  identity provider"*, apparently reading the parent company in Copperline's region fact as a hint about
+- Playbook size moved things only a little (exceptions 60 vs 53 of 72; the client's line attached about as often).
+  The misses sit on particular questions, run after run: Copperline's import line was attached in 1 of the 14
+  mixed-boundary checks we kept logs for (7 of 9 runs; the reports of the first browser check and the CLI recording were removed with their cleanup), and in that one run the answer was still CSV.
+- Background first missed once on an exception: Copperline's import answered *"No file export"*, which is true but
+  not the answer (JSON through the API); the grader counts it wrong. Its control misses are Copperline's sign-in
+  question: one answer was *"Use their corporate identity provider"*, apparently reading the parent company in Copperline's region fact as a hint about
   sign-in. Putting background in front is not free; check the standard-path questions too.
 - Earlier versions of the questions (*"How do we set up sign-in …"*, *"When should we run the training …"*) drew
   process answers (*"book two weeks ahead"*); the questions were sharpened to ask for the thing itself, and those
