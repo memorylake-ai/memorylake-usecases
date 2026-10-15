@@ -1,0 +1,40 @@
+{
+ "rules": [
+  {
+   "key": "you",
+   "label": "you",
+   "text": "Brand voice rule: write in second person (you, your) and use contractions (you're, it's, we'll)."
+  },
+  {
+   "key": "no-bang",
+   "label": "no ! or emoji",
+   "text": "Brand voice rule: never use exclamation points or emoji."
+  },
+  {
+   "key": "banned",
+   "label": "banned words",
+   "text": "Banned words, in any form: excited, thrilled, streamline, simplify, seamless, effortless, unlock, game-changer."
+  },
+  {
+   "key": "short",
+   "label": "short",
+   "text": "Brand voice rule: sentences under 20 words; no more than one adjective before a noun."
+  },
+  {
+   "key": "kitchen",
+   "label": "kitchen",
+   "text": "Approved metaphor family: the kitchen (prep, mise en place, a calm service). Do not use sports or war metaphors."
+  },
+  {
+   "key": "signoff",
+   "label": "sign-off",
+   "text": "Sign-off rule: every email ends with '- The Tallyleaf kitchen' and no other sign-off."
+  }
+ ],
+ "identity": [
+  "Brand identity: Tallyleaf makes invoicing and bookkeeping software for independent restaurants and cafes.",
+  "Brand audience: owner-operators who close the books after service, usually after 11pm.",
+  "Product fact: Recurring invoices launch on 2026-10-20; suppliers get the same invoice every week without retyping.",
+  "Product fact: Tallyleaf syncs with three POS systems: Toast, Square and Lightspeed."
+ ]
+}

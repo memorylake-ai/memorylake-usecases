@@ -1,0 +1,23 @@
+[
+ {
+  "key": "linkedin",
+  "label": "LinkedIn post",
+  "prompt": "Write a 3-sentence LinkedIn post announcing Tallyleaf's recurring invoices feature."
+ },
+ {
+  "key": "email",
+  "label": "Launch email",
+  "prompt": "Write a short launch email to Tallyleaf customers about supplier price alerts.",
+  "email": true
+ },
+ {
+  "key": "tweet",
+  "label": "Tweet",
+  "prompt": "Write a tweet about Tallyleaf's receipt photo capture."
+ },
+ {
+  "key": "ad",
+  "label": "Ad",
+  "prompt": "Write a two-sentence ad for Tallyleaf's multi-location bookkeeping."
+ }
+]
