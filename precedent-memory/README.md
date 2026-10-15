@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Legal Teams Case Memory That Holds Every Precedent and Position*](https://www.memorylake.ai/en/usecase/case-memory-for-legal-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 5:09](https://github.com/memorylake-ai/memorylake-usecases/releases/download/precedent-memory-v1/precedent-memory-cli-demo.mp4) · [Web, 5:40](https://github.com/memorylake-ai/memorylake-usecases/releases/download/precedent-memory-v1/precedent-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/precedent-memory-v1); GitHub serves them as downloads).
 
 **The problem.** A firm keeps a memo for every precedent it relies on. When a case is later reversed, someone adds
 an addendum to the memo: *"Reversed on appeal … Section 1 above is no longer good law."* The memo is complete. But
@@ -16,24 +17,24 @@ page 4 never names the case or the question's words. Nothing in the reply says w
 **What this demo shows.** Lind & Okafor (a fictional Oregon employment firm) has 16 precedent memos (PDF) in a
 MemoryLake project and a research assistant on MemoryRouter (`router chat --boundary`, `gpt-4o-mini`, temperature 0).
 The memo for *Tarrow Freight v. Delling* states the trial court's holding on page 1 and, on page 4, the 2025 appellate
-reversal. Three associate questions, each asked 4 times, over 12 runs:
+reversal. Three associate questions, each asked 4 times, over 14 runs:
 
 | | Answers that cite Tarrow's reversed trial ruling as good law |
 |---|---|
-| Boundary over the memos (`router chat --boundary`) | **38 / 144** (58 named the reversal, 48 did not use Tarrow) |
-| Boundary over the memos **and a citator** (one status note per case, naming the case) | **27 / 144** (59 named the reversal, 58 did not use Tarrow) |
-| Control, no boundary: **holding page only** handed over | **30 / 30** |
-| Control: **holding page, then the addendum** | **0 / 30** |
-| Control: **the addendum, three other memos, then the holding page** | **12 / 12** |
-| Citator check after the model (`fact list --query "<case>"` for every case an answer names) | holds back **every** ✗ above (65 / 65) |
+| Boundary over the memos (`router chat --boundary`) | **43 / 168** (67 named the reversal, 58 did not use Tarrow) |
+| Boundary over the memos **and a citator** (one status note per case, naming the case) | **30 / 168** (74 named the reversal, 64 did not use Tarrow) |
+| Control, no boundary: **holding page only** handed over | **42 / 42** |
+| Control: **holding page, then the addendum** | **0 / 42** |
+| Control: **the addendum, three other memos, then the holding page** | **24 / 24** |
+| Citator check after the model (`fact list --query "<case>"` for every case an answer names) | holds back **every** ✗ above (73 / 73) |
 
-What the checker saw — a separate call in which Claude copies out what MemoryRouter attached (8 runs, 47 readings
-through the memos-only boundary): the holding page 38 times, the addendum 34, the **holding page without the
-addendum 8**. Through the boundary with the citator, the Tarrow citator note was attached in 24 of 48 readings.
+What the checker saw — a separate call in which Claude copies out what MemoryRouter attached (10 runs, 57 readings
+through the memos-only boundary): the holding page 47 times, the addendum 42, the **holding page without the
+addendum 9**. Through the boundary with the citator, the Tarrow citator note was attached in 30 of 60 readings.
 
-So: the holding page alone is enough to produce the error (30/30), the addendum next to it fixes it (0/30), and an
-addendum that lands before the holding page, with other memos in between, did not (12/12). Putting the correction
-into memory a second time, as a citator note, helped a little (38 → 27 of 144) — whether that note is attached is
+So: the holding page alone is enough to produce the error (42/42), the addendum next to it fixes it (0/42), and an
+addendum that lands before the holding page, with other memos in between, did not (24/24). Putting the correction
+into memory a second time, as a citator note, helped a little (43 → 30 of 168) — whether that note is attached is
 again MemoryRouter's call. What did not depend on what was attached is a check **after** the model: every case an
 answer names is looked up in the citator with `fact list --query` (an exact substring match, not a ranking), and an
 answer that leans on a reversed case without saying so is held back.
@@ -158,7 +159,7 @@ sentence as *Tarrow*); ✓ when it does; · when it does not use *Tarrow*. The r
     memos + citator: 0/12 answers cite Tarrow as good law, 5 say it was reversed, 7 do not use it  ·  checker: holding page attached 3/6, addendum 3/6 (before the holding page 0), citator note 4/6
 ```
 
-This run came out 0/12; over all 12 runs it was 27/144 (against 38/144 without the citator). The note names the
+This run came out 0/12; over all 14 runs it was 30/168 (against 43/168 without the citator). The note names the
 case, so it matches the same questions the holding page does — and it is attached when MemoryRouter picks it.
 
 ### Step 7: control — hand the model the pages yourself
@@ -209,16 +210,16 @@ $ memorylake fact list --page-size 200 --projects proj-… --query 'Tarrow Freig
 
 ## Measured
 
-12 runs (4 in this directory, one of them through the web companion; 8 parallel copies with their own prefix),
-144 answers per boundary. Step 7 was added during these runs; the control totals come from the runs that had it.
+14 runs (6 in this directory — two of them the recorded videos, one more through the web companion; 8 parallel
+copies with their own prefix), 168 answers per boundary. Step 7 was added during these runs; the control totals come from the runs that had it.
 
-- **Memos only**: 38 ✗ · 58 ✓ · 48 ·. Per run: 3, 3, 3, 3, 6, 1, 3, 5, 4, 3, 3, 1 of 12.
-- **Memos + citator**: 27 ✗ · 59 ✓ · 58 ·. Per run: 3, 1, 1, 2, 3, 3, 4, 2, 1, 4, 0, 3 of 12.
-- **Checker** (8 runs with the final reader; the first runs used a parser that could not see page 4, whose heading
-  the index moves to the end of the page, and are left out): memos only — holding page 38/47, addendum 34/47,
-  holding without addendum 8/47; memos + citator — citator note 24/48.
-- **Control**: holding page only 30/30 ✗; holding then addendum 0/30 ✗; addendum, three memos, holding 12/12 ✗.
-- The citator check held back every ✗ (65/65) and nothing else.
+- **Memos only**: 43 ✗ · 67 ✓ · 58 ·. Per run: 3, 3, 3, 3, 6, 1, 3, 5, 4, 3, 3, 1, 2, 3 of 12.
+- **Memos + citator**: 30 ✗ · 74 ✓ · 64 ·. Per run: 3, 1, 1, 2, 3, 3, 4, 2, 1, 4, 0, 3, 1, 2 of 12.
+- **Checker** (10 runs with the final reader; the first runs used a parser that could not see page 4, whose heading
+  the index moves to the end of the page, and are left out): memos only — holding page 47/57, addendum 42/57,
+  holding without addendum 9/57; memos + citator — citator note 30/60.
+- **Control**: holding page only 42/42 ✗; holding then addendum 0/42 ✗; addendum, three memos, holding 24/24 ✗.
+- The citator check held back every ✗ (73/73) and nothing else.
 - Each run: 54 MemoryRouter calls, about 31,000 prompt + 11,000 reply tokens, 3½–6 minutes (indexing the 16 PDFs
   took 79–209 s).
 
