@@ -202,8 +202,24 @@ is a hint, not proof. What every line shows without a checker: the number in the
 
 ### The read-only subcommand
 
-`python3 demo.py sheet Bristol` prints Bristol's table from both projects as `search` returns it — 6 rows with no
-warehouse in them, and the same 6 rows starting `Site: Bristol`. Two searches, no model call.
+```
+$ python3 demo.py sheet Bristol
+$ memorylake search 'Bristol stock on hand' --projects proj-… --types document --top-k 8 --workspace ws-…
+$ memorylake search 'Bristol stock on hand' --projects proj-… --types document --top-k 8 --workspace ws-…
+
+  Bristol — as kept: the table item with sheet_name “Bristol”, its rows as MemoryRouter attaches them
+    SKU: HX-1040, Item: Hex bolt M10x40, On hand: 360, Reorder point: 400
+    SKU: WS-0820, Item: Washer 8mm, On hand: 950, Reorder point: 1000
+    SKU: BR-6204, Item: Ball bearing 6204, On hand: 1430, Reorder point: 150
+    …
+
+  Bristol — with the Site column:
+    Site: Bristol, SKU: HX-1040, Item: Hex bolt M10x40, On hand: 360, Reorder point: 400
+    Site: Bristol, SKU: WS-0820, Item: Washer 8mm, On hand: 950, Reorder point: 1000
+    Site: Bristol, SKU: BR-6204, Item: Ball bearing 6204, On hand: 1430, Reorder point: 150
+    …
+  · the label MemoryRouter puts in front of these rows is one sheet name for the whole file (step 5); only the second version still says which warehouse once the label is wrong
+```
 
 ## Measured
 

@@ -739,14 +739,14 @@ def show_sheet(cli: CLI, name: str) -> dict:
     q = f"{s['site']} stock on hand"
     tabs = [t for t in index_tables(cli, world["tabs"], q, echo=True) if t["sheet"] == s["site"]]
     sited = [t for t in index_tables(cli, world["sited"], q, echo=True) if t["sheet"] == s["site"]]
-    emit("text", f"\n  {s['site']} — as kept (sheet_name “{s['site']}”), what MemoryRouter would attach:")
-    if tabs:
-        emit("text", f"    - ({tabs[0]['file']} / {tabs[0]['sheet']}) " + "\n    ".join(tabs[0]["rows"]))
-    else:
-        emit("text", "    (search did not return this sheet's table for this query)")
+    emit("text", f"\n  {s['site']} — as kept: the table item with sheet_name “{s['site']}”, its rows as MemoryRouter attaches them")
+    emit("text", "\n".join("    " + r for r in tabs[0]["rows"]) if tabs
+         else "    (search did not return this sheet's table for this query)")
     emit("text", f"\n  {s['site']} — with the Site column:")
-    emit("text", ("    - ({0} / {1}) ".format(sited[0]["file"], sited[0]["sheet"]) + "\n    ".join(sited[0]["rows"]))
-         if sited else "    (search did not return this sheet's table for this query)")
+    emit("text", "\n".join("    " + r for r in sited[0]["rows"]) if sited
+         else "    (search did not return this sheet's table for this query)")
+    note("the label MemoryRouter puts in front of these rows is one sheet name for the whole file (step 5); "
+         "only the second version still says which warehouse once the label is wrong")
     out = dict(site=s["site"], tabs=tabs[0]["rows"] if tabs else [], sited=sited[0]["rows"] if sited else [])
     emit("sheet", "", **out)
     return out
