@@ -1,0 +1,258 @@
+{
+  "bank": "Halden Mutual",
+  "today": "2026-10-15",
+  "project": {
+    "key": "casebook",
+    "name": "Halden Mutual — Q3 transaction-monitoring casebook",
+    "description": "Every record behind Q3 alert decisions, word for word: policy, risk ratings, screening items, resolutions, alert closures. Each record carries the day it happened (event_on) and the day it entered the casebook (logged_on)."
+  },
+  "auditor": {
+    "name": "Mara Quist",
+    "role": "internal audit"
+  },
+  "people": {
+    "Ines Varga": "MLRO",
+    "Rhea Ilves": "AML analyst",
+    "Tomas Brandt": "AML analyst",
+    "Sam Orrin": "screening desk",
+    "Lena Hart": "branch manager, Harbour Street",
+    "Jon Pell": "onboarding"
+  },
+  "customers": {
+    "orion": "Orion Freight Ltd",
+    "lusk": "Lusk Marine Supply",
+    "brightwater": "Brightwater Imports",
+    "calder": "Calder Textiles"
+  },
+  "rules": {
+    "TM-4 §3": "a high-risk customer's alert needs a second reviewer before it is closed",
+    "TM-4 §5": "no alert may be closed while an unresolved adverse-media or sanctions item is on the customer's file"
+  },
+  "late_days": 2,
+  "records": [
+    {
+      "id": "POL-3",
+      "kind": "policy",
+      "rule": "TM-4 §3",
+      "customer": "",
+      "event_on": "2026-07-01",
+      "logged_on": "2026-07-01",
+      "by": "Ines Varga",
+      "text": "Policy TM-4 §3 (in force 2026-07-01): an alert on a customer rated high risk needs a second reviewer's sign-off before it is closed. Alerts on low and medium risk customers may be closed by one analyst."
+    },
+    {
+      "id": "POL-5",
+      "kind": "policy",
+      "rule": "TM-4 §5",
+      "customer": "",
+      "event_on": "2026-07-01",
+      "logged_on": "2026-07-01",
+      "by": "Ines Varga",
+      "text": "Policy TM-4 §5 (in force 2026-07-01): no alert may be closed while an unresolved adverse-media or sanctions item is on the customer's file. Escalate it to the MLRO instead."
+    },
+    {
+      "id": "ORN-R0",
+      "kind": "rating",
+      "customer": "orion",
+      "rating": "low",
+      "event_on": "2025-11-03",
+      "logged_on": "2025-11-03",
+      "by": "Jon Pell",
+      "text": "Onboarding, 2025-11-03: Orion Freight Ltd rated low risk. Regional haulier, 40 staff, payroll and fuel payments only."
+    },
+    {
+      "id": "ORN-R1",
+      "kind": "rating",
+      "customer": "orion",
+      "rating": "high",
+      "event_on": "2026-08-20",
+      "logged_on": "2026-09-15",
+      "by": "Lena Hart",
+      "text": "Harbour Street branch rating review, 2026-08-20 (paper form): Orion Freight Ltd raised to high risk after six cash deposits of 9,500 dollars in two weeks."
+    },
+    {
+      "id": "ORN-R2",
+      "kind": "rating",
+      "customer": "orion",
+      "rating": "medium",
+      "event_on": "2026-09-01",
+      "logged_on": "2026-09-02",
+      "by": "Ines Varga",
+      "text": "Rating review, 2026-09-01: Orion Freight Ltd set to medium risk. The August cash deposits are the weekly payroll float for the Tessel depot; bank statements and payroll register are on file."
+    },
+    {
+      "id": "ORN-AM1",
+      "kind": "adverse",
+      "customer": "orion",
+      "event_on": "2026-09-10",
+      "logged_on": "2026-10-06",
+      "by": "Sam Orrin",
+      "text": "Adverse media, article dated 2026-09-10: Orion Freight director K. Varo is named in a customs fraud inquiry at the port of Tessel. Unresolved."
+    },
+    {
+      "id": "ORN-R3",
+      "kind": "rating",
+      "customer": "orion",
+      "rating": "high",
+      "event_on": "2026-09-10",
+      "logged_on": "2026-10-08",
+      "by": "Lena Hart",
+      "text": "Harbour Street branch rating review, 2026-09-10 (paper form): Orion Freight Ltd raised to high risk after the local press named a director in a customs fraud inquiry."
+    },
+    {
+      "id": "A-1042",
+      "kind": "alert",
+      "customer": "orion",
+      "signoff": "single",
+      "event_on": "2026-09-18",
+      "logged_on": "2026-09-18",
+      "by": "Rhea Ilves",
+      "text": "Alert A-1042 (Orion Freight Ltd, outgoing wire of 48,200 dollars) closed by Rhea Ilves on 2026-09-18 as consistent with the payroll pattern. Single sign-off."
+    },
+    {
+      "id": "ORN-SAR",
+      "kind": "note",
+      "customer": "orion",
+      "event_on": "2026-09-30",
+      "logged_on": "2026-09-30",
+      "by": "Ines Varga",
+      "text": "SAR filed for Orion Freight Ltd on 2026-09-30, citing the customs fraud inquiry naming director K. Varo."
+    },
+    {
+      "id": "ORN-AM1-X",
+      "kind": "resolution",
+      "customer": "orion",
+      "resolves": "ORN-AM1",
+      "event_on": "2026-10-02",
+      "logged_on": "2026-10-02",
+      "by": "Ines Varga",
+      "text": "Adverse media item on K. Varo (Orion Freight Ltd) closed on 2026-10-02: Varo resigned as director on 2026-09-26; enhanced due diligence complete."
+    },
+    {
+      "id": "ORN-R4",
+      "kind": "rating",
+      "customer": "orion",
+      "rating": "medium",
+      "event_on": "2026-10-02",
+      "logged_on": "2026-10-02",
+      "by": "Ines Varga",
+      "text": "Rating review, 2026-10-02: Orion Freight Ltd set to medium risk after enhanced due diligence; the director named in the inquiry has resigned and the SAR is filed."
+    },
+    {
+      "id": "LSK-R0",
+      "kind": "rating",
+      "customer": "lusk",
+      "rating": "low",
+      "event_on": "2025-06-12",
+      "logged_on": "2025-06-12",
+      "by": "Jon Pell",
+      "text": "Onboarding, 2025-06-12: Lusk Marine Supply rated low risk. Ship chandler, fuel and provisions."
+    },
+    {
+      "id": "LSK-AM1",
+      "kind": "adverse",
+      "customer": "lusk",
+      "event_on": "2026-09-08",
+      "logged_on": "2026-09-09",
+      "by": "Sam Orrin",
+      "text": "Adverse media, article dated 2026-09-08: a port-fuel smuggling report names Lusk Marine. Unresolved."
+    },
+    {
+      "id": "LSK-AM1-X",
+      "kind": "resolution",
+      "customer": "lusk",
+      "resolves": "LSK-AM1",
+      "event_on": "2026-09-15",
+      "logged_on": "2026-10-01",
+      "by": "Sam Orrin",
+      "text": "Adverse media item on Lusk Marine closed: checked on 2026-09-15, the smuggling report concerns Lusk Marine Services, a different company (registration numbers differ)."
+    },
+    {
+      "id": "A-1059",
+      "kind": "alert",
+      "customer": "lusk",
+      "signoff": "single",
+      "event_on": "2026-09-24",
+      "logged_on": "2026-09-24",
+      "by": "Rhea Ilves",
+      "text": "Alert A-1059 (Lusk Marine Supply, incoming wire of 61,300 dollars) closed by Rhea Ilves on 2026-09-24 as a regular fuel supplier payment. Single sign-off."
+    },
+    {
+      "id": "BRW-R0",
+      "kind": "rating",
+      "customer": "brightwater",
+      "rating": "medium",
+      "event_on": "2026-03-12",
+      "logged_on": "2026-03-12",
+      "by": "Jon Pell",
+      "text": "Onboarding, 2026-03-12: Brightwater Imports rated medium risk. Importer of household goods, suppliers in three countries."
+    },
+    {
+      "id": "BRW-S1",
+      "kind": "sanctions",
+      "customer": "brightwater",
+      "event_on": "2026-09-21",
+      "logged_on": "2026-09-22",
+      "by": "Sam Orrin",
+      "text": "Sanctions screening, 2026-09-21: Brightwater Imports' new beneficial owner is a partial match to a sanctions-list entry. Unresolved."
+    },
+    {
+      "id": "A-1063",
+      "kind": "alert",
+      "customer": "brightwater",
+      "signoff": "single",
+      "event_on": "2026-09-29",
+      "logged_on": "2026-09-29",
+      "by": "Tomas Brandt",
+      "text": "Alert A-1063 (Brightwater Imports, incoming wire of 112,000 dollars) closed by Tomas Brandt on 2026-09-29 as a known supplier refund. Single sign-off."
+    },
+    {
+      "id": "BRW-S1-X",
+      "kind": "resolution",
+      "customer": "brightwater",
+      "resolves": "BRW-S1",
+      "event_on": "2026-10-05",
+      "logged_on": "2026-10-05",
+      "by": "Sam Orrin",
+      "text": "Sanctions match on Brightwater Imports' beneficial owner resolved on 2026-10-05 as a false positive: date of birth and nationality differ."
+    },
+    {
+      "id": "CAL-R0",
+      "kind": "rating",
+      "customer": "calder",
+      "rating": "low",
+      "event_on": "2026-01-20",
+      "logged_on": "2026-01-20",
+      "by": "Jon Pell",
+      "text": "Onboarding, 2026-01-20: Calder Textiles rated low risk. Mill supplying three domestic retailers."
+    },
+    {
+      "id": "A-1050",
+      "kind": "alert",
+      "customer": "calder",
+      "signoff": "single",
+      "event_on": "2026-09-16",
+      "logged_on": "2026-09-16",
+      "by": "Tomas Brandt",
+      "text": "Alert A-1050 (Calder Textiles, outgoing wire of 23,750 dollars) closed by Tomas Brandt on 2026-09-16 as a seasonal cotton purchase. Single sign-off."
+    }
+  ],
+  "ask_examples": [
+    {
+      "q": "Was anything known about Orion Freight's director?",
+      "day": "2026-09-18"
+    },
+    {
+      "q": "What was Orion Freight's risk rating?",
+      "day": "2026-09-18"
+    },
+    {
+      "q": "Was the Lusk Marine smuggling report resolved?",
+      "day": "2026-09-24"
+    },
+    {
+      "q": "Was the Brightwater sanctions match open?",
+      "day": "2026-09-29"
+    }
+  ]
+}
