@@ -1,0 +1,1038 @@
+{
+ "company": "Tidewater Software (fictional)",
+ "today": "2026-10-19",
+ "window": [
+  "2026-10-19",
+  "2026-12-31"
+ ],
+ "managers": [
+  "Priya Nair",
+  "Tomas Reyes",
+  "Hana Okafor",
+  "Lev Brandt"
+ ],
+ "accounts": [
+  {
+   "account": "Fjord Works",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-09-29",
+   "arr": 141000
+  },
+  {
+   "account": "Onyx Bank",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-09-24",
+   "arr": 96000
+  },
+  {
+   "account": "Delta Bank",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-01-30",
+   "arr": 122000
+  },
+  {
+   "account": "Garnet Labs",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-02-19",
+   "arr": 28000
+  },
+  {
+   "account": "Tamar Bank",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-10-29",
+   "arr": 40000
+  },
+  {
+   "account": "Glade Robotics",
+   "manager": "Priya Nair",
+   "renews_on": "2027-10-07",
+   "arr": 171000
+  },
+  {
+   "account": "Quarry Health",
+   "manager": "Hana Okafor",
+   "renews_on": "2026-12-10",
+   "arr": 106000
+  },
+  {
+   "account": "Iris Foods",
+   "manager": "Priya Nair",
+   "renews_on": "2027-11-05",
+   "arr": 141000
+  },
+  {
+   "account": "Glade Systems",
+   "manager": "Hana Okafor",
+   "renews_on": "2026-12-01",
+   "arr": 162000
+  },
+  {
+   "account": "Cedar Systems",
+   "manager": "Priya Nair",
+   "renews_on": "2026-11-13",
+   "arr": 168000
+  },
+  {
+   "account": "Tamar Studio",
+   "manager": "Priya Nair",
+   "renews_on": "2027-01-21",
+   "arr": 110000
+  },
+  {
+   "account": "Coral Studio",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-10-25",
+   "arr": 144000
+  },
+  {
+   "account": "Willow Labs",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-05-28",
+   "arr": 61000
+  },
+  {
+   "account": "Cedar Mobility",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-05-09",
+   "arr": 123000
+  },
+  {
+   "account": "Kestrel Media",
+   "manager": "Lev Brandt",
+   "renews_on": "2026-12-09",
+   "arr": 180000
+  },
+  {
+   "account": "Willow Insurance",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-10-25",
+   "arr": 37000
+  },
+  {
+   "account": "Dune Clinic",
+   "manager": "Priya Nair",
+   "renews_on": "2027-03-24",
+   "arr": 124000
+  },
+  {
+   "account": "Glade Legal",
+   "manager": "Hana Okafor",
+   "renews_on": "2026-11-25",
+   "arr": 179000
+  },
+  {
+   "account": "Umber Media",
+   "manager": "Priya Nair",
+   "renews_on": "2026-12-13",
+   "arr": 119000
+  },
+  {
+   "account": "Yarrow Foods",
+   "manager": "Lev Brandt",
+   "renews_on": "2026-11-15",
+   "arr": 35000
+  },
+  {
+   "account": "Cedar Insurance",
+   "manager": "Priya Nair",
+   "renews_on": "2027-08-11",
+   "arr": 136000
+  },
+  {
+   "account": "Basalt Retail",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-08-07",
+   "arr": 54000
+  },
+  {
+   "account": "Alder Energy",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-06-25",
+   "arr": 180000
+  },
+  {
+   "account": "Delta Analytics",
+   "manager": "Priya Nair",
+   "renews_on": "2026-11-07",
+   "arr": 29000
+  },
+  {
+   "account": "Flint Brewing",
+   "manager": "Priya Nair",
+   "renews_on": "2027-04-25",
+   "arr": 174000
+  },
+  {
+   "account": "Vale Health",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-11-01",
+   "arr": 60000
+  },
+  {
+   "account": "Kestrel Systems",
+   "manager": "Priya Nair",
+   "renews_on": "2027-03-02",
+   "arr": 113000
+  },
+  {
+   "account": "Garnet Health",
+   "manager": "Priya Nair",
+   "renews_on": "2027-06-29",
+   "arr": 81000
+  },
+  {
+   "account": "Juniper Mobility",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-02-10",
+   "arr": 148000
+  },
+  {
+   "account": "Glade Studio",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-08-28",
+   "arr": 120000
+  },
+  {
+   "account": "Juniper Studio",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-01-24",
+   "arr": 140000
+  },
+  {
+   "account": "Glade Mobility",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-03-25",
+   "arr": 150000
+  },
+  {
+   "account": "Kestrel Studio",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-04-15",
+   "arr": 143000
+  },
+  {
+   "account": "Glade Retail",
+   "manager": "Tomas Reyes",
+   "renews_on": "2026-11-24",
+   "arr": 68000
+  },
+  {
+   "account": "Harbor Works",
+   "manager": "Tomas Reyes",
+   "renews_on": "2026-12-30",
+   "arr": 112000
+  },
+  {
+   "account": "Garnet Works",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-10-18",
+   "arr": 71000
+  },
+  {
+   "account": "Rowan Analytics",
+   "manager": "Tomas Reyes",
+   "renews_on": "2026-11-23",
+   "arr": 62000
+  },
+  {
+   "account": "Pike Brewing",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-07-04",
+   "arr": 127000
+  },
+  {
+   "account": "Marlow Labs",
+   "manager": "Hana Okafor",
+   "renews_on": "2026-12-11",
+   "arr": 173000
+  },
+  {
+   "account": "Garnet Clinic",
+   "manager": "Priya Nair",
+   "renews_on": "2027-03-26",
+   "arr": 81000
+  },
+  {
+   "account": "Willow Dental",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-06-22",
+   "arr": 42000
+  },
+  {
+   "account": "Zephyr Studio",
+   "manager": "Priya Nair",
+   "renews_on": "2027-09-04",
+   "arr": 13000
+  },
+  {
+   "account": "Iris Freight",
+   "manager": "Priya Nair",
+   "renews_on": "2026-11-09",
+   "arr": 50000
+  },
+  {
+   "account": "Alder Labs",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-04-13",
+   "arr": 83000
+  },
+  {
+   "account": "Rowan Clinic",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-02-02",
+   "arr": 76000
+  },
+  {
+   "account": "Cedar Retail",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-09-12",
+   "arr": 17000
+  },
+  {
+   "account": "Alder Brewing",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-04-27",
+   "arr": 37000
+  },
+  {
+   "account": "Rowan Works",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-10-28",
+   "arr": 32000
+  },
+  {
+   "account": "Harbor Robotics",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-04-13",
+   "arr": 152000
+  },
+  {
+   "account": "Nimbus Clinic",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-05-31",
+   "arr": 99000
+  },
+  {
+   "account": "Sable Works",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-10-21",
+   "arr": 71000
+  },
+  {
+   "account": "Marlow Media",
+   "manager": "Priya Nair",
+   "renews_on": "2026-12-28",
+   "arr": 172000
+  },
+  {
+   "account": "Nimbus Analytics",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-05-03",
+   "arr": 110000
+  },
+  {
+   "account": "Garnet Dental",
+   "manager": "Priya Nair",
+   "renews_on": "2026-12-07",
+   "arr": 172000
+  },
+  {
+   "account": "Alder Analytics",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-10-19",
+   "arr": 150000
+  },
+  {
+   "account": "Vale Freight",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-04-06",
+   "arr": 117000
+  },
+  {
+   "account": "Flint Foods",
+   "manager": "Hana Okafor",
+   "renews_on": "2026-11-09",
+   "arr": 136000
+  },
+  {
+   "account": "Delta Freight",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-08-25",
+   "arr": 161000
+  },
+  {
+   "account": "Iris Clinic",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-05-23",
+   "arr": 31000
+  },
+  {
+   "account": "Onyx Analytics",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-07-25",
+   "arr": 42000
+  },
+  {
+   "account": "Harbor Retail",
+   "manager": "Priya Nair",
+   "renews_on": "2027-04-03",
+   "arr": 153000
+  },
+  {
+   "account": "Juniper Works",
+   "manager": "Priya Nair",
+   "renews_on": "2026-11-02",
+   "arr": 77000
+  },
+  {
+   "account": "Fjord Insurance",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-09-28",
+   "arr": 17000
+  },
+  {
+   "account": "Tamar Retail",
+   "manager": "Priya Nair",
+   "renews_on": "2027-09-28",
+   "arr": 113000
+  },
+  {
+   "account": "Coral Freight",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-03-01",
+   "arr": 112000
+  },
+  {
+   "account": "Marlow Freight",
+   "manager": "Hana Okafor",
+   "renews_on": "2026-12-24",
+   "arr": 94000
+  },
+  {
+   "account": "Alder Bank",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-10-07",
+   "arr": 69000
+  },
+  {
+   "account": "Rowan Legal",
+   "manager": "Priya Nair",
+   "renews_on": "2027-05-06",
+   "arr": 174000
+  },
+  {
+   "account": "Sable Media",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-05-05",
+   "arr": 51000
+  },
+  {
+   "account": "Basalt Brewing",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-08-18",
+   "arr": 167000
+  },
+  {
+   "account": "Tamar Clinic",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-09-16",
+   "arr": 57000
+  },
+  {
+   "account": "Basalt Media",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-07-30",
+   "arr": 100000
+  },
+  {
+   "account": "Harbor Logistics",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-09-03",
+   "arr": 58000
+  },
+  {
+   "account": "Harbor Clinic",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-09-29",
+   "arr": 143000
+  },
+  {
+   "account": "Glade Dental",
+   "manager": "Priya Nair",
+   "renews_on": "2027-07-03",
+   "arr": 14000
+  },
+  {
+   "account": "Willow Mobility",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-04-26",
+   "arr": 41000
+  },
+  {
+   "account": "Rowan Robotics",
+   "manager": "Tomas Reyes",
+   "renews_on": "2026-12-05",
+   "arr": 36000
+  },
+  {
+   "account": "Delta Brewing",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-10-04",
+   "arr": 151000
+  },
+  {
+   "account": "Iris Studio",
+   "manager": "Priya Nair",
+   "renews_on": "2026-11-14",
+   "arr": 118000
+  },
+  {
+   "account": "Iris Mobility",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-05-15",
+   "arr": 46000
+  },
+  {
+   "account": "Delta Studio",
+   "manager": "Priya Nair",
+   "renews_on": "2027-01-26",
+   "arr": 37000
+  },
+  {
+   "account": "Cedar Media",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-04-29",
+   "arr": 127000
+  },
+  {
+   "account": "Tamar Legal",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-06-20",
+   "arr": 173000
+  },
+  {
+   "account": "Dune Studio",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-04-13",
+   "arr": 114000
+  },
+  {
+   "account": "Kestrel Dental",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-05-28",
+   "arr": 19000
+  },
+  {
+   "account": "Cedar Health",
+   "manager": "Lev Brandt",
+   "renews_on": "2026-11-06",
+   "arr": 100000
+  },
+  {
+   "account": "Sable Foods",
+   "manager": "Tomas Reyes",
+   "renews_on": "2026-12-10",
+   "arr": 66000
+  },
+  {
+   "account": "Garnet Insurance",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-11-23",
+   "arr": 66000
+  },
+  {
+   "account": "Marlow Foods",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-04-28",
+   "arr": 137000
+  },
+  {
+   "account": "Ember Foods",
+   "manager": "Priya Nair",
+   "renews_on": "2027-05-21",
+   "arr": 84000
+  },
+  {
+   "account": "Delta Labs",
+   "manager": "Priya Nair",
+   "renews_on": "2027-11-24",
+   "arr": 165000
+  },
+  {
+   "account": "Vale Legal",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-06-15",
+   "arr": 113000
+  },
+  {
+   "account": "Nimbus Foods",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-08-05",
+   "arr": 126000
+  },
+  {
+   "account": "Lumen Robotics",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-09-22",
+   "arr": 143000
+  },
+  {
+   "account": "Dune Analytics",
+   "manager": "Priya Nair",
+   "renews_on": "2026-12-29",
+   "arr": 87000
+  },
+  {
+   "account": "Cedar Clinic",
+   "manager": "Priya Nair",
+   "renews_on": "2027-02-11",
+   "arr": 52000
+  },
+  {
+   "account": "Juniper Labs",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-07-20",
+   "arr": 49000
+  },
+  {
+   "account": "Dune Health",
+   "manager": "Priya Nair",
+   "renews_on": "2027-10-06",
+   "arr": 45000
+  },
+  {
+   "account": "Ember Brewing",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-05-11",
+   "arr": 117000
+  },
+  {
+   "account": "Onyx Studio",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-05-22",
+   "arr": 48000
+  },
+  {
+   "account": "Basalt Legal",
+   "manager": "Hana Okafor",
+   "renews_on": "2026-11-20",
+   "arr": 166000
+  },
+  {
+   "account": "Rowan Logistics",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-02-26",
+   "arr": 18000
+  },
+  {
+   "account": "Juniper Bank",
+   "manager": "Lev Brandt",
+   "renews_on": "2026-11-27",
+   "arr": 75000
+  },
+  {
+   "account": "Dune Bank",
+   "manager": "Priya Nair",
+   "renews_on": "2027-10-26",
+   "arr": 123000
+  },
+  {
+   "account": "Tamar Foods",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-07-29",
+   "arr": 146000
+  },
+  {
+   "account": "Sable Clinic",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-08-19",
+   "arr": 54000
+  },
+  {
+   "account": "Pike Legal",
+   "manager": "Lev Brandt",
+   "renews_on": "2026-12-04",
+   "arr": 80000
+  },
+  {
+   "account": "Marlow Dental",
+   "manager": "Priya Nair",
+   "renews_on": "2027-10-02",
+   "arr": 71000
+  },
+  {
+   "account": "Kestrel Bank",
+   "manager": "Priya Nair",
+   "renews_on": "2027-06-26",
+   "arr": 89000
+  },
+  {
+   "account": "Lumen Works",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-01-11",
+   "arr": 119000
+  },
+  {
+   "account": "Tamar Labs",
+   "manager": "Tomas Reyes",
+   "renews_on": "2026-10-24",
+   "arr": 118000
+  },
+  {
+   "account": "Kestrel Insurance",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-08-31",
+   "arr": 126000
+  },
+  {
+   "account": "Juniper Legal",
+   "manager": "Hana Okafor",
+   "renews_on": "2026-12-29",
+   "arr": 18000
+  },
+  {
+   "account": "Kestrel Robotics",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-07-12",
+   "arr": 126000
+  },
+  {
+   "account": "Fjord Bank",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-07-21",
+   "arr": 149000
+  },
+  {
+   "account": "Lumen Logistics",
+   "manager": "Tomas Reyes",
+   "renews_on": "2026-12-10",
+   "arr": 127000
+  },
+  {
+   "account": "Yarrow Bank",
+   "manager": "Priya Nair",
+   "renews_on": "2026-12-20",
+   "arr": 97000
+  },
+  {
+   "account": "Ember Systems",
+   "manager": "Priya Nair",
+   "renews_on": "2027-02-18",
+   "arr": 40000
+  },
+  {
+   "account": "Onyx Robotics",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-10-08",
+   "arr": 145000
+  },
+  {
+   "account": "Birch Foods",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-01-30",
+   "arr": 95000
+  },
+  {
+   "account": "Willow Legal",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-11-29",
+   "arr": 74000
+  },
+  {
+   "account": "Birch Insurance",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-05-15",
+   "arr": 141000
+  },
+  {
+   "account": "Sable Freight",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-11-01",
+   "arr": 125000
+  },
+  {
+   "account": "Zephyr Media",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-02-04",
+   "arr": 73000
+  },
+  {
+   "account": "Sable Analytics",
+   "manager": "Priya Nair",
+   "renews_on": "2026-11-15",
+   "arr": 28000
+  },
+  {
+   "account": "Vale Dental",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-05-19",
+   "arr": 47000
+  },
+  {
+   "account": "Sable Systems",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-07-16",
+   "arr": 39000
+  },
+  {
+   "account": "Kestrel Labs",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-09-12",
+   "arr": 172000
+  },
+  {
+   "account": "Iris Robotics",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-04-13",
+   "arr": 140000
+  },
+  {
+   "account": "Iris Retail",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-06-05",
+   "arr": 122000
+  },
+  {
+   "account": "Pike Dental",
+   "manager": "Hana Okafor",
+   "renews_on": "2026-12-31",
+   "arr": 118000
+  },
+  {
+   "account": "Quarry Clinic",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-01-17",
+   "arr": 88000
+  },
+  {
+   "account": "Lumen Studio",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-07-23",
+   "arr": 74000
+  },
+  {
+   "account": "Quarry Systems",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-04-01",
+   "arr": 178000
+  },
+  {
+   "account": "Coral Mobility",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-11-10",
+   "arr": 159000
+  },
+  {
+   "account": "Alder Mobility",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-01-16",
+   "arr": 66000
+  },
+  {
+   "account": "Tamar Analytics",
+   "manager": "Priya Nair",
+   "renews_on": "2027-09-30",
+   "arr": 42000
+  },
+  {
+   "account": "Glade Brewing",
+   "manager": "Priya Nair",
+   "renews_on": "2027-10-02",
+   "arr": 42000
+  },
+  {
+   "account": "Coral Dental",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-02-02",
+   "arr": 46000
+  },
+  {
+   "account": "Marlow Analytics",
+   "manager": "Hana Okafor",
+   "renews_on": "2026-12-11",
+   "arr": 38000
+  },
+  {
+   "account": "Tamar Insurance",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-09-10",
+   "arr": 77000
+  },
+  {
+   "account": "Onyx Legal",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-09-13",
+   "arr": 33000
+  },
+  {
+   "account": "Cedar Studio",
+   "manager": "Tomas Reyes",
+   "renews_on": "2026-11-06",
+   "arr": 157000
+  },
+  {
+   "account": "Pike Labs",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-01-17",
+   "arr": 100000
+  },
+  {
+   "account": "Zephyr Retail",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-10-20",
+   "arr": 71000
+  },
+  {
+   "account": "Kestrel Freight",
+   "manager": "Lev Brandt",
+   "renews_on": "2027-01-28",
+   "arr": 18000
+  },
+  {
+   "account": "Zephyr Systems",
+   "manager": "Hana Okafor",
+   "renews_on": "2026-11-27",
+   "arr": 138000
+  },
+  {
+   "account": "Willow Foods",
+   "manager": "Priya Nair",
+   "renews_on": "2027-11-07",
+   "arr": 115000
+  },
+  {
+   "account": "Vale Logistics",
+   "manager": "Hana Okafor",
+   "renews_on": "2026-10-28",
+   "arr": 134000
+  },
+  {
+   "account": "Delta Retail",
+   "manager": "Lev Brandt",
+   "renews_on": "2026-11-15",
+   "arr": 53000
+  },
+  {
+   "account": "Pike Logistics",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-04-18",
+   "arr": 141000
+  },
+  {
+   "account": "Willow Media",
+   "manager": "Tomas Reyes",
+   "renews_on": "2027-06-19",
+   "arr": 107000
+  },
+  {
+   "account": "Onyx Brewing",
+   "manager": "Priya Nair",
+   "renews_on": "2027-01-14",
+   "arr": 138000
+  },
+  {
+   "account": "Glade Clinic",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-05-18",
+   "arr": 147000
+  },
+  {
+   "account": "Pike Robotics",
+   "manager": "Priya Nair",
+   "renews_on": "2027-08-08",
+   "arr": 50000
+  },
+  {
+   "account": "Marlow Studio",
+   "manager": "Lev Brandt",
+   "renews_on": "2026-11-20",
+   "arr": 45000
+  },
+  {
+   "account": "Birch Legal",
+   "manager": "Lev Brandt",
+   "renews_on": "2026-10-29",
+   "arr": 41000
+  },
+  {
+   "account": "Alder Insurance",
+   "manager": "Tomas Reyes",
+   "renews_on": "2026-11-06",
+   "arr": 43000
+  },
+  {
+   "account": "Garnet Analytics",
+   "manager": "Priya Nair",
+   "renews_on": "2027-05-13",
+   "arr": 47000
+  },
+  {
+   "account": "Alder Retail",
+   "manager": "Hana Okafor",
+   "renews_on": "2027-09-14",
+   "arr": 119000
+  }
+ ],
+ "notes": [
+  "Call note (2026-10-08, Hana Okafor): Juniper Studio asked how to export all their data.",
+  "Call note (2026-07-24, Hana Okafor): Glade Legal reported the mobile app logging users out.",
+  "Call note (2026-07-21, Lev Brandt): Alder Energy asked about a multi-year discount.",
+  "Call note (2026-09-16, Lev Brandt): Alder Energy reported the mobile app logging users out.",
+  "Call note (2026-08-22, Tomas Reyes): Tamar Labs asked for a training session for new hires.",
+  "Call note (2026-07-10, Lev Brandt): Kestrel Media asked for copies of last year's invoices.",
+  "Call note (2026-07-26, Hana Okafor): Willow Insurance wants SSO set up before the renewal call.",
+  "Call note (2026-07-20, Priya Nair): Garnet Analytics reported the mobile app logging users out.",
+  "Call note (2026-09-28, Hana Okafor): Iris Clinic wants SSO set up before the renewal call.",
+  "Call note (2026-09-17, Tomas Reyes): Alder Insurance asked for a training session for new hires.",
+  "Call note (2026-08-12, Hana Okafor): Willow Insurance named a new admin after their old one left.",
+  "Call note (2026-08-11, Tomas Reyes): Sable Systems named a new admin after their old one left.",
+  "Call note (2026-09-12, Tomas Reyes): Rowan Analytics asked about a multi-year discount.",
+  "Call note (2026-09-11, Priya Nair): Iris Freight asked about a multi-year discount.",
+  "Call note (2026-09-03, Lev Brandt): Birch Foods reported the mobile app logging users out.",
+  "Call note (2026-09-30, Priya Nair): Harbor Retail wants a monthly usage report.",
+  "Call note (2026-09-05, Tomas Reyes): Lumen Logistics asked for copies of last year's invoices.",
+  "Call note (2026-07-28, Priya Nair): Glade Robotics hit the API rate limit twice this month.",
+  "Call note (2026-09-11, Tomas Reyes): Willow Legal hit the API rate limit twice this month.",
+  "Call note (2026-10-09, Hana Okafor): Kestrel Insurance asked about a multi-year discount.",
+  "Call note (2026-08-13, Tomas Reyes): Onyx Legal reported the mobile app logging users out.",
+  "Call note (2026-07-08, Tomas Reyes): Tamar Insurance asked about a multi-year discount.",
+  "Call note (2026-07-16, Priya Nair): Dune Analytics asked about a multi-year discount.",
+  "Call note (2026-08-31, Tomas Reyes): Garnet Labs is evaluating a cheaper competitor.",
+  "Call note (2026-08-16, Tomas Reyes): Garnet Labs pushed back on the 7 percent price increase.",
+  "Call note (2026-08-12, Tomas Reyes): Tamar Bank is evaluating a cheaper competitor.",
+  "Call note (2026-09-19, Tomas Reyes): Tamar Bank hit the API rate limit twice this month.",
+  "Call note (2026-09-22, Lev Brandt): Willow Mobility is evaluating a cheaper competitor.",
+  "Call note (2026-07-27, Lev Brandt): Cedar Retail is adding 15 seats in the spring.",
+  "Call note (2026-08-30, Tomas Reyes): Alder Insurance asked for a training session for new hires.",
+  "Call note (2026-08-05, Hana Okafor): Sable Works asked how to export all their data.",
+  "Call note (2026-07-08, Lev Brandt): Willow Mobility reported the mobile app logging users out.",
+  "Call note (2026-08-27, Lev Brandt): Alder Energy named a new admin after their old one left.",
+  "Call note (2026-09-18, Tomas Reyes): Harbor Works is evaluating a cheaper competitor.",
+  "Call note (2026-08-15, Hana Okafor): Zephyr Systems pushed back on the 7 percent price increase.",
+  "Call note (2026-08-04, Lev Brandt): Fjord Bank asked for copies of last year's invoices.",
+  "Call note (2026-09-26, Tomas Reyes): Willow Media hit the API rate limit twice this month.",
+  "Call note (2026-07-12, Hana Okafor): Kestrel Labs is evaluating a cheaper competitor.",
+  "Call note (2026-10-14, Tomas Reyes): Tamar Legal asked about a multi-year discount.",
+  "Call note (2026-07-19, Tomas Reyes): Rowan Clinic reported the mobile app logging users out.",
+  "Call note (2026-08-16, Hana Okafor): Glade Clinic is evaluating a cheaper competitor.",
+  "Call note (2026-10-06, Tomas Reyes): Cedar Mobility named a new admin after their old one left.",
+  "Call note (2026-07-16, Hana Okafor): Glade Clinic asked for a training session for new hires.",
+  "Call note (2026-09-08, Lev Brandt): Delta Bank wants a monthly usage report.",
+  "Call note (2026-08-04, Tomas Reyes): Tamar Clinic pushed back on the 7 percent price increase.",
+  "Call note (2026-09-20, Tomas Reyes): Sable Foods asked for a training session for new hires.",
+  "Call note (2026-09-17, Hana Okafor): Kestrel Insurance reported the mobile app logging users out.",
+  "Call note (2026-08-04, Hana Okafor): Juniper Legal hit the API rate limit twice this month.",
+  "Call note (2026-09-20, Lev Brandt): Willow Dental is evaluating a cheaper competitor.",
+  "Call note (2026-07-09, Priya Nair): Dune Analytics wants SSO set up before the renewal call.",
+  "Call note (2026-10-03, Priya Nair): Rowan Legal asked about a multi-year discount.",
+  "Call note (2026-07-19, Hana Okafor): Kestrel Labs reported the mobile app logging users out.",
+  "Call note (2026-10-08, Priya Nair): Iris Foods wants a monthly usage report.",
+  "Call note (2026-07-29, Lev Brandt): Iris Mobility named a new admin after their old one left.",
+  "Call note (2026-10-09, Priya Nair): Umber Media wants a monthly usage report.",
+  "Call note (2026-07-08, Lev Brandt): Iris Robotics asked for copies of last year's invoices.",
+  "Call note (2026-08-11, Hana Okafor): Alder Retail named a new admin after their old one left.",
+  "Call note (2026-09-18, Tomas Reyes): Sable Systems is adding 15 seats in the spring.",
+  "Call note (2026-10-02, Priya Nair): Dune Analytics asked for copies of last year's invoices.",
+  "Call note (2026-07-30, Priya Nair): Marlow Media is evaluating a cheaper competitor."
+ ]
+}

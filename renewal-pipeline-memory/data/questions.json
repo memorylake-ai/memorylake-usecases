@@ -1,0 +1,9 @@
+{
+ "questions": [
+  {"key": "quarry", "kind": "lookup", "label": "Quarry Health", "prompt": "When does Quarry Health's contract renew, and who is its account manager?", "expect": "2026-12-10"},
+  {"key": "alder", "kind": "lookup", "label": "Alder Insurance", "prompt": "When does Alder Insurance renew, and what is its ARR?", "expect": "2026-11-06"},
+  {"key": "delta", "kind": "lookup", "label": "Delta Bank", "prompt": "Who manages Delta Bank, and when is its renewal?", "expect": "2027-01-30"},
+  {"key": "lev", "kind": "list", "label": "Lev's renewals", "manager": "Lev Brandt", "prompt": "Which of Lev Brandt's accounts have a contract renewing between 2026-10-19 and 2026-12-31? List every one of them, one per line: account - renewal date."},
+  {"key": "team", "kind": "list", "label": "Team's renewals", "prompt": "Which accounts have a contract renewing between 2026-10-19 and 2026-12-31? List every one of them, one per line: account - renewal date."}
+ ]
+}
