@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Marketing Teams Brand Voice Memory Every AI Tool Reads*](https://www.memorylake.ai/en/usecase/brand-voice-memory-for-marketing-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 3:11](https://github.com/memorylake-ai/memorylake-usecases/releases/download/brand-voice-memory-v1/brand-voice-memory-cli-demo.mp4) · [Web, 4:01](https://github.com/memorylake-ai/memorylake-usecases/releases/download/brand-voice-memory-v1/brand-voice-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/brand-voice-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Every AI tool forgets the brand guide between sessions, so marketing pastes it into prompts all day,
 and drafts still come back with "We're thrilled to announce…! 🚀".
@@ -201,17 +202,19 @@ $ memorylake router responses "Write tonight's launch email to Tallyleaf custome
 
 ## Measured
 
-Four fresh runs of the final version on 2026-10-15 (three in parallel under separate prefixes, one `--reset`), plus one
-in the browser. Temperature 0; drafts still vary.
+Seven fresh runs of the final version on 2026-10-15: four from the terminal (three in parallel under separate
+prefixes, one `--reset`), the recorded terminal run, and two in the browser (the second one recorded). Temperature 0;
+drafts still vary.
 
-| Brand memory | Off-brand drafts (4 CLI runs) | Violations | Browser run |
-|---|---|---|---|
-| no memory | **44 / 48** | 163 | 11 / 12 |
-| day one (10 facts) | **7 / 48** | 10 | 0 / 12 |
-| a quarter later (50 facts) | **41 / 48** | 110 | 10 / 12 |
-| voice card (45 facts) | **4 / 48** | 4 | 1 / 12 |
+| Brand memory | Off-brand drafts, 4 CLI runs | Violations | Recorded CLI run | Browser runs | **All 7 runs** |
+|---|---|---|---|---|---|
+| no memory | 44 / 48 | 163 | 11 / 12 | 11 · 11 | **77 / 84** |
+| day one (10 facts) | 7 / 48 | 10 | 2 / 12 | 0 · 1 | **10 / 84** |
+| a quarter later (50 facts) | 41 / 48 | 110 | 10 / 12 | 10 · 10 | **71 / 84** |
+| voice card (45 facts) | 4 / 48 | 4 | 0 / 12 | 1 · 0 | **5 / 84** |
 
-What the inspector saw (16 briefs per stage over the 4 CLI runs):
+What the inspector saw (16 briefs per stage over the 4 CLI runs; the recorded run: rules 22/24 on day one, 3/24 a
+quarter later, card 4/4):
 
 | Rule | Day one | A quarter later |
 |---|---|---|
