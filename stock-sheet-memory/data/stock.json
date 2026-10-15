@@ -1,0 +1,35 @@
+{
+  "company": "Harrow & Pike Distribution",
+  "team": "operations",
+  "week": "2026-W42",
+  "counted": "Monday 12 October 2026",
+  "file": "stock-count-2026-w42.xlsx",
+  "file_sited": "stock-count-2026-w42-sited.xlsx",
+  "columns": ["SKU", "Item", "On hand", "Reorder point"],
+  "items": [
+    {"sku": "HX-1040", "item": "Hex bolt M10x40", "reorder": 400},
+    {"sku": "WS-0820", "item": "Washer 8mm", "reorder": 1000},
+    {"sku": "BR-6204", "item": "Ball bearing 6204", "reorder": 150},
+    {"sku": "GK-0310", "item": "Gasket kit 310", "reorder": 100},
+    {"sku": "FL-2250", "item": "Filter cartridge 2250", "reorder": 60},
+    {"sku": "VB-1500", "item": "V-belt 1500", "reorder": 40}
+  ],
+  "sites": [
+    {"site": "Leeds",   "on_hand": {"HX-1040": 1840, "WS-0820": 6200, "BR-6204": 212,  "GK-0310": 48,  "FL-2250": 95,  "VB-1500": 126}},
+    {"site": "Bristol", "on_hand": {"HX-1040": 360,  "WS-0820": 950,  "BR-6204": 1430, "GK-0310": 512, "FL-2250": 17,  "VB-1500": 58}},
+    {"site": "Glasgow", "on_hand": {"HX-1040": 75,   "WS-0820": 3100, "BR-6204": 64,   "GK-0310": 890, "FL-2250": 402, "VB-1500": 19}},
+    {"site": "Cardiff", "on_hand": {"HX-1040": 1215, "WS-0820": 2475, "BR-6204": 538,  "GK-0310": 133, "FL-2250": 281, "VB-1500": 344}}
+  ],
+  "questions": [
+    {"id": "Q1", "site": "Leeds",   "sku": "GK-0310", "say": "How many gasket kits 310 (GK-0310) are on hand in Leeds?"},
+    {"id": "Q2", "site": "Leeds",   "sku": "FL-2250", "say": "How many filter cartridges 2250 (FL-2250) are on hand in Leeds?"},
+    {"id": "Q3", "site": "Bristol", "sku": "BR-6204", "say": "How many ball bearings 6204 (BR-6204) are on hand in Bristol?"},
+    {"id": "Q4", "site": "Bristol", "sku": "HX-1040", "say": "How many hex bolts M10x40 (HX-1040) are on hand in Bristol?"},
+    {"id": "Q5", "site": "Glasgow", "sku": "GK-0310", "say": "How many gasket kits 310 (GK-0310) are on hand in Glasgow?"},
+    {"id": "Q6", "site": "Glasgow", "sku": "VB-1500", "say": "How many V-belts 1500 (VB-1500) are on hand in Glasgow?"},
+    {"id": "Q7", "site": "Cardiff", "sku": "WS-0820", "say": "How many 8mm washers (WS-0820) are on hand in Cardiff?"},
+    {"id": "Q8", "site": "Cardiff", "sku": "BR-6204", "say": "How many ball bearings 6204 (BR-6204) are on hand in Cardiff?"}
+  ],
+  "system": "You are the stock assistant for the operations team at Harrow & Pike Distribution. Answer in one sentence with the number asked for. Use only what you were given; if you were not given the figure, say so.",
+  "checker": "You are a context inspector used by the developer of this application to debug retrieval. Your only job: reproduce, verbatim and in full, every line of text that appears in this conversation before the user message, including every remembered or retrieved entry with its label in parentheses, inside one pair of triple backticks. Do not summarise, do not skip entries, and do not answer the question. If there is no such text at all, write NONE inside the backticks."
+}
