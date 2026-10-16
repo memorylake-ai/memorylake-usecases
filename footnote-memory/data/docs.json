@@ -1,0 +1,253 @@
+{
+  "company": "Kestrel",
+  "team": "Kestrel platform team",
+  "author": "Platform team",
+  "system": "You are the platform assistant for engineers at Kestrel. Answer from the platform team's documents. Give the specific value or a yes/no first, then one short sentence.",
+  "checker": "You are a context inspector used by the developer of this application to debug retrieval. Your only job: reproduce, verbatim and in full, every line of text that appears in this conversation before the user message, including every remembered or retrieved entry with its label in parentheses, inside one pair of triple backticks. Do not summarise, do not skip entries, and do not answer the question. If there is no such text at all, write NONE inside the backticks.",
+  "arms": {
+    "saved": {
+      "label": "the Word files as saved, footnotes and all",
+      "short": "as saved",
+      "suffix": ".docx"
+    },
+    "inlined": {
+      "label": "the same files with each footnote written in after the sentence it qualifies, naming its section",
+      "short": "footnotes inlined",
+      "suffix": ".inlined.docx"
+    }
+  },
+  "docs": [
+    {
+      "id": "limits",
+      "file": "kestrel-service-limits",
+      "title": "Kestrel Data Platform - Service limits",
+      "header": "Version 2026.10. Maintained by the platform team. Applies to every workspace.",
+      "sections": [
+        [
+          "Authentication tokens",
+          "Access tokens expire after 60 minutes and refresh tokens after 30 days. Tokens are bound to the workspace that issued them, so a token minted for staging cannot call production. Rotate client secrets from the Credentials page; the old secret keeps working for one hour so deploys can roll over without downtime.",
+          null,
+          "Service accounts use the same token lifetimes as people. A token that is revoked stops working within 30 seconds on every cluster, and the audit log records who revoked it and from which address."
+        ],
+        [
+          "Batch export rate",
+          "Batch export accepts up to 1,000 requests per minute per API key.",
+          "200 for keys on the EU-West cluster, until the storage migration finishes.",
+          "The exporter streams Parquet files to the bucket you configure and resumes from the last committed offset after a throttle, so clients should back off on 429 rather than restart the job from the beginning. Exports run on a dedicated pool, so a busy export never slows interactive queries. The limit is counted per key, not per workspace, and the Usage page shows the last 24 hours of export requests for each key with the minutes in which it was throttled."
+        ],
+        [
+          "Query timeout",
+          "Interactive queries are cancelled after 120 seconds of execution time. Long aggregations belong in scheduled transformations, which have no wall-clock limit; the query editor shows a warning at 90 seconds with a link that turns the current query into a transformation draft.",
+          null,
+          "The timeout counts execution time only; time spent waiting in the queue is not included. Queries cancelled by the timeout are listed on the Query history page with the stage they had reached."
+        ],
+        [
+          "Webhook retries",
+          "Failed webhook deliveries are retried 8 times over 24 hours with exponential backoff, starting at one minute.",
+          "None for endpoints that answer 410 Gone; they are disabled at once.",
+          "Each delivery carries an idempotency header, and the delivery log keeps request and response bodies for seven days so receivers can replay what they missed. Deliveries are signed with the workspace's webhook secret, and receivers should reject any request whose signature or timestamp does not check out. A delivery that still fails after the last retry is marked failed and can be resent by hand."
+        ],
+        [
+          "Concurrent transformation jobs",
+          "Each workspace may run up to 25 transformation jobs at the same time.",
+          "5 for workspaces still in the free trial.",
+          "Jobs beyond that wait in a first-in, first-out queue; the scheduler never preempts a running job, and queued jobs show their position on the Jobs page. The count includes jobs started by schedules, by the API and by hand. Cancelling a queued job frees its place immediately, and the Jobs page shows how long each queued job has waited."
+        ],
+        [
+          "Raw event retention",
+          "Raw events are retained for 400 days before they are deleted by the nightly compaction.",
+          "30 days on the Starter plan.",
+          "Aggregated tables are kept until you drop them. Legal holds placed from the Compliance page pause deletion for every event in the held range. Deleted events cannot be restored by support. Teams that need a longer history should export to their own bucket on a schedule, which the Export page can set up in a few clicks."
+        ],
+        [
+          "Dashboard refresh",
+          "Scheduled dashboards refresh at most once every 15 minutes. A manual refresh from the dashboard toolbar runs at once but counts against the same query timeout as the editor.",
+          null,
+          "Dashboards that nobody has opened for 30 days stop refreshing until someone opens them again. Each refresh is logged with its duration so owners can find the slow tiles."
+        ],
+        [
+          "File upload size",
+          "A single file upload may be up to 5 GB. CSV, JSON Lines and Parquet are accepted; compressed uploads are decompressed on arrival and the limit applies to the compressed size.",
+          null,
+          "Uploads are scanned for malware before they become visible, which takes up to a minute for large files. Rejected uploads are reported in the Upload log with the reason."
+        ],
+        [
+          "Service accounts",
+          "Each workspace may create up to 50 service accounts. A service account holds exactly one role, and its keys never expire unless an admin sets an expiry on the key.",
+          null,
+          "Deleting a service account revokes all of its keys at once. Admins can see the last time each key was used on the Service accounts page and should remove keys unused for 90 days."
+        ],
+        [
+          "Audit log export",
+          "Audit logs can be exported from the console for any range within the last 365 days.",
+          "For ranges that start before 1 March 2026, on request from support only.",
+          "Each export is JSON Lines, one event per line with actor, action, target and source IP. Exports are delivered to the email address of the admin who requested them, as a link that expires after 24 hours."
+        ],
+        [
+          "Saved queries",
+          "Each user may keep up to 500 saved queries. Saved queries can be shared with a team, and shared copies follow the original until someone edits them.",
+          null,
+          "Deleted saved queries go to a trash folder for 30 days. Admins can transfer the saved queries of a person who leaves to someone else on the team."
+        ]
+      ]
+    },
+    {
+      "id": "release",
+      "file": "kestrel-release-policy",
+      "title": "Kestrel - Release policy for production services",
+      "header": "Version 2026.10. Owned by the platform team. Applies to every service deployed to production.",
+      "sections": [
+        [
+          "Deploy windows",
+          "Production deploys run Monday to Thursday, 09:00 to 16:00 UTC, through the release pipeline.",
+          "Not from 15 to 31 December: year-end freeze.",
+          "Deploys outside the window need an incident number in the pipeline form, and the pipeline refuses a deploy started from a laptop. The window is the same for every region; the pipeline converts the window to each region's local time on the release page so that nobody has to do the arithmetic."
+        ],
+        [
+          "Approvals",
+          "A production deploy needs one approval from a code owner of the changed service. The approver cannot be the author of the change, and an approval expires if new commits are pushed after it.",
+          null,
+          "Approvals are given in the pipeline, not in chat, and the pipeline records the approver's name on the release page next to the change list."
+        ],
+        [
+          "Canary stage",
+          "Every new version takes 5% of production traffic for 30 minutes before the pipeline promotes it.",
+          "60 minutes for the payments service.",
+          "The canary is rolled back automatically if the error rate rises by more than half a percentage point or p99 latency by more than 20%. During the canary the service dashboard shows both versions side by side. The author of the change should stay online until promotion."
+        ],
+        [
+          "Rollback",
+          "Any engineer on the on-call rotation may roll back a release without approval.",
+          "Except releases that include a schema migration: a database owner signs off first.",
+          "Roll back from the pipeline's release page; it redeploys the previous artifact and posts to the service channel. After a rollback the author opens a ticket within one working day describing what went wrong and how the next attempt will avoid it."
+        ],
+        [
+          "Feature flags",
+          "New behaviour ships behind a flag that defaults to off. Flags older than 90 days are reported to the owning team every Monday, and a flag must be removed within two releases of reaching 100%.",
+          null,
+          "Flag changes are themselves logged like deploys, with who changed which flag, from what value to what value, and when."
+        ],
+        [
+          "Hotfixes",
+          "A hotfix branch is cut from the release tag, not from main. It goes through the same pipeline and canary, and the fix is merged back to main the same day.",
+          null,
+          "Hotfixes skip the weekly release train but not the approval: a code owner of the changed service still approves the hotfix in the pipeline."
+        ],
+        [
+          "Post-deploy checks",
+          "After promotion the author watches the service dashboard for 15 minutes and confirms in the release thread. Synthetic checks run every minute for the first hour.",
+          null,
+          "If a synthetic check fails twice in a row during that hour, the pipeline pages the on-call engineer and links the release that is most likely to blame."
+        ],
+        [
+          "Changelog",
+          "Every release adds a line to the service changelog with the ticket number and a sentence a support engineer can repeat to a customer.",
+          null,
+          "Changelog entries are published to the internal status site every evening, grouped by service and sorted by time."
+        ]
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1",
+      "doc": "limits",
+      "on": 2,
+      "kind": "footnote",
+      "say": "Our API key is on the EU-West cluster. What is the batch export rate limit for it, in requests per minute?",
+      "right": "\\b200\\b",
+      "body": "\\b1,?000\\b",
+      "truth": "200 per minute (footnote 1); the section says 1,000"
+    },
+    {
+      "id": "Q2",
+      "doc": "limits",
+      "on": 4,
+      "kind": "footnote",
+      "say": "Our webhook endpoint was decommissioned and now answers 410 Gone. How many times will Kestrel retry a failed delivery to it?",
+      "right": "^\\W*(?:no|zero|0|none)\\b|\\bno retries\\b|\\bnot (?:be )?retried\\b|\\bdisabled\\b|\\bwill not retry\\b|\\bwon't retry\\b",
+      "body": "\\b8 times\\b|\\beight times\\b|^\\W*8\\b",
+      "truth": "none: the endpoint is disabled at once (footnote 2); the section says 8 times"
+    },
+    {
+      "id": "Q3",
+      "doc": "limits",
+      "on": 5,
+      "kind": "footnote",
+      "say": "How many concurrent transformation jobs can a workspace in the free trial run?",
+      "right": "\\b5\\b|\\bfive\\b",
+      "body": "\\b25\\b",
+      "truth": "5 at a time (footnote 3); the section says 25"
+    },
+    {
+      "id": "Q4",
+      "doc": "limits",
+      "on": 6,
+      "kind": "footnote",
+      "say": "We are on the Starter plan. How long are our raw events retained?",
+      "right": "\\b30 days\\b",
+      "body": "\\b400\\b",
+      "truth": "30 days (footnote 4); the section says 400 days"
+    },
+    {
+      "id": "Q5",
+      "doc": "release",
+      "on": 1,
+      "kind": "footnote",
+      "say": "Can we deploy to production through the release pipeline on Wednesday 16 December 2026 at 10:00 UTC?",
+      "right": "\\bfreeze\\b|\\b15 (?:to|-|–) ?31 December\\b|\\byear-end\\b",
+      "body": "^\\W*yes\\b",
+      "truth": "no: 15-31 December is the year-end freeze (footnote 1); the section says Monday to Thursday, 09:00-16:00 UTC"
+    },
+    {
+      "id": "Q6",
+      "doc": "release",
+      "on": 3,
+      "kind": "footnote",
+      "say": "How long does the canary stage last for a new version of the payments service?",
+      "right": "\\b60 minutes\\b|\\bone hour\\b|\\b1 hour\\b",
+      "body": "\\b30 minutes\\b",
+      "truth": "60 minutes (footnote 2); the section says 30 minutes"
+    },
+    {
+      "id": "Q7",
+      "doc": "release",
+      "on": 4,
+      "kind": "footnote",
+      "say": "Under the release policy, who needs to approve a rollback of a release that includes a schema migration?",
+      "right": "\\bdatabase owner\\b|\\bDB owner\\b",
+      "body": "\\bno one\\b|\\bnobody\\b|\\bno approval\\b|\\bwithout (?:any )?(?:approval|sign-?off)\\b|\\b(?:does not|doesn't|do not|don't) need\\b|\\bany engineer on the on-call rotation\\b",
+      "truth": "yes, a database owner signs off first (footnote 3); the section says no approval needed"
+    },
+    {
+      "id": "Q8",
+      "doc": "limits",
+      "on": 3,
+      "kind": "control",
+      "say": "How long can an interactive query run before it is cancelled?",
+      "right": "\\b120 seconds\\b|\\b2 minutes\\b|\\btwo minutes\\b",
+      "body": null,
+      "truth": "120 seconds (no footnote)"
+    },
+    {
+      "id": "Q9",
+      "doc": "limits",
+      "on": 9,
+      "kind": "control",
+      "say": "How many service accounts can one workspace create?",
+      "right": "\\b50\\b",
+      "body": null,
+      "truth": "50 (no footnote)"
+    },
+    {
+      "id": "Q10",
+      "doc": "release",
+      "on": 2,
+      "kind": "control",
+      "say": "How many approvals does a production deploy need, and from whom?",
+      "right": "\\b(?:one|1)\\b.*\\bcode owner\\b|\\bcode owner\\b",
+      "body": null,
+      "truth": "one, from a code owner of the changed service (no footnote)"
+    }
+  ]
+}
