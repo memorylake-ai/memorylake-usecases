@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Recruiting Teams Job Description Memory That Compounds Across Roles*](https://www.memorylake.ai/en/usecase/job-description-memory-across-roles),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 5:30](https://github.com/memorylake-ai/memorylake-usecases/releases/download/jd-redline-memory-v1/jd-redline-memory-cli-demo.mp4) · [Web, 6:32](https://github.com/memorylake-ai/memorylake-usecases/releases/download/jd-redline-memory-v1/jd-redline-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/jd-redline-memory-v1); GitHub serves them as downloads).
 
 **The problem.** The talent team at Kestrel Freight keeps its job descriptions in shared memory, so that a
 recruiting assistant can answer *"what's the salary band for the data engineer role?"* from them. The JDs are Word
@@ -195,34 +196,36 @@ in both projects, with both document summaries — searches only, no model call.
 
 ## Measured
 
-Over **3 runs** (63 answers about edited lines per boundary, plus 9 about the unedited JD; graded with the rules
-above, refusals counted as "neither"):
+Over **6 runs** (including the two recorded for the videos; 126 answers about edited lines per boundary, plus 18
+about the unedited JD; graded with the rules above, refusals counted as "neither"):
 
 | | current term | struck-out term | both | neither | unedited JD |
 |---|---|---|---|---|---|
-| as saved | 8/63 | 17 | 36 | 2 | 9/9 |
-| changes accepted | 60/63 | 0 | 0 | 3 | 9/9 |
+| as saved | 16/126 | 35 | 70 | 5 | 18/18 |
+| changes accepted | 120/126 | 0 | 0 | 6 | 18/18 |
 
-By question (as saved → changes accepted):
+By question, over the 5 runs whose every reply was kept (15 answers each; the CLI video's run is in the totals above
+from its printed scoreboard):
 
 | | as saved | changes accepted |
 |---|---|---|
-| Q1 salary band | 0/9 (9 gave both bands, old first) | 9/9 |
-| Q2 years of experience | 0/9 (9 said 8+) | 9/9 |
-| Q3 remote or on-site | 0/9 (9 said "primarily on-site … five days a week, with some remote flexibility") | 9/9 |
-| Q4 visa sponsorship | 0/9 (8 said "No, Kestrel does not sponsor visas") | 9/9 |
-| Q5 travel | 0/9 (9 said "up to 10-40%") | 9/9 |
-| Q6 language | 0/9 (9 said "French or Spanish") | 9/9 |
-| Q7 start date | 8/9 | 6/9 (3 "I don't have the start date") |
-| Q8 pay (never edited) | 9/9 | 9/9 |
+| Q1 salary band | 0/15 (15 gave both bands, old first) | 15/15 |
+| Q2 years of experience | 0/15 (15 said 8+) | 15/15 |
+| Q3 remote or on-site | 0/15 (15 said "primarily on-site … five days a week, with some remote flexibility") | 14/15 |
+| Q4 visa sponsorship | 0/15 (14 said "No, Kestrel does not sponsor visas") | 15/15 |
+| Q5 travel | 0/15 (13 said "up to 10-40%") | 15/15 |
+| Q6 language | 0/15 (15 said "French or Spanish") | 15/15 |
+| Q7 start date | 13/15 | 12/15 (3 "I don't have the start date") |
+| Q8 pay (never edited) | 15/15 | 15/15 |
 
-- **The index**: all 21 edited-line readings (7 lines × 3 runs) in the as-saved project held the struck-out words,
-  old first; none in the accepted project. The Senior Data Engineer summary stated the old terms in 3 of 3 runs; the
-  Customer Success Manager summary did not.
-- **The checker**: in all 20 readable copies for questions about edited JDs, the as-saved entry MemoryRouter attached
+- **The index**: all 42 edited-line readings (7 lines × 6 runs) in the as-saved project held the struck-out words,
+  old first; none in the accepted project. The Senior Data Engineer summary stated the old terms in every run; the
+  Customer Success Manager summary never did.
+- **The checker**: in all 40 readable copies for questions about edited JDs, the as-saved entry MemoryRouter attached
   held the struck-out words.
 - **Q7** is the one edited line the model mostly got right as saved: *"January 11, 2027 November 30, 2026"* — two
-  complete dates, and it took the second. Which of two run-together values the model takes depends on the line, not on which one is current.
+  complete dates, and it took the second. Which of two run-together values the model takes depends on the line, not
+  on which one is current.
 - Model replies vary from run to run; these are totals over every run.
 
 ## Use it in your own app

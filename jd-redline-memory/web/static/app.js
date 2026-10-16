@@ -102,7 +102,8 @@
   }
 
   function memory() {
-    if (!S.memory) return running() ? waiting("The JD library") : empty("The JD library");
+    // The files are local: show them as soon as step 3 starts, not only once the import has finished.
+    if (!S.memory && !S.stepStatus[3]) return running() ? waiting("The JD library") : empty("The JD library");
     const jds = S.data?.jds || [];
     return `<h1>The JD library — three Word files</h1>
       <p class="lead">Two JDs were edited by their hiring managers with Track Changes on and saved as they were. Word (with markup shown) looks like the left column; with markup hidden,
