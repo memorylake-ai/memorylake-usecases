@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Software Engineers AI That Knows the Codebase Before the First Question*](https://www.memorylake.ai/en/usecase/ai-memory-for-software-engineers),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded; links follow in the next commit.
+**Watch it run:** [CLI, 6:29](https://github.com/memorylake-ai/memorylake-usecases/releases/download/footnote-memory-v1/footnote-memory-cli-demo.mp4) · [Web, 7:52](https://github.com/memorylake-ai/memorylake-usecases/releases/download/footnote-memory-v1/footnote-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/footnote-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Kestrel (a fictional data-platform company) keeps its platform team's Word documents — the service
 limits and the release policy — in shared memory, so that a platform assistant can answer an engineer's *"what is
@@ -208,39 +209,43 @@ the text `inline_footnotes()` writes instead, without touching the network.
 
 ## Measured
 
-Over **4 runs** (the first, two reruns and the browser run; 84 answers to footnote questions and 36 to
-questions without a footnote per boundary, minus the calls that had nothing attached):
+Over **7 runs** (the first, two reruns, the browser run, the two recorded for the videos and one for the
+screenshots; per boundary 147 answers to footnote questions and 63 to questions without a footnote, minus the calls
+that had nothing attached):
 
 | | footnote questions | of the misses: the section's own value | no footnote | ∅ nothing attached |
 |---|---|---|---|---|
-| as saved | 32/72 | 32/40 | 24/24 | 24 |
-| footnotes inlined | 72/72 | — | 26/26 | 22 |
+| as saved | 52/124 | 57/72 | 39/39 | 47 |
+| footnotes inlined | 125/125 | — | 48/48 | 37 |
 
 By question (answers from calls that had something attached; ∅ counted apart):
 
 | | as saved | footnotes inlined |
 |---|---|---|
-| Q1 EU-West export rate (footnote 1, §2; in another chunk) | 0/10 (10 said 1,000) · ∅ 2 | 11/11 · ∅ 1 |
-| Q2 410 Gone retries (footnote 2, §4; in another chunk) | 8/11 (3 said 8 times) · ∅ 1 | 11/11 · ∅ 1 |
-| Q3 free-trial concurrent jobs (footnote 3, §5; **same chunk**) | 12/12 | 12/12 |
-| Q4 Starter retention (footnote 4, §6; in another chunk) | 3/10 (7 said 400 days) · ∅ 2 | 10/10 · ∅ 2 |
-| Q5 deploy on 16 December (footnote 1, §1; in another chunk) | 4/12 (8 said "No" for another reason — outside the window, a holiday) | 12/12 |
-| Q6 payments canary (footnote 2, §3; in another chunk) | 0/12 (12 said 30 minutes) | 12/12 |
-| Q7 schema-migration rollback (footnote 3, §4; in another chunk) | 5/5 · ∅ 7 | 4/4 · ∅ 8 |
-| Q8–Q10 sections without a footnote | 24/24 · ∅ 12 | 26/26 · ∅ 10 |
+| Q1 EU-West export rate (footnote 1, §2; in another chunk) | 1/19 (18 said 1,000) · ∅ 2 | 20/20 · ∅ 1 |
+| Q2 410 Gone retries (footnote 2, §4; in another chunk) | 10/18 (8 said 8 times) · ∅ 3 | 16/16 · ∅ 5 |
+| Q3 free-trial concurrent jobs (footnote 3, §5; **same chunk**) | 21/21 | 20/20 · ∅ 1 |
+| Q4 Starter retention (footnote 4, §6; in another chunk) | 7/17 (10 said 400 days) · ∅ 4 | 17/17 · ∅ 4 |
+| Q5 deploy on 16 December (footnote 1, §1; in another chunk) | 6/21 (15 said "No" for another reason — outside the window) | 21/21 |
+| Q6 payments canary (footnote 2, §3; in another chunk) | 0/21 (21 said 30 minutes) | 21/21 |
+| Q7 schema-migration rollback (footnote 3, §4; in another chunk) | 7/7 · ∅ 14 | 10/10 · ∅ 11 |
+| Q8–Q10 sections without a footnote | 39/39 · ∅ 24 | 48/48 · ∅ 15 |
 
-- **The index**: in all 4 runs the same seven footnotes sat in another chunk than their sentence in the as-saved
+- **The index**: in all 7 runs the same seven footnotes sat in another chunk than their sentence in the as-saved
   project, and all eight sat right after their sentence in the inlined one.
-- **Where the footnote shares the sentence's chunk, it works as saved** (Q3, 12/12) — the control inside the
-  as-saved project. Where it doesn't, the answer depends on whether MemoryRouter also attaches the foot of the page,
-  and on whether the footnote names its subject: Q7's "Except releases that include a schema migration: a database
-  owner signs off first" carries its own subject and was right whenever it was attached; Q6's "60 minutes for the
-  payments service" was attached in several checker copies and lost every time.
-- **The checker** (as saved, footnote questions, 28 copies): the sentence without its footnote 10, the sentence
-  and the footnote at the foot of the page 13, nothing attached 4, another part of the document 1. Inlined
-  (28 copies): the footnote right after its sentence 23, nothing attached 5.
-- **∅**: MemoryRouter attached nothing to about one call in five, in both boundaries alike (Q7 and Q10 most often);
-  those answers are left out of every count above, whatever they said.
+- **Where the footnote shares the sentence's chunk, it works as saved** (Q3, 21/21) — the control inside the
+  as-saved project.
+- **Where it doesn't, attaching the foot of the page is not enough.** Over the 49 as-saved checker copies of footnote
+  questions: Q1's footnote was never attached (7/7 copies held the sentence only) and Q1 was answered 1,000 every
+  time but once; Q6's footnote was attached in 4 of 7 copies, after the text of §6 Hotfixes, and Q6 was answered
+  30 minutes every time. Q4's was attached in 6 of 7 and Q4 was still answered 400 days 10 times in 17. The one
+  that held up, Q7 ("Except releases that include a schema migration: a database owner signs off first"), names its
+  own subject; it was right whenever anything was attached — which, for that question, was only a third of the calls.
+- **The checker**, all 7 runs: as saved, the sentence without its footnote 18, sentence and footnote at the foot of
+  the page 22, nothing attached 8, another part of the document 1; inlined, the footnote right after its sentence
+  40, nothing attached 9.
+- **∅**: MemoryRouter attached nothing to about one call in five, in both boundaries alike (Q7 and Q10 most
+  often); those answers are left out of every count above, whatever they said.
 - Model replies vary from run to run; these are totals over every run.
 
 ## Use it in your own app

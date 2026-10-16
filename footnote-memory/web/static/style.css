@@ -300,3 +300,5 @@ pre.wrap { white-space: pre-wrap; }
 .idx.bad { background: var(--err-soft); }
 .idx.ok { background: var(--ok-soft); }
 .idx .tag { font-family: var(--sans); font-weight: 600; margin-right: 6px; }
+.lint.plain th { white-space: normal; vertical-align: bottom; }
+.lint.plain { table-layout: auto; width: 100%; }
