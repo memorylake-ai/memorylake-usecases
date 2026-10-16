@@ -1,0 +1,127 @@
+{
+  "company": "Kestrel Freight",
+  "library": "JD library",
+  "author": "Kestrel Freight Talent Team",
+  "arms": {
+    "saved": {
+      "short": "as saved",
+      "label": "the JDs as they were saved, tracked changes and all",
+      "suffix": ".docx"
+    },
+    "accepted": {
+      "short": "changes accepted",
+      "label": "the same JDs after accepting every tracked change",
+      "suffix": ".final.docx"
+    }
+  },
+  "jds": [
+    {
+      "id": "de",
+      "file": "senior-data-engineer",
+      "title": "Senior Data Engineer — Platform Team",
+      "editor": "Dana Okafor (hiring manager, Data Platform)",
+      "edited": "2026-09-30T09:00:00Z",
+      "paragraphs": [
+        ["Senior Data Engineer — Platform Team"],
+        ["Kestrel Freight is hiring a Senior Data Engineer to own the pipelines that price and route 40,000 shipments a day."],
+        [
+          "Salary band: ",
+          [
+            "$138,000–$152,000",
+            "$161,000–$184,000"
+          ],
+          " base, plus annual bonus."
+        ],
+        [
+          "Experience: ",
+          [
+            "8+ years",
+            "5+ years"
+          ],
+          " of data engineering, including at least two years on streaming systems."
+        ],
+        [
+          "Location: ",
+          [
+            "on-site in Columbus, Ohio, five days a week",
+            "remote within the United States, with one week a quarter in Columbus"
+          ],
+          "."
+        ],
+        [
+          "Visa sponsorship: ",
+          [
+            "not available for this role",
+            "available (H-1B transfer)"
+          ],
+          "."
+        ],
+        ["Interview loop: recruiter screen, take-home pipeline exercise, system design, and a values conversation with the hiring manager."]
+      ]
+    },
+    {
+      "id": "csm",
+      "file": "customer-success-manager",
+      "title": "Customer Success Manager — Midwest Accounts",
+      "editor": "Priya Raman (hiring manager, Customer Success)",
+      "edited": "2026-10-02T09:00:00Z",
+      "paragraphs": [
+        ["Customer Success Manager — Midwest Accounts"],
+        ["You will own renewals and adoption for 35 shipper accounts across Ohio, Indiana and Michigan."],
+        ["Salary band: $96,000–$112,000 base, plus quarterly variable."],
+        [
+          "Travel: up to ",
+          [
+            "10%",
+            "40%"
+          ],
+          " of the time, mostly to customer warehouses."
+        ],
+        [
+          "Languages: fluent ",
+          [
+            "French",
+            "Spanish"
+          ],
+          " required, alongside English."
+        ],
+        [
+          "Start date: ",
+          [
+            "January 11, 2027",
+            "November 30, 2026"
+          ],
+          "."
+        ],
+        ["Interview loop: recruiter screen, account-plan presentation, and a panel with two current CSMs."]
+      ]
+    },
+    {
+      "id": "wol",
+      "file": "warehouse-operations-lead",
+      "title": "Warehouse Operations Lead — Columbus Hub",
+      "editor": "",
+      "edited": "",
+      "paragraphs": [
+        ["Warehouse Operations Lead — Columbus Hub"],
+        ["Lead a crew of 18 on the Columbus cross-dock, from inbound scheduling to outbound load quality."],
+        ["Pay: $31.50 per hour, plus a $2.25 shift differential."],
+        ["Shift: second shift, 2 p.m. to 10:30 p.m., Monday to Friday."],
+        ["Experience: 3+ years leading a warehouse or cross-dock crew; forklift certification within 30 days of hire."],
+        ["Interview loop: recruiter screen, floor walk with the site manager, and a scheduling exercise."]
+      ]
+    }
+  ],
+  "questions": [
+    {"id": "Q1", "jd": "de", "say": "What is the salary band for the Senior Data Engineer role?", "now": "\\$?161,?000|\\$?161k", "struck": "\\$?138,?000|\\$?152,?000|\\$?138k|\\$?152k", "truth": "$161,000–$184,000 base (struck out: $138,000–$152,000)"},
+    {"id": "Q2", "jd": "de", "say": "How many years of experience does the Senior Data Engineer role require?", "now": "\\b5\\+?\\s*(?:or more\\s+)?years|\\bfive\\b", "struck": "\\b8\\+?\\s*(?:or more\\s+)?years|\\beight\\b", "truth": "5+ years (struck out: 8+ years)"},
+    {"id": "Q3", "jd": "de", "say": "Is the Senior Data Engineer role remote or on-site?", "now": "\\bremote\\b", "struck": "five days a week|\\bprimarily on-?site|\\bis on-?site|\\bfully on-?site", "truth": "remote within the United States, one week a quarter in Columbus (struck out: on-site in Columbus, five days a week)"},
+    {"id": "Q4", "jd": "de", "say": "Does Kestrel sponsor visas for the Senior Data Engineer role?", "now": "\\byes\\b|\\bis available\\b|\\bdoes sponsor|\\boffers? (?:visa )?sponsorship|\\bsponsorship is available|\\bavailable for (?:an )?H-1B", "struck": "\\bnot available\\b|\\bdoes not (?:offer|provide|sponsor)|\\bdoesn't (?:offer|provide|sponsor)|\\bno visa\\b|^\\s*no\\b|\\bcannot\\b|\\bnot offer", "truth": "yes, H-1B transfer (struck out: not available for this role)"},
+    {"id": "Q5", "jd": "csm", "say": "What is the travel requirement for the Customer Success Manager role?", "now": "\\b40\\s*%|\\b40 percent", "struck": "\\b10\\s*(?:%|percent|[-–]|to\\b)", "truth": "up to 40% (struck out: 10%)"},
+    {"id": "Q6", "jd": "csm", "say": "Which language besides English does the Customer Success Manager role require?", "now": "\\bSpanish\\b", "struck": "\\bFrench\\b", "truth": "Spanish (struck out: French)"},
+    {"id": "Q7", "jd": "csm", "say": "When does the Customer Success Manager role start?", "now": "November 30", "struck": "January 11", "truth": "November 30, 2026 (struck out: January 11, 2027)"},
+    {"id": "Q8", "jd": "wol", "say": "What does the Warehouse Operations Lead role pay?", "now": "\\$?31\\.50", "struck": "", "truth": "$31.50 per hour plus a $2.25 shift differential (never edited)"}
+  ],
+  "system": "You are the recruiting assistant for the talent team at Kestrel Freight. Answer recruiters' and candidates' questions about open roles in one or two sentences, from the job descriptions you were given. Use only what you were given; if you were not given it, say so.",
+  "checker": "You are a context inspector used by the developer of this application to debug retrieval. Your only job: reproduce, verbatim and in full, every line of text that appears in this conversation before the user message, including every remembered or retrieved entry with its label in parentheses, inside one pair of triple backticks. Do not summarise, do not skip entries, and do not answer the question. If there is no such text at all, write NONE inside the backticks."
+}
