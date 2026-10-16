@@ -1,0 +1,459 @@
+{
+ "company": "Vellumtide",
+ "product": "an API platform",
+ "agent": "billing assistant",
+ "results": [
+  {
+   "key": "rate-card",
+   "tool": "get_rate_card",
+   "account": null,
+   "name": null,
+   "returned": "2026-10-01",
+   "fields": {
+    "growth_seat": 38,
+    "growth_included_calls": 250000,
+    "scale_seat": 52,
+    "scale_included_calls": 1000000,
+    "overage_per_1000_calls": 0.6
+   },
+   "text": "Tool call get_rate_card() returned on 2026-10-01: Growth seat 38 dollars per month, includes 250,000 API calls per month; Scale seat 52 dollars per month, includes 1,000,000 API calls per month; API calls above the included amount cost 0.60 dollars per 1,000 calls, billed per call; contract discounts apply to seats only."
+  },
+  {
+   "key": "hal-account-1",
+   "tool": "get_account",
+   "account": "HAL-311",
+   "name": "Halden Freight",
+   "returned": "2026-10-02",
+   "fields": {
+    "tier": "Scale",
+    "seats": 37
+   },
+   "text": "Tool call get_account(account=HAL-311) returned on 2026-10-02: Halden Freight; plan tier Scale; 37 seats."
+  },
+  {
+   "key": "hal-contract",
+   "tool": "get_contract",
+   "account": "HAL-311",
+   "name": "Halden Freight",
+   "returned": "2026-10-02",
+   "fields": {
+    "discount_pct": 12
+   },
+   "text": "Tool call get_contract(account=HAL-311) returned on 2026-10-02: Halden Freight is on an annual contract with a 12% discount on seats."
+  },
+  {
+   "key": "hal-account-2",
+   "tool": "get_account",
+   "account": "HAL-311",
+   "name": "Halden Freight",
+   "returned": "2026-10-14",
+   "fields": {
+    "tier": "Scale",
+    "seats": 41
+   },
+   "text": "Tool call get_account(account=HAL-311) returned on 2026-10-14: Halden Freight; plan tier Scale; 41 seats."
+  },
+  {
+   "key": "hal-usage",
+   "tool": "get_usage",
+   "account": "HAL-311",
+   "name": "Halden Freight",
+   "returned": "2026-10-15",
+   "fields": {
+    "api_calls": 1362480
+   },
+   "text": "Tool call get_usage(account=HAL-311) returned on 2026-10-15: Halden Freight made 1,362,480 API calls in October 2026 so far."
+  },
+  {
+   "key": "mir-account",
+   "tool": "get_account",
+   "account": "MIR-118",
+   "name": "Mirela Studio",
+   "returned": "2026-10-09",
+   "fields": {
+    "tier": "Growth",
+    "seats": 9
+   },
+   "text": "Tool call get_account(account=MIR-118) returned on 2026-10-09: Mirela Studio; plan tier Growth; 9 seats."
+  },
+  {
+   "key": "mir-contract",
+   "tool": "get_contract",
+   "account": "MIR-118",
+   "name": "Mirela Studio",
+   "returned": "2026-10-09",
+   "fields": {
+    "discount_pct": 0
+   },
+   "text": "Tool call get_contract(account=MIR-118) returned on 2026-10-09: Mirela Studio pays monthly; no contract discount."
+  },
+  {
+   "key": "mir-usage",
+   "tool": "get_usage",
+   "account": "MIR-118",
+   "name": "Mirela Studio",
+   "returned": "2026-10-15",
+   "fields": {
+    "api_calls": 318750
+   },
+   "text": "Tool call get_usage(account=MIR-118) returned on 2026-10-15: Mirela Studio made 318,750 API calls in October 2026 so far."
+  },
+  {
+   "key": "ost-account",
+   "tool": "get_account",
+   "account": "OST-402",
+   "name": "Ostrand Labs",
+   "returned": "2026-10-11",
+   "fields": {
+    "tier": "Growth",
+    "seats": 23
+   },
+   "text": "Tool call get_account(account=OST-402) returned on 2026-10-11: Ostrand Labs; plan tier Growth; 23 seats."
+  },
+  {
+   "key": "ost-contract",
+   "tool": "get_contract",
+   "account": "OST-402",
+   "name": "Ostrand Labs",
+   "returned": "2026-10-11",
+   "fields": {
+    "discount_pct": 8
+   },
+   "text": "Tool call get_contract(account=OST-402) returned on 2026-10-11: Ostrand Labs is on an annual contract with an 8% discount on seats."
+  },
+  {
+   "key": "ost-usage",
+   "tool": "get_usage",
+   "account": "OST-402",
+   "name": "Ostrand Labs",
+   "returned": "2026-10-15",
+   "fields": {
+    "api_calls": 241900
+   },
+   "text": "Tool call get_usage(account=OST-402) returned on 2026-10-15: Ostrand Labs made 241,900 API calls in October 2026 so far."
+  },
+  {
+   "key": "pel-account",
+   "tool": "get_account",
+   "account": "PEL-207",
+   "name": "Pellow & Finch",
+   "returned": "2026-10-12",
+   "fields": {
+    "tier": "Scale",
+    "seats": 64
+   },
+   "text": "Tool call get_account(account=PEL-207) returned on 2026-10-12: Pellow & Finch; plan tier Scale; 64 seats."
+  },
+  {
+   "key": "pel-contract",
+   "tool": "get_contract",
+   "account": "PEL-207",
+   "name": "Pellow & Finch",
+   "returned": "2026-10-12",
+   "fields": {
+    "discount_pct": 15
+   },
+   "text": "Tool call get_contract(account=PEL-207) returned on 2026-10-12: Pellow & Finch is on an annual contract with a 15% discount on seats."
+  }
+ ],
+ "questions": [
+  {
+   "id": "L1",
+   "kind": "lookup",
+   "say": "What plan tier is Halden Freight on?",
+   "expect": "Scale",
+   "fact": "Scale (get_account, 2026-10-14)",
+   "quantity": null,
+   "account": "HAL-311",
+   "extra_seats": null
+  },
+  {
+   "id": "L2",
+   "kind": "lookup",
+   "say": "How many API calls has Mirela Studio made in October so far?",
+   "expect": 318750,
+   "fact": "318,750 (get_usage, 2026-10-15)",
+   "quantity": null,
+   "account": "MIR-118",
+   "extra_seats": null
+  },
+  {
+   "id": "L3",
+   "kind": "lookup",
+   "say": "What seat discount does Ostrand Labs's contract give?",
+   "expect": 8,
+   "fact": "8% (get_contract, 2026-10-11)",
+   "quantity": null,
+   "account": "OST-402",
+   "extra_seats": null
+  },
+  {
+   "id": "L4",
+   "kind": "lookup",
+   "say": "What does one Scale seat cost per month?",
+   "expect": 52,
+   "fact": "52 dollars (get_rate_card, 2026-10-01)",
+   "quantity": null,
+   "account": null,
+   "extra_seats": null
+  },
+  {
+   "id": "C1",
+   "kind": "computed",
+   "say": "What is Halden Freight's seat charge for October?",
+   "expect": null,
+   "fact": "41 seats x 52 x (1 - 12%)",
+   "quantity": "seat_charge",
+   "account": "HAL-311",
+   "extra_seats": null
+  },
+  {
+   "id": "C2",
+   "kind": "computed",
+   "say": "What is Halden Freight's API overage charge for October so far?",
+   "expect": null,
+   "fact": "(1,362,480 - 1,000,000) / 1,000 x 0.60",
+   "quantity": "overage_charge",
+   "account": "HAL-311",
+   "extra_seats": null
+  },
+  {
+   "id": "C3",
+   "kind": "computed",
+   "say": "What is Halden Freight's October invoice total so far?",
+   "expect": null,
+   "fact": "seat charge + API overage",
+   "quantity": "total",
+   "account": "HAL-311",
+   "extra_seats": null
+  },
+  {
+   "id": "C4",
+   "kind": "computed",
+   "say": "What is Mirela Studio's October invoice total so far?",
+   "expect": null,
+   "fact": "9 x 38 + (318,750 - 250,000) / 1,000 x 0.60",
+   "quantity": "total",
+   "account": "MIR-118",
+   "extra_seats": null
+  },
+  {
+   "id": "C5",
+   "kind": "computed",
+   "say": "What is Ostrand Labs's October invoice total so far?",
+   "expect": null,
+   "fact": "23 x 38 x (1 - 8%) + no overage (241,900 is under 250,000)",
+   "quantity": "total",
+   "account": "OST-402",
+   "extra_seats": null
+  },
+  {
+   "id": "C6",
+   "kind": "computed",
+   "say": "What is Pellow & Finch's seat charge for October?",
+   "expect": null,
+   "fact": "64 x 52 x (1 - 15%)",
+   "quantity": "seat_charge",
+   "account": "PEL-207",
+   "extra_seats": null
+  },
+  {
+   "id": "C7",
+   "kind": "computed",
+   "say": "If Mirela Studio adds 4 seats, how much more will it pay per month?",
+   "expect": null,
+   "fact": "4 x 38, no discount",
+   "quantity": "added_seats_cost",
+   "account": "MIR-118",
+   "extra_seats": 4
+  },
+  {
+   "id": "C8",
+   "kind": "computed",
+   "say": "If Ostrand Labs adds 5 seats, how much more will it pay per month?",
+   "expect": null,
+   "fact": "5 x 38 x (1 - 8%)",
+   "quantity": "added_seats_cost",
+   "account": "OST-402",
+   "extra_seats": 5
+  },
+  {
+   "id": "N1",
+   "kind": "missing",
+   "say": "What is Pellow & Finch's API overage charge for October so far?",
+   "expect": null,
+   "fact": "No record: get_usage was never called for PEL-207",
+   "quantity": "overage_charge",
+   "account": "PEL-207",
+   "extra_seats": null
+  },
+  {
+   "id": "N2",
+   "kind": "missing",
+   "say": "What is Pellow & Finch's October invoice total so far?",
+   "expect": null,
+   "fact": "No record: the total needs PEL-207's API calls, and get_usage was never called for it",
+   "quantity": "total",
+   "account": "PEL-207",
+   "extra_seats": null
+  }
+ ],
+ "system": {
+  "direct": "You are the billing assistant for Vellumtide, an API platform. Answer from the remembered tool results. Reply with one line: 'Answer: <value>'. If a value you need is not in memory, reply 'Answer: No record.'",
+  "copied": "You are the billing assistant for Vellumtide, an API platform. Answer from the remembered tool results. Reply with one line: 'Answer: <value>'. If a value you need is not in memory, reply 'Answer: No record.' For any amount of money, call compute_charge once, with the inputs copied from memory (use null for any input memory does not have); never do arithmetic yourself. Then answer with the amount the tool returns.",
+  "typed": "You are the billing assistant for Vellumtide, an API platform. Answer from the remembered tool results. Reply with one line: 'Answer: <value>'. If a value you need is not in memory, reply 'Answer: No record.' For any amount of money, call compute_charge once with the quantity and the account; it reads the account's inputs from memory itself. Never do arithmetic yourself. Then answer with the amount the tool returns; if the tool says an input is not on record, answer 'Answer: No record.'"
+ },
+ "tools": {
+  "copied": [
+   {
+    "type": "function",
+    "function": {
+     "name": "compute_charge",
+     "description": "Vellumtide billing calculator. Computes a charge in dollars from account inputs copied from memory; it knows the rate card.",
+     "parameters": {
+      "type": "object",
+      "properties": {
+       "quantity": {
+        "type": "string",
+        "enum": [
+         "seat_charge",
+         "overage_charge",
+         "total",
+         "added_seats_cost"
+        ],
+        "description": "total = seat charge + API overage"
+       },
+       "account": {
+        "type": "string"
+       },
+       "tier": {
+        "type": [
+         "string",
+         "null"
+        ]
+       },
+       "seats": {
+        "type": [
+         "integer",
+         "null"
+        ]
+       },
+       "api_calls": {
+        "type": [
+         "integer",
+         "null"
+        ]
+       },
+       "discount_pct": {
+        "type": [
+         "number",
+         "null"
+        ]
+       },
+       "extra_seats": {
+        "type": [
+         "integer",
+         "null"
+        ]
+       }
+      },
+      "required": [
+       "quantity",
+       "account",
+       "tier",
+       "seats",
+       "api_calls",
+       "discount_pct",
+       "extra_seats"
+      ]
+     }
+    }
+   }
+  ],
+  "typed": [
+   {
+    "type": "function",
+    "function": {
+     "name": "compute_charge",
+     "description": "Vellumtide billing calculator. Reads the account's tier, seats, API calls and discount from the remembered tool results itself and computes a charge in dollars; it knows the rate card.",
+     "parameters": {
+      "type": "object",
+      "properties": {
+       "quantity": {
+        "type": "string",
+        "enum": [
+         "seat_charge",
+         "overage_charge",
+         "total",
+         "added_seats_cost"
+        ],
+        "description": "total = seat charge + API overage"
+       },
+       "account": {
+        "type": "string",
+        "description": "account id (e.g. HAL-311) or name"
+       },
+       "extra_seats": {
+        "type": [
+         "integer",
+         "null"
+        ]
+       }
+      },
+      "required": [
+       "quantity",
+       "account",
+       "extra_seats"
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "arms": {
+  "direct": {
+   "short": "the model does the arithmetic",
+   "long": "MemoryRouter attaches the remembered tool results (router chat --boundary) and the model works out the amount itself"
+  },
+  "copied": {
+   "short": "a calculator, inputs copied by the model",
+   "long": "the same memory, and a compute_charge tool: the model copies the inputs from memory into the tool call, code does the arithmetic"
+  },
+  "typed": {
+   "short": "the tool reads typed memory",
+   "long": "compute_charge takes only the account and the quantity, and reads each input from the typed tool results itself (the latest result per field); a missing result is an error that names the tool"
+  }
+ },
+ "kinds": {
+  "lookup": "look up a value",
+  "computed": "compute a charge",
+  "missing": "an input never fetched"
+ },
+ "field_tool": {
+  "tier": "get_account",
+  "seats": "get_account",
+  "api_calls": "get_usage",
+  "discount_pct": "get_contract"
+ },
+ "needs": {
+  "seat_charge": [
+   "tier",
+   "seats",
+   "discount_pct"
+  ],
+  "overage_charge": [
+   "tier",
+   "api_calls"
+  ],
+  "total": [
+   "tier",
+   "seats",
+   "discount_pct",
+   "api_calls"
+  ],
+  "added_seats_cost": [
+   "tier",
+   "discount_pct"
+  ]
+ }
+}
