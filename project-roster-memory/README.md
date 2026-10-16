@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*AI That Remembers Every Project Decision, From Day One to Delivery*](https://www.memorylake.ai/en/usecase/ai-memory-for-project-management-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 5:22](https://github.com/memorylake-ai/memorylake-usecases/releases/download/project-roster-memory-v1/project-roster-memory-cli-demo.mp4) · [Web, 5:41](https://github.com/memorylake-ai/memorylake-usecases/releases/download/project-roster-memory-v1/project-roster-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/project-roster-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Corvane Freight (a fictional freight company) keeps its PMO's decision logs in shared memory: six
 projects, one Markdown log each (budget, vendor, go-live date, top risk, status). A PMO assistant answers from them.
@@ -26,13 +27,13 @@ Q2  Which vendor did we pick for Project Juniper?
     ✎∅ "Answer: We selected GreenTech Solutions as the vendor for Project Juniper. …"
 ```
 
-Over 7 runs, the assistant said "not tracked" for **9 of 84** questions about the four projects the PMO never
-tracked; 73 answers were invented, **every one of them on a call where MemoryRouter attached nothing**. Adding the
-PMO roster as a document in the same boundary ("the PMO tracks exactly these six projects; any other project is not
-tracked") brought it to **26 of 84**: the roster only helps when MemoryRouter attaches it, and an unfamiliar name is
-exactly what makes it attach nothing. Keeping the roster as facts in MemoryLake and having the app read them
-(`fact list`) into the system prompt: **84 of 84**. The 84 controls about tracked projects were right in all three
-setups.
+Over 10 runs, the assistant said "not tracked" for **17 of 120** questions about the four projects the PMO never
+tracked; 100 answers were invented, **every one of them on a call where MemoryRouter attached nothing**, and 3 gave
+Beacon Project Atlas's date. Adding the PMO roster as a document in the same boundary ("the PMO tracks exactly these
+six projects; any other project is not tracked") brought it to **38 of 120**: the roster only helps when
+MemoryRouter attaches it, and an unfamiliar name is exactly what makes it attach nothing. Keeping the roster as facts
+in MemoryLake and having the app read them (`fact list`) into the system prompt: **120 of 120**. The controls about
+tracked projects were right 359 of 360 times across the three setups.
 
 ## What the demo shows
 
@@ -150,7 +151,8 @@ match over the facts in a scope, so it can say *no*.
       2. nothing attached (∅)
 ```
 
-Over 6 runs (48 copies), nothing was attached in 31, a project's log in 14, the roster in 5.
+Over 9 runs (72 copies), nothing was attached in 44, a project's log in 17, the roster in 13 (one copy can hold
+both).
 
 ### Steps 6–8: ask the PMO assistant
 
@@ -187,33 +189,38 @@ With the roster in the prompt, ∅ is harmless: the model has the list whether o
 
 ## Measured
 
-Over **7 runs** (per setup and run: 12 answers about never-tracked projects, 12 controls):
+Over **10 runs** (including the recordings for the videos; per setup and run: 12 answers about never-tracked
+projects, 12 controls):
 
 | | never tracked: "not tracked" | another project's value | invented | ∅ | controls |
 |---|---|---|---|---|---|
-| decision logs only | 9/84 | 2 | 73 | 73 | 84/84 |
-| + roster document | 26/84 | 1 | 57 | 57 | 84/84 |
-| + roster in the prompt | 84/84 | 0 | 0 | 68 | 84/84 |
+| decision logs only | 17/120 | 3 | 100 | 100 | 120/120 |
+| + roster document | 38/120 | 1 | 81 | 81 | 119/120 |
+| + roster in the prompt | 120/120 | 0 | 0 | 100 | 120/120 |
 
-By question (21 answers each):
+By question (30 answers each):
 
 | | decision logs only | + roster document | + roster in the prompt |
 |---|---|---|---|
-| Q1 Beacon's go-live date | ✎∅ 18, ⇄ 2 (Atlas's November 16), ✓ 1 | ✎∅ 14, ✓ 6, ⇄ 1 (Harbor's December 7) | ✓ 21 |
-| Q2 Juniper's vendor | ✎∅ 20, ✓ 1 | ✎∅ 17, ✓ 4 | ✓ 21 |
-| Q3 Kestrel's budget | ✎∅ 21 | ✎∅ 17, ✓ 4 | ✓ 21 |
-| Q4 Orion's sponsor | ✎∅ 14, ✓ 7 | ✓ 12, ✎∅ 9 | ✓ 21 |
-| Q5–Q8 controls (Atlas, Cobalt, Harbor, Lumen) | ✓ 84 | ✓ 84 | ✓ 84 |
+| Q1 Beacon's go-live date | ✎∅ 26, ⇄ 3 (Atlas's November 16), ✓ 1 | ✎∅ 21, ✓ 8, ⇄ 1 (Harbor's December 7) | ✓ 30 |
+| Q2 Juniper's vendor | ✎∅ 28, ✓ 2 | ✎∅ 25, ✓ 5 | ✓ 30 |
+| Q3 Kestrel's budget | ✎∅ 29, ✓ 1 | ✎∅ 23, ✓ 7 | ✓ 30 |
+| Q4 Orion's sponsor | ✎∅ 17, ✓ 13 | ✓ 18, ✎∅ 12 | ✓ 30 |
+| Q5 Atlas's go-live date — control | ✓ 30 | ✓ 30 | ✓ 30 |
+| Q6 Cobalt's vendor — control | ✓ 30 | ✓ 30 | ✓ 30 |
+| Q7 Harbor's budget — control | ✓ 30 | ✓ 30 | ✓ 30 |
+| Q8 Lumen's sponsor — control | ✓ 30 | ✓ 29, ✗∅ 1 ("Sarah Thompson") | ✓ 30 |
 
-- **Every invented answer had nothing attached.** 130 of 130 ✎ answers across the first two setups were ∅ calls. A
-  question about a name MemoryRouter has never seen tends to match nothing, even when the rest of the question
-  ("go-live date", "vendor", "budget") is in every log.
-- **When a log is attached, the model mostly declines** ("not listed in the provided decision logs") — but 3 times it
-  gave Beacon another project's go-live date.
-- **The roster document helps only when it is attached.** It turned 17 of the logs-only misses into "not tracked";
-  its remaining misses were all ∅ calls (57 of 58; the other was ⇄).
+- **Every invented answer had nothing attached.** 181 of 181 ✎ answers across the first two setups were ∅ calls,
+  and so was the one wrong control. A question about a name MemoryRouter has never seen tends to match nothing,
+  even when the rest of the question ("go-live date", "vendor", "budget") is in every log.
+- **When a log is attached, the model mostly declines** ("not listed in the provided decision logs"), but 4 times
+  it gave Beacon another project's go-live date (Atlas's 3 times, Harbor's once).
+- **The roster document helps only when it is attached.** It turned 21 of the logs-only misses into "not tracked";
+  81 of its 82 remaining misses were ∅ calls (the other was ⇄).
 - **The roster in the prompt doesn't depend on attachment.** The app reads the six roster facts with `fact list` and
-  sends them on every call: 84 of 84, with no change to the controls.
+  sends them on every call: 120 of 120, with 100 of those calls having nothing attached, and no change to the
+  controls.
 - These are totals over every run. Model replies vary from run to run.
 
 ## Use it in your own app
