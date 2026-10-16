@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Run Production Agents With Memory Observability You Don't Have to Build*](https://www.memorylake.ai/en/usecase/memory-observability-for-production-agents),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** (recording in progress)
+**Watch it run:** [CLI, 5:08](https://github.com/memorylake-ai/memorylake-usecases/releases/download/empty-retrieval-memory-v1/empty-retrieval-memory-cli-demo.mp4) · [Web, 6:08](https://github.com/memorylake-ai/memorylake-usecases/releases/download/empty-retrieval-memory-v1/empty-retrieval-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/empty-retrieval-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Larkspur Pay (a fictional payments company) keeps its platform runbooks in shared memory: six short
 Markdown documents — rollback sign-off, Postgres failover, partner rate limits, Sev1 escalation, certificate
@@ -24,10 +25,10 @@ Q8  Can I ship a hotfix the Friday after Thanksgiving?               (freeze.md:
 ```
 
 The usual fix is one more sentence in the system prompt: *"If you do not know the answer, reply 'Answer: No record.'
-Do not guess."* It helps — invented answers go from 66 to 30 over 4 runs — but look at what the "No record" replies are for:
+Do not guess."* It helps — invented answers go from 98 to 49 over 6 runs — but look at what the "No record" replies are for:
 
 ```
-“Do not guess” prompt:  “No record” 33 times;  21 of them for a question a runbook answers
+“Do not guess” prompt:  “No record” 49 times;  31 of them for a question a runbook answers
     –∅ Q6 How many calls can a partner make before we throttle them?   "Answer: No record."   (ratelimits.md: 240/min)
     –∅ Q8 Can I ship a hotfix the Friday after Thanksgiving?           "Answer: No record."   (freeze.md)
     ✓∅ Q10 Which Kafka cluster does the ledger service publish to?     "Answer: No record."   (truly not covered)
@@ -39,7 +40,7 @@ have no rule about this" from "the assistant didn't look in the right place" —
 The app can tell them apart, because each MemoryRouter call leaves one trace: `usage.prompt_tokens`. If it is no
 higher than the same call **without** a boundary, nothing was attached (∅). In the third setup the app checks that on
 every call; on ∅ it runs `search --types document --top-k 1` itself (which finds the right runbook for every question
-here) and asks again with that page, and it labels where the answer came from: **117 of 120 right over 4 runs**, no invented answers.
+here) and asks again with that page, and it labels where the answer came from: **177 of 180 right over 6 runs**, no invented answers.
 
 ## What the demo shows
 
@@ -96,7 +97,10 @@ every answer is labelled "MemoryRouter attached 183 tokens" or "MemoryRouter att
 freeze.md"), the per-retrieval metrics and a scoreboard. **Ask** runs one question the observed way. A terminal drawer
 shows every `memorylake` command as it runs. **Clean up** removes it all.
 
-
+| | |
+|---|---|
+| ![](web/screenshot-attached.png) | ![](web/screenshot-noguess.png) |
+| ![](web/screenshot-observed.png) | ![](web/screenshot-score.png) |
 
 ## What happens, step by step
 
@@ -174,12 +178,12 @@ MemoryRouter attached nothing for this question, so the app searched the runbook
   question                                                              calls  attached  ∅   median tokens
   Q1   Under the release rollback runbook, who must sign off on a pay     9         9   0     178
   Q2   What is the partner API rate limit per key?                        9         9   0     167
-  Q3   Which replica do we promote in a Postgres failover of the ledg     9         7   2     169
-  Q4   When does the 2026 holiday change freeze start?                    9         7   2     161
-  Q5   I'm on call and want to roll back. Do I need anyone's OK?          9         7   2     274
+  Q3   Which replica do we promote in a Postgres failover of the ledg     9         6   3     169
+  Q4   When does the 2026 holiday change freeze start?                    9         9   0     161
+  Q5   I'm on call and want to roll back. Do I need anyone's OK?          9         6   3     274
   Q6   How many calls can a partner make before we throttle them?         9         2   7     167
-  Q7   Who do I wake up if a Sev1 is still burning after half an hour     9         0   9       —
-  Q8   Can I ship a hotfix the Friday after Thanksgiving?                 9         2   7     161
+  Q7   Who do I wake up if a Sev1 is still burning after half an hour     9         3   6     162
+  Q8   Can I ship a hotfix the Friday after Thanksgiving?                 9         1   8     161
   Q9   How long do we keep payment webhook logs?                          9         0   9       —
   Q10  Which Kafka cluster does the ledger service publish to?            9         0   9       —
 ```
@@ -195,34 +199,34 @@ an app can log, alert on and put next to the answer.
 
 ## Measured
 
-Over **4 runs** (including the recordings; per setup and run: 10 questions × 3 answers):
+Over **6 runs** (including the recordings; per setup and run: 10 questions × 3 answers):
 
 | | right | ✎ invented (all with nothing attached) | “No record” | of those, a runbook has the answer | ∅ calls | answered from the app's search |
 |---|---|---|---|---|---|---|
-| plain prompt | 54/120 | 66 | 0 | 0 | 66 | – |
-| “Do not guess” prompt | 69/120 | 30 | 33 | 21 | 63 | – |
-| “Do not guess” + the app sees ∅ | 117/120 | 0 | 27 | 3 | 64 | 64 |
+| plain prompt | 82/180 | 98 | 0 | 0 | 98 | – |
+| “Do not guess” prompt | 100/180 | 49 | 49 | 31 | 97 | – |
+| “Do not guess” + the app sees ∅ | 177/180 | 0 | 39 | 3 | 94 | 94 |
 
-By question (12 answers each):
+By question (18 answers each):
 
 | | plain prompt | “Do not guess” | + the app sees ∅ |
 |---|---|---|---|
-| Q1 Under the release rollback runbook, who must sign off on a payments-api rollback? (rollback.md) | ✓ 12 | ✓ 12 | ✓ 12 |
-| Q2 What is the partner API rate limit per key? (ratelimits.md) | ✓ 12 | ✓ 12 | ✓ 11, ✓∅ 1 |
-| Q3 Which replica do we promote in a Postgres failover of the ledger database? (failover.md) | ✎∅ 8, ✓ 4 | ✓ 7, ✎∅ 5 | ✓ 8, ✓∅ 4 |
-| Q4 When does the 2026 holiday change freeze start? (freeze.md) | ✓ 10, ✎∅ 2 | ✓ 11, –∅ 1 | ✓ 10, ✓∅ 2 |
-| Q5 I'm on call and want to roll back. Do I need anyone's OK? (rollback.md) | ✎∅ 6, ✓ 6 | ✓ 11, ✎∅ 1 | ✓ 9, ✓∅ 3 |
-| Q6 How many calls can a partner make before we throttle them? (ratelimits.md) | ✎∅ 8, ✓ 4 | –∅ 8, ✓ 4 | ✓∅ 11, ✓ 1 |
-| Q7 Who do I wake up if a Sev1 is still burning after half an hour? (paging.md) | ✎∅ 9, ✓ 3 | ✎∅ 12 | ✓∅ 10, ✓ 2 |
-| Q8 Can I ship a hotfix the Friday after Thanksgiving? (freeze.md) | ✎∅ 9, ✓ 3 | –∅ 12 | ✓∅ 9, – 3 |
-| Q9 How long do we keep payment webhook logs? (not covered) | ✎∅ 12 | ✎∅ 12 | ✓∅ 12 |
-| Q10 Which Kafka cluster does the ledger service publish to? (not covered) | ✎∅ 12 | ✓∅ 12 | ✓∅ 12 |
+| Q1 Under the release rollback runbook, who must sign off on a payments-api rollback? (rollback.md) | ✓ 18 | ✓ 18 | ✓ 18 |
+| Q2 What is the partner API rate limit per key? (ratelimits.md) | ✓ 17, ✎∅ 1 | ✓ 18 | ✓ 17, ✓∅ 1 |
+| Q3 Which replica do we promote in a Postgres failover of the ledger database? (failover.md) | ✎∅ 10, ✓ 8 | ✎∅ 10, ✓ 8 | ✓ 11, ✓∅ 7 |
+| Q4 When does the 2026 holiday change freeze start? (freeze.md) | ✓ 16, ✎∅ 2 | ✓ 17, –∅ 1 | ✓ 16, ✓∅ 2 |
+| Q5 I'm on call and want to roll back. Do I need anyone's OK? (rollback.md) | ✎∅ 9, ✓ 9 | ✓ 15, ✎∅ 3 | ✓ 14, ✓∅ 4 |
+| Q6 How many calls can a partner make before we throttle them? (ratelimits.md) | ✎∅ 12, ✓ 6 | –∅ 12, ✓ 6 | ✓∅ 16, ✓ 2 |
+| Q7 Who do I wake up if a Sev1 is still burning after half an hour? (paging.md) | ✎∅ 13, ✓ 5 | ✎∅ 18 | ✓∅ 13, ✓ 5 |
+| Q8 Can I ship a hotfix the Friday after Thanksgiving? (freeze.md) | ✎∅ 15, ✓ 3 | –∅ 17, – 1 | ✓∅ 15, – 3 |
+| Q9 How long do we keep payment webhook logs? (not covered) | ✎∅ 18 | ✎∅ 18 | ✓∅ 18 |
+| Q10 Which Kafka cluster does the ledger service publish to? (not covered) | ✎∅ 18 | ✓∅ 18 | ✓∅ 18 |
 
-- **Every invented answer, in every setup, had nothing attached** (66 + 30 + 0 = 96 of 96). When MemoryRouter attaches a
+- **Every invented answer, in every setup, had nothing attached** (98 + 49 + 0 = 147 of 147). When MemoryRouter attaches a
   runbook page, the model uses it.
 - **"Do not guess" stops some inventions, not all.** Q9 (webhook logs) was answered "90 days" every time with the
   instruction too; Q7 still got "the on-call engineer and the platform team lead". Where it works, it turns ∅ into
-  "No record" — and those were more often for questions a runbook answers (21) than for the one none does.
+  "No record" — and those were more often for questions a runbook answers (31) than for the one none does.
 - **The observed setup answers from the app's search on ∅** (in the third column, ✓∅ = MemoryRouter attached
   nothing and the answer came from the app's search). It is still the model reading a page: Q8 ("the Friday after
   Thanksgiving") needs the date worked out against the freeze window, and 3 times the model said "No record"
