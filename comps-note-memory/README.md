@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Real Estate Teams Local Market Memory That Survives Every Agent Departure*](https://www.memorylake.ai/en/usecase/local-market-memory-for-real-estate-agents),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 4:12](https://github.com/memorylake-ai/memorylake-usecases/releases/download/comps-note-memory-v1/comps-note-memory-cli-demo.mp4) · [Web, 4:36](https://github.com/memorylake-ai/memorylake-usecases/releases/download/comps-note-memory-v1/comps-note-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/comps-note-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Harrow & Vale Realty (a fictional brokerage) keeps its comparable sales in an Excel workbook that
 the senior agent, Priya Nair, maintains. It goes into shared memory so that a newer agent's listing assistant can
@@ -26,12 +27,12 @@ hidden row and the hidden sheet are indexed like every other row. MemoryRouter a
 sheet's contracts sometimes under the visible sheet's name, `(… / Comps)` — and the assistant hands the agent the
 fire-damaged as-is sale as the lowest comp (*"Answer: 389000."*), a contract price as the top sale
 (*"Answer: 790000. This is the highest sale price among the comps."*), the sale that fell through as the most recent
-close, and the family sale as usable. 104 of 108 answers used a ruled-out row as a comp.
+close, and the family sale as usable. 176 of 180 answers used a ruled-out row as a comp.
 
 **Writing the notes into a column fixes most of it, not all.** With every note copied into an "Agent note" column
 and the hidden row and sheet left out (`note_workbook()`), the yes/no and top-of-range questions come back right.
 The lowest-price question does not: it skips both noted sales and then answers *598000* — the second-lowest usable
-price, not the lowest (589,000) — 18 times out of 18.
+price, not the lowest (589,000) — 30 times out of 30.
 
 **Leaving the ruled-out rows out of the file** (`usable_workbook()`) gets every attached answer right — and opens a
 different gap: ask about a sale that is no longer in the file, and MemoryRouter often attaches nothing. The model
@@ -227,40 +228,41 @@ The scoreboard of one run:
 
 ## Measured
 
-Over **6 runs** (per boundary and run: 18 answers about ruled-out rows, 6 about the controls):
+Over **10 runs** (including the recordings for the videos; per boundary and run: 18 answers about ruled-out rows, 6 about the controls):
 
 | | ruled-out rows: right | used as a comp | with a caveat | other | ∅ | controls |
 |---|---|---|---|---|---|---|
-| as saved | 0/107 | 104 | 3 | 0 | 1 | 36/36 |
-| noted | 85/105 | 0 | 0 | 20 | 3 | 36/36 |
-| usable | 83/83 | 0 | 0 | 0 | 25 | 36/36 |
+| as saved | 0/179 | 176 | 3 | 0 | 1 | 60/60 |
+| noted | 139/172 | 0 | 0 | 33 | 8 | 60/60 |
+| usable | 135/135 | 0 | 0 | 0 | 45 | 60/60 |
 
-By question (18 answers each):
+By question (30 answers each):
 
 | | as saved | noted | usable |
 |---|---|---|---|
-| Q1 lowest usable price — *589,000* | ✗ 17 (*389000*), ∅ 1 | · 18 (*598000*) | ✓ 18 |
-| Q2 top of range — *634,000* | ✗ 15 (*790000*, a contract), ◐ 3 (*"highest contract price"*) | ✓ 18 | ✓ 18 |
-| Q3 most recent close — *2 Tanner Court* | ✗ 18 (*7 Brook Mews*) | ✓ 18 | ✓ 18 |
-| Q4 9 Quarry Lane usable? — *no* | ✗ 18 | ✓ 18 | ✓ 15, ∅ 3 (*"Yes …"*) |
-| Q5 5 Mill Pond Road usable? — *no* | ✗ 18 | ✓ 15, ∅ 3 (*"Yes …"*) | ✓ 10, ∅ 8 (*"Yes …"*) |
-| Q6 16 Fenwick Street's sale price — *not closed* | ✗ 18 (*641000*) | ✓ 16, · 2 (*598000*) | ✓ 4, ∅ 14 (*$450,000*) |
-| Q7 118 Fenwick Street — control | ✓ 18 | ✓ 18 | ✓ 18 |
-| Q8 37 Larch Close sq ft — control | ✓ 18 | ✓ 18 | ✓ 18 |
+| Q1 lowest usable price — *589,000* | ✗ 29 (*389000*), ∅ 1 | · 30 (*598000*) | ✓ 30 |
+| Q2 top of range — *634,000* | ✗ 27 (*790000*, a contract), ◐ 3 (*"highest contract price"*) | ✓ 30 | ✓ 30 |
+| Q3 most recent close — *2 Tanner Court* | ✗ 30 (*7 Brook Mews*) | ✓ 30 | ✓ 30 |
+| Q4 9 Quarry Lane usable? — *no* | ✗ 30 | ✓ 30 | ✓ 23, ∅ 7 (*"Yes …"*) |
+| Q5 5 Mill Pond Road usable? — *no* | ✗ 30 | ✓ 23, ∅ 7 (*"Yes …"*) | ✓ 17, ∅ 13 (*"Yes …"*) |
+| Q6 16 Fenwick Street's sale price — *not closed* | ✗ 30 (*641000*) | ✓ 26, · 3 (*598000*), ∅ 1 (*$450,000*) | ✓ 5, ∅ 25 (*$450,000*) |
+| Q7 118 Fenwick Street — control | ✓ 30 | ✓ 30 | ✓ 30 |
+| Q8 37 Larch Close sq ft — control | ✓ 30 | ✓ 30 | ✓ 30 |
 
-- **The index**: in all 6 runs (each a fresh import) the as-saved text held 0 words from the cell notes, the hidden
+- **The index**: in all 10 runs (each a fresh import) the as-saved text held 0 words from the cell notes, the hidden
   row, and the hidden sheet as its own table item (`sheet_name “Pending”`).
-- **What the model was handed** (36 checker copies, all readable): 0 words from the cell notes; the hidden row in
-  30 entries; the hidden sheet's contracts in 14 entries — 8 labelled `/ Comps`, 6 `/ Pending`.
+- **What the model was handed** (60 checker copies, all readable): 0 words from the cell notes; the hidden row in
+  50 entries; the hidden sheet's contracts in 26 entries — 16 labelled `/ Comps`, 10 `/ Pending`.
 - **Notes in a column are read, mostly.** Under *noted*, every question that names a noted sale came back right.
   The lowest-price question skipped both noted sales and then picked 221 Fenwick Street (598,000) over 2 Tanner
-  Court (589,000), 18 of 18; under *usable* — the same five sales without the noted rows beside them — it picked
-  589,000, 18 of 18. A checker copy of the noted Q1 attachment had all eight rows, Tanner Court included: the
+  Court (589,000), 30 of 30; under *usable* — the same five sales without the noted rows beside them — it picked
+  589,000, 30 of 30. A checker copy of the noted Q1 attachment had all eight rows, Tanner Court included: the
   rows were there, the comparison went wrong. We did not find why.
 - **∅ is where *usable* fails.** Ask about a sale that is no longer in the file and MemoryRouter often attaches
-  nothing (25 of 54 such answers). Every one of those 25 replies was wrong: *"Yes, 9 Quarry Lane can be used …"*,
+  nothing (45 of 90 such answers). Every one of those 45 replies was wrong: *"Yes, 9 Quarry Lane can be used …"*,
   *"Yes, 5 Mill Pond Road …"*, *"Answer: $450,000."* for a house that hasn't closed. They are not graded — nothing
-  was attached — but they are what the agent would read. Under *noted* the same questions had the note to go on.
+  was attached — but they are what the agent would read. Under *noted* the same questions had the note to go on
+  and ∅ was rarer (8 of 90; those 8 replies were wrong too).
 - These are totals over every run. Model replies vary from run to run.
 
 ## Use it in your own app
