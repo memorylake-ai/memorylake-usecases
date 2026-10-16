@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Strategy Teams AI That Builds Cumulative Competitor Knowledge*](https://www.memorylake.ai/en/usecase/ai-memory-for-competitive-intelligence),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 5:46](https://github.com/memorylake-ai/memorylake-usecases/releases/download/win-rate-memory-v1/win-rate-memory-cli-demo.mp4) · [Web, 6:01](https://github.com/memorylake-ai/memorylake-usecases/releases/download/win-rate-memory-v1/win-rate-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/win-rate-memory-v1); GitHub serves them as downloads).
 
 **The problem.** The sales team at Lumen Fieldworks keeps its competitive-intelligence pack in shared memory, so that
 a rep's assistant can answer *"what was Halvard's win rate against us in May?"* from it. The pack is six chart pages
@@ -46,7 +47,7 @@ January 2025"* — 31.4 is Halvard's January 2026.
 **What fixes it.** Store the same bytes under a file name that says whose numbers they are:
 `halvard-win-rate-2026.pdf`. The chart item is just as anonymous, but the file name is the one label that travels
 with every attached entry. The July question came back *"Halvard had the highest head-to-head win rate against us at
-36.5%"* in every call.
+36.5%"* in every call (27 of 27 over nine runs).
 
 **What a file name cannot fix.** On page 5 (Ostrava, 2025) the index kept the title in the chart item — and read
 it wrong, in every import: `Ostrava Win Rate in Head to Head Deals, 2023 (%)`, summary *"throughout 2023"*. Asked
@@ -93,6 +94,11 @@ Paste the key, press **Run demo**. The page follows the run step by step: the si
 holds it (with the chart item's text and the split-off paragraph), the questions under each set of file names with
 the checker's copy of what was attached, and a scoreboard. **Page** looks up one page in both projects without a
 model call. A terminal drawer shows every `memorylake` command as it runs. **Clean up** removes it all.
+
+| | |
+|---|---|
+| ![](web/screenshot-index.png) | ![](web/screenshot-exported.png) |
+| ![](web/screenshot-named.png) | ![](web/screenshot-score.png) |
 
 ## What happens, step by step
 
@@ -174,7 +180,8 @@ $ memorylake router chat "What was Halvard's head-to-head win rate against us in
       on the pages: Jul 2026: Halvard 36.5% · Brisk 24.9% · Ostrava 24.6% → Halvard  (pages 2, 4, 6)
       checker: attached p2 (Halvard 2026) as “ci-pack-p2.pdf”: 8/8 values, the text names neither rival nor year;
                p4 (Brisk 2026) as “ci-pack-p4.pdf”: 8/8 values, the text names its rival and year; p6 (Ostrava 2026) …
-      answers ✗ · ✗   e.g. “In July 2026, Brisk had the highest head-to-head win rate against us at 24.9%.”
+      answers ✗ ✗ ✗   e.g. “In July 2026, Halvard's win rate is not provided, but Brisk had a win rate of 24.9% and Ostrava had a
+                      win rate of 24.6%. Therefore, Brisk had the highest head-t…”
       ↳ named Brisk; on the pages Halvard was ahead at 36.5%
 ```
 
@@ -182,7 +189,7 @@ Under the named files, the same question:
 
 ```
       checker: attached p2 (Halvard 2026) as “halvard-win-rate-2026.pdf”: 8/8 values, the text names neither rival nor year; …
-      answers ✓ ✓ ✓   e.g. “In July 2026, Halvard had the highest head-to-head win rate against us at 36.5%.”
+      answers ✓ ✓ ✓   e.g. “In July 2026, Halvard had the highest head-to-head win rate against Lumen Fieldworks at 36.5%.”
 ```
 
 And page 5, under both:
@@ -206,31 +213,34 @@ searches only, no model call.
 
 ## Measured
 
-Over **6 runs** (108 answers per set of names; the totals are recomputed from every reply with the grading above):
+Over **9 runs** (including the two recorded for the videos; 162 answers per set of names, recomputed from every
+reply with the grading above):
 
 | | right | wrong | incomplete | no figure |
 |---|---|---|---|---|
-| as exported (`ci-pack-p2.pdf`) | 36/108 | 23 | 14 | 35 |
-| named files (`halvard-win-rate-2026.pdf`) | 66/108 | 4 | 14 | 24 |
+| as exported (`ci-pack-p2.pdf`) | 46/162 | 38 | 22 | 56 |
+| named files (`halvard-win-rate-2026.pdf`) | 102/162 | 4 | 22 | 34 |
 
 By question:
 
 | | as exported | named files |
 |---|---|---|
-| Q1 Halvard May 2026 (page 2, title split off) | 9/18 | 18/18 |
-| Q5 who was ahead in July 2026 (pages 2, 4, 6) | 2/18 (14 named Brisk or Ostrava) | 18/18 |
-| Q4 Halvard Aug 2025 vs Aug 2026 (pages 1, 2) | 14/18 | 14/18 |
-| Q3 Brisk June 2026 (page 4, title kept) | 11/18 | 14/18 |
-| Q2 Ostrava March 2025 (page 5, year read as 2023) | 0/18 | 0/18 |
-| Q6 Ostrava Jan 2025 vs Jan 2026 (pages 5, 6) | 0/18 | 2/18 |
+| Q1 Halvard May 2026 (page 2, title split off) | 11/27 (16 "not given") | 27/27 |
+| Q5 who was ahead in July 2026 (pages 2, 4, 6) | 2/27 (19 named Brisk, 3 Ostrava) | 27/27 |
+| Q4 Halvard Aug 2025 vs Aug 2026 (pages 1, 2) | 19/27 | 23/27 |
+| Q3 Brisk June 2026 (page 4, title kept) | 14/27 | 23/27 |
+| Q2 Ostrava March 2025 (page 5, year read as 2023) | 0/27 | 0/27 |
+| Q6 Ostrava Jan 2025 vs Jan 2026 (pages 5, 6) | 0/27 (3 used Halvard's 31.4 as Ostrava 2025) | 2/27 |
 
-- **The index**: page 2's title was split off in 12 of 12 imports (6 runs × 2 projects); page 5's year was read as
-  2023 in 12 of 12. The other four pages kept their title every time.
-- **Q3's wrong answers** (11 over both) are all *23.4%* — Brisk's May, the figure next to June in a chart item that
-  lists the months on one line and the values on the next. That is the model misreading an attached, labelled
-  entry, not a missing label.
-- What the index reads and what MemoryRouter attaches vary from run to run; these are totals over every run,
-  including the ones recorded for the videos.
+- **The index**: page 2's title was split off in 18 of 18 imports (9 runs × 2 projects); page 5's year was read
+  as 2023 in 18 of 18. The other four pages kept their title, read right, every time.
+- **The checker**: in all 48 readable copies that included page 2, its entry held all eight values and no rival or
+  year in its text — under the named files the label carried them, under the exported names nothing did. In 3 of the
+  9 exported Q5 copies page 2 was not attached at all.
+- **Q3's wrong answers** (17 over both) are all *23.4%* — Brisk's May, next to June in a chart item that lists the
+  months on one line and the values on the next. That is the model misreading an attached, labelled entry, not a
+  missing label.
+- What the index reads and what MemoryRouter attaches vary from run to run; these are totals over every run.
 
 ## Use it in your own app
 
