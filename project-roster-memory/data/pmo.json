@@ -1,0 +1,197 @@
+{
+ "company": "Corvane Freight",
+ "team": "PMO",
+ "lead": "Nadia Petrov",
+ "projects": [
+  {
+   "key": "atlas",
+   "name": "Project Atlas",
+   "about": "customer portal rebuild",
+   "owner": "Priya Raman",
+   "sponsor": "Daniel Okafor",
+   "values": [
+    "420,000",
+    "Lattice Forge",
+    "November 16",
+    "Daniel Okafor",
+    "Priya Raman"
+   ]
+  },
+  {
+   "key": "cobalt",
+   "name": "Project Cobalt",
+   "about": "data warehouse migration",
+   "owner": "Marcus Lindqvist",
+   "sponsor": "Helen Achebe",
+   "values": [
+    "680,000",
+    "Northpine",
+    "January 25",
+    "Helen Achebe",
+    "Marcus Lindqvist"
+   ]
+  },
+  {
+   "key": "fennel",
+   "name": "Project Fennel",
+   "about": "warehouse slotting, Reno DC",
+   "owner": "Ana Costa",
+   "sponsor": "Tobias Brandt",
+   "values": [
+    "195,000",
+    "Gridwise",
+    "October 26",
+    "Tobias Brandt",
+    "Ana Costa"
+   ]
+  },
+  {
+   "key": "harbor",
+   "name": "Project Harbor",
+   "about": "carrier rate management and freight audit",
+   "owner": "Wei Zhang",
+   "sponsor": "Daniel Okafor",
+   "values": [
+    "310,000",
+    "Clearmark",
+    "December 7",
+    "Wei Zhang"
+   ]
+  },
+  {
+   "key": "lumen",
+   "name": "Project Lumen",
+   "about": "driver mobile app",
+   "owner": "Grace Mensah",
+   "sponsor": "Tobias Brandt",
+   "values": [
+    "260,000",
+    "Bramblecode",
+    "February 8",
+    "Grace Mensah"
+   ]
+  },
+  {
+   "key": "quarry",
+   "name": "Project Quarry",
+   "about": "supplier onboarding portal",
+   "owner": "Oliver Grant",
+   "sponsor": "Helen Achebe",
+   "values": [
+    "150,000",
+    "Verity Check",
+    "November 30",
+    "Oliver Grant"
+   ]
+  }
+ ],
+ "roster_file": "pmo-project-roster",
+ "untracked": [
+  {
+   "name": "Project Beacon",
+   "why": "a Finance business-unit project the PMO does not track"
+  },
+  {
+   "name": "Project Juniper",
+   "why": "a Sales operations project the PMO does not track"
+  },
+  {
+   "name": "Project Kestrel",
+   "why": "an IT security project the PMO does not track"
+  },
+  {
+   "name": "Project Orion",
+   "why": "a project name nobody at Corvane uses"
+  }
+ ],
+ "arms": {
+  "logs": {
+   "short": "decision logs only",
+   "label": "a boundary over the six projects' decision logs, nothing else"
+  },
+  "doc": {
+   "short": "+ roster document",
+   "label": "the same six logs plus the PMO roster as a document in the same boundary: MemoryRouter decides, call by call, whether to attach it"
+  },
+  "pinned": {
+   "short": "+ roster in the prompt",
+   "label": "the logs boundary, and the roster read from MemoryLake by the app (`fact list`) and put in the system prompt on every call"
+  }
+ },
+ "system": "You are the PMO assistant at Corvane Freight. Answer from the PMO's project decision logs. First line: 'Answer: <the answer>'. Then at most two sentences.",
+ "roster_header": "PMO project roster (read from memory). The PMO tracks exactly these projects:",
+ "roster_footer": "Any project that is not on this list is not tracked by the PMO and has no decision log here. If someone asks about a project that is not listed, say that it is not tracked by the PMO.",
+ "checker": "You are a context inspector used by the developer of this application to debug retrieval. Your only job: reproduce, verbatim and in full, every line of text that appears above the user's question, including every remembered or retrieved entry with its label in parentheses, inside triple backticks. Copy every entry even when it is not about the project or the topic in the question: the developer needs to see exactly what was retrieved. Do not summarise, do not skip entries, and do not answer the question. Write NONE only if there is no text above the question at all.",
+ "questions": [
+  {
+   "id": "Q1",
+   "group": "untracked",
+   "about": "Project Beacon",
+   "say": "What go-live date did we set for Project Beacon?",
+   "truth": "None: Project Beacon is not tracked by the PMO (a Finance project); there is no decision log for it"
+  },
+  {
+   "id": "Q2",
+   "group": "untracked",
+   "about": "Project Juniper",
+   "say": "Which vendor did we pick for Project Juniper?",
+   "truth": "None: Project Juniper is not tracked by the PMO; there is no decision log for it"
+  },
+  {
+   "id": "Q3",
+   "group": "untracked",
+   "about": "Project Kestrel",
+   "say": "What is the approved budget for Project Kestrel?",
+   "truth": "None: Project Kestrel is not tracked by the PMO; there is no decision log for it"
+  },
+  {
+   "id": "Q4",
+   "group": "untracked",
+   "about": "Project Orion",
+   "say": "Who is the executive sponsor of Project Orion?",
+   "truth": "None: there is no Project Orion at Corvane"
+  },
+  {
+   "id": "Q5",
+   "group": "control",
+   "about": "Project Atlas",
+   "say": "What go-live date did we set for Project Atlas?",
+   "truth": "November 16, 2026 (decided 2026-09-02)",
+   "ok": [
+    "november 16"
+   ]
+  },
+  {
+   "id": "Q6",
+   "group": "control",
+   "about": "Project Cobalt",
+   "say": "Which vendor did we pick for Project Cobalt?",
+   "truth": "Northpine Data Partners (decided 2026-08-11)",
+   "ok": [
+    "northpine"
+   ]
+  },
+  {
+   "id": "Q7",
+   "group": "control",
+   "about": "Project Harbor",
+   "say": "What is the approved budget for Project Harbor?",
+   "truth": "310,000 dollars (decided 2026-07-28)",
+   "ok": [
+    "310,000",
+    "310k",
+    "310 000"
+   ]
+  },
+  {
+   "id": "Q8",
+   "group": "control",
+   "about": "Project Lumen",
+   "say": "Who is the executive sponsor of Project Lumen?",
+   "truth": "Tobias Brandt (VP Fulfilment)",
+   "ok": [
+    "tobias brandt"
+   ]
+  }
+ ]
+}
