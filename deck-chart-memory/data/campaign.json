@@ -1,0 +1,192 @@
+{
+ "company": "Larkhaven Outdoor",
+ "team": "growth team",
+ "review": "Larkhaven Outdoor September 2026 growth review",
+ "figures": [
+  {
+   "id": "A",
+   "file": "deck-a-cpa",
+   "title": "Cost per acquisition by channel, September 2026 (USD)",
+   "unit": "$",
+   "series": [
+    "September 2026"
+   ],
+   "values": {
+    "Paid search": [
+     46.8
+    ],
+    "Paid social": [
+     57.3
+    ],
+    "Affiliate": [
+     31.4
+    ],
+    "Display": [
+     88.6
+    ],
+    "Podcast": [
+     64.1
+    ],
+    "Influencer": [
+     49.7
+    ],
+    "Email": [
+     12.9
+    ],
+    "Retargeting": [
+     26.2
+    ]
+   }
+  },
+  {
+   "id": "B",
+   "file": "deck-b-conversion",
+   "title": "Landing-page conversion rate (%), August vs September 2026",
+   "unit": "%",
+   "series": [
+    "August 2026",
+    "September 2026"
+   ],
+   "values": {
+    "Homepage": [
+     2.4,
+     2.7
+    ],
+    "Tents": [
+     3.1,
+     4.2
+    ],
+    "Backpacks": [
+     2.8,
+     2.3
+    ],
+    "Jackets": [
+     1.9,
+     3.4
+    ],
+    "Footwear": [
+     3.6,
+     3.3
+    ],
+    "Sale": [
+     5.2,
+     4.8
+    ]
+   }
+  }
+ ],
+ "aliases": {
+  "Paid search": "search ads|paid search",
+  "Paid social": "paid social|social ads",
+  "Affiliate": "affiliate",
+  "Display": "display (?:ads?|advertising)",
+  "Podcast": "podcast",
+  "Influencer": "influencer",
+  "Email": "e-?mail",
+  "Retargeting": "retargeting|remarketing",
+  "Homepage": "home ?page",
+  "Tents": "tents?\\b",
+  "Backpacks": "backpacks?",
+  "Jackets": "jackets?",
+  "Footwear": "footwear",
+  "Sale": "sale\\b|sale page"
+ },
+ "arms": {
+  "as-saved": {
+   "label": "the review decks as the team saves them: native charts, every bar labelled",
+   "short": "deck as saved",
+   "kind": "deck"
+  },
+  "notes": {
+   "label": "the same decks, with every number also typed into the speaker notes",
+   "short": "numbers in notes",
+   "kind": "notes"
+  },
+  "with-data": {
+   "label": "the same decks, plus each chart's own data read out of the .pptx into a CSV",
+   "short": "deck + chart data",
+   "kind": "data"
+  }
+ },
+ "questions": [
+  {
+   "id": "Q1",
+   "kind": "lookup",
+   "say": "In Larkhaven's September 2026 paid media review, what was the cost per acquisition for the affiliate channel?",
+   "values": [
+    [
+     "A",
+     "Affiliate",
+     0
+    ]
+   ]
+  },
+  {
+   "id": "Q2",
+   "kind": "lookup",
+   "say": "What was the conversion rate of Larkhaven's Backpacks landing page in September 2026?",
+   "values": [
+    [
+     "B",
+     "Backpacks",
+     1
+    ]
+   ]
+  },
+  {
+   "id": "Q3",
+   "kind": "list",
+   "say": "Which of Larkhaven's channels had a cost per acquisition under $40 in September 2026?",
+   "fig": "A",
+   "series": 0,
+   "below": 40
+  },
+  {
+   "id": "Q4",
+   "kind": "rise",
+   "say": "Which Larkhaven landing page's conversion rate rose the most from August to September 2026, and by how many points?",
+   "fig": "B"
+  },
+  {
+   "id": "Q5",
+   "kind": "rank",
+   "say": "Name Larkhaven's three most expensive channels by cost per acquisition in September 2026, with their CPAs.",
+   "values": [
+    [
+     "A",
+     "Display",
+     0
+    ],
+    [
+     "A",
+     "Podcast",
+     0
+    ],
+    [
+     "A",
+     "Paid social",
+     0
+    ]
+   ]
+  },
+  {
+   "id": "Q6",
+   "kind": "gap",
+   "say": "In September 2026, how much higher was Larkhaven's cost per acquisition for influencer than for paid search?",
+   "values": [
+    [
+     "A",
+     "Influencer",
+     0
+    ],
+    [
+     "A",
+     "Paid search",
+     0
+    ]
+   ]
+  }
+ ],
+ "system": "You are the marketing assistant for the growth team at Larkhaven Outdoor. Answer in one or two sentences with the numbers asked for. Use only what you were given; if you were not given a figure, say so.",
+ "checker": "You are a context inspector used by the developer of this application to debug retrieval. Your only job: reproduce, verbatim and in full, every line of text that appears in this conversation before the user message, including every remembered or retrieved entry with its label in parentheses, inside one pair of triple backticks. Do not summarise, do not skip entries, and do not answer the question. If there is no such text at all, write NONE inside the backticks."
+}
