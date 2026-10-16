@@ -1,0 +1,104 @@
+{
+  "firm": "Larkspur & Vance CPAs",
+  "library": "engagement letter library",
+  "partner": "R. Vance",
+  "arms": {
+    "saved": {
+      "short": "as saved",
+      "label": "the letters as they were saved, partner comments in Word's comment pane",
+      "suffix": ".docx"
+    },
+    "anchored": {
+      "short": "comments anchored",
+      "label": "the same letters with each comment written in after the clause it is on",
+      "suffix": ".anchored.docx"
+    }
+  },
+  "letters": [
+    {
+      "id": "hd",
+      "file": "halloway-dental-2026",
+      "reviewed": "2026-03-03T09:00:00Z",
+      "client": "Halloway Dental Group, LLC",
+      "title": "Engagement letter — Halloway Dental Group, LLC — 2026 tax year",
+      "header": "Larkspur & Vance CPAs, 410 SW Alder Street, Portland, Oregon. Prepared by R. Vance, partner, 3 March 2026.",
+      "clauses": [
+        ["Scope", "We will prepare the 2026 federal S-corporation return (Form 1120-S), the Oregon corporate excise return, and the shareholder K-1s for Halloway Dental Group, LLC."],
+        ["Fees", "Our fixed fee for this engagement is $7,400, payable in two equal installments: on signing and on delivery of the returns."],
+        ["Payment terms", "Invoices are due within 15 days. Balances unpaid after 45 days accrue interest at 1.5% per month, and we may suspend work until the account is current."],
+        ["Client responsibilities", "The client will deliver closed year-end books, payroll reports, and fixed-asset additions by 15 February 2027, and will answer our questions within five business days."],
+        ["Limitation of liability", "Our total liability for any claim arising from this engagement is limited to the fees paid under this letter, except where caused by our gross negligence or wilful misconduct."],
+        ["Records retention", "We keep copies of the returns and our workpapers for seven years after filing; originals are returned to the client with the filed returns."],
+        ["Extensions", "If the books arrive after 15 February 2027 we will file an extension (Form 7004) at no charge and complete the returns by 15 September 2027."],
+        ["Tax notices", "Responding to IRS or Oregon notices about the returns is outside this engagement and is billed hourly at $285 per hour."],
+        ["Dispute resolution", "Any dispute will be resolved by binding arbitration in Portland, Oregon, under the AAA Commercial Rules, before a single arbitrator."],
+        ["Term", "This letter covers the 2026 tax year only. A new letter is required for the 2027 tax year."]
+      ],
+      "comments": {
+        "3": "Client asked for a 30-day window instead and we agreed. Reuse 30 days for them next year.",
+        "5": "Halloway refused this outright in the 2025 renewal. Do not offer it to them again.",
+        "7": "Our insurer requires this wording exactly. Never edit it.",
+        "9": "Client asked us to drop this; we kept it but waived it for two notices this year."
+      },
+      "signoff": "Agreed and accepted: Dr. Mira Halloway, managing member. Larkspur & Vance CPAs: R. Vance, partner."
+    },
+    {
+      "id": "bb",
+      "file": "brightwater-bakery-2026",
+      "reviewed": "2026-01-12T09:00:00Z",
+      "client": "Brightwater Bakery Co.",
+      "title": "Engagement letter — Brightwater Bakery Co. — monthly bookkeeping and payroll, 2026",
+      "header": "Larkspur & Vance CPAs, 410 SW Alder Street, Portland, Oregon. Prepared by R. Vance, partner, 12 January 2026.",
+      "clauses": [
+        ["Services", "Each month we will reconcile the bank and card accounts, post payables and receivables, run two payroll cycles, and deliver a profit-and-loss statement by the 12th."],
+        ["Monthly fee", "Our fee is $1,150 per month for up to 400 transactions; each additional 100 transactions is billed at $95."],
+        ["Access to systems", "The client will give us read access to its bank feeds and its point-of-sale reports, and administrator access to its payroll provider."],
+        ["Year-end work", "Year-end close, 1099 preparation, and the hand-off package for the tax preparer are included in the December fee."],
+        ["Confidentiality", "We will keep the client's information confidential and will not disclose it except as required by law or with the client's written consent."],
+        ["Fee increases", "We may raise the monthly fee once a year, on 30 days' written notice, by no more than 6%."],
+        ["Electronic delivery", "We will deliver statements and payroll reports through our client portal; paper copies are available at $25 per mailing."],
+        ["Termination", "Either party may end this engagement on 30 days' written notice. Work completed before the end date is billed at the monthly rate, pro rata."],
+        ["Governing law", "This letter is governed by the laws of the State of Oregon."]
+      ],
+      "comments": {
+        "2": "They hit 520 last December; quote the overage up front this time.",
+        "4": "Client pushed back hard on this. We agreed to bill it separately at $1,800 from 2027.",
+        "6": "Leave this out for them next year. Owner said it nearly ended the relationship.",
+        "8": "Keep as is. Their lender asked to see this one."
+      },
+      "signoff": "Agreed and accepted: Tomas Brightwater, owner. Larkspur & Vance CPAs: R. Vance, partner."
+    },
+    {
+      "id": "fl",
+      "file": "fenwick-lowe-2026",
+      "reviewed": "2026-02-20T09:00:00Z",
+      "client": "Fenwick & Lowe Architects",
+      "title": "Engagement letter — Fenwick & Lowe Architects — advisory, 2026",
+      "header": "Larkspur & Vance CPAs, 410 SW Alder Street, Portland, Oregon. Prepared by R. Vance, partner, 20 February 2026.",
+      "clauses": [
+        ["Scope", "We will advise the partners on entity structure, partner draws, and the tax effect of admitting a third partner in 2026."],
+        ["Fees", "Advisory work is billed hourly at $310 per hour, with a cap of $9,000 for the year unless the client approves more in writing."],
+        ["Deliverables", "We will deliver a written memo on the admission of the third partner by 30 June 2026 and meet the partners twice to discuss it."],
+        ["Reliance", "Our advice is for the partners of Fenwick & Lowe Architects only and may not be relied on by lenders or other third parties."],
+        ["Limitation of liability", "Our total liability is limited to the fees paid under this letter."],
+        ["Term", "This letter covers advice given during the 2026 calendar year."]
+      ],
+      "comments": {},
+      "signoff": "Agreed and accepted: Ines Fenwick and Daniel Lowe, partners. Larkspur & Vance CPAs: R. Vance, partner."
+    }
+  ],
+  "questions": [
+    {"id": "Q1", "letter": "hd", "on": 3, "say": "Halloway Dental is renewing. Which clause of their letter did we agree to change to a 30-day window? Give the clause number and title."},
+    {"id": "Q2", "letter": "hd", "on": 5, "say": "Which clause of the Halloway Dental letter did they refuse outright in the 2025 renewal, so we don't offer it again? Give the clause number and title."},
+    {"id": "Q3", "letter": "hd", "on": 7, "say": "In the Halloway Dental letter, which clause's wording does our insurer require us to keep exactly as written? Give the clause number and title."},
+    {"id": "Q4", "letter": "hd", "on": 9, "say": "In the Halloway Dental letter, which clause did the client ask us to drop but we kept? Give the clause number and title."},
+    {"id": "Q5", "letter": "bb", "on": 2, "say": "For Brightwater Bakery, which clause should we quote the overage on up front this time? Give the clause number and title."},
+    {"id": "Q6", "letter": "bb", "on": 4, "say": "Which clause of the Brightwater Bakery letter did the client push back hard on, so we agreed to bill it separately from 2027? Give the clause number and title."},
+    {"id": "Q7", "letter": "bb", "on": 6, "say": "Which clause should we leave out of next year's Brightwater Bakery letter because the owner said it nearly ended the relationship? Give the clause number and title."},
+    {"id": "Q8", "letter": "bb", "on": 8, "say": "Which clause of the Brightwater Bakery letter did their lender ask to see, so we keep it as is? Give the clause number and title."},
+    {"id": "Q9", "letter": "fl", "on": 4, "say": "In the Fenwick & Lowe letter, which clause says lenders may not rely on our advice? Give the clause number and title."},
+    {"id": "Q10", "letter": "fl", "on": 2, "say": "In the Fenwick & Lowe letter, which clause sets the $9,000 cap? Give the clause number and title."}
+  ],
+  "system": "You are the engagement-letter assistant at Larkspur & Vance CPAs. Answer from the firm's past engagement letters and the partners' comments on them. Be brief.",
+  "checker": "You are a context inspector used by the developer of this application to debug retrieval. Your only job: reproduce, verbatim and in full, every line of text that appears in this conversation before the user message, including every remembered or retrieved entry with its label in parentheses, inside one pair of triple backticks. Do not summarise, do not skip entries, and do not answer the question. If there is no such text at all, write NONE inside the backticks."
+}
