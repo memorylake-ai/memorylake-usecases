@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Drug Discovery Teams AI That Carries Research Across Every Session*](https://www.memorylake.ai/en/usecase/ai-memory-for-pharmaceutical-research),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 4:28](https://github.com/memorylake-ai/memorylake-usecases/releases/download/rule-application-memory-v1/rule-application-memory-cli-demo.mp4) · [Web, 4:57](https://github.com/memorylake-ai/memorylake-usecases/releases/download/rule-application-memory-v1/rule-application-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/rule-application-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Corvane Therapeutics (a fictional drug developer) keeps the protocol of its Phase II trial
 CVT-118-201 in shared memory: six short pages — dosing, prohibited medicines, liver safety, eligibility, visit
@@ -25,12 +26,12 @@ D4  Participant 1031's ALT came back at 131 U/L this week, bilirubin normal. Do 
     – "Answer: No record."
 ```
 
-Same prompt, same page, same model: **108 of 108** right for the rules themselves, **68 of 126** for the same
-rules applied to a participant (6 runs). The wrong answers read exactly like the right ones — one confident line.
+Same prompt, same page, same model: **144 of 144** right for the rules themselves, **90 of 168** for the same
+rules applied to a participant (8 runs). The wrong answers read exactly like the right ones — one confident line.
 
 The fix is not in retrieval. In the third setup the prompt asks for the rule **word for word**, then **one step per
 line**, then the answer, and the app checks that the quoted rule is really on the page. Applied questions go to
-**99 of 126**; every quote (126 of 126) was on the page word for word. The errors that remain are now on the screen:
+**131 of 168**; every quote (168 of 168) was on the page word for word. The errors that remain are now on the screen:
 every wrong D6 answer contains the line *"Day 32 (6 November 2026)"* (Day 32 is 5 November), every wrong D2 answer
 says 128 mg needs no rounding (*"already at a 10 mg increment"*, *"already a multiple of 10"*). A coordinator can see which step to distrust; a bare "Yes" gave
 them nothing to check.
@@ -88,6 +89,11 @@ working behind each answer in the third setup, and a scoreboard. **Ask** runs on
 the rule word for word, the steps and the quote check. A terminal drawer shows every `memorylake` command as it
 runs. **Clean up** removes it all.
 
+| | |
+|---|---|
+| ![](web/screenshot-page.png) | ![](web/screenshot-work.png) |
+| ![](web/screenshot-score.png) | ![](web/screenshot-ask.png) |
+
 ## What happens, step by step
 
 ### Steps 2–3: one project, six pages
@@ -116,7 +122,7 @@ memorylake search 'Participant 1042 weighed 93 kg this morning. What dose of CVT
 
 The page text `search` returns is the Markdown file word for word. Search always returns its top k, so the two
 uncovered questions get the closest page; the model is told to say "No record" when no rule covers the question,
-and it did, 36 of 36 times in steps 6–7.
+and it did, 96 of 96 times in steps 6–7.
 
 ### Step 5: MemoryRouter attaches
 
@@ -183,38 +189,38 @@ Step 2 of that working is right (Day 29 = 2 November); step 3 adds one day too m
 
 ## Measured
 
-Over **6 runs** (per setup and run: 6 rule questions, 7 applied, 2 not covered, each × 3):
+Over **8 runs** (including the recordings; per setup and run: 6 rule questions, 7 applied, 2 not covered, each × 3):
 
 | | the rule itself | applied to a participant | not in the protocol |
 |---|---|---|---|
-| MemoryRouter attaches (step 5) | 102/108 ✓ · 6 ✗ | 70/126 ✓ · 35 ✗ · 21 – | 19/36 ✓ · 17 ✎ |
-| the right page, pasted in (step 6) | **108/108** ✓ | **68/126** ✓ · 41 ✗ · 17 – | 36/36 ✓ |
-| quote the rule, then work it (step 7) | 108/108 ✓ | **99/126** ✓ · 26 ✗ · 1 – | 36/36 ✓ |
+| MemoryRouter attaches (step 5) | 135/144 ✓ · 9 ✗ | 94/168 ✓ · 46 ✗ · 28 – | 26/48 ✓ · 22 ✎ |
+| the right page, pasted in (step 6) | **144/144** ✓ | **90/168** ✓ · 55 ✗ · 23 – | 48/48 ✓ |
+| quote the rule, then work it (step 7) | 144/144 ✓ | **131/168** ✓ · 35 ✗ · 2 – | 48/48 ✓ |
 
 ✓ right · ✗ wrong · – "No record" although the protocol has it · ✎ an answer the protocol does not give.
 
-By applied question (18 answers each):
+By applied question (24 answers each):
 
 | | step 5 | step 6 (page pasted in) | step 7 (quote, then work) |
 |---|---|---|---|
-| D1 93 kg → dose (cap 160 mg) | ✗ 15, ✓ 3 | ✓ 13, ✗ 5 | ✓ 18 |
-| D2 64 kg → dose (round to 10 mg) | ✓ 18 | ✓ 18 | ✗ 10, ✓ 8 |
-| D3 last clarithromycin 3 Nov → first dose | ✓ 18 (10 with nothing attached) | ✓ 18 | ✓ 18 |
-| D4 ALT 131 U/L → dose this week? | ✓ 15, –∅ 3 | – 17, ✓ 1 | ✓ 18 |
-| D5 born 14 Aug 1950 → eligible on age? | –∅ 18 | ✗ 18 | ✓ 18 |
-| D6 first infusion 5 Oct → visit 6 Nov in window? | ✗ 18 (15 with nothing attached) | ✗ 18 | ✗ 16, ✓ 1, – 1 |
-| D7 SAE known 16:00 Tue 13 Oct → deadline | ✓ 16, ✗∅ 2 | ✓ 18 | ✓ 18 |
+| D1 93 kg → dose (cap 160 mg) | ✗ 19, ✓ 5 | ✓ 17, ✗ 7 | ✓ 24 |
+| D2 64 kg → dose (round to 10 mg) | ✓ 24 | ✓ 24 | ✗ 15, ✓ 9 |
+| D3 last clarithromycin 3 Nov → first dose | ✓ 24 (10 with nothing attached) | ✓ 24 | ✓ 24 |
+| D4 ALT 131 U/L → dose this week? | ✓ 20, –∅ 4 | – 23, ✓ 1 | ✓ 24 |
+| D5 born 14 Aug 1950 → eligible on age? | –∅ 24 | ✗ 24 | ✓ 23, – 1 |
+| D6 first infusion 5 Oct → visit 6 Nov in window? | ✗ 24 (19 with nothing attached) | ✗ 24 | ✗ 20, ✓ 3, – 1 |
+| D7 SAE known 16:00 Tue 13 Oct → deadline | ✓ 21, ✗∅ 3 | ✓ 24 | ✓ 24 |
 
-- **With the page in the prompt, rules are never the problem** (108/108 in step 6). Applying them is: the cap on a
+- **With the page in the prompt, rules are never the problem** (144/144 in step 6). Applying them is: the cap on a
   dose, a lab value against a multiple of the limit, an age from a birth date, a day count from a date.
-- **"Do not guess" turns some of these into "No record"** (D4 17 of 18 in step 6): the rule is on the page, the model
+- **"Do not guess" turns some of these into "No record"** (D4 23 of 24 in step 6): the rule is on the page, the model
   does not see that it answers the question, and the reply looks exactly like an honest gap.
-- **Quote, then work, fixes D1, D4 and D5 completely — and breaks D2.** As a one-liner, "64 kg → 130 mg" was right
-  18 times; written out, the rounding step said "128 mg is already at a 10 mg increment" (or "a multiple of 10")
-  10 times. Step-by-step is not a cure; what it buys is that every error sits in a line a person can check: all 10
-  wrong D2 answers have that rounding line, all 16 wrong D6 answers have "Day 32 (6 November 2026)".
+- **Quote, then work, fixes D1 and D4 completely, D5 all but once — and breaks D2.** As a one-liner, "64 kg → 130 mg"
+  was right 24 times; written out, the rounding step said "128 mg is already at a 10 mg increment" (or "a multiple of
+  10") 15 times. Step-by-step is not a cure; what it buys is that every error sits in a line a person can check: all
+  15 wrong D2 answers have that rounding line, all 20 wrong D6 answers have "Day 32 (6 November 2026)".
 - **The reverse check holds**: asking the model to "apply the rule" did not make it apply rules that are not there —
-  the two uncovered questions got "No record" 36 of 36 times in steps 6 and 7.
+  the two uncovered questions got "No record" 96 of 96 times in steps 6 and 7.
 - These are totals over every run. Model replies vary from run to run, and so does which MemoryRouter calls come back empty.
 
 ## Use it in your own app
