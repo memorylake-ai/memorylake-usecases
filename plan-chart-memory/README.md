@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Executives AI That Arrives to Every Briefing Already Informed*](https://www.memorylake.ai/en/usecase/ai-memory-for-executives),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded
+**Watch it run:** [CLI, 6:31](https://github.com/memorylake-ai/memorylake-usecases/releases/download/plan-chart-memory-v1/plan-chart-memory-cli-demo.mp4) · [Web, 6:29](https://github.com/memorylake-ai/memorylake-usecases/releases/download/plan-chart-memory-v1/plan-chart-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/plan-chart-memory-v1); GitHub serves them as downloads).
 
 **The problem.** The office of the CEO keeps the board pack in shared memory, so that a chief of staff's assistant
 can answer *"what was actual operating cash flow in March?"* from it. The KPI pages are what finance exports: actual
@@ -27,7 +28,7 @@ nothing else (a checker call copies out what the model was given):
 ```
 
 and the assistant said *"I do not have the actual operating cash flow figure for March 2026"*. Asked about gross
-margin, with only the ARR page's numbers attached, it answered *"The actual gross margin in March 2026 was
+margin, it answered *"The actual gross margin in March 2026 was
 3.94%"* — the ARR page's misread March point, whose text never says it is ARR. Asked which months actual cash flow
 beat plan, it named January, February, March, April, June and July — five of them months where actual came in
 **below** plan.
@@ -58,23 +59,23 @@ temperature 0), each asked 3 times per boundary. Every number on the pages is di
 so every wrong figure in an answer is traced to where it sits on the page: the other line's number, another chart's,
 an axis label, or nowhere.
 
-Totals over **5 runs** (18 answers per boundary per run):
+Totals over **7 runs** (18 answers per boundary per run):
 
 | Boundary | Pages whose two lines' numbers are tied to their names in the index | Right | Wrong | No figure | The asked chart's numbers were in what MemoryRouter attached |
 |---|---|---|---|---|---|
-| **As drawn** | 0 of 15 | **15 / 90** | 24 | 45 | 10 of 30 checker readings |
-| **Month labels** | 1 of 15 | **15 / 90** | 9 | 57 | 12 of 30 checker readings |
-| **Chart + table** | **15 of 15** | **63 / 90** | 22 | 0 | 30 of 30 checker readings, tied every time |
+| **As drawn** | 0 of 21 | **21 / 126** | 31 | 68 | 14 of 42 checker readings |
+| **Month labels** | 2 of 21 | **21 / 126** | 10 | 81 | 18 of 42 checker readings |
+| **Chart + table** | **21 of 21** | **88 / 126** | 33 | 0 | 42 of 42 checker readings, tied every time |
 
-Look-ups and the gap to plan (Q1, Q2, Q3, Q6) with the table: **60 of 60 right**. As drawn and with month labels,
+Look-ups and the gap to plan (Q1, Q2, Q3, Q6) with the table: **84 of 84 right**. As drawn and with month labels,
 the only look-up that ever came back right is Q2 — the ARR page, whose numbers were attached. For the cash-flow and
-gross-margin questions, MemoryRouter attached **the page's title and nothing else** in 20 of 20 checker readings as
-drawn and 18 of 20 with month labels. Those are exactly the pages where the index had rewritten the year (2026 →
+gross-margin questions, MemoryRouter attached **the page's title and nothing else** in 28 of 28 checker readings as
+drawn and 24 of 28 with month labels. Those are exactly the pages where the index had rewritten the year (2026 →
 2023, or 2020, on every import of those four pages; the ARR page's text has no year at all). We did not test whether
 the misread year is why the chart text loses to the title; we only see that the two go together in every run.
 
 The two "which months beat plan" questions are the other story. With the table attached and both rows tied every
-time, gpt-4o-mini still got them right only 3 of 30 times: it adds close months (March 1.97 vs 2.03, May 2.08 vs 2.12)
+time, gpt-4o-mini still got them right only 4 of 42 times: it adds close months (March 1.97 vs 2.03, May 2.08 vs 2.12)
 or leaves out February. That is the model comparing sixteen numbers, not memory — the checker shows every number was
 there with its name. If your app needs "where did actual beat plan", compute it from the attached rows in code.
 
@@ -263,32 +264,32 @@ that chart — no model call.
 
 ## Measured
 
-5 runs: 3 in this directory (run, run again, `--reset`), 2 through the browser companion, and the two
-recording runs. 18 answers per boundary per run; 30 checker calls per boundary.
+7 runs: 3 in this directory (run, run again, `--reset`), 2 through the browser companion, and the two
+recording runs. 18 answers per boundary per run; 42 checker calls per boundary.
 
-- **Per question** (15 answers each; ✓ right · ✗ wrong · ◐ rounded or incomplete · · no figure):
+- **Per question** (21 answers each; ✓ right · ✗ wrong · ◐ rounded or incomplete · · no figure):
 
   | | Q1 actual | Q2 plan | Q3 actual % | Q4 beat plan | Q5 beat plan | Q6 gap |
   |---|---|---|---|---|---|---|
-  | **As drawn** | 2 ✗ 13 · | 15 ✓ | 2 ✗ 13 · | 11 ✗ 4 · | 9 ✗ 6 ◐ | 15 · |
-  | **Month labels** | 15 · | 15 ✓ | 1 ✗ 14 · | 1 ✗ 14 · | 6 ✗ 9 ◐ | 1 ✗ 14 · |
-  | **Chart + table** | 15 ✓ | 15 ✓ | 15 ✓ | 3 ✓ 12 ✗ | 10 ✗ 5 ◐ | 15 ✓ |
+  | **As drawn** | 2 ✗ 19 · | 21 ✓ | 2 ✗ 19 · | 12 ✗ 9 · | 15 ✗ 6 ◐ | 21 · |
+  | **Month labels** | 21 · | 21 ✓ | 1 ✗ 20 · | 1 ✗ 20 · | 7 ✗ 14 ◐ | 1 ✗ 20 · |
+  | **Chart + table** | 21 ✓ | 21 ✓ | 21 ✓ | 4 ✓ 17 ✗ | 16 ✗ 5 ◐ | 21 ✓ |
 
   Of the wrong answers as drawn, 4 gave another chart's figure (the ARR page's
-  3.94, whose text never says it is ARR, as March cash flow or gross margin) and 20 named
+  3.94, whose text never says it is ARR, as March cash flow or gross margin) and 27 named
   months where actual was below plan; with month labels, 1 gave the plan line's
-  figure as the actual, 2 another chart's, 7
+  figure as the actual, 2 another chart's, 8
   named months below plan.
-- **The index text** (step 4, 5 imports of every page): the cash-flow and gross-margin pages, as drawn and with
+- **The index text** (step 4, 7 imports of every page): the cash-flow and gross-margin pages, as drawn and with
   month labels, had their year read as 2020, 2023 on every import
-  (20 of 20); the ARR page's chart text never held a year. As drawn, the ARR page came back as
-  `Actual: … / Plan: …` with the two March points swapped on 5 of 5 imports; the other two pages as
+  (28 of 28); the ARR page's chart text never held a year. As drawn, the ARR page came back as
+  `Actual: … / Plan: …` with the two March points swapped on 7 of 7 imports; the other two pages as
   flat lists. With month labels, every page's numbers carried months but not lines, except the gross-margin page
-  read as `Jan: Actual 68.4, Plan 69.1` on 1 of 5 imports. With the table, the table item tied
-  both rows on every page, every import (15 of 15), while the chart's own text stayed a flat list.
+  read as `Jan: Actual 68.4, Plan 69.1` on 2 of 7 imports. With the table, the table item tied
+  both rows on every page, every import (21 of 21), while the chart's own text stayed a flat list.
 - **The checker** (`claude-haiku-4-5`): as drawn and with month labels, the cash-flow and gross-margin questions got
-  the page title only in 38 of 40 readings (the other 2: the numbers, untied); the ARR questions got the ARR page's numbers every time (untied). With
-  the table, the asked chart's numbers were attached, tied, in 30 of 30.
+  the page title only in 52 of 56 readings (the other 4: the gross-margin page's numbers with month labels, tied to their lines in 1); the ARR questions got the ARR page's numbers every time (untied). With
+  the table, the asked chart's numbers were attached, tied, in 42 of 42.
 - Each run: 72 MemoryRouter calls, about 21,000–23,000 prompt + 3,700–4,400 reply tokens, 5½–7 minutes (nine
   pages indexed in about 80 s).
 
