@@ -1,0 +1,153 @@
+{
+ "company": "Larkspur Pay",
+ "team": "platform on-call",
+ "runbooks": [
+  {
+   "key": "rollback",
+   "title": "Release rollback (payments-api)"
+  },
+  {
+   "key": "failover",
+   "title": "Postgres failover (ledger database)"
+  },
+  {
+   "key": "ratelimits",
+   "title": "Partner API rate limits"
+  },
+  {
+   "key": "paging",
+   "title": "Incident paging and escalation"
+  },
+  {
+   "key": "certs",
+   "title": "TLS certificate rotation"
+  },
+  {
+   "key": "freeze",
+   "title": "Holiday change freeze 2026"
+  }
+ ],
+ "system": {
+  "plain": "You are the on-call assistant for Larkspur Pay's platform team. Answer from the team's runbooks. First line: 'Answer: <the answer>'. Then at most one sentence.",
+  "noguess": "You are the on-call assistant for Larkspur Pay's platform team. Answer from the team's runbooks. First line: 'Answer: <the answer>'. Then at most one sentence. If you do not know the answer, reply 'Answer: No record.' Do not guess."
+ },
+ "fallback_header": "MemoryRouter attached nothing for this question, so the app searched the runbooks itself and found this page:",
+ "checker": "You are a context inspector used by the developer of this application to debug retrieval. Your only job: reproduce, verbatim and in full, every line of text that appears above the user's question, including every remembered or retrieved entry with its label in parentheses, inside triple backticks. Copy every entry even when it is not about the question: the developer needs to see exactly what was retrieved. Do not summarise, do not skip entries, and do not answer the question. Write NONE only if there is no text above the question at all.",
+ "arms": {
+  "plain": {
+   "short": "plain prompt",
+   "long": "the plain system prompt"
+  },
+  "noguess": {
+   "short": "“Do not guess” prompt",
+   "long": "the system prompt plus “If you do not know the answer, reply 'Answer: No record.' Do not guess.”"
+  },
+  "observed": {
+   "short": "“Do not guess” + app sees ∅",
+   "long": "the “Do not guess” prompt, and the app checks every call's attached tokens; on ∅ it searches the runbooks itself and asks again with that page"
+  }
+ },
+ "questions": [
+  {
+   "id": "Q1",
+   "kind": "runbook wording",
+   "say": "Under the release rollback runbook, who must sign off on a payments-api rollback?",
+   "runbook": "rollback",
+   "truth": [
+    "incident commander"
+   ],
+   "fact": "the on-call incident commander and one payments engineer"
+  },
+  {
+   "id": "Q2",
+   "kind": "runbook wording",
+   "say": "What is the partner API rate limit per key?",
+   "runbook": "ratelimits",
+   "truth": [
+    "240"
+   ],
+   "fact": "240 requests per minute (burst 60)"
+  },
+  {
+   "id": "Q3",
+   "kind": "runbook wording",
+   "say": "Which replica do we promote in a Postgres failover of the ledger database?",
+   "runbook": "failover",
+   "truth": [
+    "pg-east-2"
+   ],
+   "fact": "pg-east-2"
+  },
+  {
+   "id": "Q4",
+   "kind": "runbook wording",
+   "say": "When does the 2026 holiday change freeze start?",
+   "runbook": "freeze",
+   "truth": [
+    "26 november",
+    "november 26",
+    "nov 26"
+   ],
+   "fact": "26 November 2026"
+  },
+  {
+   "id": "Q5",
+   "kind": "on-call wording",
+   "say": "I'm on call and want to roll back. Do I need anyone's OK?",
+   "runbook": "rollback",
+   "truth": [
+    "incident commander"
+   ],
+   "fact": "yes: the incident commander and one payments engineer"
+  },
+  {
+   "id": "Q6",
+   "kind": "on-call wording",
+   "say": "How many calls can a partner make before we throttle them?",
+   "runbook": "ratelimits",
+   "truth": [
+    "240"
+   ],
+   "fact": "240 requests per minute (burst 60)"
+  },
+  {
+   "id": "Q7",
+   "kind": "on-call wording",
+   "say": "Who do I wake up if a Sev1 is still burning after half an hour?",
+   "runbook": "paging",
+   "truth": [
+    "rosa lindqvist",
+    "head of platform"
+   ],
+   "fact": "Rosa Lindqvist, Head of Platform, by phone"
+  },
+  {
+   "id": "Q8",
+   "kind": "on-call wording",
+   "say": "Can I ship a hotfix the Friday after Thanksgiving?",
+   "runbook": "freeze",
+   "truth": [
+    "tomas ibarra",
+    "vp of engineering",
+    "freeze"
+   ],
+   "fact": "only with written approval from the VP of Engineering, Tomas Ibarra (27 Nov is inside the freeze)"
+  },
+  {
+   "id": "Q9",
+   "kind": "not in any runbook",
+   "say": "How long do we keep payment webhook logs?",
+   "runbook": null,
+   "truth": [],
+   "fact": "no runbook covers it"
+  },
+  {
+   "id": "Q10",
+   "kind": "not in any runbook",
+   "say": "Which Kafka cluster does the ledger service publish to?",
+   "runbook": null,
+   "truth": [],
+   "fact": "no runbook covers it"
+  }
+ ]
+}
