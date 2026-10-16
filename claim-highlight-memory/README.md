@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Content Writers AI That Knows the Brand Before the First Word*](https://www.memorylake.ai/en/usecase/ai-memory-for-content-writers),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 4:11](https://github.com/memorylake-ai/memorylake-usecases/releases/download/claim-highlight-memory-v1/claim-highlight-memory-cli-demo.mp4) · [Web, 5:20](https://github.com/memorylake-ai/memorylake-usecases/releases/download/claim-highlight-memory-v1/claim-highlight-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/claim-highlight-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Kestrel Outdoor (a fictional outdoor-gear brand) keeps its launch fact sheets in shared memory, so
 that the content team's assistant can answer *"what brightness can I state in the launch post?"* while a writer
@@ -25,12 +26,12 @@ one, and the index's own summary of the sheet states four of them as facts (*"Ke
 of 1,200 lumens, up to 40 hours of battery life in pulse mode, IPX7 water resistance, and a 3-year limited
 warranty."*). MemoryRouter attaches that text, and the assistant hands the
 writer every unverified claim: *"Answer: The Lumen Trail 2 has a maximum output brightness of 1,200 lumens."* —
-126 answers out of 126.
+168 answers out of 168.
 
 **Writing the status into the text is not enough.** With each yellow claim rewritten as
 `[UNVERIFIED - not cleared to publish: …]` before upload — the assistant can read the tag, and the index keeps it —
 the assistant still quotes most of them: *"IPX7, fully submersible to 1 metre"*, *"a 3-year limited warranty"*,
-*"visible from up to 2 km away"*. 36 of 126 answers held the claim back.
+*"visible from up to 2 km away"*. 48 of 168 answers held the claim back.
 
 **What holds** is taking the unverified number out of the file before upload: `withhold_highlights()` replaces each
 yellow claim with *"Not cleared to publish yet (waiting for test-lab or legal sign-off)."* and keeps the green ones.
@@ -99,6 +100,11 @@ Paste the key, press **Run demo**. The page follows the run step by step: the sh
 (yellow and green highlighter on the claims), each highlighted line in the index of all three projects, the
 questions under each boundary, and a scoreboard. **Fact sheet** looks up one file in the three projects without a
 model call. A terminal drawer shows every `memorylake` command as it runs. **Clean up** removes it all.
+
+| | |
+|---|---|
+| ![](web/screenshot-sheets.png) | ![](web/screenshot-index.png) |
+| ![](web/screenshot-tagged.png) | ![](web/screenshot-score.png) |
 
 ## What happens, step by step
 
@@ -192,33 +198,33 @@ waiting for test-lab or legal sign-off."* The scoreboard of one run:
 
 ## Measured
 
-Over **6 runs** (per boundary and run: 21 answers about yellow claims, 12 about the controls):
+Over **8 runs** (including the recordings for the videos; per boundary and run: 21 answers about yellow claims, 12 about the controls):
 
 | | yellow claims: right | published as fact | with a caveat | verified figure held back too | ∅ | controls |
 |---|---|---|---|---|---|---|
-| as saved | 0/126 | 126 | 0 | 0 | 0 | 71/71 (1 ∅) |
-| tagged | 36/126 | 72 | 18 | 0 | 0 | 72/72 |
-| withheld | 103/121 | 0 | 0 | 18 | 5 | 72/72 |
+| as saved | 0/168 | 168 | 0 | 0 | 0 | 95/95 (1 ∅) |
+| tagged | 48/168 | 96 | 24 | 0 | 0 | 96/96 |
+| withheld | 138/162 | 0 | 0 | 24 | 6 | 96/96 |
 
-By question (18 answers each):
+By question (24 answers each):
 
 | | as saved | tagged | withheld |
 |---|---|---|---|
-| Q1 brightness — yellow line: *1,200 lumens* | ✗ 18 | ✗ 18 | ✓ 18 |
-| Q2 battery — *28 h (lab test)* + yellow *up to 40 h* | ✗ 18 | ✓ 18 | ○ 18 — *"28 hours in eco mode, but this claim is not cleared"* |
-| Q3 water resistance — yellow line: *IPX7* | ✗ 18 | ✗ 18 | ✓ 18 |
-| Q4 warranty — yellow line: *3-year* | ✗ 18 | ✗ 18 | ✓ 14, ∅ 4 |
-| Q5 visibility — *270-degree* + yellow *visible from 2 km* | ✗ 18 | ✗ 18 | ✓ 17, ∅ 1 |
-| Q6 road standard — green: *StVZO* | ✓ 18 | ✓ 18 | ✓ 18 |
-| Q7 Lumen weight — no highlight | ✓ 18 | ✓ 18 | ✓ 18 |
-| Q8 waterproof rating — yellow line: *20,000 mm* | ✗ 18 | ◐ 18 — *"…can state 20,000 mm …, but this claim is currently unverified"* | ✓ 18 |
-| Q9 fabric — *nylon ripstop* + yellow *100% recycled* | ✗ 18 | ✓ 18 | ✓ 18 |
-| Q10 water-repellent finish — green: *PFAS-free* | ✓ 17, ∅ 1 | ✓ 18 | ✓ 18 |
-| Q11 Driftline weight — no highlight | ✓ 18 | ✓ 18 | ✓ 18 |
+| Q1 brightness — yellow line: *1,200 lumens* | ✗ 24 | ✗ 24 | ✓ 24 |
+| Q2 battery — *28 h (lab test)* + yellow *up to 40 h* | ✗ 24 | ✓ 24 | ○ 24 — *"28 hours in eco mode, but this claim is not cleared"* |
+| Q3 water resistance — yellow line: *IPX7* | ✗ 24 | ✗ 24 | ✓ 24 |
+| Q4 warranty — yellow line: *3-year* | ✗ 24 | ✗ 24 | ✓ 20, ∅ 4 |
+| Q5 visibility — *270-degree* + yellow *visible from 2 km* | ✗ 24 | ✗ 24 | ✓ 22, ∅ 2 |
+| Q6 road standard — green: *StVZO* | ✓ 24 | ✓ 24 | ✓ 24 |
+| Q7 Lumen weight — no highlight | ✓ 24 | ✓ 24 | ✓ 24 |
+| Q8 waterproof rating — yellow line: *20,000 mm* | ✗ 24 | ◐ 24 — *"…can state 20,000 mm …, but this claim is currently unverified"* | ✓ 24 |
+| Q9 fabric — *nylon ripstop* + yellow *100% recycled* | ✗ 24 | ✓ 24 | ✓ 24 |
+| Q10 water-repellent finish — green: *PFAS-free* | ✓ 23, ∅ 1 | ✓ 24 | ✓ 24 |
+| Q11 Driftline weight — no highlight | ✓ 24 | ✓ 24 | ✓ 24 |
 
-- **The index**: in all 6 runs (each a fresh import) the as-saved text held every yellow claim as plain text (8/8),
+- **The index**: in all 8 runs (each a fresh import) the as-saved text held every yellow claim as plain text (8/8),
   with no word marking a colour outside the legend; the tagged text kept every tag (8/8). The index's summary of
-  the Lumen Trail 2 sheet stated four of its five yellow claims as facts in 6 runs out of 6. The Driftline summary
+  the Lumen Trail 2 sheet stated four of its five yellow claims as facts in 8 runs out of 8. The Driftline summary
   named none of its values and ended *"Some claims are pending legal sign-off"* — it read the legend, but not which
   claims it applies to.
 - **A tag the model can read is not a tag it follows.** Under *tagged*, the claims it held back were two of the
@@ -227,8 +233,8 @@ By question (18 answers each):
   with a caveat attached (waterproof rating). Visibility shares a line with a verified figure and was still quoted.
   We did not find a rule for which tags it follows; we report each question.
 - **Withheld is not free either.** On battery life the assistant attached "not cleared" to the verified 28 hours
-  as well — a writer would leave out a figure that was fine to publish (○, 18 of 18).
-- **∅**: 6 of 594 boundary calls came back with exactly the prompt-token count of the same call without a
+  as well — a writer would leave out a figure that was fine to publish (○, 24 of 24).
+- **∅**: 7 of 792 boundary calls came back with exactly the prompt-token count of the same call without a
   boundary — MemoryRouter attached nothing, and the model answered on its own (*"a limited lifetime warranty"*,
   *"a 2-year warranty"*).
   Not graded either way.
