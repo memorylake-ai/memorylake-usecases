@@ -686,6 +686,23 @@ def values_in(fig: dict | None, text: str) -> list[float]:
     return [v for v in values_of(fig) if any(same(v, n) for n in nums)]
 
 
+APPROX = re.compile(r"~\s*(\d+(?:\.\d+)?)")
+
+
+def estimates(fig: dict | None, text: str) -> list[dict]:
+    """Values the index estimated from the bar heights instead of reading them (written "~30"), paired with what the
+    survey data says: a figure text line that names a category gives its ~values in series order."""
+    if not fig:
+        return []
+    out = []
+    for line in (text or "").splitlines():
+        for cat, vals in fig["values"].items():
+            if cat.lower() in line.lower():
+                for k, x in enumerate(APPROX.findall(line)[:len(vals)]):
+                    out.append(dict(cat=cat, series=fig["series"][k], est=float(x), actual=vals[k]))
+    return out
+
+
 def index_docs(cli: CLI, project: str, query: str, echo: bool = False) -> list[dict]:
     """Every document `search --types document` returns for the project, with all the text the index holds for it:
     the document summary and, for every item, its text, its summary and its highlighted chunks."""
@@ -719,7 +736,8 @@ def figure_view(d: dict, doc: dict) -> dict:
     found = values_in(fig, "\n".join([summary, fig_text, fig_summary] + page))
     return dict(name=doc["name"], arm=arm_of(doc["name"]), fig=fig["id"] if fig else "?", source_type=doc["source_type"],
                 summary=summary, figure_items=len(figs), figure_text=fig_text, figure_summary=fig_summary, page=page,
-                found=found, in_figure_text=values_in(fig, fig_text), total=len(values_of(fig)) if fig else 0)
+                found=found, in_figure_text=values_in(fig, fig_text), total=len(values_of(fig)) if fig else 0,
+                estimates=estimates(fig, fig_text))
 
 
 def show_figure(d: dict, v: dict) -> None:
@@ -734,6 +752,10 @@ def show_figure(d: dict, v: dict) -> None:
             lines.append("    figure item, summary:  " + "\n                           ".join(_wrap(v["figure_summary"], 84)))
     for t in v["page"]:
         lines.append("    text on the page:  " + " / ".join(t.splitlines())[:150])
+    if v["estimates"]:
+        worst = max(v["estimates"], key=lambda e: abs(e["est"] - e["actual"]))
+        lines.append(f"    values estimated from the bar heights (written ~): {len(v['estimates'])}, none of them printed on the "
+                     f"chart; the furthest off: {worst['cat']}, {worst['series']} ~{worst['est']:g} (survey: {worst['actual']:g})")
     lines.append(f"    values printed on the chart that are anywhere in this text: {len(v['found'])} of {v['total']}"
                  + (f"  ({', '.join(f'{x:g}' for x in v['found'])})" if v["found"] else ""))
     emit("text", "\n".join(lines))
@@ -775,9 +797,12 @@ def show_index(cli: CLI, world: dict) -> dict:
     per = {}
     for arm in ARMS:
         vs = [v for v in views if v["arm"] == arm]
-        per[arm] = dict(found=sum(len(v["found"]) for v in vs), total=sum(v["total"] for v in vs), docs=len(vs))
+        per[arm] = dict(found=sum(len(v["found"]) for v in vs), total=sum(v["total"] for v in vs), docs=len(vs),
+                        estimated=sum(len(v["estimates"]) for v in vs))
     emit("text", "\n  values printed on the charts that are anywhere in the index text:\n" + "\n".join(
-        f"    {d['arms'][a]['short']:<16} {per[a]['found']:>2} of {per[a]['total']}" for a in ARMS))
+        f"    {d['arms'][a]['short']:<16} {per[a]['found']:>2} of {per[a]['total']}"
+        + (f"   (+ {per[a]['estimated']} estimated from bar heights, written ~)" if per[a]["estimated"] else "")
+        for a in ARMS))
     note("this text is what MemoryRouter attaches for a figure — the checker in steps 5-7 copies it out")
     emit("index", "", figures=views, per=per)
     return dict(figures=views, per=per)

@@ -49,6 +49,7 @@
       <p class="small"><b>document summary</b> ${esc(v.summary || "(none)")}</p>
       ${v.figure_items ? `<p class="small"><b>figure item, text read off the chart</b></p><pre class="mono small wrap figtext">${esc(v.figure_text || "(empty)")}</pre>` : ""}
       ${v.figure_summary && v.figure_summary !== v.summary ? `<p class="small"><b>figure item, summary</b> ${esc(v.figure_summary)}</p>` : ""}
+      ${(v.estimates || []).length ? `<p class="small bad"><b>${v.estimates.length} values estimated from the bar heights</b> (written ~), none printed on the chart — e.g. ${esc(v.estimates.slice().sort((x, y) => Math.abs(y.est - y.actual) - Math.abs(x.est - x.actual))[0].cat)} ~${v.estimates.slice().sort((x, y) => Math.abs(y.est - y.actual) - Math.abs(x.est - x.actual))[0].est} (survey: ${v.estimates.slice().sort((x, y) => Math.abs(y.est - y.actual) - Math.abs(x.est - x.actual))[0].actual})</p>` : ""}
       ${(v.page || []).map((t) => `<p class="small"><b>text on the page</b> <code>${esc(t)}</code></p>`).join("")}
       ${v.found.length && v.found.length < v.total ? `<p class="small muted">values in this text: ${esc(v.found.join(", "))}</p>` : ""}</div>`;
 
