@@ -15,6 +15,7 @@ Larkhaven Outdoor and its numbers are fictional.
 from __future__ import annotations
 
 import json
+from datetime import datetime
 from pathlib import Path
 
 from pptx import Presentation
@@ -84,6 +85,11 @@ def notes_text(f: dict) -> str:
 def deck(d: dict, f: dict, notes: bool) -> Path:
     p = Presentation()
     p.slide_width, p.slide_height = Inches(13.333), Inches(7.5)
+    # The default template carries its own author and dates; the deck's properties are the team's.
+    cp = p.core_properties
+    cp.author = cp.last_modified_by = f"{d['company']} {d['team']}"
+    cp.title, cp.comments, cp.revision = f["title"], "", 1
+    cp.created = cp.modified = datetime(2026, 10, 2, 9, 0, 0)
     s = p.slides.add_slide(p.slide_layouts[5])  # title only
     s.shapes.title.text = f["title"]
     s.shapes.title.text_frame.paragraphs[0].font.size = Pt(30)
