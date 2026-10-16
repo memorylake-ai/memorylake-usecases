@@ -138,7 +138,14 @@ class CLI:
         while True:
             rc, out, err = self.raw(*args, scoped=scoped, echo=echo and attempt == 0)
             if rc == 0:
-                break
+                parsed = self._parse(out)
+                # A reply that should be JSON and isn't (seen once on `lib upload`, exit 0): retry what is safe to retry.
+                if parsed is not None or not out.strip() or not retryable or attempt >= 4 or args[0] == "router":
+                    break
+                attempt += 1
+                note(f"unexpected reply ({' '.join(out.split())[:80]}); retry {attempt}/4 in {2 * attempt}s")
+                time.sleep(2 * attempt)
+                continue
             e = CLIError([self.binary, *map(str, args)], rc, out, err)
             if retryable and attempt < 4 and e.has(*self.TRANSIENT):
                 attempt += 1
@@ -148,10 +155,20 @@ class CLI:
             raise e
         if self.show_json and out.strip():
             emit("json", out.rstrip())
-        try:
-            return json.loads(out) if out.strip() else None
-        except json.JSONDecodeError:
-            return out
+        parsed = self._parse(out)
+        return parsed if parsed is not None else (out if out.strip() else None)
+
+    @staticmethod
+    def _parse(out: str):
+        """The JSON reply, also when something was printed before it; None when there is no JSON."""
+        for start in (0, out.find("{"), out.find("[")):
+            if start < 0:
+                continue
+            try:
+                return json.loads(out[start:])
+            except json.JSONDecodeError:
+                continue
+        return None
 
     def try_run(self, *args: str, missing=("404", "not found"), scoped: bool = False, echo: bool = True):
         try:
