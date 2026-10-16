@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Marketing Teams AI That Carries Campaign Context From Brief to Launch*](https://www.memorylake.ai/en/usecase/ai-memory-for-marketing-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 7:04](https://github.com/memorylake-ai/memorylake-usecases/releases/download/deck-chart-memory-v1/deck-chart-memory-cli-demo.mp4) · [Web, 6:44](https://github.com/memorylake-ai/memorylake-usecases/releases/download/deck-chart-memory-v1/deck-chart-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/deck-chart-memory-v1); GitHub serves them as downloads).
 
 **The problem.** A growth team keeps its monthly results where marketers keep them: in review decks, as native
 PowerPoint charts with a data label on every bar. It saves the decks into shared memory so that everyone's assistant
@@ -25,7 +26,7 @@ have relatively high costs at $57.30 and $64.10, respectively.
 Eight values are on that slide; four reached the model, and affiliate ($31.40) is not one of them. The answer:
 *"I do not have the specific cost per acquisition for the affiliate channel in September 2026."* The other deck
 fares worse: its chart compares landing-page **conversion rates**, and the summary describes it as **"website
-visits"** — in every one of the imports we made — without a single value.
+visits"** — in all 18 imports we made — without a single value.
 
 **The habit that does not help.** Teams that notice this type the numbers into the speaker notes "so search finds
 them". The notes are in the file (`read_deck()` reads them back), but they are **not anywhere in the index**: not in
@@ -54,24 +55,26 @@ channels — go through MemoryRouter (`router chat --boundary`, `gpt-4o-mini`, t
 boundary, and every answer is graded against the data in the deck. Every value is different, so a number in an
 answer names exactly one bar.
 
-Totals over **3 runs** (18 answers per boundary per run):
+Totals over **6 runs** (18 answers per boundary per run):
 
 | Boundary | Chart values in the index text | Right | Wrong | Incomplete | No figure | The asked figures were in what MemoryRouter attached |
 |---|---|---|---|---|---|---|
-| **Decks as saved** | 4 of 20 (summary only) | **9 / 54** | 0 | 9 | 36 | 3 of 18 checker calls |
-| **Numbers in the speaker notes** | 4 of 20 (notes: 0 of 2 in the index) | **9 / 54** | 0 | 8 | 37 | 3 of 18 |
-| **Decks + chart data (CSV)** | **20 of 20** | **48 / 54** | 0 | 6 | 0 | 18 of 18 |
+| **Decks as saved** | 4 of 20 (summary only) | **18 / 108** | 0 | 18 | 72 | 6 of 36 checker calls |
+| **Numbers in the speaker notes** | 4 of 20 (notes: 0 of 12 imports in the index) | **18 / 108** | 0 | 17 | 73 | 6 of 36 (notes text: 0 of 36) |
+| **Decks + chart data (CSV)** | **20 of 20** | **92 / 108** | 0 | 15 | 1 | 36 of 36 |
 
-The figure item's text was **empty for every chart in every deck** (all imports, with and without notes). The
-as-saved boundary's 9 right answers are all one question — the three most expensive channels — and they are luck:
+The figure item's text was **empty for every chart in every deck** (36 of 36 deck imports, with and without notes).
+The as-saved boundary's 18 right answers are all one question — the three most expensive channels — and they are luck:
 the summary happens to name exactly the top three (Display, Podcast, Paid social). Ask for the cheapest three, or for
 any channel in the middle, and it has nothing. The threshold question (CPA under $40) gets *"email marketing at
 $12.90"* — the only cheap channel the summary names — every time.
 
-The six incomplete answers with the CSV are worth seeing too: every row was attached each time (the checker shows
-it), and gpt-4o-mini still answered the under-$40 question with *"Affiliate at $31.4 and Email at $12.9"*, leaving
-out Retargeting ($26.20), twice per run. Memory delivered the numbers; the model dropped one. The checker is what
-tells the two failures apart.
+The 16 misses with the CSV are worth seeing too. Fifteen are one question: every row was attached each time (the
+checker shows it), and gpt-4o-mini still answered the under-$40 question with *"Affiliate at $31.4 and Email at
+$12.9"*, leaving out Retargeting ($26.20) — 15 of 18 times. Memory delivered the numbers; the model dropped one. The
+checker is what tells the two failures apart. The sixteenth: once, with the CSV attached in the checker's call, the
+answer to the top-three question was *"I do not have data for September 2026."* (the checker is its own call; what
+the answer call was given can differ).
 
 ## Prerequisites
 
@@ -278,15 +281,20 @@ chart — no model call.
 
 ## Measured
 
-3 runs in this directory. 18 answers per boundary per run; 18 checker calls per boundary, all readable.
+6 runs: 3 in this directory (run, run again, `--reset`), 1 through the browser companion, and the two recording
+runs (CLI and web). 18 answers per boundary per run; 36 checker calls per boundary, all readable.
 
-- **The index text** (step 4, 3 imports of every file): figure item `text` empty for every chart in every deck (as
-  saved and with notes, 18 of 18 deck imports); speaker notes in the index 0 of 6 notes-deck imports. Deck A's chart
-  summary was the same text in all 9 imports (4 values: the top three and the lowest); deck B's summary varied in
-  wording, called the chart "website visits" every time, and never held a value. The CSVs: every value, every import.
-- **The checker** (`claude-haiku-4-5`): the asked figures were attached for every question with the CSV; with the
-  decks alone, only for Q5 (the summary's own three).
-- Each run: 72 MemoryRouter calls, about 22,700 prompt + 4,900 reply tokens, 5½–6 minutes (the eight documents
+- **Per question** (108 answers per boundary, 18 per question): **as saved** and **numbers in notes** — Q5 18 ✓
+  each (the summary's own three); Q3 18 ◐ and 17 ◐ 1 · (*"email marketing at $12.90"*); Q1, Q2, Q4, Q6 18 · each.
+  **Deck + chart data** — Q1, Q2, Q4, Q6 18 ✓ each; Q5 17 ✓ 1 ·; Q3 3 ✓ 15 ◐ (Retargeting left out).
+- **The index text** (step 4, 6 imports of every file): figure item `text` empty for every chart in every deck (36
+  of 36 deck imports); speaker notes in the index 0 of 12 notes-deck imports. Deck A's chart summary was the same
+  text in all 18 imports (4 values: the top three and the lowest); deck B's summary varied in wording, called the
+  chart "website visits" 18 times of 18, and never held a value. The CSVs: every value, every import.
+- **The checker** (`claude-haiku-4-5`, 108 calls, all readable): the asked figures were attached for every question
+  with the CSV (36 of 36); with the decks alone, only for Q5 (6 of 36). The speaker-notes text was in none of the 36
+  readings for the notes boundary.
+- Each run: 72 MemoryRouter calls, about 22,700 prompt + 4,900 reply tokens, 5½–7 minutes (the eight documents
   indexed in 79–98 s).
 
 ## Use it in your own app
