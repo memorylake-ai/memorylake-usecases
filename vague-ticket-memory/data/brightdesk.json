@@ -1,0 +1,219 @@
+{
+ "company": "Brightdesk",
+ "today": "2026-10-16",
+ "system": "You are Brightdesk's support assistant. Draft the reply a Tier 1 agent will send to the customer, in 2 to 3 sentences, following Brightdesk's support policies.",
+ "policies": [
+  {
+   "key": "refund-annual",
+   "topic": "Refunds",
+   "text": "Refunds: annual plans can be refunded in full within 30 days of the renewal or purchase date; after 30 days, no refunds, only cancellation at term end."
+  },
+  {
+   "key": "refund-monthly",
+   "topic": "Refunds",
+   "text": "Refunds: monthly plans are never refunded; cancelling stops the next charge."
+  },
+  {
+   "key": "duplicate",
+   "topic": "Billing",
+   "text": "Duplicate charges: if a card is charged twice for the same invoice, Tier 1 refunds the duplicate immediately in Stripe without approval."
+  },
+  {
+   "key": "seats",
+   "topic": "Billing",
+   "text": "Seat changes: removing seats mid-term gives account credit, not a refund; the credit applies to the next invoice."
+  },
+  {
+   "key": "export",
+   "topic": "Account & data",
+   "text": "Data export: workspace owners can export all tickets as CSV from Settings > Data; exports over 2 GB are emailed as a link valid for 72 hours."
+  },
+  {
+   "key": "deletion",
+   "topic": "Account & data",
+   "text": "Account deletion: deletion requests are processed after a 14-day grace period; within the grace period the owner can restore everything."
+  },
+  {
+   "key": "sso",
+   "topic": "Login & security",
+   "text": "SSO: SAML SSO is only available on the Business plan and above; Starter and Team plans cannot enable it."
+  },
+  {
+   "key": "password",
+   "topic": "Login & security",
+   "text": "Password reset: if the reset email does not arrive, check that the address is not on the suppression list in Postmark; Tier 1 can remove it."
+  },
+  {
+   "key": "outage",
+   "topic": "Reliability",
+   "text": "Outage credits: customers on Business get a 10% service credit for each full hour of downtime beyond the 99.9% SLA, capped at 50% of the monthly fee."
+  },
+  {
+   "key": "escalation",
+   "topic": "Escalation",
+   "text": "Escalation: anything mentioning legal action, a data breach or a regulator goes straight to the support lead, not Tier 2."
+  },
+  {
+   "key": "forwarding",
+   "topic": "Email",
+   "text": "Email forwarding: inbound email forwarding requires the SPF record to include _spf.brightdesk.io; without it, forwarded mail lands in spam."
+  },
+  {
+   "key": "downgrade",
+   "topic": "Plans",
+   "text": "Plan downgrade: downgrading from Business to Team takes effect at the end of the current billing period; features above Team stop then."
+  },
+  {
+   "key": "invoices",
+   "topic": "Billing",
+   "text": "Invoices: customers can download past invoices from Billing > History; VAT numbers can be added only before the invoice is issued."
+  },
+  {
+   "key": "trial",
+   "topic": "Plans",
+   "text": "Trial extension: a 14-day trial can be extended once by 7 days by Tier 1; any further extension needs sales."
+  },
+  {
+   "key": "android",
+   "topic": "Mobile app",
+   "text": "Mobile app: push notifications on Android need battery optimisation turned off for the Brightdesk app."
+  },
+  {
+   "key": "api",
+   "topic": "Developers",
+   "text": "API limits: the REST API allows 600 requests per minute per workspace; bursts above that get HTTP 429 with a Retry-After header."
+  },
+  {
+   "key": "attachments",
+   "topic": "Tickets",
+   "text": "Attachments: the maximum attachment size on a ticket is 25 MB; larger files must be shared as links."
+  },
+  {
+   "key": "chargeback",
+   "topic": "Billing",
+   "text": "Chargebacks: when a customer opens a chargeback, the account is frozen until finance resolves it; support must not refund in parallel."
+  },
+  {
+   "key": "language",
+   "topic": "Tone",
+   "text": "Language: replies to customers in Germany must use the formal Sie form."
+  },
+  {
+   "key": "hours",
+   "topic": "Support hours",
+   "text": "Working hours: phone support runs 08:00 to 18:00 CET on weekdays; chat is 24/7 for Business."
+  }
+ ],
+ "inbox": [
+  {
+   "id": "M1",
+   "sender": "Dana (Fernway Studio)",
+   "message": "Please wipe everything you have on us.",
+   "topic": "Account & data › Close account",
+   "policy": "deletion",
+   "right": "14[- ]day|grace period",
+   "right_label": "the 14-day grace period before deletion",
+   "control": false
+  },
+  {
+   "id": "M2",
+   "sender": "Ilse (Harbor & Pine)",
+   "message": "I want it back. All of it.",
+   "topic": "Billing › Refund",
+   "policy": "refund-annual",
+   "right": "30[- ]days?",
+   "right_label": "a full refund within 30 days (annual plan)",
+   "control": false
+  },
+  {
+   "id": "M3",
+   "sender": "Marco (Tidewater Labs)",
+   "message": "you did it twice!!",
+   "topic": "Billing › Charges",
+   "policy": "duplicate",
+   "right": "refund\\w*\\s+(the|this|that|your)?\\s*duplicate|duplicate.{0,60}refund|refund.{0,60}duplicate",
+   "right_label": "the duplicate charge is refunded right away",
+   "control": false
+  },
+  {
+   "id": "M4",
+   "sender": "Priya (Northgate Clinic)",
+   "message": "our IT people want everyone signing in the Okta way",
+   "topic": "Login & security › Single sign-on",
+   "policy": "sso",
+   "right": "\\bBusiness\\b",
+   "right_label": "SAML SSO needs the Business plan",
+   "control": false
+  },
+  {
+   "id": "M5",
+   "sender": "Tom (Gully & Co)",
+   "message": "can we have a little longer? not ready to decide",
+   "topic": "Plans › Trial",
+   "policy": "trial",
+   "right": "\\b7[- ]days?\\b|seven days|one week|1 week",
+   "right_label": "one 7-day trial extension",
+   "control": false
+  },
+  {
+   "id": "M6",
+   "sender": "Ana (Loomwork)",
+   "message": "it keeps saying slow down",
+   "topic": "Developers › API",
+   "policy": "api",
+   "right": "\\b600\\b|Retry-After",
+   "right_label": "600 requests per minute; wait for Retry-After",
+   "control": false
+  },
+  {
+   "id": "M7",
+   "sender": "Kofi (Brightline Movers)",
+   "message": "we got rid of two people. what about their part?",
+   "topic": "Billing › Seats",
+   "policy": "seats",
+   "right": "\\bcredit",
+   "right_label": "account credit for removed seats, not a refund",
+   "control": false
+  },
+  {
+   "id": "M8",
+   "sender": "Lena (Oakfield Dental)",
+   "message": "the phone stays quiet now",
+   "topic": "Mobile app › Notifications",
+   "policy": "android",
+   "right": "battery",
+   "right_label": "turn off battery optimisation for the app",
+   "control": false
+  },
+  {
+   "id": "M9",
+   "sender": "Sam (Quarry Bikes)",
+   "message": "before we go we need all of it",
+   "topic": "Account & data › Export",
+   "policy": "export",
+   "right": "Settings\\s*[>›]\\s*Data|\\bCSV\\b",
+   "right_label": "CSV export from Settings > Data",
+   "control": false
+  },
+  {
+   "id": "C1",
+   "sender": "Dana (Fernway Studio)",
+   "message": "Please delete our account.",
+   "topic": "Account & data › Close account",
+   "policy": "deletion",
+   "right": "14[- ]day|grace period",
+   "right_label": "the 14-day grace period before deletion",
+   "control": true
+  },
+  {
+   "id": "C2",
+   "sender": "Marco (Tidewater Labs)",
+   "message": "You charged me twice!!",
+   "topic": "Billing › Charges",
+   "policy": "duplicate",
+   "right": "refund\\w*\\s+(the|this|that|your)?\\s*duplicate|duplicate.{0,60}refund|refund.{0,60}duplicate",
+   "right_label": "the duplicate charge is refunded right away",
+   "control": true
+  }
+ ]
+}
