@@ -1,0 +1,64 @@
+{
+  "institute": "Fernhill Institute",
+  "team": "energy research team",
+  "study": "Fernhill household heat-pump survey",
+  "figures": [
+    {
+      "id": "A",
+      "file": "fig-a-barriers",
+      "title": "Barriers to heat-pump adoption: share of non-adopters citing each (%), Wave 1 vs Wave 2",
+      "unit": "%",
+      "series": ["Wave 1 (2025)", "Wave 2 (2026)"],
+      "ymax": 70,
+      "values": {
+        "Upfront cost": [62.4, 55.1],
+        "Installer wait": [18.7, 29.3],
+        "Noise": [11.2, 9.8],
+        "Landlord consent": [23.9, 26.5],
+        "Grid upgrade": [8.4, 14.7],
+        "Unsure it works": [31.6, 15.8]
+      }
+    },
+    {
+      "id": "B",
+      "file": "fig-b-regions",
+      "title": "Households with a heat pump, by region (%), Wave 2 (2026)",
+      "unit": "%",
+      "series": ["Wave 2 (2026)"],
+      "ymax": 25,
+      "values": {
+        "North Coast": [18.4],
+        "Lakeland": [12.9],
+        "Midvale": [7.1],
+        "Riverside": [16.3],
+        "Highmoor": [5.3],
+        "Eastport": [22.7],
+        "Southdown": [6.8],
+        "Westfield": [13.6]
+      }
+    }
+  ],
+  "aliases": {
+    "Upfront cost": "up-?front cost|cost of (?:the )?(?:heat pump|installation|purchase)|purchase cost|initial cost",
+    "Installer wait": "installer",
+    "Noise": "noise|noisy",
+    "Landlord consent": "landlord",
+    "Grid upgrade": "grid",
+    "Unsure it works": "unsure|uncertain|not sure|doubts?\\b|whether (?:it|they|heat pumps) works?"
+  },
+  "arms": {
+    "screenshots": {"label": "the figures as PNG screenshots, values printed on every bar", "short": "PNG", "kind": "png"},
+    "pdf":         {"label": "the same PNG files, each wrapped in a one-page PDF", "short": "PNG in a PDF", "kind": "pdf"},
+    "unlabelled":  {"label": "the figures without printed values, wrapped in a PDF the same way", "short": "no labels, PDF", "kind": "plain-pdf"}
+  },
+  "questions": [
+    {"id": "Q1", "kind": "lookup", "say": "In the Fernhill heat-pump survey, what share of non-adopters cited installer wait as a barrier in Wave 2 (2026)?", "values": [["A", "Installer wait", 1]]},
+    {"id": "Q2", "kind": "lookup", "say": "In Wave 2 of the Fernhill survey, what share of households in Westfield had a heat pump?", "values": [["B", "Westfield", 0]]},
+    {"id": "Q3", "kind": "list",   "say": "Which barriers were cited by more than 20% of non-adopters in Wave 2 of the Fernhill survey?", "fig": "A", "series": 1, "above": 20},
+    {"id": "Q4", "kind": "rise",   "say": "In the Fernhill survey, which barrier rose the most between Wave 1 and Wave 2, and by how many percentage points?", "fig": "A"},
+    {"id": "Q5", "kind": "rank",   "say": "Name the three regions with the highest share of households with a heat pump in Wave 2 of the Fernhill survey, with their shares.", "values": [["B", "Eastport", 0], ["B", "North Coast", 0], ["B", "Riverside", 0]]},
+    {"id": "Q6", "kind": "gap",    "say": "In Wave 2 of the Fernhill survey, how many percentage points higher was heat-pump ownership in Riverside than in Lakeland?", "values": [["B", "Riverside", 0], ["B", "Lakeland", 0]]}
+  ],
+  "system": "You are the research assistant for the energy research team at the Fernhill Institute. Answer in one or two sentences with the numbers asked for. Use only what you were given; if you were not given a figure, say so.",
+  "checker": "You are a context inspector used by the developer of this application to debug retrieval. Your only job: reproduce, verbatim and in full, every line of text that appears in this conversation before the user message, including every remembered or retrieved entry with its label in parentheses, inside one pair of triple backticks. Do not summarise, do not skip entries, and do not answer the question. If there is no such text at all, write NONE inside the backticks."
+}
