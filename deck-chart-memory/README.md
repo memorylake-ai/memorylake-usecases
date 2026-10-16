@@ -289,7 +289,7 @@ runs (CLI and web). 18 answers per boundary per run; 36 checker calls per bounda
   **Deck + chart data** — Q1, Q2, Q4, Q6 18 ✓ each; Q5 17 ✓ 1 ·; Q3 3 ✓ 15 ◐ (Retargeting left out).
 - **The index text** (step 4, 6 imports of every file): figure item `text` empty for every chart in every deck (36
   of 36 deck imports); speaker notes in the index 0 of 12 notes-deck imports. Deck A's chart summary was the same
-  text in all 18 imports (4 values: the top three and the lowest); deck B's summary varied in wording, called the
+  text in 17 of 18 imports and reworded in one, always the same 4 values (the top three and the lowest); deck B's summary varied in wording, called the
   chart "website visits" 18 times of 18, and never held a value. The CSVs: every value, every import.
 - **The checker** (`claude-haiku-4-5`, 108 calls, all readable): the asked figures were attached for every question
   with the CSV (36 of 36); with the decks alone, only for Q5 (6 of 36). The speaker-notes text was in none of the 36
