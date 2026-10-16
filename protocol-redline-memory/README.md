@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Healthcare Researchers AI That Retains Clinical Context Across the Full Study*](https://www.memorylake.ai/en/usecase/ai-memory-for-healthcare-researchers),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded; links follow.
+**Watch it run:** [CLI, 5:19](https://github.com/memorylake-ai/memorylake-usecases/releases/download/protocol-redline-memory-v1/protocol-redline-memory-cli-demo.mp4) · [Web, 6:42](https://github.com/memorylake-ai/memorylake-usecases/releases/download/protocol-redline-memory-v1/protocol-redline-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/protocol-redline-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Northfield Clinical Research Unit (a fictional research site) keeps its study documents in shared
 memory, so that a study assistant can answer *"what's the minimum eGFR at screening?"* while a coordinator
@@ -30,7 +31,7 @@ Inclusion criterion 1: Adults 18 years or older with a diagnosis of asthma for a
 ```
 
 MemoryRouter attaches that text, and the assistant answers with criteria the amendment deleted: *"Answer: 90 days."*
-— 15 times out of 15. Where both values survive, which one it picks is not predictable: it took the new eGFR (45)
+— 21 times out of 21. Where both values survive, which one it picks is not predictable: it took the new eGFR (45)
 from `60 45`, but the old endpoint (week 12) from `week 12 24`, and merged *"with breakfast after an overnight
 fast"* into a dosing instruction that is neither.
 
@@ -209,28 +210,28 @@ Under the *strike removed* boundary the same question gets *"Answer: 30 days."* 
 
 ## Measured
 
-Over **6 runs** (including the recording for the video; per boundary and run: 21 answers about edited lines, 6 about the controls):
+Over **7 runs** (including the recordings for the videos; per boundary and run: 21 answers about edited lines, 6 about the controls):
 
 | | edited lines: right | gave the deleted value | gave both | other | controls |
 |---|---|---|---|---|---|
-| as saved | 36/126 | 54 | 36 | 0 | 36/36 |
-| strike removed | 126/126 | 0 | 0 | 0 | 36/36 |
+| as saved | 42/146 | 63 | 41 | 0 | 42/42 |
+| strike removed | 147/147 | 0 | 0 | 0 | 42/42 |
 
-By question (18 answers each):
+By question (21 answers each):
 
 | | as saved | strike removed |
 |---|---|---|
-| Q1 KLV-301 minimum eGFR (45; struck 60) — index: `60 45` | 18/18 | 18/18 |
-| Q2 KLV-301 SGLT2 washout (30; struck 90) — index: `90` only | 0/18 — 18 gave the deleted value | 18/18 |
-| Q3 KLV-301 dosing (after an overnight fast; struck with breakfast) — index: both | 0/18 — 18 gave both | 18/18 |
-| Q4 KLV-301 primary endpoint (week 24; struck 12) — index: `12 24` | 0/18 — 18 gave the deleted value | 18/18 |
-| Q5 ORV-118 upper FEV1 (85; struck 80) — index: `80 85` | 18/18 | 18/18 |
-| Q6 ORV-118 asthma history (6 months; struck 12) — index: `12` only | 0/18 — 18 gave the deleted value | 18/18 |
-| Q7 ORV-118 dosing interval (every 4 weeks; struck 2) — index: `2 4` | 0/18 — 18 gave both | 18/18 |
-| Q8 KLV-301 sample size (no markup on the line) | 18/18 | 18/18 |
-| Q9 pharmacy manual storage (no markup in the file) | 18/18 | 18/18 |
+| Q1 KLV-301 minimum eGFR (45; struck 60) — index: `60 45` | 21/21 | 21/21 |
+| Q2 KLV-301 SGLT2 washout (30; struck 90) — index: `90` only | 0/21 — 21 gave the deleted value | 21/21 |
+| Q3 KLV-301 dosing (after an overnight fast; struck with breakfast) — index: both | 0/21 — 21 gave both | 21/21 |
+| Q4 KLV-301 primary endpoint (week 24; struck 12) — index: `12 24` | 0/21 — 21 gave the deleted value | 21/21 |
+| Q5 ORV-118 upper FEV1 (85; struck 80) — index: `80 85` | 21/21 | 21/21 |
+| Q6 ORV-118 asthma history (6 months; struck 12) — index: `12` only | 0/21 — 21 gave the deleted value | 21/21 |
+| Q7 ORV-118 dosing interval (every 4 weeks; struck 2) — index: `2 4` | 0/20 — 20 gave both, 1 ∅ | 21/21 |
+| Q8 KLV-301 sample size (no markup on the line) | 21/21 | 21/21 |
+| Q9 pharmacy manual storage (no markup in the file) | 21/21 | 21/21 |
 
-- **The index**: in all 6 runs (each a fresh import), the as-saved text held both values on 9 of the 11 edited lines
+- **The index**: in all 7 runs (each a fresh import), the as-saved text held both values on 9 of the 11 edited lines
   and **only the deleted value on 2** (Exclusion criterion 3 `within 90 days`, ORV-118 Inclusion
   criterion 1 `at least 12 months`) — the same lines, the same text, every time. The strike-removed text held only
   the new value on 11/11. The rule for which new values disappear is not something we found: in an earlier
@@ -239,10 +240,11 @@ By question (18 answers each):
   and FEV1 (`80 85` → 85), the earlier one for the endpoint (`week 12 24` → week 12), and merged the dosing
   line and the injection interval into instructions that are neither (*"with breakfast after an overnight fast"*,
   *"every 2 to 4 weeks"*).
-- **∅**: no boundary call came back with the prompt-token count of the same call without a boundary — MemoryRouter
-  attached the documents to every question.
-- Model replies vary from run to run in principle; here every question got the same verdict in every run. These are
-  totals over every run.
+- **∅**: 1 of 378 boundary calls came back with exactly the prompt-token count of the same call without a
+  boundary — MemoryRouter attached nothing, and the model answered on its own (Q7 in the CLI recording: *"once every 28
+  days"*). Not graded either way.
+- Model replies vary from run to run in principle; here every graded answer got the same verdict as the others for
+  its question, run after run. These are totals over every run.
 
 ## Use it in your own app
 
