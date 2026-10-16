@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Professional Services Engagement Letter Memory That Accelerates Every New Client*](https://www.memorylake.ai/en/usecase/engagement-letter-memory-for-professional-services),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 7:06](https://github.com/memorylake-ai/memorylake-usecases/releases/download/letter-comment-memory-v1/letter-comment-memory-cli-demo.mp4) · [Web, 7:50](https://github.com/memorylake-ai/memorylake-usecases/releases/download/letter-comment-memory-v1/letter-comment-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/letter-comment-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Larkspur & Vance CPAs (a fictional accounting firm) keeps its past engagement letters in shared
 memory, so that an engagement-letter assistant can answer *"which clause did Halloway refuse last year?"* before
@@ -169,7 +170,7 @@ $ memorylake search 'Halloway Dental Group, LLC engagement letter' --projects pr
 ```
 
 Where a comment lands depends on the page layout, not on its anchor: the same bytes landed identically in every
-import (4 runs here, plus the probes), and three of the eight landed after their own clause.
+import (6 runs here, plus the probes), and three of the eight landed after their own clause.
 
 ### Steps 5–6: ask through MemoryRouter, under each boundary
 
@@ -212,35 +213,37 @@ paragraphs `anchor_comments()` writes instead, without touching the network.
 
 ## Measured
 
-Over **4 runs** (three from the command line, one through the browser companion; 60 answers about displaced
-comments, 36 about in-place comments and 24 about the uncommented letter per boundary):
+Over **6 runs** (including the two recorded for the videos; 90 answers about displaced comments, 54 about in-place
+comments and 36 about the uncommented letter per boundary):
 
 | | displaced comments | of the misses: the clause the comment sits under | in-place comments | uncommented letter |
 |---|---|---|---|---|
-| as saved | 3/60 | 56/57 | 31/36 | 24/24 |
-| comments anchored | 60/60 | — | 36/36 | 24/24 |
+| as saved | 6/90 | 83/84 | 45/54 | 36/36 |
+| comments anchored | 90/90 | — | 54/54 | 36/36 |
 
-By question (12 answers each):
+By question, over the 5 runs whose every reply was kept (15 answers each; the CLI video's run is in the totals above
+from its printed scoreboard):
 
 | | as saved | comments anchored |
 |---|---|---|
-| Q1 Halloway 30-day window (clause 3; indexed after 4) | 3/12 (9 said clause 4) | 12/12 |
-| Q2 Halloway refused (clause 5; indexed after 6) | 0/12 (12 said clause 6) | 12/12 |
-| Q3 Halloway insurer wording (clause 7; in place) | 12/12 | 12/12 |
-| Q4 Halloway asked to drop (clause 9; in place) | 7/12 (5 said clause 10, the clause *below* it) | 12/12 |
-| Q5 Brightwater overage (clause 2; in place) | 12/12 | 12/12 |
-| Q6 Brightwater pushed back (clause 4; indexed after 5) | 0/12 (12 said clause 5) | 12/12 |
-| Q7 Brightwater leave out (clause 6; indexed after 7) | 0/12 (11 said clause 7) | 12/12 |
-| Q8 Brightwater lender (clause 8; indexed after 9) | 0/12 (12 said clause 9) | 12/12 |
-| Q9, Q10 Fenwick & Lowe (no comments) | 24/24 | 24/24 |
+| Q1 Halloway 30-day window (clause 3; indexed after 4) | 5/15 (10 said clause 4) | 15/15 |
+| Q2 Halloway refused (clause 5; indexed after 6) | 0/15 (15 said clause 6) | 15/15 |
+| Q3 Halloway insurer wording (clause 7; in place) | 15/15 | 15/15 |
+| Q4 Halloway asked to drop (clause 9; in place) | 8/15 (7 said clause 10, the clause *below* it) | 15/15 |
+| Q5 Brightwater overage (clause 2; in place) | 15/15 | 15/15 |
+| Q6 Brightwater pushed back (clause 4; indexed after 5) | 0/15 (15 said clause 5) | 15/15 |
+| Q7 Brightwater leave out (clause 6; indexed after 7) | 0/15 (14 said clause 7) | 15/15 |
+| Q8 Brightwater lender (clause 8; indexed after 9) | 0/15 (15 said clause 9) | 15/15 |
+| Q9, Q10 Fenwick & Lowe (no comments) | 30/30 | 30/30 |
 
-- **The index**: in all 4 runs, the same five comments sat after the next clause down in the as-saved project and
+- **The index**: in all 6 runs, the same five comments sat after the next clause down in the as-saved project and
   all eight sat after their own clause in the anchored project.
 - **"In place" is not safe either.** Q4's comment sits right after its clause — and right before the next one,
-  with a blank line between. Five answers in twelve gave it to the clause below. A comment with no subject is
+  with a blank line between. Seven answers in fifteen gave it to the clause below. A comment with no subject is
   ambiguous wherever it lands; the anchored copy names the clause, and that is what fixed all twelve.
-- **The checker**: in all 32 readable as-saved copies the letter was attached; 30 held the comment, and in all 30 it
-  sat after the clause step 4 measured (the other 2 copies did not include it).
+- **The checker**: in all 48 readable as-saved copies (6 runs) the letter was attached and 46 held the comment. In
+  the 38 such copies from the 5 runs whose replies were kept, the comment sat after the clause step 4 measured every
+  time; the CLI video's scoreboard reads the same (after its own clause 3/8).
 - Model replies vary from run to run; these are totals over every run.
 
 ## Use it in your own app
