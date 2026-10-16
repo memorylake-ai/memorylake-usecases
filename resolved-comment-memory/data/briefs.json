@@ -1,0 +1,250 @@
+{
+  "studio": "Halfmoon Studio",
+  "library": "Client brief library",
+  "arms": {
+    "saved": {
+      "short": "as saved",
+      "label": "the briefs as they were saved, every comment thread in Word's comment pane, open or resolved",
+      "suffix": ".docx"
+    },
+    "dropped": {
+      "short": "resolved dropped",
+      "label": "the same briefs with resolved comment threads removed before upload; open threads kept",
+      "suffix": ".open-only.docx"
+    }
+  },
+  "people": {
+    "PN": "Priya Nandakumar (strategist)",
+    "OC": "Owen Castellano (account lead)",
+    "LO": "Lena Ortiz (client brand director)"
+  },
+  "briefs": [
+    {
+      "id": "fl",
+      "file": "fernlight-sync-launch",
+      "client": "Fernlight",
+      "title": "Fernlight Sync 3.0 launch brief",
+      "saved": "2026-10-02",
+      "lines": [
+        [
+          "Launch date",
+          "Fernlight Sync 3.0 goes live on Tuesday, October 27, 2026, at 9:00 Pacific."
+        ],
+        [
+          "Headline",
+          "Sync every file across every device, with no manual steps."
+        ],
+        [
+          "Price",
+          "Fernlight Sync Pro is 12 dollars per user per month, billed annually."
+        ],
+        [
+          "Trial",
+          "New teams get a free trial before the first invoice."
+        ],
+        [
+          "Audience",
+          "IT leads at companies with 50 to 500 employees."
+        ],
+        [
+          "Channels",
+          "Email to the existing customer list, a webinar on launch day, and paid search."
+        ]
+      ],
+      "threads": [
+        {
+          "on": "Launch date",
+          "by": "PN",
+          "text": "Move the launch to Tuesday, November 3, so it lines up with the webinar.",
+          "state": "resolved",
+          "outcome": "rejected"
+        },
+        {
+          "on": "Headline",
+          "by": "PN",
+          "text": "Change the headline to: The fastest file sync on the market.",
+          "state": "resolved",
+          "outcome": "rejected"
+        },
+        {
+          "on": "Trial",
+          "by": "PN",
+          "text": "Trial length is 14 days - please write it into the line.",
+          "state": "open",
+          "outcome": "open"
+        },
+        {
+          "on": "Channels",
+          "by": "OC",
+          "text": "Add a co-marketing post with our reseller Tallgrass Systems on launch day.",
+          "state": "resolved",
+          "outcome": "rejected"
+        }
+      ]
+    },
+    {
+      "id": "op",
+      "file": "orchard-pine-autumn",
+      "client": "Orchard & Pine",
+      "title": "Orchard & Pine autumn cider campaign brief",
+      "saved": "2026-09-14",
+      "lines": [
+        [
+          "Campaign window",
+          "September 28 to October 25, 2026."
+        ],
+        [
+          "Hero image",
+          "The orchard at dawn, mist over the rows, no people and no animals."
+        ],
+        [
+          "Palette",
+          "Rust, cream and deep green."
+        ],
+        [
+          "Budget",
+          "48,000 dollars for production and media."
+        ],
+        [
+          "Deliverables",
+          "Six social posts, two outdoor boards and a shelf talker; final files as PNG."
+        ],
+        [
+          "Approval",
+          "Lena Ortiz, brand director, signs off on every piece."
+        ]
+      ],
+      "threads": [
+        {
+          "on": "Campaign window",
+          "by": "LO",
+          "text": "End the campaign on October 25, not November 1 - the batch sells out by then.",
+          "state": "resolved",
+          "outcome": "applied"
+        },
+        {
+          "on": "Hero image",
+          "by": "OC",
+          "text": "Put the fox mascot in the hero image, sitting under the first tree.",
+          "state": "resolved",
+          "outcome": "rejected"
+        },
+        {
+          "on": "Palette",
+          "by": "PN",
+          "text": "Swap deep green for navy so it matches the new bottle labels.",
+          "state": "resolved",
+          "outcome": "rejected"
+        },
+        {
+          "on": "Budget",
+          "by": "OC",
+          "text": "Raise the budget to 60,000 dollars to add a third outdoor board.",
+          "state": "resolved",
+          "outcome": "rejected"
+        },
+        {
+          "on": "Deliverables",
+          "by": "LO",
+          "text": "Please send layered PSD files along with the PNGs for every final.",
+          "state": "open",
+          "outcome": "open"
+        }
+      ]
+    },
+    {
+      "id": "bd",
+      "file": "brightline-dental-referral",
+      "client": "Brightline Dental",
+      "title": "Brightline Dental refer-a-friend brief",
+      "saved": "2026-08-20",
+      "lines": [
+        [
+          "Offer",
+          "Each patient who refers a friend gets a free at-home whitening kit."
+        ],
+        [
+          "Channels",
+          "In-clinic posters and a text message to current patients."
+        ],
+        [
+          "Deadline",
+          "Artwork to the clinic by November 12, 2026."
+        ],
+        [
+          "Tone",
+          "Warm and plain-spoken; no before-and-after photos."
+        ]
+      ],
+      "threads": []
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1",
+      "brief": "fl",
+      "on": "Launch date",
+      "say": "When does Fernlight Sync 3.0 launch?",
+      "right": "october\\s*27|oct\\.?\\s*27|10/27",
+      "wrong": "november\\s*3|nov\\.?\\s*3|11/3"
+    },
+    {
+      "id": "Q2",
+      "brief": "fl",
+      "on": "Headline",
+      "say": "What is the launch headline for Fernlight Sync 3.0?",
+      "right": "sync every file",
+      "wrong": "fastest"
+    },
+    {
+      "id": "Q3",
+      "brief": "fl",
+      "on": "Channels",
+      "say": "Which channels are we using for the Fernlight Sync 3.0 launch?",
+      "right": "paid search",
+      "wrong": "tallgrass|co-marketing|reseller"
+    },
+    {
+      "id": "Q4",
+      "brief": "op",
+      "on": "Hero image",
+      "say": "What is the hero image for Orchard & Pine, and is there a mascot in it?",
+      "right": "\\bno (?:people|animals|mascot)\\b|\\bno,|\\bnot (?:in|included|part)\\b|\\bwithout (?:a |the |any )?(?:fox|mascot|animals)\\b|\\bthere is no\\b",
+      "wrong": "\\b(?:includes|including|with|features|featuring|has|shows) (?:a |the )?fox\\b|\\bfox mascot is (?!not)"
+    },
+    {
+      "id": "Q5",
+      "brief": "op",
+      "on": "Palette",
+      "say": "What is the Orchard & Pine palette - did it change for the new bottle labels?",
+      "right": "deep green",
+      "wrong": "\\bnavy\\b"
+    },
+    {
+      "id": "Q6",
+      "brief": "op",
+      "on": "Budget",
+      "say": "Did the Orchard & Pine budget go up to 60,000 dollars?",
+      "right": "48,?000|\\$48k",
+      "wrong": "^yes\\b|\\b(?:raised|increased|went up|gone up|go up) to \\$?60,?000|\\bis (?:now )?\\$?60,?000"
+    },
+    {
+      "id": "Q7",
+      "brief": "op",
+      "on": "Deliverables",
+      "say": "In what file formats does Orchard & Pine want the final files?",
+      "right": "psd",
+      "wrong": null
+    },
+    {
+      "id": "Q8",
+      "brief": "bd",
+      "on": "Offer",
+      "say": "What does a Brightline Dental patient get for referring a friend?",
+      "right": "whitening",
+      "wrong": null
+    }
+  ],
+  "system": "You are the brief assistant at Halfmoon Studio, a design studio. Answer from the studio's client briefs. Be brief.",
+  "checker": "You are a context inspector used by the developer of this application to debug retrieval. Your only job: reproduce, verbatim and in full, every line of text that appears in this conversation before the user message, including every remembered or retrieved entry with its label in parentheses, inside one pair of triple backticks. Do not summarise, do not skip entries, and do not answer the question. If there is no such text at all, write NONE inside the backticks."
+}
