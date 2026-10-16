@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Agencies Creative Brief Memory That Compounds Across Every Client Project*](https://www.memorylake.ai/en/usecase/creative-brief-memory-across-agency-client-work),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 5:12](https://github.com/memorylake-ai/memorylake-usecases/releases/download/resolved-comment-memory-v1/resolved-comment-memory-cli-demo.mp4) · [Web, 6:29](https://github.com/memorylake-ai/memorylake-usecases/releases/download/resolved-comment-memory-v1/resolved-comment-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/resolved-comment-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Halfmoon Studio (a fictional design studio) keeps its past client briefs in shared memory, so that a
 brief assistant can answer *"when does Fernlight launch?"* or *"what's in the Orchard & Pine hero image?"* before the
@@ -35,7 +36,7 @@ Commented [PN3]: Trial length is 14 days - please write it into the line.
 Commented [OC4]: Add a co-marketing post with our reseller Tallgrass Systems on launch day.
 ```
 
-and answered *"Fernlight Sync 3.0 launches on Tuesday, November 3, 2026, at 9:00 Pacific."* — 15 times out of 15.
+and answered *"Fernlight Sync 3.0 launches on Tuesday, November 3, 2026, at 9:00 Pacific."* — 21 times out of 21.
 The brief says October 27 two lines above; nothing in the text says the November idea was turned down, and a
 comment reads like the latest word.
 
@@ -101,6 +102,11 @@ pane (resolved balloons greyed out, as Word shows them), each comment's line in 
 questions under each boundary with the checker's reading, and a scoreboard. **Brief** looks up one brief in both
 projects without a model call. A terminal drawer shows every `memorylake` command as it runs. **Clean up** removes
 it all.
+
+| | |
+|---|---|
+| ![](web/screenshot-library.png) | ![](web/screenshot-index.png) |
+| ![](web/screenshot-saved.png) | ![](web/screenshot-score.png) |
 
 ## What happens, step by step
 
@@ -214,30 +220,30 @@ channels plus the Tallgrass post) · ∅ MemoryRouter attached nothing (prompt t
 
 ## Measured
 
-Over **6 runs** (per boundary and run: 18 answers about lines with a resolved suggestion, 3 about the open comment, 3 about the uncommented brief):
+Over **8 runs** (including the two recorded for the videos; per boundary and run: 18 answers about lines with a resolved suggestion, 3 about the open comment, 3 about the uncommented brief):
 
 | | lines with a resolved suggestion: right | gave the turned-down suggestion | mixed it in | open comment (PSD) | uncommented brief |
 |---|---|---|---|---|---|
-| as saved | 2/108 | 55 | 51 | 18/18 | 18/18 |
-| resolved dropped | 108/108 | 0 | 0 | 18/18 | 17/17 (1 ∅) |
+| as saved | 2/144 | 76 | 66 | 24/24 | 23/23 (1 ∅) |
+| resolved dropped | 144/144 | 0 | 0 | 24/24 | 23/23 (1 ∅) |
 
-By question, over the 5 runs whose every reply was kept (15 answers each):
+By question, over the 7 runs whose every reply was kept (21 answers each):
 
 | | as saved | resolved dropped |
 |---|---|---|
-| Q1 Fernlight launch date (Oct 27; resolved: Nov 3) | 0/15 — 15 said November 3 | 15/15 |
-| Q2 Fernlight headline (resolved: "fastest") | 0/15 — 2 gave "fastest", 13 merged both | 15/15 |
-| Q3 Fernlight channels (resolved: Tallgrass co-marketing) | 0/15 — 15 added the Tallgrass post | 15/15 |
-| Q4 Orchard & Pine hero image (resolved: fox mascot) | 1/15 — 14 put the fox in | 15/15 |
-| Q5 Orchard & Pine palette (resolved: navy) | 0/15 — 15 said deep green was swapped for navy | 15/15 |
-| Q6 Orchard & Pine budget (48,000; resolved: 60,000) | 0/15 — 15 said "Yes … raised to 60,000" | 15/15 |
-| Q7 Orchard & Pine file formats (open comment: PSD) | 15/15 | 15/15 |
-| Q8 Brightline Dental referral (no comments) | 15/15 | 14/14 (1 ∅) |
+| Q1 Fernlight launch date (Oct 27; resolved: Nov 3) | 0/21 — 21 said November 3 | 21/21 |
+| Q2 Fernlight headline (resolved: "fastest") | 0/21 — 5 gave "fastest", 16 merged both | 21/21 |
+| Q3 Fernlight channels (resolved: Tallgrass co-marketing) | 0/21 — 21 added the Tallgrass post | 21/21 |
+| Q4 Orchard & Pine hero image (resolved: fox mascot) | 1/21 — 20 put the fox in | 21/21 |
+| Q5 Orchard & Pine palette (resolved: navy) | 0/21 — 21 said deep green was swapped for navy | 21/21 |
+| Q6 Orchard & Pine budget (48,000; resolved: 60,000) | 0/21 — 21 said "Yes … raised to 60,000" | 21/21 |
+| Q7 Orchard & Pine file formats (open comment: PSD) | 21/21 | 21/21 |
+| Q8 Brightline Dental referral (no comments) | 20/20 (1 ∅) | 20/20 (1 ∅) |
 
-- **The index**: in all 6 runs, the 7 resolved comments were in the as-saved index text and 0 in the open-only
+- **The index**: in all 8 runs, the 7 resolved comments were in the as-saved index text and 0 in the open-only
   one; the 2 open comments were in both. Words like "resolved" in the as-saved text: 0 every time.
-- **The checker**: the question's brief was attached in 36/36 readable as-saved copies, and 33 of them carried the
-  resolved comment on the question's line; in the open-only project 0/36. The checker and the answer are separate
+- **The checker**: the question's brief was attached in 48/48 readable as-saved copies, and 45 of them carried the
+  resolved comment on the question's line; in the open-only project 0/48. The checker and the answer are separate
   calls, so a single answer can't be paired with a single reading; these are totals.
 - **"Mixed it in" is not a near miss.** Q5's ◐ answers say *"The deep green has been swapped for navy … The current
   palette is now rust, cream, and navy"* — the brief's colour is named only as the thing that was replaced.
@@ -251,7 +257,7 @@ By question, over the 5 runs whose every reply was kept (15 answers each):
   `word/document.xml`, and their entries from `commentsExtended.xml`.
 - **Or write the outcome into the thread.** A resolved thread with a reply that says what was decided ("No — keeping
   October 27") came back right in our probes; a bare Resolve click carries nothing the index can read.
-- **Keep open comments.** They are live: the open-comment question was answered from the comment 36/36 times across
+- **Keep open comments.** They are live: the open-comment question was answered from the comment 48/48 times across
   both boundaries.
 - **Look at what the index read.** `memorylake search "<client> brief" --projects <p> --types document` shows the
   text MemoryRouter will attach. Every `Commented [XY3]:` line is a comment, and nothing in it says whether its
