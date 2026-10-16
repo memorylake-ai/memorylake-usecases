@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Keep Every Customer Research Insight, Across Every AI Session*](https://www.memorylake.ai/en/usecase/ai-memory-for-customer-research-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 6:16](https://github.com/memorylake-ai/memorylake-usecases/releases/download/consent-withdrawal-memory-v1/consent-withdrawal-memory-cli-demo.mp4) · [Web, 7:06](https://github.com/memorylake-ai/memorylake-usecases/releases/download/consent-withdrawal-memory-v1/consent-withdrawal-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/consent-withdrawal-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Tallyfox (a fictional invoicing app) runs customer interviews, and its UX research team keeps the
 notes in shared memory, one Markdown file per interview, so a research assistant can answer *"what did Dana Reyes
@@ -26,13 +27,13 @@ Q3  Can we quote Dana Reyes in the onboarding readout deck?
         readout deck."                                                          ← nothing attached at all
 ```
 
-Over 6 runs, **0 of 72** answers about the two who withdrew were right with the notes simply deleted: 36 said yes,
-quote them; 20 gave them someone else's words; 16 invented what they said. What was missing was not more deletion,
+Over 8 runs, **0 of 96** answers about the two who withdrew were right with the notes simply deleted: 48 said yes,
+quote them; 26 gave them someone else's words; 22 invented what they said. What was missing was not more deletion,
 but a **record that the deletion happened**. With the team's consent register in the project (who withdrew and
-when, do not quote, none of what they said), **66 of 72** were right; with a short notice under each deleted file's
-own name, **67 of 72**. Every remaining miss was a call where MemoryRouter attached nothing. Neither record helps
+when, do not quote, none of what they said), **89 of 96** were right; with a short notice under each deleted file's
+own name, **90 of 96**. Every remaining miss was a call where MemoryRouter attached nothing. Neither record helps
 with a name that nobody ever interviewed: *"What did Omar Haddad say about the CSV export?"* got another
-participant's words, or an invented answer, **54 of 54** times in all three projects.
+participant's words, or an invented answer, **72 of 72** times in all three projects.
 
 ## What the demo shows
 
@@ -103,6 +104,11 @@ marked), the deletion check per project, what each project keeps in their place,
 model was handed, the questions under each boundary (with "these words are from Lena Fischer's notes" under every
 ⇄ answer), and a scoreboard. **Who** looks up one name in the three projects without a model call. A terminal
 drawer shows every `memorylake` command as it runs. **Clean up** removes it all.
+
+| | |
+|---|---|
+| ![](web/screenshot-notes.png) | ![](web/screenshot-withdrawn.png) |
+| ![](web/screenshot-deleted.png) | ![](web/screenshot-scoreboard.png) |
 
 ## What happens, step by step
 
@@ -213,40 +219,40 @@ $ memorylake router chat 'What did Dana Reyes say about the onboarding checklist
 
 ## Measured
 
-Over **6 runs** (including the browser run; per boundary and run: 12 answers about the two who withdrew, 3 about
-the name never interviewed, 9 controls). The Q8 control was reworded after the first run (*"Would Tom Achebe
-switch to annual billing?"* got nothing attached 9/9 and an invented answer), so the controls total 51:
+Over **8 runs** (including the recordings for the videos; per boundary and run: 12 answers about the two who
+withdrew, 3 about the name never interviewed, 9 controls). The Q8 control was reworded after the first run (*"Would
+Tom Achebe switch to annual billing?"* got nothing attached 9/9 and an invented answer), so the controls total 69:
 
 | | withdrew: right | someone else's words | invented | "yes, quote them" | ∅ | never interviewed: right | controls |
 |---|---|---|---|---|---|---|---|
-| notes deleted | 0/72 | 20 | 16 | 36 | 52 | 0/18 | 51/51 |
-| + consent register | 66/72 | 0 | 5 | 1 | 6 | 0/18 | 51/51 |
-| + withdrawal notices | 67/72 | 0 | 4 | 1 | 5 | 0/18 | 51/51 |
+| notes deleted | 0/96 | 26 | 22 | 48 | 70 | 0/24 | 69/69 |
+| + consent register | 89/96 | 0 | 6 | 1 | 7 | 0/24 | 69/69 |
+| + withdrawal notices | 90/96 | 0 | 4 | 2 | 6 | 0/24 | 69/69 |
 
-By question (18 answers each; 15 for Q8):
+By question (24 answers each; 21 for Q8):
 
 | | notes deleted | + consent register | + withdrawal notices |
 |---|---|---|---|
-| Q1 what Dana said about the checklist | ⇄ 17 (Lena's "fourteen steps"), ✎∅ 1 | ✓ 16, ✎∅ 2 | ✓ 16, ✎∅ 2 |
-| Q2 what Marco said about pricing | ✎∅ 15, ⇄ 3 (Grace's per-client plan) | ✓ 15, ✎∅ 3 | ✓ 16, ✎∅ 2 |
-| Q3 can we quote Dana | ✗∅ 18 | ✓ 17, ✗∅ 1 | ✓ 17, ✗∅ 1 |
-| Q4 can we quote Marco | ✗∅ 18 | ✓ 18 | ✓ 18 |
-| Q5 what Omar Haddad (never interviewed) said | ⇄ 18 | ⇄ 16, ✎∅ 2 | ⇄ 10, ✎∅ 8 |
-| Q6 Lena on the CSV export — control | ✓ 18 | ✓ 18 | ✓ 18 |
-| Q7 who asked for Slack — control | ✓ 18 | ✓ 18 | ✓ 18 |
-| Q8 Tom on annual billing — control | ✓ 15 | ✓ 15 | ✓ 15 |
+| Q1 what Dana said about the checklist | ⇄ 23 (Lena's "fourteen steps"), ✎∅ 1 | ✓ 22, ✎∅ 2 | ✓ 22, ✎∅ 2 |
+| Q2 what Marco said about pricing | ✎∅ 21, ⇄ 3 (Grace's per-client plan) | ✓ 20, ✎∅ 4 | ✓ 22, ✎∅ 2 |
+| Q3 can we quote Dana | ✗∅ 24 | ✓ 23, ✗∅ 1 | ✓ 23, ✗∅ 1 |
+| Q4 can we quote Marco | ✗∅ 24 | ✓ 24 | ✓ 23, ✗∅ 1 |
+| Q5 what Omar Haddad (never interviewed) said | ⇄ 24 | ⇄ 22, ✎∅ 2 | ⇄ 13, ✎∅ 11 |
+| Q6 Lena on the CSV export — control | ✓ 24 | ✓ 24 | ✓ 24 |
+| Q7 who asked for Slack — control | ✓ 24 | ✓ 24 | ✓ 24 |
+| Q8 Tom on annual billing — control | ✓ 21 | ✓ 21 | ✓ 21 |
 
-- **The deletion was complete every time.** In all 6 runs, `search` in each project found none of their phrases
-  and no chunk naming them, 8–10 s after `proj doc delete` (CLI runs; the browser run reported the same). No answer ever repeated their own words (**!** 0).
+- **The deletion was complete every time.** In all 8 runs, `search` in each project found none of their phrases
+  and no chunk naming them, 8–10 s after `proj doc delete` (CLI runs; the browser runs reported the same). No answer ever repeated their own words (**!** 0).
 - **Two failures, one cause.** With the notes gone, a question about the person either matches other people's
   notes on the same topic (MemoryRouter attaches them, and the model uses them as hers: Q1, Q5), or matches
-  nothing (∅: Q2, Q3, Q4), and the model answers on its own. On its own it says yes, quote them — 36 of 36 times.
+  nothing (∅: Q2, Q3, Q4), and the model answers on its own. On its own it says yes, quote them — 48 of 48 times.
 - **A record of the deletion fixes the people it names.** The register and the notices make the questions about
-  Dana and Marco match something: a line that says they withdrew. Every miss under those two boundaries (6 and 5)
+  Dana and Marco match something: a line that says they withdrew. Every miss under those two boundaries (7 and 6)
   was a call where MemoryRouter attached nothing. The two records did about equally well; the register is one file
   for the whole study, the notices one per person.
-- **It does not fix names it doesn't hold.** Omar Haddad, never interviewed, got someone else's words in 44 of 54
-  answers and an invented answer in the other 10 — including under the register, whose last line names every
+- **It does not fix names it doesn't hold.** Omar Haddad, never interviewed, got someone else's words in 59 of 72
+  answers and an invented answer in the other 13 — including under the register, whose last line names every
   participant who consented. A question about a person is answered from whatever matches its topic; the model
   does not check that the person is in the notes.
 - These are totals over every run. Model replies vary from run to run.
