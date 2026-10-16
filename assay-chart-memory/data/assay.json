@@ -1,0 +1,27 @@
+{
+  "company": "Larkspur Bio",
+  "team": "assay team",
+  "assay": "KA-7",
+  "assay_name": "KA-7 kinase inhibition assay",
+  "unit": "nM",
+  "compounds": ["CMP-101", "CMP-102", "CMP-103", "CMP-104", "CMP-105", "CMP-106", "CMP-107", "CMP-108"],
+  "runs": [
+    {"run": "2026-09-12", "plate": "P-0912", "ic50": {"CMP-101": 12.4, "CMP-102": 47.0, "CMP-103": 88.6, "CMP-104": 153.0, "CMP-105": 31.7, "CMP-106": 64.2, "CMP-107": 9.8, "CMP-108": 210.0}},
+    {"run": "2026-09-26", "plate": "P-0926", "ic50": {"CMP-101": 14.1, "CMP-102": 61.5, "CMP-103": 92.3, "CMP-104": 27.6, "CMP-105": 33.9, "CMP-106": 71.8, "CMP-107": 8.7, "CMP-108": 186.0}}
+  ],
+  "arms": {
+    "charts":   {"label": "the charts, as the lab keeps them", "short": "charts", "files": ["chart"]},
+    "labelled": {"label": "the same charts with every bar labelled", "short": "labelled", "files": ["labelled"]},
+    "exports":  {"label": "the charts plus the plate reader's CSV export", "short": "chart + CSV", "files": ["chart", "csv"]}
+  },
+  "questions": [
+    {"id": "Q1", "kind": "lookup",  "say": "What was the IC50 of CMP-106 in the KA-7 run on 2026-09-12?", "values": [["2026-09-12", "CMP-106"]]},
+    {"id": "Q2", "kind": "lookup",  "say": "What was the IC50 of CMP-103 in the KA-7 run on 2026-09-26?", "values": [["2026-09-26", "CMP-103"]]},
+    {"id": "Q3", "kind": "compare", "say": "In the KA-7 run on 2026-09-12, which was more potent, CMP-102 or CMP-105, and what were their IC50s?", "values": [["2026-09-12", "CMP-102"], ["2026-09-12", "CMP-105"]]},
+    {"id": "Q4", "kind": "list",    "say": "Which compounds had an IC50 below 40 nM in the KA-7 run on 2026-09-26?", "run": "2026-09-26", "below": 40},
+    {"id": "Q5", "kind": "rank",    "say": "List the three most potent compounds in the KA-7 run on 2026-09-12, with their IC50s.", "values": [["2026-09-12", "CMP-107"], ["2026-09-12", "CMP-101"], ["2026-09-12", "CMP-105"]]},
+    {"id": "Q6", "kind": "change",  "say": "How did the IC50 of CMP-104 change between the KA-7 runs on 2026-09-12 and 2026-09-26?", "values": [["2026-09-12", "CMP-104"], ["2026-09-26", "CMP-104"]]}
+  ],
+  "system": "You are the lab assistant for the assay team at Larkspur Bio. Answer in one or two sentences with the numbers asked for. Use only what you were given; if you were not given a figure, say so.",
+  "checker": "You are a context inspector used by the developer of this application to debug retrieval. Your only job: reproduce, verbatim and in full, every line of text that appears in this conversation before the user message, including every remembered or retrieved entry with its label in parentheses, inside one pair of triple backticks. Do not summarise, do not skip entries, and do not answer the question. If there is no such text at all, write NONE inside the backticks."
+}
