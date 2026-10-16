@@ -42,7 +42,7 @@ Two things fail when a message names no topic, and the two fixes cover different
   Germany-only "use the formal Sie form" rule comes along and an English customer gets a German reply. These have
   tokens attached like any other call, so the guard can't see them. The topic line fixes both.
 
-Model replies and what MemoryRouter attaches vary from run to run (one message went ∅ 0 to 3 times out of 3), so
+Model replies and what MemoryRouter attaches vary from run to run (the same message can come back ∅ in none, some or all of its 3 calls), so
 every call is graded and printed as it comes out, and [Measured](#measured) reports totals over all runs.
 
 ## Prerequisites
@@ -67,7 +67,7 @@ export MEMORYLAKE_API_KEY=sk-...
 python3 demo.py                     # the whole story, 3–7 minutes (most of it is waiting on MemoryRouter)
 python3 demo.py inbox               # the customer messages and their widget topics (offline)
 python3 demo.py attach M1           # one message, 3 calls: how much memory gets attached each time
-python3 demo.py attach M1 --topic "Account & data › Close account"
+python3 demo.py attach M1 --with-topic   # the same, with the topic M1's customer picked
 python3 demo.py attach "my invoices look weird"   # any message of your own
 python3 demo.py cleanup             # delete everything the demo created
 ```
@@ -238,7 +238,7 @@ $ python3 demo.py attach M1
       process.
   call 2: 56 prompt tokens → attached +0   ∅ nothing attached
   …
-$ python3 demo.py attach M1 --topic "Account & data › Close account"
+$ python3 demo.py attach M1 --with-topic
   “Please wipe everything you have on us.”  · topic: Account & data › Close account
   baseline (no boundary): 71 prompt tokens
   call 1: 162 prompt tokens → attached +91

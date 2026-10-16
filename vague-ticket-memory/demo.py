@@ -649,6 +649,7 @@ def main() -> None:
                          "attach \"<message>\" = how much memory MemoryRouter attaches to any message; cleanup = delete everything")
     ap.add_argument("args", nargs="*", help="for attach: the message (or an inbox id such as M1)")
     ap.add_argument("--topic", help="for attach: the help-widget topic to send with the message")
+    ap.add_argument("--with-topic", action="store_true", help="for attach with an inbox id: send that message's own widget topic")
     ap.add_argument("--runs", type=int, default=RUNS, help="for attach: calls with the boundary (default 3)")
     ap.add_argument("--reset", action="store_true", help="accepted for symmetry: every run starts over")
     ap.add_argument("--show-json", action="store_true", help="print the raw JSON the CLI returns")
@@ -675,11 +676,15 @@ def main() -> None:
         if re.fullmatch(r"[MC]\d+", msg, re.I):
             m = pick_message(load_data(), msg)
             msg = m["message"]
+            if args.with_topic and not topic:
+                topic = m["topic"]
+        elif args.with_topic:
+            die("--with-topic needs an inbox id (M1 … M9, C1, C2); for your own message pass --topic \"…\"")
         banner(2, 2, "How much memory MemoryRouter attaches to one message")
         attach(cli, msg, topic, runs=max(1, args.runs))
         return
     run_pipeline(cli, reset=args.reset)
-    print('\nDone. Try `python3 demo.py attach M1`, `python3 demo.py attach M1 --topic "Account & data › Close account"`, '
+    print("\nDone. Try `python3 demo.py attach M1`, `python3 demo.py attach M1 --with-topic`, "
           "or any message of your own; `python3 demo.py cleanup` removes the demo data.")
 
 
