@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Agencies Client Context Memory That Works Across Every AI Tool*](https://www.memorylake.ai/en/usecase/client-context-memory-for-agencies),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 5:00](https://github.com/memorylake-ai/memorylake-usecases/releases/download/client-alias-memory-v1/client-alias-memory-cli-demo.mp4) · [Web, 5:46](https://github.com/memorylake-ai/memorylake-usecases/releases/download/client-alias-memory-v1/client-alias-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/client-alias-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Copperline Studio (a fictional creative agency) keeps one brief per client in shared memory: six
 clients, one Markdown brief each (product, contact, launch date, approved tagline, banned word). An account assistant
@@ -27,21 +28,21 @@ Q4  What is the approved tagline for Project Heron?            (Project Heron = 
                                                          ← Quillfeather Books' tagline
 ```
 
-Nothing in those replies says the brief belongs to another client. Over 5 runs, the two codename questions were
-answered right **0 of 30** times.
+Nothing in those replies says the brief belongs to another client. Over 7 runs, the two codename questions were
+answered right **0 of 42** times.
 
 The agency already has the answer to "who is Project Kestrel": an alias registry, kept as facts in MemoryLake. The
 obvious fix is to read it (`fact list`) and put it in the system prompt. It changes what the model *knows*, not what
 MemoryRouter *retrieves* — retrieval still runs on "Project Kestrel". The model now notices that Halden's brief is
 not Kestrel's and says "not specified" — or, when nothing was attached, still invents one. Codename questions:
-**0 of 30** again.
+**0 of 42** again.
 
 What works is changing the words retrieval sees: the app finds the alias in the question, looks it up exactly
 (`fact list --query "Project Kestrel"` → Brightwater Foods) and asks about **Brightwater Foods**. That brings all six
-questions to 82 of 90. The last 8 are a different failure that every setup shares: **MemoryRouter attached nothing
+questions to 116 of 126. The last 10 are a different failure that every setup shares: **MemoryRouter attached nothing
 at all, and the model invented a tagline.** Every invented answer in every run had nothing attached. The app can see
 that — the prompt tokens equal those of the same call without a boundary — so the last setup only shows an answer
-when something was attached, and asks again otherwise: **89 of 90**, and the 90th was held back ("no brief came
+when something was attached, and asks again otherwise: **125 of 126**, and the last one was held back ("no brief came
 back"), not invented.
 
 ## What the demo shows
@@ -150,8 +151,8 @@ copy out everything above the question — twice per alias, plus once without a 
       2. (halden.md) — the brief for Halden Cycleworks  ← another client
 ```
 
-Over 5 runs, for the two codenames: Brightwater's or Solvane's own brief attached **0 of 20** times — another
-client's brief 11, nothing 9.
+Over 7 runs, for the two codenames: Brightwater's or Solvane's own brief attached **0 of 28** times — another
+client's brief 15, nothing 13.
 
 ### Steps 6–9: ask the account assistant
 
@@ -188,36 +189,36 @@ don't give one · ◌ held back by the app.
 
 ## Measured
 
-Over **5 runs** (per setup and run: 6 questions × 3 answers):
+Over **7 runs** (including the two recordings; per setup and run: 6 questions × 3 answers):
 
 | | right | ⇄ another client's tagline | ✎ invented (all with nothing attached) | – "not specified" | ◌ held back |
 |---|---|---|---|---|---|
-| asked as written | 41/90 | 12 | 35 | 2 | – |
-| + alias registry in the system prompt | 42/90 | 0 | 34 | 14 | – |
-| alias rewritten | 82/90 | 0 | 8 | 0 | – |
-| rewritten + attach check | 89/90 | 0 | 0 | 0 | 1 |
+| asked as written | 59/126 | 16 | 49 | 2 | – |
+| + alias registry in the system prompt | 56/126 | 0 | 50 | 20 | – |
+| alias rewritten | 116/126 | 0 | 10 | 0 | – |
+| rewritten + attach check | 125/126 | 0 | 0 | 0 | 1 |
 
-By question (15 answers each):
+By question (21 answers each):
 
 | | as written | + registry in the prompt | rewritten | rewritten + check |
 |---|---|---|---|---|
-| Q1 Project Kestrel (codename) | ✎∅ 10, ⇄ 5 | ✎∅ 11, – 4 | ✓ 15 | ✓ 15 |
-| Q4 Project Heron (codename) | ⇄ 7, ✎∅ 7, – 1 | – 9, ✎∅ 6 | ✓ 14, ✎∅ 1 | ✓ 15 |
-| Q2 the Dutch bikes account (description) | ✓ 14, ✎∅ 1 | ✓ 14, ✎∅ 1 | ✓ 14, ✎∅ 1 | ✓ 15 |
-| Q3 M&P (initials) | ✓ 10, ✎∅ 5 | ✓ 9, ✎∅ 6 | ✓ 14, ✎∅ 1 | ✓ 14, ◌ 1 |
-| Q5 the insurer (generic) | ✓ 15 | ✓ 15 | ✓ 15 | ✓ 15 |
-| Q6 QB (initials) | ✎∅ 12, ✓ 2, – 1 | ✎∅ 10, ✓ 4, – 1 | ✓ 10, ✎∅ 5 | ✓ 15 |
+| Q1 Project Kestrel (codename) | ✎∅ 14, ⇄ 7 | ✎∅ 14, – 7 | ✓ 21 | ✓ 21 |
+| Q4 Project Heron (codename) | ✎∅ 11, ⇄ 9, – 1 | – 12, ✎∅ 9 | ✓ 20, ✎∅ 1 | ✓ 21 |
+| Q2 the Dutch bikes account (description) | ✓ 19, ✎∅ 2 | ✓ 20, ✎∅ 1 | ✓ 20, ✎∅ 1 | ✓ 21 |
+| Q3 M&P (initials) | ✓ 14, ✎∅ 7 | ✓ 11, ✎∅ 10 | ✓ 18, ✎∅ 3 | ✓ 20, ◌ 1 |
+| Q5 the insurer (generic) | ✓ 21 | ✓ 21 | ✓ 21 | ✓ 21 |
+| Q6 QB (initials) | ✎∅ 15, ✓ 5, – 1 | ✎∅ 16, ✓ 4, – 1 | ✓ 16, ✎∅ 5 | ✓ 21 |
 
 - **A codename gives retrieval nothing to go on.** For Kestrel and Heron, the checker never saw the right brief
-  attached (0 of 20 copies), and search had it in its top 3 once in 10 lookups (#2); what came back instead was
+  attached (0 of 28 copies), and search had it in its top 3 once in 14 lookups (#2); what came back instead was
   whichever brief happened to rank first (Halden's, mostly).
 - **The registry in the prompt moves the failure, it doesn't fix it.** With it, the model never passed another
-  client's tagline off as Kestrel's (⇄ 12 → 0): it says "not specified" instead. But it still has no Brightwater
-  brief to answer from, and right answers stay at 42/90.
-- **Rewriting the alias fixes retrieval.** Codenames go from 0/30 to 29/30.
-- **Every ✎ answer, in every setup, was on a call with nothing attached** (35 + 34 + 8 = 77 of 77). MemoryRouter
-  sometimes attaches nothing even for the client's full name (8 of 90 rewritten calls), and the model never says so:
-  it writes a plausible tagline. Prompt tokens equal to the no-boundary baseline are the app's signal; 12 calls
+  client's tagline off as Kestrel's (⇄ 16 → 0): it says "not specified" instead. But it still has no Brightwater
+  brief to answer from, and right answers stay at 56/126.
+- **Rewriting the alias fixes retrieval.** Codenames go from 0/42 to 41/42.
+- **Every ✎ answer, in every setup, was on a call with nothing attached** (49 + 50 + 10 = 109 of 109). MemoryRouter
+  sometimes attaches nothing even for the client's full name (10 of 126 rewritten calls), and the model never says so:
+  it writes a plausible tagline. Prompt tokens equal to the no-boundary baseline are the app's signal; 18 answers
   needed a retry, 1 question came back empty three times and was held back.
 - These are totals over every run. Model replies vary from run to run.
 
