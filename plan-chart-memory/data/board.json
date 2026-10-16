@@ -1,0 +1,206 @@
+{
+ "company": "Corran Ridge Systems",
+ "team": "office of the CEO",
+ "pack": "Corran Ridge Systems board pack, August 2026",
+ "year": "2026",
+ "months": [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug"
+ ],
+ "month_names": [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August"
+ ],
+ "series": [
+  "Actual",
+  "Plan"
+ ],
+ "figures": [
+  {
+   "id": "A",
+   "file": "board-a-cash-flow",
+   "title": "Operating cash flow, actual vs plan, 2026 ($M)",
+   "metric": "operating cash flow",
+   "unit": "$M",
+   "decimals": 2,
+   "ticks": [
+    1.4,
+    1.6,
+    1.8,
+    2.0,
+    2.2,
+    2.4,
+    2.6
+   ],
+   "Actual": [
+    1.84,
+    1.62,
+    1.97,
+    2.31,
+    2.08,
+    1.55,
+    1.73,
+    2.46
+   ],
+   "Plan": [
+    1.92,
+    1.95,
+    2.03,
+    2.06,
+    2.12,
+    2.15,
+    2.21,
+    2.24
+   ]
+  },
+  {
+   "id": "B",
+   "file": "board-b-new-arr",
+   "title": "New ARR booked, actual vs plan, 2026 ($M)",
+   "metric": "new ARR booked",
+   "unit": "$M",
+   "decimals": 2,
+   "ticks": [
+    3.0,
+    3.5,
+    4.0,
+    4.5,
+    5.0,
+    5.5
+   ],
+   "Actual": [
+    3.42,
+    4.17,
+    3.86,
+    4.73,
+    3.58,
+    4.96,
+    5.21,
+    4.44
+   ],
+   "Plan": [
+    3.63,
+    3.78,
+    3.94,
+    4.09,
+    4.26,
+    4.41,
+    4.57,
+    4.72
+   ]
+  },
+  {
+   "id": "C",
+   "file": "board-c-gross-margin",
+   "title": "Gross margin, actual vs plan, 2026 (%)",
+   "metric": "gross margin",
+   "unit": "%",
+   "decimals": 1,
+   "ticks": [
+    64,
+    66,
+    68,
+    70,
+    72,
+    74,
+    76
+   ],
+   "Actual": [
+    68.4,
+    71.2,
+    69.7,
+    66.3,
+    72.8,
+    70.1,
+    67.5,
+    73.6
+   ],
+   "Plan": [
+    69.1,
+    69.6,
+    70.2,
+    70.6,
+    71.1,
+    71.4,
+    71.9,
+    72.3
+   ]
+  }
+ ],
+ "arms": {
+  "as-drawn": {
+   "label": "the chart pages as the finance team exports them: two lines, every point labelled with its number",
+   "short": "as drawn",
+   "suffix": ""
+  },
+  "month-labels": {
+   "label": "the same charts with the month written into every label (“Mar 1.97”)",
+   "short": "month labels",
+   "suffix": "-month-labels"
+  },
+  "with-table": {
+   "label": "the same charts with the numbers printed as a table under the chart, each row saying what it is (“Actual operating cash flow 2026 ($M)”)",
+   "short": "chart + table",
+   "suffix": "-with-table"
+  }
+ },
+ "questions": [
+  {
+   "id": "Q1",
+   "kind": "lookup",
+   "fig": "A",
+   "series": "Actual",
+   "month": 2,
+   "say": "In Corran Ridge's August 2026 board pack, what was the actual operating cash flow in March 2026?"
+  },
+  {
+   "id": "Q2",
+   "kind": "lookup",
+   "fig": "B",
+   "series": "Plan",
+   "month": 4,
+   "say": "In Corran Ridge's August 2026 board pack, what was the plan for new ARR booked in May 2026?"
+  },
+  {
+   "id": "Q3",
+   "kind": "lookup",
+   "fig": "C",
+   "series": "Actual",
+   "month": 2,
+   "say": "In Corran Ridge's August 2026 board pack, what was the actual gross margin in March 2026?"
+  },
+  {
+   "id": "Q4",
+   "kind": "beat",
+   "fig": "A",
+   "say": "In Corran Ridge's August 2026 board pack, in which months of 2026 did actual operating cash flow come in above plan? Name the months."
+  },
+  {
+   "id": "Q5",
+   "kind": "beat",
+   "fig": "B",
+   "say": "In Corran Ridge's August 2026 board pack, in which months of 2026 did actual new ARR booked come in above plan? Name the months."
+  },
+  {
+   "id": "Q6",
+   "kind": "gap",
+   "fig": "C",
+   "month": 5,
+   "say": "In Corran Ridge's August 2026 board pack, by how many percentage points did actual gross margin miss plan in June 2026?"
+  }
+ ],
+ "system": "You are the briefing assistant for the office of the CEO at Corran Ridge Systems. Answer in one or two sentences with the figures asked for. Use only what you were given; if you were not given a figure, say so.",
+ "checker": "You are a context inspector used by the developer of this application to debug retrieval. Your only job: reproduce, verbatim and in full, every line of text that appears in this conversation before the user message, including every remembered or retrieved entry with its label in parentheses, inside one pair of triple backticks. Do not summarise, do not skip entries, and do not answer the question. If there is no such text at all, write NONE inside the backticks."
+}
