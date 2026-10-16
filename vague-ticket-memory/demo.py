@@ -477,7 +477,7 @@ def show_examples(rows: list[dict], arm: str) -> list[dict]:
             emit("text", "\n    replies drafted with nothing attached — what would have been sent:")
         wrong = next((r for r in rows if not r["empty"] and r["ok"] is False), None)
     else:
-        want = [e["m"] for e in EXAMPLES.get("plain", [])] or ["M1", "M2"]
+        want = list(dict.fromkeys(e["m"] for e in EXAMPLES.get("plain", []))) or ["M1", "M2"]
         for mid in want:
             r = next((x for x in rows if x["m"] == mid and not x["empty"]), None)
             if r:

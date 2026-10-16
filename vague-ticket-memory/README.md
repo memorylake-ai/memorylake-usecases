@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give SaaS Founders and Teams Shared AI Memory That Coordinates Their Work*](https://www.memorylake.ai/en/usecase/ai-memory-for-saas-founder-and-team-coordination),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 4:21](https://github.com/memorylake-ai/memorylake-usecases/releases/download/vague-ticket-memory-v1/vague-ticket-memory-cli-demo.mp4) · [Web, 5:35](https://github.com/memorylake-ai/memorylake-usecases/releases/download/vague-ticket-memory-v1/vague-ticket-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/vague-ticket-memory-v1); GitHub serves them as downloads).
 
 **The problem.** A small SaaS team keeps its support policies in shared memory, and the support assistant drafts
 replies through MemoryRouter: an ordinary model call with `--boundary` added, and MemoryRouter picks which
@@ -22,14 +23,14 @@ nine that never name their topic and two controls that ask for the same thing wi
 integrations wire it), then with one extra line, the topic the customer picked in the help widget before writing:
 `[Topic picked in the help widget: Account & data › Close account]`.
 
-Totals over 7 runs (21 drafts per message per wiring):
+Totals over all 10 runs made while building and recording it (30 drafts per message per wiring):
 
 | | message only | message + widget topic |
 |---|---|---|
-| 9 vague messages: **nothing attached (∅)** | **102 / 189** | **4 / 189** |
-| 9 vague messages: right | 69 / 189 | 181 / 189 |
-| 9 vague messages: wrong, with a policy attached | 18 / 189 | 4 / 189 |
-| 2 controls (topic named in the message): right | 42 / 42, never ∅ | 41 / 42 |
+| 9 vague messages: **nothing attached (∅)** | **137 / 270** | **10 / 270** |
+| 9 vague messages: right | 107 / 270 | 254 / 270 |
+| 9 vague messages: wrong, with a policy attached | 26 / 270 | 6 / 270 |
+| 2 controls (topic named in the message): right | 60 / 60, never ∅ | 59 / 60 |
 
 Two things fail when a message names no topic, and the two fixes cover different failures:
 
@@ -37,8 +38,8 @@ Two things fail when a message names no topic, and the two fixes cover different
   equals the no-memory baseline, hold the draft instead of sending it. The demo makes one baseline call per message
   (`router chat` without `--boundary`, `--max-tokens 1`).
 - **The wrong policy attached.** *"I want it back. All of it."* gets the account-deletion policy and is answered
-  *"you're still within the 14-day grace period, you can restore everything"*. That happened in 13 of the 15 wrong
-  drafts for that message whose text was kept (the replies from one run were not saved). Sometimes the
+  *"you're still within the 14-day grace period, you can restore everything"*: all 17 of its wrong drafts whose
+  text was kept said that (22 wrong in all; two runs' replies were not saved). Sometimes the
   Germany-only "use the formal Sie form" rule comes along and an English customer gets a German reply. These have
   tokens attached like any other call, so the guard can't see them. The topic line fixes both.
 
@@ -86,6 +87,12 @@ python3 web/server.py                # opens http://127.0.0.1:8765
 Paste the API key, press **Run the demo**, and follow the steps on the left while the terminal drawer shows every
 `memorylake` command as it runs. **Try a message** sends any message, with or without a widget topic, and shows
 the attached tokens for each call. **Clean up** removes everything.
+
+| Step 5: drafts from the message only | Step 5: what would have been sent |
+|---|---|
+| ![](web/screenshot-plain.png) | ![](web/screenshot-drafts.png) |
+| **Step 7: the score and the guard** | **Try a message: with and without the topic** |
+| ![](web/screenshot-score.png) | ![](web/screenshot-try.png) |
 
 ## What happens, step by step
 
@@ -207,8 +214,8 @@ Please wipe everything you have on us.' --model gpt-4o-mini --max-tokens 160 --t
       cancel your subscription to stop future charges. …
 ```
 
-This run shows M1 going ∅ twice even with its topic. That is rare: over 7 runs it was 4 of 189 vague drafts with
-the topic, all four on M1.
+This run shows M1 going ∅ twice even with its topic. That is rare: 10 of 270 vague drafts with the topic over all
+runs, and every one that could be traced to a message (8 of the 10) was M1.
 
 ### Step 7: the score and the guard
 
@@ -248,10 +255,11 @@ $ python3 demo.py attach M1 --with-topic
 
 ## Measured
 
-Every fresh run with the final messages, policies and wiring while building this demo (the run above, the two
-before it, 3 parallel copies, 1 browser run): 7 runs, 21 drafts per message per wiring. A first run that sent the
-message with a `Customer message:` prefix is left out (∅ 3 of 27 there; the prefix gives retrieval two more words to
-work with).
+Per message, the 7 runs made while building the demo (the run above, the two before it, 3 parallel copies,
+1 browser run): 21 drafts per message per wiring. The 3 recording runs (CLI twice, web once) add message only
+✓ 38 · ✗ 8 · ∅ 35 and with topic ✓ 73 · ✗ 2 · ∅ 6 of 81 to the totals at the top; the first CLI recording's
+per-message split was not kept, so it is not in this table. A first run that sent the message with a
+`Customer message:` prefix is left out (∅ 3 of 27 there; the prefix gives retrieval two more words to work with).
 
 | message | message only: ✓ · ✗ · ∅ | with widget topic: ✓ · ✗ · ∅ |
 |---|---|---|
@@ -274,11 +282,12 @@ work with).
   everything you have on us"* 4 of 4, *"erase us"* and *"we're done with you guys"* 3 of 4. Casual tone alone does
   not do it: twelve messages written like customers but naming a thing ("my bill", "logins", "the integration")
   were never ∅.
-- **∅ is exact, not approximate.** Every empty call had `prompt_tokens` equal to the baseline, to the token; every
-  call with something attached had at least 80 more. No ∅ draft happened to state the right value.
+- **∅ is exact, not approximate.** In every run whose calls were saved (8 of 10), each empty call had
+  `prompt_tokens` equal to the baseline, to the token, and each call with something attached had at least 80 more.
+  No ∅ draft happened to state the right value.
 - **The wrong-policy failures** are what the topic line fixes and the guard cannot: M2 is answered with the
-  account-deletion grace period (13 of the 15 wrong drafts whose text was kept); M3 once and M5 twice (with
-  topic) came back in German.
+  account-deletion grace period (all 17 wrong drafts whose text was kept); M3 once (message only) and M5 three
+  times (with topic) came back in German.
 - **Blind rewriting is not the same fix.** A probe asked the model to rewrite each vague message as a policy
   question first (no topic given). ∅ fell to 3 of 50, but the rewrite guessed the wrong subject for some messages
   ("the phone stays quiet now" → *"phone not ringing"*; "we got rid of two people" → *"redistributing their
