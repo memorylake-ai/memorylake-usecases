@@ -1,0 +1,30 @@
+{
+  "company": "Lumen Fieldworks",
+  "pack": "Competitive intelligence pack, September 2026",
+  "metric": "head-to-head win rate",
+  "unit": "%",
+  "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+  "ticks": [0, 10, 20, 30, 40, 50],
+  "pages": [
+    {"id": "1", "rival": "Halvard", "year": 2025, "file": "halvard-win-rate-2025", "values": [22.4, 23.9, 21.7, 24.8, 26.1, 25.3, 27.4, 28.0]},
+    {"id": "2", "rival": "Halvard", "year": 2026, "file": "halvard-win-rate-2026", "values": [31.4, 29.8, 33.1, 35.6, 34.2, 37.9, 36.5, 39.2]},
+    {"id": "3", "rival": "Brisk", "year": 2025, "file": "brisk-win-rate-2025", "values": [14.2, 15.8, 13.9, 16.4, 17.7, 16.9, 18.3, 19.5]},
+    {"id": "4", "rival": "Brisk", "year": 2026, "file": "brisk-win-rate-2026", "values": [18.6, 20.3, 19.1, 21.8, 23.4, 22.7, 24.9, 25.6]},
+    {"id": "5", "rival": "Ostrava", "year": 2025, "file": "ostrava-win-rate-2025", "values": [38.5, 36.9, 37.4, 35.2, 34.6, 33.3, 32.8, 31.5]},
+    {"id": "6", "rival": "Ostrava", "year": 2026, "file": "ostrava-win-rate-2026", "values": [29.7, 28.4, 27.9, 26.3, 27.1, 25.4, 24.6, 23.6]}
+  ],
+  "arms": {
+    "exported": {"label": "the pages under the names the slide export gave them", "short": "as exported", "pattern": "ci-pack-p{id}.pdf"},
+    "named": {"label": "the same pages, each file named for its rival, metric and year", "short": "named files", "pattern": "{file}.pdf"}
+  },
+  "system": "You are the competitive-intelligence assistant for the sales team at Lumen Fieldworks. Answer in one or two sentences with the figures asked for. Use only what you were given; if you were not given a figure, say so.",
+  "checker": "You are a context inspector used by the developer of this application to debug retrieval. Your only job: reproduce, verbatim and in full, every line of text that appears in this conversation before the user message, including every remembered or retrieved entry with its label in parentheses, inside one pair of triple backticks. Do not summarise, do not skip entries, and do not answer the question. If there is no such text at all, write NONE inside the backticks.",
+  "questions": [
+    {"id": "Q1", "kind": "lookup", "pages": ["2"], "month": 4, "say": "What was Halvard's head-to-head win rate against us in May 2026?"},
+    {"id": "Q2", "kind": "lookup", "pages": ["5"], "month": 2, "say": "What was Ostrava's head-to-head win rate against us in March 2025?"},
+    {"id": "Q3", "kind": "lookup", "pages": ["4"], "month": 5, "say": "What was Brisk's head-to-head win rate against us in June 2026?"},
+    {"id": "Q4", "kind": "compare", "pages": ["1", "2"], "month": 7, "say": "How did Halvard's head-to-head win rate against us in August 2026 compare with August 2025?"},
+    {"id": "Q5", "kind": "rank", "pages": ["2", "4", "6"], "month": 6, "say": "Which competitor had the highest head-to-head win rate against us in July 2026 (Halvard, Brisk or Ostrava), and what was it?"},
+    {"id": "Q6", "kind": "compare", "pages": ["5", "6"], "month": 0, "say": "How did Ostrava's head-to-head win rate against us in January 2026 compare with January 2025?"}
+  ]
+}
