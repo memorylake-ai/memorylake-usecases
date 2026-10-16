@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give IP Attorneys Patent Memory That Carries Every Prior Art Search*](https://www.memorylake.ai/en/usecase/patent-memory-for-ip-attorneys),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 4:41](https://github.com/memorylake-ai/memorylake-usecases/releases/download/docket-number-memory-v1/docket-number-memory-cli-demo.mp4) · [Web, 5:31](https://github.com/memorylake-ai/memorylake-usecases/releases/download/docket-number-memory-v1/docket-number-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/docket-number-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Halberd & Quill LLP (a fictional IP firm) keeps its prior art search memos in shared memory: six US
 applications, one Markdown memo each (client, who searched, when, the closest reference, the conclusion). A
@@ -28,17 +29,17 @@ Q2  When did we run the prior art search for US application 18/063,155?
                                                                                      ← nothing attached; invented
 ```
 
-Nothing in those replies says the memo belongs to another application. Over 6 runs, the assistant said "no search
-on file" for **0 of 72** near-miss questions: 45 answers carried another application's reference, date or
-searcher, and the other 27 were invented on calls where MemoryRouter attached nothing.
+Nothing in those replies says the memo belongs to another application. Over 7 runs, the assistant said "no search
+on file" for **0 of 84** near-miss questions: 51 answers carried another application's reference, date or
+searcher, and the other 33 were invented on calls where MemoryRouter attached nothing.
 
 Putting the docket (the six numbers with a search on file, kept as facts in MemoryLake and read by the app with
 `fact list`) in the system prompt, with "if the number is not exactly one of these, say no search is on file",
-brought it to **62 of 72**. The other 10 are the interesting ones: the model **rewrote the number** to the docket's
+brought it to **73 of 84**. The other 11 are the interesting ones: the model **rewrote the number** to the docket's
 and answered for it — *"The prior art search for US Application No. 16/774,381 concluded …"* when asked about
 16/774,318. An exact check in the app before any model call — normalise the number, `fact list --query
-"16/774,318"` on the docket, 0 facts means no model call — answered **72 of 72**, and names the nearest docket number
-so the attorney can check it. The controls about numbers on file were right 214 of 216 times across the three setups.
+"16/774,318"` on the docket, 0 facts means no model call — answered **84 of 84**, and names the nearest docket number
+so the attorney can check it. The controls about numbers on file were right 250 of 252 times across the three setups.
 
 ## What the demo shows
 
@@ -161,7 +162,7 @@ is on file but typed differently. The demo's `canonical()` writes every number a
       1. (17-951240.md) — the memo for 17/951,240  ← the near number
 ```
 
-Over 6 runs (48 copies), the memo two digits away was attached in 31 and nothing in 17. No other memo was attached.
+Over 7 runs (56 copies), the memo two digits away was attached in 35 and nothing in 21. No other memo was attached.
 
 ### Steps 6–8: ask the prior-art assistant
 
@@ -201,35 +202,35 @@ $ memorylake fact list --projects proj-… --page-size 200 --query 17/428,907
 
 ## Measured
 
-Over **6 runs** (per setup and run: 12 near-miss answers, 12 controls):
+Over **7 runs** (including the two recordings; per setup and run: 12 near-miss answers, 12 controls):
 
 | | near misses: "no search on file" | another application's answer | of which number rewritten ↻ | invented | ∅ | controls |
 |---|---|---|---|---|---|---|
-| memos only | 0/72 | 45 | 0 | 27 | 27 | 72/72 |
-| + docket in the prompt | 62/72 | 10 | 10 | 0 | 24 | 71/72 |
-| + exact number check | 72/72 | 0 | 0 | 0 | 0 (no model call) | 71/72 |
+| memos only | 0/84 | 51 | 0 | 33 | 33 | 84/84 |
+| + docket in the prompt | 73/84 | 11 | 11 | 0 | 29 | 83/84 |
+| + exact number check | 84/84 | 0 | 0 | 0 | 0 (no model call) | 83/84 |
 
-By question (18 answers each):
+By question (21 answers each):
 
 | | memos only | + docket in the prompt | + exact number check |
 |---|---|---|---|
-| Q1 17/428,907 (on file: 17/482,907) — closest reference | ⇄ 18 | ✓ 18 | ✓ 18 |
-| Q2 18/063,155 (on file: 18/063,515) — search date | ✎∅ 16, ⇄ 2 | ✓ 18 (16 ∅) | ✓ 18 |
-| Q3 17/915,240 (on file: 17/951,240) — who searched | ⇄ 18 | ✓ 18 | ✓ 18 |
-| Q4 16/774,318 (on file: 16/774,381) — conclusion | ✎∅ 11, ⇄ 7 | ⇄↻ 10, ✓∅ 8 | ✓ 18 |
-| Q5–Q8 controls | ✓ 72 | ✓ 71, ✗∅ 1 | ✓ 71, ✗∅ 1 |
+| Q1 17/428,907 (on file: 17/482,907) — closest reference | ⇄ 21 | ✓ 21 | ✓ 21 |
+| Q2 18/063,155 (on file: 18/063,515) — search date | ✎∅ 19, ⇄ 2 | ✓ 21 (19 ∅) | ✓ 21 |
+| Q3 17/915,240 (on file: 17/951,240) — who searched | ⇄ 21 | ✓ 21 | ✓ 21 |
+| Q4 16/774,318 (on file: 16/774,381) — conclusion | ✎∅ 14, ⇄ 7 | ⇄↻ 11, ✓∅ 10 | ✓ 21 |
+| Q5–Q8 controls | ✓ 84 | ✓ 83, ✗∅ 1 | ✓ 83, ✗∅ 1 |
 
 - **When MemoryRouter attaches something for a near miss, it is the neighbour's memo.** The application number is
-  in the memo's heading, so a number two digits away is the closest match there is. All 45 ⇄ answers in the
-  memos-only setup were on calls with something attached; all 27 ✎ answers were on calls with nothing attached.
+  in the memo's heading, so a number two digits away is the closest match there is. All 51 ⇄ answers in the
+  memos-only setup were on calls with something attached; all 33 ✎ answers were on calls with nothing attached.
 - **The number in the reply is the one that was asked.** In the memos-only setup the model repeats "17/428,907" and
   gives 17/482,907's reference: the reply reads as a correct answer.
 - **The docket in the prompt fails exactly when the neighbour's memo is attached and the model "corrects" the
-  number.** All 10 misses rewrote 16/774,318 to 16/774,381 and answered for it. On another session, before these
+  number.** All 11 misses rewrote 16/774,318 to 16/774,381 and answered for it. On another session, before these
   runs, the same thing happened 3 times out of 3 on Q1 instead. A list of what exists stops unknown *names*
   (see [project-roster-memory](../project-roster-memory)); a number one transposition away from a listed one is
   something the model is inclined to fix rather than refuse.
-- **The exact check doesn't depend on the model.** 72 of 72, with no model call for any near miss, and the reply
+- **The exact check doesn't depend on the model.** 84 of 84, with no model call for any near miss, and the reply
   names the nearest docket number (two adjacent digits swapped) — what the attorney needs to check the number.
 - The two wrong controls (one in each of the last two setups) were both "Who ran the prior art search for
   17/951,240?" on calls where nothing was attached: once the client's name, once an invented searcher.
