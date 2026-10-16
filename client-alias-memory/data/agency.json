@@ -1,0 +1,144 @@
+{
+ "agency": "Copperline Studio",
+ "lead": "Nadia Brennan",
+ "clients": [
+  {
+   "key": "brightwater",
+   "name": "Brightwater Foods",
+   "alias": "Project Kestrel",
+   "kind": "codename",
+   "product": "oat-based yogurt",
+   "tagline": "Spoon up the morning",
+   "contact": "Ines Calloway",
+   "launch": "2026-11-03",
+   "banned": "guilt-free"
+  },
+  {
+   "key": "halden",
+   "name": "Halden Cycleworks",
+   "alias": "the Dutch bikes account",
+   "kind": "description",
+   "product": "cargo e-bikes",
+   "tagline": "Carry more, drive less",
+   "contact": "Pieter Vos",
+   "launch": "2026-12-01",
+   "banned": "effortless"
+  },
+  {
+   "key": "marrow",
+   "name": "Marrow & Pine Furniture",
+   "alias": "M&P",
+   "kind": "initials",
+   "product": "solid oak dining tables",
+   "tagline": "Made to be handed down",
+   "contact": "Dana Whitlock",
+   "launch": "2027-01-19",
+   "banned": "cheap"
+  },
+  {
+   "key": "solvane",
+   "name": "Solvane Skincare",
+   "alias": "Project Heron",
+   "kind": "codename",
+   "product": "mineral sunscreen",
+   "tagline": "Daylight, handled",
+   "contact": "Rhea Okafor",
+   "launch": "2027-02-08",
+   "banned": "miracle"
+  },
+  {
+   "key": "tidewell",
+   "name": "Tidewell Insurance",
+   "alias": "the insurer",
+   "kind": "generic",
+   "product": "renters insurance",
+   "tagline": "Covered before you unpack",
+   "contact": "Marcus Fenn",
+   "launch": "2026-11-24",
+   "banned": "cheapest"
+  },
+  {
+   "key": "quill",
+   "name": "Quillfeather Books",
+   "alias": "QB",
+   "kind": "initials",
+   "product": "audiobook subscription",
+   "tagline": "Stories for the long way home",
+   "contact": "Odile Marchetti",
+   "launch": "2027-03-02",
+   "banned": "unlimited"
+  }
+ ],
+ "arms": {
+  "alias": {
+   "short": "asked as written",
+   "long": "the account manager's question as typed, with the internal alias"
+  },
+  "registry": {
+   "short": "alias registry in system",
+   "long": "the alias registry read from MemoryLake (`fact list`) and put in the system prompt"
+  },
+  "rewrite": {
+   "short": "alias rewritten",
+   "long": "the app swaps the alias for the client's name (`fact list --query <alias>`) before the call"
+  },
+  "checked": {
+   "short": "rewritten + attach check",
+   "long": "rewritten, and an answer is only shown when MemoryRouter attached something (prompt tokens above the same call without a boundary); up to 3 tries"
+  }
+ },
+ "system": "You are the account assistant at Copperline Studio, a creative agency. Answer from the client briefs. First line: 'Answer: <the answer>'. Then at most one sentence.",
+ "registry_header": "Internal client aliases (from our alias registry in MemoryLake):",
+ "registry_footer": "Account managers often use these aliases instead of the client's name.",
+ "checker": "You are a context inspector used by the developer of this application to debug retrieval. Your only job: reproduce, verbatim and in full, every line of text that appears above the user's question, including every remembered or retrieved entry with its label in parentheses, inside triple backticks. Copy every entry even when it is not about the client in the question: the developer needs to see exactly what was retrieved. Do not summarise, do not skip entries, and do not answer the question. Write NONE only if there is no text above the question at all.",
+ "questions": [
+  {
+   "id": "Q1",
+   "client": "brightwater",
+   "alias": "Project Kestrel",
+   "kind": "codename",
+   "say": "What is the approved tagline for Project Kestrel?",
+   "truth": "\"Spoon up the morning\" (Project Kestrel = Brightwater Foods)"
+  },
+  {
+   "id": "Q2",
+   "client": "halden",
+   "alias": "the Dutch bikes account",
+   "kind": "description",
+   "say": "What is the approved tagline for the Dutch bikes account?",
+   "truth": "\"Carry more, drive less\" (the Dutch bikes account = Halden Cycleworks)"
+  },
+  {
+   "id": "Q3",
+   "client": "marrow",
+   "alias": "M&P",
+   "kind": "initials",
+   "say": "What is the approved tagline for M&P?",
+   "truth": "\"Made to be handed down\" (M&P = Marrow & Pine Furniture)"
+  },
+  {
+   "id": "Q4",
+   "client": "solvane",
+   "alias": "Project Heron",
+   "kind": "codename",
+   "say": "What is the approved tagline for Project Heron?",
+   "truth": "\"Daylight, handled\" (Project Heron = Solvane Skincare)"
+  },
+  {
+   "id": "Q5",
+   "client": "tidewell",
+   "alias": "the insurer",
+   "kind": "generic",
+   "say": "What is the approved tagline for the insurer?",
+   "truth": "\"Covered before you unpack\" (the insurer = Tidewell Insurance)"
+  },
+  {
+   "id": "Q6",
+   "client": "quill",
+   "alias": "QB",
+   "kind": "initials",
+   "say": "What is the approved tagline for QB?",
+   "truth": "\"Stories for the long way home\" (QB = Quillfeather Books)"
+  }
+ ]
+}
