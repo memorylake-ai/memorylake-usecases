@@ -1,0 +1,90 @@
+{
+  "company": "Kestrel Outdoor",
+  "team": "Content team",
+  "library": "Launch fact sheets",
+  "people": {
+    "writer": "Maya Ostrander (content writer)",
+    "pmm": "Theo Brandt (product marketing)"
+  },
+  "legend": "Highlights in this sheet: yellow = claim still waiting for test-lab or legal sign-off, do not publish yet; green = wording cleared by legal, publish as written.",
+  "withheld_text": "Not cleared to publish yet (waiting for test-lab or legal sign-off).",
+  "tag_text": "[UNVERIFIED - not cleared to publish: {}]",
+  "arms": {
+    "saved": {
+      "short": "as saved",
+      "label": "the fact sheets as product marketing saved them: unverified claims highlighted yellow",
+      "suffix": ".docx"
+    },
+    "tagged": {
+      "short": "tagged",
+      "label": "the same sheets with each yellow claim written as “[UNVERIFIED - not cleared to publish: …]” in the text",
+      "suffix": ".tagged.docx"
+    },
+    "withheld": {
+      "short": "withheld",
+      "label": "the same sheets with each yellow claim replaced by “Not cleared to publish yet”",
+      "suffix": ".withheld.docx"
+    }
+  },
+  "system": "You are the content assistant for Kestrel Outdoor's marketing team. Answer from the team's product documents. First line: 'Answer: <what the writer can publish>'. Then at most one sentence.",
+  "docs": [
+    {
+      "id": "lumen",
+      "file": "lumen-trail-2-fact-sheet",
+      "product": "Lumen Trail 2",
+      "title": "Lumen Trail 2 bike light: launch fact sheet (draft 4)",
+      "saved": "2026-10-05",
+      "lines": [
+        ["Brightness", [["yellow", "1,200 lumens maximum output.", "1,200 lumens"]]],
+        ["Battery life", ["28 hours in eco mode (lab test LT-114). ", ["yellow", "Up to 40 hours in pulse mode.", "40 hours"]]],
+        ["Water resistance", [["yellow", "IPX7, fully submersible to 1 metre.", "IPX7"]]],
+        ["Weight", ["148 grams including the mount."]],
+        ["Charging", ["2.5 hours to full over USB-C."]],
+        ["Warranty", [["yellow", "3-year limited warranty.", "3-year"]]],
+        ["Visibility", ["Side cut-outs give 270-degree visibility. ", ["yellow", "Visible from 2 km away.", "2 km"]]],
+        ["Road standard", [["green", "Meets the German StVZO standard for front bike lights.", "StVZO"]]],
+        ["Price", ["89 dollars at launch."]]
+      ]
+    },
+    {
+      "id": "driftline",
+      "file": "driftline-shell-fact-sheet",
+      "product": "Driftline 2.5L rain shell",
+      "title": "Driftline 2.5L rain shell: launch fact sheet (draft 2)",
+      "saved": "2026-10-08",
+      "lines": [
+        ["Waterproofing", [["yellow", "20,000 mm hydrostatic head.", "20,000 mm"]]],
+        ["Fabric", ["Face fabric is nylon ripstop. ", ["yellow", "Made from 100% recycled nylon.", "100% recycled"]]],
+        ["Breathability", ["15,000 g/m2/24h (lab test DS-207). ", ["yellow", "Breathes like a softshell.", "softshell"]]],
+        ["Water-repellent finish", [["green", "PFAS-free water-repellent finish.", "PFAS-free"]]],
+        ["Weight", ["310 grams in size M."]],
+        ["Packability", ["Packs into its own chest pocket."]],
+        ["Price", ["149 dollars at launch."]]
+      ]
+    }
+  ],
+  "questions": [
+    {"id": "Q1", "doc": "lumen", "on": "Brightness", "say": "For the Lumen Trail 2 launch blog post, what brightness in lumens can I state?",
+     "claim": "1,?200", "ok": ""},
+    {"id": "Q2", "doc": "lumen", "on": "Battery life", "say": "What battery life can the Lumen Trail 2 product page claim?",
+     "claim": "\\b40\\b", "ok": "\\b28\\b"},
+    {"id": "Q3", "doc": "lumen", "on": "Water resistance", "say": "What water resistance rating can I put in the Lumen Trail 2 launch email?",
+     "claim": "ipx7|submersible", "ok": ""},
+    {"id": "Q4", "doc": "lumen", "on": "Warranty", "say": "How long is the Lumen Trail 2 warranty, for the FAQ page?",
+     "claim": "\\b(3|three)[- ]year", "ok": ""},
+    {"id": "Q5", "doc": "lumen", "on": "Visibility", "say": "How far away is the Lumen Trail 2 visible, for the ad copy?",
+     "claim": "\\b2 ?km\\b|kilomet", "ok": "270"},
+    {"id": "Q6", "doc": "lumen", "on": "Road standard", "say": "Which road standard can the Lumen Trail 2 product page say it meets?",
+     "claim": "", "ok": "stvzo"},
+    {"id": "Q7", "doc": "lumen", "on": "Weight", "say": "What does the Lumen Trail 2 weigh, for the spec table?",
+     "claim": "", "ok": "\\b148\\b"},
+    {"id": "Q8", "doc": "driftline", "on": "Waterproofing", "say": "What waterproof rating in millimetres can the Driftline shell's product page state?",
+     "claim": "20,?000", "ok": ""},
+    {"id": "Q9", "doc": "driftline", "on": "Fabric", "say": "For the Driftline shell's sustainability copy, what can I say the fabric is made from?",
+     "claim": "recycled", "ok": "ripstop"},
+    {"id": "Q10", "doc": "driftline", "on": "Water-repellent finish", "say": "What can the Driftline shell's product page say about its water-repellent finish?",
+     "claim": "", "ok": "pfas"},
+    {"id": "Q11", "doc": "driftline", "on": "Weight", "say": "What does the Driftline shell weigh, for the spec table?",
+     "claim": "", "ok": "\\b310\\b"}
+  ]
+}
