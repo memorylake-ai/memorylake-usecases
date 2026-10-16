@@ -4,16 +4,17 @@ A runnable version of the MemoryLake use case
 [*Build Tool-Calling Agents on Memory Patterns That Actually Hold the State*](https://www.memorylake.ai/en/usecase/memory-patterns-for-tool-calling-agents),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 4:01](https://github.com/memorylake-ai/memorylake-usecases/releases/download/tool-input-memory-v1/tool-input-memory-cli-demo.mp4) · [Web, 4:57](https://github.com/memorylake-ai/memorylake-usecases/releases/download/tool-input-memory-v1/tool-input-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/tool-input-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Vellumtide (a fictional API platform) runs a billing assistant: a tool-calling agent that, over two
 weeks, called `get_account`, `get_usage`, `get_contract` and `get_rate_card` for four customers. Every tool result
 went into MemoryLake as a fact, with its typed fields as metadata. Later, finance asks it for charges.
 
-Ask the model to work a charge out from the remembered results and it is mostly wrong (**26 of 144**) — the numbers
+Ask the model to work a charge out from the remembered results and it is mostly wrong (**34 of 192** right) — the numbers
 are all in its prompt. The usual fix is a calculator tool: the model copies the inputs from memory into the call,
-code does the arithmetic. Charges go to **113 of 144**. But one customer, Pellow & Finch, never had `get_usage`
-called, and asked about its overage the model now **makes the input up** — **0 of 36** right, against 33 of 36 when it
+code does the arithmetic. Charges go to **154 of 192**. But one customer, Pellow & Finch, never had `get_usage`
+called, and asked about its overage the model now **makes the input up** — **0 of 48** right, against 45 of 48 when it
 had to do the sum itself:
 
 ```
@@ -28,16 +29,16 @@ had to do the sum itself:
         │   → 0.00 dollars
 ```
 
-The calculator said exactly what was missing; the model's answer to that was to fill it in (29 of the 30 recorded
-answers went *error → call again with a made-up value*: `0`, Halden Freight's `362,480`, or `1,000,000`). The tool
-then turns the guess into a charge to the cent.
+The calculator said exactly what was missing; the model's answer to that was to fill it in (36 of the 38 made-up
+answers with call records went *error → call again with a made-up value*: `0` 33 times, or a number from Halden
+Freight's usage). The tool then turns the guess into a charge to the cent.
 
 The fix is the one on the use case page — *each tool result writes structured memory; later tools retrieve*: in the
 third setup `compute_charge` takes only the account and the quantity, and reads every input from typed memory
-itself, the latest result per field. Charges **144 of 144**; the overage question gets the tool's own error and the
-model says "No record" **18 of 18**. One gap is left, and it is the model's again: asked for Pellow & Finch's *total*,
-it calls the seat charge (fine) and the overage (not on record), then reports the seat charge as the total — **0 of
-18**. Code can catch that too; the demo shows it instead of hiding it.
+itself, the latest result per field. Charges **192 of 192**; the overage question gets the tool's own error and the
+model says "No record" **24 of 24**. One gap is left, and it is the model's again: asked for Pellow & Finch's *total*,
+it calls the seat charge (fine) and the overage (not on record), then reports the seat charge as the total — **23 of
+24** times. Code can catch that too; the demo shows it instead of hiding it.
 
 ## What the demo shows
 
@@ -64,7 +65,7 @@ never fetched — for those, "No record" is the right answer.
   ```
 - A MemoryLake API key ([app.memorylake.ai](https://app.memorylake.ai) → API Keys)
 - Router calls are billed to your MemoryLake balance: 240–248 gpt-4o-mini calls per run (tool calls take extra
-  turns), about 99,000–105,000 prompt + 6,300–6,900 reply tokens. Without balance, the memory steps (1–4) still run
+  turns), about 99,000–105,000 prompt + 6,100–6,900 reply tokens. Without balance, the memory steps (1–4) still run
   and the answers are skipped.
 
 ## Run it
@@ -196,44 +197,45 @@ the two halves of the total instead of `total`, got one amount and one error, an
 
 ## Measured
 
-Over **6 runs** (per setup and run: 4 look-ups, 8 charges, 2 never-fetched, each × 3):
+Over **8 runs** (including the two recordings; per setup and run: 4 look-ups, 8 charges, 2 never-fetched, each × 3):
 
 | | look up a value | compute a charge | an input never fetched |
 |---|---|---|---|
-| the model does the arithmetic (step 5) | 54/72 ✓ · 18 – | **26/144** ✓ · 114 ✗ · 4 – | 33/36 ✓ · 3 ✎ |
-| a calculator, inputs copied by the model (step 6) | 72/72 ✓ | **113/144** ✓ · 23 ✗ · 8 – | **0/36** ✓ · 34 ✎ · 2 – |
-| the tool reads typed memory (step 7) | 72/72 ✓ | **144/144** ✓ | 18/36 ✓ · 18 ✎ |
+| the model does the arithmetic (step 5) | 72/96 ✓ · 24 – | **34/192** ✓ · 148 ✗ · 10 – | 45/48 ✓ · 3 ✎ |
+| a calculator, inputs copied by the model (step 6) | 96/96 ✓ | **154/192** ✓ · 29 ✗ · 9 – | **0/48** ✓ · 44 ✎ · 4 – |
+| the tool reads typed memory (step 7) | 96/96 ✓ | **192/192** ✓ | 25/48 ✓ · 23 ✎ |
 
 ✓ right · ✗ wrong · – no amount although memory has one ("No record", or still calling tools after 4 turns) ·
 ✎ a value where memory has none.
 
-By question (18 answers each):
+By question (24 answers each):
 
 | | step 5 | step 6 | step 7 |
 |---|---|---|---|
-| L2 Mirela Studio's API calls | – 18 ("No record") | ✓ 18 | ✓ 18 |
-| C1 Halden seat charge (41 × 52 × 0.88) | ✗ 18 | ✓ 18 | ✓ 18 |
-| C2 Halden overage | ✓ 8 · ✗ 10 | ✓ 15 · ✗ 3 | ✓ 18 |
-| C3 Halden total | ✗ 14 · – 4 | ✓ 7 · ✗ 9 · – 2 | ✓ 18 |
-| C4 Mirela total | ✗ 18 | ✓ 5 · ✗ 11 · – 2 | ✓ 18 |
-| C5 Ostrand total | ✗ 18 | ✓ 16 · – 2 | ✓ 18 |
-| C6 Pellow seat charge | ✗ 18 | ✓ 18 | ✓ 18 |
-| C7 Mirela adds 4 seats (4 × 38) | ✓ 18 | ✓ 18 | ✓ 18 |
-| C8 Ostrand adds 5 seats | ✗ 18 | ✓ 16 · – 2 | ✓ 18 |
-| N1 Pellow overage (no `get_usage`) | ✓ 17 · ✎ 1 | **✎ 18** | ✓ 18 |
-| N2 Pellow total (no `get_usage`) | ✓ 16 · ✎ 2 | **✎ 16 · – 2** | **✎ 18** |
+| L2 Mirela Studio's API calls | – 24 ("No record") | ✓ 24 | ✓ 24 |
+| C1 Halden seat charge (41 × 52 × 0.88) | ✗ 24 | ✓ 24 | ✓ 24 |
+| C2 Halden overage | ✓ 10 · ✗ 14 | ✓ 21 · ✗ 3 | ✓ 24 |
+| C3 Halden total | ✗ 16 · – 8 | ✓ 11 · ✗ 10 · – 3 | ✓ 24 |
+| C4 Mirela total | ✗ 24 | ✓ 6 · ✗ 16 · – 2 | ✓ 24 |
+| C5 Ostrand total | ✗ 22 · – 2 | ✓ 22 · – 2 | ✓ 24 |
+| C6 Pellow seat charge | ✗ 24 | ✓ 24 | ✓ 24 |
+| C7 Mirela adds 4 seats (4 × 38) | ✓ 24 | ✓ 24 | ✓ 24 |
+| C8 Ostrand adds 5 seats | ✗ 24 | ✓ 22 · – 2 | ✓ 24 |
+| N1 Pellow overage (no `get_usage`) | ✓ 23 · ✎ 1 | **✎ 23 · – 1** | ✓ 24 |
+| N2 Pellow total (no `get_usage`) | ✓ 22 · ✎ 2 | **✎ 21 · – 3** | **✎ 23 · ✓ 1** |
 
 - **The memory is right; the arithmetic is not.** Look-ups are fine in every setup (L2 aside: in step 5 the model
   answered "No record" for a value MemoryRouter had attached). Step 5 gets only the one-multiplication charge (C7)
   reliably.
 - **A calculator fixes the arithmetic and breaks "No record".** With the sum to do itself, the model mostly declined
-  to price usage it did not have (33/36). Handed a tool with an `api_calls` parameter, it filled the parameter in
-  (0/36), usually right after the tool reported it missing.
-- **Copied inputs go wrong in quieter ways too**: a pre-subtracted usage count (68,750 for Mirela in 16 calls, 362,480 for
-  Halden in 17, over the five runs with call records), a discount left null (then retried), added seats put into `seats`. The input check in step 6 names each of them; the final answer
+  to price usage it did not have (45/48). Handed a tool with an `api_calls` parameter, it filled the parameter in
+  (0/48), almost always right after the tool reported it missing.
+- **Copied inputs go wrong in quieter ways too**: a pre-subtracted usage count (68,750 for Mirela in 20 calls, 362,480 for
+  Halden in 19, over the seven runs with call records), a discount left null (then retried), added seats put into `seats`. The input check in step 6 names each of them; the final answer
   does not.
-- **Reading typed memory in the tool removes all of that** (144/144, N1 18/18), and every amount comes with the tool
-  results it was computed from. What it cannot fix is the model presenting a partial result as the whole (N2 0/18).
+- **Reading typed memory in the tool removes all of that** (192/192, N1 24/24), and every amount comes with the tool
+  results it was computed from. What it cannot fix is the model presenting a partial result as the whole (N2 1/24;
+  the one right answer made the same two calls and still said "No record").
 - These are totals over every run; model replies vary from run to run.
 
 ## Use it in your own app
