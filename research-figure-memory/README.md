@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Research Teams Need Shared Memory, Not Just Shared Documents*](https://www.memorylake.ai/en/usecase/ai-memory-for-research-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 6:26](https://github.com/memorylake-ai/memorylake-usecases/releases/download/research-figure-memory-v1/research-figure-memory-cli-demo.mp4) · [Web, 6:35](https://github.com/memorylake-ai/memorylake-usecases/releases/download/research-figure-memory-v1/research-figure-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/research-figure-memory-v1); GitHub serves them as downloads).
 
 **The problem.** A research team keeps its results as bar charts with the value printed on every bar, and saves
 them into shared memory so that everyone's assistant can answer from them. MemoryLake indexes a picture by looking
@@ -51,25 +52,30 @@ top three, a gap between two regions — go through MemoryRouter (`router chat -
 temperature 0), each asked 3 times per boundary, and every answer is graded against the survey data. Every value
 in the data is different, so a number in an answer names exactly one bar.
 
-Totals over **6 runs** (18 answers per boundary per run):
+Totals over **10 runs** (18 answers per boundary per run):
 
 | Boundary | Printed values in the index text | Right | Wrong | Incomplete | No figure | The asked figures were in what MemoryRouter attached |
 |---|---|---|---|---|---|---|
-| **PNG screenshots** | 4–6 of 20 (summary only) | **18 / 108** | 0 | 36 | 54 | 0 of 36 checker calls |
-| **The same PNGs, wrapped in a PDF** | **20 of 20** | **104 / 108** | 4 | 0 | 0 | 36 of 36 |
-| **No printed values, wrapped in a PDF** | 0 of 20 | **0 / 108** | **38** | 12 | 58 | 0 of 36 |
+| **PNG screenshots** | 4–6 of 20 (summary only) | **27 / 180** | 3 | 60 | 90 | 0 of 60 checker calls |
+| **The same PNGs, wrapped in a PDF** | **20 of 20** | **175 / 180** | 4 | 1 | 0 | 60 of 60 |
+| **No printed values, wrapped in a PDF** | 0 of 20 | **0 / 180** | **68** | 15 | 97 | 0 of 60 |
 
-The figure item's own text — what the index reads off the chart — was **empty for every PNG** (12 of 12 imports)
-and held **every printed value for every wrapped PDF** (12 of 12). The PNG's few values come from the summary: its
+The figure item's own text — what the index reads off the chart — was **empty for every PNG** (20 of 20 imports)
+and held **every printed value for every wrapped PDF** (20 of 20). The PNG's few values come from the summary: its
 writer mentions the extremes (Eastport highest, Highmoor lowest; upfront cost 62.4 → 55.1). That is why the PNG
 boundary answers the top-three question with *"Eastport at 22.7%, followed by the other two regions, which are not
-specified"*, and why its 18 right answers are all one question (which barriers were above 20% — the summary
-happened to name the three that rose or led; none of their Wave 2 values except upfront cost reached the model).
+specified"*. Its 27 right answers are all one question — which barriers were above 20% — and they are luck: the
+model lists the barriers the summary says *increased*. When a summary named grid upgrade (14.7%) instead of
+landlord consent, the same question went wrong three times out of three.
 
-The unlabelled control shows what the PDF reads: the printed labels, not the bars. Its figure text is the category
+The unlabelled control shows what the PDF reads: the printed labels. Its figure text is usually the category
 names and the legend, and the assistant fills the gap — *"the three regions with the highest share are Eastport,
-Highmoor, and Southdown"* (Highmoor is the lowest of eight) 17 times of 18, *"upfront cost and uncertainty about
-functionality"* for the barriers above 20% (uncertainty is 15.8).
+Highmoor, and Southdown"* (Highmoor is the lowest of eight) 29 times of 30, *"upfront cost and uncertainty about
+functionality"* for the barriers above 20% (uncertainty is 15.8). In 2 of the 10 imports of the grouped chart the
+index went further and **estimated** the values from the bar heights, marked only by a tilde — `Unsure it works:
+Wave 1 (2025) - ~60` (the survey says 31.6), `Landlord consent … ~35` (26.5). Those estimates reached the model:
+*"approximately 30% of non-adopters cited installer wait"*. Step 4 counts them separately; none is a value printed
+on the chart.
 
 The four wrong answers with the PDF are worth seeing too: all 12 values were attached each time (the checker shows
 it), and gpt-4o-mini still named grid upgrade (+6.3) as the biggest rise instead of installer wait (+10.6) three
@@ -194,7 +200,11 @@ its `text`.
 ```
 
 The layout of the figure text varies between imports (`North Coast 18.4`, `North Coast: 18.4`, `Upfront cost (62.4,
-55.1)`), the values in it did not.
+55.1)`), the values in it did not. When the index estimates values for an unlabelled chart, step 4 adds a line:
+
+```
+    values estimated from the bar heights (written ~): 12, none of them printed on the chart; the furthest off: Unsure it works, Wave 1 (2025) ~60 (survey: 31.6)
+```
 
 ### Step 5: ask through MemoryRouter — the PNG screenshots
 
@@ -272,18 +282,22 @@ of the three projects (the step 4 view, for one figure). It makes searches only,
 
 ## Measured
 
-6 runs: 1 in this directory, 2 parallel copies with their own prefix, and 3 through the browser companion. 18
-answers per boundary per run; 36 checker calls per boundary, all readable.
+10 runs: 2 in this directory, 2 parallel copies with their own prefix, 4 through the browser companion, and the
+two recording runs (CLI and web; the CLI video was recorded twice — the first take was fine, but the step 4 view
+then gained the "estimated from the bar heights" line, and the video should match the code). 18 answers per
+boundary per run; 60 checker calls per boundary, all readable.
 
-- **Per question** (108 answers per boundary, 18 per question): **PNG** — Q3 18 ✓; Q4 18 ◐ (installer wait named,
-  no points); Q5 18 ◐ (Eastport only); Q1, Q2, Q6 18 · each. **PNG in a PDF** — Q1, Q2, Q5, Q6 18 ✓ each; Q3 17 ✓
-  1 ✗ (a 15.8% barrier listed above 20%); Q4 15 ✓ 3 ✗ (grid upgrade +6.3, all in one run). **No printed values,
-  PDF** — Q5 17 ✗ (Eastport, Highmoor, Southdown) 1 ·; Q3 15 ✗ 3 ·; Q4 12 ◐ 3 ✗ (*"10 percentage points (from ~20%
-  to ~30%)"* — read off nothing) 3 ·; Q1 15 · 3 ✗ (*"approximately 30%"*); Q2, Q6 18 · each.
-- **The index text** (step 4, 6 imports of every file): figure item `text` empty for all 12 PNG imports, every
-  printed value for all 12 wrapped-PDF imports, category names and legend only for the unlabelled PDFs. The PNG
+- **Per question** (180 answers per boundary, 30 per question): **PNG** — Q3 27 ✓ 3 ✗; Q4 30 ◐ (installer wait
+  named, no points); Q5 30 ◐ (Eastport only); Q1, Q2, Q6 30 · each. **PNG in a PDF** — Q1, Q2, Q5, Q6 30 ✓ each;
+  Q3 28 ✓ 1 ✗ (a 15.8% barrier listed above 20%) 1 ◐ (upfront cost left out); Q4 27 ✓ 3 ✗ (grid upgrade +6.3, all
+  in one run). **No printed values, PDF** — Q5 29 ✗ (Eastport, Highmoor, Southdown) 1 ·; Q3 27 ✗ 3 ·; Q4 15 ◐
+  6 ✗ (*"10 percentage points (from ~20% to ~30%)"*, from the estimated figure text) 9 ·; Q1 24 · 6 ✗
+  (*"approximately 30%"*, same two runs); Q2, Q6 30 · each.
+- **The index text** (step 4, 10 imports of every file): figure item `text` empty for all 20 PNG imports, every
+  printed value for all 20 wrapped-PDF imports; for the unlabelled PDFs, category names and legend only in 18 of
+  20, and bar-height estimates (`~60`, `~35`) in 2 — both times the grouped chart, never the region chart. The PNG
   summaries held 4 or 6 of the 20 values (the extremes).
-- **The checker** (`claude-haiku-4-5`, 108 calls, all readable): MemoryRouter attached the asked figure for every
+- **The checker** (`claude-haiku-4-5`, 180 calls, all readable): MemoryRouter attached the asked figure for every
   question in every boundary.
 - Each run: 72 MemoryRouter calls, 23,000–25,000 prompt + 5,000–5,900 reply tokens, 5–6 minutes (the six
   documents indexed in 68–102 s; three copies importing at once were the slow ones).
@@ -294,9 +308,10 @@ answers per boundary per run; 36 checker calls per boundary, all readable.
   are read into text, value by value; the same picture as a PNG is described, not read. Before you rely on a chart
   being "in memory", look at what `search --types document` holds for it.
 - **Wrapping is enough.** No redraw and no export of the data: `wrap_png_as_pdf()` puts the PNG's own bytes in a
-  one-page PDF. For screenshots you already have, that took this team from 18 to 104 of 108.
-- **Print the values on the chart.** The PDF reads the labels, not the bar heights; an unlabelled chart in a PDF
-  gives the category names and nothing else, and the assistant then makes up rankings.
+  one-page PDF. For screenshots you already have, that took this team from 27 to 175 of 180.
+- **Print the values on the chart.** The PDF reads the labels. An unlabelled chart in a PDF usually gives the
+  category names and nothing else (and the assistant then makes up rankings); sometimes it gives estimates off the
+  bar heights, written `~60`, that can be off by half. Treat a `~` in figure text as a guess, not a value.
 - **Grade list answers for what is missing and what is extra**, and tell "not attached" from "attached and still
   wrong": the checker shows every value was attached when the model still picked the wrong biggest rise.
 
