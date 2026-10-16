@@ -1,0 +1,360 @@
+{
+  "site": "Northfield Clinical Research Unit",
+  "sponsor": "Ardent Bay Therapeutics",
+  "library": "Study document library",
+  "arms": {
+    "saved": {
+      "short": "as saved",
+      "label": "the study documents as the sponsor sent them: amendments marked up by hand, deleted text struck through",
+      "suffix": ".docx"
+    },
+    "applied": {
+      "short": "strike removed",
+      "label": "the same documents with struck-through text removed before upload (and the new text's bold and underline taken off)",
+      "suffix": ".current.docx"
+    }
+  },
+  "people": {
+    "coordinator": "Dana Whitcombe (study coordinator)",
+    "pi": "Dr. Ilse Marrow (principal investigator)"
+  },
+  "docs": [
+    {
+      "id": "klv",
+      "file": "klv301-protocol-v3-redline",
+      "study": "KLV-301",
+      "title": "KLV-301 Protocol, Version 3.0 (Amendment 2)",
+      "saved": "2026-09-14",
+      "lines": [
+        [
+          "Legend",
+          [
+            "Changes from the previous version are marked in this document: deleted text is struck through, new text is bold and underlined."
+          ]
+        ],
+        [
+          "Inclusion criterion 2",
+          [
+            "Age ",
+            [
+              "del",
+              "18 to 65"
+            ],
+            [
+              "ins",
+              "18 to 75"
+            ],
+            " years at screening."
+          ]
+        ],
+        [
+          "Inclusion criterion 4",
+          [
+            "eGFR of at least ",
+            [
+              "del",
+              "60"
+            ],
+            " ",
+            [
+              "ins",
+              "45"
+            ],
+            " mL/min/1.73 m2 at screening."
+          ]
+        ],
+        [
+          "Exclusion criterion 3",
+          [
+            "Any SGLT2 inhibitor within ",
+            [
+              "del",
+              "90"
+            ],
+            " ",
+            [
+              "ins",
+              "30"
+            ],
+            " days before randomization."
+          ]
+        ],
+        [
+          "Dosing",
+          [
+            "KLV-301 10 mg once daily, taken ",
+            [
+              "del",
+              "with breakfast"
+            ],
+            " ",
+            [
+              "ins",
+              "after an overnight fast"
+            ],
+            "."
+          ]
+        ],
+        [
+          "Visit 3 window",
+          [
+            "Day 28 plus or minus ",
+            [
+              "del",
+              "3"
+            ],
+            " ",
+            [
+              "ins",
+              "7"
+            ],
+            " days."
+          ]
+        ],
+        [
+          "Primary endpoint",
+          [
+            "Change in UACR from baseline to week ",
+            [
+              "del",
+              "12"
+            ],
+            " ",
+            [
+              "ins",
+              "24"
+            ],
+            "."
+          ]
+        ],
+        [
+          "Exclusion criterion 5",
+          [
+            "Systolic blood pressure above 160 mmHg at screening."
+          ]
+        ],
+        [
+          "Sample size",
+          [
+            "240 participants, randomized 1:1."
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "orv",
+      "file": "orv118-protocol-v2-redline",
+      "study": "ORV-118",
+      "title": "ORV-118 Protocol, Version 2.0 (Amendment 1)",
+      "saved": "2026-08-27",
+      "lines": [
+        [
+          "Legend",
+          [
+            "Changes from the previous version are marked in this document: deleted text is struck through, new text is bold and underlined."
+          ]
+        ],
+        [
+          "Inclusion criterion 1",
+          [
+            "Adults 18 years or older with a diagnosis of asthma for at least ",
+            [
+              "del",
+              "12"
+            ],
+            " ",
+            [
+              "ins",
+              "6"
+            ],
+            " months."
+          ]
+        ],
+        [
+          "Inclusion criterion 3",
+          [
+            "Pre-bronchodilator FEV1 between 40 and ",
+            [
+              "del",
+              "80"
+            ],
+            " ",
+            [
+              "ins",
+              "85"
+            ],
+            " percent of predicted."
+          ]
+        ],
+        [
+          "Exclusion criterion 2",
+          [
+            "Current smokers, or former smokers with more than ",
+            [
+              "del",
+              "10"
+            ],
+            " ",
+            [
+              "ins",
+              "20"
+            ],
+            " pack-years."
+          ]
+        ],
+        [
+          "Run-in",
+          [
+            "A placebo run-in of ",
+            [
+              "del",
+              "14"
+            ],
+            " ",
+            [
+              "ins",
+              "21"
+            ],
+            " days before randomization."
+          ]
+        ],
+        [
+          "Dosing",
+          [
+            "ORV-118 200 mg by subcutaneous injection every ",
+            [
+              "del",
+              "2"
+            ],
+            " ",
+            [
+              "ins",
+              "4"
+            ],
+            " weeks."
+          ]
+        ],
+        [
+          "Primary endpoint",
+          [
+            "Annualized rate of severe asthma exacerbations over 52 weeks."
+          ]
+        ],
+        [
+          "Sample size",
+          [
+            "420 participants, randomized 2:1."
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "pharm",
+      "file": "klv301-pharmacy-manual",
+      "study": "KLV-301",
+      "title": "KLV-301 Pharmacy Manual, Version 1.0",
+      "saved": "2026-07-02",
+      "lines": [
+        [
+          "Storage",
+          [
+            "Store bottles at 15 to 25 degrees C in the original carton."
+          ]
+        ],
+        [
+          "Dispensing",
+          [
+            "Dispense one bottle of 35 tablets per visit and record the bottle number in the IRT system."
+          ]
+        ],
+        [
+          "Returns",
+          [
+            "Participants bring back every bottle, used or unused, at the next visit."
+          ]
+        ],
+        [
+          "Temperature excursions",
+          [
+            "Quarantine the supply and contact the sponsor within 24 hours."
+          ]
+        ]
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1",
+      "doc": "klv",
+      "on": "Inclusion criterion 4",
+      "say": "What is the minimum eGFR at screening for KLV-301?",
+      "right": "(?<!\\d)45(?!\\d)",
+      "wrong": "(?<!\\d)60(?!\\d)"
+    },
+    {
+      "id": "Q2",
+      "doc": "klv",
+      "on": "Exclusion criterion 3",
+      "say": "How long must a patient be off SGLT2 inhibitors before randomization in KLV-301?",
+      "right": "(?<!\\d)30(?!\\d)|thirty",
+      "wrong": "(?<!\\d)90(?!\\d)|ninety"
+    },
+    {
+      "id": "Q3",
+      "doc": "klv",
+      "on": "Dosing",
+      "say": "Is KLV-301 taken with breakfast or after an overnight fast?",
+      "right": "overnight fast|fasting|fasted|empty stomach",
+      "wrong": "with breakfast|with food|with a meal"
+    },
+    {
+      "id": "Q4",
+      "doc": "klv",
+      "on": "Primary endpoint",
+      "say": "At which week is the KLV-301 primary endpoint measured?",
+      "right": "(?<!\\d)24(?!\\d)",
+      "wrong": "(?<!\\d)12(?!\\d)"
+    },
+    {
+      "id": "Q5",
+      "doc": "orv",
+      "on": "Inclusion criterion 3",
+      "say": "What is the upper FEV1 limit for ORV-118 eligibility, as percent of predicted?",
+      "right": "(?<!\\d)85(?!\\d)",
+      "wrong": "(?<!\\d)80(?!\\d)"
+    },
+    {
+      "id": "Q6",
+      "doc": "orv",
+      "on": "Inclusion criterion 1",
+      "say": "How long must a patient have had an asthma diagnosis to enter ORV-118?",
+      "right": "(?<!\\d)(?:6|six)\\s*months",
+      "wrong": "(?<!\\d)(?:12|twelve)\\s*months|one year|1 year"
+    },
+    {
+      "id": "Q7",
+      "doc": "orv",
+      "on": "Dosing",
+      "say": "How often is ORV-118 injected?",
+      "right": "every\\s*(?:4|four)\\s*weeks|(?:4|four)[- ]week|q4w",
+      "wrong": "every\\s*(?:2|two)\\b|(?:2|two)[- ]week|q2w|every other week"
+    },
+    {
+      "id": "Q8",
+      "doc": "klv",
+      "on": "Sample size",
+      "say": "How many participants will KLV-301 randomize?",
+      "right": "(?<!\\d)240(?!\\d)",
+      "wrong": ""
+    },
+    {
+      "id": "Q9",
+      "doc": "pharm",
+      "on": "Storage",
+      "say": "At what temperature are KLV-301 bottles stored at the site?",
+      "right": "15\\s*(?:to|-|and)\\s*25",
+      "wrong": ""
+    }
+  ],
+  "system": "You are the study assistant at Northfield Clinical Research Unit. Answer from the site's study documents. First line: 'Answer: <the value>'. Then at most one sentence."
+}
