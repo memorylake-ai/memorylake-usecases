@@ -4,6 +4,9 @@ A runnable version of the MemoryLake use case
 [*Give Biotech Teams AI That Carries Experimental Context Across Every Lab Session*](https://www.memorylake.ai/en/usecase/ai-memory-for-biotech-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
+**Watch it run:** [CLI, 7:07](https://github.com/memorylake-ai/memorylake-usecases/releases/download/assay-chart-memory-v1/assay-chart-memory-cli-demo.mp4) · [Web, 7:42](https://github.com/memorylake-ai/memorylake-usecases/releases/download/assay-chart-memory-v1/assay-chart-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/assay-chart-memory-v1); GitHub serves them as downloads).
+
 **The problem.** After every plate run, an assay team saves the plate reader's IC50 bar chart into its notebook —
 and into MemoryLake, so the lab assistant "has the results". MemoryLake indexes an image by looking at it: a vision
 summary of the chart plus the text it can read off it. That text is what MemoryRouter attaches when the assistant
@@ -27,9 +30,9 @@ the highest, the two the summary's writer chose. The answer:
 > The three most potent compounds in the KA-7 run on 2026-09-12 are CMP-107 with an IC50 of 9.8 nM, CMP-106 (IC50
 > not provided), and CMP-105 (IC50 not provided).
 
-The plate data says CMP-107 9.8, **CMP-101 12.4**, CMP-105 31.7. CMP-106 is 64.2, sixth of eight. Once, the same
-question got *"CMP-106 with an IC50 of 15.4 nM, and CMP-105 with an IC50 of 22.3 nM"* — two numbers that exist
-nowhere.
+The plate data says CMP-107 9.8, **CMP-101 12.4**, CMP-105 31.7. CMP-106 is 64.2, sixth of eight. Three times
+the same question got *"CMP-106 with an IC50 of 15.4 nM, and CMP-105 with an IC50 of 22.3 nM"* — the same two
+numbers each time, and they exist nowhere.
 
 **What this demo shows.** Larkspur Bio (a fictional biotech) keeps two KA-7 plate runs three ways, one project
 and one boundary each: **the charts**, as the lab keeps them; **the same charts with every bar labelled**, the
@@ -38,24 +41,24 @@ comparison, a threshold list, a top three, a change between runs — go through 
 --boundary`, `gpt-4o-mini`, temperature 0), each asked 3 times per boundary, and every answer is graded against the
 plate data. Every IC50 in the data is different, so a number in an answer names exactly one compound and run.
 
-Totals over **6 runs** (18 answers per boundary per run):
+Totals over **8 runs** (18 answers per boundary per run):
 
 | Boundary | Right | Wrong figure | Incomplete | No figure | The asked figures were in what MemoryRouter attached |
 |---|---|---|---|---|---|
-| **The charts**, as the lab keeps them | **0 / 108** | 9 | 3 | 96 | 0 of 36 checker calls |
-| **The same charts, every bar labelled** | **0 / 108** | **36** | 0 | 72 | 0 of 36 |
-| **The charts + the CSV export** | **90 / 108** | 18 | 0 | 0 | 36 of 36 |
+| **The charts**, as the lab keeps them | **0 / 144** | 9 | 3 | 132 | 0 of 48 checker calls |
+| **The same charts, every bar labelled** | **0 / 144** | **47** | 0 | 97 | 0 of 48 |
+| **The charts + the CSV export** | **121 / 144** | 23 | 0 | 0 | 48 of 48 |
 
 Most of the time the assistant says honestly that it was not given the figure — on a question where a lab would
 expect an answer, from memory it was told it has. On list questions it does worse: it builds the answer out of
 the summary's prose. From the labelled charts, *"which compounds had an IC50 below 40 nM on 2026-09-26?"* got
-*"CMP-101, CMP-102, CMP-103, CMP-104, CMP-105, CMP-106, and CMP-107"* 18 times out of 18 (four of them are; the
+*"CMP-101, CMP-102, CMP-103, CMP-104, CMP-105, CMP-106, and CMP-107"* 22 times out of 24 (four of them are; the
 summary only said CMP-107 is the lowest and CMP-108 the highest). From the plain charts the top three came back as
 *"CMP-101, CMP-102, and CMP-103"* — the first three on the axis.
 
 With the CSV, MemoryRouter attaches the rows (`Compound: CMP-105, IC50 (nM): 31.7`) and five of the six questions
 are right every time. The sixth is a different failure, and worth seeing next to the others: the top-three
-question is wrong **18 of 18** times with all eight values attached — gpt-4o-mini lists CMP-102 (47.0) third, ahead
+question is wrong **23 of 24** times with all eight values attached — gpt-4o-mini lists CMP-102 (47.0) third, ahead
 of CMP-105 (31.7). Memory delivered the numbers; the model sorted them wrong. The checker is what tells the two
 failures apart.
 
@@ -159,7 +162,7 @@ $ memorylake proj doc import --project proj-… sc-…:inode-… sc-…:inode-�
 
 The text read off the image is the title, every time: the values printed above the bars and the compound names
 under them are not in it. And the plain 2026-09-12 summary says **CMP-101 is the lowest** — it is CMP-107 (9.8
-against 12.4; the two bars are close). That sentence was in the summary in 5 of the 6 imports.
+against 12.4; the two bars are close). That sentence was in the summary in 7 of the 8 imports we read.
 
 ### Step 5: ask through MemoryRouter — the charts, as the lab keeps them
 
@@ -240,20 +243,22 @@ same view as step 4, for one run). It makes searches only, no model call.
 
 ## Measured
 
-6 runs: 2 in this directory, 3 parallel copies with their own prefix, and the browser run. 18 answers per boundary
-per run; 36 checker calls per boundary, all 108 readable.
+8 runs: 2 in this directory, 3 parallel copies with their own prefix, the browser check, and the two recording
+runs (CLI and web; neither was re-recorded). 18 answers per boundary per run; 48 checker calls per boundary, all
+readable.
 
-- **Per question** (108 answers per boundary, 18 per question): **charts** — Q1–Q3 and Q6 18 · each; Q4 15 · and
-  3 ◐ (*"CMP-101 and CMP-107"*, which is what the 2026-09-26 summary calls the lowest); Q5 9 · and 9 ✗ (*"CMP-101,
-  CMP-102, and CMP-103"*). **labelled** — Q1–Q3 and Q6 18 · each; Q4 18 ✗ (seven compounds listed); Q5 18 ✗
-  (CMP-106 named second; once with invented IC50s 15.4 and 22.3 nM). **chart + CSV** — Q1–Q4 and Q6 18 ✓ each; Q5
-  18 ✗ (CMP-102 third instead of CMP-105, with all eight values attached).
-- **The index text** (step 4, 6 imports of each chart — the five terminal runs and a first run that stopped at
-  step 5): the plain charts held 0 of 8 values every time; the labelled charts 2 of 8 every time — the lowest and
-  the highest; the text read off every image was its title.
-- **The checker** (`claude-haiku-4-5`, 108 calls, all readable): MemoryRouter attached the asked run's chart for
+- **Per question** (144 answers per boundary, 24 per question): **charts** — Q1–Q3 and Q6 24 · each; Q4 21 · and
+  3 ◐ (*"CMP-101 and CMP-107"*, which is what the 2026-09-26 summary calls the lowest); Q5 15 · and 9 ✗ (*"CMP-101,
+  CMP-102, and CMP-103"*). **labelled** — Q1–Q3 and Q6 24 · each; Q4 23 ✗ (seven compounds listed, once six) and
+  1 ·; Q5 24 ✗ (CMP-106 named second; three times with the same invented IC50s, 15.4 and 22.3 nM). **chart + CSV**
+  — Q1–Q4 and Q6 24 ✓ each; Q5 23 ✗ and 1 ✓ (CMP-102 third instead of CMP-105, with all eight values attached).
+- **The index text** (step 4, 9 imports of each chart — these 8 runs and a first run that stopped at step 5): the
+  plain charts held 0 of 8 values every time; the labelled charts 2 of 8 (the lowest and the highest) in 17 of 18
+  imports, and 0 of 8 once — that summary said *"CMP-107 shows the lowest IC50 value … CMP-108 has the highest"*
+  without the numbers printed next to them. The text read off every image was its title.
+- **The checker** (`claude-haiku-4-5`, 144 calls, all readable): MemoryRouter attached the asked run's chart for
   every chart question, and the asked run's CSV for every CSV-arm question.
-- Each run: 72 MemoryRouter calls, 31,000–31,700 prompt + 7,700–7,900 reply tokens, 5½–7½ minutes (the eight
+- Each run: 72 MemoryRouter calls, 31,000–32,000 prompt + 7,700–8,000 reply tokens, 5½–7½ minutes (the eight
   documents indexed in 72–177 s; three copies importing at once were the slow ones).
 
 ## Use it in your own app
@@ -262,9 +267,9 @@ per run; 36 checker calls per boundary, all 108 readable.
   else's model wrote, plus the text it could read. Check that text (`search --types document`) before you rely on
   a figure being "in memory".
 - **Store the numbers, not only the picture.** Every instrument that draws a chart can export the table behind it.
-  Keep both: the chart for people, the CSV for the assistant. That was the whole fix here: 0 → 90 of 108.
+  Keep both: the chart for people, the CSV for the assistant. That was the whole fix here: 0 → 121 of 144.
 - **Labelling the chart is not the fix.** Values printed on the bars did not reach the index text; the summary
-  named two of eight.
+  named two of eight, and once none.
 - **Grade list answers for what is missing and what is extra.** The worst answers here were not refusals; they
   were lists assembled from a summary's prose.
 - **Tell "not attached" from "attached and still wrong".** The checker shows the CSV was attached for the
