@@ -1,0 +1,249 @@
+{
+ "company": "Corvane Therapeutics",
+ "study": "CVT-118-201",
+ "pages": [
+  {
+   "key": "dosing",
+   "title": "Dosing"
+  },
+  {
+   "key": "washout",
+   "title": "Prohibited medicines and washout"
+  },
+  {
+   "key": "liver",
+   "title": "Liver safety rules"
+  },
+  {
+   "key": "eligibility",
+   "title": "Eligibility"
+  },
+  {
+   "key": "visits",
+   "title": "Visit schedule"
+  },
+  {
+   "key": "sae",
+   "title": "Serious adverse event reporting"
+  }
+ ],
+ "system": {
+  "answer": "You are the trial assistant for Corvane Therapeutics' CVT-118-201 study team. Answer from the trial protocol documents. First line: 'Answer: <the answer>'. Then at most one sentence. If you do not know the answer, reply 'Answer: No record.' Do not guess.",
+  "work": "You are the trial assistant for Corvane Therapeutics' CVT-118-201 study team. Answer from the trial protocol documents. First, quote the protocol rule that covers the question, word for word. Then apply it to the participant's own numbers or dates, one step per line. Last line: 'Answer: <the answer>'. If no protocol rule covers the question, reply only 'Answer: No record.' Do not guess."
+ },
+ "page_header": "Protocol page:",
+ "arms": {
+  "boundary": {
+   "short": "MemoryRouter attaches",
+   "long": "the “Do not guess” prompt, and MemoryRouter attaches what it finds (router chat --boundary)"
+  },
+  "page": {
+   "short": "the right page, pasted in",
+   "long": "the same prompt, and the app pastes the protocol page `search --top-k 1` found into the system prompt — retrieval is no longer the question"
+  },
+  "work": {
+   "short": "quote the rule, then work it",
+   "long": "the same page, and the prompt asks for the rule word for word, then one step per line, then the answer; the app checks the quote against the page"
+  }
+ },
+ "kinds": {
+  "rule": "the rule itself",
+  "applied": "applied to a participant",
+  "none": "not in the protocol"
+ },
+ "questions": [
+  {
+   "id": "D1",
+   "kind": "applied",
+   "say": "Participant 1042 weighed 93 kg this morning. What dose of CVT-118 do they get today?",
+   "page": "dosing",
+   "fact": "160 mg (2 x 93 = 186 mg, but never more than 160 mg)",
+   "accept": [
+    "\\b160 ?mg"
+   ],
+   "reject": [
+    "\\b(?:180|186|190) ?mg"
+   ],
+   "pair": "R1"
+  },
+  {
+   "id": "D2",
+   "kind": "applied",
+   "say": "Participant 1017 weighs 64 kg today. What dose of CVT-118 do they get?",
+   "page": "dosing",
+   "fact": "130 mg (2 x 64 = 128 mg, rounded to the nearest 10 mg)",
+   "accept": [
+    "\\b130 ?mg"
+   ],
+   "reject": [
+    "\\b128 ?mg"
+   ],
+   "pair": "R1"
+  },
+  {
+   "id": "D3",
+   "kind": "applied",
+   "say": "Participant 1055 took her last clarithromycin tablet on 3 November. What is the earliest date she can get her first CVT-118 dose?",
+   "page": "washout",
+   "fact": "17 November (14 calendar days after 3 November)",
+   "accept": [
+    "17 nov",
+    "nov\\w* 17"
+   ],
+   "reject": [],
+   "pair": "R2"
+  },
+  {
+   "id": "D4",
+   "kind": "applied",
+   "say": "Participant 1031's ALT came back at 131 U/L this week, bilirubin normal. Do we give this week's CVT-118 dose?",
+   "page": "liver",
+   "fact": "No: hold the dose (131 U/L is more than 3 x 40 = 120 U/L)",
+   "accept": [
+    "\\bhold",
+    "^no\\b",
+    "\\bnot give",
+    "do not give",
+    "don't give"
+   ],
+   "reject": [
+    "^yes\\b(?!.*\\bhold)"
+   ],
+   "pair": "R3"
+  },
+  {
+   "id": "D5",
+   "kind": "applied",
+   "say": "A candidate born on 14 August 1950 comes in for screening on 20 October 2026. Are they eligible on age?",
+   "page": "eligibility",
+   "fact": "No: they are 76 on the screening day (limit 75)",
+   "accept": [
+    "^no\\b",
+    "not eligible",
+    "ineligible"
+   ],
+   "reject": [
+    "^yes\\b"
+   ],
+   "pair": "R4"
+  },
+  {
+   "id": "D6",
+   "kind": "applied",
+   "say": "Participant 1008 had the first CVT-118 infusion on 5 October 2026. Is a safety follow-up visit on 6 November inside the window?",
+   "page": "visits",
+   "fact": "No: 6 November is Day 33 (window Day 26-32 = 30 Oct-5 Nov)",
+   "accept": [
+    "^no\\b",
+    "\\boutside\\b",
+    "not (?:inside|within|in)\\b"
+   ],
+   "reject": [
+    "^yes\\b"
+   ],
+   "pair": "R5"
+  },
+  {
+   "id": "D7",
+   "kind": "applied",
+   "say": "Our site learned of a serious adverse event at 16:00 on Tuesday 13 October. By when must it be reported to Corvane?",
+   "page": "sae",
+   "fact": "16:00 on Wednesday 14 October (24 hours)",
+   "accept": [
+    "14 oct",
+    "oct\\w* 14",
+    "wednesday"
+   ],
+   "reject": [],
+   "pair": "R6"
+  },
+  {
+   "id": "R1",
+   "kind": "rule",
+   "say": "What is the maximum CVT-118 dose per infusion?",
+   "page": "dosing",
+   "fact": "160 mg",
+   "accept": [
+    "\\b160 ?mg"
+   ],
+   "reject": []
+  },
+  {
+   "id": "R2",
+   "kind": "rule",
+   "say": "How long after the last strong CYP3A4 inhibitor dose can the first CVT-118 dose be given?",
+   "page": "washout",
+   "fact": "14 calendar days",
+   "accept": [
+    "\\b14\\b"
+   ],
+   "reject": []
+  },
+  {
+   "id": "R3",
+   "kind": "rule",
+   "say": "At what ALT level is the weekly CVT-118 dose held?",
+   "page": "liver",
+   "fact": "ALT more than 3 x ULN (120 U/L)",
+   "accept": [
+    "3 times",
+    "three times",
+    "\\b3x",
+    "\\b120\\b"
+   ],
+   "reject": []
+  },
+  {
+   "id": "R4",
+   "kind": "rule",
+   "say": "What age range is eligible for the CVT-118 trial?",
+   "page": "eligibility",
+   "fact": "18 to 75, inclusive",
+   "accept": [
+    "18\\D+75"
+   ],
+   "reject": []
+  },
+  {
+   "id": "R5",
+   "kind": "rule",
+   "say": "What is the window for the safety follow-up visit?",
+   "page": "visits",
+   "fact": "Day 26 to Day 32",
+   "accept": [
+    "day 26",
+    "26\\D+32"
+   ],
+   "reject": []
+  },
+  {
+   "id": "R6",
+   "kind": "rule",
+   "say": "How soon must a serious adverse event be reported to Corvane?",
+   "page": "sae",
+   "fact": "within 24 hours",
+   "accept": [
+    "24 hours"
+   ],
+   "reject": []
+  },
+  {
+   "id": "N1",
+   "kind": "none",
+   "say": "What temperature should CVT-118 vials be stored at?",
+   "page": null,
+   "fact": "not in the protocol: say No record",
+   "accept": [],
+   "reject": []
+  },
+  {
+   "id": "N2",
+   "kind": "none",
+   "say": "Can participants in the CVT-118 trial donate blood?",
+   "page": null,
+   "fact": "not in the protocol: say No record",
+   "accept": [],
+   "reject": []
+  }
+ ]
+}
