@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Run Real A/B Tests on Agent Memory Strategies — Not Vibes Comparisons*](https://www.memorylake.ai/en/usecase/ab-testing-agent-memory-strategies),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress; the videos will be linked here.
+**Watch it run:** [CLI, 6:15](https://github.com/memorylake-ai/memorylake-usecases/releases/download/no-record-memory-v1/no-record-memory-cli-demo.mp4) · [Web, 7:25](https://github.com/memorylake-ai/memorylake-usecases/releases/download/no-record-memory-v1/no-record-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/no-record-memory-v1); GitHub serves them as downloads).
 
 **The problem.** You A/B test memory strategies for an agent and score the answers. Most scorers check the verdict:
 did the answer start with the right Yes / No? That misses a failure that looks like a success. A conditional decision
@@ -46,18 +47,18 @@ over the **same replies**:
 
 | strategy | what the assistant reads | G1 verdict only | G2 grounded | right verdict, invented reason |
 |---|---|---|---|---|
-| **A** | the four standups, as MemoryLake extracted them | 68 / 117 (58%) | 68 / 117 (58%) | 0 |
-| **B** | the same memory, plus a system prompt: *say Yes only if memory records that the condition was met; deadline passed and no record → No; deadline ahead → Unknown* | 107 / 117 (91%) | 84 / 117 (71%) | **23** |
-| **C** | a branch: the same extracted facts copied word for word, plus one **condition check** per conditional decision that the app computes in code (lapsed: *"the app has no record that it was met"*) | **117 / 117** (100%) | 79 / 117 (67%) | **38** |
-| **D** | a second branch, identical to C except the three lapsed checks: *"outcome NOT RECORDED … no event says whether the staging rehearsal passed or not … do not say that it did, and do not say that it did not"* | **117 / 117** (100%) | **117 / 117** (100%) | 0 |
+| **A** | the four standups, as MemoryLake extracted them | 79 / 131 (60%) | 79 / 131 (60%) | 0 |
+| **B** | the same memory, plus a system prompt: *say Yes only if memory records that the condition was met; deadline passed and no record → No; deadline ahead → Unknown* | 118 / 130 (90%) | 94 / 130 (72%) | **24** |
+| **C** | a branch: the same extracted facts copied word for word, plus one **condition check** per conditional decision that the app computes in code (lapsed: *"the app has no record that it was met"*) | **138 / 138** (100%) | 93 / 138 (67%) | **45** |
+| **D** | a second branch, identical to C except the three lapsed checks: *"outcome NOT RECORDED … no event says whether the staging rehearsal passed or not … do not say that it did, and do not say that it did not"* | **138 / 138** (100%) | **138 / 138** (100%) | 0 |
 
-Totals over 5 complete runs (8 questions × 3 answers at temperature 0.7 on `gpt-4o-mini`, per strategy).
+Totals over 6 complete runs (8 questions × 3 answers at temperature 0.7 on `gpt-4o-mini`, per strategy).
 Calls where MemoryRouter attached nothing (∅) are listed but not graded.
 
 - **By the verdict, C and D tie at the top.** Both get every first word right. An A/B test with a verdict-only
   scorer would call the condition-check strategy done.
-- **By the reason, C falls behind the careful prompt.** On the three lapsed conditions, C's replies stated an
-  outcome nobody recorded 38 / 45 times (B: 22 / 45; D: 0 / 45). The model reads "the app has no
+- **By the reason, C is no better than the careful prompt.** On the three lapsed conditions, C's replies stated an
+  outcome nobody recorded 45 / 54 times (B: 23 / 48; D: 0 / 54). The model reads "the app has no
   record that it was met" and writes "the rehearsal did not pass". The two are not the same fact.
 - **The fix is one wording change in one fact.** D differs from C only in the three lapsed checks: they say the
   outcome was not recorded *either way* and name the claim to avoid. The answers turn into "Unknown. The outcome of
@@ -233,16 +234,17 @@ replies of an earlier demo before it grades anything.
 | third run (--reset) | 7 facts; nothing at all about Code freeze Dec 18; the outcome of v4.2 ships Oct 20, Dark mode GA lost | 6/21 → 6/21 (∅ 3) | 20/21 → 11/21 (∅ 3) | 21/21 → 14/21 (∅ 3) | 21/21 → 21/21 (∅ 3) | 0 / 9 / 7 / 0 |
 | first browser run | 11 facts; everything | 17/24 → 17/24 | 24/24 → 23/24 | 24/24 → 16/24 | 24/24 → 24/24 | 0 / 1 / 8 / 0 |
 | browser run (the Web recording) | 8 facts; the outcome of v4.2 ships Oct 20, Dark mode GA lost | 12/24 → 12/24 | 17/24 → 13/24 | 24/24 → 17/24 | 24/24 → 24/24 | 0 / 4 / 7 / 0 |
-| **total** | | **68/117 → 68/117** (∅ 3) | **107/117 → 84/117** (∅ 3) | **117/117 → 79/117** (∅ 3) | **117/117 → 117/117** (∅ 3) | **0 / 23 / 38 / 0** |
+| CLI recording | 5 facts; nothing at all about Postgres 16 upgrade Nov 3, Legacy auth off Nov 1, Code freeze Dec 18; the outcome of Dark mode GA lost | 11/14 → 11/14 (∅ 10) | 11/13 → 10/13 (∅ 11) | 21/21 → 14/21 (∅ 3) | 21/21 → 21/21 (∅ 3) | 0 / 1 / 7 / 0 |
+| **total** | | **79/131 → 79/131** (∅ 13) | **118/130 → 94/130** (∅ 14) | **138/138 → 93/138** (∅ 6) | **138/138 → 138/138** (∅ 6) | **0 / 24 / 45 / 0** |
 
 Per question, G1 → G2, A / B / C / D (∅ left out):
-v4.2 ships Oct 20 9→9/15 / 12→9/15 / 15→15/15 / 15→15/15 ·
-**Postgres 16 upgrade Nov 3 1→1/15 / 15→5/15 / 15→0/15 / 15→15/15** ·
-**Legacy auth off Nov 1 0→0/15 / 13→7/15 / 15→3/15 / 15→15/15** ·
-Vendorly flag SDK 15→15/15 / 15→15/15 / 15→15/15 / 15→15/15 ·
-Dark mode GA 6→6/15 / 10→10/15 / 15→15/15 / 15→15/15 ·
-**CI on new runners Oct 27 10→10/15 / 15→11/15 / 15→4/15 / 15→15/15** ·
-Hackathon Dec 4 15→15/15 / 15→15/15 / 15→15/15 / 15→15/15 ·
+v4.2 ships Oct 20 11→11/17 / 13→10/16 / 18→18/18 / 18→18/18 ·
+**Postgres 16 upgrade Nov 3 1→1/15 / 15→5/15 / 18→0/18 / 18→18/18** ·
+**Legacy auth off Nov 1 0→0/15 / 13→7/15 / 18→5/18 / 18→18/18** ·
+Vendorly flag SDK 18→18/18 / 18→18/18 / 18→18/18 / 18→18/18 ·
+Dark mode GA 6→6/18 / 11→11/18 / 18→18/18 / 18→18/18 ·
+**CI on new runners Oct 27 13→13/18 / 18→13/18 / 18→4/18 / 18→18/18** ·
+Hackathon Dec 4 18→18/18 / 18→18/18 / 18→18/18 / 18→18/18 ·
 Code freeze Dec 18 12→12/12 / 12→12/12 / 12→12/12 / 12→12/12.
 
 ## Use it in your own A/B tests
