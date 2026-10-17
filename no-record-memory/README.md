@@ -58,7 +58,7 @@ Calls where MemoryRouter attached nothing (∅) are listed but not graded.
 - **By the verdict, C and D tie at the top.** Both get every first word right. An A/B test with a verdict-only
   scorer would call the condition-check strategy done.
 - **By the reason, C is no better than the careful prompt.** On the three lapsed conditions, C's replies stated an
-  outcome nobody recorded 45 / 54 times (B: 23 / 48; D: 0 / 54). The model reads "the app has no
+  outcome nobody recorded in 45 of 54 answers (B: 23 of 48; D: 0 of 54). The model reads "the app has no
   record that it was met" and writes "the rehearsal did not pass". The two are not the same fact.
 - **The fix is one wording change in one fact.** D differs from C only in the three lapsed checks: they say the
   outcome was not recorded *either way* and name the claim to avoid. The answers turn into "Unknown. The outcome of
