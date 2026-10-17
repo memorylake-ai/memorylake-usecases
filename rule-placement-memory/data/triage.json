@@ -1,0 +1,75 @@
+{
+  "org": "Quillfold",
+  "today": "2026-10-17",
+  "system": "You are Quillfold's support assistant. Today is {today}. Answer from the product team's feedback-triage memory in one or two sentences, starting with Yes, No or Unknown.",
+  "rule": "No record that something happened is not a record that it did not happen. A decision in memory can carry a condition (unless, provided, only if, if, as long as). If memory holds no fact saying how a condition came out, answer No when its deadline has passed (the plan is not confirmed) or Unknown when it is still ahead, and say the outcome is not recorded: do not say that it happened, and do not say that it did not. If memory does record how it came out, answer from that record.",
+  "rule_fact": "Rule for Quillfold's support assistant, for every conditional decision: ",
+  "people": [
+    {"key": "ceo", "display": "Maya Lindqvist", "role": "Co-founder and CEO, Quillfold"},
+    {"key": "pm", "display": "Tomás Reyes", "role": "Product manager, Quillfold"},
+    {"key": "sup", "display": "Aisha Bello", "role": "Support lead, Quillfold"},
+    {"key": "eng", "display": "Jonah Park", "role": "Engineering lead, Quillfold"}
+  ],
+  "meetings": [
+    {"id": "T1", "name": "Feedback triage 7 Sep", "at": "2026-09-07T09:00:00Z", "lines": [
+      ["sup", "We tell Halverson Logistics their CSV export fix ships on October 20, provided the fix passes QA on their 200,000-row file by October 14."],
+      ["pm", "We promise Brightwater Clinics SAML single sign-on in the November 2 release, as long as the Okta integration test passes by October 9."],
+      ["eng", "We switch off the v1 API on November 1, provided the last four customers still on it move to v2 by October 12."],
+      ["ceo", "And the public roadmap page launches on December 1."]
+    ]},
+    {"id": "T2", "name": "Feedback triage 14 Sep", "at": "2026-09-14T09:00:00Z", "lines": [
+      ["pm", "We build the Slack digest only if at least ten accounts vote for it on the feedback board."],
+      ["pm", "Bulk edit goes GA only if the beta error rate stays under 1 percent."],
+      ["ceo", "The new $49 Team plan price starts on October 27, as long as finance signs off the margin review by October 13."],
+      ["sup", "The customer webinar on December 4 goes ahead if at least 40 customers register by October 28."]
+    ]},
+    {"id": "T3", "name": "Feedback triage 21 Sep", "at": "2026-09-21T09:00:00Z", "lines": [
+      ["pm", "The Slack digest passed ten votes on Friday: twelve accounts have voted for it, so we are building it."]
+    ]},
+    {"id": "T4", "name": "Feedback triage 15 Oct", "at": "2026-10-15T09:00:00Z", "lines": [
+      ["eng", "The CSV export fix failed QA: Halverson's 200,000-row export still timed out at 90 seconds."],
+      ["pm", "The bulk edit beta error rate came in at 2.4 percent."]
+    ]}
+  ],
+  "decisions": [
+    {"id": "csv", "what": "CSV fix ships Oct 20", "ask": "Is Halverson Logistics' CSV export fix shipping on October 20?", "truth": "N",
+     "kind": "failed", "said": "T1", "decision": "Halverson Logistics' CSV export fix ships on October 20", "condition": "provided the fix passes QA on their 200,000-row file by October 14",
+     "deadline": null, "event": "csv-qa", "topic": "csv|export fix|halverson", "outcome": "fail|timed out|90 seconds|未通过",
+     "claim": "(\\bQA\\b|\\bfix\\b|export|test)[^.;]*\\b(?<!to )(pass(ed|es)?|succeeded|was successful|fail(ed|s)?|did not pass|didn't pass|has not passed|hasn't passed|was not (passed|successful|completed)|timed out|(is|are|was|were) (still )?(failing|passing))"},
+    {"id": "sso", "what": "SSO for Brightwater Nov 2", "ask": "Is SAML single sign-on going out to Brightwater Clinics in the November 2 release?", "truth": "NU",
+     "kind": "lapsed", "said": "T1", "decision": "SAML single sign-on for Brightwater Clinics in the November 2 release", "condition": "as long as the Okta integration test passes by October 9",
+     "deadline": "2026-10-09", "event": null, "happened": "the Okta integration test passed", "topic": "saml|sso|single sign-on|okta|brightwater",
+     "outcome": "integration test (passed|was successful|succeeded|went well)|集成测试(已)?通过",
+     "claim": "(integration test|okta test|\\btest\\b)[^.;]*\\b(?<!to )(pass(ed|es)?|succeeded|was successful|went well|fail(ed|s)?|did not (pass|succeed|happen|take place)|didn't (pass|succeed|happen)|has not (passed|happened|been completed)|hasn't (passed|happened)|was not (passed|successful|completed|conducted)|not (being )?completed|(is|are|was|were) (still )?(failing|passing))"},
+    {"id": "v1api", "what": "v1 API off Nov 1", "ask": "Are we switching off the v1 API on November 1?", "truth": "NU",
+     "kind": "lapsed", "said": "T1", "decision": "v1 API switched off on November 1", "condition": "provided the last four customers still on it move to v2 by October 12",
+     "deadline": "2026-10-12", "event": null, "happened": "the last four customers moved to v2", "topic": "v1 api|\\bv1\\b|\\bv2\\b|last four customers",
+     "outcome": "(customers|accounts) (have |had )?(all )?(moved|migrated)|迁移完成",
+     "claim": "(customers?|accounts?|migration)\\b[^.;]*\\b(moved|migrated|did not (move|migrate|happen)|didn't (move|migrate)|have not (moved|migrated)|haven't (moved|migrated)|were not (moved|migrated)|was not (completed|done|finished)|not (being )?completed|failed to (move|migrate)|completed|were completed|(are|remain|were) still on)"},
+    {"id": "slack", "what": "Slack digest", "ask": "Are we building the Slack digest?", "truth": "Y",
+     "kind": "met", "said": "T2", "decision": "Build the Slack digest", "condition": "only if at least ten accounts vote for it on the feedback board",
+     "deadline": null, "event": "slack-votes", "topic": "slack digest|digest|feedback board", "outcome": "twelve|\\b12\\b|passed ten votes|批准",
+     "claim": "(\\btwelve\\b|\\b\\d+ (accounts|votes)\\b[^.;]*\\b(voted|received|got)|enough votes|not enough votes|fewer than ten|(reached|passed|got|received) (the )?(ten|10)|did not (reach|get|receive))"},
+    {"id": "bulk", "what": "Bulk edit GA", "ask": "Is bulk edit going GA?", "truth": "N",
+     "kind": "failed", "said": "T2", "decision": "Bulk edit goes GA", "condition": "only if the beta error rate stays under 1 percent",
+     "deadline": null, "event": "bulk-error", "topic": "bulk edit|error rate", "outcome": "2\\.4",
+     "claim": "error rate\\b[^.;]*\\b(\\d+(\\.\\d+)? ?(percent|%)|below|above|under|over|rose|exceeded|stayed|did not stay|didn't stay)"},
+    {"id": "price", "what": "$49 Team price Oct 27", "ask": "Does the new $49 Team plan price start on October 27?", "truth": "NU",
+     "kind": "lapsed", "said": "T2", "decision": "The new $49 Team plan price starts on October 27", "condition": "as long as finance signs off the margin review by October 13",
+     "deadline": "2026-10-13", "event": null, "happened": "finance signed off the margin review", "topic": "team plan|\\$49|margin review|price",
+     "outcome": "(signed off|approved) (on )?the margin review|margin review (was |has been )?(signed off|approved)|签字",
+     "claim": "(margin review|finance|sign-?off)\\b[^.;]*\\b(signed off|approved|did not (sign|approve)|didn't (sign|approve)|has not (signed|approved|been signed|been approved)|hasn't (signed|approved)|was not (signed|approved|completed)|not (being )?(signed|completed)|rejected)"},
+    {"id": "webinar", "what": "Customer webinar Dec 4", "ask": "Is the customer webinar on December 4 going ahead?", "truth": "U",
+     "kind": "pending", "said": "T2", "decision": "Customer webinar on December 4", "condition": "if at least 40 customers register by October 28",
+     "deadline": "2026-10-28", "event": null, "happened": "40 customers registered", "topic": "webinar|研讨会", "outcome": "\\b([4-9]\\d|\\d{3}) (customers )?(have )?registered",
+     "claim": "(\\b\\d+ (customers|people)\\b[^.;]*\\bregistered|enough (customers|people)\\b[^.;]*\\bregistered|(not enough|fewer than 40|only \\d+) (customers|people)? ?(have )?registered)"},
+    {"id": "roadmap", "what": "Roadmap page Dec 1", "ask": "Does the public roadmap page launch on December 1?", "truth": "Y",
+     "kind": "plain", "said": "T1", "decision": "Public roadmap page launches on December 1", "condition": null,
+     "deadline": null, "event": null, "topic": "roadmap|路线图", "outcome": "december 1\\b|1 december|12月1", "claim": null}
+  ],
+  "events": [
+    {"id": "slack-votes", "on": "2026-09-18", "source": "feedback board", "result": "met", "summary": "twelve accounts voted for the Slack digest on the feedback board"},
+    {"id": "csv-qa", "on": "2026-10-14", "source": "QA tracker", "result": "failed", "summary": "the CSV export fix failed QA: Halverson's 200,000-row export still timed out at 90 seconds"},
+    {"id": "bulk-error", "on": "2026-10-15", "source": "beta analytics", "result": "failed", "summary": "the bulk edit beta error rate came in at 2.4 percent"}
+  ]
+}
