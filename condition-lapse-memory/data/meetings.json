@@ -1,0 +1,68 @@
+{
+  "org": "Halcrest",
+  "today": "2026-10-17",
+  "system": "You are Halcrest's operations assistant. Today is {today}. Answer from the team's meeting memory in one or two sentences, starting with Yes, No or Unknown.",
+  "careful": "Decisions in memory can carry a condition (unless, provided, only if, if). Say Yes only if memory records that the condition was met. If the condition's deadline has passed and memory has no record that it was met, say No. If its deadline is still ahead, say Unknown.",
+  "people": [
+    {"key": "coo", "display": "Priya Natarajan", "role": "COO, Halcrest"},
+    {"key": "fin", "display": "Marcus Hale", "role": "Finance lead, Halcrest"},
+    {"key": "legal", "display": "Lena Brandt", "role": "Legal counsel, Halcrest"},
+    {"key": "it", "display": "Tomas Reyes", "role": "IT lead, Halcrest"}
+  ],
+  "meetings": [
+    {"id": "M1", "name": "Ops weekly 8 Sep", "at": "2026-09-08T09:00:00Z", "lines": [
+      ["coo", "Payroll vendor: we go with Corvane, unless legal finds a problem with their data processing agreement before we sign."],
+      ["coo", "Lisbon office: we open on November 2, provided the lease is signed by October 1."],
+      ["fin", "The January price increase goes ahead only if Q3 churn stays under 3 percent."],
+      ["coo", "And from next week the all-hands moves to Thursdays at 4pm."]
+    ]},
+    {"id": "M2", "name": "Ops weekly 15 Sep", "at": "2026-09-15T09:00:00Z", "lines": [
+      ["coo", "We sign the Quellmark warehouse contract only if they match the 18-month term."],
+      ["fin", "We hire two more support agents in Q4 if September ticket volume tops 5,000."],
+      ["it", "Support moves to the new ticketing tool on November 9, as long as the data migration test passes by October 10."],
+      ["coo", "The Berlin offsite is on December 3 if at least 20 people RSVP by October 30."]
+    ]},
+    {"id": "M3", "name": "Ops weekly 22 Sep", "at": "2026-09-22T09:00:00Z", "lines": [
+      ["legal", "I finished the Corvane DPA review. They will not commit to EU data residency, and that is a hard blocker for us."],
+      ["coo", "Quellmark came back and agreed to the 18-month term, so we signed on Friday."]
+    ]},
+    {"id": "M4", "name": "Ops weekly 5 Oct", "at": "2026-10-05T09:00:00Z", "lines": [
+      ["fin", "Q3 churn closed at 4.1 percent."],
+      ["fin", "September tickets came in at 4,600."]
+    ]}
+  ],
+  "decisions": [
+    {"id": "corvane", "what": "Payroll: Corvane", "ask": "Are we going with Corvane for payroll?", "truth": "N",
+     "kind": "failed", "said": "M1", "decision": "Payroll vendor: Corvane", "condition": "unless legal finds a problem with the data processing agreement before signing",
+     "deadline": null, "event": "dpa-review", "topic": "corvane", "outcome": "will not commit|not commit|blocker|not (be |the )?(selected|chosen|going)|no longer|拒绝|阻塞|无法"},
+    {"id": "lisbon", "what": "Lisbon opens Nov 2", "ask": "Is the Lisbon office opening on November 2?", "truth": "NU",
+     "kind": "lapsed", "said": "M1", "decision": "Lisbon office opens on November 2", "condition": "provided the lease is signed by October 1",
+     "deadline": "2026-10-01", "event": null, "topic": "lisbon|里斯本", "outcome": "lease (was|has been|is now) signed|signed the lease|租约已签",
+     "made": "\\b(since|as|because|now that)\\b[^.;]*\\b(lease (was|has been|had been) signed|signed the lease|lease signing (was|has been) (completed|done)|condition (was|has been) met)"},
+    {"id": "price", "what": "January price rise", "ask": "Is the January price increase going ahead?", "truth": "N",
+     "kind": "failed", "said": "M1", "decision": "January price increase", "condition": "only if Q3 churn stays under 3 percent",
+     "deadline": null, "event": "q3-churn", "topic": "price increase|churn|涨价|流失", "outcome": "4\\.1"},
+    {"id": "quellmark", "what": "Quellmark contract", "ask": "Do we have the Quellmark warehouse contract?", "truth": "Y",
+     "kind": "met", "said": "M2", "decision": "Quellmark warehouse contract", "condition": "only if Quellmark matches the 18-month term",
+     "deadline": null, "event": "quellmark-signed", "topic": "quellmark", "outcome": "agreed|signed|签"},
+    {"id": "hires", "what": "Two Q4 support hires", "ask": "Are we hiring two more support agents in Q4?", "truth": "N",
+     "kind": "failed", "said": "M2", "decision": "Two more support agents in Q4", "condition": "if September ticket volume tops 5,000",
+     "deadline": null, "event": "sept-tickets", "topic": "support agent|ticket volume|tickets came|客服|工单", "outcome": "4,600|4600"},
+    {"id": "ticketing", "what": "New ticketing tool Nov 9", "ask": "Is support moving to the new ticketing tool on November 9?", "truth": "NU",
+     "kind": "lapsed", "said": "M2", "decision": "Support moves to the new ticketing tool on November 9", "condition": "as long as the data migration test passes by October 10",
+     "deadline": "2026-10-10", "event": null, "topic": "ticketing tool|migration|工单系统|迁移", "outcome": "test (passed|was successful|succeeded)|测试(已)?通过",
+     "made": "\\b(since|as|because|now that)\\b[^.;]*\\b(test (passed|was successful|succeeded|has passed|was completed)|passed (the|its) (data )?migration test|condition (was|has been) met)"},
+    {"id": "offsite", "what": "Berlin offsite Dec 3", "ask": "Is the Berlin offsite on December 3 going ahead?", "truth": "U",
+     "kind": "pending", "said": "M2", "decision": "Berlin offsite on December 3", "condition": "if at least 20 people RSVP by October 30",
+     "deadline": "2026-10-30", "event": null, "topic": "berlin|offsite|柏林", "outcome": "\\b(2\\d|[3-9]\\d) (people )?(have )?rsvp"},
+    {"id": "allhands", "what": "All-hands on Thursdays", "ask": "Is the all-hands on Thursdays?", "truth": "Y",
+     "kind": "plain", "said": "M1", "decision": "All-hands on Thursdays at 4pm", "condition": null,
+     "deadline": null, "event": null, "topic": "all-hands|全员", "outcome": "thursday|周四|星期四"}
+  ],
+  "events": [
+    {"id": "dpa-review", "on": "2026-09-22", "source": "legal review tracker", "result": "failed", "summary": "legal: Corvane will not commit to EU data residency, a hard blocker"},
+    {"id": "quellmark-signed", "on": "2026-09-18", "source": "contract system", "result": "met", "summary": "Quellmark agreed to the 18-month term; contract signed"},
+    {"id": "q3-churn", "on": "2026-10-05", "source": "finance dashboard", "result": "failed", "summary": "Q3 churn closed at 4.1 percent"},
+    {"id": "sept-tickets", "on": "2026-10-05", "source": "support dashboard", "result": "failed", "summary": "September tickets came in at 4,600"}
+  ]
+}
