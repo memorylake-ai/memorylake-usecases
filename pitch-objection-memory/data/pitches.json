@@ -1,0 +1,219 @@
+{
+  "org": "Fernhallow",
+  "today": "2026-10-16",
+  "system": "You are the new business assistant at {org}, a marketing agency. Today is {today}. Answer from the team's pitch memory. Reply in one or two sentences, starting with 'Answer:'.",
+  "people": [
+    {
+      "key": "jonah",
+      "display": "Jonah Pike",
+      "role": "new business lead, Fernhallow",
+      "tool": "CRM"
+    },
+    {
+      "key": "mei",
+      "display": "Mei Arden",
+      "role": "strategy director, Fernhallow",
+      "tool": "meeting notes"
+    },
+    {
+      "key": "rosa",
+      "display": "Rosa Quint",
+      "role": "head of new business, Fernhallow",
+      "tool": "Slack"
+    }
+  ],
+  "pitches": [
+    {
+      "id": "brisklane",
+      "opp": "OPP-311",
+      "name": "Brisklane",
+      "vertical": "HR software",
+      "date": "2026-03-12",
+      "objection": "pricing",
+      "detail": "wants a fixed project fee, not a monthly retainer",
+      "outcome": "lost"
+    },
+    {
+      "id": "quorvia",
+      "opp": "OPP-318",
+      "name": "Quorvia",
+      "vertical": "payments platform",
+      "date": "2026-04-08",
+      "objection": "security",
+      "detail": "our tools must pass their SOC 2 vendor review before touching customer data",
+      "outcome": "pending"
+    },
+    {
+      "id": "tamberly",
+      "opp": "OPP-324",
+      "name": "Tamberly",
+      "vertical": "analytics SaaS",
+      "date": "2026-05-20",
+      "objection": "pricing",
+      "detail": "the retainer is too expensive; asked for a performance-based fee",
+      "outcome": "lost"
+    },
+    {
+      "id": "velloway",
+      "opp": "OPP-330",
+      "name": "Velloway",
+      "vertical": "logistics SaaS",
+      "date": "2026-06-17",
+      "objection": "timeline",
+      "detail": "our 12-week launch plan is too slow; they need to be live in 6 weeks",
+      "outcome": "lost"
+    },
+    {
+      "id": "holbrine",
+      "opp": "OPP-337",
+      "name": "Holbrine",
+      "vertical": "CRM software",
+      "date": "2026-08-05",
+      "objection": "pricing",
+      "detail": "objects to the retainer model; wants per-campaign pricing",
+      "outcome": "pending"
+    },
+    {
+      "id": "mossquill",
+      "opp": "OPP-342",
+      "name": "Mossquill",
+      "vertical": "developer tools",
+      "date": "2026-09-09",
+      "objection": "none",
+      "detail": "no objections; they liked the creative concept",
+      "outcome": "won"
+    }
+  ],
+  "objections": {
+    "pricing": "pricing model",
+    "security": "security",
+    "timeline": "launch timeline",
+    "none": "none"
+  },
+  "captures": [
+    {
+      "id": "brisklane-crm",
+      "pitch": "brisklane",
+      "by": "jonah",
+      "tool": "CRM",
+      "ts": "2026-03-12T09:00:00Z",
+      "link": "CRM opportunity OPP-311",
+      "called": "Brisklane",
+      "text": "Pitch debrief, Brisklane (HR software). Their CMO pushed back on our pricing model: they want a fixed project fee, not a monthly retainer. Outcome: lost."
+    },
+    {
+      "id": "quorvia-crm",
+      "pitch": "quorvia",
+      "by": "jonah",
+      "tool": "CRM",
+      "ts": "2026-04-08T09:00:00Z",
+      "link": "CRM opportunity OPP-318",
+      "called": "Quorvia",
+      "text": "Pitch debrief, Quorvia (payments platform). Their head of security said our analytics tooling has to pass their SOC 2 vendor review before we can touch customer data. Outcome: pending."
+    },
+    {
+      "id": "quorvia-notes",
+      "pitch": "quorvia",
+      "by": "mei",
+      "tool": "meeting notes",
+      "ts": "2026-04-09T09:00:00Z",
+      "repeat": true,
+      "link": "calendar event 'Project Lantern pitch' (attached to CRM opportunity OPP-318)",
+      "called": "Project Lantern",
+      "text": "Notes from the Project Lantern pitch. The client's security lead raised a data security concern: any tool we use on their customer data must clear a SOC 2 vendor review first."
+    },
+    {
+      "id": "quorvia-slack",
+      "pitch": "quorvia",
+      "by": "rosa",
+      "tool": "Slack",
+      "ts": "2026-04-10T09:00:00Z",
+      "repeat": true,
+      "link": "#new-business thread on the OPP-318 deal card",
+      "called": "the payments prospect",
+      "text": "Recap for the channel: the payments prospect is blocked on security. They will not move until our tools pass a SOC 2 review."
+    },
+    {
+      "id": "tamberly-crm",
+      "pitch": "tamberly",
+      "by": "jonah",
+      "tool": "CRM",
+      "ts": "2026-05-20T09:00:00Z",
+      "link": "CRM opportunity OPP-324",
+      "called": "Tamberly",
+      "text": "Pitch debrief, Tamberly (analytics SaaS). They said the retainer is too expensive and asked for a performance-based fee instead. Outcome: lost."
+    },
+    {
+      "id": "velloway-crm",
+      "pitch": "velloway",
+      "by": "jonah",
+      "tool": "CRM",
+      "ts": "2026-06-17T09:00:00Z",
+      "link": "CRM opportunity OPP-330",
+      "called": "Velloway",
+      "text": "Pitch debrief, Velloway (logistics SaaS). They said our 12-week launch plan is too slow; they need to be live in 6 weeks. Outcome: lost."
+    },
+    {
+      "id": "holbrine-crm",
+      "pitch": "holbrine",
+      "by": "jonah",
+      "tool": "CRM",
+      "ts": "2026-08-05T09:00:00Z",
+      "link": "CRM opportunity OPP-337",
+      "called": "Holbrine",
+      "text": "Pitch debrief, Holbrine (CRM software). Their VP Marketing objected to the retainer model and wants per-campaign pricing. Outcome: pending."
+    },
+    {
+      "id": "mossquill-crm",
+      "pitch": "mossquill",
+      "by": "jonah",
+      "tool": "CRM",
+      "ts": "2026-09-09T09:00:00Z",
+      "link": "CRM opportunity OPP-342",
+      "called": "Mossquill",
+      "text": "Pitch debrief, Mossquill (developer tools). No objections raised; they liked the creative concept. Outcome: won."
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1",
+      "kind": "recurring",
+      "what": "objections at 2+ prospects",
+      "truth": "pricing model only",
+      "ask": "Which objections came up with two or more different prospects this year? List only those."
+    },
+    {
+      "id": "Q2",
+      "kind": "list_soc2",
+      "what": "prospects that asked for SOC 2",
+      "truth": "Quorvia only",
+      "ask": "Which prospects asked us to pass a SOC 2 review? List each prospect once."
+    },
+    {
+      "id": "Q3",
+      "kind": "count",
+      "what": "how many raised security / SOC 2",
+      "truth": "1",
+      "n": 1,
+      "topic": "security",
+      "ask": "How many different prospects raised a security or SOC 2 concern this year?"
+    },
+    {
+      "id": "Q4",
+      "kind": "count",
+      "what": "how many pushed back on pricing",
+      "truth": "3",
+      "n": 3,
+      "topic": "pricing",
+      "ask": "How many different prospects pushed back on our pricing model this year?"
+    },
+    {
+      "id": "Q5",
+      "kind": "name",
+      "what": "who said the launch plan was too slow",
+      "truth": "Velloway",
+      "name": "Velloway",
+      "ask": "Which prospect said our launch plan was too slow?"
+    }
+  ]
+}
