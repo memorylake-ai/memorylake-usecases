@@ -521,7 +521,7 @@ CONCERN = {
 }
 UNKNOWN = (r"\b(?:don't have|do not have|not have (?:the |any |specific )?(?:exact |specific )?(?:number|data|information|feedback)|"
            r"no record|unable to|cannot (?:determine|confirm|say)|can't (?:determine|say)|not specified|not available|"
-           r"no information|no (?:specific )?mention|not mentioned|no (?:specific )?(?:feedback|concerns) "
+           r"no information|no (?:specific )?mention|not mentioned|(?:details )?not provided|no (?:specific )?(?:feedback|concerns) "
            r"(?:recorded|on record|available|has been))\b|\[(?:insert|specific)")
 # A piece that says a concern did not come up, or belongs elsewhere, is not a claim about this house. Narrow on
 # purpose: "they could not get past the traffic noise" and "the backyard not being suitable" are claims.
@@ -604,6 +604,7 @@ CASES = [
     ("Q4", "Answer: The buyers felt the following listing was overpriced for the size: [insert listing name or address here].", "unknown"),
     ("Q4", "Answer: The listings that buyers have called overpriced are 123 Maple St, 456 Oak Ave, and 789 Pine Rd.", "wrong"),
     ("Q4", "Answer: Only 22 Birch Court; nobody said 9 Cedar Row was overpriced.", "ok"),
+    ("Q4", "Answer: The buyers have called the following listings overpriced: [Listing details not provided].", "unknown"),
     ("Q4", "Answer: Buyers felt the home was overpriced for the size, but the listing is not specified.", "unknown"),
 ]
 

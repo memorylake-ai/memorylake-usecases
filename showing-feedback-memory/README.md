@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Showing Feedback Memory for Real Estate Teams*](https://www.memorylake.ai/en/usecase/showing-feedback-memory-for-real-estate-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 4:37](https://github.com/memorylake-ai/memorylake-usecases/releases/download/showing-feedback-memory-v1/showing-feedback-memory-cli-demo.mp4) · [Web, 5:47](https://github.com/memorylake-ai/memorylake-usecases/releases/download/showing-feedback-memory-v1/showing-feedback-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/showing-feedback-memory-v1); GitHub serves them as downloads). Both recordings are counted in the totals below.
 
 **The problem.** Showing feedback arrives as texts from buyer's agents, and most of them don't name the house — the
 agent knows which showing they mean, and so does the showing schedule:
@@ -41,16 +42,16 @@ three memories:
 Four questions — what buyers raised about each of the three houses, and which house buyers called overpriced — four
 answers each per memory, on `gpt-4o-mini` at temperature 0.7.
 
-Over 8 runs (A and B hold the same texts; B only has the address written in front):
+Over 9 runs (A and B hold the same texts; B only has the address written in front):
 
-- **A put another house's feedback into the answer 93 times in 124** (mix). Every one of the 8 runs had facts that
-  name no house (1 to 8 of them); with even one, A's answers about the house it was not about went mix.
-- **B: 8 mix in 116**, all in one run — the run where extraction dropped the address from a text that *did* name the
+- **A put another house's feedback into the answer 105 times in 140** (mix). Every one of the 9 runs had facts that
+  name no house (1 to 8 of them); with even one, A's answers about the other houses went mix.
+- **B: 8 mix in 132**, all in one run — the run where extraction dropped the address from a text that *did* name the
   house ("Showed 14 Alder Lane this morning … the kitchen is dated" became "Buyers loved the light but said the kitchen
   is dated"), and that one fact went into the Birch and Cedar answers 8 times.
-- **C was right 128/128.** B lost feedback to extraction (14 of 56 concern-runs not in memory, 12 ∅ where nothing was
+- **C was right 144/144.** B lost feedback to extraction (14 of 63 concern-runs not in memory, 12 ∅ where nothing was
   attached); C quotes every text, so nothing is lost.
-- With no memory, the model invents ("123 Maple Street", "the condition of the roof"): 28/128, and 27 of those are
+- With no memory, the model invents ("123 Maple Street", "the condition of the roof"): 31/144, and 30 of those are
   the Alder question, where its stock guess — an outdated kitchen and the yard — happens to match.
 
 Details in [Measured](#measured).
@@ -232,7 +233,7 @@ many prompt tokens had nothing attached (∅, not graded).
 **mix** = the answer about one house carries a concern that only another house had (the garage on Alder, the noise on
 Cedar), or names another house as the overpriced one. A piece of the answer that names the other house ("the noise was
 at Birch") or says a concern did not come up is not counted. With no memory, another house's concern is invented, so it
-is ✗. The grader's rules and 25 offline cases, and 8 offline cases for the schedule lookup, are in `demo.py`
+is ✗. The grader's rules and 26 offline cases, and 8 offline cases for the schedule lookup, are in `demo.py`
 (`grade()`, `CASES`, `resolve()`; `python3 demo.py selftest`).
 
 ## Measured
@@ -249,23 +250,25 @@ Per run, graded from the saved `out/report.json` with the final grader; columns 
 | run 6 | 2/4 | 2/7 (1) · 5/7 (5) | 3/16 (✗ 13) | 0/12 (mix 12 · ∅ 4) | 16/16 | 16/16 |
 | run 7 | 5/8 | 5/7 (2) · 4/7 (3) | 4/16 (✗ 12) | 3/16 (mix 13) | 8/16 (mix 8) | 16/16 |
 | browser run (Web recording) | 1/4 | 3/7 (2) · 5/7 (5) | 4/16 (✗ 12) | 8/16 (mix 8) | 12/12 (∅ 4) | 16/16 |
-| **total (8 runs)** | **37/54** | 36/56 (14) · 42/56 (41) | **28/128 (✗ 100)** | **31/124 (mix 93 · ∅ 4)** | **108/116 (mix 8 · ∅ 12)** | **128/128** |
+| CLI recording | 3/3 | 3/7 (0) · 7/7 (7) | 3/16 (✗ 13) | 0/16 (mix 12 · ✗ 1 · ? 3) | 16/16 | 16/16 |
+| **total (9 runs)** | **40/57** | 39/63 (14) · 49/63 (48) | **31/144 (✗ 113)** | **31/140 (mix 105 · ✗ 1 · ? 3 · ∅ 4)** | **124/132 (mix 8 · ∅ 12)** | **144/144** |
 
 Per question, all runs:
 
 | question (truth) | 0 no memory | A every text as it arrived | B address stamped | C one record per showing |
 |---|---|---|---|---|
-| Q1 What concerns have buyers raised about 14 Alder Lane after showings? List each concern once. (dated kitchen, small backyard) | 27/32 (✗ 5) | 4/32 (mix 28) | 28/28 (∅ 4) | 32/32 |
-| Q2 … about 22 Birch Court … (price, street noise) | 1/32 (✗ 31) | 0/32 (mix 32) | 28/32 (mix 4) | 32/32 |
-| Q3 … about 9 Cedar Row … (basement ceiling, no garage, water stain) | 0/32 (✗ 32) | 0/32 (mix 32) | 28/32 (mix 4) | 32/32 |
-| Q4 Which of our listings have buyers called overpriced? List each listing once. (22 Birch Court only) | 0/32 (✗ 32) | 27/28 (mix 1 · ∅ 4) | 24/24 (∅ 8) | 32/32 |
+| Q1 What concerns have buyers raised about 14 Alder Lane after showings? List each concern once. (dated kitchen, small backyard) | 30/36 (✗ 6) | 4/36 (mix 32) | 32/32 (∅ 4) | 36/36 |
+| Q2 … about 22 Birch Court … (price, street noise) | 1/36 (✗ 35) | 0/36 (mix 36) | 32/36 (mix 4) | 36/36 |
+| Q3 … about 9 Cedar Row … (basement ceiling, no garage, water stain) | 0/36 (✗ 36) | 0/36 (mix 36) | 32/36 (mix 4) | 36/36 |
+| Q4 Which of our listings have buyers called overpriced? List each listing once. (22 Birch Court only) | 0/36 (✗ 36) | 27/32 (mix 1 · ✗ 1 · ? 3 · ∅ 4) | 28/28 (∅ 8) | 36/36 |
 
-- **Q4 is the reverse check**, and A gets it right 27/28: one text names Birch and calls it pricey ("22 Birch Court:
-  buyers said the price is high …"). An unowned "overpriced for its size" fact did not make the assistant name another
-  house as overpriced (1 in 28); it made it put the concern on whichever house you ask about.
+- **Q4 is the reverse check**: one text names Birch and calls it pricey ("22 Birch Court: buyers said the price is
+  high …"). An unowned "overpriced for its size" fact did not make the assistant name another house as overpriced (1 in
+  32); it made it put the concern on whichever house you ask about. A missed Q4 only in the CLI recording, where no A
+  fact named a house and the assistant answered "[insert relevant listings here]".
 - **The 4 A answers right on Q1 are the browser run**, where only one fact named no house (the water stain) and the
-  assistant left it out of the Alder answer. In the other seven runs every Q1–Q3 answer through A was mix.
-- **Extraction loses whole texts, in B as in A.** B had 7/7 concerns in memory in 2 of 8 runs; a Birch or Cedar text
+  assistant left it out of the Alder answer. In the other eight runs every Q1–Q3 answer through A was mix.
+- **Extraction loses whole texts, in B as in A.** B had 7/7 concerns in memory in 3 of 9 runs; a Birch or Cedar text
   sometimes produced no fact at all: in one run nothing about Alder was left, so the Alder question attached nothing
   (∅ 4), and in two runs both "overpriced" texts were gone (Q4 ∅ 8). A record written with `fact add` (C) does not go through extraction.
 
@@ -281,9 +284,9 @@ B, and the model invented "123 Maple St".
 - **Join feedback to the showing on the way in.** The house is in the showing tool, not in the text. Match each text to
   the last showing by the same buyer's agent before it was sent, and write the house into what you store.
 - **Prefer a record you write over extraction for anything you will filter on.** Stamping the address in front (B)
-  fixed the attribution in 7 of 8 runs; in the eighth, extraction rewrote a text that *named* the house into a fact
+  fixed the attribution in 8 of 9 runs; in the ninth, extraction rewrote a text that *named* the house into a fact
   that does not, and that fact went into two other houses' answers. One `fact add` per showing (C), with the text
-  quoted, was right 128/128.
+  quoted, was right 144/144.
 - **Keep the showing id and time in the record.** "Audit feedback origin" on the use case page is the showing
   (`SH-2042`, 17:00–17:30) and the text's own timestamp — enough to trace any line of seller advice back to a text.
 
