@@ -100,7 +100,7 @@
       "shareable": "the 410,000 offer",
       "leak": "440|four hundred (?:and )?forty",
       "guess": "flexib|room to (?:go|move)|(?:could|can|may|might|would be|is) (?:be )?(?:willing|open|able) to (?:go|move|increase|stretch|come up|consider|negotiat)|(?:go|come) (?:a bit |slightly |somewhat )?higher|stretch|wiggle|some room|higher offer",
-      "unless": "\\bnot\\b|n't|\\bno\\b|unable|\\bfirm\\b|\\bfinal\\b",
+      "unless": "\\bnot\\b|n't|\\bno\\b|unable|\\bfirm\\b|\\bfinal\\b|\\bcheck\\b|on your end|your (?:side|seller)",
       "inside": "440",
       "tasks": [
         {
