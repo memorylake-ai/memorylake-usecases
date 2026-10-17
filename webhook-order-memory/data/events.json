@@ -1,0 +1,314 @@
+{
+ "org": "Tallowby",
+ "today": "2026-10-18",
+ "retry_hours": 27,
+ "outage": "Tallowby's webhook endpoint was down for a day; the provider retried the events it could not deliver.",
+ "bot": {
+  "key": "bot",
+  "display": "billing-webhook",
+  "role": "Webhook handler that writes payment-provider events into memory"
+ },
+ "system": "You are the billing support assistant at {org}, a SaaS company. Today is {today}. Use what you remember about the customer's account. Reply in one line that starts with \"Answer: <the current value>\" (or \"Answer: Unknown\"), then one short sentence.",
+ "customers": [
+  {
+   "id": "harrow",
+   "name": "Harrow Pike",
+   "field": "subscription status",
+   "order": "late",
+   "ask": "Is Harrow Pike's subscription active or canceled right now?",
+   "values": {
+    "active": "\\b(?:active|reactivated)\\b",
+    "canceled": "\\bcancel+ed\\b"
+   },
+   "current": "active",
+   "stale": "canceled",
+   "events": [
+    {
+     "id": "evt_1JH4c2",
+     "type": "subscription.canceled",
+     "created": "2026-10-12T09:00:00Z",
+     "text": "Harrow Pike's Team plan subscription was canceled.",
+     "value": "canceled"
+    },
+    {
+     "id": "evt_1JK9d7",
+     "type": "subscription.reactivated",
+     "created": "2026-10-14T09:00:00Z",
+     "text": "Harrow Pike's Team plan subscription was reactivated and is active again.",
+     "value": "active"
+    }
+   ]
+  },
+  {
+   "id": "lumen",
+   "name": "Lumen Dray",
+   "field": "plan",
+   "order": "late",
+   "ask": "Which plan is Lumen Dray on now?",
+   "values": {
+    "Team": "\\bTeam\\b",
+    "Business": "\\bBusiness\\b"
+   },
+   "current": "Team",
+   "stale": "Business",
+   "events": [
+    {
+     "id": "evt_1JJ2a9",
+     "type": "subscription.plan_changed",
+     "created": "2026-10-13T09:00:00Z",
+     "text": "Lumen Dray's subscription moved from the Team plan to the Business plan.",
+     "value": "Business"
+    },
+    {
+     "id": "evt_1JM5f1",
+     "type": "subscription.plan_changed",
+     "created": "2026-10-15T09:00:00Z",
+     "text": "Lumen Dray's subscription moved from the Business plan to the Team plan.",
+     "value": "Team"
+    }
+   ]
+  },
+  {
+   "id": "ostrel",
+   "name": "Ostrel Vane",
+   "field": "invoice INV-2207",
+   "order": "late",
+   "ask": "Is Ostrel Vane's October invoice INV-2207 paid, or is it past due?",
+   "values": {
+    "paid": "\\bpaid\\b",
+    "past due": "\\bpast due\\b|\\bunpaid\\b|\\bfailed\\b|\\boverdue\\b"
+   },
+   "current": "paid",
+   "stale": "past due",
+   "events": [
+    {
+     "id": "evt_1JD8k3",
+     "type": "invoice.payment_failed",
+     "created": "2026-10-10T09:00:00Z",
+     "text": "Payment of Ostrel Vane's October invoice INV-2207 (1,840 dollars) failed; the invoice is past due.",
+     "value": "past due"
+    },
+    {
+     "id": "evt_1JF1m6",
+     "type": "invoice.paid",
+     "created": "2026-10-11T09:00:00Z",
+     "text": "Ostrel Vane's October invoice INV-2207 (1,840 dollars) was paid in full.",
+     "value": "paid"
+    }
+   ]
+  },
+  {
+   "id": "quill",
+   "name": "Quillmere",
+   "field": "seat count",
+   "order": "late",
+   "ask": "How many seats does Quillmere have now?",
+   "values": {
+    "25": "(?<![\\d.])25(?![\\d])",
+    "40": "(?<![\\d.])40(?![\\d])"
+   },
+   "current": "25",
+   "stale": "40",
+   "events": [
+    {
+     "id": "evt_1JA3p8",
+     "type": "subscription.seats_changed",
+     "created": "2026-10-09T09:00:00Z",
+     "text": "Quillmere's seat count was set to 40 seats.",
+     "value": "40"
+    },
+    {
+     "id": "evt_1JQ7r2",
+     "type": "subscription.seats_changed",
+     "created": "2026-10-16T09:00:00Z",
+     "text": "Quillmere's seat count was set to 25 seats.",
+     "value": "25"
+    }
+   ]
+  },
+  {
+   "id": "fenwick",
+   "name": "Fenwick Lark",
+   "field": "billing email",
+   "order": "late",
+   "ask": "What is Fenwick Lark's billing email address now?",
+   "values": {
+    "finance@fenwicklark.example": "\\bfinance@",
+    "ap@fenwicklark.example": "\\bap@"
+   },
+   "current": "finance@fenwicklark.example",
+   "stale": "ap@fenwicklark.example",
+   "events": [
+    {
+     "id": "evt_1J8s4b",
+     "type": "customer.updated",
+     "created": "2026-10-08T09:00:00Z",
+     "text": "Fenwick Lark's billing email was changed to ap@fenwicklark.example.",
+     "value": "ap@fenwicklark.example"
+    },
+    {
+     "id": "evt_1JL2t5",
+     "type": "customer.updated",
+     "created": "2026-10-14T09:00:00Z",
+     "text": "Fenwick Lark's billing email was changed to finance@fenwicklark.example.",
+     "value": "finance@fenwicklark.example"
+    }
+   ]
+  },
+  {
+   "id": "tamrow",
+   "name": "Tamrow Supply",
+   "field": "default card",
+   "order": "late",
+   "ask": "Which card is Tamrow Supply's default payment card now?",
+   "values": {
+    "6630": "6630|Mastercard",
+    "1881": "1881|Visa"
+   },
+   "current": "6630",
+   "stale": "1881",
+   "events": [
+    {
+     "id": "evt_1J6u7c",
+     "type": "payment_method.attached",
+     "created": "2026-10-06T09:00:00Z",
+     "text": "Tamrow Supply's default payment card was set to the Visa ending 1881.",
+     "value": "1881"
+    },
+    {
+     "id": "evt_1JN4v8",
+     "type": "payment_method.attached",
+     "created": "2026-10-15T09:00:00Z",
+     "text": "Tamrow Supply's default payment card was set to the Mastercard ending 6630.",
+     "value": "6630"
+    }
+   ]
+  },
+  {
+   "id": "corbel",
+   "name": "Corbel Ashe",
+   "field": "trial end date",
+   "order": "late",
+   "ask": "When does Corbel Ashe's trial end?",
+   "values": {
+    "3 November 2026": "\\bNov(?:ember)?\\.? 3\\b|\\b3(?:rd)? Nov|2026-11-03",
+    "20 October 2026": "\\bOct(?:ober)?\\.? 20\\b|\\b20(?:th)? Oct|2026-10-20"
+   },
+   "current": "3 November 2026",
+   "stale": "20 October 2026",
+   "events": [
+    {
+     "id": "evt_1J7w2d",
+     "type": "subscription.trial_updated",
+     "created": "2026-10-07T09:00:00Z",
+     "text": "Corbel Ashe's trial end date was set to 20 October 2026.",
+     "value": "20 October 2026"
+    },
+    {
+     "id": "evt_1JJ8x4",
+     "type": "subscription.trial_updated",
+     "created": "2026-10-13T09:00:00Z",
+     "text": "Corbel Ashe's trial end date was set to 3 November 2026.",
+     "value": "3 November 2026"
+    }
+   ]
+  },
+  {
+   "id": "ivel",
+   "name": "Ivel Marrow",
+   "field": "billing country",
+   "order": "late",
+   "ask": "Which country is Ivel Marrow billed in now?",
+   "values": {
+    "Netherlands": "\\bNetherlands\\b|\\bDutch\\b",
+    "Germany": "\\bGermany\\b|\\bGerman\\b"
+   },
+   "current": "Netherlands",
+   "stale": "Germany",
+   "events": [
+    {
+     "id": "evt_1JD3y6",
+     "type": "customer.tax_location_updated",
+     "created": "2026-10-10T09:00:00Z",
+     "text": "Ivel Marrow's billing country was set to Germany.",
+     "value": "Germany"
+    },
+    {
+     "id": "evt_1JQ9z1",
+     "type": "customer.tax_location_updated",
+     "created": "2026-10-16T09:00:00Z",
+     "text": "Ivel Marrow's billing country was set to the Netherlands.",
+     "value": "Netherlands"
+    }
+   ]
+  },
+  {
+   "id": "pell",
+   "name": "Pell Arden",
+   "field": "seat count",
+   "order": "inorder",
+   "ask": "How many seats does Pell Arden have now?",
+   "values": {
+    "18": "(?<![\\d.])18(?![\\d])",
+    "10": "(?<![\\d.])10(?![\\d])"
+   },
+   "current": "18",
+   "stale": "10",
+   "events": [
+    {
+     "id": "evt_1J8a5e",
+     "type": "subscription.seats_changed",
+     "created": "2026-10-08T09:00:00Z",
+     "text": "Pell Arden's seat count was set to 10 seats.",
+     "value": "10"
+    },
+    {
+     "id": "evt_1JL6b9",
+     "type": "subscription.seats_changed",
+     "created": "2026-10-14T09:00:00Z",
+     "text": "Pell Arden's seat count was set to 18 seats.",
+     "value": "18"
+    }
+   ]
+  },
+  {
+   "id": "sorrel",
+   "name": "Sorrel Quay",
+   "field": "plan",
+   "order": "inorder",
+   "ask": "Which plan is Sorrel Quay on now?",
+   "values": {
+    "Team": "\\bTeam\\b",
+    "Starter": "\\bStarter\\b"
+   },
+   "current": "Team",
+   "stale": "Starter",
+   "events": [
+    {
+     "id": "evt_1JA1c3",
+     "type": "subscription.created",
+     "created": "2026-10-09T09:00:00Z",
+     "text": "Sorrel Quay started a subscription on the Starter plan.",
+     "value": "Starter"
+    },
+    {
+     "id": "evt_1JM8d2",
+     "type": "subscription.plan_changed",
+     "created": "2026-10-15T09:00:00Z",
+     "text": "Sorrel Quay's subscription moved from the Starter plan to the Team plan.",
+     "value": "Team"
+    }
+   ]
+  }
+ ],
+ "history": {
+  "id": "history",
+  "customer": "harrow",
+  "ask": "Was Harrow Pike's subscription canceled at any point this month?",
+  "values": {
+   "yes": "^\\W*(?:answer:\\s*)?yes\\b|\\bwas canceled\\b|\\bwas cancelled\\b",
+   "no": "^\\W*(?:answer:\\s*)?no\\b"
+  },
+  "current": "yes"
+ }
+}
