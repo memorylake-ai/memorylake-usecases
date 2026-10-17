@@ -4,7 +4,9 @@ A runnable version of the MemoryLake use case
 [*Months of Project Context, Retained Across Every AI Session*](https://www.memorylake.ai/en/usecase/ai-memory-for-long-term-projects),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 5:02](https://github.com/memorylake-ai/memorylake-usecases/releases/download/contract-clock-memory-v1/contract-clock-memory-cli-demo.mp4) · [Web, 5:35](https://github.com/memorylake-ai/memorylake-usecases/releases/download/contract-clock-memory-v1/contract-clock-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/contract-clock-memory-v1); GitHub serves them as downloads). In the Web recording C missed one answer: the
+validators date came back as 2026-09-29, an off-by-one date that extraction wrote into the same copy.
 
 **The problem.** A long project's contract is full of clocks that start on an event, not on a date: the pilot runs
 90 days *from go-live*, the final payment is due 45 days *after the pilot ends*, a defect must be fixed within 30 days
@@ -28,26 +30,29 @@ signed (15 September). Today is 17 October. The demo stores the same four meetin
 
 | copy | what is stored | due dates in memory | clocks on today's calendar | programme assistant's answers right |
 |---|---|---|---|---|
-| **A** | the meetings only | **4 / 36** | **4 / 36** | **35 / 72** |
-| **B** | the meetings + the app writes the six clocks and the four milestones as structured facts (the use case page's "stable parameters" and "events with timestamps") | **4 / 36** | **4 / 36** | **53 / 72** |
-| **C** | B + the app works out each due date in code when the milestone that starts it is written, and pins it | **36 / 36** | **36 / 36** | **72 / 72** |
+| **A** | the meetings only | **4 / 48** | **4 / 48** | **44 / 96** |
+| **B** | the meetings + the app writes the six clocks and the four milestones as structured facts (the use case page's "stable parameters" and "events with timestamps") | **6 / 48** | **6 / 48** | **70 / 96** |
+| **C** | B + the app works out each due date in code when the milestone that starts it is written, and pins it | **48 / 48** | **48 / 48** | **95 / 96** |
 
-Measured over 6 complete runs (6 clocks each; the assistant's answers are 6 questions × 2 at temperature 0.7 on
+Measured over 8 complete runs (6 clocks each; the assistant's answers are 6 questions × 2 at temperature 0.7 on
 `gpt-4o-mini` through MemoryRouter). MemoryRouter attached something on every one of those calls (no ∅).
 
-- **The five clocks that start on an event never got a due date in A or B: 0 of 30 each.** The only clock that ever
+- **The five clocks that start on an event never got a due date in A or B: 0 of 40 each.** The only clock that ever
   did is the one that starts on the day it was said ("16 weeks from today" → 2026-09-30), and even that one only some
-  of the time (4 of 6 runs in each copy; the others kept "16 weeks from 2026-06-10" or put it a day early).
-- **The chained clock is wrong every time without C:** the final payment, 0 / 12 in A and 0 / 12 in B. B holds every
+  of the time (A 4 of 8 runs, B 6 of 8; the others kept "16 weeks from 2026-06-10" or put it a day early).
+- **The chained clock is wrong every time without C:** the final payment, 0 / 16 in A and 0 / 16 in B. B holds every
   ingredient as a clean fact (the clock, go-live on 2026-08-03, the pilot's 90 days); the model still answered
   2026-10-29, 2026-11-17, 2026-11-29 … rather than 2026-12-16.
 - **The event can go missing too.** The defect report ("I reported the turnstile double-charge defect to Tamsett this
-  morning") was never remembered as an event in A (0 / 6 runs), so A's answer to "by when must Tamsett fix it?" was
-  0 / 12 (it guessed 30 days from acceptance, 2026-10-15). B has the milestone and got it 12 / 12.
-- **A stale statement stays.** Every run remembered the programme manager's "none of those clocks have started yet
+  morning") was never remembered as an event in A (0 / 8 runs), so A's answer to "by when must Tamsett fix it?" was
+  0 / 16 (mostly 30 days from acceptance, 2026-10-15). B has the milestone and got it 16 / 16.
+- **A stale statement stays.** 7 of 8 runs remembered the programme manager's "none of those clocks have started yet
   (as of 2026-06-10)", which is no longer true.
 - A search by date can't see an unresolved clock: `fact list --query 2026-10` ("what falls due this month?") finds
-  0 facts in A and B, 2 in C (the escrow deposit and the defect fix, both already overdue).
+  0 facts in A and B, 2 in C (the escrow deposit and the defect fix, both already overdue), in every run.
+- **A pinned date can still lose to an extracted one.** C's single miss in 96: extraction had also written "Tamsett
+  delivers the station validators on 2026-09-29" (a day early) into C, and the model took that date once instead of
+  the app's "Due date: … by 2026-09-30". If the app owns a date, it should also remove or correct competing ones.
 
 ## Prerequisites
 
@@ -238,11 +243,13 @@ payment that depends on it, it did not carry that date forward.
 | parallel copy 2 | 1/6 | 0/6 | 6/6 | 4/12 | 8/12 | 12/12 |
 | `--reset` | 1/6 | 1/6 | 6/6 | 7/12 | 9/12 | 12/12 |
 | browser check | 1/6 | 1/6 | 6/6 | 8/12 | 10/12 | 12/12 |
-| **total** | **4/36** | **4/36** | **36/36** | **35/72** | **53/72** | **72/72** |
+| CLI recording | 0/6 | 1/6 | 6/6 | 5/12 | 8/12 | 12/12 |
+| browser recording | 0/6 | 1/6 | 6/6 | 4/12 | 9/12 | 11/12 |
+| **total** | **4/48** | **6/48** | **48/48** | **44/96** | **70/96** | **95/96** |
 
-Answers right per clock, A / B / C (12 each): validators 10 / 10 / 12 · pilot 8 / 11 / 12 · final payment 0 / 0 / 12 ·
-escrow 5 / 9 / 12 · defect fix 0 / 12 / 12 · warranty 12 / 11 / 12. Milestones A remembered as events: contract
-signature 5 / 6 runs, go-live 4 / 6, defect report 0 / 6, acceptance 6 / 6. The census grader was corrected once
+Answers right per clock, A / B / C (16 each): validators 14 / 14 / 15 · pilot 9 / 15 / 16 · final payment 0 / 0 / 16 ·
+escrow 5 / 10 / 16 · defect fix 0 / 16 / 16 · warranty 16 / 15 / 16. Milestones A remembered as events: contract
+signature 7 / 8 runs, go-live 5 / 8, defect report 0 / 8, acceptance 8 / 8. The census grader was corrected once
 during these runs (a Chinese-language run, and "16 weeks after 2026-06-10 (expected 2026-09-30)" read as unresolved);
 every census above is re-read from the stored facts with the final grader.
 
@@ -274,7 +281,7 @@ whose start is an event.
 - **`the demo memory does not exist yet`**: `memory` and `ask` need a full run first (and `cleanup` removes it).
 - **A run was interrupted**: run again; it deletes what the previous run left and starts over.
 - **Your counts differ from the ones above**: extraction and the model vary from run to run; that is why the table
-  above adds up six runs rather than quoting one.
+  above adds up eight runs rather than quoting one.
 
 ## Files
 
