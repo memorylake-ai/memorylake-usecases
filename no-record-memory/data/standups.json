@@ -1,0 +1,74 @@
+{
+  "org": "Tarnwick",
+  "today": "2026-10-17",
+  "system": "You are Tarnwick's release assistant. Today is {today}. Answer from the platform team's standup memory in one or two sentences, starting with Yes, No or Unknown.",
+  "careful": "Decisions in memory can carry a condition (unless, provided, only if, if, as long as). Say Yes only if memory records that the condition was met. If the condition's deadline has passed and memory has no record that it was met, say No. If its deadline is still ahead, say Unknown.",
+  "people": [
+    {"key": "em", "display": "Ines Okafor", "role": "Engineering manager, Tarnwick platform team"},
+    {"key": "sre", "display": "Dmitri Valk", "role": "SRE lead, Tarnwick platform team"},
+    {"key": "sec", "display": "Wen Liu", "role": "Security engineer, Tarnwick platform team"},
+    {"key": "pm", "display": "Kofi Mensah", "role": "Product manager, Tarnwick platform team"}
+  ],
+  "meetings": [
+    {"id": "S1", "name": "Platform standup 8 Sep", "at": "2026-09-08T09:00:00Z", "lines": [
+      ["pm", "We ship the v4.2 billing release on October 20, provided the load test holds 2,000 requests per second by October 14."],
+      ["sre", "The Postgres 16 upgrade goes ahead on November 3, as long as the staging rehearsal passes by October 9."],
+      ["em", "We switch off the legacy auth service on November 1, provided the last three client apps migrate off it by October 12."],
+      ["em", "And the holiday code freeze starts on December 18."]
+    ]},
+    {"id": "S2", "name": "Platform standup 15 Sep", "at": "2026-09-15T09:00:00Z", "lines": [
+      ["sec", "We adopt Vendorly's feature-flag SDK only if security approves their SOC 2 report."],
+      ["pm", "Dark mode goes GA only if beta crash-free sessions stay above 99.5 percent."],
+      ["em", "CI moves to the new runners on October 27, as long as finance signs off the cost review by October 13."],
+      ["pm", "The internal hackathon is on December 4 if at least 15 engineers sign up by October 28."]
+    ]},
+    {"id": "S3", "name": "Platform standup 22 Sep", "at": "2026-09-22T09:00:00Z", "lines": [
+      ["sec", "I went through Vendorly's SOC 2 report and approved it on Friday, so the feature-flag SDK is cleared."]
+    ]},
+    {"id": "S4", "name": "Platform standup 15 Oct", "at": "2026-10-15T09:00:00Z", "lines": [
+      ["sre", "The v4.2 load test failed: at 2,000 requests per second the p99 latency hit 4 seconds."],
+      ["pm", "Beta crash-free sessions came in at 98.7 percent."]
+    ]}
+  ],
+  "decisions": [
+    {"id": "release", "what": "v4.2 ships Oct 20", "ask": "Is the v4.2 billing release shipping on October 20?", "truth": "N",
+     "kind": "failed", "said": "S1", "decision": "v4.2 billing release ships on October 20", "condition": "provided the load test holds 2,000 requests per second by October 14",
+     "deadline": null, "event": "load-test", "topic": "v4\\.2|billing release|load test|压测", "outcome": "fail|4 seconds|p99|失败",
+     "claim": "load test\\b[^.;]*\\b(?<!to )(pass(ed|es)?|held|holds|succeeded|was successful|fail(ed|s)?|did not (pass|hold)|didn't (pass|hold)|has not (passed|held)|was not (passed|successful|completed))"},
+    {"id": "pg16", "what": "Postgres 16 upgrade Nov 3", "ask": "Is the Postgres 16 upgrade going ahead on November 3?", "truth": "NU",
+     "kind": "lapsed", "said": "S1", "decision": "Postgres 16 upgrade on November 3", "condition": "as long as the staging rehearsal passes by October 9",
+     "deadline": "2026-10-09", "event": null, "happened": "the staging rehearsal passed", "topic": "postgres|pg ?16|staging rehearsal|升级|演练",
+     "outcome": "rehearsal (passed|was successful|succeeded|went well)|演练(已)?通过",
+     "claim": "rehearsal\\b[^.;]*\\b(?<!to )(pass(ed|es)?|succeeded|was successful|went well|fail(ed|s)?|did not (pass|succeed|happen|take place)|didn't (pass|succeed|happen)|has not (passed|happened|been completed)|was not (passed|successful|completed|conducted)|not (being )?completed)"},
+    {"id": "auth", "what": "Legacy auth off Nov 1", "ask": "Are we switching off the legacy auth service on November 1?", "truth": "NU",
+     "kind": "lapsed", "said": "S1", "decision": "Legacy auth service switched off on November 1", "condition": "provided the last three client apps migrate off it by October 12",
+     "deadline": "2026-10-12", "event": null, "happened": "the last three client apps migrated", "topic": "legacy auth|auth service|client apps|认证",
+     "outcome": "(client apps|clients|apps) (have |had )?(all )?(migrated|moved)|迁移完成",
+     "claim": "(client apps?|clients?|apps?|migration)\\b[^.;]*\\b(migrated|moved off|did not (migrate|move|happen)|didn't (migrate|move)|have not (migrated|moved)|haven't (migrated|moved)|were not (migrated|moved)|was not (completed|done|finished)|not (being )?completed|failed to (migrate|move)|completed|were completed)"},
+    {"id": "vendorly", "what": "Vendorly flag SDK", "ask": "Are we adopting Vendorly's feature-flag SDK?", "truth": "Y",
+     "kind": "met", "said": "S2", "decision": "Adopt Vendorly's feature-flag SDK", "condition": "only if security approves their SOC 2 report",
+     "deadline": null, "event": "soc2-approved", "topic": "vendorly|feature-flag|soc ?2", "outcome": "approved|cleared|批准",
+     "claim": "(soc ?2|report|security)\\b[^.;]*\\b(approved|cleared|rejected|did not approve|didn't approve|has not (approved|been approved)|was not approved)"},
+    {"id": "darkmode", "what": "Dark mode GA", "ask": "Is dark mode going GA?", "truth": "N",
+     "kind": "failed", "said": "S2", "decision": "Dark mode goes GA", "condition": "only if beta crash-free sessions stay above 99.5 percent",
+     "deadline": null, "event": "crash-free", "topic": "dark mode|crash-free|深色", "outcome": "98\\.7",
+     "claim": "crash-free\\b[^.;]*\\b(\\d+(\\.\\d+)? ?(percent|%)|below|above|under|over|fell|dropped|stayed|did not stay|didn't stay)"},
+    {"id": "ci", "what": "CI on new runners Oct 27", "ask": "Is CI moving to the new runners on October 27?", "truth": "NU",
+     "kind": "lapsed", "said": "S2", "decision": "CI moves to the new runners on October 27", "condition": "as long as finance signs off the cost review by October 13",
+     "deadline": "2026-10-13", "event": null, "happened": "finance signed off the cost review", "topic": "\\bci\\b|runners?|cost review|成本",
+     "outcome": "(signed off|approved) (on )?the cost review|cost review (was |has been )?(signed off|approved)|签字",
+     "claim": "(cost review|finance|sign-?off)\\b[^.;]*\\b(signed off|approved|did not (sign|approve)|didn't (sign|approve)|has not (signed|approved|been signed|been approved)|hasn't (signed|approved)|was not (signed|approved|completed)|not (being )?(signed|completed)|rejected)"},
+    {"id": "hackathon", "what": "Hackathon Dec 4", "ask": "Is the hackathon on December 4 going ahead?", "truth": "U",
+     "kind": "pending", "said": "S2", "decision": "Internal hackathon on December 4", "condition": "if at least 15 engineers sign up by October 28",
+     "deadline": "2026-10-28", "event": null, "happened": "15 engineers signed up", "topic": "hackathon|黑客松", "outcome": "\\b(1[5-9]|[2-9]\\d) (engineers )?(have )?signed up",
+     "claim": "(\\b\\d+ (engineers|people)\\b[^.;]*\\bsigned up|enough (engineers|people)\\b[^.;]*\\bsigned up|(not enough|fewer than 15|only \\d+) (engineers|people)? ?(have )?signed up)"},
+    {"id": "freeze", "what": "Code freeze Dec 18", "ask": "Does the holiday code freeze start on December 18?", "truth": "Y",
+     "kind": "plain", "said": "S1", "decision": "Holiday code freeze starts on December 18", "condition": null,
+     "deadline": null, "event": null, "topic": "code freeze|freeze|冻结", "outcome": "december 18|18 december|12月18", "claim": null}
+  ],
+  "events": [
+    {"id": "soc2-approved", "on": "2026-09-18", "source": "security review tracker", "result": "met", "summary": "security approved Vendorly's SOC 2 report"},
+    {"id": "load-test", "on": "2026-10-14", "source": "load-test runner", "result": "failed", "summary": "the v4.2 load test failed: p99 latency 4 seconds at 2,000 requests per second"},
+    {"id": "crash-free", "on": "2026-10-15", "source": "beta analytics", "result": "failed", "summary": "beta crash-free sessions came in at 98.7 percent"}
+  ]
+}
