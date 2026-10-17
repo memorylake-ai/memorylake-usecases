@@ -1,0 +1,40 @@
+{
+  "team": "Tessaline",
+  "channel": "#release-sync",
+  "date": "2026-10-19",
+  "asker": {"key": "sam", "display": "Sam Okafor", "role": "Support lead", "city": "London", "tz": "Europe/London"},
+  "people": [
+    {"key": "lena", "display": "Lena Brandt", "role": "Platform lead", "city": "Berlin", "tz": "Europe/Berlin"},
+    {"key": "marcus", "display": "Marcus Webb", "role": "Release manager", "city": "Austin", "tz": "America/Chicago"},
+    {"key": "priya", "display": "Priya Raman", "role": "Customer Success", "city": "Singapore", "tz": "Asia/Singapore"}
+  ],
+  "messages": [
+    {"who": "priya", "text": "Welcome to #release-sync. For the new folks: Lena runs Platform from Berlin, Marcus is release manager in Austin, I'm in Singapore."},
+    {"who": "lena", "event": "migration", "text": "I'll start the database migration at 4pm on Wednesday 21 October. Expect about 20 minutes of read-only mode."},
+    {"who": "marcus", "event": "freeze", "text": "Code freeze for the 3.8 release begins Friday 23 October at 6pm my time."},
+    {"who": "priya", "event": "demo", "text": "The Barrowgate Logistics demo is Thursday 22 October at 10am SGT."},
+    {"who": "lena", "event": "standup", "text": "From Monday 26 October the daily standup moves to 15:00 UTC."},
+    {"who": "marcus", "event": "gonogo", "text": "Release go/no-go call is Monday 26 October at 9am."},
+    {"who": "priya", "event": "office", "text": "Customer office hours this week: Tuesday 20 October, 5pm."},
+    {"who": "lena", "event": "rollback", "text": "If anything looks off after the migration, the rollback window closes at 8am on Thursday 22 October."}
+  ],
+  "events": [
+    {"id": "migration", "what": "database migration starts", "said": "4pm, Wed 21 Oct", "local": "2026-10-21 16:00", "tz": "Europe/Berlin", "zone_in_text": false,
+     "key": "migration will start|migration (?:is )?(?:scheduled|set|planned)|start(?:s|ing)? the database migration|database migration (?:at|on|will)",
+     "ask": "What time does the database migration start for me?"},
+    {"id": "freeze", "what": "3.8 code freeze begins", "said": "6pm my time, Fri 23 Oct", "local": "2026-10-23 18:00", "tz": "America/Chicago", "zone_in_text": false,
+     "key": "freeze", "ask": "When does the code freeze for 3.8 begin, in my time?"},
+    {"id": "demo", "what": "Barrowgate Logistics demo", "said": "10am SGT, Thu 22 Oct", "local": "2026-10-22 10:00", "tz": "Asia/Singapore", "zone_in_text": true,
+     "key": "Barrowgate", "ask": "What time is the Barrowgate Logistics demo for me?"},
+    {"id": "standup", "what": "daily standup (from 26 Oct)", "said": "15:00 UTC, from Mon 26 Oct", "local": "2026-10-26 15:00", "tz": "UTC", "zone_in_text": true,
+     "key": "standup", "ask": "What time is the daily standup from 26 October, my time?"},
+    {"id": "gonogo", "what": "release go/no-go call", "said": "9am, Mon 26 Oct", "local": "2026-10-26 09:00", "tz": "America/Chicago", "zone_in_text": false,
+     "key": "go/no-go|go-no-go|no-go", "ask": "What time is the release go/no-go call for me?"},
+    {"id": "office", "what": "customer office hours", "said": "5pm, Tue 20 Oct", "local": "2026-10-20 17:00", "tz": "Asia/Singapore", "zone_in_text": false,
+     "key": "office hours", "ask": "When are this week's customer office hours, in my time?"},
+    {"id": "rollback", "what": "rollback window closes", "said": "8am, Thu 22 Oct", "local": "2026-10-22 08:00", "tz": "Europe/Berlin", "zone_in_text": false,
+     "key": "rollback", "ask": "When does the rollback window close, in my time?"}
+  ],
+  "system_local": "You are the team assistant for Sam Okafor, the support lead, who works in London. Today is Monday 19 October 2026. Convert every time to Sam's local London time. Reply with one line 'Answer: <weekday> <date>, <HH:MM> London time' and then at most one sentence.",
+  "system_utc": "You are the team assistant for Sam Okafor, the support lead, who works in London. Today is Monday 19 October 2026. Find the moment in UTC. Reply with one line 'Answer: <YYYY-MM-DD HH:MM> UTC' and then at most one sentence."
+}
