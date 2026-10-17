@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Case Study Memory for Agency Teams*](https://www.memorylake.ai/en/usecase/case-study-memory-for-agency-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress
+**Watch it run:** [CLI, 6:31](https://github.com/memorylake-ai/memorylake-usecases/releases/download/wrap-up-call-memory-v1/wrap-up-call-memory-cli-demo.mp4) · [Web, 6:44](https://github.com/memorylake-ai/memorylake-usecases/releases/download/wrap-up-call-memory-v1/wrap-up-call-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/wrap-up-call-memory-v1); GitHub serves them as downloads).
 
 **The problem.** An agency holds a wrap-up call at the end of every client campaign, and the new-business team
 writes case studies from what those calls left in memory. The figures are said the way people say them:
@@ -39,7 +40,7 @@ is the record. Two memories, read through MemoryRouter:
 Twelve figure questions ("What was the cost per lead on the Halden Bikes spring commuter campaign?"), two per client,
 three answers each per memory, on `gpt-4o-mini` at temperature 0.7.
 
-Over 5 runs: **6 of 30 calls** left nothing at all; of the figures said, **73/120** were kept and **29/120** in a fact naming the client. Figure questions answered right: **A 108/170 (? 61 · ⇄ 1) · ∅ 10**, **F 180/180**. On the figures memory had already kept with their client, both memories scored the same (A 42/42, F 42/42): pinning cost nothing. Details in [Measured](#measured).
+Over 7 runs: **9 of 42 calls** left nothing at all; of the figures said, **101/168** were kept and **33/168** in a fact naming the client. Figure questions answered right: **A 150/236 (? 82 · ⇄ 4) · ∅ 16**, **F 252/252**. On the figures memory had already kept with their client, both memories scored the same (A 48/48, F 48/48): pinning cost nothing. Details in [Measured](#measured).
 
 ## Prerequisites
 
@@ -51,7 +52,7 @@ Over 5 runs: **6 of 30 calls** left nothing at all; of the figures said, **73/12
   ```
 - A MemoryLake API key ([app.memorylake.ai](https://app.memorylake.ai) → API Keys).
 - **Router calls are billed to your MemoryLake balance** (`memorylake billing balance`). One run makes 84 calls on
-  `gpt-4o-mini`, about 15,000 prompt + 1,000 reply tokens; the run prints the total. If the balance is empty, the
+  `gpt-4o-mini`, about 16,000 prompt + 1,000 reply tokens; the run prints the total. If the balance is empty, the
   router calls print the refusal and are skipped; the memory steps and the audit still run.
 
 ## Run it
@@ -207,20 +208,22 @@ Figure questions answered right (✓) per run, graded; ∅ (MemoryRouter attache
 | first run | Halden Bikes | 13/24 · 5/24 | 21/33 (? 12) · ∅ 3 | 36/36 |
 | second run (--reset) | Halden Bikes, Tallis Credit Union | 12/24 · 8/24 | 15/32 (? 17) · ∅ 4 | 36/36 |
 | browser run | — | 16/24 · 4/24 | 24/34 (? 10) · ∅ 2 | 36/36 |
-| **total** | 6 of 30 calls | 73/120 · 29/120 | **108/170** (? 61 · ⇄ 1) · ∅ 10 | **180/180** |
+| CLI recording | Halden Bikes | 20/24 · 4/24 | 30/34 (? 4) · ∅ 2 | 36/36 |
+| Web recording | Orla Kitchens, Tallis Credit Union | 8/24 · 0/24 | 12/32 (? 17 · ⇄ 3) · ∅ 4 | 36/36 |
+| **total** | 9 of 42 calls | 101/168 · 33/168 | **150/236** (? 82 · ⇄ 4) · ∅ 16 | **252/252** |
 
-On the figures the audit pinned: A 66/128, F 138/138. The PREFIX copies are the same demo run side by side under another prefix (`mlu-wcm4-`, `mlu-wcm5-`).
+On the figures the audit pinned: A 102/188, F 204/204. The PREFIX copies are the same demo run side by side under another prefix (`mlu-wcm4-`, `mlu-wcm5-`).
 
 Per call and run — figures kept · naming the client ("0 facts" = the call left nothing):
 
-| call | PREFIX copy 1 | PREFIX copy 2 | first run | second run (--reset) | browser run |
-|---|---|---|---|---|---|
-| Halden Bikes | 0/4 · 0/4 | 0 facts | 0 facts | 0 facts | 0/4 · 0/4 |
-| Orla Kitchens | 4/4 · 0/4 | 4/4 · 0/4 | 4/4 · 1/4 | 2/4 · 0/4 | 4/4 · 0/4 |
-| Fenmore Tea | 4/4 · 4/4 | 4/4 · 0/4 | 2/4 · 2/4 | 4/4 · 4/4 | 4/4 · 4/4 |
-| Tallis Credit Union | 0 facts | 4/4 · 4/4 | 1/4 · 1/4 | 0 facts | 4/4 · 0/4 |
-| Corva Outdoor | 4/4 · 4/4 | 4/4 · 0/4 | 4/4 · 1/4 | 2/4 · 2/4 | 0/4 · 0/4 |
-| Pellow Health | 4/4 · 0/4 | 0 facts | 2/4 · 0/4 | 4/4 · 2/4 | 4/4 · 0/4 |
+| call | PREFIX copy 1 | PREFIX copy 2 | first run | second run (--reset) | browser run | CLI recording | Web recording |
+|---|---|---|---|---|---|---|---|
+| Halden Bikes | 0/4 · 0/4 | 0 facts | 0 facts | 0 facts | 0/4 · 0/4 | 0 facts | 0/4 · 0/4 |
+| Orla Kitchens | 4/4 · 0/4 | 4/4 · 0/4 | 4/4 · 1/4 | 2/4 · 0/4 | 4/4 · 0/4 | 4/4 · 0/4 | 0 facts |
+| Fenmore Tea | 4/4 · 4/4 | 4/4 · 0/4 | 2/4 · 2/4 | 4/4 · 4/4 | 4/4 · 4/4 | 4/4 · 0/4 | 0/4 · 0/4 |
+| Tallis Credit Union | 0 facts | 4/4 · 4/4 | 1/4 · 1/4 | 0 facts | 4/4 · 0/4 | 4/4 · 4/4 | 0 facts |
+| Corva Outdoor | 4/4 · 4/4 | 4/4 · 0/4 | 4/4 · 1/4 | 2/4 · 2/4 | 0/4 · 0/4 | 4/4 · 0/4 | 4/4 · 0/4 |
+| Pellow Health | 4/4 · 0/4 | 0 facts | 2/4 · 0/4 | 4/4 · 2/4 | 4/4 · 0/4 | 4/4 · 0/4 | 4/4 · 0/4 |
 
 ## What else we measured
 
