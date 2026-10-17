@@ -1,0 +1,46 @@
+{
+  "org": "Pellridge Freight",
+  "channel": "#office-moves",
+  "today": "2026-10-19",
+  "system": "You are the workplace assistant for the workplace operations team at {org}. Today is {today}. Answer from the team's memory of the {channel} channel. Reply in one or two sentences, starting with 'Answer:'.",
+  "people": [
+    {"key": "maya", "display": "Maya Okafor", "role": "workplace operations lead"},
+    {"key": "jon", "display": "Jon Brandt", "role": "facilities coordinator"}
+  ],
+  "moves": [
+    {"id": "leeds", "name": "Leeds"},
+    {"id": "porto", "name": "Porto"},
+    {"id": "austin", "name": "Austin"}
+  ],
+  "messages": [
+    {"id": "m1", "thread": "leeds", "by": "maya", "ts": "2026-10-12T09:00:00Z", "text": "Kicking off planning for the Leeds office move today."},
+    {"id": "m2", "thread": "leeds", "by": "jon", "ts": "2026-10-12T09:03:00Z", "text": "It slips to 9 March because the fit-out crew is booked until then."},
+    {"id": "m3", "thread": "leeds", "by": "maya", "ts": "2026-10-12T09:06:00Z", "text": "The budget for it is capped at 180,000 pounds."},
+    {"id": "m4", "thread": "porto", "by": "jon", "ts": "2026-10-12T09:09:00Z", "text": "Next up is the Porto office move."},
+    {"id": "m5", "thread": "porto", "by": "maya", "ts": "2026-10-12T09:12:00Z", "text": "It goes ahead on 2 February, the landlord confirmed the lease break."},
+    {"id": "m6", "thread": "porto", "by": "jon", "ts": "2026-10-12T09:15:00Z", "text": "They want the third floor, not the ground floor."},
+    {"id": "m7", "thread": "austin", "by": "maya", "ts": "2026-10-12T09:18:00Z", "text": "Last one is the Austin office move."},
+    {"id": "m8", "thread": "austin", "by": "jon", "ts": "2026-10-12T09:21:00Z", "text": "It needs a badge reader upgrade before anyone moves in, so 23 April at the earliest."},
+    {"id": "m9", "thread": "austin", "by": "maya", "ts": "2026-10-12T09:24:00Z", "text": "Budget there is 95,000 dollars."},
+    {"id": "m10", "thread": "leeds", "by": "jon", "ts": "2026-10-13T09:00:00Z", "text": "Update: it keeps the old server room until 30 April."}
+  ],
+  "values": [
+    {"id": "leeds.date", "move": "leeds", "kind": "date", "label": "move date", "show": "9 March", "said_in": "m2"},
+    {"id": "leeds.budget", "move": "leeds", "kind": "budget", "label": "budget", "show": "180,000 pounds", "said_in": "m3"},
+    {"id": "porto.date", "move": "porto", "kind": "date", "label": "move date", "show": "2 February", "said_in": "m5"},
+    {"id": "porto.floor", "move": "porto", "kind": "floor", "label": "floor", "show": "third floor", "said_in": "m6"},
+    {"id": "austin.date", "move": "austin", "kind": "date", "label": "earliest move-in", "show": "23 April", "said_in": "m8"},
+    {"id": "austin.budget", "move": "austin", "kind": "budget", "label": "budget", "show": "95,000 dollars", "said_in": "m9"},
+    {"id": "leeds.server", "move": "leeds", "kind": "date", "label": "server room until", "show": "30 April", "said_in": "m10"}
+  ],
+  "questions": [
+    {"id": "Q1", "value": "leeds.date", "what": "Leeds move date", "truth": "9 March", "ask": "When does the Leeds office move happen?"},
+    {"id": "Q2", "value": "porto.date", "what": "Porto move date", "truth": "2 February", "ask": "When does the Porto office move happen?"},
+    {"id": "Q3", "value": "porto.floor", "what": "Porto floor", "truth": "the third floor", "ask": "Which floor is the Porto office moving to?"},
+    {"id": "Q4", "value": "austin.date", "what": "Austin earliest move-in", "truth": "23 April", "ask": "What is the earliest date for the Austin office move?"},
+    {"id": "Q5", "value": "austin.budget", "what": "Austin budget", "truth": "95,000 dollars", "ask": "What is the budget for the Austin office move?"},
+    {"id": "Q6", "value": "leeds.budget", "what": "Leeds budget", "truth": "180,000 pounds", "ask": "What is the budget for the Leeds office move?"},
+    {"id": "Q7", "value": "leeds.server", "what": "Leeds server room kept until", "truth": "30 April", "ask": "Until when does the Leeds office keep its old server room?"},
+    {"id": "Q8", "value": null, "move": "leeds", "kind": "floor", "what": "Leeds floor (never said)", "truth": "not recorded: nobody said which floor Leeds moves to", "ask": "Which floor is the Leeds office moving to?"}
+  ]
+}
