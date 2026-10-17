@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Make Your Perplexity Research Compound Over Time*](https://www.memorylake.ai/en/usecase/add-persistent-memory-to-perplexity),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress — the videos are added to the [release](https://github.com/memorylake-ai/memorylake-usecases/releases) when it is published.
+**Watch it run:** [CLI, 7:30](https://github.com/memorylake-ai/memorylake-usecases/releases/download/presupposed-claim-memory-v1/presupposed-claim-memory-cli-demo.mp4) · [Web, 9:46](https://github.com/memorylake-ai/memorylake-usecases/releases/download/presupposed-claim-memory-v1/presupposed-claim-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/presupposed-claim-memory-v1); GitHub serves them as downloads). Both recordings are counted in the totals below.
 
 **The problem.** Saving every research thread is how Perplexity research starts to compound: next week the assistant
 knows what you already found. The answers are careful — "unconfirmed", "the company claims", "depends on a grant" —
@@ -48,24 +49,24 @@ Eight questions — Pellmont's capacity and how it compares with Brisa's Leipzig
 it compares with Varra's, whether Halden bought Lithra and for how much, and two controls nobody questioned (the EU
 battery passport date, Brisa's capacity) — three answers each per memory, on `gpt-4o-mini` at temperature 0.7.
 
-Over 8 runs:
+Over 9 runs:
 
-- **A stated the rumoured deal as fact in 8 of 8 runs** ("Halden paid 410 million dollars for Lithra
+- **A stated the rumoured deal as fact in 9 of 9 runs** ("Halden paid 410 million dollars for Lithra
   Recycling", "The combined Halden Group–Lithra Recycling company runs recycling plants in …"), Pellmont's planned 60,000 tonnes as the plant's figure in
   3 — each time with the verified 18,000 only after "previously" — and Ostrel's own 91 percent in
   2. Nobody ever said any of it; the questions assumed it.
-- **Through A the assistant stated an unproven claim as fact 65 times in 192 graded answers** (⚑): "Yes, Halden
-  Group has acquired Lithra Recycling" (0/24 right on that question), "Halden Group paid 410 million dollars"
-  (3/24), "Yes, Pellmont's Ohio plant, processing 60,000 tonnes a year, is larger" (15/24).
-- **B, the answers only: 184/189, ⚑ 0.** In 8 runs no week-1 claim became a fact in B. Its misses: 4 answers about
+- **Through A the assistant stated an unproven claim as fact 71 times in 216 graded answers** (⚑): "Yes, Halden
+  Group has acquired Lithra Recycling" (0/27 right on that question), "Halden Group paid 410 million dollars"
+  (3/27), "Yes, Pellmont's Ohio plant, processing 60,000 tonnes a year, is larger" (18/27).
+- **B, the answers only: 208/213, ⚑ 0.** In 9 runs no week-1 claim became a fact in B. Its misses: 4 answers about
   the future ("will be larger after the planned expansion"), 1 hedged "Yes" on Ostrel versus Varra, and one run where
   extraction dropped the passport date (∅ 3, not graded).
-- **C, as A plus the finding log: 154/192, ⚑ 36.** The log entries stayed word for word
+- **C, as A plus the finding log: 174/216, ⚑ 40.** The log entries stayed word for word
   (`UNCONFIRMED … no price has been paid`), and the extracted facts beside them were laundered just as in A (the deal in
-  7 of 8 runs). The log helped on Pellmont's capacity (21/24 vs A 15/24) and lost to
-  a newer fact on the deal: 12/24 on "has Halden acquired Lithra", 8/24 on the price.
+  8 of 9 runs). The log helped on Pellmont's capacity (24/27 vs A 18/27) and lost to
+  a newer fact on the deal: 15/27 on "has Halden acquired Lithra", 9/27 on the price.
 - The controls nobody questioned (passport date, Brisa's capacity) are right through every memory. With no memory the
-  model is right 2 times in 192 — it mostly says it does not know these (fictional) companies.
+  model is right 3 times in 216 — it mostly says it does not know these (fictional) companies.
 
 Details in [Measured](#measured).
 
@@ -269,18 +270,19 @@ facts.
 | run 6 | Halden deal · none · Halden deal, Pellmont 60,000 t | current | 0/24 (✗ 6 · ? 18) | 17/24 (⚑ 6 · ✗ 1) | 23/24 (✗ 1) | 16/24 (⚑ 8) |
 | browser run (Web recording) | Halden deal, Ostrel 91% · none · Halden deal | current | 0/24 (✗ 5 · ? 19) | 15/24 (⚑ 8 · ✗ 1) | 24/24 | 18/24 (⚑ 6) |
 | run 8 | Halden deal, Pellmont 60,000 t · none · Halden deal, Pellmont 60,000 t | only as "previously" | 0/24 (✗ 5 · ? 19) | 12/24 (⚑ 12) | 24/24 | 18/24 (⚑ 5 · ✗ 1) |
-| **total (8 runs)** | A Halden deal 8/8, Ostrel 91% 2/8, Pellmont 60,000 t 3/8 · B Halden deal 0/8, Ostrel 91% 0/8, Pellmont 60,000 t 0/8 · C Halden deal 7/8, Ostrel 91% 1/8, Pellmont 60,000 t 3/8 | 3/8 only as "previously" | **2/192 (✗ 56 · ? 134)** | **124/192 (⚑ 65 · ✗ 3)** | **184/189 (✗ 5 · ∅ 3)** | **154/192 (⚑ 36 · ✗ 2)** |
+| CLI recording (the video) | Halden deal · none · Halden deal, Pellmont 60,000 t | current | 1/24 (✗ 8 · ? 15) | 17/24 (⚑ 6 · ✗ 1) | 24/24 | 20/24 (⚑ 4) |
+| **total (9 runs)** | A Halden deal 9/9, Ostrel 91% 2/9, Pellmont 60,000 t 3/9 · B Halden deal 0/9, Ostrel 91% 0/9, Pellmont 60,000 t 0/9 · C Halden deal 8/9, Ostrel 91% 1/9, Pellmont 60,000 t 4/9 | 3/9 only as "previously" | **3/216 (✗ 64 · ? 149)** | **141/216 (⚑ 71 · ✗ 4)** | **208/213 (✗ 5 · ∅ 3)** | **174/216 (⚑ 40 · ✗ 2)** |
 
 | question (truth) | 0 no memory | A as asked and answered | B answers only | C + finding log |
 |---|---|---|---|---|
-| Q1 What is the processing capacity of Pellmont's Ohio plant today? (18,000 tonnes a year (60,000 is only a plan, pending a state grant)) | 0/24 (? 24) | 15/24 (⚑ 9) | 24/24 | 21/24 (⚑ 3) |
-| Q2 Is Pellmont's Ohio plant bigger than Brisa Cycle's Leipzig plant? (No: 18,000 vs 25,000 tonnes a year) | 1/24 (? 23) | 15/24 (⚑ 9) | 20/24 (✗ 4) | 19/24 (⚑ 5) |
-| Q3 What is Ostrel's lithium recovery rate? (Ostrel claims 91 percent; not independently verified (the only independent test found 64 percent)) | 0/24 (✗ 3 · ? 21) | 23/24 (⚑ 1) | 24/24 | 24/24 |
-| Q4 Does Ostrel recover more lithium than Varra? (Not established: Ostrel's 91 percent is its own unverified claim; the independent 64 percent is below Varra's 85) | 1/24 (✗ 10 · ? 13) | 20/24 (⚑ 1 · ✗ 3) | 23/24 (✗ 1) | 22/24 (✗ 2) |
-| Q5 Has Halden Group acquired Lithra Recycling? (No: only an unconfirmed anonymous-source report of talks) | 0/24 (? 24) | 0/24 (⚑ 24) | 24/24 | 12/24 (⚑ 12) |
-| Q6 How much did Halden Group pay for Lithra Recycling? (Nothing: no deal is confirmed (a report put talks at about 410 million dollars)) | 0/24 (✗ 3 · ? 21) | 3/24 (⚑ 21) | 24/24 | 8/24 (⚑ 16) |
-| Q7 When does the EU battery passport requirement start? (18 February 2027) | 0/24 (✗ 24) | 24/24 | 21/21 (∅ 3) | 24/24 |
-| Q8 What processing capacity does Brisa Cycle's Leipzig plant have? (25,000 tonnes a year) | 0/24 (✗ 16 · ? 8) | 24/24 | 24/24 | 24/24 |
+| Q1 What is the processing capacity of Pellmont's Ohio plant today? (18,000 tonnes a year (60,000 is only a plan, pending a state grant)) | 0/27 (? 27) | 18/27 (⚑ 9) | 27/27 | 24/27 (⚑ 3) |
+| Q2 Is Pellmont's Ohio plant bigger than Brisa Cycle's Leipzig plant? (No: 18,000 vs 25,000 tonnes a year) | 2/27 (? 25) | 18/27 (⚑ 9) | 23/27 (✗ 4) | 20/27 (⚑ 7) |
+| Q3 What is Ostrel's lithium recovery rate? (Ostrel claims 91 percent; not independently verified (the only independent test found 64 percent)) | 0/27 (✗ 4 · ? 23) | 26/27 (⚑ 1) | 27/27 | 27/27 |
+| Q4 Does Ostrel recover more lithium than Varra? (Not established: Ostrel's 91 percent is its own unverified claim; the independent 64 percent is below Varra's 85) | 1/27 (✗ 12 · ? 14) | 22/27 (⚑ 1 · ✗ 4) | 26/27 (✗ 1) | 25/27 (✗ 2) |
+| Q5 Has Halden Group acquired Lithra Recycling? (No: only an unconfirmed anonymous-source report of talks) | 0/27 (? 27) | 0/27 (⚑ 27) | 27/27 | 15/27 (⚑ 12) |
+| Q6 How much did Halden Group pay for Lithra Recycling? (Nothing: no deal is confirmed (a report put talks at about 410 million dollars)) | 0/27 (✗ 3 · ? 24) | 3/27 (⚑ 24) | 27/27 | 9/27 (⚑ 18) |
+| Q7 When does the EU battery passport requirement start? (18 February 2027) | 0/27 (✗ 27) | 27/27 | 24/24 (∅ 3) | 27/27 |
+| Q8 What processing capacity does Brisa Cycle's Leipzig plant have? (25,000 tonnes a year) | 0/27 (✗ 18 · ? 9) | 27/27 | 27/27 | 27/27 |
 
 - **The price question (Q6) is right through A only in run 5**, the one run where A's laundered Halden fact was about
   the combined company ("The combined Halden Group–Lithra Recycling company runs …") rather than a payment; in the
@@ -314,7 +316,7 @@ the demo existed:
   claim a claim in every run; the question text can live in your own log, or go in as context the extractor is told
   not to state.
 - **A finding log next to the threads is not enough on its own.** C's log said `UNCONFIRMED … no price has been paid`,
-  and the assistant still answered from the newer, laundered fact (C 12/24 on "has Halden acquired Lithra", 8/24 on the price). A fact dated later reads as an update.
+  and the assistant still answered from the newer, laundered fact (C 15/27 on "has Halden acquired Lithra", 9/27 on the price). A fact dated later reads as an update.
 - **Watch for "previously" on a figure you verified.** A laundered fact keeps the right value after "previously …";
   `fact list --query previously` on a project, or `fact trace <id>`, shows which thread changed it.
 
