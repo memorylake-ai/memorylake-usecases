@@ -1,0 +1,20 @@
+{
+  "forwarded_by": "ana",
+  "forwards": [
+    {
+      "id": "f1",
+      "forwarded_at": "2026-10-14T08:30:00Z",
+      "text": "Forwarding for the docket - this one sat in my inbox, sorry. Please calendar everything in it.\n\n---------- Forwarded message ---------\nFrom: Kenji Mori <kenji.mori@sakuraba-hollis.example>\nDate: Mon, 21 Sep 2026 10:05:00 +0900\nSubject: QR-2291-JP - Office Action received\nTo: Ruth Okafor <ruth.okafor@quillmere-rook.example>\n\nDear Ruth,\n\nThe Office Action in the Japanese application (your ref. QR-2291-JP) was mailed today. The deadline to file our response is 60 days from today. The examiner can also take an interview call the day after tomorrow, 2 pm Tokyo time, if you want one.\n\nBest regards,\nKenji"
+    },
+    {
+      "id": "f2",
+      "forwarded_at": "2026-10-14T08:34:00Z",
+      "text": "Another one for the docket from the same backlog.\n\n---------- Forwarded message ---------\nFrom: Lena Vogt <l.vogt@brandauer-wenz.example>\nDate: Tue, 29 Sep 2026 11:20:00 +0200\nSubject: QR-2307-EP - Rule 71(3) communication\nTo: Ruth Okafor <ruth.okafor@quillmere-rook.example>\n\nDear Ruth,\n\nThe EPO issued the Rule 71(3) communication in the European application (your ref. QR-2307-EP) today. We have four months from today to approve the text, file the claim translations and pay the grant and publishing fees. Please send us your instructions on the translations within 14 days.\n\nKind regards,\nLena"
+    },
+    {
+      "id": "f3",
+      "forwarded_at": "2026-10-14T08:38:00Z",
+      "text": "Last one - client email, please docket.\n\n---------- Forwarded message ---------\nFrom: Priya Raman <praman@orrisdale-robotics.example>\nDate: Thu, 08 Oct 2026 09:30:00 -0400\nSubject: Re: QR-2315-US gripper patent - FTO\nTo: Ruth Okafor <ruth.okafor@quillmere-rook.example>\n\nHi Ruth,\n\nFollowing up on the gripper patent (your ref. QR-2315-US): our board meets three weeks from today, and we need the freedom-to-operate summary in hand by then. Dr. Hale, the lead inventor, can join a call with your team the day after tomorrow if that helps.\n\nThanks,\nPriya"
+    }
+  ]
+}

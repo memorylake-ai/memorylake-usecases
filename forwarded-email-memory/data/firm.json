@@ -1,0 +1,97 @@
+{
+  "firm": "Quillmere & Rook",
+  "assistant": "the docketing assistant",
+  "channel": "#docketing",
+  "home_tz": "Europe/London",
+  "people": [
+    {
+      "key": "ana",
+      "display": "Ana Lindqvist",
+      "role": "docketing paralegal, Quillmere & Rook",
+      "city": "London",
+      "tz": "Europe/London",
+      "email": "ana.lindqvist@quillmere-rook.example"
+    },
+    {
+      "key": "kenji",
+      "display": "Kenji Mori",
+      "role": "Tokyo associate, Sakuraba-Hollis IP",
+      "city": "Tokyo",
+      "tz": "Asia/Tokyo",
+      "email": "kenji.mori@sakuraba-hollis.example"
+    },
+    {
+      "key": "lena",
+      "display": "Lena Vogt",
+      "role": "Munich associate, Brandauer & Wenz",
+      "city": "Munich",
+      "tz": "Europe/Berlin",
+      "email": "l.vogt@brandauer-wenz.example"
+    },
+    {
+      "key": "priya",
+      "display": "Priya Raman",
+      "role": "in-house counsel, Orrisdale Robotics",
+      "city": "Boston",
+      "tz": "America/New_York",
+      "email": "praman@orrisdale-robotics.example"
+    }
+  ],
+  "items": [
+    {
+      "id": "jp_response",
+      "email": "f1",
+      "what": "Response to the JP Office Action due",
+      "said": "60 days from today",
+      "days": 60,
+      "match": "\\brespon(?:se|d)",
+      "ask": "When is our response to the Japanese Office Action in QR-2291-JP due?"
+    },
+    {
+      "id": "jp_interview",
+      "email": "f1",
+      "what": "JP examiner interview call offered",
+      "said": "the day after tomorrow",
+      "days": 2,
+      "match": "interview",
+      "ask": "On what day did the examiner offer an interview call in QR-2291-JP?"
+    },
+    {
+      "id": "ep_grant",
+      "email": "f2",
+      "what": "EP text approval + grant fees due",
+      "said": "four months from today",
+      "months": 4,
+      "match": "approv|fees?\\b",
+      "ask": "By when must we approve the text and pay the grant fees in QR-2307-EP?"
+    },
+    {
+      "id": "ep_instructions",
+      "email": "f2",
+      "what": "EP instructions on translations due to Lena",
+      "said": "within 14 days",
+      "days": 14,
+      "match": "instruction",
+      "ask": "By when did the Munich associates need our instructions on the translations for QR-2307-EP?"
+    },
+    {
+      "id": "us_fto",
+      "email": "f3",
+      "what": "FTO summary due for Orrisdale's board",
+      "said": "three weeks from today",
+      "days": 21,
+      "match": "freedom|\\bFTO\\b|board",
+      "ask": "By when does Orrisdale's board need the freedom-to-operate summary for QR-2315-US?"
+    },
+    {
+      "id": "us_call",
+      "email": "f3",
+      "what": "Call with the inventor, Dr. Hale",
+      "said": "the day after tomorrow",
+      "days": 2,
+      "match": "\\bHale\\b|inventor",
+      "ask": "On what day could the inventor, Dr. Hale, join a call with us about QR-2315-US?"
+    }
+  ],
+  "system": "You are the docketing assistant at Quillmere & Rook, a patent firm. Today is {today}. Use the firm's memory. Reply in one line: \"Date: YYYY-MM-DD\" (the day the thing is due or happens, not today's date), or \"Date: unknown\" if the memory does not say, then at most one short sentence."
+}
