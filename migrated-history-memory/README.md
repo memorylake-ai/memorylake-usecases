@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Switch Agent Frameworks Without Losing the Memory You Built*](https://www.memorylake.ai/en/usecase/memory-migration-when-upgrading-agent-frameworks),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 2:54](https://github.com/memorylake-ai/memorylake-usecases/releases/download/migrated-history-memory-v1/migrated-history-memory-cli-demo.mp4) · [Web, 3:41](https://github.com/memorylake-ai/memorylake-usecases/releases/download/migrated-history-memory-v1/migrated-history-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/migrated-history-memory-v1); GitHub serves them as downloads). In the browser recording, copy B's cron item was not extracted at all, so B shows 3 of 6.
 
 **The problem.** A team moves its assistant from LangChain to LangGraph and its memory into MemoryLake. The old
 memory exports cleanly: `messages_to_dict(memory.chat_memory.messages)` gives every thread's messages. But a
@@ -29,14 +30,14 @@ request log, with each thread's `started_at`. The demo imports the same history 
 
 | copy | how it is imported | remembered dates right | Relay's answers right | deadline board on migration day |
 |---|---|---|---|---|
-| **A** | as exported (no `--timestamp`) | **0 / 36** (every date +16 to +33 days) | **0 / 60** | 0 past · **6 still upcoming** |
-| **B** | `--timestamp` = thread `started_at` + 1 min per message | **24 / 36** (daytime threads 24 / 24) | **41 / 60** | 6 past (5 when an item was missed) |
+| **A** | as exported (no `--timestamp`) | **0 / 48** (every date +16 to +33 days) | **0 / 84** | 0 past · **6 still upcoming** |
+| **B** | `--timestamp` = thread `started_at` + 1 min per message | **31 / 48** (daytime threads 31 / 32) | **55 / 84** | 6 past (5 when an item was missed) |
 
-Measured over 6 complete runs (dates) and 5 of them (answers, 6 questions × 2 at temperature 0.7 on `gpt-4o-mini`
-through MemoryRouter). Every miss in B is on the one thread that started in the evening (19:40 London): extraction
-dates a message by its calendar day in UTC+8, so that thread reads as said the next day, and both of its items come
-out one day late. That is 10 of the 12 misses; the other two are an item not extracted at all, and one kept as
-"starting tomorrow morning".
+Measured over 8 complete runs (dates) and 7 of them (answers, 6 questions × 2 at temperature 0.7 on `gpt-4o-mini`
+through MemoryRouter). 16 of B's 17 misses are on the one thread that started in the evening (19:40 London):
+extraction dates a message by its calendar day in UTC+8, so that thread reads as said the next day, and its items
+come out one day late (14), or not at all (1), or as "starting tomorrow morning" (1). The other miss is a daytime
+item that one run never extracted.
 
 ## Prerequisites
 
@@ -202,12 +203,15 @@ from the calendar day in UTC+8 (`as of 2026-10-02` for a message sent on 1 Octob
 | parallel copy 2 | 0/6 | 4/6 (2 +1 day) | 0/12 | 8/12 |
 | parallel copy 3 | 0/6 | 4/6 (1 +1 day, 1 "starting tomorrow morning") | 0/12 | 9/12 |
 | `--reset` | 0/6 | 4/6 (2 +1 day) | 0/12 | 8/12 |
-| browser | 0/6 | 4/6 (2 +1 day) | 0/12 | 8/12 |
-| **total** | **0/36** | **24/36** | **0/60** | **41/60** |
+| browser check | 0/6 | 4/6 (2 +1 day) | 0/12 | 8/12 |
+| CLI recording | 0/6 | 4/6 (2 +1 day) | 0/12 | 8/12 |
+| browser recording | 0/6 | 3/6 (2 +1 day, daytime cron item not extracted) | 0/12 | 6/12 (∅ 2) |
+| **total** | **0/48** | **31/48** | **0/84** | **55/84** |
 
-Copy A's 36 dates were wrong by exactly the import offset every time (+33 / +24 / +16 days). In the four terminal
-runs with answers, every wrong B answer (15 of 15) is about the evening thread; the browser run's 4 wrong B answers
-match its two evening items being a day late in memory. Before building the demo, a probe with a law firm's thread showed the same
+Copy A's 48 dates were wrong by exactly the import offset every time (+33 / +24 / +16 days). In the five terminal
+runs with answers, every wrong B answer (19 of 19) is about the evening thread; in the two browser runs the 4 wrong
+B answers each match the two evening items being a day late in memory, and the browser recording's 2 ∅ are the cron
+item that was never extracted. Before building the demo, a probe with a law firm's thread showed the same
 behaviour: a date line written into the message text ("[Wed 16 Sep 2026, 6:30 pm New York time]") is not a
 substitute for the timestamp. Across three runs it got every date right once, kept the relative words once, and
 counted from the import day once.
