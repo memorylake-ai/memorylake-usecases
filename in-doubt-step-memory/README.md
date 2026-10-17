@@ -4,6 +4,9 @@ A runnable version of the MemoryLake use case
 [*Give Your Startup AI That Knows the Whole Company, Not Just the Last Chat*](https://www.memorylake.ai/en/usecase/ai-memory-for-startups-and-founding-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
+**Watch it run:** [CLI, 5:00](https://github.com/memorylake-ai/memorylake-usecases/releases/download/in-doubt-step-memory-v1/in-doubt-step-memory-cli-demo.mp4) · [Web, 5:13](https://github.com/memorylake-ai/memorylake-usecases/releases/download/in-doubt-step-memory-v1/in-doubt-step-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/in-doubt-step-memory-v1); GitHub serves them as downloads).
+
 **The problem.** An agent's run journal lives in memory: the app writes one fact the moment each step completes, plus
 one fact that says the journal is complete, so *a step with no entry has not completed*. That is the fix from
 [silent-step-memory](../silent-step-memory), and it works as long as every outcome really gets written. There is one
@@ -40,7 +43,7 @@ again. The resume check is [MemoryRouter](https://github.com/memorylake-ai/memor
 with `--boundary`, an ordinary model call (gpt-4o-mini, temperature 0.7) with the boundary's memory attached. Each of
 the seven questions is asked three times per arm.
 
-**Measured so far** (details in [Measured](#measured)): on step 4, A and B answered "No" every time; C answered "Unknown", and "Yes" once the app wrote the bank's answer back.
+**Measured over 6 runs** (details in [Measured](#measured)): asked whether step 4 was done, the completion journal got "No" 18/18 times, and 18/18 also when "Unknown" was allowed: every resume would have paid the 23 contractors again. The write-ahead journal got "Unknown" 18/18; after the app looked the key up at the bank and wrote the answer back, "Yes" 15/18. Its cost: on steps never reached, it answered "Unknown" instead of "No" 25 times out of 54.
 
 ## Prerequisites
 
@@ -217,7 +220,21 @@ The bank is simulated (`data/run.json` → `bank`): the point is that C has a ke
 
 ## Measured
 
-Runs are still being added up; this section is filled in once the recordings are done.
+| run | A: “No” on step 4 | B: “No” on step 4 | C: “Unknown” on step 4 | C after the bank lookup: “Yes” | C: “Unknown” on steps 5–7 | right A / B / C | ∅ |
+|---|---|---|---|---|---|---|---|
+| first run | 3/3 | 3/3 | 3/3 | 3/3 | 3/9 | 18/21 · 18/21 · 18/21 | 0 |
+| second run (over leftovers) | 3/3 | 3/3 | 3/3 | 3/3 | 5/9 | 18/21 · 18/21 · 16/21 | 0 |
+| parallel copy 1 | 3/3 | 3/3 | 3/3 | 2/3 | 5/9 | 18/21 · 18/21 · 16/21 | 0 |
+| parallel copy 2 | 3/3 | 3/3 | 3/3 | 1/3 | 4/9 | 18/21 · 18/21 · 16/21 | 0 |
+| browser check = Web recording | 3/3 | 3/3 | 3/3 | 3/3 | 5/9 | 18/21 · 18/21 · 16/21 | 0 |
+| CLI recording | 3/3 | 3/3 | 3/3 | 3/3 | 3/9 | 18/21 · 18/21 · 18/21 | 0 |
+| **total (6 runs)** | **18/18** | **18/18** | **18/18** | **15/18** | **25/54** | **108/126 · 108/126 · 100/126** | 0 |
+
+"Unknown on steps 5–7" is the reverse metric: those steps were never reached, so "No" is right and "Unknown" makes the resume stop to check something memory already settles. The model often explained it with step 4 ("since step 4 is still in doubt, I cannot determine if step 5 …"): the doubt about one step spread to the steps after it. A and B answered every step other than 4 correctly in every run.
+
+Only the reply's first word is graded, because that is what a resume acts on. In 4 replies the first word and the sentence disagree ("No, step 4 has already been completed."): 3 of them are C after the bank lookup was written (they are the 3 missing from 15/18), 1 is C on step 2. They are counted as graded. No boundary call came back with nothing attached (∅ 0 of 396).
+
+Every run: the completion-journal copy held nothing about step 4 (and nothing about 5–7); the write-ahead copy held step 4 as started with no result. The run log's TEXT messages added 0–6 extracted facts per copy beside the journal entries; none of them mentioned the transfers.
 
 ## Use it in your own app
 
