@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Memory for Webhook-Triggered Agents*](https://www.memorylake.ai/en/usecase/memory-for-webhook-triggered-agents),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos coming with the `webhook-order-memory-v1` release.
+**Watch it run:** [CLI, 7:14](https://github.com/memorylake-ai/memorylake-usecases/releases/download/webhook-order-memory-v1/webhook-order-memory-cli-demo.mp4) · [Web, 8:32](https://github.com/memorylake-ai/memorylake-usecases/releases/download/webhook-order-memory-v1/webhook-order-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/webhook-order-memory-v1); GitHub serves them as downloads). In the CLI recording Sorrel Quay, whose events arrived in order, lost its newer event in both A and B — the only run where that happened.
 
 **The problem.** Payment providers deliver webhooks *at least once* and *not in order*. When your endpoint is down,
 the provider retries what it could not deliver, so an older event can arrive after a newer one. Most handlers write
@@ -41,11 +42,11 @@ Eleven questions — eight about customers whose older event arrived late ("How 
 two about customers whose events arrived in order, one about the past ("Was Harrow Pike's subscription canceled at
 any point this month?") — three answers each per memory, on `gpt-4o-mini` at temperature 0.7.
 
-Over 10 runs: in A, the latest-dated fact about the account states the **old value for 79 of 80** late-retry
-customers (rewritten in place for 8); in B, the current value for 77 of 80, and the older event survives at all for
-only 67 of 80. Current-value questions on the late-retry customers: **A 34/240** (↺ the late retry's value 183),
-**B 193/240**, **C 238/240**. Customers whose events arrived in order: A 60/60, B 59/60, C 60/60. The cost is on the
-past: the history question is right **A 21/30, B 17/30, C 9/30**. Details in [Measured](#measured).
+Over 12 runs: in A, the latest-dated fact about the account states the **old value for 95 of 96** late-retry
+customers (rewritten in place for 10); in B, the current value for 93 of 96, and the older event survives at all for
+only 82 of 96. Current-value questions on the late-retry customers: **A 41/288** (↺ the late retry's value 222 in
+all), **B 233/288**, **C 286/288**. Customers whose events arrived in order: A 69/72, B 68/72, C 72/72. The cost is on
+the past: the history question is right **A 26/36, B 22/36, C 14/36**. Details in [Measured](#measured).
 
 ## Prerequisites
 
@@ -237,16 +238,18 @@ order (6), history (3); ↺ = the late retry's value, ? = Unknown, – = neither
 | PREFIX copy 5 | 7/8 (1 rewritten in place) | 8/8 | 7/8 | late 6/24 · in order 6/6 · history 1/3 (↺ 15 · ? 5) | late 24/24 · in order 6/6 · history 2/3 (? 1) | late 24/24 · in order 6/6 · history 1/3 (– 2) |
 | PREFIX copy 6 | 8/8 | 7/8 (Lumen Dray tie) | 7/8 | late 5/24 · in order 6/6 · history 2/3 (↺ 16 · ? 4) | late 16/24 · in order 6/6 · history 3/3 (↺ 6 · ? 2) | late 24/24 · in order 6/6 · history 0/3 (↺ 1 · – 2) |
 | PREFIX copy 7 | 8/8 (1 rewritten in place) | 8/8 | 8/8 | late 4/24 · in order 6/6 · history 2/3 (↺ 18 · ? 3) | late 24/24 · in order 6/6 · history 3/3 | late 24/24 · in order 6/6 · history 2/3 (– 1) |
-| **total** | **79/80** (8 rewritten) | **77/80** | **67/80** | **late 34/240** · in order 60/60 · history 21/30 (↺ 183 · ? 32) | **late 193/240** · in order 59/60 · history 17/30 (↺ 36 · ? 25) | **late 238/240** · in order 60/60 · history 9/30 |
+| browser run (Web recording) | 8/8 (1 rewritten in place) | 8/8 | 8/8 | late 2/24 · in order 6/6 · history 3/3 (↺ 20 · ? 2) | late 20/24 · in order 6/6 · history 3/3 (↺ 3 · ? 1) | late 24/24 · in order 6/6 · history 2/3 (– 1) |
+| CLI recording | 8/8 (1 rewritten in place) | 8/8 | 7/8 | late 5/24 · in order 3/6 · history 2/3 (↺ 19 · ? 4) | late 20/24 · in order 3/6 · history 2/3 (↺ 6 · ? 2) | late 24/24 · in order 6/6 · history 3/3 |
+| **total** | **95/96** (10 rewritten) | **93/96** | **82/96** | **late 41/288** · in order 69/72 · history 26/36 (↺ 222 · ? 38) | **late 233/288** · in order 68/72 · history 22/36 (↺ 45 · ? 28) | **late 286/288** · in order 72/72 · history 14/36 |
 
 C was built in three steps, and A and B are the same in all of them: ¹ the state fact said "events that arrived later
 but were created earlier were not applied" — the model then answered the history question "No" (3/3); ² the state
 fact says older events "still happened and stay in the history", but C has no history facts — history 3/15; from the
-third run on, C also has one history fact per event the app did not apply — history 6/12. The PREFIX copies are the
+third run on, C also has one history fact per event the app did not apply — history 11/18. The PREFIX copies are the
 same demo run side by side under another prefix (`mlu-wom1-` … `mlu-wom4-`).
 
-What goes wrong in B (event-time stamps), across the 10 runs: the newer event's fact disappears (Ivel Marrow's
-Netherlands, Lumen Dray's Team: only the older value is left), or the older event's fact disappears (13 of 80 — most
+What goes wrong in B (event-time stamps), across the 12 runs: the newer event's fact disappears (Ivel Marrow's
+Netherlands, Lumen Dray's Team: only the older value is left), or the older event's fact disappears (14 of 96 — most
 often the Harrow Pike cancellation, which then makes the history question unanswerable), and with both facts present
 the model still picks the wrong one now and then (Quillmere 40 in the third run, though the facts are dated 10-09 and
 10-16).
@@ -269,14 +272,14 @@ Probes before the demo (four customers, the same pairs of events; 2026-10-18):
 
 - **Stamp each message with the event's `created`, not the arrival time.** `conv msg append --timestamp` is what
   MemoryLake dates the extracted facts by. It is the cheap fix, and in these runs it took the late-retry customers
-  from 34/240 to 193/240.
+  from 41/288 to 233/288.
 - **Keep the current state yourself, by event version.** The standard webhook rule — apply an event only if it is
   newer than the one you already applied — belongs in the handler, not in extraction. Write the result as one
-  `fact add` per entity and field, saying which event set it. 238/240.
+  `fact add` per entity and field, saying which event set it. 286/288.
 - **Write down what you did not apply.** An older event that arrives late still happened. If memory is also asked
-  about the past, record it as history: extraction alone dropped it in 13 of 80 cases.
+  about the past, record it as history: extraction alone dropped it in 14 of 96 cases.
 - **State facts pull every question toward the present.** With them, the model answered "Was the subscription
-  canceled this month?" with the current status ("Answer: Active", 13 of 30) or with "No" / "Unknown" (12 of 30). For questions about the past, query
+  canceled this month?" with the current status ("Answer: Active", 18 of 36) or with "No" / "Unknown" (12 of 36). For questions about the past, query
   the history (`fact list --query`) instead of asking the state.
 
 ## Troubleshooting
