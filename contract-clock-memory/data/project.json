@@ -1,0 +1,68 @@
+{
+  "org": "Fernbeck Transit",
+  "project": "fare system replacement",
+  "vendor": "Tamsett Fare Systems",
+  "home_tz": "Europe/London",
+  "people": [
+    {"key": "pm", "display": "Rhea Okafor", "role": "programme manager"},
+    {"key": "pr", "display": "Tom Lindqvist", "role": "procurement lead"},
+    {"key": "it", "display": "Sana Iqbal", "role": "IT security lead"}
+  ],
+  "meetings": [
+    {"id": "M1", "name": "Contract signed", "at": "2026-06-10T09:00:00Z", "lines": [
+      ["pr", "We signed the vendor contract with Tamsett Fare Systems today. Let me read out the clocks in the contract schedule so they are on record."],
+      ["pr", "Tamsett delivers the station validators 16 weeks from today."],
+      ["pr", "The pilot runs for 90 days from go-live."],
+      ["pr", "The final payment is due 45 days after the pilot ends."],
+      ["pr", "Tamsett must deposit the source code in escrow within 60 days of go-live."],
+      ["pr", "Any defect found in acceptance testing must be fixed within 30 days of being reported."],
+      ["pr", "The warranty runs for 12 months from acceptance."],
+      ["pm", "Thanks Tom. Apart from the validators, none of those clocks have started yet."]
+    ]},
+    {"id": "M2", "name": "Go-live review", "at": "2026-08-03T09:00:00Z", "lines": [
+      ["pm", "We went live this morning on the Northline stations. Well done, everyone."],
+      ["it", "Monitoring looks clean so far. Acceptance testing starts next month."]
+    ]},
+    {"id": "M3", "name": "Acceptance testing", "at": "2026-09-08T09:00:00Z", "lines": [
+      ["it", "I reported the turnstile double-charge defect to Tamsett this morning."],
+      ["pr", "Noted. I will chase their account manager."]
+    ]},
+    {"id": "M4", "name": "Acceptance", "at": "2026-09-15T09:00:00Z", "lines": [
+      ["pr", "We signed the acceptance certificate today."],
+      ["pm", "Good. The turnstile defect is still open."]
+    ]}
+  ],
+  "milestones": [
+    {"key": "contract", "short": "contract signature", "what": "vendor contract with Tamsett Fare Systems signed", "on": "2026-06-10", "meeting": "M1"},
+    {"key": "golive", "short": "go-live", "what": "go-live on the Northline stations", "on": "2026-08-03", "meeting": "M2"},
+    {"key": "defect", "short": "the defect report", "what": "turnstile double-charge defect reported to Tamsett", "on": "2026-09-08", "meeting": "M3"},
+    {"key": "acceptance", "short": "acceptance", "what": "acceptance certificate signed", "on": "2026-09-15", "meeting": "M4"}
+  ],
+  "clocks": [
+    {"id": "validators", "what": "Station validators delivered", "said": "16 weeks from today", "weeks": 16, "from": "contract",
+     "clock": "Tamsett delivers the station validators 16 weeks after the contract is signed",
+     "due": "Tamsett must deliver the station validators by {due}",
+     "match": "validator|验票机|验证机", "ask": "When are the station validators due from Tamsett?"},
+    {"id": "pilot", "what": "Pilot ends", "said": "90 days from go-live", "days": 90, "from": "golive",
+     "clock": "the pilot runs for 90 days from go-live",
+     "due": "the pilot ends on {due}",
+     "match": "\\bpilot\\b|试点", "not": "final payment|最终付款|尾款", "ask": "When does the pilot end?"},
+    {"id": "payment", "what": "Final payment due", "said": "45 days after the pilot ends", "days": 45, "from": "@pilot",
+     "clock": "the final payment to Tamsett is due 45 days after the pilot ends",
+     "due": "the final payment to Tamsett is due on {due}",
+     "match": "final payment|最终付款|尾款", "ask": "When is the final payment to Tamsett due?"},
+    {"id": "escrow", "what": "Source code escrow deposit due", "said": "within 60 days of go-live", "days": 60, "from": "golive",
+     "clock": "Tamsett must deposit the source code in escrow within 60 days of go-live",
+     "due": "Tamsett must deposit the source code in escrow by {due}",
+     "match": "escrow|托管", "ask": "When is Tamsett's source code escrow deposit due?"},
+    {"id": "defect", "what": "Turnstile defect fix due", "said": "within 30 days of being reported", "days": 30, "from": "defect",
+     "clock": "a defect found in acceptance testing must be fixed within 30 days of being reported",
+     "due": "Tamsett must fix the turnstile double-charge defect by {due}",
+     "match": "defect.*\\bfix|\\bfix.*defect|缺陷.*修复", "ask": "By when must Tamsett fix the turnstile double-charge defect?"},
+    {"id": "warranty", "what": "Warranty ends", "said": "12 months from acceptance", "months": 12, "from": "acceptance",
+     "clock": "the warranty runs for 12 months from acceptance",
+     "due": "the warranty ends on {due}",
+     "match": "warrant|保修|质保", "ask": "When does the warranty end?"}
+  ],
+  "system": "You are the programme assistant for Fernbeck Transit's fare system replacement. Today is {today}. Reply in one line: \"Date: YYYY-MM-DD\" (the day the thing happens or is due, not today's date), then one short sentence."
+}
