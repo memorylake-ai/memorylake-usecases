@@ -4,7 +4,10 @@ A runnable version of the MemoryLake use case
 [*Give Patent and IP Teams AI That Remembers Every Prior Art Finding*](https://www.memorylake.ai/en/usecase/ai-memory-for-patent-and-ip-research),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 3:20](https://github.com/memorylake-ai/memorylake-usecases/releases/download/forwarded-email-memory-v1/forwarded-email-memory-cli-demo.mp4) · [Web, 3:52](https://github.com/memorylake-ai/memorylake-usecases/releases/download/forwarded-email-memory-v1/forwarded-email-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/forwarded-email-memory-v1); GitHub serves them as downloads). In the CLI recording copy B lost three deadlines too
+(1/6 each), and its census shows A's JP response as ✗ 2026-09-23: the grader was fixed after that recording and now reads that
+fact ("…60 days from that date and … an interview call on 2026-09-23") as ~ never resolved.
 
 **The problem.** A patent firm dockets from email, and most deadlines arrive forwarded. A foreign associate reports
 an Office Action, a client asks for an opinion before a board meeting, and the docketing paralegal forwards the email
@@ -33,16 +36,16 @@ forwards all three. The demo stores the same three forwards twice:
 
 | copy | how a forward is stored | deadlines remembered with the right date | not remembered at all | docketing assistant's answers right |
 |---|---|---|---|---|
-| **A** | as received: one message from the paralegal, at the time she forwarded it | **6 / 36** | **18 / 36** | **27 / 62** (∅ 10) |
-| **B** | split by the app: the original as its own message, from its author, at its `Date:`, then the paralegal's note | **19 / 36** | **5 / 36** | **57 / 69** (∅ 3) |
+| **A** | as received: one message from the paralegal, at the time she forwarded it | **9 / 54** | **28 / 54** | **38 / 93** (∅ 15) |
+| **B** | split by the app: the original as its own message, from its author, at its `Date:`, then the paralegal's note | **25 / 54** | **11 / 54** | **80 / 101** (∅ 7) |
 
-Measured over 6 complete runs (6 deadlines each; the assistant's answers are 6 questions × 2 at temperature 0.7 on
+Measured over 9 complete runs (6 deadlines each; the assistant's answers are 6 questions × 2 at temperature 0.7 on
 `gpt-4o-mini` through MemoryRouter; ∅ = MemoryRouter attached nothing and is not graded). Copy A loses the second
-deadline in an email most often: the JP examiner interview 1 / 6 in A against 6 / 6 in B. In 3 of A's 6 runs, at
+deadline in an email most often: the JP examiner interview 2 / 9 in A against 8 / 9 in B. In 5 of A's 9 runs, at
 least one email left nothing behind but "an email titled … was received for docketing".
 
 What splitting does **not** fix: extraction's date arithmetic. In both copies a period can stay unresolved
-("60 days from 2026-09-21", "four months from 2026-09-29"): 10 of A's 36 items and 11 of B's. The anchor date is
+("60 days from 2026-09-21", "four months from 2026-09-29"): 15 of A's 54 items and 17 of B's. The anchor date is
 right, which is more than A can say for its missing items, but a docket that counts only real dates leaves them off.
 
 What it is **not** about: the forward's own timestamp. Before building this demo, a probe checked whether a forward
@@ -195,8 +198,9 @@ baseline had nothing attached. The system prompt gives today's date and asks for
     FTO summary due for Orrisdale's board          2026-10-29   ✓ 2026-10-29  ✓ 2026-10-29
 ```
 
-When memory holds only "60 days from 2026-09-21", the model has to do the arithmetic itself. Across the six runs it
-answered the JP response right every time (24 of 24), but the EP question came back as 2026-01-29 in 13 of 22
+When memory holds only "60 days from 2026-09-21", the model has to do the arithmetic itself. Across the nine runs
+it answered the JP response right 30 times in 32; the other two (both copy A, CLI recording) were 2026-12-14 and
+2026-12-15, about 60 days from the day the email was *forwarded*. The EP question came back as 2026-01-29 in 17 of 30
 graded answers: four months from 29 September, in the wrong year.
 
 ### Step 7: the score
@@ -212,16 +216,20 @@ graded answers: four months from 29 September, in the wrong year.
 |---|---|---|---|---|---|---|
 | first run | 0/6 | 4/6 | 2 | 0 | 2/12 | 10/12 |
 | second run (over the first run's leftovers) | 2/6 | 3/6 | 2 | 0 | 6/10 (∅ 2) | 10/12 |
-| parallel copy 1 | 1/6 | 3/6 | 4 | 2 | 4/10 (∅ 2) | 8/11 (∅ 1) |
+| parallel copy 1 | 2/6 | 3/6 | 4 | 2 | 4/10 (∅ 2) | 8/11 (∅ 1) |
 | parallel copy 2 | 1/6 | 2/6 | 2 | 3 | 7/10 (∅ 2) | 8/10 (∅ 2) |
 | `--reset` | 1/6 | 4/6 | 4 | 0 | 4/8 (∅ 4) | 10/12 |
 | browser check | 1/6 | 3/6 | 4 | 0 | 4/12 | 11/12 |
-| **total** | **6/36** | **19/36** | **18/36** | **5/36** | **27/62** | **57/69** |
+| CLI recording | 1/6 | 1/6 | 4 | 3 | 3/11 (∅ 1) | 9/11 (∅ 1) |
+| browser recording | 1/6 | 3/6 | 5 | 1 | 2/10 (∅ 2) | 8/10 (∅ 2) |
+| after the last grader fix (`run`, `memory`, `ask`, `cleanup`) | 0/6 | 2/6 | 1 | 2 | 6/10 (∅ 2) | 6/11 (∅ 1) |
+| **total** | **9/54** | **25/54** | **28/54** | **11/54** | **38/93** | **80/101** |
 
-Per deadline, right date in A / B: JP response 3 / 4 · JP interview 1 / 6 · EP approval and fees 0 / 1 · EP
-instructions 0 / 1 · FTO summary 1 / 4 · inventor call 1 / 3. The first run's census was graded by a first version
-of the grader that misread "on 2026-09-29, giving four months from that date" as a wrong date; the numbers above
-re-read the same facts with the fixed grader (`python3 demo.py memory`). Its answers were graded at the time.
+Per deadline, right date in A / B: JP response 3 / 6 · JP interview 2 / 8 · EP approval and fees 0 / 1 · EP
+instructions 0 / 1 · FTO summary 3 / 6 · inventor call 1 / 3. The grader was corrected three times during these runs
+(a period such as "on 2026-09-29, giving four months from that date" or "60 days from that date and … on 2026-09-23"
+was first read as a wrong date; a fact that drifted into French was misread). Every census above is re-read from
+the stored facts with the final grader; answers are graded as they were at the time.
 
 The probe before this demo (one email per conversation, three deadlines each): forwarded as received, 15 of 27
 deadlines came through (2 of 9 copies kept only "an email was received for docketing"); split, 9 of 9.

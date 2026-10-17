@@ -405,8 +405,17 @@ def read_fact(text: str, rx: str) -> tuple[date | None, date | None]:
     real = [x for x in ds if not x[2]]
     anchors = [x for x in ds if x[2]]
     after = [x for x in real if k and x[0] >= k.start()]
-    if after:
+    # "…a response deadline 60 days from that date and an interview call on 2026-09-23": a bare period between the
+    # keyword and the next date means this item was never resolved; the next date belongs to something else.
+    # A period that names its own anchor ("60 days from 2026-09-21, i.e., 2026-11-20") is not a gap.
+    gap = DURATION.search(body, k.start(), after[0][0]) if k and after else None
+    if gap and any(x[2] and gap.end() <= x[0] < after[0][0] for x in ds):
+        gap = None
+    if after and not gap:
         return after[0][1], None
+    if gap:
+        before = [x for x in ds if x[0] < gap.start()]
+        return None, (before[-1][1] if before else None)
     if anchors:
         return None, anchors[0][1]
     if real and DURATION.search(body):
