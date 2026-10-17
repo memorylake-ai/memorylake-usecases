@@ -497,7 +497,7 @@ TIME = r"\b(?:timeline|launch|too slow|6 weeks|six weeks|12-week|live in)\b"
 ALIAS = r"\b(?:payments prospect|payments platform prospect|Project Lantern|Lantern)\b"
 UNKNOWN = (r"\b(?:don't have|do not have|not have (?:the |any |specific )?(?:exact |specific )?(?:number|data|information)|"
            r"no record|unable to|cannot (?:determine|confirm|say)|can't (?:determine|say)|not specified|not available|"
-           r"additional data|need to check|no information)\b")
+           r"additional data|need to check|no information|no (?:specific )?mention|not mentioned)\b")
 ONLY = r"\b(?:only|just|single|solely|one prospect|one-off|once)\b"
 SAME = r"\b(?:same prospect|same pitch|same client|also (?:called|known)|referred to as|captured as|code ?name|i\.e\.|aka)\b"
 NUM = {"no": 0, "zero": 0, "one": 1, "a single": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7,
@@ -599,6 +599,8 @@ CASES = [
     ("Q3", "Answer: Quorvia is the only prospect noted to have raised a security concern.", "ok"),
     ("Q3", "Answer: This year, there are two different prospects that raised a security or SOC 2 concern.", "dup"),
     ("Q3", "Answer: At least two different prospects, including the payments prospect and Quorvia.", "dup"),
+    ("Q3", "Answer: Based on the information available, there is no specific mention of the number of different "
+           "prospects that raised a security or SOC 2 concern this year.", "unknown"),
     ("Q3", "Answer: I don't have the exact number of different prospects that raised a security concern.", "unknown"),
     ("Q3", "Answer: This year, one prospect has raised a security concern (the payments prospect), and another has "
            "raised a SOC 2 concern (Quorvia).", "dup"),

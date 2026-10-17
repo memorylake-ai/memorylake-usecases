@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*New Business Pitch Memory for Agencies*](https://www.memorylake.ai/en/usecase/new-business-pitch-memory-for-agencies),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 4:55](https://github.com/memorylake-ai/memorylake-usecases/releases/download/pitch-objection-memory-v1/pitch-objection-memory-cli-demo.mp4) · [Web, 5:32](https://github.com/memorylake-ai/memorylake-usecases/releases/download/pitch-objection-memory-v1/pitch-objection-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/pitch-objection-memory-v1); GitHub serves them as downloads). The Web video is the second browser run: in the first, the 2× mark rendered like "π"; both runs are in the totals.
 
 **The problem.** Pitch memory is supposed to tell a new business team which objections *keep coming up*. But agency
 tools capture the same pitch more than once, and each tool names the prospect its own way:
@@ -43,17 +44,17 @@ Five questions — which objections came up with two or more prospects, which pr
 many raised a security concern, how many pushed back on pricing, who said the launch plan was too slow — four
 answers each per memory, on `gpt-4o-mini` at temperature 0.7.
 
-Over 9 runs (A and B differ **only** by the two repeat captures):
+Over 11 runs (A and B differ **only** by the two repeat captures):
 
-- **A counted the one objection as more than one prospect, or listed it as recurring, 67 times in 177 answers**
-  (2×); **B never did** (0 of 171). On the three SOC 2 questions A was right 25/108 times, B 63/103.
-- The 2× follows the facts: in the 8 runs where A's memory held the nickname facts, A answered 2× 67 times; in the
+- **A counted the one objection as more than one prospect, or listed it as recurring, 91 times in 217 answers**
+  (2×); **B never did** (0 of 211). On the three SOC 2 questions A was right 25/132 times, B 78/127.
+- The 2× follows the facts: in the 10 runs where A's memory held the nickname facts, A answered 2× 91 times; in the
   one run where extraction dropped both repeats (browser run 1), 0.
-- **C was right 171/177** — Q3 ("how many raised a security concern") 33/33, where B, with one fact, said it did not
-  know 34 times out of 35. C still listed SOC 2 among the recurring objections 5 times in 36 (Q1), though its record
+- **C was right 210/217** — Q3 ("how many raised a security concern") 41/41, where B, with one fact, said it did not
+  know 42 times out of 43. C still listed SOC 2 among the recurring objections 6 times in 44 (Q1), though its record
   says "one pitch, one prospect".
-- Extraction also drops things: the pricing objection of a pitch, or a whole pitch, was missing from A in 15 of 54
-  pitch-runs and from B in 13. That is why Q4 (three prospects pushed back on pricing) is A 13/36, B 8/36, C 36/36.
+- Extraction also drops things: the pricing objection of a pitch, or a whole pitch, was missing from A in 18 of 66
+  pitch-runs and from B in 14. That is why Q4 (three prospects pushed back on pricing) is A 14/44, B 12/44, C 44/44.
 
 Details in [Measured](#measured).
 
@@ -228,7 +229,7 @@ prompt tokens had nothing attached (∅, not graded).
 **2×** = the answer counts a nickname as another prospect ("Quorvia and the payments prospect", "at least two"), or
 lists the one-off SOC 2 objection among those that came up with two or more prospects. Naming only the nickname, or
 listing the one-off *timeline* objection as recurring, is ✗ — wrong, but not double counting. With no memory, an
-inflated number is invented, so it is ✗ too. The grader's rules and 29 offline cases are in `demo.py`
+inflated number is invented, so it is ✗ too. The grader's rules and 30 offline cases are in `demo.py`
 (`grade()`, `CASES`; `python3 demo.py selftest`).
 
 ## Measured
@@ -246,20 +247,23 @@ Per run, graded from the saved `out/report.json` with the current grader. Column
 | browser run 1 | 1 · Quorvia | 3/6 · 5/6 | 0/20 (✗ 14 · ? 6) | 8/18 (✗ 6 · ? 4 · ∅ 2) | 16/20 (? 4) | 20/20 |
 | second run | 3 · Quorvia, no name, the payments prospect | 6/6 · 5/6 | 0/20 (✗ 16 · ? 4) | 11/20 (2× 9) | 15/20 (✗ 1 · ? 4) | 18/20 (2× 1 · ✗ 1) |
 | PREFIX copy 6 | 2 · Quorvia, the payments prospect | 4/6 · 4/6 | 1/20 (✗ 14 · ? 5) | 9/19 (2× 2 · ✗ 6 · ? 2 · ∅ 1) | 12/20 (✗ 4 · ? 4) | 18/20 (2× 2) |
-| **total (9 runs)** | alias facts in 8/9 runs | 39/54 · 41/54 | **4/180 (✗ 137 · ? 39)** | **58/177 (2× 67 · ✗ 36 · ? 16 · ∅ 3)** | **99/171 (✗ 37 · ? 35 · ∅ 9)** | **171/177 (2× 5 · ✗ 1 · ∅ 3)** |
+| CLI recording | 2 · Quorvia, the payments prospect | 4/6 · 5/6 | 2/20 (✗ 13 · ? 5) | 4/20 (2× 12 · ✗ 4) | 12/20 (✗ 4 · ? 4) | 19/20 (2× 1) |
+| browser run 2 (Web recording) | 3 · Project Lantern, Quorvia, the payments prospect | 5/6 · 6/6 | 0/20 (✗ 15 · ? 5) | 5/20 (2× 12 · ✗ 3) | 15/20 (✗ 1 · ? 4) | 20/20 |
+| **total (11 runs)** | alias facts in 10/11 runs | 48/66 · 52/66 | **6/220 (✗ 165 · ? 49)** | **67/217 (2× 91 · ✗ 43 · ? 16 · ∅ 3)** | **126/211 (✗ 42 · ? 43 · ∅ 9)** | **210/217 (2× 6 · ✗ 1 · ∅ 3)** |
 
 Per question, all runs:
 
 | question (truth) | 0  no memory | A  every capture as it arrived | B  each pitch captured once | C  one record per pitch |
 |---|---|---|---|---|
-| Q1 Which objections came up with two or more different prospects this year? List only those. (pricing model only) | 1/36 (✗ 35) | 12/36 (2× 24) | 27/32 (✗ 5 · ∅ 4) | 30/36 (2× 5 · ✗ 1) |
-| Q2 Which prospects asked us to pass a SOC 2 review? List each prospect once. (Quorvia only) | 0/36 (✗ 36) | 11/36 (2× 21 · ✗ 4) | 36/36 | 36/36 |
-| Q3 How many different prospects raised a security or SOC 2 concern this year? (1) | 0/36 (✗ 4 · ? 32) | 2/36 (2× 22 · ? 12) | 0/35 (✗ 1 · ? 34 · ∅ 1) | 33/33 (∅ 3) |
-| Q4 How many different prospects pushed back on our pricing model this year? (3) | 3/36 (✗ 26 · ? 7) | 13/36 (✗ 20 · ? 3) | 8/36 (✗ 28) | 36/36 |
-| Q5 Which prospect said our launch plan was too slow? (Velloway) | 0/36 (✗ 36) | 20/33 (✗ 12 · ? 1 · ∅ 3) | 28/32 (✗ 3 · ? 1 · ∅ 4) | 36/36 |
+| Q1 Which objections came up with two or more different prospects this year? List only those. (pricing model only) | 1/44 (✗ 43) | 12/44 (2× 32) | 34/40 (✗ 6 · ∅ 4) | 37/44 (2× 6 · ✗ 1) |
+| Q2 Which prospects asked us to pass a SOC 2 review? List each prospect once. (Quorvia only) | 0/44 (✗ 44) | 11/44 (2× 29 · ✗ 4) | 44/44 | 44/44 |
+| Q3 How many different prospects raised a security or SOC 2 concern this year? (1) | 0/44 (✗ 4 · ? 40) | 2/44 (2× 30 · ? 12) | 0/43 (✗ 1 · ? 42 · ∅ 1) | 41/41 (∅ 3) |
+| Q4 How many different prospects pushed back on our pricing model this year? (3) | 5/44 (✗ 30 · ? 9) | 14/44 (✗ 27 · ? 3) | 12/44 (✗ 32) | 44/44 |
+| Q5 Which prospect said our launch plan was too slow? (Velloway) | 0/44 (✗ 44) | 28/41 (✗ 12 · ? 1 · ∅ 3) | 36/40 (✗ 3 · ? 1 · ∅ 4) | 44/44 |
 
-The PREFIX copies are the same demo run side by side under another prefix (`mlu-pom1-` … `mlu-pom6-`). The first run
-was graded with an earlier grader and re-graded here.
+The PREFIX copies are the same demo run side by side under another prefix (`mlu-pom1-` … `mlu-pom6-`). Every run
+is re-graded here with the final grader (it changed four times during the build; each change came with an offline
+case). Browser run 1 is the one where extraction dropped both repeat captures: one SOC 2 fact, named Quorvia, and no 2×.
 
 ## What else we measured
 
@@ -281,9 +285,9 @@ Probes before the demo (the same six pitches, 2026-10-18):
 - **Deduplicate on the way in, by a link, not by a name.** Every capture in an agency stack is attached to something
   with an id — the CRM opportunity, the calendar event, the deal card a Slack thread hangs off. Resolve the capture
   to it, and write **one record per pitch** that lists where it was captured (`fact add`). That took the SOC 2
-  questions from 25/108 (A) to 99/105 (C).
+  questions from 25/132 (A) to 122/129 (C).
 - **Do not let the model count raw captures.** Even one clean fact per pitch (B) left "how many raised X" at "I don't
-  know" 34 times in 35; one record per pitch with the objection in a fixed place answered it 33/33. For anything
+  know" 42 times in 43; one record per pitch with the objection in a fixed place answered it 41/41. For anything
   that matters, count in code with `fact list --query` and hand the model the number.
 - **Ask lists, not yes/no.** "Did more than one prospect …?" gets "Yes" from the model on its own — with no memory at
   all. Ask "which prospects", and check the names.
