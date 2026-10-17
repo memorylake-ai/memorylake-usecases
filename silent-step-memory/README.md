@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Plan-and-Execute Agents Memory That Keeps the Plan Intact Through Execution*](https://www.memorylake.ai/en/usecase/memory-for-plan-and-execute-agents),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 4:28](https://github.com/memorylake-ai/memorylake-usecases/releases/download/silent-step-memory-v1/silent-step-memory-cli-demo.mp4) · [Web, 4:42](https://github.com/memorylake-ai/memorylake-usecases/releases/download/silent-step-memory-v1/silent-step-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/silent-step-memory-v1); GitHub serves them as downloads).
 
 **The problem.** A plan-and-execute agent crashes halfway through a billing run. Before it resumes, it asks memory,
 step by step, "has this step already been done?". Two of the finished steps happened as tool calls: the agent called
@@ -41,7 +42,7 @@ The resume check is [MemoryRouter](https://github.com/memorylake-ai/memorylake-c
 `--boundary`, an ordinary model call (gpt-4o-mini, temperature 0.7) with the boundary's memory attached. Each of the
 eight questions is asked three times per arm.
 
-**Measured over 6 runs** (details in [Measured](#measured)): every answer A gave about steps 4 and 5 was "No" (34/34), so every resume would have charged the 412 cards again and resent the receipts. Across all finished steps memory said nothing about, A answered "No" 48/51 times. B never re-ran a step, and answered "No record" 88 times out of 143, including 12/18 on the failed step that memory does record. C was right 144/144.
+**Measured over 8 runs** (details in [Measured](#measured)): every answer A gave about steps 4 and 5 was "No" (46/46), so every resume would have charged the 412 cards again and resent the receipts. Across all finished steps memory said nothing about, A answered "No" 66/72 times. B never re-ran a step, and answered "No record" 116 times out of 191, including 12/24 on the failed step that memory does record. C was right 192/192.
 
 ## Prerequisites
 
@@ -225,10 +226,12 @@ a boundary call with the same prompt-token count had nothing attached and would 
 | --reset | 2, 4, 5, 7, 8 | 15/24 | 6/6 | 8/24 | 16 | 24/24 |
 | parallel copy 1 | 3, 4, 5, 7, 8 | 18/23 (∅ 1) | 5/5 | 11/24 | 13 | 24/24 |
 | parallel copy 2 | 2, 3, 4, 5, 7, 8 | 12/24 | 6/6 | 9/23 (∅ 1) | 14 | 24/24 |
-| browser check | 2, 3, 4, 5, 7, 8 | 12/22 (∅ 2) | 5/5 | 6/24 | 18 | 24/24 |
-| **total (6 runs)** | | **93/141** (∅ 3) | **34/34** | **55/143** (∅ 1) | **88** | **144/144** |
+| browser check (its score page lacked the ∅ count; fixed, then the Web recording) | 2, 3, 4, 5, 7, 8 | 12/22 (∅ 2) | 5/5 | 6/24 | 18 | 24/24 |
+| CLI recording | 3, 4, 5, 7, 8 | 18/24 | 6/6 | 11/24 | 13 | 24/24 |
+| Web recording | 2, 3, 4, 5, 7, 8 | 12/24 | 6/6 | 9/24 | 15 | 24/24 |
+| **total (8 runs)** | | **123/189** (∅ 3) | **46/46** | **75/191** (∅ 1) | **116** | **192/192** |
 
-By what the run-log copy held about the step (A / B): a finished step memory says nothing about — A “No” 48/51, B “No record” 53/53; a step never reached — A “No” (right) 36/36, B “No record” 23/36; the failed step, recorded — A right 18/18, B “No record” 12/18. C: right on every step in every run (144/144).
+By what the run-log copy held about the step (A / B): a finished step memory says nothing about — A “No” 66/72, B “No record” 74/74; a step never reached — A “No” (right) 48/48, B “No record” 30/48; the failed step, recorded — A right 24/24, B “No record” 12/24. C: right on every step in every run (192/192).
 
 "Nothing about step(s)" is what the run-log copy held after extraction: steps 4 and 5 (tool results only) and 7 and 8 (never reached) in every run; in some runs extraction also dropped the status message for step 2 or 3, and A answered "No" for those as well. ∅: MemoryRouter attached nothing to that call (prompt tokens equal the same call without a boundary); those answers are left out of the counts.
 
