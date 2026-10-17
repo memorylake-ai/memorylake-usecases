@@ -507,8 +507,9 @@ MOVE_RE = {"leeds": r"\bLeeds\b|利兹", "porto": r"\bPorto\b|波尔图", "austi
 PREVIOUSLY = r"\bpreviously\b|\bformerly\b|\boriginally\b|\binitially\b|\bantes\b|\bvorher\b|\bzuvor\b|此前|之前|原定"
 UNKNOWN = (r"\b(?:don't have|do not have|no record|not recorded|not (?:been )?(?:stated|mentioned|specified|provided|"
            r"available|confirmed|given|known)|unable to|cannot (?:determine|confirm|say)|can't (?:determine|say)|"
-           r"no information|no (?:specific )?(?:details?|mention|floor|date|budget)|unknown|has(?:n't| not) been (?:decided|"
-           r"specified|mentioned|confirmed|shared)|isn't (?:specified|mentioned|recorded))\b|\[(?:insert|specific)")
+           r"no information|no (?:specific )?(?:details?|mention|floor|date|budget)|unknown|ha(?:s|ve)(?:n't| not) been (?:decided|"
+           r"specified|mentioned|confirmed|shared|set|announced)|(?:yet|still) to be (?:confirmed|decided|set|announced|determined)|"
+           r"isn't (?:specified|mentioned|recorded))\b|\[(?:insert|specific)")
 
 
 def has_value(key: str, text: str) -> bool:
@@ -586,6 +587,8 @@ CASES = [
     ("Q2", "Answer: The Porto office move goes ahead on 2 February, after the landlord confirmed the lease break.", "ok"),
     ("Q2", "Answer: The date of the Porto office move has not been specified.", "unknown"),
     ("Q2", "Answer: The Porto office move happens on 9 March.", "swap"),
+    ("Q2", "Answer: The Porto office move is scheduled for a date yet to be confirmed, but it is the next project.", "unknown"),
+    ("Q2", "Answer: The Porto office move is scheduled to take place soon. Specific dates have not been shared yet.", "unknown"),
     ("Q2", "Answer: The Porto move is on 23 April.", "swap"),
     ("Q3", "Answer: The Porto office is moving to the third floor, not the ground floor.", "ok"),
     ("Q3", "Answer: The Porto team wants the 3rd floor.", "ok"),
