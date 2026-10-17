@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Why Summarization Buffers Lose the Details Agents Need*](https://www.memorylake.ai/en/usecase/why-summarization-buffers-lose-critical-agent-context),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded (CLI and Web); links follow.
+**Watch it run:** [CLI, 6:30](https://github.com/memorylake-ai/memorylake-usecases/releases/download/bare-reading-memory-v1/bare-reading-memory-cli-demo.mp4) · [Web, 6:54](https://github.com/memorylake-ai/memorylake-usecases/releases/download/bare-reading-memory-v1/bare-reading-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/bare-reading-memory-v1); GitHub serves them as downloads).
 
 **The problem.** An AI agent team sets release gates in one meeting and reads out the eval results in a later one.
 The results are said the way people say them, as a number:
@@ -34,6 +35,9 @@ assistant says it did not.
 Six ship questions ("Does the new reranker ship?", Yes / No / Unknown) and two figure questions ("What did recall at
 10 come in at?"), three answers each per memory, on `gpt-4o-mini` at temperature 0.7.
 
+Over 7 runs, ship questions answered right from memory: **A 6/126 · V 124/126 · H 125/126**; figure questions
+**6/42 · 18/42 · 42/42**. With the readings as said, 71 answers were "Unknown" and 26 were wrong, 25 of them a gate
+that had passed called missed. Details in [Measured](#measured).
 
 
 ## Prerequisites
@@ -105,11 +109,13 @@ context for extraction (see [What else we measured](#what-else-we-measured)).
         Aisha Bello: We turn the response cache on only if the cache hit rate is above 40 percent.
         Jonah Park: The memory compaction job ships only if token cost per session drops below 3 cents.
         Tomas Reyes: Tool router v2 goes GA only if the tool-call error rate is under 2 percent.
-        Priya Natarajan: We remove the summarization buffer only if task success on long sessions is at least 78 percent.
+        Priya Natarajan: We remove the summarization buffer only if task success on long sessions is at least 78
+        percent.
 
     Thu 15 Oct 2026  “Eval sync 15 Oct” — the six readings, said two ways:
-        said     Priya Natarajan: Recall at 10 for the new reranker came in at 0.81.
-        verdict  Priya Natarajan: Recall at 10 for the new reranker came in at 0.81, under the 0.85 bar, so the new reranker does not ship.
+        said Priya Natarajan: Recall at 10 for the new reranker came in at 0.81.
+        verdict Priya Natarajan: Recall at 10 for the new reranker came in at 0.81, under the 0.85 bar, so the
+        new reranker does not ship.
         …
 ```
 
@@ -180,7 +186,20 @@ gets turned on if the cache hit rate is above 40 percent") · ✗ wrong · ? Unk
 
 ## Measured
 
-Totals over all runs follow once the recordings are in.
+Ship questions answered right from memory (✓), and figure questions, per run. ∅ (nothing attached): 0 in all runs. A's ? = Unknown, ✗ = wrong, ◐ = right word with neither the reading nor the decision in memory.
+
+| run | "said" kept | "verdict" kept | A readings as said | V said with the verdict | H + harness readings |
+|---|---|---|---|---|---|
+| first run | gates 6/6 · readings 0/6 | gates 6/6 · readings 0/6 · decisions 6/6 | 0/18 (? 10 · ✗ 5 · ◐ 3) · figures 0/6 | 18/18 · figures 0/6 | 17/18 (✗ 1) · figures 6/6 |
+| PREFIX copy 1 | gates 6/6 · readings 0/6 | gates 6/6 · readings 6/6 · decisions 6/6 | 0/18 (? 11 · ✗ 2 · ◐ 5) · figures 0/6 | 18/18 · figures 6/6 | 18/18 · figures 6/6 |
+| PREFIX copy 2 | gates 6/6 · readings 0/6 | gates 6/6 · readings 0/6 · decisions 6/6 | 0/18 (? 12 · ✗ 3 · ◐ 3) · figures 0/6 | 18/18 · figures 0/6 | 18/18 · figures 6/6 |
+| PREFIX copy 3 | gates 6/6 · readings 2/6 | gates 6/6 · readings 6/6 · decisions 6/6 | 6/18 (? 5 · ✗ 4 · ◐ 3) · figures 6/6 | 18/18 · figures 6/6 | 18/18 · figures 6/6 |
+| browser run (the Web recording) | gates 6/6 · readings 0/6 | gates 6/6 · readings 0/6 · decisions 6/6 | 0/18 (? 10 · ✗ 4 · ◐ 4) · figures 0/6 | 17/18 (✗ 1) · figures 0/6 | 18/18 · figures 6/6 |
+| fourth run (--reset; the excerpts above) | gates 6/6 · readings 0/6 | gates 4/6 · readings 2/6 · decisions 6/6 | 0/18 (? 11 · ✗ 5 · ◐ 2) · figures 0/6 | 18/18 · figures 6/6 | 18/18 · figures 6/6 |
+| CLI recording | gates 6/6 · readings 0/6 | gates 6/6 · readings 0/6 · decisions 6/6 | 0/18 (? 12 · ✗ 3 · ◐ 3) · figures 0/6 | 17/18 (✗ 1) · figures 0/6 | 18/18 · figures 6/6 |
+| **total** | | | **6/126** (? 71 · ✗ 26 · ◐ 23) · figures **6/42** | **124/126** (✗ 2) · figures **18/42** | **125/126** (✗ 1) · figures **42/42** |
+
+"harness" always holds the six gates it copied from "said" and its six harness readings. The PREFIX copies are the same demo run side by side under another prefix (`mlu-brm1-` … `mlu-brm3-`). Five earlier runs, made while every project's name still said "agent evals (eval sync, readings said as numbers)", kept all six bare readings each time (A 88/90 right) and are not in this table: see [What else we measured](#what-else-we-measured).
 
 ## What else we measured
 
