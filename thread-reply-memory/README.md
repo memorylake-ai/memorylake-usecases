@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Keep AI Context Across Conversations*](https://www.memorylake.ai/en/usecase/keep-ai-context-across-conversations),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 6:51](https://github.com/memorylake-ai/memorylake-usecases/releases/download/thread-reply-memory-v1/thread-reply-memory-cli-demo.mp4) · [Web, 7:51](https://github.com/memorylake-ai/memorylake-usecases/releases/download/thread-reply-memory-v1/thread-reply-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/thread-reply-memory-v1); GitHub serves them as downloads). Both recordings are counted in the totals below.
 
 **The problem.** A team channel is the most natural thing to give an assistant as memory: save every message the
 moment it is posted, and next week it knows what was decided. But replies in a thread rarely repeat the subject —
@@ -40,19 +41,21 @@ Eight questions — each move's date, the Porto floor, both budgets, how long Le
 nobody answered in the channel (which floor Leeds moves to) — three answers each per memory, on `gpt-4o-mini` at
 temperature 0.7.
 
-Over 7 runs:
+Over 9 runs:
 
-- **A stored Porto's date under Leeds in 7 of 7 runs**, and the late Leeds reply ("Update: it keeps the old server room
-  until 30 April") under Austin in 6 of 7. In 4 of 7 runs not one of A's facts named Porto.
-- **Through A the assistant gave another move's value 41 times in 120 graded answers** (⇄): Leeds moves on 2 February
-  (13/21), Leeds keeps its server room "until the move on 2 February" or until 30 April for Austin (15/21), Leeds moves
-  to the third floor (13/21). Asked about Porto, MemoryRouter attached nothing in 4 of 7 runs, and the model invented
+- **A stored Porto's date under Leeds in 9 of 9 runs** — in 5 of them the right Leeds date survived only after
+  "previously" — and the late Leeds reply ("Update: it keeps the old server room until 30 April") under Austin in 7 of
+  9. In 4 of 9 runs not one of A's facts named Porto.
+- **Through A the assistant gave another move's value 56 times in 192 graded answers** (⇄): Leeds moves on 2 February
+  (19/27), Leeds keeps its server room "until the move on 2 February" or until Austin's date (18/27), Leeds moves to the
+  third floor (19/27). Asked about Porto, MemoryRouter attached nothing in 4 of 9 runs, and the model invented
   "November 15, 2026" and "the 5th floor" (24 answers, listed, not graded).
-- **B: 160/168 · C: 158/168.** Same messages, same one-at-a-time saving; B only keeps each thread in its own
-  conversation, C only writes the thread's first message in front of each reply. What they miss: once extraction
-  dropped a value entirely (B lost the Austin date in one run, C the Porto floor in another), and on the question nobody
-  answered they sometimes dodged ("a new floor on 9 March") or made one up (B 5/21, C 7/21).
-- With no memory the model is right 8 times in 168, every one of them "the third floor" for Porto — its stock guess.
+- **B: 203/216 · C: 203/216.** Same messages, same one-at-a-time saving; B only keeps each thread in its own
+  conversation, C only writes the thread's first message in front of each reply. What they miss: in three runs
+  extraction dropped one value entirely (B the Porto date once and the Austin date once, C the Porto floor once), and
+  on the question nobody answered they sometimes dodged ("a new floor on 9 March") or made a floor up (B 7/27, C 10/27)
+  — never Porto's floor. In 9 runs neither put any value under another move.
+- With no memory the model is right 12 times in 216, every one of them "the third floor" for Porto — its stock guess.
 
 Details in [Measured](#measured).
 
@@ -222,7 +225,7 @@ put under another move — the model reads them faithfully.
 
 ## Measured
 
-Per run, graded from the saved `out/report.json` with the final grader; column 2 is read from the saved facts.
+Per run, graded from the saved `out/report.json` with the final grader; columns 2–3 are read from the saved facts.
 
 | run | values under the right move, A · B · C | A's misplaced values | 0 no memory | A as sent | B per thread | C tagged |
 |---|---|---|---|---|---|---|
@@ -232,38 +235,42 @@ Per run, graded from the saved `out/report.json` with the final grader; column 2
 | run 4 | 3/7 · 7/7 · 7/7 | Porto date → Leeds (9 March only as "previously"), Porto floor → Leeds, Austin budget → Porto | 1/24 (✗ 23) | 12/24 (⇄ 3 · ✗ 1 · ? 8) | 24/24 | 23/24 (✗ 1) |
 | run 5 | 3/7 · 7/7 · 7/7 | Porto date → Leeds (9 March only as "previously"), Porto floor not in memory, server room → Austin | 1/24 (✗ 23) | 12/18 (⇄ 3 · ✗ 3 · ∅ 6) | 23/24 (✗ 1) | 23/24 (✗ 1) |
 | run 6 | 4/7 · 7/7 · 7/7 | Porto date → Leeds, Porto floor → Leeds, server room → Austin | 2/24 (✗ 22) | 9/18 (⇄ 9 · ∅ 6) | 22/24 (✗ 2) | 23/24 (✗ 1) |
-| browser run (Web check) | 4/7 · 7/7 · 7/7 | Porto date → Leeds, Porto floor → Leeds, server room → Austin | 0/24 (✗ 24) | 12/24 (⇄ 4 · ✗ 5 · ? 3) | 24/24 | 23/24 (✗ 1) |
-| **total (7 runs)** | **26/49 · 48/49 · 48/49** | Porto date → Leeds 7/7 · server room → Austin 6/7 · no fact naming Porto in 4/7 | **8/168 (✗ 160)** | **75/144 (⇄ 41 · ✗ 14 · ? 14 · ∅ 24)** | **160/168 (✗ 7 · ? 1)** | **158/168 (✗ 7 · ? 3)** |
+| browser run (Web recording) | 4/7 · 7/7 · 7/7 | Porto date → Leeds, Porto floor → Leeds, server room → Austin | 0/24 (✗ 24) | 12/24 (⇄ 4 · ✗ 5 · ? 3) | 24/24 | 23/24 (✗ 1) |
+| CLI recording, first take | 4/7 · 6/7 · 7/7 | Porto date → Leeds (9 March only as "previously"), Porto floor → Leeds | 2/24 (✗ 22) | 13/24 (⇄ 6 · ✗ 2 · ? 3) | 21/24 (? 3) | 21/24 (✗ 3) |
+| CLI recording (the video) | 3/7 · 7/7 · 7/7 | Porto date → Leeds (9 March only as "previously"), Porto floor → Leeds, server room → Austin | 2/24 (✗ 21 · ? 1) | 9/24 (⇄ 9 · ✗ 4 · ? 2) | 22/24 (✗ 2) | 24/24 |
+| **total (9 runs)** | **33/63 · 61/63 · 62/63** | Porto date → Leeds 9/9 · server room → Austin 7/9 · Porto floor → Leeds 6/9 · no fact naming Porto 4/9 | **12/216 (✗ 203 · ? 1)** | **97/192 (⇄ 56 · ✗ 20 · ? 19 · ∅ 24)** | **203/216 (✗ 9 · ? 4)** | **203/216 (✗ 10 · ? 3)** |
 
 Per question, all runs:
 
 | question (truth) | 0 no memory | A as sent | B per thread | C tagged |
 |---|---|---|---|---|
-| Q1 When does the Leeds office move happen? (9 March) | 0/21 (✗ 21) | 8/21 (⇄ 13) | 21/21 | 21/21 |
-| Q2 When does the Porto office move happen? (2 February) | 0/21 (✗ 21) | 0/9 (? 9 · ∅ 12) | 21/21 | 21/21 |
-| Q3 Which floor is the Porto office moving to? (third) | 8/21 (✗ 13) | 4/9 (✗ 3 · ? 2 · ∅ 12) | 21/21 | 18/21 (? 3) |
-| Q4 What is the earliest date for the Austin office move? (23 April) | 0/21 (✗ 21) | 21/21 | 18/21 (✗ 2 · ? 1) | 21/21 |
-| Q5 What is the budget for the Austin office move? (95,000 dollars) | 0/21 (✗ 21) | 18/21 (? 3) | 21/21 | 21/21 |
-| Q6 What is the budget for the Leeds office move? (180,000 pounds) | 0/21 (✗ 21) | 21/21 | 21/21 | 21/21 |
-| Q7 Until when does the Leeds office keep its old server room? (30 April) | 0/21 (✗ 21) | 3/21 (⇄ 15 · ✗ 3) | 21/21 | 21/21 |
-| Q8 Which floor is the Leeds office moving to? (nobody said) | 0/21 (✗ 21) | 0/21 (⇄ 13 · ✗ 8) | 16/21 (✗ 5) | 14/21 (✗ 7) |
+| Q1 When does the Leeds office move happen? (9 March) | 0/27 (✗ 27) | 8/27 (⇄ 19) | 27/27 | 27/27 |
+| Q2 When does the Porto office move happen? (2 February) | 0/27 (✗ 27) | 0/15 (✗ 1 · ? 14 · ∅ 12) | 24/27 (? 3) | 27/27 |
+| Q3 Which floor is the Porto office moving to? (third) | 12/27 (✗ 15) | 5/15 (✗ 8 · ? 2 · ∅ 12) | 27/27 | 24/27 (? 3) |
+| Q4 What is the earliest date for the Austin office move? (23 April) | 0/27 (✗ 26 · ? 1) | 27/27 | 24/27 (✗ 2 · ? 1) | 27/27 |
+| Q5 What is the budget for the Austin office move? (95,000 dollars) | 0/27 (✗ 27) | 24/27 (? 3) | 27/27 | 27/27 |
+| Q6 What is the budget for the Leeds office move? (180,000 pounds) | 0/27 (✗ 27) | 27/27 | 27/27 | 27/27 |
+| Q7 Until when does the Leeds office keep its old server room? (30 April) | 0/27 (✗ 27) | 6/27 (⇄ 18 · ✗ 3) | 27/27 | 27/27 |
+| Q8 Which floor is the Leeds office moving to? (nobody said) | 0/27 (✗ 27) | 0/27 (⇄ 19 · ✗ 8) | 20/27 (✗ 7) | 17/27 (✗ 10) |
 
 - **∅ through A** (MemoryRouter attached nothing, listed, not graded): Porto's date 12 times ("November 15, 2026" 7,
   "November 15, 2023" 3, "November 2026" 2), Porto's floor 12 times ("the 5th floor" 8, "the 3rd floor" 4). These are
-  the runs where no fact named Porto.
-- **The 8 right answers through A on Q1 are not the memory being right.** In runs 4 and 5 the overwritten fact kept the
-  old text word for word — "goes ahead on 2 February (… previously the Leeds office move slips to 9 March …)" — and the
-  model took "slips to" for the newer change (6 of 6). In the browser run a second fact still said "slips to 9 March"
-  (2 of 3). Where the old value read "previously scheduled for 9 March", the model said 2 February every time (0 of 9
-  right in the first run, run 6 and the `--reset` run, even with another fact that mentioned 9 March).
+  exactly the 4 runs where no fact named Porto.
+- **The 8 right answers through A on Q1 came from 3 runs** where 9 March was still in memory: inside the overwritten
+  fact after "previously" (runs 4 and 5, 3 of 3 each) or in a second fact (browser run, 2 of 3). 9 March was in A's
+  memory in the other 6 runs too — after "previously", sometimes with a second fact — and there the assistant said
+  2 February every time (0 of 18). We did not find what separates the two groups; the wording after "previously"
+  does not (the first CLI take had "previously slips to 9 March" and got 0 of 3).
 - **Q8 is the reverse check**: nobody said which floor Leeds moves to. Through A the assistant gave Porto's floor
-  (13/21). B and C mostly said it is not recorded; their 12 misses are dodges ("moving to a new floor on 9 March 2026")
-  or an invented "5th floor" — never Porto's floor.
-- **Q3 with no memory**: "the third floor" is what the model guesses for any office (8/21), so that cell and the
+  (19/27). B and C mostly said it is not recorded; their 17 misses are dodges ("moving to a new floor on 9 March 2026")
+  or an invented floor ("the 5th floor") — never Porto's floor.
+- **Q3 with no memory**: "the third floor" is what the model guesses for an office (12/27), so that cell and the
   "3rd floor" ∅ answers through A are guesses that happen to match.
-- **B and C still go through extraction.** One run lost the Austin date in B, one the Porto floor in C — no fact held
-  it, so the assistant said it did not know or guessed. What they fix is attribution: in 7 runs neither put any value
-  under another move.
+- **B and C still go through extraction.** In three runs one value was not in memory at all (B: Porto's date, Austin's
+  date; C: Porto's floor); the assistant then said it did not know or guessed. What B and C fix is attribution.
+- **The grader changed once after a recording**: two B answers in the first CLI take ("a date yet to be confirmed",
+  "have not been shared yet") were read as wrong and are now "?"; all reports were re-graded, and the CLI video was
+  recorded again so it shows the final grader.
 
 ## What else we measured
 
@@ -298,8 +305,8 @@ before the demo existed:
   Steps 2–4 do not need the Router.
 - **`still extracting after 420 s`**: once in a while a message takes longer to read; the demo carries on with what
   memory holds. Run `python3 demo.py memory` a few minutes later to re-read the facts.
-- **A looks right on a question**: sometimes the old value survives inside the overwritten fact ("previously … slips to
-  9 March") and the model picks it (see Q1 in Measured). Step 4 shows which move each value is stored under.
+- **A looks right on a question**: the right value often survives inside the overwritten fact after "previously", and
+  sometimes the model picks it (Q1 in Measured: 3 runs of 9). Step 4 shows which move each value is stored under.
 - **`?` or `∅` on a B or C question**: extraction dropped that message's value; nothing was there to attach.
 - **The question in `ask` contains a `$`**: quote it with single quotes, or the shell expands `$…` before the demo sees it.
 - **`the demo memory does not exist yet`**: `memory` and `ask` need a full run first (and `cleanup` removes it).
