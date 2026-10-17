@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Background Agent Workers Memory That Survives Every Process Boundary*](https://www.memorylake.ai/en/usecase/memory-for-background-agent-workers),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 4:37](https://github.com/memorylake-ai/memorylake-usecases/releases/download/halt-point-memory-v1/halt-point-memory-cli-demo.mp4) · [Web, 5:16](https://github.com/memorylake-ai/memorylake-usecases/releases/download/halt-point-memory-v1/halt-point-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/halt-point-memory-v1); GitHub serves them as downloads). Both recordings are runs 5 and 6 in [Measured](#measured).
 
 **The problem.** A background worker keeps a *write-ahead* run journal in memory, the fix from
 [in-doubt-step-memory](../in-doubt-step-memory): before each step it writes a *started* entry with the idempotency
@@ -44,7 +45,7 @@ On step 4 only "Unknown" is right: check the processor by the key before retryin
 second time. "Yes" is graded ◇: true this time, but nothing in memory says the charges went through, so the resume
 skips the key check; had the processor declined, 312 renewals would go unbilled. On steps 5–7 only "No" is right.
 
-**Measured over 5 runs** (details in [Measured](#measured)): on the steps that never started, the write-ahead journal as is answered "Unknown" 28 times out of 45: each one a resume stopped on a step with nothing to check. One more coverage sentence (D) brought that to 1/45, and kept step 4 at "Unknown" 14 times out of 15 ("No", a second charge, 1). The supervisor's marker (E) brought it to 0/45, and turned step 4 into "Yes" 14 times and "No" 1 out of 15: not once "Unknown".
+**Measured over 6 runs** (details in [Measured](#measured)): on the steps that never started, the write-ahead journal as is answered "Unknown" 31 times out of 54: each one a resume stopped on a step with nothing to check. One more coverage sentence (D) brought that to 1/54, and kept step 4 at "Unknown" 16 times out of 18 ("No", a second charge, 2). The supervisor's marker (E) brought it to 0/54, and turned step 4 into "Yes" 17 times and "No" 1 out of 18: not once "Unknown".
 
 ## Prerequisites
 
@@ -226,11 +227,12 @@ first word is graded, because that is what a resume acts on.
 | parallel copy 1 | 3/9 | 0/9 | 0/9 | 3/3 | 0 | 3 | 0 | 18/21 · 20/21 · 18/21 | 0 |
 | parallel copy 2 | 6/9 | 0/9 | 0/9 | 3/3 | 0 | 3 | 0 | 15/21 · 21/21 · 18/21 | 0 |
 | browser check = Web recording | 7/9 | 0/9 | 0/9 | 3/3 | 0 | 2 | 1 | 14/21 · 21/21 · 17/21 | 0 |
-| **total (5 runs)** | **28/45** | **1/45** | **0/45** | **15/15** | **1** | **14** | **1** | **76/105 · 102/105 · 89/105** | **0** |
+| CLI recording | 3/9 | 0/9 | 0/9 | 3/3 | 1 | 3 | 0 | 18/21 · 20/21 · 18/21 | 0 |
+| **total (6 runs)** | **31/54** | **1/54** | **0/54** | **18/18** | **2** | **17** | **1** | **94/126 · 122/126 · 107/126** | **0** |
 
 C's coverage fact already says "a step with no entry at all has not started"; the replies explain the hedge with step 4 ("Step 4 has started but lacks a result entry, so it's unclear if step 5 has been completed"). D's one sentence says where the doubt stops, and step 4 stays in doubt. E's marker is computed in code from the complete journal and settles steps 5–7, and its "the run halted inside step 4" is read as an answer about step 4 ("Yes, step 4 has already been started but not completed"): the reverse check that the first question alone would never show.
 
-Only the reply's first word is graded, because that is what a resume acts on; a few replies start with "No" and go on to say the step was completed (counted as graded, as ✗ on steps 1–3). No boundary call came back with nothing attached (∅ 0 of 315). The journal was identical in every copy and every run; the run log's TEXT messages added a handful of extracted facts beside it, none about steps 5–7.
+Only the reply's first word is graded, because that is what a resume acts on; a few replies start with "No" and go on to say the step was completed (counted as graded, as ✗ on steps 1–3). No boundary call came back with nothing attached (∅ 0 of 378). The journal was identical in every copy and every run; the run log's TEXT messages added a handful of extracted facts beside it, none about steps 5–7.
 
 ## Use it in your own app
 
