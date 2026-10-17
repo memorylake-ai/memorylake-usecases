@@ -4,6 +4,10 @@ A runnable version of the MemoryLake use case
 [*The AI Memory Layer Your Knowledge Management Stack Is Missing*](https://www.memorylake.ai/en/usecase/ai-memory-for-knowledge-management),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
+**Watch it run:** [CLI, 7:20](https://github.com/memorylake-ai/memorylake-usecases/releases/download/plain-recap-memory-v1/plain-recap-memory-cli-demo.mp4) · [Web, 7:41](https://github.com/memorylake-ai/memorylake-usecases/releases/download/plain-recap-memory-v1/plain-recap-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/plain-recap-memory-v1); GitHub serves them as downloads). In the Web recording, copy B kept nothing about the
+replication or the grant on that run, and the assistant still answered "not yet replicated" three times.
+
 **The problem.** A research group's kickoff meeting ends with a list of what isn't there yet: not replicated, ethics
 amendment not approved, sequencing data not arrived, preregistration not posted, nobody outside the lab has reviewed the
 stats plan. Memory keeps that list, dated the day it was said. Over the next weeks each item is settled, and each is
@@ -30,38 +34,43 @@ meetings three times:
 
 | copy | what is stored | item's later mention never became a fact | research assistant's answers right |
 |---|---|---|---|
-| **A** | the meetings as said | **15 / 40** | **120 / 166** (∅ 2) |
-| **B** | the same meetings, each closed by one more line from the PI: "Status as of today: …" in plain words | **8 / 40** | **141 / 168** |
-| **C** | the meetings as said + a lab log the app writes from its tracker: one dated fact per event (`fact add`) | **0 / 40** | **166 / 168** |
+| **A** | the meetings as said | **17 / 50** | **154 / 208** (∅ 2) |
+| **B** | the same meetings, each closed by one more line from the PI: "Status as of today: …" in plain words | **10 / 50** | **171 / 208** (∅ 2) |
+| **C** | the meetings as said + a lab log the app writes from its tracker: one dated fact per event (`fact add`) | **0 / 50** | **208 / 210** |
 
-Measured over 8 complete runs (5 ended items per run; the assistant's answers are 7 questions × 3 at
+Measured over 10 complete runs (5 ended items per run; the assistant's answers are 7 questions × 3 at
 temperature 0.7 on `gpt-4o-mini` through MemoryRouter; ∅ calls, where MemoryRouter attached nothing, are left out of
 the denominator). A "never became a fact" item is one where memory holds the 09-01 "not yet" and nothing about the
 event.
 
-- **The assistant is right exactly when the event is in memory.** Across all runs and copies, an ended item whose
-  later mention never became a fact was answered right 0 times out of 69; an item whose event is in memory, rewritten
-  into the old fact or sitting beside it, 286 out of 288.
-- **How plainly it was said doesn't decide which mentions become facts.** In copy A (8 runs): the second-hand "Kwame
-  mentioned the ethics board signed off" became a fact 8 / 8, the question and answer about the sequencing data 8 / 8,
-  the taken-for-granted "now that the preregistration is live on OSF" 7 / 8, the plain "We replicated the Varga effect:
-  d = 0.41" **2 / 8**, and the implied review ("Having gone through your analysis plan …") 0 / 8. Replication was
-  answered right 6 / 24 in A, the review 0 / 24 (every answer "nobody outside the lab has reviewed it").
+- **The assistant is right when the event is in memory, and only then.** Across all runs and copies, an ended item
+  whose later mention never became a fact was answered right 0 times out of 81; an item whose event is in memory,
+  rewritten into the old fact or sitting beside it, 359 out of 363.
+- **How plainly it was said doesn't decide which mentions become facts.** In copy A (10 runs): the second-hand "Kwame
+  mentioned the ethics board signed off" became a fact 10 / 10, the question and answer about the sequencing data
+  10 / 10, the taken-for-granted "now that the preregistration is live on OSF" 9 / 10, the plain "We replicated the
+  Varga effect: d = 0.41" **4 / 10**, and the implied review ("Having gone through your analysis plan …") 0 / 10.
+  Replication was answered right 10 / 30 in A, the review 0 / 30 (every answer "nobody outside the lab has reviewed it").
 - **A plain status line at the end of the meeting helps where extraction picks it up, and it doesn't always.** B's
-  "Status as of today: we have replicated the Varga effect" made the replication a fact in 6 of 8 runs (A: 2); B's
-  "Status as of today: Kwame Osei has reviewed our stats plan" named Kwame in memory in 1 of 8 (once more a fact said
+  "Status as of today: we have replicated the Varga effect" made the replication a fact in 7 of 10 runs (A: 4); B's
+  "Status as of today: Kwame Osei has reviewed our stats plan" named Kwame in memory in 1 of 10 (once more a fact said
   it was "reviewed by someone outside the lab", and the assistant said that, without the name). Review in B:
-  3 / 24 right.
+  3 / 30 right.
 - **Writing the event as a fact fixes the answer, with the "not yet" still in memory.** C keeps every 09-01 "not yet"
-  extraction left (the review "not yet" in 8 of 8 runs) and adds the lab log; the model reads both and takes the later
-  one: 166 / 168. The 2 misses: one replication answer "not yet replicated", one ethics answer.
+  extraction left (the review "not yet" in 10 of 10 runs) and adds the lab log; the model reads both and takes the later
+  one: 208 / 210. The 2 misses: one replication answer "not yet replicated", one ethics answer.
 - **The "not yet" that is still true** (no access to the 2019 cohort) was kept in every copy of every run and answered
-  right 72 / 72. **The control** (the grant ends 30 June 2027) is right whenever MemoryRouter attaches something; in
-  the browser run A's grant fact wasn't extracted, 2 of 3 calls attached nothing and all 3 answers gave a made-up date.
+  right 90 / 90. **The control** (the grant ends 30 June 2027) is right whenever its fact is in memory; twice (A in the
+  browser run, B in the Web recording) it wasn't extracted, 2 of 3 calls attached nothing and all 3 answers gave a
+  made-up date.
+- **When nothing about an item is in memory, the model still says "not yet".** In the Web recording, B kept no fact
+  about the replication at all, neither the "not yet" nor the event, and all 3 answers were "we have not yet
+  replicated the Varga 2024 effect".
 - MemoryLake rewrites a "not yet" in place when it does turn the later mention into a fact on the same subject
   ("The preregistration is live on OSF (as of 2026-09-29, previously not posted as of 2026-09-01)"); when the event
   comes out as a fact on a different subject ("Sequencing data for all 48 samples came in on 2026-09-25"), the "not
-  yet" stays beside it. Either way the answer was right.
+  yet" stays beside it. Either way the answer was right (1 miss in 186 for a rewritten fact: the old value is still in its "previously"
+  tail).
 
 ## Prerequisites
 
@@ -267,11 +276,15 @@ had nothing attached (∅).
 | second run (over leftovers) | 2/5 | 1/5 | 0/5 | 15/21 | 18/21 | 21/21 |
 | --reset | 3/5 | 1/5 | 0/5 | 12/21 | 18/21 | 21/21 |
 | browser check | 1/5 | 0/5 | 0/5 | 15/19 (∅ 2) | 18/21 | 21/21 |
-| **total (8 runs)** | **15/40** | **8/40** | **0/40** | **120/166 (∅ 2)** | **141/168** | **166/168** |
+| CLI recording | 1/5 | 1/5 | 0/5 | 17/21 | 18/21 | 21/21 |
+| Web recording | 1/5 | 1/5 | 0/5 | 17/21 | 12/19 (∅ 2) | 21/21 |
+| **total (10 runs)** | **17/50** | **10/50** | **0/50** | **154/208 (∅ 2)** | **171/208 (∅ 2)** | **208/210** |
 
-Answers right per question, A / B / C (24 each, ∅ left out): replicated 6 / 18 / 23 · ethics 24 / 24 / 23 ·
-sequencing 24 / 24 / 24 · preregistration 21 / 24 / 24 · stats plan reviewed 0 / 3 / 24 · 2019 cohort (still true)
-24 / 24 / 24 · grant (control) 21/22 / 24 / 24.
+Answers right per question, A / B / C (30 each, ∅ left out): replicated 10 / 21 / 29 · ethics 30 / 30 / 29 ·
+sequencing 30 / 30 / 30 · preregistration 27 / 30 / 30 · stats plan reviewed 0 / 3 / 30 · 2019 cohort (still true)
+30 / 30 / 30 · grant (control) 27/28 / 27/28 / 30.
+
+The CLI recording's report was removed by its own `cleanup`; its numbers are read off the recording's last screen.
 
 The two probe runs are the demo pipeline itself, run before this README was written; they are counted because the
 data, questions and grading are the same. The first probe was meant to show that plainly said changes rewrite their
@@ -283,8 +296,8 @@ event becoming a fact.
 - **Don't count on the meeting to update memory.** A later mention retires a "not yet" only if extraction turns it
   into a fact, and here that had nothing to do with how plainly it was said.
 - **A plain status line in the conversation is not a write.** It goes through the same extraction as everything else.
-  It helped (the replication became a fact in 6 of 8 runs with it, 2 of 8 without), but the review's status line put
-  Kwame's name in memory once in 8.
+  It helped (the replication became a fact in 7 of 10 runs with it, 4 of 10 without), but the review's status line put
+  Kwame's name in memory once in 10.
 - **Write the event from the system that knows it.** One dated fact per event (`fact add`, with the topic and date in
   `fact update --metadata`). It fixed every stale answer here without deleting the old "not yet": the model reads both
   and takes the later one.

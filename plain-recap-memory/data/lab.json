@@ -58,7 +58,7 @@
     {"id": "prereg", "what": "Preregistration", "form": "taken for granted", "truth": "posted on OSF (by 2026-09-29)", "closed": "M3",
      "said": "the preregistration is not posted",
      "neg": "preregistration.{0,80}(?:not|n't|yet to)\\b.{0,20}(?:post|publish|live|submit)|预注册.{0,20}(?:未|尚未|没有).{0,6}(?:发布|提交)|no (?:está|ha sido) publicad",
-     "pos": "live on OSF|posted on OSF|\\bis (?:now )?(?:live|posted)|publicad|已发布",
+     "pos": "live on OSF|posted on OSF|\\bis (?:now )?(?:live|posted)|publicad|activa en OSF|已发布",
      "log": {"on": "2026-09-29", "text": "Lab log 2026-09-29: the preregistration for the Varga 2024 replication is posted on OSF."},
      "ask": "Is our preregistration posted?",
      "ok": "(?:live|posted) on OSF|\\byes\\b|is (?:now )?(?:live|posted)|has been posted|was posted|(?:is|was|been) published",
