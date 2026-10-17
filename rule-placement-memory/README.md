@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give SaaS Teams Product Feedback Memory That Doesn't Disappear Into Slack*](https://www.memorylake.ai/en/usecase/product-feedback-memory-for-saas-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** the CLI and Web recordings are being made; links follow here.
+**Watch it run:** [CLI, 6:31](https://github.com/memorylake-ai/memorylake-usecases/releases/download/rule-placement-memory-v1/rule-placement-memory-cli-demo.mp4) · [Web, 7:26](https://github.com/memorylake-ai/memorylake-usecases/releases/download/rule-placement-memory-v1/rule-placement-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/rule-placement-memory-v1); GitHub serves them as downloads).
 
 **The problem.** A small SaaS team makes conditional promises in its product-feedback triage: *"SAML single sign-on
 for Brightwater Clinics in the November 2 release, as long as the Okta integration test passes by October 9."*
@@ -52,26 +53,26 @@ came out when the memory that arm reads holds no fact about it ("finance did not
 
 | | where the rule is | G1 verdict only | G2 grounded | lapsed promises: outcome invented | outcome in memory: right verdict |
 |---|---|---|---|---|---|
-| **A** | nowhere | 43 / 78 (55%) | 43 / 78 (55%) | **0 / 24** | 24 / 24 |
-| **P** | system prompt | 61 / 78 (78%) | 59 / 78 (75%) | **3 / 24** | 24 / 24 |
-| **G** | one memory fact | 70 / 91 (76%) | 64 / 91 (70%) | **6 / 33** | 24 / 24 |
-| **D** | a check per decision | 89 / 90 (98%) | 89 / 90 (98%) | **0 / 36** | 36 / 36 |
+| **A** | nowhere | 55 / 102 (53%) | 55 / 102 (53%) | **0 / 33** | 30 / 30 |
+| **P** | system prompt | 79 / 102 (77%) | 76 / 102 (74%) | **4 / 33** | 30 / 30 |
+| **G** | one memory fact | 90 / 115 (78%) | 82 / 115 (71%) | **8 / 42** | 30 / 30 |
+| **D** | a check per decision | 113 / 114 (99%) | 113 / 114 (99%) | **0 / 45** | 45 / 45 |
 
-Totals over 4 complete runs (8 questions × 3 answers at temperature 0.7 on `gpt-4o-mini`, per arm). Calls where MemoryRouter attached nothing (∅) are listed but not graded: A 18 · P 18 · G 5 · D 6.
+Totals over 5 complete runs (8 questions × 3 answers at temperature 0.7 on `gpt-4o-mini`, per arm). Calls where MemoryRouter attached nothing (∅) are listed but not graded: A 18 · P 18 · G 5 · D 6.
 
 - **The rule in the prompt is not reliably obeyed.** P's system prompt forbids exactly "say that it did not", and
-  on the $49 price question the assistant still wrote "finance did not sign off" in 3 of 12 answers. The same words
-  stored as one memory fact (G): 6 of 12.
+  on the $49 price question the assistant still wrote "finance did not sign off" in 4 of 15 answers. The same words
+  stored as one memory fact (G): 8 of 15.
 - **The rule said about the decision held.** D's check for the price is the same rule with the decision's own event
-  named. 0 of 12 of D's answers to it stated an outcome: "Unknown." or "it's unclear if finance signed off".
-- **A has a different failure.** Without any rule the assistant answers the price question "Yes …" in 11 of 12 answers: the plan
+  named. 0 of 15 of D's answers to it stated an outcome: "Unknown." or "it's unclear if finance signed off".
+- **A has a different failure.** Without any rule the assistant answers the price question "Yes …" in 14 of 15 answers: the plan
   given as standing. P and G fix that verdict, and some of the fixed answers come with an invented
   reason instead. A verdict-only eval scores them as a straight improvement.
 - **No cost where memory knows.** Answers to a met or failed condition whose outcome the arm's memory holds stayed
-  right in every arm; the rule did not make the assistant say "not recorded" about a recorded outcome: A 24/24 · P 24/24 · G 24/24 · D 36/36.
-  (CSV fix ships Oct 20: outcome extracted into “notes” in 4 of 4 runs; Slack digest: outcome extracted into “notes” in 4 of 4 runs; Bulk edit GA: outcome extracted into “notes” in 0 of 4 runs; D's MET / FAILED checks state all three in every run)
+  right in every arm; the rule did not make the assistant say "not recorded" about a recorded outcome: A 30/30 · P 30/30 · G 30/30 · D 45/45.
+  (CSV fix ships Oct 20: outcome extracted into “notes” in 5 of 5 runs; Slack digest: outcome extracted into “notes” in 5 of 5 runs; Bulk edit GA: outcome extracted into “notes” in 0 of 5 runs; D's MET / FAILED checks state all three in every run)
 - **Extraction drops whole lines, and that hides the gap.** Lines of the 7 September meeting were often not
-  extracted at all (SSO for Brightwater Nov 2: nothing in memory in 2 of 4 runs; v1 API off Nov 1: nothing in memory in 2 of 4 runs; Roadmap page Dec 1: nothing in memory in 2 of 4 runs). A and P then had nothing to read (∅, not graded); G and D had their rule fact or
+  extracted at all (SSO for Brightwater Nov 2: nothing in memory in 2 of 5 runs; v1 API off Nov 1: nothing in memory in 2 of 5 runs; Roadmap page Dec 1: nothing in memory in 2 of 5 runs). A and P then had nothing to read (∅, not graded); G and D had their rule fact or
   check. That is why the comparison leans on the price question, which was extracted every time.
 
 ## Prerequisites
@@ -244,9 +245,10 @@ re-graded with the final version.
 | second run (over the first run's leftovers) | 7 facts; nothing at all about Roadmap page Dec 1; the outcome of Bulk edit GA lost | 10/21 → 10/21 (∅ 3) | 17/21 → 17/21 (∅ 3) | 20/24 → 19/24 | 21/21 → 21/21 (∅ 3) | 0/9 / 0/9 / 1/9 / 0/9 |
 | third run (--reset) | 6 facts; nothing at all about SSO for Brightwater Nov 2, v1 API off Nov 1, Roadmap page Dec 1; the outcome of Bulk edit GA lost | 9/15 → 9/15 (∅ 9) | 12/15 → 11/15 (∅ 9) | 15/20 → 14/20 (∅ 4) | 20/21 → 20/21 (∅ 3) | 0/3 / 1/3 / 1/7 / 0/9 |
 | browser run (the Web recording) | 10 facts; the outcome of Bulk edit GA lost | 12/24 → 12/24 | 16/24 → 16/24 | 17/24 → 15/24 | 24/24 → 24/24 | 0/9 / 0/9 / 2/9 / 0/9 |
-| **total** | | **43/78 → 43/78 (∅ 18)** | **61/78 → 59/78 (∅ 18)** | **70/91 → 64/91 (∅ 5)** | **89/90 → 89/90 (∅ 6)** | **0/24 / 3/24 / 6/33 / 0/36** |
+| CLI recording | 10 facts; the outcome of Bulk edit GA lost | 12/24 → 12/24 | 18/24 → 17/24 | 20/24 → 18/24 | 24/24 → 24/24 | 0/9 / 1/9 / 2/9 / 0/9 |
+| **total** | | **55/102 → 55/102 (∅ 18)** | **79/102 → 76/102 (∅ 18)** | **90/115 → 82/115 (∅ 5)** | **113/114 → 113/114 (∅ 6)** | **0/33 / 4/33 / 8/42 / 0/45** |
 
-Lapsed promises, replies that state an outcome nobody recorded, A / P / G / D (∅ left out): SSO for Brightwater Nov 2 0/6 / 0/6 / 0/10 / 0/12 · v1 API off Nov 1 0/6 / 0/6 / 0/11 / 0/12 · $49 Team price Oct 27 0/12 / 3/12 / 6/12 / 0/12.
+Lapsed promises, replies that state an outcome nobody recorded, A / P / G / D (∅ left out): SSO for Brightwater Nov 2 0/9 / 0/9 / 0/13 / 0/15 · v1 API off Nov 1 0/9 / 0/9 / 0/14 / 0/15 · $49 Team price Oct 27 0/15 / 4/15 / 8/15 / 0/15.
 
 ## Use it in your own assistant
 
