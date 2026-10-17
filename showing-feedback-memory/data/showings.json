@@ -1,0 +1,58 @@
+{
+  "org": "Wrenfield Homes",
+  "agent": "Rhea Calloway",
+  "today": "2026-10-10",
+  "system": "You are the listing assistant for {agent}, a listing agent at {org}. Today is {today}. Answer from the team's showing feedback memory. Reply in one or two sentences, starting with 'Answer:'.",
+  "listings": [
+    {"id": "alder", "address": "14 Alder Lane", "short": "Alder", "price": "$612,000",
+     "concerns": {"kitchen": "dated kitchen", "yard": "small backyard"}},
+    {"id": "birch", "address": "22 Birch Court", "short": "Birch", "price": "$745,000",
+     "concerns": {"price": "overpriced", "noise": "street noise"}},
+    {"id": "cedar", "address": "9 Cedar Row", "short": "Cedar", "price": "$538,000",
+     "concerns": {"ceiling": "low basement ceiling", "garage": "no garage", "water": "basement water stain"}}
+  ],
+  "people": [
+    {"key": "pena", "display": "Marisol Pena", "brokerage": "Northgate Realty Partners"},
+    {"key": "okoye", "display": "Daniel Okoye", "brokerage": "Brightline Home Group"},
+    {"key": "brandt", "display": "Lena Brandt", "brokerage": "Coastway Property Co."},
+    {"key": "hsu", "display": "Kevin Hsu", "brokerage": "Fieldstone Agents"}
+  ],
+  "showings": [
+    {"id": "SH-2041", "listing": "alder", "by": "pena", "start": "2026-10-03T14:00:00Z", "end": "2026-10-03T14:30:00Z"},
+    {"id": "SH-2042", "listing": "birch", "by": "okoye", "start": "2026-10-03T17:00:00Z", "end": "2026-10-03T17:30:00Z"},
+    {"id": "SH-2047", "listing": "cedar", "by": "brandt", "start": "2026-10-04T18:00:00Z", "end": "2026-10-04T18:45:00Z"},
+    {"id": "SH-2050", "listing": "alder", "by": "hsu", "start": "2026-10-05T15:00:00Z", "end": "2026-10-05T15:30:00Z"},
+    {"id": "SH-2053", "listing": "birch", "by": "pena", "start": "2026-10-06T16:30:00Z", "end": "2026-10-06T17:00:00Z"},
+    {"id": "SH-2056", "listing": "cedar", "by": "okoye", "start": "2026-10-07T19:00:00Z", "end": "2026-10-07T19:30:00Z"},
+    {"id": "SH-2058", "listing": "alder", "by": "brandt", "start": "2026-10-08T16:00:00Z", "end": "2026-10-08T16:30:00Z"},
+    {"id": "SH-2061", "listing": "birch", "by": "hsu", "start": "2026-10-09T14:00:00Z", "end": "2026-10-09T14:30:00Z"}
+  ],
+  "texts": [
+    {"id": "t1", "by": "pena", "ts": "2026-10-03T15:10:00Z", "concerns": ["kitchen"],
+     "text": "Showed 14 Alder Lane this morning. Buyers loved the light but said the kitchen is dated."},
+    {"id": "t2", "by": "okoye", "ts": "2026-10-03T19:40:00Z", "concerns": ["price", "noise"],
+     "text": "Thanks for letting us in today. My buyers felt it was overpriced for the size, and the street noise from the main road bothered them."},
+    {"id": "t3", "by": "brandt", "ts": "2026-10-04T20:05:00Z", "concerns": ["ceiling", "garage"],
+     "text": "Feedback from this afternoon: they liked the layout, but the basement ceiling is too low for them and they need a garage."},
+    {"id": "t4", "by": "hsu", "ts": "2026-10-05T16:30:00Z", "concerns": ["yard"],
+     "text": "Quick feedback: the backyard is too small for their dog. Otherwise a strong contender."},
+    {"id": "t5", "by": "pena", "ts": "2026-10-06T18:00:00Z", "concerns": ["price"],
+     "text": "22 Birch Court: buyers said the price is high compared to what they have seen nearby."},
+    {"id": "t6", "by": "okoye", "ts": "2026-10-07T21:15:00Z", "concerns": ["water"],
+     "text": "My clients noticed a water stain on the basement wall and got nervous."},
+    {"id": "t7", "by": "brandt", "ts": "2026-10-08T17:20:00Z", "concerns": ["kitchen"],
+     "text": "In their opinion the kitchen needs a full redo before they could live there."},
+    {"id": "t8", "by": "hsu", "ts": "2026-10-09T15:45:00Z", "concerns": ["noise"],
+     "text": "They couldn't get past the traffic noise. Nice finishes though."}
+  ],
+  "questions": [
+    {"id": "Q1", "kind": "concerns", "listing": "alder", "what": "concerns about 14 Alder Lane", "truth": "dated kitchen, small backyard",
+     "ask": "What concerns have buyers raised about 14 Alder Lane after showings? List each concern once."},
+    {"id": "Q2", "kind": "concerns", "listing": "birch", "what": "concerns about 22 Birch Court", "truth": "price, street noise",
+     "ask": "What concerns have buyers raised about 22 Birch Court after showings? List each concern once."},
+    {"id": "Q3", "kind": "concerns", "listing": "cedar", "what": "concerns about 9 Cedar Row", "truth": "basement ceiling, no garage, water stain",
+     "ask": "What concerns have buyers raised about 9 Cedar Row after showings? List each concern once."},
+    {"id": "Q4", "kind": "which", "listing": "birch", "what": "which listing was called overpriced", "truth": "22 Birch Court only",
+     "ask": "Which of our listings have buyers called overpriced? List each listing once."}
+  ]
+}
