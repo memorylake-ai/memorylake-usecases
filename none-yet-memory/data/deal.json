@@ -1,0 +1,76 @@
+{
+  "org": "Tallyfern",
+  "customer": "Brackwell Freight",
+  "deal": "dock scheduling",
+  "today": "2026-10-15",
+  "system": "You are Tallyfern's sales assistant, preparing Mara Ellison for her next call with Brackwell Freight. Today is {today}. Answer from the team's account memory in one or two sentences.",
+  "people": [
+    {"key": "ae", "display": "Mara Ellison", "role": "account executive, Tallyfern"},
+    {"key": "se", "display": "Owen Pratt", "role": "solutions engineer, Tallyfern"},
+    {"key": "ops", "display": "Priya Raman", "role": "VP Operations, Brackwell Freight"},
+    {"key": "fin", "display": "Dev Kaul", "role": "CFO, Brackwell Freight"}
+  ],
+  "calls": [
+    {"id": "C1", "name": "Discovery call 1", "at": "2026-09-01T09:00:00Z", "lines": [
+      ["ops", "Our dock scheduling is all spreadsheets. Drivers wait two hours on a bad day."],
+      ["ae", "Thanks Priya. Is there budget set aside for fixing this?"],
+      ["ops", "Honestly, no. Nothing is budgeted for it this year."],
+      ["ops", "Our contract with the current yard system ends on 31 March 2027."],
+      ["ae", "Recap for the team, as of today: there is no budget for this, nobody at Brackwell has agreed to champion it, no other vendor is in the picture, none of their decision makers has seen a demo yet, and we haven't met anyone from their procurement team."]
+    ]},
+    {"id": "C2", "name": "Discovery call 2", "at": "2026-09-15T09:00:00Z", "lines": [
+      ["fin", "Finance approved 140,000 dollars for dock scheduling in the Q4 plan."],
+      ["ae", "Great, thank you Dev."]
+    ]},
+    {"id": "C3", "name": "Discovery call 3", "at": "2026-09-29T09:00:00Z", "lines": [
+      ["ops", "I will take this to our steering committee myself. Consider me your sponsor."],
+      ["ops", "For transparency, we are also talking to Quaystride Software."]
+    ]},
+    {"id": "C4", "name": "Product demo", "at": "2026-10-08T09:00:00Z", "lines": [
+      ["se", "Thanks for joining the demo today, Priya and Dev."],
+      ["fin", "That was useful. The slot-booking screen is what our carriers need."]
+    ]}
+  ],
+  "topics": [
+    {"id": "budget", "what": "Budget", "truth": "140,000 dollars, approved 2026-09-15",
+     "said": "there is no budget for this",
+     "neg": "\\bno budget|not budgeted|nothing (?:is )?budgeted|no (?:funds|money)|no budget allocated|没有预算|未.{0,6}预算|无预算",
+     "pos": "140,?000|140k|14 ?万",
+     "log": {"on": "2026-09-15", "text": "Deal log 2026-09-15: Dev Kaul (CFO) confirmed Brackwell Freight's finance team approved a 140,000 dollar budget for dock scheduling in the Q4 plan."},
+     "ask": "What budget does Brackwell Freight have for dock scheduling?",
+     "ok": "140,?000|\\$?140k", "stale": "\\bno budget|not budgeted|nothing (?:is )?budgeted|(?:has|have) no\\b|does not have|doesn't have"},
+    {"id": "champion", "what": "Champion", "truth": "Priya Raman, since 2026-09-29",
+     "said": "nobody at Brackwell has agreed to champion it",
+     "neg": "(?:no ?one|nobody|no person|not .{0,20}anyone).{0,60}(?:champion|sponsor)|no champion|没有人.{0,20}(?:支持|倡导|推动|champion|担任)|尚无.{0,10}(?:支持者|倡导者)",
+     "pos": "champion|sponsor|steering committee|倡导|支持者|发起人",
+     "log": {"on": "2026-09-29", "text": "Deal log 2026-09-29: Priya Raman (VP Operations, Brackwell Freight) agreed to champion the dock scheduling project and will take it to the steering committee."},
+     "ask": "Who is our champion at Brackwell Freight?",
+     "ok": "Priya", "stale": "\\bno ?one\\b|nobody|no champion|not (?:yet )?(?:identified|agreed|have a)|don't have a|do not have a|\\bnone\\b"},
+    {"id": "competition", "what": "Other vendors", "truth": "Quaystride Software, since 2026-09-29",
+     "said": "no other vendor is in the picture",
+     "neg": "no other vendors?|no (?:competitors?|competing vendors?)|没有其他(?:供应商|厂商|竞争)",
+     "pos": "Quaystride",
+     "log": {"on": "2026-09-29", "text": "Deal log 2026-09-29: Brackwell Freight is also evaluating Quaystride Software for dock scheduling."},
+     "ask": "Which other vendors is Brackwell Freight evaluating?",
+     "ok": "Quaystride", "stale": "no other|\\bnone\\b|not (?:currently )?(?:evaluating|talking|considering)|no (?:competitors?|vendors?)"},
+    {"id": "demo", "what": "Demo seen by", "truth": "Priya Raman and Dev Kaul, on 2026-10-08",
+     "said": "none of their decision makers has seen a demo yet",
+     "neg": "(?:none|no ?one|nobody|no decision[- ]makers?)\\b.{0,80}\\bdemo|demo.{0,40}\\b(?:not|yet to)\\b|没有.{0,30}演示|尚未.{0,30}演示|未.{0,10}看过.{0,10}演示",
+     "pos": "\\bdemo|演示",
+     "log": {"on": "2026-10-08", "text": "Deal log 2026-10-08: Tallyfern demoed the product to Priya Raman (VP Operations) and Dev Kaul (CFO) of Brackwell Freight."},
+     "ask": "Which of Brackwell Freight's decision makers have seen a demo?",
+     "ok": "Priya.*Dev|Dev.*Priya", "part": "Priya|Dev",
+     "stale": "\\bnone\\b|\\bno ?one\\b|nobody|not (?:yet )?seen|have(?:n't| not) (?:yet )?seen|has(?:n't| not) (?:yet )?seen|no decision"},
+    {"id": "procurement", "what": "Procurement met", "truth": "nobody yet (still true)",
+     "said": "we haven't met anyone from their procurement team",
+     "neg": "procurement|采购",
+     "pos": "procurement|采购",
+     "ask": "Who from Brackwell Freight's procurement team have we met so far?",
+     "ok": "\\bno ?one\\b|nobody|\\bnone\\b|not (?:yet )?met|haven't (?:yet )?met|have not (?:yet )?met|hasn't|has not|no (?:one|members?|record|information|meetings?)|not (?:yet )?(?:been )?(?:in contact|involved|engaged)|not .{0,20}anyone|no indication|does not (?:mention|include|specify)|doesn't (?:mention|include|specify)|not mentioned|not specified",
+     "stale": "$^"},
+    {"id": "yard", "what": "Yard contract ends", "truth": "31 March 2027 (control)",
+     "said": "", "neg": "$^", "pos": "yard|堆场",
+     "ask": "When does Brackwell Freight's current yard system contract end?",
+     "ok": "31 March 2027|March 31,? 2027|2027-03-31", "stale": "$^"}
+  ]
+}
