@@ -4,7 +4,9 @@ A runnable version of the MemoryLake use case
 [*Give Sales Teams Discovery Question Memory That Makes Every Rep Ask What Works*](https://www.memorylake.ai/en/usecase/discovery-question-memory-for-sales-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 6:33](https://github.com/memorylake-ai/memorylake-usecases/releases/download/none-yet-memory-v1/none-yet-memory-cli-demo.mp4) · [Web, 7:54](https://github.com/memorylake-ai/memorylake-usecases/releases/download/none-yet-memory-v1/none-yet-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/none-yet-memory-v1); GitHub serves them as downloads). In the Web recording, copy A's
+procurement question came back ∅ three times: extraction hadn't kept that "not yet" in A on that run.
 
 **The problem.** Discovery is a list of things you don't know yet: no budget, no champion, no competitor, nobody has
 seen a demo, nobody from procurement met. A rep says that list out loud at the end of the first call, and memory
@@ -29,31 +31,31 @@ they are also talking to Quaystride Software (fictional) (29 September); the pro
 
 | copy | what is stored | ended "not yet" still in memory | sales assistant's answers right |
 |---|---|---|---|
-| **A** | the calls only | **12 / 24** | **69 / 104** (33 times the old "not yet") |
-| **B** | the calls + the deal log the app writes from its CRM activity: one dated fact per event | **11 / 24** | **99 / 104** |
-| **C** | B + the app retires every "not yet" that a logged event ended; the one that is still true stays | **0 / 24** | **104 / 108** |
+| **A** | the calls only | **16 / 32** | **93 / 140** (44 times the old "not yet") |
+| **B** | the calls + the deal log the app writes from its CRM activity: one dated fact per event | **14 / 32** | **135 / 140** |
+| **C** | B + the app retires every "not yet" that a logged event ended; the one that is still true stays | **0 / 32** | **140 / 144** |
 
-Measured over 6 complete runs (4 ended "not yet"s per run; the assistant's answers are 6 questions × 3 at
+Measured over 8 complete runs (4 ended "not yet"s per run; the assistant's answers are 6 questions × 3 at
 temperature 0.7 on `gpt-4o-mini` through MemoryRouter; ∅ calls, where MemoryRouter attached nothing, are left out of
 the denominator).
 
-- **Which "not yet" survives depends on how the change was said, not on what changed.** In copy A, all 6 runs:
+- **Which "not yet" survives depends on how the change was said, not on what changed.** In copy A, all 8 runs:
   the budget ("Finance approved 140,000 dollars") and the competitor ("we are also talking to Quaystride") rewrote
   their "not yet" in place; the sponsor offer ("Consider me your sponsor") and the demo ("Thanks for joining the demo
   today, Priya and Dev") did not. The demo was never remembered as an event, and the sponsor offer landed only on
   Priya Raman's own actor ("The person is the sponsor", once in Spanish), outside the account project the assistant
-  reads. (The same calls in copy B once did rewrite the champion "not yet", 1 of 6 runs.)
-- **The assistant gives the old "not yet" as today's answer every time it is there.** Champion 0 / 17 in A (15 of them
-  "nobody has agreed to champion it"), demo 0 / 18 (all 18 "none of them has seen a demo").
-- **Writing the event fixes the answer even with the old "not yet" still in memory.** B: champion 18 / 18, demo
-  18 / 18. The model reads both facts and takes the later one.
+  reads. (The same calls in copy B rewrote the champion "not yet" in 2 of 8 runs.)
+- **The assistant gives the old "not yet" as today's answer every time it is there.** Champion 0 / 23 in A (20 of them
+  "nobody has agreed to champion it"), demo 0 / 24 (all 24 "none of them has seen a demo").
+- **Writing the event fixes the answer even with the old "not yet" still in memory.** B: champion 24 / 24, demo
+  24 / 24. The model reads both facts and takes the later one.
 - **A "not yet" that is still true carries weight.** "We haven't met anyone from their procurement team" is still
-  true today. Extraction didn't keep it in 3 of 18 copies, and every answer in those copies was wrong: in B and C
+  true today. Extraction didn't keep it in 3 of 24 copies, and every answer in those copies was wrong: in B and C
   "you have met Priya Raman and Dev Kaul from their procurement team" (6 / 6; the deal log had told it they were met,
   and nothing said procurement wasn't), in A MemoryRouter attached nothing and the model made up two names (3 / 3).
-  With the fact there, 44 / 45.
+  With the fact there, 62 / 63.
 - **The control question** (the current yard-system contract ends 31 March 2027) is right whenever MemoryRouter
-  attaches something; in B, 4 of 18 calls attached nothing (∅), and the 2 other answers in those two
+  attaches something; in B, 4 of 24 calls attached nothing (∅), and the 2 other answers in those two
   runs were wrong.
 - MemoryLake's contradiction check (`fact conflict list`) raised nothing in a probe with the same calls: "nobody has
   agreed to champion it (as of 09-01)" and "Priya agreed to champion it (09-29)" are both true, on different days.
@@ -257,11 +259,13 @@ had nothing attached (∅).
 | parallel copy 2 | 2/4 | 2/4 | 0/4 | 12/18 | 18/18 | 15/18 |
 | `--reset` | 2/4 | 2/4 | 0/4 | 12/18 | 15/16 (∅ 2) | 18/18 |
 | browser check (= the Web recording) | 2/4 | 1/4 | 0/4 | 9/15 (∅ 3) | 18/18 | 18/18 |
-| **total** | **12/24** | **11/24** | **0/24** | **69/104** (∅ 4) | **99/104** (∅ 4) | **104/108** |
+| CLI recording, first take (the run finished; the `ask` line was mistyped, so the video was redone) | 2/4 | 2/4 | 0/4 | 12/18 | 18/18 | 18/18 |
+| CLI recording | 2/4 | 1/4 | 0/4 | 12/18 | 18/18 | 18/18 |
+| **total** | **16/32** | **14/32** | **0/32** | **93/140** (∅ 4) | **135/140** (∅ 4) | **140/144** |
 
-Answers right per question, A / B / C (18 each, ∅ left out): budget 18 / 18 / 18 · champion 0/17 / 18 / 18 ·
-other vendors 18 / 18 / 18 · demo 0 / 18 / 18 · procurement (still true) 15/15 / 15 / 14 · yard contract (control)
-18 / 12/14 / 18. Every miss in B and C is in the procurement question of the copy where that "not yet" wasn't
+Answers right per question, A / B / C (24 each, ∅ left out): budget 24 / 24 / 24 · champion 0/23 / 24 / 24 ·
+other vendors 24 / 24 / 24 · demo 0 / 24 / 24 · procurement (still true) 21/21 / 21 / 20 · yard contract (control)
+24 / 18/20 / 24. Every miss in B and C is in the procurement question of the copy where that "not yet" wasn't
 extracted (3 each), C's one other procurement miss ("you have met Priya Raman and Dev Kaul from Brackwell Freight",
 with the procurement fact in memory), or B's control question in the two runs where it went ∅.
 
