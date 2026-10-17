@@ -1,0 +1,462 @@
+{
+ "org": "Brightwell Studio",
+ "today": "2026-10-17",
+ "system": "You are the new-business assistant at Brightwell Studio, an agency. You help write case studies from what the studio remembers about past client campaigns. Today is {today}. Answer a figure question with the figure and one short sentence. If the figure for that client and campaign is not remembered, start with Unknown.",
+ "people": [
+  {
+   "key": "ad",
+   "display": "Maya Lindqvist",
+   "role": "Account director, Brightwell Studio"
+  },
+  {
+   "key": "pa",
+   "display": "Owen Achterberg",
+   "role": "Paid media lead, Brightwell Studio"
+  },
+  {
+   "key": "cr",
+   "display": "Lucia Ferraz",
+   "role": "Creative lead, Brightwell Studio"
+  }
+ ],
+ "calls": [
+  {
+   "id": "halden",
+   "client": "Halden Bikes",
+   "contact": "Rafe Donnelly",
+   "contact_role": "Marketing manager, Halden Bikes",
+   "campaign": "spring commuter campaign",
+   "at": "2026-04-29T09:00:00Z",
+   "lines": [
+    [
+     "ad",
+     "This is the wrap-up for the Halden Bikes spring commuter campaign, which ran March 3 to April 27."
+    ],
+    [
+     "client",
+     "Our team loved the Ride the Long Way Round creative, and we want to run it again in the autumn."
+    ],
+    [
+     "pa",
+     "Paid social click-through rate came in at 2.7 percent."
+    ],
+    [
+     "pa",
+     "Cost per lead came in at 18.40 dollars."
+    ],
+    [
+     "ad",
+     "Email open rate came in at 41 percent."
+    ],
+    [
+     "client",
+     "Test rides booked through the site came in at 1,180."
+    ],
+    [
+     "ad",
+     "Next step: I will draft the case study for the new business team by Friday."
+    ]
+   ],
+   "metrics": [
+    {
+     "id": "ctr",
+     "what": "paid social click-through rate",
+     "value": "2.7 percent",
+     "re": "(?<![\\d.,])2\\.7(?![\\d])",
+     "line": 2
+    },
+    {
+     "id": "cpl",
+     "what": "cost per lead",
+     "value": "18.40 dollars",
+     "re": "(?<![\\d.,])18\\.40?(?![\\d])",
+     "line": 3
+    },
+    {
+     "id": "open",
+     "what": "email open rate",
+     "value": "41 percent",
+     "re": "(?<![\\d.,])41(?![\\d])",
+     "line": 4
+    },
+    {
+     "id": "rides",
+     "what": "test rides booked",
+     "value": "1,180",
+     "re": "(?<![\\d.,])1,?180(?![\\d])",
+     "line": 5
+    }
+   ],
+   "name_re": "\\bHalden\\b",
+   "ask": [
+    "cpl",
+    "rides"
+   ]
+  },
+  {
+   "id": "orla",
+   "client": "Orla Kitchens",
+   "contact": "Dana Whitcombe",
+   "contact_role": "Head of brand, Orla Kitchens",
+   "campaign": "showroom launch",
+   "at": "2026-05-14T09:00:00Z",
+   "lines": [
+    [
+     "ad",
+     "This is the wrap-up for the Orla Kitchens showroom launch, which ran April 6 to May 10."
+    ],
+    [
+     "client",
+     "The store team said the opening weekend was the busiest they have had."
+    ],
+    [
+     "pa",
+     "Showroom visits booked online came in at 640."
+    ],
+    [
+     "pa",
+     "Cost per booked visit came in at 31 dollars."
+    ],
+    [
+     "cr",
+     "Video completion rate came in at 58 percent."
+    ],
+    [
+     "client",
+     "Average order value came in at 9,400 dollars."
+    ],
+    [
+     "ad",
+     "Next step: Lucia will pull the best stills for the case study."
+    ]
+   ],
+   "metrics": [
+    {
+     "id": "visits",
+     "what": "showroom visits booked online",
+     "value": "640",
+     "re": "(?<![\\d.,])640(?![\\d])",
+     "line": 2
+    },
+    {
+     "id": "cpv",
+     "what": "cost per booked visit",
+     "value": "31 dollars",
+     "re": "(?<![\\d.,])31(?![\\d])",
+     "line": 3
+    },
+    {
+     "id": "vcr",
+     "what": "video completion rate",
+     "value": "58 percent",
+     "re": "(?<![\\d.,])58(?![\\d])",
+     "line": 4
+    },
+    {
+     "id": "aov",
+     "what": "average order value",
+     "value": "9,400 dollars",
+     "re": "(?<![\\d.,])9,?400(?![\\d])",
+     "line": 5
+    }
+   ],
+   "name_re": "\\bOrla\\b",
+   "ask": [
+    "cpv",
+    "aov"
+   ]
+  },
+  {
+   "id": "fenmore",
+   "client": "Fenmore Tea",
+   "contact": "Arjun Basu",
+   "contact_role": "E-commerce lead, Fenmore Tea",
+   "campaign": "subscription push",
+   "at": "2026-06-03T09:00:00Z",
+   "lines": [
+    [
+     "ad",
+     "This is the wrap-up for the Fenmore Tea subscription push, which ran May 4 to May 31."
+    ],
+    [
+     "client",
+     "We are keeping the two-week free trial offer on the site."
+    ],
+    [
+     "pa",
+     "New subscriptions came in at 2,350."
+    ],
+    [
+     "pa",
+     "Cost per acquisition came in at 22.60 dollars."
+    ],
+    [
+     "ad",
+     "Trial to paid conversion came in at 37 percent."
+    ],
+    [
+     "client",
+     "Churn in the first month came in at 8 percent."
+    ],
+    [
+     "ad",
+     "Next step: Maya will send the final report to Arjun on Thursday."
+    ]
+   ],
+   "metrics": [
+    {
+     "id": "subs",
+     "what": "new subscriptions",
+     "value": "2,350",
+     "re": "(?<![\\d.,])2,?350(?![\\d])",
+     "line": 2
+    },
+    {
+     "id": "cpa",
+     "what": "cost per acquisition",
+     "value": "22.60 dollars",
+     "re": "(?<![\\d.,])22\\.60?(?![\\d])",
+     "line": 3
+    },
+    {
+     "id": "t2p",
+     "what": "trial to paid conversion",
+     "value": "37 percent",
+     "re": "(?<![\\d.,])37(?![\\d])",
+     "line": 4
+    },
+    {
+     "id": "churn",
+     "what": "first-month churn",
+     "value": "8 percent",
+     "re": "(?<![\\d.,])8(?:\\.0)?\\s*(?:%|percent)",
+     "line": 5
+    }
+   ],
+   "name_re": "\\bFenmore\\b",
+   "ask": [
+    "cpa",
+    "t2p"
+   ]
+  },
+  {
+   "id": "tallis",
+   "client": "Tallis Credit Union",
+   "contact": "Grace Okafor",
+   "contact_role": "Marketing director, Tallis Credit Union",
+   "campaign": "first-home loan campaign",
+   "at": "2026-07-08T09:00:00Z",
+   "lines": [
+    [
+     "ad",
+     "This is the wrap-up for the Tallis Credit Union first-home loan campaign, which ran June 1 to July 3."
+    ],
+    [
+     "client",
+     "Branch staff liked the plain-language rate explainer and want it in the branches."
+    ],
+    [
+     "pa",
+     "Loan enquiries came in at 412."
+    ],
+    [
+     "pa",
+     "Cost per enquiry came in at 47 dollars."
+    ],
+    [
+     "cr",
+     "Rate calculator completions came in at 3,060."
+    ],
+    [
+     "client",
+     "Approved applications came in at 96."
+    ],
+    [
+     "ad",
+     "Next step: Owen will hand the audience lists over to Grace's team."
+    ]
+   ],
+   "metrics": [
+    {
+     "id": "enq",
+     "what": "loan enquiries",
+     "value": "412",
+     "re": "(?<![\\d.,])412(?![\\d])",
+     "line": 2
+    },
+    {
+     "id": "cpe",
+     "what": "cost per enquiry",
+     "value": "47 dollars",
+     "re": "(?<![\\d.,])47(?![\\d])",
+     "line": 3
+    },
+    {
+     "id": "calc",
+     "what": "rate calculator completions",
+     "value": "3,060",
+     "re": "(?<![\\d.,])3,?060(?![\\d])",
+     "line": 4
+    },
+    {
+     "id": "approved",
+     "what": "approved applications",
+     "value": "96",
+     "re": "(?<![\\d.,])96(?![\\d])",
+     "line": 5
+    }
+   ],
+   "name_re": "\\bTallis\\b",
+   "ask": [
+    "cpe",
+    "approved"
+   ]
+  },
+  {
+   "id": "corva",
+   "client": "Corva Outdoor",
+   "contact": "Nils Sorensen",
+   "contact_role": "Brand manager, Corva Outdoor",
+   "campaign": "trail shoe launch",
+   "at": "2026-08-12T09:00:00Z",
+   "lines": [
+    [
+     "ad",
+     "This is the wrap-up for the Corva Outdoor trail shoe launch, which ran July 6 to August 9."
+    ],
+    [
+     "client",
+     "The athlete films did better than anything we have run before."
+    ],
+    [
+     "pa",
+     "Return on ad spend came in at 5.1."
+    ],
+    [
+     "pa",
+     "Paid search cost per click came in at 0.86 dollars."
+    ],
+    [
+     "cr",
+     "Social video views came in at 1.9 million."
+    ],
+    [
+     "client",
+     "Online sell-through came in at 73 percent."
+    ],
+    [
+     "ad",
+     "Next step: Maya will ask Nils for sign-off to name Corva in the case study."
+    ]
+   ],
+   "metrics": [
+    {
+     "id": "roas",
+     "what": "return on ad spend",
+     "value": "5.1",
+     "re": "(?<![\\d.,])5\\.1(?![\\d])",
+     "line": 2
+    },
+    {
+     "id": "cpc",
+     "what": "paid search cost per click",
+     "value": "0.86 dollars",
+     "re": "(?<![\\d.,])0?\\.86(?![\\d])",
+     "line": 3
+    },
+    {
+     "id": "views",
+     "what": "social video views",
+     "value": "1.9 million",
+     "re": "(?<![\\d.,])1\\.9(?![\\d])",
+     "line": 4
+    },
+    {
+     "id": "sell",
+     "what": "online sell-through",
+     "value": "73 percent",
+     "re": "(?<![\\d.,])73(?![\\d])",
+     "line": 5
+    }
+   ],
+   "name_re": "\\bCorva\\b",
+   "ask": [
+    "roas",
+    "cpc"
+   ]
+  },
+  {
+   "id": "pellow",
+   "client": "Pellow Health",
+   "contact": "Imogen Hart",
+   "contact_role": "Growth lead, Pellow Health",
+   "campaign": "clinic finder relaunch",
+   "at": "2026-09-16T09:00:00Z",
+   "lines": [
+    [
+     "ad",
+     "This is the wrap-up for the Pellow Health clinic finder relaunch, which ran August 10 to September 13."
+    ],
+    [
+     "client",
+     "The new search page got far fewer complaints from patients."
+    ],
+    [
+     "pa",
+     "Appointments booked through the finder came in at 5,200."
+    ],
+    [
+     "pa",
+     "Cost per booking came in at 6.75 dollars."
+    ],
+    [
+     "ad",
+     "Search to booking conversion came in at 12.4 percent."
+    ],
+    [
+     "client",
+     "Bounce rate on the finder came in at 29 percent."
+    ],
+    [
+     "ad",
+     "Next step: Lucia will send the before and after screenshots."
+    ]
+   ],
+   "metrics": [
+    {
+     "id": "appts",
+     "what": "appointments booked through the finder",
+     "value": "5,200",
+     "re": "(?<![\\d.,])5,?200(?![\\d])",
+     "line": 2
+    },
+    {
+     "id": "cpb",
+     "what": "cost per booking",
+     "value": "6.75 dollars",
+     "re": "(?<![\\d.,])6\\.75(?![\\d])",
+     "line": 3
+    },
+    {
+     "id": "conv",
+     "what": "search to booking conversion",
+     "value": "12.4 percent",
+     "re": "(?<![\\d.,])12\\.4(?![\\d])",
+     "line": 4
+    },
+    {
+     "id": "bounce",
+     "what": "finder bounce rate",
+     "value": "29 percent",
+     "re": "(?<![\\d.,])29(?![\\d])",
+     "line": 5
+    }
+   ],
+   "name_re": "\\bPellow\\b",
+   "ask": [
+    "cpb",
+    "conv"
+   ]
+  }
+ ]
+}
