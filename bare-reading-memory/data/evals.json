@@ -1,0 +1,80 @@
+{
+  "org": "Quillfold",
+  "today": "2026-10-17",
+  "system": "You are the release assistant for Quillfold's AI support agent team. Answer from what the team remembers. Today is {today}. For a ship or go decision, start your reply with Yes, No or Unknown, then one sentence why. For a number, give the number, or say Unknown if it is not remembered.",
+  "people": [
+    {"key": "ml", "display": "Priya Natarajan", "role": "ML lead, Quillfold"},
+    {"key": "eng", "display": "Jonah Park", "role": "Engineering lead, Quillfold"},
+    {"key": "ops", "display": "Aisha Bello", "role": "Support operations lead, Quillfold"},
+    {"key": "pm", "display": "Tomas Reyes", "role": "Product manager, Quillfold"}
+  ],
+  "gates_meeting": {"id": "G", "name": "Release gates 14 Sep", "at": "2026-09-14T09:00:00Z"},
+  "evals_meeting": {"id": "E", "name": "Eval sync 15 Oct", "at": "2026-10-15T09:00:00Z"},
+  "harness": {"run": "2026-10-15", "source": "eval set v4, 2,000 recorded support sessions"},
+  "items": [
+    {
+      "id": "reranker", "what": "New reranker", "speaker": "ml",
+      "gate": "We ship the new reranker only if recall at 10 on the eval set is at least 0.85.",
+      "bare": "Recall at 10 for the new reranker came in at 0.81.",
+      "verdict": "Recall at 10 for the new reranker came in at 0.81, under the 0.85 bar, so the new reranker does not ship.",
+      "metric": "recall at 10 for the new reranker", "value": "0.81", "unit": "", "bar": "0.85",
+      "value_re": "\\b0?\\.81\\b",
+      "topic": "rerank",
+      "ask": "Does the new reranker ship?", "truth": "N"
+    },
+    {
+      "id": "small_model", "what": "Smaller model", "speaker": "eng",
+      "gate": "We move the agent to the smaller model only if p95 latency stays under 900 milliseconds.",
+      "bare": "p95 latency on the smaller model came in at 1,140 milliseconds.",
+      "verdict": "p95 latency on the smaller model came in at 1,140 milliseconds, over the 900 millisecond limit, so the agent stays on the current model.",
+      "metric": "p95 latency on the smaller model", "value": "1,140", "unit": " milliseconds", "bar": "900",
+      "value_re": "\\b1,?140\\b|\\b1\\.14 ?s",
+      "topic": "smaller model|small model|current model|p95|latency",
+      "ask": "Does the agent move to the smaller model?", "truth": "N"
+    },
+    {
+      "id": "cache", "what": "Response cache", "speaker": "ops",
+      "gate": "We turn the response cache on only if the cache hit rate is above 40 percent.",
+      "bare": "The response cache hit rate came in at 52 percent.",
+      "verdict": "The response cache hit rate came in at 52 percent, above the 40 percent bar, so we turn the cache on.",
+      "metric": "response cache hit rate", "value": "52", "unit": " percent", "bar": "40",
+      "value_re": "\\b52(?:\\.0)?\\s?(?:%|percent)",
+      "topic": "cache",
+      "ask": "Does the response cache get turned on?", "truth": "Y"
+    },
+    {
+      "id": "compaction", "what": "Memory compaction job", "speaker": "eng",
+      "gate": "The memory compaction job ships only if token cost per session drops below 3 cents.",
+      "bare": "Token cost per session with the compaction job came in at 2.6 cents.",
+      "verdict": "Token cost per session with the compaction job came in at 2.6 cents, below the 3 cent target, so the compaction job ships.",
+      "metric": "token cost per session with the memory compaction job", "value": "2.6", "unit": " cents", "bar": "3",
+      "value_re": "\\b2\\.6\\s?(?:cents?|¢)|\\$0\\.026\\b",
+      "topic": "compaction|token cost",
+      "ask": "Does the memory compaction job ship?", "truth": "Y"
+    },
+    {
+      "id": "router_v2", "what": "Tool router v2", "speaker": "pm",
+      "gate": "Tool router v2 goes GA only if the tool-call error rate is under 2 percent.",
+      "bare": "The tool-call error rate on tool router v2 came in at 3.7 percent.",
+      "verdict": "The tool-call error rate on tool router v2 came in at 3.7 percent, over the 2 percent limit, so tool router v2 does not go GA.",
+      "metric": "tool-call error rate on tool router v2", "value": "3.7", "unit": " percent", "bar": "2",
+      "value_re": "\\b3\\.7\\s?(?:%|percent)",
+      "topic": "router v2|tool router|tool-call error",
+      "ask": "Does tool router v2 go GA?", "truth": "N"
+    },
+    {
+      "id": "buffer", "what": "Remove the summarization buffer", "speaker": "ml",
+      "gate": "We remove the summarization buffer only if task success on long sessions is at least 78 percent.",
+      "bare": "Task success on long sessions without the summarization buffer came in at 81 percent.",
+      "verdict": "Task success on long sessions without the summarization buffer came in at 81 percent, above the 78 percent bar, so we remove the buffer.",
+      "metric": "task success on long sessions without the summarization buffer", "value": "81", "unit": " percent", "bar": "78",
+      "value_re": "\\b81(?:\\.0)?\\s?(?:%|percent)",
+      "topic": "summari[sz]ation buffer|long sessions|task success",
+      "ask": "Do we remove the summarization buffer?", "truth": "Y"
+    }
+  ],
+  "figures": [
+    {"id": "recall_value", "of": "reranker", "what": "Reranker recall at 10", "ask": "What did recall at 10 come in at for the new reranker?"},
+    {"id": "p95_value", "of": "small_model", "what": "Smaller model p95", "ask": "What was p95 latency on the smaller model?"}
+  ]
+}
