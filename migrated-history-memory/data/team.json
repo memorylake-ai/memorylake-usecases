@@ -1,0 +1,80 @@
+{
+  "company": "Tallowmere",
+  "assistant": "Relay",
+  "channel": "#platform",
+  "old_stack": "LangChain + ConversationBufferMemory",
+  "new_stack": "LangGraph + MemoryLake",
+  "people": [
+    {
+      "key": "ines",
+      "display": "Ines Moreau",
+      "role": "platform lead",
+      "city": "London",
+      "tz": "Europe/London"
+    },
+    {
+      "key": "tomas",
+      "display": "Tomas Brandt",
+      "role": "site reliability engineer",
+      "city": "London",
+      "tz": "Europe/London"
+    }
+  ],
+  "items": [
+    {
+      "id": "cert",
+      "thread": "t-0914",
+      "what": "TLS certificate on api.tallowmere.io expires",
+      "said": "two weeks from today",
+      "days": 14,
+      "match": "certificate|\\bTLS\\b",
+      "ask": "When does the TLS certificate on api.tallowmere.io expire?"
+    },
+    {
+      "id": "cron",
+      "thread": "t-0914",
+      "what": "Old reconciliation cron switched off",
+      "said": "tomorrow",
+      "days": 1,
+      "match": "reconciliation|cron",
+      "ask": "When was the old reconciliation cron job switched off?"
+    },
+    {
+      "id": "webhooks",
+      "thread": "t-0923",
+      "what": "Paylane sunsets the v1 webhooks API",
+      "said": "ten days from today",
+      "days": 10,
+      "match": "webhook|Paylane",
+      "ask": "When does Paylane sunset the v1 webhooks API?"
+    },
+    {
+      "id": "soc2",
+      "thread": "t-0923",
+      "what": "SOC 2 evidence pack due to the auditors",
+      "said": "the day after tomorrow",
+      "days": 2,
+      "match": "SOC ?2|evidence|auditor",
+      "ask": "When is the SOC 2 evidence pack due to the auditors?"
+    },
+    {
+      "id": "postgres",
+      "thread": "t-1001",
+      "what": "Postgres 16 upgrade window",
+      "said": "the day after tomorrow",
+      "days": 2,
+      "match": "Postgres|upgrade window",
+      "ask": "When is the Postgres 16 upgrade window?"
+    },
+    {
+      "id": "oncall",
+      "thread": "t-1001",
+      "what": "On-call handed over to Mateo",
+      "said": "tomorrow",
+      "days": 1,
+      "match": "on-?call|Mateo|hand",
+      "ask": "When does Ines hand on-call over to Mateo?"
+    }
+  ],
+  "system": "You are Relay, the platform team's assistant at Tallowmere. Today is {today}. Use the team's memory. Reply in one line: \"Date: YYYY-MM-DD\" (the day the thing happens or happened, not today's date), then at most one short sentence."
+}

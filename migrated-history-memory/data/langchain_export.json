@@ -1,0 +1,182 @@
+{
+  "exported_with": "langchain_core.messages.messages_to_dict(memory.chat_memory.messages)",
+  "threads": [
+    {
+      "thread_id": "t-0914",
+      "messages": [
+        {
+          "type": "human",
+          "data": {
+            "content": "Heads-up: the TLS certificate on api.tallowmere.io expires two weeks from today. I've asked security to renew it.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": "ines",
+            "id": null,
+            "example": false
+          }
+        },
+        {
+          "type": "ai",
+          "data": {
+            "content": "Noted: TLS certificate on api.tallowmere.io expires in two weeks; security is renewing it.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": "relay",
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+          }
+        },
+        {
+          "type": "human",
+          "data": {
+            "content": "And the old reconciliation cron gets switched off tomorrow, so nobody panic when the 02:00 job doesn't run.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": "tomas",
+            "id": null,
+            "example": false
+          }
+        },
+        {
+          "type": "ai",
+          "data": {
+            "content": "Noted: the old reconciliation cron is switched off tomorrow.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": "relay",
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+          }
+        }
+      ]
+    },
+    {
+      "thread_id": "t-0923",
+      "messages": [
+        {
+          "type": "human",
+          "data": {
+            "content": "Vendor email just in: Paylane sunsets the v1 webhooks API ten days from today. We need to be on v2 before then.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": "ines",
+            "id": null,
+            "example": false
+          }
+        },
+        {
+          "type": "ai",
+          "data": {
+            "content": "Noted: Paylane's v1 webhooks API is sunset in ten days; migrate to v2 first.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": "relay",
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+          }
+        },
+        {
+          "type": "human",
+          "data": {
+            "content": "Also, the SOC 2 evidence pack is due to the auditors the day after tomorrow.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": "tomas",
+            "id": null,
+            "example": false
+          }
+        },
+        {
+          "type": "ai",
+          "data": {
+            "content": "Noted: SOC 2 evidence pack due the day after tomorrow.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": "relay",
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+          }
+        }
+      ]
+    },
+    {
+      "thread_id": "t-1001",
+      "messages": [
+        {
+          "type": "human",
+          "data": {
+            "content": "Confirmed with the DBAs: the Postgres 16 upgrade window is the day after tomorrow, 06:00 to 08:00.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": "tomas",
+            "id": null,
+            "example": false
+          }
+        },
+        {
+          "type": "ai",
+          "data": {
+            "content": "Noted: Postgres 16 upgrade window the day after tomorrow, 06:00-08:00.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": "relay",
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+          }
+        },
+        {
+          "type": "human",
+          "data": {
+            "content": "I'm handing on-call over to Mateo tomorrow morning, so page him from then on.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "human",
+            "name": "ines",
+            "id": null,
+            "example": false
+          }
+        },
+        {
+          "type": "ai",
+          "data": {
+            "content": "Noted: on-call goes to Mateo tomorrow morning.",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "ai",
+            "name": "relay",
+            "id": null,
+            "example": false,
+            "tool_calls": [],
+            "invalid_tool_calls": [],
+            "usage_metadata": null
+          }
+        }
+      ]
+    }
+  ]
+}
