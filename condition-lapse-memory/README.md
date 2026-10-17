@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Your Team AI That Remembers Every Decision You've Ever Made*](https://www.memorylake.ai/en/usecase/ai-memory-for-meeting-notes-and-decisions),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 6:01](https://github.com/memorylake-ai/memorylake-usecases/releases/download/condition-lapse-memory-v1/condition-lapse-memory-cli-demo.mp4) · [Web, 7:07](https://github.com/memorylake-ai/memorylake-usecases/releases/download/condition-lapse-memory-v1/condition-lapse-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/condition-lapse-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Many decisions come with a condition: "we open the Lisbon office on November 2, *provided the lease is
 signed by October 1*". MemoryLake keeps the condition with the decision. A condition gets settled one of two ways:
@@ -41,29 +42,29 @@ arms. Each answer must start with Yes, No or Unknown:
 
 | arm | what the assistant reads | answers right | plan given as standing | "the condition was met" (made up) |
 |---|---|---|---|---|
-| **A** | the four meetings, as MemoryLake extracted them | **68 / 105** | 28 | **5** |
-| **B** | the same memory, plus a system prompt: *say Yes only if memory records that the condition was met; deadline passed and no record → No; deadline ahead → Unknown* | **89 / 105** | 14 | **2** |
-| **C** | the same extracted facts, copied word for word, plus one **condition check** fact per conditional decision that the app works out in code from its own decision register and event log | **115 / 117** | 0 | 0 |
+| **A** | the four meetings, as MemoryLake extracted them | **85 / 129** | 34 | **6** |
+| **B** | the same memory, plus a system prompt: *say Yes only if memory records that the condition was met; deadline passed and no record → No; deadline ahead → Unknown* | **113 / 129** | 14 | **2** |
+| **C** | the same extracted facts, copied word for word, plus one **condition check** fact per conditional decision that the app works out in code from its own decision register and event log | **137 / 141** | 0 | 0 |
 
-These are the totals over 5 complete runs (8 questions × 3 answers at temperature 0.7 on `gpt-4o-mini`). Calls
+These are the totals over 6 complete runs (8 questions × 3 answers at temperature 0.7 on `gpt-4o-mini`). Calls
 where MemoryRouter attached nothing (∅) are listed but not graded, so they are left out of the denominator.
 
-- **A condition that lapses in silence is answered as met.** In A, Lisbon was right 0 times out of 9 and the
-  ticketing tool 0 out of 15. Five of those answers gave a reason that no record supports: "as the lease was signed by
+- **A condition that lapses in silence is answered as met.** In A, Lisbon was right 0 times out of 12 and the
+  ticketing tool 0 out of 18. Six of those answers gave a reason that no record supports: "as the lease was signed by
   October 1", "as the lease was signed by the required date".
 - **The same thing happens when extraction drops the meeting that settled a condition.** In one run, extraction kept
   none of meeting 4 ("Q3 churn closed at 4.1 percent", "September tickets came in at 4,600"). The assistant then
   answered "Yes, the January price increase will go ahead if Q3 churn stays under 3 percent" (3/3). Without the
   settling fact in memory, a failed condition looks the same as one nobody mentioned.
-- **The careful prompt helps, and it has a cost.** B fixed the ticketing tool (15/15) and most of Lisbon (7/9).
+- **The careful prompt helps, and it has a cost.** B fixed the ticketing tool (18/18) and most of Lisbon (10/12).
   But it still made up "as the lease was signed on September 18" (Quellmark's signing date) and "since the lease was
   signed by October 1". When extraction lost "Quellmark agreed … signed", the prompt also turned the condition that
-  *was* met into "No" (Quellmark 7/15, against 12/15 in A). Even B's right answers often explain themselves with a
+  *was* met into "No" (Quellmark 10/18, against 15/18 in A). Even B's right answers often explain themselves with a
   claim memory doesn't hold ("No. The lease was not signed by October 1").
 - **The condition check is not a model's guess.** The app keeps a register of conditional decisions (the condition,
   the deadline) and an event log from the systems that settle them: the legal review tracker, the contract system,
   the finance and support dashboards. A logged event settles a condition as met or failed. With no event and the
-  deadline passed, it is **lapsed**. With the deadline still ahead, it stays **open**. C's two misses are "No, not
+  deadline passed, it is **lapsed**. With the deadline still ahead, it stays **open**. C's four misses are all "No, not
   confirmed yet" on the still-open Berlin offsite, where the right answer is Unknown.
 - **Extraction keeps conditions.** The probe before this demo checked whether "unless / provided / only if" gets
   stripped on the way into memory. It didn't: every decision fact that was extracted kept its condition. What goes
@@ -228,14 +229,15 @@ before the deadline · ∅ MemoryRouter attached nothing.
 | parallel copy 1 | 12 facts; everything | 18/24 | 22/24 | 24/24 | 0 / 2 |
 | parallel copy 2 | 8 facts; the Lisbon line and the all-hands lost | 10/15 (∅ 9) | 15/15 (∅ 9) | 20/21 (∅ 3) | 0 / 0 |
 | browser check (= the Web recording) | 10 facts; everything | 15/24 | 21/24 | 24/24 | 2 / 0 |
-| **total** | | **68/105** (∅ 15) | **89/105** (∅ 15) | **115/117** (∅ 3) | **5 / 2** |
+| CLI recording | 12 facts; everything | 17/24 | 24/24 | 22/24 | 1 / 0 |
+| **total** | | **85/129** (∅ 15) | **113/129** (∅ 15) | **137/141** (∅ 3) | **6 / 2** |
 
-Answers right per question, A / B / C (∅ left out): Corvane 15/15 / 15/15 / 15/15 · **Lisbon 0/9 / 7/9 / 15/15** ·
-price increase 6/9 / 6/9 / 15/15 · Quellmark 12/15 / 7/15 / 15/15 · support hires 12/15 / 12/15 / 15/15 ·
-**ticketing tool 0/15 / 15/15 / 15/15** · Berlin offsite 11/15 / 15/15 / 13/15 · all-hands 12/12 / 12/12 / 12/12.
+Answers right per question, A / B / C (∅ left out): Corvane 18/18 / 18/18 / 18/18 · **Lisbon 0/12 / 10/12 / 18/18** ·
+price increase 8/12 / 9/12 / 18/18 · Quellmark 15/18 / 10/18 / 18/18 · support hires 15/18 / 15/18 / 18/18 ·
+**ticketing tool 0/18 / 18/18 / 18/18** · Berlin offsite 14/18 / 18/18 / 14/18 · all-hands 15/15 / 15/15 / 15/15.
 
 Most of the ∅ are runs where extraction lost the decision altogether. The Lisbon line was missing from memory in
-2 of 5 runs, the price decision and the all-hands in 1 each, and MemoryRouter then attached nothing for that question.
+2 of 6 runs, the price decision and the all-hands in 1 each, and MemoryRouter then attached nothing for that question.
 
 ## Use it in your own app
 
