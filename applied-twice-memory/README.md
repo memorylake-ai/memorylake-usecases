@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Small Teams Prompt and Workflow Memory That Works Across Every AI Tool*](https://www.memorylake.ai/en/usecase/cross-tool-prompt-and-workflow-memory-for-small-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 7:02](https://github.com/memorylake-ai/memorylake-usecases/releases/download/applied-twice-memory-v1/applied-twice-memory-cli-demo.mp4) · [Web, 8:28](https://github.com/memorylake-ai/memorylake-usecases/releases/download/applied-twice-memory-v1/applied-twice-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/applied-twice-memory-v1); GitHub serves them as downloads).
 
 **The problem.** Quillhaven Bookkeeping (a fictional six-person firm) tuned five calculator tools in its custom GPT
 (overtime pay, commission, mileage reimbursement, late fees and insurance payouts) and now stores them once in
@@ -32,23 +33,23 @@ The model reads the policy and applies the threshold before it calls the tool. T
 
 The answer comes back exact to the cent, the model states it confidently, and it is wrong. **The policies cause it.**
 With the same bare tools and only the records attached (no policies in the memory the model sees), the mileage and
-late-fee questions are right every time: **103 → 143 of 144** record questions right, and the threshold is applied
-twice **41 → 0** times. The memory is not wrong. The rule is in two places, and the model applies both.
+late-fee questions are right every time: **154 → 215 of 216** record questions right, and the threshold is applied
+twice **62 → 0** times. The memory is not wrong. The rule is in two places, and the model applies both.
 
 Two fixes, measured:
 
 - **Describe the unit.** Each parameter says *TOTAL, exactly as recorded … never subtract the threshold yourself*.
-  This fixes mileage, overtime and the what-ifs (**126 of 144**, what-if 35 of 36), but **not the late fee: 0 of 18**.
+  This fixes mileage, overtime and the what-ifs (**189 of 216**, what-if 53 of 54), but **not the late fee: 0 of 27**.
   The model still passes 32 days, with the instruction not to do that in the same request.
 - **Pass the record, not the number.** The tools take a record id (`late_fee(record="INV-2207")`), plus the change
   for a what-if (`overtime_pay(record="TS-41", extra_hours=4)`), and read the recorded value from typed memory
-  themselves. There is no number left for the model to pre-process: **144 of 144**, what-if **36 of 36**.
+  themselves. There is no number left for the model to pre-process: **216 of 216**, what-if **54 of 54**.
 
 The same workflow memory, read by a second model (claude-haiku-4-5, through the same `router chat`): with the bare
-tools it takes the threshold off first in **140 of 244** tool calls, and often never answers. It calls the tool
-four times with the same pre-reduced number (Q2, Q6, Q7). With the record-id tools: **96 of 96**, what-if 24 of 24.
+tools it takes the threshold off first in **218 of 373** tool calls, and often never answers. It calls the tool
+four times with the same pre-reduced number (Q2, Q6, Q7). With the record-id tools: **144 of 144**, what-if 36 of 36.
 
-Totals are over 6 runs (5 CLI runs + 1 browser run, every question × 3 with gpt-4o-mini and × 2 with claude-haiku-4-5).
+Totals are over 9 runs (6 CLI runs, 1 browser run and the two recorded runs; every question × 3 with gpt-4o-mini and × 2 with claude-haiku-4-5).
 
 ## What the demo shows
 
@@ -108,6 +109,11 @@ records and policies, the answer key, the ten questions under each arm (every to
 against the record), and a scoreboard. **Ask** runs one question with the record-id tools. A terminal drawer shows
 every `memorylake` command as it runs. **Clean up** removes it all.
 
+| | |
+|---|---|
+| ![](web/screenshot-workflows.png) | ![](web/screenshot-bare.png) |
+| ![](web/screenshot-record.png) | ![](web/screenshot-score.png) |
+
 ## What happens, step by step
 
 ### Steps 2–3: workflow memory
@@ -163,28 +169,28 @@ Every number the model passes is checked against the record:
 ✓ as recorded · ⇣ the recorded value with the tool's threshold already taken off · Δ a what-if's change passed as the
 new total · ✗ anything else.
 
-Per question, over 6 runs (gpt-4o-mini, 18 answers each):
+Per question, over 9 runs (gpt-4o-mini, 27 answers each):
 
 | | Q1 OT Dana | Q2 OT Priya | Q3 OT Marco | Q4 com. Lena | Q5 com. Omar | Q6 mileage | Q7 late fee | Q8 payout | W1 50 h | W2 +5,000 |
 |---|---|---|---|---|---|---|---|---|---|---|
-| bare, records + policies | 14 (⇣4) | 17 (⇣1) | 18 | 18 | 18 | **0 (⇣18)** | **0 (⇣18)** | 18 | **0 (⇣18)** | 5 (Δ13) |
-| bare, records only | 18 | 18 | 18 | 18 | 18 | 18 | 17 | 18 | 0 (Δ18) | 8 (Δ10) |
-| described | 18 | 18 | 18 | 18 | 18 | 18 | **0 (⇣18)** | 18 | 18 | 17 |
-| record id | 18 | 18 | 18 | 18 | 18 | 18 | 18 | 18 | 18 | 18 |
+| bare, records + policies | 20 (⇣7) | 26 (⇣1) | 27 | 27 | 27 | **0 (⇣27)** | **0 (⇣27)** | 27 | **0 (⇣27)** | 8 (Δ19) |
+| bare, records only | 27 | 27 | 27 | 27 | 27 | 27 | 26 | 27 | 0 (Δ27) | 14 (Δ13) |
+| described | 27 | 27 | 27 | 27 | 27 | 27 | **0 (⇣27)** | 27 | 27 | 26 |
+| record id | 27 | 27 | 27 | 27 | 27 | 27 | 27 | 27 | 27 | 27 |
 
 Notes from the runs:
 
-- **Only some rules get applied twice.** Overtime for Dana (46 h) is pre-reduced in 4 of 18 answers, Priya (51.5 h)
+- **Only some rules get applied twice.** Overtime for Dana (46 h) is pre-reduced in 7 of 27 answers, Priya (51.5 h)
   in 1, the commission never, and mileage and the late fee every time. Questions under the threshold (Marco 38 h,
   Omar 48,000) come out right either way: zero is zero.
 - **The control also fails on what-ifs, in a different way.** Without the policies, the model passes the *change*
   as the total (`hours=4`, `bookings=5000`). That is not the threshold being applied twice, and the described tools
-  fix it (35 of 36).
-- **"Never subtract the grace period yourself" does not stop the late-fee one.** It goes 0 of 18 in the described arm,
+  fix it (53 of 54).
+- **"Never subtract the grace period yourself" does not stop the late-fee one.** It goes 0 of 27 in the described arm,
   in every run. The description sits in the same request as the policy, and the model still passes 32.
-- **claude-haiku-4-5** with the bare tools (12 answers per question): Q2 0/12, Q6 0/12, Q7 0/12, the rest right.
+- **claude-haiku-4-5** with the bare tools (18 answers per question): Q2 0/18, Q6 0/18, Q7 0/18, W1 13/18, the rest right.
   Mostly no answer at all: it repeats the same pre-reduced call until the 4-turn limit (counted as –, no amount).
-  140 of its 244 tool calls carried a pre-reduced value. With the record-id tools every answer was right (120 of 120).
+  218 of its 373 tool calls carried a pre-reduced value. With the record-id tools every answer was right (180 of 180).
 
 ### Step 11: scoreboard (one run)
 
