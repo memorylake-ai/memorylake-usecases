@@ -1,0 +1,563 @@
+{
+ "company": "Quillhaven Bookkeeping",
+ "agent": "bookkeeping assistant",
+ "schemas": {
+  "bare": [
+   {
+    "type": "function",
+    "function": {
+     "name": "overtime_pay",
+     "description": "Overtime pay for one week.",
+     "parameters": {
+      "type": "object",
+      "properties": {
+       "hours": {
+        "type": "number",
+        "description": "Hours."
+       },
+       "hourly_rate": {
+        "type": "number",
+        "description": "Hourly rate in dollars."
+       }
+      },
+      "required": [
+       "hours",
+       "hourly_rate"
+      ]
+     }
+    }
+   },
+   {
+    "type": "function",
+    "function": {
+     "name": "commission",
+     "description": "Quarterly commission for an account executive.",
+     "parameters": {
+      "type": "object",
+      "properties": {
+       "bookings": {
+        "type": "number",
+        "description": "Bookings in dollars."
+       }
+      },
+      "required": [
+       "bookings"
+      ]
+     }
+    }
+   },
+   {
+    "type": "function",
+    "function": {
+     "name": "mileage_reimbursement",
+     "description": "Mileage reimbursement for a monthly log.",
+     "parameters": {
+      "type": "object",
+      "properties": {
+       "miles": {
+        "type": "number",
+        "description": "Miles."
+       }
+      },
+      "required": [
+       "miles"
+      ]
+     }
+    }
+   },
+   {
+    "type": "function",
+    "function": {
+     "name": "late_fee",
+     "description": "Late fee on an overdue invoice.",
+     "parameters": {
+      "type": "object",
+      "properties": {
+       "invoice_amount": {
+        "type": "number",
+        "description": "Invoice amount in dollars."
+       },
+       "days_overdue": {
+        "type": "number",
+        "description": "Days overdue."
+       }
+      },
+      "required": [
+       "invoice_amount",
+       "days_overdue"
+      ]
+     }
+    }
+   },
+   {
+    "type": "function",
+    "function": {
+     "name": "insurance_payout",
+     "description": "Insurer payout on a claim.",
+     "parameters": {
+      "type": "object",
+      "properties": {
+       "claimed": {
+        "type": "number",
+        "description": "Amount in dollars."
+       }
+      },
+      "required": [
+       "claimed"
+      ]
+     }
+    }
+   }
+  ],
+  "described": [
+   {
+    "type": "function",
+    "function": {
+     "name": "overtime_pay",
+     "description": "Overtime pay for one week. The tool applies the 40-hour threshold and the 1.5x rate itself.",
+     "parameters": {
+      "type": "object",
+      "properties": {
+       "hours": {
+        "type": "number",
+        "description": "TOTAL hours worked in the week, exactly as the timesheet records them, including the first 40. Never subtract 40 yourself."
+       },
+       "hourly_rate": {
+        "type": "number",
+        "description": "Base hourly rate in dollars, as recorded."
+       }
+      },
+      "required": [
+       "hours",
+       "hourly_rate"
+      ]
+     }
+    }
+   },
+   {
+    "type": "function",
+    "function": {
+     "name": "commission",
+     "description": "Quarterly commission for an account executive. The tool subtracts the 50,000 dollar quota and applies 8% itself.",
+     "parameters": {
+      "type": "object",
+      "properties": {
+       "bookings": {
+        "type": "number",
+        "description": "TOTAL bookings for the quarter in dollars, exactly as recorded, including the quota. Never subtract the quota yourself."
+       }
+      },
+      "required": [
+       "bookings"
+      ]
+     }
+    }
+   },
+   {
+    "type": "function",
+    "function": {
+     "name": "mileage_reimbursement",
+     "description": "Mileage reimbursement for a monthly log. The tool removes the 30 commuting miles and applies 0.70 per mile itself.",
+     "parameters": {
+      "type": "object",
+      "properties": {
+       "miles": {
+        "type": "number",
+        "description": "TOTAL miles on the log, exactly as recorded. Never subtract commuting miles yourself."
+       }
+      },
+      "required": [
+       "miles"
+      ]
+     }
+    }
+   },
+   {
+    "type": "function",
+    "function": {
+     "name": "late_fee",
+     "description": "Late fee on an overdue invoice. The tool removes the 10-day grace period and applies the daily rate itself.",
+     "parameters": {
+      "type": "object",
+      "properties": {
+       "invoice_amount": {
+        "type": "number",
+        "description": "Invoice amount in dollars, as recorded."
+       },
+       "days_overdue": {
+        "type": "number",
+        "description": "TOTAL days after the due date, exactly as recorded. Never subtract the grace period yourself."
+       }
+      },
+      "required": [
+       "invoice_amount",
+       "days_overdue"
+      ]
+     }
+    }
+   },
+   {
+    "type": "function",
+    "function": {
+     "name": "insurance_payout",
+     "description": "Insurer payout on a claim. The tool subtracts the deductible itself.",
+     "parameters": {
+      "type": "object",
+      "properties": {
+       "claimed": {
+        "type": "number",
+        "description": "TOTAL amount claimed in dollars, exactly as recorded, before the deductible. Never subtract the deductible yourself."
+       }
+      },
+      "required": [
+       "claimed"
+      ]
+     }
+    }
+   }
+  ],
+  "record": [
+   {
+    "type": "function",
+    "function": {
+     "name": "overtime_pay",
+     "description": "Overtime pay for one week, from a timesheet record. The tool reads the hours and the rate from the record.",
+     "parameters": {
+      "type": "object",
+      "properties": {
+       "record": {
+        "type": "string",
+        "description": "Timesheet id, e.g. TS-41."
+       },
+       "extra_hours": {
+        "type": "number",
+        "description": "Only for what-if questions: hours to add to the recorded total. Omit otherwise."
+       }
+      },
+      "required": [
+       "record"
+      ]
+     }
+    }
+   },
+   {
+    "type": "function",
+    "function": {
+     "name": "commission",
+     "description": "Quarterly commission, from a bookings record. The tool reads the bookings from the record.",
+     "parameters": {
+      "type": "object",
+      "properties": {
+       "record": {
+        "type": "string",
+        "description": "Bookings record id, e.g. BK-Q3-LENA."
+       },
+       "extra_bookings": {
+        "type": "number",
+        "description": "Only for what-if questions: dollars to add to the recorded bookings. Omit otherwise."
+       }
+      },
+      "required": [
+       "record"
+      ]
+     }
+    }
+   },
+   {
+    "type": "function",
+    "function": {
+     "name": "mileage_reimbursement",
+     "description": "Mileage reimbursement, from a mileage log record.",
+     "parameters": {
+      "type": "object",
+      "properties": {
+       "record": {
+        "type": "string",
+        "description": "Mileage log id, e.g. ML-7."
+       }
+      },
+      "required": [
+       "record"
+      ]
+     }
+    }
+   },
+   {
+    "type": "function",
+    "function": {
+     "name": "late_fee",
+     "description": "Late fee, from an invoice record.",
+     "parameters": {
+      "type": "object",
+      "properties": {
+       "record": {
+        "type": "string",
+        "description": "Invoice id, e.g. INV-2207."
+       }
+      },
+      "required": [
+       "record"
+      ]
+     }
+    }
+   },
+   {
+    "type": "function",
+    "function": {
+     "name": "insurance_payout",
+     "description": "Insurer payout, from a claim record.",
+     "parameters": {
+      "type": "object",
+      "properties": {
+       "record": {
+        "type": "string",
+        "description": "Claim id, e.g. IC-19."
+       }
+      },
+      "required": [
+       "record"
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "records": [
+  {
+   "id": "TS-41",
+   "tool": "overtime_pay",
+   "text": "Timesheet TS-41 (Dana Ruiz, week of 5 October 2026): 46 hours worked; hourly rate 32 dollars.",
+   "fields": {
+    "hours": 46,
+    "hourly_rate": 32
+   }
+  },
+  {
+   "id": "TS-42",
+   "tool": "overtime_pay",
+   "text": "Timesheet TS-42 (Marco Ibe, week of 5 October 2026): 38 hours worked; hourly rate 28 dollars.",
+   "fields": {
+    "hours": 38,
+    "hourly_rate": 28
+   }
+  },
+  {
+   "id": "TS-43",
+   "tool": "overtime_pay",
+   "text": "Timesheet TS-43 (Priya Nand, week of 12 October 2026): 51.5 hours worked; hourly rate 36 dollars.",
+   "fields": {
+    "hours": 51.5,
+    "hourly_rate": 36
+   }
+  },
+  {
+   "id": "BK-Q3-LENA",
+   "tool": "commission",
+   "text": "Q3 2026 bookings BK-Q3-LENA (Lena Varga, account executive): 72,400 dollars booked.",
+   "fields": {
+    "bookings": 72400
+   }
+  },
+  {
+   "id": "BK-Q3-OMAR",
+   "tool": "commission",
+   "text": "Q3 2026 bookings BK-Q3-OMAR (Omar Haddad, account executive): 48,000 dollars booked.",
+   "fields": {
+    "bookings": 48000
+   }
+  },
+  {
+   "id": "ML-7",
+   "tool": "mileage_reimbursement",
+   "text": "Mileage log ML-7 (Dana Ruiz, October 2026 client visits): 412 miles driven.",
+   "fields": {
+    "miles": 412
+   }
+  },
+  {
+   "id": "INV-2207",
+   "tool": "late_fee",
+   "text": "Invoice INV-2207 (client Marrowby Dental): 4,800 dollars, paid 42 days after its due date.",
+   "fields": {
+    "invoice_amount": 4800,
+    "days_overdue": 42
+   }
+  },
+  {
+   "id": "IC-19",
+   "tool": "insurance_payout",
+   "text": "Insurance claim IC-19 (laptop theft, 8 October 2026): 3,250 dollars claimed; policy deductible 500 dollars.",
+   "fields": {
+    "claimed": 3250,
+    "deductible": 500
+   }
+  }
+ ],
+ "policies": [
+  {
+   "id": "P-OT",
+   "tool": "overtime_pay",
+   "text": "Policy: overtime is paid at 1.5 times the hourly rate for hours above 40 in a week."
+  },
+  {
+   "id": "P-COM",
+   "tool": "commission",
+   "text": "Policy: account executives earn 8% commission on quarterly bookings above the 50,000 dollar quota."
+  },
+  {
+   "id": "P-MIL",
+   "tool": "mileage_reimbursement",
+   "text": "Policy: mileage is reimbursed at 0.70 dollars per mile; the first 30 miles of each monthly log are commuting and not reimbursed."
+  },
+  {
+   "id": "P-LATE",
+   "tool": "late_fee",
+   "text": "Policy: overdue invoices carry a late fee of 0.05% of the invoice per day overdue, after a 10-day grace period."
+  }
+ ],
+ "thresholds": {
+  "hours": 40,
+  "bookings": 50000,
+  "miles": 30,
+  "days_overdue": 10,
+  "claimed": 500
+ },
+ "questions": [
+  {
+   "id": "Q1",
+   "kind": "recorded",
+   "tool": "overtime_pay",
+   "record": "TS-41",
+   "say": "How much overtime pay does Dana Ruiz get for the week of 5 October?"
+  },
+  {
+   "id": "Q2",
+   "kind": "recorded",
+   "tool": "overtime_pay",
+   "record": "TS-43",
+   "say": "How much overtime pay does Priya Nand get for the week of 12 October?"
+  },
+  {
+   "id": "Q3",
+   "kind": "recorded",
+   "tool": "overtime_pay",
+   "record": "TS-42",
+   "say": "How much overtime pay does Marco Ibe get for the week of 5 October?"
+  },
+  {
+   "id": "Q4",
+   "kind": "recorded",
+   "tool": "commission",
+   "record": "BK-Q3-LENA",
+   "say": "What commission does Lena Varga earn for Q3?"
+  },
+  {
+   "id": "Q5",
+   "kind": "recorded",
+   "tool": "commission",
+   "record": "BK-Q3-OMAR",
+   "say": "What commission does Omar Haddad earn for Q3?"
+  },
+  {
+   "id": "Q6",
+   "kind": "recorded",
+   "tool": "mileage_reimbursement",
+   "record": "ML-7",
+   "say": "How much should we reimburse Dana Ruiz for her October mileage?"
+  },
+  {
+   "id": "Q7",
+   "kind": "recorded",
+   "tool": "late_fee",
+   "record": "INV-2207",
+   "say": "What late fee do we charge Marrowby Dental on invoice INV-2207?"
+  },
+  {
+   "id": "Q8",
+   "kind": "recorded",
+   "tool": "insurance_payout",
+   "record": "IC-19",
+   "say": "How much will the insurer pay out on claim IC-19?"
+  },
+  {
+   "id": "W1",
+   "kind": "whatif",
+   "tool": "overtime_pay",
+   "record": "TS-41",
+   "extra": {
+    "hours": 4
+   },
+   "say": "If Dana Ruiz had worked 50 hours in the week of 5 October, what would her overtime pay be?"
+  },
+  {
+   "id": "W2",
+   "kind": "whatif",
+   "tool": "commission",
+   "record": "BK-Q3-LENA",
+   "extra": {
+    "bookings": 5000
+   },
+   "say": "If Lena Varga had booked another 5,000 dollars in Q3, what commission would she earn?"
+  }
+ ],
+ "system": "You are the bookkeeping assistant of Quillhaven Bookkeeping, a small firm. Use the remembered records. For any amount, call the matching workflow tool; do not do the arithmetic yourself. End with one line 'Answer: <amount in dollars>' (0 if nothing is due) or 'Answer: No record'.",
+ "arms": {
+  "bare": {
+   "schema": "bare",
+   "scope": "full",
+   "model": "gpt-4o-mini",
+   "runs": 3,
+   "short": "Bare tools, records + policies",
+   "long": "The tools as the team's custom GPT had them: parameter names and a one-line description; MemoryRouter attaches the records and the policies"
+  },
+  "nopolicy": {
+   "schema": "bare",
+   "scope": "records",
+   "model": "gpt-4o-mini",
+   "runs": 3,
+   "short": "Bare tools, records only",
+   "long": "The same bare tools, but the boundary covers only the records project: the policies are not in the memory the model sees (the control)"
+  },
+  "described": {
+   "schema": "described",
+   "scope": "full",
+   "model": "gpt-4o-mini",
+   "runs": 3,
+   "short": "Described tools, records + policies",
+   "long": "Each parameter description says TOTAL, exactly as recorded, and that the tool applies the threshold itself (never subtract it yourself)"
+  },
+  "record": {
+   "schema": "record",
+   "scope": "full",
+   "model": "gpt-4o-mini",
+   "runs": 3,
+   "short": "Tools take the record id",
+   "long": "The tools take a record id (and, for what-if questions, the change) and read the recorded value from typed memory themselves"
+  },
+  "claude_bare": {
+   "schema": "bare",
+   "scope": "full",
+   "model": "claude-haiku-4-5",
+   "runs": 2,
+   "short": "claude-haiku-4-5, bare tools",
+   "long": "The same workflow memory, read by a second model: claude-haiku-4-5 with the bare tools, records + policies"
+  },
+  "claude_record": {
+   "schema": "record",
+   "scope": "full",
+   "model": "claude-haiku-4-5",
+   "runs": 2,
+   "short": "claude-haiku-4-5, record id",
+   "long": "claude-haiku-4-5 with the record-id tools"
+  }
+ },
+ "kinds": {
+  "recorded": "from a record",
+  "whatif": "what-if"
+ },
+ "schema_label": {
+  "bare": "bare",
+  "described": "described",
+  "record": "record id"
+ }
+}
