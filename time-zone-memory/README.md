@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Distributed Teams AI That Works Across Every Time Zone and Tool*](https://www.memorylake.ai/en/usecase/ai-memory-for-remote-and-distributed-teams),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 4:56](https://github.com/memorylake-ai/memorylake-usecases/releases/download/time-zone-memory-v1/time-zone-memory-cli-demo.mp4) · [Web, 5:27](https://github.com/memorylake-ai/memorylake-usecases/releases/download/time-zone-memory-v1/time-zone-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/time-zone-memory-v1); GitHub serves them as downloads). The browser recording is the run in which copy C was missing four items (C 9 of 21).
 
 **The problem.** A distributed team lets MemoryLake remember its release channel, and a teammate's assistant answers
 "what time is that for me?" through MemoryRouter: an ordinary model call with `--boundary` added. People in a
@@ -28,15 +29,15 @@ The app writes the same channel into memory three ways, one copy each:
 
 | arm | what the app writes / how it reads | right, said **without** a zone | right, said with a zone | wrong by a whole day |
 |---|---|---|---|---|
-| 0 no memory (control) | no boundary at all | 0 / 90 | 0 / 36 | — |
-| A as remembered | the messages as said | **0 / 72 (∅ 18)** | 29 / 30 (∅ 6) | 0 |
-| B zone stamped on write | `6pm (Austin time, UTC-5)` | 54 / 90 | 35 / 36 | **18** |
-| C UTC stamped, app converts | `6pm (Austin time, UTC-5; = 23:00 UTC Friday 23 October)`; the model answers in UTC, code converts | **90 / 90** | 36 / 36 | 0 |
-| A′ reverse check | C's read path on A's memory | **0 / 72 (∅ 18)** | 30 / 30 (∅ 6) | 0 |
+| 0 no memory (control) | no boundary at all | 0 / 120 | 0 / 48 | — |
+| A as remembered | the messages as said | **0 / 99 (∅ 21)** | 40 / 42 (∅ 6) | 0 |
+| B zone stamped on write | `6pm (Austin time, UTC-5)` | 71 / 120 | 47 / 48 | **24** |
+| C UTC stamped, app converts | `6pm (Austin time, UTC-5; = 23:00 UTC Friday 23 October)`; the model answers in UTC, code converts | **114 / 120** | 42 / 47 (∅ 1) | 0 |
+| A′ reverse check | C's read path on A's memory | **0 / 99 (∅ 21)** | 42 / 42 (∅ 6) | 0 |
 
-Totals over 6 full runs (3 CLI runs, 2 parallel copies under another prefix, 1 browser run; 21 answers per arm per run). ∅ = MemoryRouter attached nothing (prompt tokens equal the same call without a boundary), graded apart.
-Per item, B: database migration 18/18, office hours 18/18, rollback 18/18 —
-code freeze **0/18** (London time crosses midnight) and go/no-go call **0/18** (the day after British Summer Time ends).
+Totals over 8 full runs (3 CLI runs, 2 parallel copies under another prefix, 2 browser runs, the CLI recording; 21 answers per arm per run). ∅ = MemoryRouter attached nothing (prompt tokens equal the same call without a boundary), graded apart.
+Per item, B: database migration 24/24, office hours 23/24, rollback 24/24 —
+code freeze **0/24** (London time crosses midnight) and go/no-go call **0/24** (the day after British Summer Time ends).
 
 **What it means.**
 
@@ -51,8 +52,12 @@ code freeze **0/18** (London time crosses midnight) and go/no-go call **0/18** (
   change go wrong.** B is right on the hours, then answers *"Friday 23 October, 00:00"* for the freeze (the date did
   not roll over) and *15:00* for the 26 October go/no-go call (it applied British Summer Time a day after it ended).
 - **Store the instant, convert in code.** C stamps `= 23:00 UTC Friday 23 October` next to each time on write,
-  asks the model for the UTC instant, and converts it to the asker's zone with the real time-zone rules. That is
-  the only arm with no wrong answers.
+  asks the model for the UTC instant, and converts it to the asker's zone with the real time-zone rules. In 7 of 8
+  runs it answered every question right.
+- **It still needs the item to be in memory.** In one run (the browser recording) copy C's extraction held only 3
+  of the 7 items when Sam asked. For the 4 missing ones the model did not say so: it returned the instant of a
+  neighbouring item (the migration got the rollback window's 06:00 UTC), and the conversion turned it into a
+  confident, wrong London time. The census in step 4 shows which items are missing before anyone asks.
 
 ## Prerequisites
 
@@ -306,31 +311,33 @@ a guess (0 right in every run).
 
 ## Measured
 
-Totals over 6 full runs (3 CLI runs, 2 parallel copies under another prefix, 1 browser run; 21 answers per arm per run).
+Totals over 8 full runs (3 CLI runs, 2 parallel copies under another prefix, 2 browser runs, the CLI recording; 21 answers per arm per run).
 
 | arm | right | wrong | of which a whole day | no time | ∅ | answers |
 |---|---|---|---|---|---|---|
-| 0 no memory | 0 | 123 | 3 | 3 | 0 | 126 |
-| A as remembered | 29 | 73 | 0 | 0 | 24 | 126 |
-| B zone stamped | 89 | 37 | 18 | 0 | 0 | 126 |
-| C UTC + app converts | 126 | 0 | 0 | 0 | 0 | 126 |
-| A′ reverse check | 30 | 72 | 0 | 0 | 24 | 126 |
+| 0 no memory | 0 | 165 | 5 | 3 | 0 | 168 |
+| A as remembered | 40 | 101 | 0 | 0 | 27 | 168 |
+| B zone stamped | 118 | 50 | 24 | 0 | 0 | 168 |
+| C UTC + app converts | 156 | 11 | 0 | 0 | 1 | 168 |
+| A′ reverse check | 42 | 99 | 0 | 0 | 27 | 168 |
 
 Per item (right / graded):
 
 | item | 0 | A | B | C | A′ |
 |---|---|---|---|---|---|
-| migration | 0/18 | 0/15 | 18/18 | 18/18 | 0/15 |
-| freeze | 0/18 | 0/15 | 0/18 | 18/18 | 0/15 |
-| demo | 0/18 | 15/15 | 17/18 | 18/18 | 15/15 |
-| standup | 0/18 | 14/15 | 18/18 | 18/18 | 15/15 |
-| gonogo | 0/18 | 0/15 | 0/18 | 18/18 | 0/15 |
-| office | 0/18 | 0/12 | 18/18 | 18/18 | 0/12 |
-| rollback | 0/18 | 0/15 | 18/18 | 18/18 | 0/15 |
+| migration | 0/24 | 0/21 | 24/24 | 21/24 | 0/21 |
+| freeze | 0/24 | 0/21 | 0/24 | 21/24 | 0/21 |
+| demo | 0/24 | 21/21 | 23/24 | 21/23 | 21/21 |
+| standup | 0/24 | 19/21 | 24/24 | 21/24 | 21/21 |
+| gonogo | 0/24 | 0/21 | 0/24 | 24/24 | 0/21 |
+| office | 0/24 | 0/15 | 23/24 | 24/24 | 0/15 |
+| rollback | 0/24 | 0/21 | 24/24 | 24/24 | 0/21 |
 
+All 11 wrong answers in C come from the one run where copy C held 3 of the 7 items (see *What it means*).
 Where the ∅ come from: in one copy the "as said" conversation finished cooking with no facts in its project (21 calls
-in A and A′ attached nothing — the demo waits 600 s, says "deferred", and grades them apart), and in the browser
-run the office-hours question attached nothing 3 times. In the browser run copy B's facts came back in German
+in A and A′ attached nothing — the demo waits 600 s, says "deferred", and grades them apart), and in two other runs
+the "as said" copy had no office-hours fact, so those 3 calls attached nothing. (In the run where copy C was
+short, the missing items' questions did get attachments — the neighbouring items — 11 of 12 times.) In the first browser run copy B's facts came back in German
 (`Die Datenbankmigration startet am Mittwoch … 16:00 Uhr (Berlin time, UTC+2)`), and so did one answer
 (`Montag 26. Oktober, 15:00`); the grader reads German, French and Spanish day and month names.
 
@@ -343,7 +350,7 @@ run the office-hours question attached nothing 3 times. In the browser run copy 
   trip the model. Have it return `YYYY-MM-DD HH:MM UTC` and render it in the reader's zone with a real time-zone
   database.
 - **Check the census, not just the answers.** `fact list --projects` and a regex for clock times without a zone
-  tell you, before anyone asks, which remembered times can't be converted.
+  tell you, before anyone asks, which remembered times can't be converted — and which items aren't there at all.
 
 ## Troubleshooting
 
