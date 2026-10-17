@@ -1,0 +1,86 @@
+{
+  "org": "Halvern Lab",
+  "study": "the Varga 2024 replication",
+  "today": "2026-10-15",
+  "system": "You are the Halvern Lab research assistant, answering a lab member from the team's project memory. Today is {today}. Answer in one or two sentences.",
+  "people": [
+    {"key": "pi", "display": "Ines Marlow", "role": "principal investigator, Halvern Lab"},
+    {"key": "postdoc", "display": "Tomas Reyes", "role": "postdoc, Halvern Lab"},
+    {"key": "student", "display": "Noor Haddad", "role": "PhD student, Halvern Lab"},
+    {"key": "stats", "display": "Kwame Osei", "role": "statistician, collaborating"}
+  ],
+  "meetings": [
+    {"id": "M1", "name": "Replication kickoff", "at": "2026-09-01T09:00:00Z", "lines": [
+      ["pi", "Welcome, everyone. We are replicating the Varga 2024 effect over the autumn."],
+      ["postdoc", "The grant for this ends on 30 June 2027, so we have time, but not much slack."],
+      ["pi", "Where we stand, as of today: we have not replicated the Varga effect, the ethics amendment is not approved, the sequencing data has not arrived, the preregistration is not posted, nobody outside the lab has reviewed our stats plan, and we have no access to the 2019 cohort data."]
+    ], "recap": ""},
+    {"id": "M2", "name": "Lab meeting", "at": "2026-09-15T09:00:00Z", "lines": [
+      ["postdoc", "Pilot results are in. We replicated the Varga effect: our effect size is d = 0.41, theirs was 0.45."],
+      ["student", "Oh, and Kwame mentioned the ethics board signed off on our amendment on Monday."],
+      ["pi", "Good. Next week we start the main sample."]
+    ], "recap": "Status as of today: we have replicated the Varga effect, and the ethics amendment is approved."},
+    {"id": "M3", "name": "Lab meeting", "at": "2026-09-29T09:00:00Z", "lines": [
+      ["pi", "Did the sequencing data come in?"],
+      ["postdoc", "Yes, on Friday. All 48 samples."],
+      ["pi", "Now that the preregistration is live on OSF, nobody touches the analysis script without telling me."]
+    ], "recap": "Status as of today: the sequencing data has arrived, and the preregistration is posted."},
+    {"id": "M4", "name": "Stats plan review with Kwame Osei", "at": "2026-10-08T09:00:00Z", "lines": [
+      ["stats", "Having gone through your analysis plan line by line: switch to a mixed model with site as a random effect. Otherwise it is sound."],
+      ["pi", "Thank you, Kwame. Tomas will make the change this week."]
+    ], "recap": "Status as of today: Kwame Osei has reviewed our stats plan."}
+  ],
+  "topics": [
+    {"id": "replication", "what": "Replicated", "form": "said plainly", "truth": "yes, d = 0.41 (2026-09-15)", "closed": "M2",
+     "said": "we have not replicated the Varga effect",
+     "neg": "(?:not|n't|yet to)\\s+(?:yet\\s+)?(?:been\\s+)?(?:successfully\\s+)?replicat|no replication|尚未.{0,10}复现|没有.{0,10}复现|未.{0,6}复现|no (?:se )?ha replicado",
+     "pos": "0\\.41|(?:have|has|pilot|results?|we|lab) (?:successfully )?(?:replicated|reproduced) the|been (?:successfully )?replicated|replic(?:ó|aron|ado)",
+     "log": {"on": "2026-09-15", "text": "Lab log 2026-09-15: Halvern Lab replicated the Varga 2024 effect in the pilot (d = 0.41; the original reported 0.45)."},
+     "ask": "Have we replicated the Varga 2024 effect yet?",
+     "ok": "0\\.41|\\byes\\b|(?:we|lab) (?:have|has) (?:successfully )?replicated|(?:was|been) (?:successfully )?replicated|successfully replicated",
+     "stale": "not (?:yet )?(?:been )?replicated|have(?:n't| not) (?:yet )?replicated|has(?:n't| not) (?:yet )?been|\\bno\\b|not yet"},
+    {"id": "ethics", "what": "Ethics amendment", "form": "second-hand", "truth": "approved (signed off week of 2026-09-14)", "closed": "M2",
+     "said": "the ethics amendment is not approved",
+     "neg": "(?:amendment|ethics).{0,80}(?:not|n't|yet to|pending|awaiting)\\b.{0,20}(?:approv|sign)|not (?:yet )?(?:been )?approved|伦理.{0,20}(?:未|尚未|没有).{0,6}(?:批准|通过)|no (?:está|ha sido) aprobad",
+     "pos": "signed off|\\bapproved|aprob|批准|通过",
+     "log": {"on": "2026-09-14", "text": "Lab log 2026-09-14: the ethics board approved Halvern Lab's amendment for the Varga 2024 replication."},
+     "ask": "Is our ethics amendment approved?",
+     "ok": "signed off|\\byes\\b|(?:is|was|has been|been|got|now) approved|approved (?:on|by|in|it)|approval (?:came|was granted|has been granted)|board approved",
+     "stale": "not (?:yet )?(?:been )?approved|(?:is|remains|still) pending|awaiting|has(?:n't| not)|\\bno\\b|not yet"},
+    {"id": "sequencing", "what": "Sequencing data", "form": "question and answer", "truth": "arrived, all 48 samples (2026-09-25)", "closed": "M3",
+     "said": "the sequencing data has not arrived",
+     "neg": "sequencing.{0,80}(?:not|n't|yet to)\\b.{0,20}(?:arriv|receiv|come)|测序.{0,20}(?:未|尚未|没有).{0,6}(?:到|收到)|no han llegado|no ha llegado",
+     "pos": "48 samples|\\barrived|came in|lleg|到达|收到",
+     "log": {"on": "2026-09-25", "text": "Lab log 2026-09-25: the sequencing data for the Varga 2024 replication arrived, all 48 samples."},
+     "ask": "Has the sequencing data arrived?",
+     "ok": "48|\\byes\\b|has arrived|(?:it|data) arrived|came in|was received|has been received|have received|we received",
+     "stale": "not (?:yet )?(?:arrived|been received|come)|has(?:n't| not)|still (?:waiting|pending|awaiting)|awaiting|\\bno\\b|not yet"},
+    {"id": "prereg", "what": "Preregistration", "form": "taken for granted", "truth": "posted on OSF (by 2026-09-29)", "closed": "M3",
+     "said": "the preregistration is not posted",
+     "neg": "preregistration.{0,80}(?:not|n't|yet to)\\b.{0,20}(?:post|publish|live|submit)|预注册.{0,20}(?:未|尚未|没有).{0,6}(?:发布|提交)|no (?:está|ha sido) publicad",
+     "pos": "live on OSF|posted on OSF|\\bis (?:now )?(?:live|posted)|publicad|已发布",
+     "log": {"on": "2026-09-29", "text": "Lab log 2026-09-29: the preregistration for the Varga 2024 replication is posted on OSF."},
+     "ask": "Is our preregistration posted?",
+     "ok": "(?:live|posted) on OSF|\\byes\\b|is (?:now )?(?:live|posted)|has been posted|was posted|(?:is|was|been) published",
+     "stale": "not (?:yet )?(?:been )?(?:posted|published|live)|has(?:n't| not)|\\bno\\b|not yet|pending"},
+    {"id": "review", "what": "Stats plan reviewed", "form": "implied", "truth": "yes, by Kwame Osei (2026-10-08)", "closed": "M4",
+     "said": "nobody outside the lab has reviewed our stats plan",
+     "neg": "(?:no ?one|nobody|not been|has not|hasn't|yet to).{0,60}review|统计.{0,20}(?:未|尚未|没有).{0,10}审|nadie.{0,60}revis",
+     "pos": "Kwame|Osei|has reviewed|have reviewed|reviewed (?:the|our|Halvern)|revis(?:ó|ado)",
+     "log": {"on": "2026-10-08", "text": "Lab log 2026-10-08: Kwame Osei (statistician) reviewed Halvern Lab's stats plan and asked for a mixed model with site as a random effect."},
+     "ask": "Has anyone outside the lab reviewed our stats plan?",
+     "ok": "Kwame|Osei",
+     "stale": "\\bno ?one\\b|nobody|not (?:yet )?(?:been )?reviewed|has(?:n't| not)|\\bno\\b|not yet"},
+    {"id": "cohort", "what": "2019 cohort access", "form": "still true", "truth": "no access yet (still true)", "closed": "",
+     "said": "we have no access to the 2019 cohort data",
+     "neg": "2019|队列",
+     "pos": "2019|队列",
+     "ask": "Do we have access to the 2019 cohort data?",
+     "ok": "\\bno\\b|no access|(?:do|does) not have|don't have|doesn't have|not (?:yet )?(?:have|been granted|available)|lack|without access|not (?:currently )?accessible",
+     "stale": "$^"},
+    {"id": "grant", "what": "Grant ends", "form": "control", "truth": "30 June 2027 (control)", "closed": "",
+     "said": "", "neg": "$^", "pos": "grant|30 June|June 30|2027-06-30|资助",
+     "ask": "When does the grant for the replication end?",
+     "ok": "30 June 2027|June 30,? 2027|2027-06-30", "stale": "$^"}
+  ]
+}
