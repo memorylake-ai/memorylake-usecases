@@ -1,0 +1,42 @@
+{
+  "company": "Fernhill Garden Centres",
+  "store": "Store 14",
+  "kiosk": {"key": "kiosk", "display": "Sprout (Store 14 kiosk)", "role": "In-store kiosk assistant, Fernhill Store 14"},
+  "project_name": "Fernhill orders",
+  "log_project_name": "Fernhill Store 14 kiosk log",
+  "orders": [
+    {"key": "o5521", "order": "5521", "customer": "Dana Ruiz", "item": "olive tree",
+     "template": "Order 5521 (Dana Ruiz, olive tree): pickup at Store 14 on {date}.", "start": "Thursday 22 October"},
+    {"key": "o5530", "order": "5530", "customer": "Omar Haddad", "item": "raised bed kit",
+     "template": "Order 5530 (Omar Haddad, raised bed kit): delivery on {date}.", "start": "Tuesday 27 October"},
+    {"key": "o5547", "order": "5547", "customer": "Mei Tanaka", "item": "compost bundle",
+     "template": "Order 5547 (Mei Tanaka, compost bundle): pickup at Store 14 on {date}.", "start": "Saturday 24 October"},
+    {"key": "o5560", "order": "5560", "customer": "Ravi Menon", "item": "apple trees",
+     "template": "Order 5560 (Ravi Menon, apple trees): delivery on {date}.", "start": "Thursday 29 October"}
+  ],
+  "offline_secs": 70,
+  "timeline": [
+    {"at": 10, "who": "kiosk", "order": "5521", "date": "Friday 23 October",
+     "says": "Dana Ruiz (customer, order 5521) at the Store 14 kiosk: Please move the pickup of my olive tree, order 5521, to Friday 23 October."},
+    {"at": 20, "who": "hq", "order": "5530", "date": "Wednesday 28 October",
+     "why": "Omar emailed HQ: Tuesday is no good, deliver on Wednesday"},
+    {"at": 30, "who": "kiosk", "order": "5547", "date": "Sunday 25 October",
+     "says": "Mei Tanaka (customer, order 5547) at the Store 14 kiosk: Can I collect my compost bundle, order 5547, on Sunday 25 October instead?"},
+    {"at": 40, "who": "hq", "order": "5521", "date": "Saturday 24 October",
+     "why": "Dana phoned HQ: Saturday after all, her van is free then"},
+    {"at": 50, "who": "hq", "order": "5560", "date": "Friday 30 October",
+     "why": "the nursery's truck moved: apple trees go out a day later"},
+    {"at": 55, "who": "read", "order": "5560",
+     "asks": "Ravi Menon asks the kiosk: when are my apple trees delivered?"},
+    {"at": 60, "who": "kiosk", "order": "5530", "date": "Monday 26 October",
+     "says": "Omar Haddad (customer, order 5530) at the Store 14 kiosk: Please deliver my raised bed kit, order 5530, on Monday 26 October."}
+  ],
+  "arms": {
+    "A": {"short": "A replay the transcript",
+          "how": "append the kiosk's conversation to the orders project with each message's own `--timestamp`; MemoryLake's extractor updates the orders"},
+    "B": {"short": "B version check",
+          "how": "outbox of changes; `fact get` each order: apply only if its `updated_at` is still the one in the offline snapshot, else hold for review"},
+    "C": {"short": "C request vs last write",
+          "how": "outbox of changes; `fact trace` each order: apply if its last write is older than the customer's request, else keep it and log the request as superseded"}
+  }
+}
