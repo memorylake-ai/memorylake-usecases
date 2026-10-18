@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Memory for Queue-Driven Agent Pipelines*](https://www.memorylake.ai/en/usecase/memory-for-queue-driven-agent-pipelines),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 4:59](https://github.com/memorylake-ai/memorylake-usecases/releases/download/stage-handoff-memory-v1/stage-handoff-memory-cli-demo.mp4) · [Web, 4:21](https://github.com/memorylake-ai/memorylake-usecases/releases/download/stage-handoff-memory-v1/stage-handoff-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/stage-handoff-memory-v1); GitHub serves them as downloads).
 
 **The problem.** In a queue-driven pipeline the messages stay light: stage 1 writes what it learned into shared
 memory and enqueues an id; stage 2 picks the message up and reads the context from memory. The queue hands a message
@@ -36,18 +37,18 @@ handoff runs through three pipelines, each with its own memory:
 | **B** | appends its note, waits until `conv consumed-messages --message` lists it and `conv cook-status` reports `cook_finished`, then enqueues | after extraction: 11 to 77 s |
 | **C** | appends its note **and** writes its result with `fact add` — dated, naming the value it replaces — then puts the fact id in the queue message and enqueues at once | about 2.5 s after the write |
 
-Over five runs (each read three times at temperature 0.7 — 72 reads per run):
+Over seven runs (each read three times at temperature 0.7 — 72 reads per run):
 
 | pipeline | the new value | ↺ the old value | changed customers | controls | stage 2 reads at (median) |
 |---|---|---|---|---|---|
-| A enqueue at once | 30/120 | **90** | **0/90** | 30/30 | +1.8 s |
-| B wait for `cook_finished` | 114/120 | 0 | 90/90 | **24/30** | **+38.8 s** (max 77.1) |
-| C `fact add` + id in the message | **120/120** | 0 | **90/90** | 30/30 | +2.4 s |
+| A enqueue at once | 42/168 | **126** | **0/126** | 42/42 | +1.8 s |
+| B wait for `cook_finished` | 162/168 | 0 | 126/126 | **36/42** | **+37.3 s** (max 77.1) |
+| C `fact add` + id in the message | **168/168** | 0 | **126/126** | 42/42 | +2.4 s |
 
-- **A** read the old value every time a value had changed: 90 of 90 reads, in every run. The controls were right
+- **A** read the old value every time a value had changed: 126 of 126 reads, in every run. The controls were right
   because nothing about them had changed.
-- **B** is right about the changed customers, but stage 2 waits a median 39 s for each message, and waiting made a
-  control wrong: in three runs out of five, extraction wrote Orvane's note as a fact with **no customer in it** —
+- **B** is right about the changed customers, but stage 2 waits a median 37 s for each message, and waiting made a
+  control wrong: in five runs out of seven, extraction wrote Orvane's note as a fact with **no customer in it** —
   *"New environments must be created in eu-central"* — and MemoryRouter attaches that fact to Brismoor's region
   question too. In two of those runs the fact was already there when Brismoor's stage 2 read, and all three reads
   answered *eu-central* for a customer who never asked to move.
@@ -209,16 +210,17 @@ memorylake fact list --projects proj-… --page-size 200 --workspace ws-…
 After the handoffs (and 20 s more), the demo lists each project's facts and asks every question once more. Two
 things show up here that the handoff itself does not:
 
-- **Extraction does not always keep the new value, or the customer.** Over five runs a fact naming the customer and
-  stating the new value was in A's memory for 26 of 30 changes and in B's for 29 of 30. In two runs A lost
+- **Extraction does not always keep the new value, or the customer.** Over seven runs a fact naming the customer
+  and stating the new value was in A's memory for 37 of 42 changes and in B's for 40 of 42. In two runs A lost
   Quassett's 60 seats: once merged into the September record as *"Quassett Health is on the Business plan with 25
   seats (previously … Team plan with 25 seats)"*, once as *"upgraded to the Business plan, effective 2026-10-18"*
   with no seat count — asked again, memory said 25 both times. The region change became *"New environments must be
-  created in eu-central"*, a fact with no customer in it, in A's memory in 2 runs and in B's in 3.
+  created in eu-central"*, a fact with no customer in it, in A's memory in 4 runs and in B's in 5.
 - **A fact with no customer in it answers every customer's question.** The demo prints these facts. Asked again,
   that fact made Orvane's answer right — and Brismoor's wrong (*"eu-central. New environments for Brismoor Freight
-  must be created in the eu-central region"*: A in 2 runs, B in 2). C's own facts always name the customer; its
-  notes are extracted too, but in these runs a subjectless fact never appeared in C's project.
+  must be created in the eu-central region"*: A in 4 runs, B in 4). C's own facts always name the customer; its
+  notes are extracted too, and once a subjectless fact did land in C's project (*"Invoices must not be sent to Dana
+  Roe"*, which no question reads) — never the region one.
 
 ### Step 6: the score
 
@@ -231,8 +233,8 @@ things show up here that the handoff itself does not:
 
 ## Measured
 
-Five runs: three `python3 demo.py` runs on the CLI, one in the browser, one more CLI run. Every stored reply was
-re-graded with the final grader (0 grades changed).
+Seven runs: three `python3 demo.py` runs on the CLI, one in the browser, one more CLI run, and the two recordings.
+Every stored reply was re-graded with the final grader (0 grades changed).
 
 | run | A new value (controls) | B new value (controls) | B median wait | C new value (controls) |
 |---|---|---|---|---|
@@ -241,10 +243,13 @@ re-graded with the final grader (0 grades changed).
 | 3 | 6/24 (6/6) | 21/24 (**3/6**) | 54.9 s | 24/24 (6/6) |
 | browser | 6/24 (6/6) | 24/24 (6/6) | 34.5 s | 24/24 (6/6) |
 | 4 | 6/24 (6/6) | 24/24 (6/6) | 51.4 s | 24/24 (6/6) |
+| CLI recording | 6/24 (6/6) | 24/24 (6/6) | 40.5 s | 24/24 (6/6) |
+| Web recording | 6/24 (6/6) | 24/24 (6/6) | 31.6 s | 24/24 (6/6) |
 
 In B's two bad runs the three wrong reads were Brismoor's: *eu-central*, from the subjectless fact above. Asked
-again after the handoffs, A was right 35 of 40 times, B 30 of 32 (run 1 asked only A again; B and C
-were added from run 2 on), C 32 of 32.
+again after the handoffs, A was right 49 of 56 times, B 44 of 48 (run 1 asked only A again; B and C
+were added from run 2 on), C 48 of 48 — every wrong later read was Brismoor's *eu-central* or a change A's
+extraction had lost.
 No read was ∅ in any run.
 
 ## What else we measured
@@ -253,12 +258,12 @@ These came from a probe before the demo was built (6 customers, one run each), n
 
 - **`cook_finished` is not a commit.** One change (Orvane's region) was read — `consumed-messages` listed it,
   `cook_finished` was true at +21 s — and no fact about it was ever written. 80 s later memory still said us-east.
-  Waiting for extraction tells you extraction ran, not that it kept what you wrote. It did not happen in the five demo
-  runs; B was 90/90 on the changed customers.
+  Waiting for extraction tells you extraction ran, not that it kept what you wrote. It did not happen in the seven demo
+  runs; B was 126/126 on the changed customers.
 - **A fact you write can still lose to an older one.** In the probe, C's first fact for Halvex was undated
   (*"Halvex Studio upgraded to the Business plan with 60 seats."*) next to the record *"… Team plan with 25 seats
   (as of 2026-09-02)"*. Reads at +0.7 s and +80 s gave the new plan; reads at +10, +20 and +40 s gave the old one.
-  The demo's C facts carry the date and name the value they replace, and were right in 120 of 120 reads.
+  The demo's C facts carry the date and name the value they replace, and were right in 168 of 168 reads.
 - **At-least-once delivery did not double anything.** We first tested whether a redelivered event ("bought a
   500-credit pack", delivered twice as two messages) would be counted twice. It was not: 0 of 6 duplicates became a
   second fact, and 0 of 36 answers doubled the total. Appending with `--custom-id <event id>` makes the redelivery a
