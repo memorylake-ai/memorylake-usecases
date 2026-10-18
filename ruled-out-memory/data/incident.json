@@ -1,0 +1,211 @@
+{
+  "org": "Tarnwick",
+  "agent": "Sleuth",
+  "incident": "INC-2291",
+  "symptom": "Checkout API p99 latency went from 300 ms to 4.1 s at 08:40 today",
+  "project_name": "Checkout service incidents",
+  "started": "2026-10-19T09:10:00Z",
+  "resume_at": "2026-10-19T10:30:00Z",
+  "budget": 5,
+  "people": [
+    {
+      "key": "eng",
+      "display": "Priya Raman",
+      "role": "on-call engineer, Tarnwick"
+    },
+    {
+      "key": "agent",
+      "display": "Sleuth",
+      "role": "investigation agent"
+    }
+  ],
+  "opening": "Checkout API p99 latency went from 300 ms to 4.1 s at 08:40 today. Find the cause. You have read-only tools; step budget is 5 actions.",
+  "closing": "Step budget reached (5 of 5 actions). Stopping here; INC-2291 is still open.",
+  "coverage": "INC-2291 run 1 coverage (2026-10-19 09:27 UTC): run 1 checked exactly five things - a cold Redis cache, payments-gateway connection pool exhaustion, the fraud-scorer sidecar and slow DNS resolution (all four ruled out), and the overnight deploy log (lead: migration 0412). Nothing else has been checked, and nothing else is ruled out.",
+  "iterations": [
+    {
+      "n": 1,
+      "suspect": "cache",
+      "short": "a cold Redis cache",
+      "thought": "The most likely cause is a cold Redis cache: last night's 02:00 deploy probably flushed it. I'll check the cache hit rate.",
+      "tool": "get_cache_stats",
+      "arguments": {
+        "service": "checkout",
+        "window": "60m"
+      },
+      "result": {
+        "hit_rate": 0.97,
+        "evictions_per_min": 3,
+        "last_flush": null
+      },
+      "observation": "hit rate 0.97, 3 evictions a minute, no flush",
+      "verdict": "ruled out",
+      "conclusion": "Cache hit rate is 97% with no flush, so a cold Redis cache is ruled out as the cause."
+    },
+    {
+      "n": 2,
+      "suspect": "pool",
+      "short": "payments-gateway connection pool exhaustion",
+      "thought": "Next suspect is the payments-gateway connection pool being exhausted, which would queue every checkout request. Checking pool stats.",
+      "tool": "get_pool_stats",
+      "arguments": {
+        "pool": "payments-gateway"
+      },
+      "result": {
+        "in_use": 11,
+        "max": 50,
+        "wait_ms_p99": 2
+      },
+      "observation": "11 of 50 connections in use, p99 wait 2 ms",
+      "verdict": "ruled out",
+      "conclusion": "The payments-gateway pool has 11 of 50 connections in use and 2 ms waits, so pool exhaustion is ruled out."
+    },
+    {
+      "n": 3,
+      "suspect": "sidecar",
+      "short": "the fraud-scorer sidecar",
+      "thought": "It could be the new fraud-scorer sidecar adding latency to every call. Checking its span timings.",
+      "tool": "get_sidecar_timings",
+      "arguments": {
+        "sidecar": "fraud-scorer",
+        "window": "60m"
+      },
+      "result": {
+        "p99_ms": 18,
+        "calls": 41200
+      },
+      "observation": "p99 18 ms over 41,200 calls",
+      "verdict": "ruled out",
+      "conclusion": "The fraud-scorer sidecar's p99 is 18 ms, so it is ruled out as the cause."
+    },
+    {
+      "n": 4,
+      "suspect": "dns",
+      "short": "slow DNS resolution",
+      "thought": "Maybe DNS resolution got slow, so every outbound call stalls on lookups. Checking resolver latency.",
+      "tool": "get_dns_latency",
+      "arguments": {
+        "resolver": "internal",
+        "window": "60m"
+      },
+      "result": {
+        "p99_ms": 3,
+        "failures": 0
+      },
+      "observation": "resolver p99 3 ms, 0 failures",
+      "verdict": "ruled out",
+      "conclusion": "The internal resolver answers in 3 ms with no failures, so slow DNS is ruled out."
+    },
+    {
+      "n": 5,
+      "suspect": "lead",
+      "short": "what changed overnight",
+      "thought": "Let me see what changed overnight.",
+      "tool": "get_deploy_log",
+      "arguments": {
+        "since": "2026-10-19T00:00:00Z"
+      },
+      "result": {
+        "entries": [
+          {
+            "at": "02:00",
+            "what": "checkout v4.18 (no schema change)"
+          },
+          {
+            "at": "02:05",
+            "what": "orders-db migration 0412: rebuild indexes on the orders table"
+          }
+        ]
+      },
+      "observation": "02:00 checkout v4.18 (no schema change); 02:05 orders-db migration 0412 rebuilt the indexes on the orders table",
+      "verdict": "lead",
+      "conclusion": "Migration 0412 rebuilt the orders-table indexes at 02:05; that is the lead, and the orders queries should be checked next."
+    }
+  ],
+  "suspects": [
+    {
+      "key": "cache",
+      "name": "a cold Redis cache",
+      "tool": "get_cache_stats",
+      "checked": true,
+      "topic": "\\bcache|缓存|hit.?rate|命中"
+    },
+    {
+      "key": "pool",
+      "name": "payments-gateway connection pool exhaustion",
+      "tool": "get_pool_stats",
+      "checked": true,
+      "topic": "\\bpool|连接池|connections? in use|in_use"
+    },
+    {
+      "key": "sidecar",
+      "name": "the fraud-scorer sidecar",
+      "tool": "get_sidecar_timings",
+      "checked": true,
+      "topic": "fraud.?scor|sidecar|风控"
+    },
+    {
+      "key": "dns",
+      "name": "slow DNS resolution",
+      "tool": "get_dns_latency",
+      "checked": true,
+      "topic": "\\bdns\\b|resolver|域名解析|解析器"
+    },
+    {
+      "key": "queries",
+      "name": "slow queries on the orders database",
+      "tool": "get_slow_queries",
+      "checked": false,
+      "topic": "slow quer|慢查询"
+    },
+    {
+      "key": "locks",
+      "name": "lock contention on the orders database",
+      "tool": "get_db_locks",
+      "checked": false,
+      "topic": "\\block|锁"
+    }
+  ],
+  "lead_topic": "0412|migration|迁移|rebuil|重建",
+  "tools": [
+    {
+      "name": "get_cache_stats",
+      "about": "Redis cache hit rate, evictions and last flush for a service"
+    },
+    {
+      "name": "get_pool_stats",
+      "about": "connection pool usage and wait times for a downstream"
+    },
+    {
+      "name": "get_sidecar_timings",
+      "about": "latency of a sidecar on the request path"
+    },
+    {
+      "name": "get_dns_latency",
+      "about": "internal DNS resolver latency and failures"
+    },
+    {
+      "name": "get_deploy_log",
+      "about": "deploys and migrations since a time"
+    },
+    {
+      "name": "get_slow_queries",
+      "about": "slowest queries on a database, with plans"
+    },
+    {
+      "name": "get_db_locks",
+      "about": "lock waits and blocking sessions on a database"
+    },
+    {
+      "name": "get_gc_pauses",
+      "about": "garbage-collection pauses of a service"
+    },
+    {
+      "name": "get_error_rates",
+      "about": "error rates by endpoint for a service"
+    }
+  ],
+  "system": "You are Sleuth, the investigation agent for Tarnwick's checkout service. It is {now}. Incident INC-2291 (checkout API p99 latency went from 300 ms to 4.1 s at 08:40 today) is still open, and a new investigation run is starting with a fresh budget of read-only actions. Use what earlier runs of this investigation established. Tools: {tools}.",
+  "ask_plan": "Pick the 4 actions to run next for INC-2291, most useful first. Do not repeat a check the investigation already ruled out. Reply with exactly 4 lines, each just one tool name.",
+  "ask_suspect": "Has the INC-2291 investigation already ruled out {name}? Start your answer with Yes, No, or Not recorded, then one sentence."
+}
