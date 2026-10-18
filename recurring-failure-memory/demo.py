@@ -435,8 +435,9 @@ def check_story() -> dict:
 
 # --------------------------------------------------------------------------- reading the two memories
 
-# "batches of 20", "batch size from 50 to 20", "20-invoice batches": the recovery that worked on night 46.
-WORKED = re.compile(r"\bbatch(?:es)?\b[^.;]{0,40}?\b20\b|\b20\b[- ](?:\w+[- ])?batch", re.I)
+# "batches of 20", "batch size from 50 to 20", "switching batching to 20", "20-invoice batches": the recovery that
+# worked on night 46 — and not "batches of 200" or "batches of 50 after waiting 20 seconds".
+WORKED = re.compile(r"\bbatch\w*[^.;]{0,40}?\b20\b(?!\s*-?\s*sec)|\b20\b[- ](?:\w+[- ])?batch", re.I)
 
 
 def names_worked(text: str | None) -> bool:
