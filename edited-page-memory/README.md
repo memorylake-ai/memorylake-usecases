@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Your Knowledge Shouldn't Be Trapped in Notion*](https://www.memorylake.ai/en/usecase/ai-memory-beyond-notion-ai),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 4:01](https://github.com/memorylake-ai/memorylake-usecases/releases/download/edited-page-memory-v1/edited-page-memory-cli-demo.mp4) · [Web, 5:00](https://github.com/memorylake-ai/memorylake-usecases/releases/download/edited-page-memory-v1/edited-page-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/edited-page-memory-v1); GitHub serves them as downloads).
 
 **The problem.** You sync your team's workspace into MemoryLake so every AI tool starts from what the team wrote
 down — ChatGPT for drafting, Claude for analysis, the same memory behind both. Workspaces hold two kinds of page.
@@ -37,20 +38,20 @@ The edited page is written three ways, each into its own project:
 | **B** | `Pilot study decisions: the pilot cohort is 25 accounts. Last edited 12 October 2026.` | plus the page's last-edited date (every block of the page) |
 | **C** | `Pilot study decisions: the pilot cohort is 25 accounts, changed from 40 accounts.` | plus what the block changed from (the sync diffs against what it wrote last time) |
 
-Over 4 runs (each question three times per model and project, temperature 0), the six changed questions:
+Over 6 runs (each question three times per model and project, temperature 0), the six changed questions:
 
 | | ChatGPT · gpt-4o-mini | Claude · claude-haiku-4-5 |
 |---|---|---|
-| **A** page text only | 49/72 (↺ 23) | 29/72 (↺ 43) |
-| **B** + last-edited date | 61/72 (↺ 11) | 72/72 |
-| **C** + what it changed from | 72/72 | 72/72 |
-| controls (unchanged), every arm | 72/72 | 72/72 |
+| **A** page text only | 76/108 (↺ 32) | 43/108 (↺ 65) |
+| **B** + last-edited date | 91/108 (↺ 17) | 108/108 |
+| **C** + what it changed from | 108/108 | 108/108 |
+| controls (unchanged), every arm | 108/108 | 108/108 |
 
 - **Undated, the edit loses on both models.** Claude gave the older note's value most of the time and said why: *"40
   accounts, according to the most recent research sync notes from September 14, 2026"* — the only fact with a date
   looked like the newest.
 - **The date fixes Claude, not ChatGPT.** With "Last edited 12 October 2026" in every block, Claude was right every
-  time; gpt-4o-mini still gave the older value 11 times, 9 of them on the pilot cohort, whose September note says
+  time; gpt-4o-mini still gave the older value 17 times, 13 of them on the pilot cohort, whose September note says
   *"will be 40 accounts"*.
 - **Naming what changed fixes both.** *"…25 accounts, changed from 40 accounts"* was right every time on both models.
   The fact no longer depends on the reader working out which of two facts is newer.
@@ -110,7 +111,7 @@ python3 web/server.py
 ```
 
 Opens `http://127.0.0.1:8765`. Paste the API key, press **Run demo**. The page runs the same pipeline (it imports
-`demo.py`) and shows each step: the first sync, the edit and how each project writes it, both models' answers, and
+`demo.py`) and shows each step ([video, 5:00](https://github.com/memorylake-ai/memorylake-usecases/releases/download/edited-page-memory-v1/edited-page-memory-web-demo.mp4)): the first sync, the edit and how each project writes it, both models' answers, and
 the score. **Ask one** sends any question through all three projects on both models. The terminal drawer at the
 bottom shows every `memorylake` command as it runs.
 
