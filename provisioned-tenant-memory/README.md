@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Run AI SaaS on Memory Infrastructure That Scales With You*](https://www.memorylake.ai/en/usecase/memory-infrastructure-for-ai-saas),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 4:30](https://github.com/memorylake-ai/memorylake-usecases/releases/download/provisioned-tenant-memory-v1/provisioned-tenant-memory-cli-demo.mp4) · [Web, 5:16](https://github.com/memorylake-ai/memorylake-usecases/releases/download/provisioned-tenant-memory-v1/provisioned-tenant-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/provisioned-tenant-memory-v1); GitHub serves them as downloads).
 
 **The problem.** An AI SaaS gives every customer team its own MemoryLake project, created by its provisioning code.
 The project gets named after the account id, and what the customer said at signup about their meetings has to go
@@ -37,9 +38,9 @@ Three eval syncs (1, 8 and 15 October), each with four bare metric readings and 
 meeting assistant is asked for each of the twelve readings through MemoryRouter (`router chat --boundary`, one
 boundary per tenant project), twice per tenant, on `gpt-4o-mini` at temperature 0.
 
-Over 5 runs, readings kept in the tenant's project: **A 5/60 · B 9/60 · C 52/60**; meetings that left
-nothing at all: **A 13/15 · B 12/15 · C 2/15**. The assistant answered the readings right:
-**A 10/120 · B 18/120 · C 104/120**; it never invented a number (temperature 0, "say Unknown"), it said
+Over 6 runs, readings kept in the tenant's project: **A 5/72 · B 9/72 · C 60/72**; meetings that left
+nothing at all: **A 16/18 · B 15/18 · C 3/18**. The assistant answered the readings right:
+**A 10/144 · B 18/144 · C 120/144**; it never invented a number (temperature 0, "say Unknown"), it said
 Unknown or got nothing attached. Details in [Measured](#measured).
 
 ## Prerequisites
@@ -182,7 +183,7 @@ after removing dates and the numbers the question itself says; it checks itself 
 
 ## Measured
 
-5 full runs (first run, a second run, `--reset`, the browser run, the Web recording), all exit 0.
+6 full runs (first run, a second run, `--reset`, the browser run, the Web recording, the CLI recording), all exit 0.
 Readings kept per run (in brackets: meetings that left nothing):
 
 | run | A project only | B + description | C + fact instruction |
@@ -192,22 +193,23 @@ Readings kept per run (in brackets: meetings that left nothing):
 | 3 | 0/12 (3) | 0/12 (3) | 12/12 (0) |
 | 4 | 3/12 (2) | 3/12 (2) | 8/12 (1) |
 | 5 | 0/12 (3) | 0/12 (3) | 8/12 (1) |
-| **total** | **5/60** (13/15) | **9/60** (12/15) | **52/60** (2/15) |
+| 6 | 0/12 (3) | 0/12 (3) | 8/12 (1) |
+| **total** | **5/72** (16/18) | **9/72** (15/18) | **60/72** (3/18) |
 
-The assistant, 120 answers per tenant:
+The assistant, 144 answers per tenant:
 
 | | right | Unknown | invented | MemoryRouter attached nothing (∅) |
 |---|---|---|---|---|
-| **A** | 10/120 | 9 | 0 | 101 |
-| **B** | 18/120 | 7 | 0 | 95 |
-| **C** | 104/120 | 2 | 0 | 14 |
+| **A** | 10/144 | 9 | 0 | 125 |
+| **B** | 18/144 | 7 | 0 | 119 |
+| **C** | 120/144 | 6 | 0 | 18 |
 
-- **The description is not what extraction reads.** A and B differ only by `--description`; they kept 5/60 and
-  9/60. In our probes before the demo (one eval sync, three projects each), a description saying what to keep
+- **The description is not what extraction reads.** A and B differ only by `--description`; they kept 5/72 and
+  9/72. In our probes before the demo (one eval sync, three projects each), a description saying what to keep
   left 0 of 18 readings; a fact instruction saying the same thing, 18 of 18.
-- **The fact instruction is not a guarantee.** C lost one whole meeting in 2 of 15 meetings. Count what
+- **The fact instruction is not a guarantee.** C lost one whole meeting in 3 of 18 meetings. Count what
   each meeting left, as `census()` does.
-- **Action items were kept nowhere** (0 of 45 across all three tenants). The instruction asks for readings only, and
+- **Action items were kept nowhere** (0 of 54 across all three tenants). The instruction asks for readings only, and
   "I will rerun the latency eval …" is not one; nor did the default extraction keep it.
 - **The project name was not the lever.** Before settling on this demo we also tried naming the project after the
   team and its topic ("Quillfold agent evals"): 10 of 18 readings kept once and 0 of 18 the next time, against 1 and
