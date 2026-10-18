@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Run Concurrent Agents on Shared Memory Without Race Conditions*](https://www.memorylake.ai/en/usecase/concurrent-agent-memory-access-without-race-conditions),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 4:02](https://github.com/memorylake-ai/memorylake-usecases/releases/download/concurrent-write-memory-v1/concurrent-write-memory-cli-demo.mp4) · [Web, 4:21](https://github.com/memorylake-ai/memorylake-usecases/releases/download/concurrent-write-memory-v1/concurrent-write-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/concurrent-write-memory-v1); GitHub serves them as downloads). Each video is one run; the numbers below add up all of them.
 
 **The problem.** Several agents share one memory, and some of them write at the same moment. Two things go wrong, and
 neither raises an error:
@@ -181,7 +182,7 @@ records are read as one seat assigned to six people. Resolving that conflict wit
 
 ## Measured
 
-7 runs of this version of the demo: three terminal runs (the third with `--reset`), three parallel copies of the demo with their own `custom_id` prefix, the browser run recorded for the Web video. Every number below comes from the saved reports (`out/runs/`). Truth in every run: 18 of 20.
+8 runs of this version of the demo: three terminal runs (the third with `--reset`), three parallel copies of the demo with their own `custom_id` prefix, the browser run recorded for the Web video, and the run recorded for the CLI video (from a fresh `git clone`). Every number below comes from the saved reports (`out/runs/`). Truth in every run: 18 of 20.
 
 | run | A one counter fact | B records, seat as subject | C records, person as subject |
 |---|---|---|---|
@@ -192,10 +193,11 @@ records are read as one seat assigned to six people. Resolving that conflict wit
 | copy3 | 13 · 5 of 6 updates overwrote · 0 conflicts | 13 · flagged (“Tamsor seat assigned to multiple users”, 6 facts) · 5 forgotten | 18 · 0 conflicts |
 | run3 --reset | 13 · 5 of 6 updates overwrote · 0 conflicts | 13 · flagged (“Conflicting Tamsor seat assignees”, 6 facts) · 5 forgotten | 18 · 0 conflicts |
 | web1 | 13 · 5 of 6 updates overwrote · 0 conflicts | 13 · flagged (“Multiple assignees for Tamsor seat”, 6 facts) · 5 forgotten | 18 · 0 conflicts |
+| cli | 13 · 5 of 6 updates overwrote · 0 conflicts | 13 · flagged after 20 s (“Tamsor seat has multiple assignees”, 6 facts) · 5 forgotten | 18 · 0 conflicts |
 
-- **A lost 5 of 6 writes in every run (35 of 42), and was never flagged (0 of 7).** All six agents read 12 before any of them wrote; each update replaced a "13 of 20" another agent had written milliseconds earlier. Which agent's write survived changed from run to run; the count never did.
-- **B was flagged as a contradiction in 7 of 7 runs**, always one `m2m` conflict spanning all six records, named 4 different ways in 7 runs (the name and description are written by a model). `keep_fact` on it forgot the other five records every time (35 real assignments in all).
-- **C came out right in 7 of 7 runs, with 0 conflicts.**
+- **A lost 5 of 6 writes in every run (40 of 48), and was never flagged (0 of 8).** All six agents read 12 before any of them wrote; each update replaced a "13 of 20" another agent had written milliseconds earlier. Which agent's write survived changed from run to run; the count never did.
+- **B was flagged as a contradiction in 8 of 8 runs**, always one `m2m` conflict spanning all six records, named 5 different ways in 8 runs (the name and description are written by a model). `keep_fact` on it forgot the other five records every time (40 real assignments in all).
+- **C came out right in 8 of 8 runs, with 0 conflicts.**
 - **The pool size changes what gets flagged.** An earlier version of this demo also wrote "Kesswick Labs has 20 Tamsor seats; 12 were in use before 2026-10-19." into B's project before the race: B was then flagged in 0 of 5 runs. In a separate probe of six records each, with no pool fact, "… seat assigned to …" records were flagged 5 of 6 times; with the pool fact, 1 of 3. The detector judges whether the facts it can see can all be true — a record that leaves the seat count to the app looks like one seat with six owners.
 
 ## Use it in your own agents
