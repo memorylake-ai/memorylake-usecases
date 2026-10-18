@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Stop Bloating Token Costs by Stuffing Agent History Into Every Prompt*](https://www.memorylake.ai/en/usecase/stop-token-bloat-from-stuffed-agent-history),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded; links follow.
+**Watch it run:** [CLI, 7:58](https://github.com/memorylake-ai/memorylake-usecases/releases/download/history-window-memory-v1/history-window-memory-cli-demo.mp4) · [Web, 8:27](https://github.com/memorylake-ai/memorylake-usecases/releases/download/history-window-memory-v1/history-window-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/history-window-memory-v1); GitHub serves them as downloads). Both are real, unedited runs from a clean account and are counted in the Measured table below.
 
 **The problem.** An agent that re-sends its whole conversation history in every request gets more expensive with
 every turn. The usual fix is a sliding window: keep the system prompt and the last few turns, drop the rest. That
@@ -37,10 +38,11 @@ earlier. The same session runs three ways:
 - **C — the same 6 turns, plus MemoryRouter** (`router chat --boundary`) attaching what MemoryLake extracted from the
   ten past sessions.
 
-Over the runs counted below, B got **0 of the 21** earlier agreements right (14 times "not on file", 7 times a made-up
-value such as lot `C-2023-07` at 3.50 USD/lb or CO2 account `12345`). C got 21 of 21, A 20 of 21. After the window
-slid, B's cache read was exactly the 1,024-token playbook on 27 of 30 turns (0 on the other three). About 90% of A's
-prompt tokens were read from the cache, and A still cost 1.5–1.6× C per session.
+Over the 5 runs counted below, B got **0 of the 35** earlier agreements right (24 times "not on file", 11 times a made-up
+value such as lot `C-2023-07` at 3.50 USD/lb or CO2 account `12345`). C got 35 of 35, A 34 of 35. After the window
+slid, B's cache read was exactly the 1,024-token playbook on 47 of 50 turns (0 on the other three). About 92% of A's
+prompt tokens were read from the cache, and A still cost 1.5× C per session (6,345 vs 4,240 USD per million sessions;
+B 3,350).
 
 ## What it shows
 
@@ -52,7 +54,7 @@ prompt tokens were read from the cache, and A still cost 1.5–1.6× C per sessi
   doesn't have a value. B mostly does. But in every run it also answered some questions with values it made up: a lot
   number, a 5% credit instead of 6%, a 250 USD emergency fee instead of 180.
 - **Memory instead of history.** In C, each past session is a MemoryLake conversation (`conv create`, `conv msg
-  append`). Extraction turns the 104 messages into about 70–80 facts, and the demo checks that every value today's
+  append`). Extraction turns the 104 messages into 68–78 facts (it varies from run to run), and the demo checks that every value today's
   session needs is among them before any answer. MemoryRouter attaches the relevant facts to each request (about 300
   tokens more than B). Because they come after the system prompt, the playbook stays cacheable.
 - **Caching narrows the gap, but stuffing still costs more.** A sent 2.2× C's prompt tokens and paid 1.5× C's price,
@@ -203,9 +205,11 @@ after the window slid (turns 7–16) whose `cached_tokens` was exactly the 1,024
 | first run (`--reset`) | built, 78 facts | 7/0/0 | 0/4/3 | 7/0/0 | 87% · 55% · 53% | 9/10 | 6,643 · 3,500 · 4,281 |
 | second run | reused | 6/0/1 | 0/6/1 | 7/0/0 | 93% · 60% · 54% | 10/10 | 6,267 · 3,208 · 4,214 |
 | browser check | built, 70 facts | 7/0/0 | 0/4/3 | 7/0/0 | 93% · 52% · 54% | 8/10 | 6,214 · 3,471 · 4,170 |
-| **total (3 runs)** | 7/7 values every time | **20/0/1** | **0/14/7** | **21/0/0** | | **27/30** | |
+| CLI recording | built, 76 facts | 7/0/0 | 0/4/3 | 7/0/0 | 92% · 59% · 50% | 10/10 | 6,383 · 3,303 · 4,170 |
+| Web recording | built, 68 facts | 7/0/0 | 0/6/1 | 7/0/0 | 93% · 60% · 52% | 10/10 | 6,218 · 3,270 · 4,364 |
+| **total (5 runs)** | 7/7 values every time | **34/0/1** | **0/24/11** | **35/0/0** | | **47/50** | **6,345 · 3,350 · 4,240** (mean) |
 
-On the B turns that were not on the floor, `cached_tokens` was 0: the provider did not read even the playbook from
+On the B turns that were not on the floor, `cached_tokens` was 0 (C had one such turn too): the provider did not read even the playbook from
 its cache that time. A's one ✗ was the approval question: the 5,000 USD rule was in its prompt, and it said 7,400 USD
 was below it.
 
