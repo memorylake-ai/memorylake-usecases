@@ -1,0 +1,58 @@
+{
+  "company": "Sallowfen Outfitters",
+  "agent": "support agent",
+  "project_name": "Sallowfen support agent memory",
+  "rules": [
+    {"key": "R-RET-ALL", "topic": "returns", "kind": "rule", "applies_to": "all", "op": "max", "value": 30, "unit": "days", "status": "active",
+     "text": "Returns: unworn items can be returned within 30 days of delivery for a full refund."},
+    {"key": "R-RET-OUT", "topic": "returns", "kind": "rule", "applies_to": "outerwear", "op": "max", "value": 14, "unit": "days", "status": "draft",
+     "text": "Returns, outerwear: jackets and shells can be returned within 14 days of delivery."},
+    {"key": "R-RET-HOW", "topic": "returns", "kind": "info", "status": "active",
+     "text": "Returns are started by email to returns@sallowfen.example with the order number."},
+    {"key": "R-SHIP", "topic": "shipping", "kind": "rule", "applies_to": "all", "op": "min", "value": 50, "unit": "dollars", "status": "active",
+     "text": "Shipping: orders of 50 dollars or more ship free within the US."},
+    {"key": "R-WAR-FOOT", "topic": "warranty", "kind": "rule", "applies_to": "footwear", "op": "max", "value": 24, "unit": "months", "status": "active",
+     "text": "Warranty, footwear: boots and shoes are covered against defects for 24 months."},
+    {"key": "R-PRICE", "topic": "price_protection", "kind": "rule", "applies_to": "all", "op": "max", "value": 7, "unit": "days", "status": "active",
+     "text": "Price protection: if the price drops within 7 days of purchase, we refund the difference."},
+    {"key": "R-EXCH", "topic": "exchanges", "kind": "rule", "applies_to": "all", "op": "max", "value": 60, "unit": "days", "status": "active",
+     "text": "Exchanges: a different size or colour can be exchanged within 60 days of delivery."},
+    {"key": "R-DAMAGE", "topic": "damaged", "kind": "rule", "applies_to": "all", "op": "always", "status": "active",
+     "text": "Damaged on arrival: we send a free replacement; the customer does not need to return the item."},
+    {"key": "R-SUMMER", "topic": "promotions", "kind": "rule", "applies_to": "all", "op": "always", "status": "active",
+     "text": "Summer sale: 20 percent off all tents until 31 August."},
+    {"key": "R-HOURS", "topic": "contact", "kind": "info", "status": "active",
+     "text": "Support hours: Monday to Friday, 8 am to 6 pm Mountain time."}
+  ],
+  "changes": [
+    {"key": "R-SHIP", "do": "text", "text": "Shipping: free US shipping on any order of 50 dollars or more.", "why": "copy edit"},
+    {"key": "R-RET-HOW", "do": "text", "text": "Returns are started at sallowfen.example/returns with the order number; the email address is retired.", "why": "new returns portal"},
+    {"key": "R-PRICE", "do": "text+meta", "text": "Price protection: if the price drops within 14 days of purchase, we refund the difference.", "meta": {"value": 14}, "why": "policy change: 7 → 14 days"},
+    {"key": "R-WAR-FOOT", "do": "text", "text": "Warranty, footwear: boots and shoes have a 24-month warranty against manufacturing defects.", "why": "copy edit"},
+    {"key": "R-GIFT", "do": "add", "rule": {"key": "R-GIFT", "topic": "gift_cards", "kind": "rule", "applies_to": "all", "op": "never", "status": "active",
+      "text": "Gift cards: gift cards cannot be returned or refunded."}, "why": "new rule"},
+    {"key": "R-LOYAL", "do": "add", "rule": {"key": "R-LOYAL", "topic": "loyalty", "kind": "rule", "applies_to": "all", "op": "always", "status": "active",
+      "text": "Loyalty: members earn 1 point per dollar; 100 points is a 5 dollar credit."}, "why": "new programme"},
+    {"key": "R-SUMMER", "do": "delete", "why": "sale ended"},
+    {"key": "R-RET-OUT", "do": "meta", "meta": {"status": "active"}, "why": "the outerwear rule was approved"},
+    {"key": "R-RET-ALL", "do": "meta", "meta": {"reviewed": "2026-10-12"}, "why": "quarterly review stamp"},
+    {"key": "R-EXCH", "do": "meta", "meta": {"reviewed": "2026-10-12"}, "why": "quarterly review stamp"},
+    {"key": "R-DAMAGE", "do": "meta", "meta": {"reviewed": "2026-10-12"}, "why": "quarterly review stamp"}
+  ],
+  "questions": [
+    {"id": "Q1", "topic": "returns", "category": "outerwear", "x": 20, "ask": "Can a customer return a rain jacket delivered 20 days ago?"},
+    {"id": "Q2", "topic": "shipping", "category": "camping", "x": 60, "ask": "Does a 60 dollar order of camping gear ship free?"},
+    {"id": "Q3", "topic": "warranty", "category": "footwear", "x": 18, "ask": "Are 18-month-old hiking boots with a split sole under warranty?"},
+    {"id": "Q4", "topic": "price_protection", "category": "outerwear", "x": 10, "ask": "A jacket dropped in price 10 days after purchase. Do we refund the difference?"},
+    {"id": "Q5", "topic": "exchanges", "category": "footwear", "x": 45, "ask": "Can a customer exchange boots for a larger size 45 days after delivery?"},
+    {"id": "Q6", "topic": "gift_cards", "category": "gift_card", "x": 0, "ask": "Can a customer return an unused gift card?"}
+  ],
+  "methods": {
+    "A": {"short": "A trace window", "title": "A · diff the time window in fact trace",
+          "how": "every fact id (today's `fact list` plus the ids eval 1 logged), `fact trace` each, keep the entries after eval 1; a changed answer is blamed on the entries on its topic"},
+    "B": {"short": "B snapshot diff", "title": "B · diff two full snapshots",
+          "how": "eval 1 saved the whole `fact list` (text, metadata, updated_at); compare it with today's; a changed answer is blamed on the changes on its topic"},
+    "C": {"short": "C answer receipts", "title": "C · diff the memory the answer read",
+          "how": "every answer saved a receipt: the facts it read, as it read them; compare the two receipts of a changed answer, then replay the agent with one changed fact at a time put back to its eval-1 version"}
+  }
+}
