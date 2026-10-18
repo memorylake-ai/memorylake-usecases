@@ -4,7 +4,10 @@ A runnable version of the MemoryLake use case
 [*Give Agents Memory of Tool Failures So They Recover Instead of Spiral*](https://www.memorylake.ai/en/usecase/memory-for-agents-that-recover-from-tool-failures),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 5:00](https://github.com/memorylake-ai/memorylake-usecases/releases/download/recurring-failure-memory-v1/recurring-failure-memory-cli-demo.mp4) · [Web, 5:21](https://github.com/memorylake-ai/memorylake-usecases/releases/download/recurring-failure-memory-v1/recurring-failure-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/recurring-failure-memory-v1); GitHub serves them as downloads). Each video is one real run:
+in the CLI run the extractor merged all four failures into one fact (A counted 1), in the Web run it kept three of
+the four nights (A counted 3 and reached the rule a night late).
 
 **The problem.** An agent's tool fails — a rate limit, a timeout — and it recovers. Remembering *how* it recovered
 helps next time. But one failure is bad luck; the same failure every other night is a pattern, and a pattern needs a
@@ -14,7 +17,7 @@ fix, not another retry. "Has this failed three times this week?" is a question a
   extractor turns it into memory. The extractor is built to keep **knowledge**: "the export_invoices call can fail
   with HTTP 429 …; waiting 30 seconds and resending in batches of 50 lets it complete". When the same failure comes
   back, that knowledge is already there — so the repeat is merged into it, or changes nothing at all. Four failures
-  left one to three facts and three or four history entries. In 6 of 8 runs the count came out short; in 4 of 8 the
+  left one to five facts and two to six history entries. In 10 of 12 runs the count came out short; in 6 of 12 the
   rule never fired.
 - **Write a typed failure record** — the tool error handler writes one record per failure (`fact add`, then
   `fact update --metadata` with run, date, tool, error, recovery, outcome). Four failures, four records, every run.
@@ -81,7 +84,7 @@ previous run left behind first (`--reset` is accepted and does the same).
 python3 web/server.py                   # opens http://127.0.0.1:8765
 ```
 
-Paste the API key, press **Run demo**, and follow the steps: the two projects, the six nights as they happen (with a
+[Watch the browser run (5:21)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/recurring-failure-memory-v1/recurring-failure-memory-web-demo.mp4). Paste the API key, press **Run demo**, and follow the steps: the two projects, the six nights as they happen (with a
 running count per memory), what each memory holds, night 47's pre-call check, and the score. The terminal drawer at
 the bottom shows every `memorylake` command as it runs. The server is standard library only and binds to localhost;
 the key stays in that process and in `.memorylake-demo/`.
@@ -214,26 +217,28 @@ Every failure of the week against both memories (same run):
 
 ## Measured
 
-8 full runs: four in this directory (two terminal runs, one with `--reset`, and a browser run), three copies run
-side by side with their own prefix, and the first terminal run. Every number comes from the saved reports
-(`out/runs/`).
+12 full runs: five in this directory before the recordings (two terminal runs, one with `--reset`, a browser run
+and the first terminal run), three copies run side by side with their own prefix, the two recorded runs (CLI from a
+fresh `git clone`, Web) and two earlier browser recordings that were redone (the score's recovery check misread the
+facts' wording; the counts are unaffected). Every number comes from the saved reports (`out/runs/`); the recovery
+row is recomputed with the final check for all 12.
 
-| over 8 runs | A run log | A + fact trace | B failure records |
+| over 12 runs | A run log | A + fact trace | B failure records |
 |---|---|---|---|
-| runs that count all 4 failures | 2 | 3 | **8** |
-| counts read (truth 4) | 2 · 4 · 2 · 3 · 2 · 4 · 2 · 3 | 4 · 4 · 3 · 3 · 2 · 4 · 3 · 3 | 4 every run |
-| rule holds tonight | 4 of 8 | 7 of 8 | **8 of 8** |
-| rule first held on night 45, as it should | 2 of 8 (46 twice, never 4 times) | 3 of 8 (46 four times, never once) | **8 of 8** |
-| names the recovery that worked last (batches of 20) | 8 of 8 | 8 of 8 | 8 of 8 |
+| runs that count all 4 failures | 2 | 3 | **12** |
+| counts read (truth 4) | 1 to 4 (2 · 4 · 2 · 3 · 2 · 2 · 3 · 3 · 4 · 2 · 3 · 1) | 2 to 4 (4 · 4 · 3 · 3 · 2 · 3 · 3 · 3 · 4 · 3 · 3 · 2) | 4 every run |
+| rule holds tonight | 6 of 12 | 10 of 12 | **12 of 12** |
+| rule first held on night 45, as it should | 2 of 12 (46 four times, never six) | 3 of 12 (46 seven times, never twice) | **12 of 12** |
+| names the recovery that worked last (batches of 20) | 12 of 12 | 12 of 12 | 12 of 12 |
 
 What the extractor did with the four `export_invoices` failures:
 
-| over 8 runs | |
+| over 12 runs | |
 |---|---|
-| facts about it after six nights | 1 to 3 (1 · 3 · 2 · 2 · 2 · 3 · 2 · 2) |
-| `fact trace` entries across those facts | 3 or 4 |
-| runs where a repeat changed no fact at all (night 43 or 45, once both) | 5 of 8 |
-| runs where every night's date is still written in A's facts | 2 of 8 |
+| facts about it after six nights | 1 to 5 (one fact in 2 runs) |
+| `fact trace` entries across those facts | 2 to 6 |
+| runs where a repeat changed no fact at all (night 43 or 45; both in 2 runs) | 9 of 12 |
+| runs where every night's date is still written in A's facts | 2 of 12 |
 
 The extractor is not wrong to merge: "the call can fail with HTTP 429, and here is what works" is the right
 knowledge to keep. It is the wrong place to count. Before the demo, four probes of the same shape gave 1, 1, 2 and 2
