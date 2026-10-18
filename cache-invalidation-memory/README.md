@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Cache Agent Memory Hot-Paths Without Risking Correctness*](https://www.memorylake.ai/en/usecase/memory-caching-strategies-for-agent-apps),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 2:38](https://github.com/memorylake-ai/memorylake-usecases/releases/download/cache-invalidation-memory-v1/cache-invalidation-memory-cli-demo.mp4) · [Web, 3:04](https://github.com/memorylake-ai/memorylake-usecases/releases/download/cache-invalidation-memory-v1/cache-invalidation-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/cache-invalidation-memory-v1); GitHub serves them as downloads). Each video is one real run.
 
 **The problem.** An agent answers the same few questions all day, and each answer is a memory `search` (about 3 s
 here). So you cache the answers. The question is when a cached answer stops being true:
@@ -72,7 +73,7 @@ previous run left behind first (`--reset` is accepted and does the same).
 python3 web/server.py                   # opens http://127.0.0.1:8765
 ```
 
-Paste the API key, press **Run demo**, and follow the steps: the policies, the warm-up and the quiet minute, the
+[Watch the browser run (3:04)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/cache-invalidation-memory-v1/cache-invalidation-memory-web-demo.mp4). Paste the API key, press **Run demo**, and follow the steps: the policies, the warm-up and the quiet minute, the
 admin edit, the channel message with the extractor's writes, the retirement, and the score. The terminal drawer at
 the bottom shows every `memorylake` command as it runs. The server is standard library only and binds to
 localhost; the key stays in that process and in `.memorylake-demo/`.
@@ -193,22 +194,23 @@ refund window.
 
 ## Measured
 
-4 runs so far: three terminal runs (the second over the first's leftovers, the third with `--reset`) and the browser
-run recorded for the Web video. The first run had no quiet round yet (16 reads after the warm-up instead of 20).
-Every number comes from the saved reports (`out/runs/`); all 4 gave the same stale answers in the same rounds.
+5 runs: three terminal runs (the second over the first's leftovers, the third with `--reset`), the browser run
+recorded for the Web video, and the run recorded for the CLI video (from a fresh `git clone`). The first run had no
+quiet round yet (16 reads after the warm-up instead of 20). Every number comes from the saved reports (`out/runs/`);
+all 5 gave the same stale answers in the same rounds.
 
-| over 4 runs | A TTL 15 min | B project version | C fact watermark |
+| over 5 runs | A TTL 15 min | B project version | C fact watermark |
 |---|---|---|---|
-| stale answers | 28 of 76 | 8 of 76 | 0 of 76 |
-| stale answers served as cache hits | 28 | 8 | 0 |
-| validator calls | 0 | 76 | 76 |
+| stale answers | 35 of 96 | 10 of 96 | 0 of 96 |
+| stale answers served as cache hits | 35 | 10 | 0 |
+| validator calls | 0 | 96 | 96 |
 
-| over 4 runs | |
+| over 5 runs | |
 |---|---|
-| the extractor rewrote both policies in place (`UPDATE`, `COOK`) | 4 of 4, 15–25 s after the append (`fact trace` time) |
-| the project version moved with the extractor's writes | 0 of 4 |
-| the newest fact's `updated_at` moved with them | 4 of 4 |
-| the delete moved the newest fact's `updated_at` / `total` | 0 of 4 / 4 of 4 |
+| the extractor rewrote both policies in place (`UPDATE`, `COOK`) | 5 of 5, 15–25 s after the append (`fact trace` time) |
+| the project version moved with the extractor's writes | 0 of 5 |
+| the newest fact's `updated_at` moved with them | 5 of 5 |
+| the delete moved the newest fact's `updated_at` / `total` | 0 of 5 / 5 of 5 |
 
 The answers depend on the extractor: in another run it could merge the change differently, write it as a new fact,
 or take longer than the 240 s the demo waits (it then says *deferred*). The verdicts are always measured against a
