@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Evolve Agent Memory Schemas Without Breaking the Memory You Already Have*](https://www.memorylake.ai/en/usecase/schema-evolution-for-versioned-agent-memory),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 2:11](https://github.com/memorylake-ai/memorylake-usecases/releases/download/schema-version-memory-v1/schema-version-memory-cli-demo.mp4) · [Web, 2:20](https://github.com/memorylake-ai/memorylake-usecases/releases/download/schema-version-memory-v1/schema-version-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/schema-version-memory-v1); GitHub serves them as downloads). Each video is one run; the numbers below add up all of them.
 
 **The problem.** The use case page promises *forward-and-backward compatibility* ("new code reads old data; old code
 reads what it can of new data") and an *audit trail per schema change*. A MemoryLake fact has two parts: the text,
@@ -220,18 +221,18 @@ trace entry, with nothing that says what changed.
 
 ## Measured
 
-4 runs so far: three terminal runs (the second over the first's leftovers, the third with `--reset`) and the browser run recorded for the Web video. Every number comes from the saved reports (`out/runs/`); every run gave the same result for every reader and every record.
+5 runs: three terminal runs (the second over the first's leftovers, the third with `--reset`), the browser run recorded for the Web video, and the run recorded for the CLI video (from a fresh `git clone`). Every number comes from the saved reports (`out/runs/`); every run gave the same result for every reader and every record.
 
 Priority accounts each reader found (6 per run), and migrated records the audit could read (8 per run), summed:
 
 | | A ship v2, no migration | B rename in place | C expand, then record |
 |---|---|---|---|
-| R1 support router (v2, `tier`) | 8 of 24 | 24 of 24 | 24 of 24 |
-| R2 billing export (v1, `plan`) | 16 of 24 | 0 of 24 | 24 of 24 |
-| R3 ops search (v2, "tier …") | 8 of 24 | 8 of 24 | 24 of 24 |
-| R4 saved search (v1, "plan …") | 16 of 24 | 16 of 24 | 24 of 24 |
-| migration in `fact trace` | n/a | 0 of 32 | 32 of 32 |
-| v1 fields read back | n/a | 0 of 32 | 32 of 32 |
+| R1 support router (v2, `tier`) | 10 of 30 | 30 of 30 | 30 of 30 |
+| R2 billing export (v1, `plan`) | 20 of 30 | 0 of 30 | 30 of 30 |
+| R3 ops search (v2, "tier …") | 10 of 30 | 10 of 30 | 30 of 30 |
+| R4 saved search (v1, "plan …") | 20 of 30 | 20 of 30 | 30 of 30 |
+| migration in `fact trace` | n/a | 0 of 40 | 40 of 40 |
+| v1 fields read back | n/a | 0 of 40 | 40 of 40 |
 
 The first terminal run took 60 s. All writes go through the API with fixed texts and metadata (no extraction from
 conversations, no search ranking), so nothing in the outcome depends on a model.
