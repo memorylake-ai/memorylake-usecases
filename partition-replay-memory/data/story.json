@@ -1,0 +1,115 @@
+{
+  "company": "Tessane Freight",
+  "today": "2026-10-19",
+  "project_name": "Tessane dispatch runbook",
+  "regions": {
+    "online": "us-east",
+    "offline": "eu-west"
+  },
+  "partition": {
+    "read_at": "09:00",
+    "start": "09:04",
+    "end": "09:40"
+  },
+  "fields": [
+    {
+      "key": "rate",
+      "label": "Corvio rate limit",
+      "base": "Tessane dispatch agents may call the Corvio carrier-rates API at most 50 requests per second.",
+      "value": "50 req/s"
+    },
+    {
+      "key": "retries",
+      "label": "webhook retries",
+      "base": "Tessane dispatch agents retry a failed carrier webhook 3 times before paging on-call.",
+      "value": "3 retries"
+    },
+    {
+      "key": "cache",
+      "label": "quote cache TTL",
+      "base": "Tessane dispatch agents cache carrier quotes for 300 seconds.",
+      "value": "300 s"
+    },
+    {
+      "key": "failover",
+      "label": "payment failover",
+      "base": "When the primary payment gateway fails, Tessane dispatch agents fail over to Kelpay.",
+      "value": "Kelpay"
+    },
+    {
+      "key": "hub",
+      "label": "EU hub",
+      "base": "Tessane routes EU shipments through the Rotterdam hub.",
+      "value": "Rotterdam"
+    },
+    {
+      "key": "oncall",
+      "label": "on-call channel",
+      "base": "The Tessane dispatch on-call channel is #dispatch-oncall.",
+      "value": "#dispatch-oncall"
+    }
+  ],
+  "online_writes": [
+    {
+      "field": "rate",
+      "at": "09:18",
+      "text": "Tessane dispatch agents may call the Corvio carrier-rates API at most 80 requests per second.",
+      "value": "80 req/s",
+      "why": "Corvio confirmed the contract upgrade to the 80 req/s tier"
+    },
+    {
+      "field": "cache",
+      "at": "09:25",
+      "text": "Tessane dispatch agents cache carrier quotes for 120 seconds.",
+      "value": "120 s",
+      "why": "quotes went stale during the fuel-price surge"
+    }
+  ],
+  "outbox": [
+    {
+      "field": "rate",
+      "at": "09:06",
+      "text": "Tessane dispatch agents may call the Corvio carrier-rates API at most 40 requests per second.",
+      "value": "40 req/s",
+      "why": "Corvio returned 429s to the EU agents"
+    },
+    {
+      "field": "retries",
+      "at": "09:12",
+      "text": "Tessane dispatch agents retry a failed carrier webhook 5 times before paging on-call.",
+      "value": "5 retries",
+      "why": "the EU carrier webhook endpoint kept flapping"
+    },
+    {
+      "field": "cache",
+      "at": "09:15",
+      "text": "Tessane dispatch agents cache carrier quotes for 600 seconds.",
+      "value": "600 s",
+      "why": "fewer quote calls under the lower rate limit"
+    },
+    {
+      "field": "failover",
+      "at": "09:21",
+      "text": "When the primary payment gateway fails, Tessane dispatch agents fail over to Paymora.",
+      "value": "Paymora",
+      "why": "Kelpay announced an EU outage window"
+    }
+  ],
+  "arms": {
+    "A": {
+      "title": "A · replay as-is",
+      "short": "A  replay as-is",
+      "how": "eu-west sends its outbox exactly as it was journaled: one `fact update` per entry, in order. This is what a queue that just drains on reconnect does."
+    },
+    "B": {
+      "title": "B · replay as new facts",
+      "short": "B  replay as new facts",
+      "how": "eu-west adds each outbox entry as a new fact (`fact add`) instead of overwriting, so MemoryLake's conflict detection can compare it with what is there — the page's \"surface for review\"."
+    },
+    "C": {
+      "title": "C · replay only if unchanged",
+      "short": "C  replay only if unchanged",
+      "how": "Each outbox entry carries the fact's `updated_at` and text as eu-west read them. On reconnect: `fact get`; same `updated_at` → `fact update`, then `fact trace` must show it replaced exactly that text; changed → hold the entry for review."
+    }
+  }
+}
