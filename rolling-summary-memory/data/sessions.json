@@ -1,0 +1,572 @@
+{
+ "person": {
+  "key": "dana",
+  "display": "Dana Okafor",
+  "role": "Platform engineer at Kestrel Freight"
+ },
+ "assistant": {
+  "key": "ferry",
+  "display": "Ferry",
+  "role": "The platform team's AI assistant"
+ },
+ "project_name": "Platform team notes",
+ "today": "Wednesday 21 October 2026",
+ "budget_words": 150,
+ "chains": 3,
+ "summarizer": "You keep the running memory of Ferry, an AI assistant for a platform engineering team. You are given the current summary and a new session. Progressively summarize: return a new summary that adds the new session to the current one. Return only the summary. Keep the summary under 150 words.",
+ "system": "Today is Wednesday 21 October 2026. You are Ferry, the platform team's AI assistant. Answer from what you remember, in one short sentence. If it is not in what you remember, say it is not recorded.",
+ "sessions": [
+  {
+   "id": "s1",
+   "topic": "Billing database",
+   "at": "2026-10-01T09:00:00Z",
+   "turns": [
+    {
+     "who": "dana",
+     "text": "Morning Ferry. Starting the queue migration notes today. Staging Postgres for the billing service listens on port 6543, not the default, because PgBouncer sits on 5432."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    },
+    {
+     "who": "dana",
+     "text": "The read replica we point reports at is pg-ro-2. pg-ro-1 is being retired."
+    },
+    {
+     "who": "ferry",
+     "text": "Got it."
+    },
+    {
+     "who": "dana",
+     "text": "And the billing service connection pool is capped at 40 connections per pod."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    }
+   ]
+  },
+  {
+   "id": "s2",
+   "topic": "Rate-card cache",
+   "at": "2026-10-03T09:00:00Z",
+   "turns": [
+    {
+     "who": "dana",
+     "text": "Cache notes. The Redis cluster for rate cards runs allkeys-lfu eviction, we switched from LRU in August."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    },
+    {
+     "who": "dana",
+     "text": "Rate cards are cached for 90 seconds. Anything longer and finance sees stale prices."
+    },
+    {
+     "who": "ferry",
+     "text": "Got it."
+    },
+    {
+     "who": "dana",
+     "text": "The cluster has 6 shards, and shard 4 is the hot one during month-end."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    }
+   ]
+  },
+  {
+   "id": "s3",
+   "topic": "Release process",
+   "at": "2026-10-06T09:00:00Z",
+   "turns": [
+    {
+     "who": "dana",
+     "text": "Release process. We have a deploy freeze every Thursday from 14:00 to 18:00 UTC while finance runs the settlement batch."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    },
+    {
+     "who": "dana",
+     "text": "Canaries go to 5 percent of traffic and we hold them for 20 minutes before promoting."
+    },
+    {
+     "who": "ferry",
+     "text": "Got it."
+    },
+    {
+     "who": "dana",
+     "text": "If a rollback is needed, Priyesh Raman owns the call. Not the on-call, Priyesh."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    }
+   ]
+  },
+  {
+   "id": "s4",
+   "topic": "Billing webhooks",
+   "at": "2026-10-08T09:00:00Z",
+   "turns": [
+    {
+     "who": "dana",
+     "text": "Webhooks. Billing webhooks retry 7 times before giving up."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    },
+    {
+     "who": "dana",
+     "text": "Backoff starts at 3 seconds and doubles, capped at 10 minutes between attempts."
+    },
+    {
+     "who": "ferry",
+     "text": "Got it."
+    },
+    {
+     "who": "dana",
+     "text": "Failed deliveries land in the dead-letter queue dlq-billing-v2. The v1 queue is read-only now."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    }
+   ]
+  },
+  {
+   "id": "s5",
+   "topic": "Security housekeeping",
+   "at": "2026-10-10T09:00:00Z",
+   "turns": [
+    {
+     "who": "dana",
+     "text": "Security housekeeping. The TLS certificate for api.kestrel-freight.test renews on 14 November."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    },
+    {
+     "who": "dana",
+     "text": "Old API keys with the kf_live_ prefix are revoked on 31 October; customers have been emailed."
+    },
+    {
+     "who": "ferry",
+     "text": "Got it."
+    },
+    {
+     "who": "dana",
+     "text": "Audit logs are kept for 400 days, that is the contract with our largest shipper."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    }
+   ]
+  },
+  {
+   "id": "s6",
+   "topic": "Queue cutover plan",
+   "at": "2026-10-13T09:00:00Z",
+   "turns": [
+    {
+     "who": "dana",
+     "text": "Queue cutover plan. The new consumer group is called billing-consumers-blue."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    },
+    {
+     "who": "dana",
+     "text": "We cut over on Thursday 22 October at 07:30 UTC, before the European morning peak."
+    },
+    {
+     "who": "ferry",
+     "text": "Got it."
+    },
+    {
+     "who": "dana",
+     "text": "Each consumer prefetches 25 messages; above that the ack latency alarm fires."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    }
+   ]
+  },
+  {
+   "id": "s7",
+   "topic": "Incident review INC-4471",
+   "at": "2026-10-14T09:00:00Z",
+   "turns": [
+    {
+     "who": "dana",
+     "text": "Incident review for INC-4471 yesterday. p99 latency on the quote API went from 180 ms to 2.4 seconds at 16:05 UTC."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    },
+    {
+     "who": "dana",
+     "text": "Root cause was a missing index on shipments.created_at after migration 0193. Query time went from 12 ms to 1.9 seconds."
+    },
+    {
+     "who": "ferry",
+     "text": "Got it."
+    },
+    {
+     "who": "dana",
+     "text": "We added the index at 16:40 and latency was back under 200 ms by 16:52. About 3,100 quote requests timed out."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    },
+    {
+     "who": "dana",
+     "text": "Action items: add an index check to the migration linter, and alert when p99 is above 800 ms for 5 minutes."
+    },
+    {
+     "who": "ferry",
+     "text": "Got it."
+    }
+   ]
+  },
+  {
+   "id": "s8",
+   "topic": "Capacity planning",
+   "at": "2026-10-15T09:00:00Z",
+   "turns": [
+    {
+     "who": "dana",
+     "text": "Capacity planning. Peak traffic last month was 2,350 requests per second on the quote API, and 410 on billing."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    },
+    {
+     "who": "dana",
+     "text": "We are planning for 3,000 rps by December. The node pool goes from 18 to 24 nodes, m6i.2xlarge."
+    },
+    {
+     "who": "ferry",
+     "text": "Got it."
+    },
+    {
+     "who": "dana",
+     "text": "Cost estimate is about 4,200 dollars a month more. Finance approved up to 5,000."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    },
+    {
+     "who": "dana",
+     "text": "Karen wants a load test at 3,500 rps before the end of November."
+    },
+    {
+     "who": "ferry",
+     "text": "Got it."
+    }
+   ]
+  },
+  {
+   "id": "s9",
+   "topic": "Pool change, CI, tests",
+   "at": "2026-10-16T09:00:00Z",
+   "turns": [
+    {
+     "who": "dana",
+     "text": "Change to something from earlier: we raised the billing service connection pool cap to 64 per pod yesterday, the 40 limit was causing queueing."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    },
+    {
+     "who": "dana",
+     "text": "Also, PR 2281 bumps the Go version to 1.23 across the billing repos. CI time went from 11 minutes to 8."
+    },
+    {
+     "who": "ferry",
+     "text": "Got it."
+    },
+    {
+     "who": "dana",
+     "text": "The flaky test in invoice_export_test.go failed 14 times last week; Ilya is quarantining it."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    },
+    {
+     "who": "dana",
+     "text": "Dependabot opened 37 PRs this week; we merge the patch-level ones on Mondays."
+    },
+    {
+     "who": "ferry",
+     "text": "Got it."
+    }
+   ]
+  },
+  {
+   "id": "s10",
+   "topic": "On-call handover",
+   "at": "2026-10-19T09:00:00Z",
+   "turns": [
+    {
+     "who": "dana",
+     "text": "On-call handover. Last week had 9 pages, 6 of them from the disk alert on the log shippers."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    },
+    {
+     "who": "dana",
+     "text": "We raised the log shipper disk alert from 80 to 85 percent and added 50 GB volumes."
+    },
+    {
+     "who": "ferry",
+     "text": "Got it."
+    },
+    {
+     "who": "dana",
+     "text": "Mean time to acknowledge was 4 minutes, mean time to resolve 38 minutes."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    },
+    {
+     "who": "dana",
+     "text": "Next week's primary is Tomasz, secondary is Aiyana."
+    },
+    {
+     "who": "ferry",
+     "text": "Got it."
+    }
+   ]
+  },
+  {
+   "id": "s11",
+   "topic": "Canary change, release train",
+   "at": "2026-10-20T09:00:00Z",
+   "turns": [
+    {
+     "who": "dana",
+     "text": "Release change: from now on canaries are held for 30 minutes before promoting, not 20. Two regressions slipped through at 20 minutes."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    },
+    {
+     "who": "dana",
+     "text": "The release train moved to Monday, Wednesday and Friday. Release 2026.10.3 went out with 42 changes."
+    },
+    {
+     "who": "ferry",
+     "text": "Got it."
+    },
+    {
+     "who": "dana",
+     "text": "Error budget for the quote API is at 61 percent remaining for the quarter."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    },
+    {
+     "who": "dana",
+     "text": "Grafana dashboards were reorganised; the billing board is now under Platform / Billing / Overview."
+    },
+    {
+     "who": "ferry",
+     "text": "Got it."
+    }
+   ]
+  },
+  {
+   "id": "s12",
+   "topic": "Cost review",
+   "at": "2026-10-21T09:00:00Z",
+   "turns": [
+    {
+     "who": "dana",
+     "text": "Cost review. The S3 bill was 7,800 dollars in September, 2,100 of it from old shipment photos."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    },
+    {
+     "who": "dana",
+     "text": "We will move photos older than 180 days to Glacier Instant Retrieval; estimated savings 1,300 a month."
+    },
+    {
+     "who": "ferry",
+     "text": "Got it."
+    },
+    {
+     "who": "dana",
+     "text": "NAT gateway traffic was 18 TB; most of it is the label printer callbacks."
+    },
+    {
+     "who": "ferry",
+     "text": "Noted."
+    },
+    {
+     "who": "dana",
+     "text": "Reserved instances cover 70 percent of the fleet; the target is 85 percent by Q1."
+    },
+    {
+     "who": "ferry",
+     "text": "Got it."
+    }
+   ]
+  }
+ ],
+ "questions": [
+  {
+   "id": "q01",
+   "what": "Postgres port",
+   "ask": "What port does staging Postgres for the billing service listen on?",
+   "session": "s1",
+   "re": "\\b6543\\b"
+  },
+  {
+   "id": "q02",
+   "what": "Report replica",
+   "ask": "Which read replica do reports point at?",
+   "session": "s1",
+   "re": "pg-ro-2"
+  },
+  {
+   "id": "q03",
+   "what": "Pool cap per pod",
+   "ask": "What is the billing service connection pool cap per pod?",
+   "session": "s1",
+   "re": "\\b64\\b",
+   "old_re": "\\b40\\b",
+   "revised_in": "s9"
+  },
+  {
+   "id": "q04",
+   "what": "Redis eviction",
+   "ask": "Which eviction policy does the rate-card Redis cluster use?",
+   "session": "s2",
+   "re": "allkeys-lfu|\\bLFU\\b"
+  },
+  {
+   "id": "q05",
+   "what": "Rate-card TTL",
+   "ask": "How long are rate cards cached?",
+   "session": "s2",
+   "re": "\\b90[- ]?(s\\b|sec)"
+  },
+  {
+   "id": "q06",
+   "what": "Redis shards",
+   "ask": "How many shards does the rate-card Redis cluster have?",
+   "session": "s2",
+   "re": "\\b(6|six)[- ]shards?|shards?\\D{0,12}\\b(6|six)\\b"
+  },
+  {
+   "id": "q07",
+   "what": "Deploy freeze",
+   "ask": "When is the weekly deploy freeze?",
+   "session": "s3",
+   "re": "14:00|\\b2(:00)? ?pm"
+  },
+  {
+   "id": "q08",
+   "what": "Canary hold",
+   "ask": "How long are canaries held before promotion?",
+   "session": "s3",
+   "re": "\\b30[- ]?min",
+   "old_re": "\\b20[- ]?min",
+   "revised_in": "s11"
+  },
+  {
+   "id": "q09",
+   "what": "Rollback owner",
+   "ask": "Who owns the rollback call?",
+   "session": "s3",
+   "re": "Priyesh"
+  },
+  {
+   "id": "q10",
+   "what": "Webhook retries",
+   "ask": "How many times do billing webhooks retry?",
+   "session": "s4",
+   "re": "\\b(7|seven)[- ](times|attempts|retries)|retr\\w*\\s+(up to\\s+)?(7|seven)\\b"
+  },
+  {
+   "id": "q11",
+   "what": "Max backoff",
+   "ask": "What is the maximum backoff between webhook attempts?",
+   "session": "s4",
+   "re": "\\b10[- ]?min|\\bten[- ]min"
+  },
+  {
+   "id": "q12",
+   "what": "Dead-letter queue",
+   "ask": "Which dead-letter queue do failed webhook deliveries go to?",
+   "session": "s4",
+   "re": "dlq-billing-v2"
+  },
+  {
+   "id": "q13",
+   "what": "TLS renewal",
+   "ask": "When does the TLS certificate for the API renew?",
+   "session": "s5",
+   "re": "\\b14(th)? Nov|Nov\\w*\\.? 14\\b"
+  },
+  {
+   "id": "q14",
+   "what": "kf_live_ revocation",
+   "ask": "When are kf_live_ API keys revoked?",
+   "session": "s5",
+   "re": "\\b31(st)? Oct|Oct\\w*\\.? 31\\b"
+  },
+  {
+   "id": "q15",
+   "what": "Audit-log retention",
+   "ask": "How long are audit logs kept?",
+   "session": "s5",
+   "re": "\\b400[- ]?days?"
+  },
+  {
+   "id": "q16",
+   "what": "Consumer group",
+   "ask": "What is the new consumer group called?",
+   "session": "s6",
+   "re": "billing-consumers-blue"
+  },
+  {
+   "id": "q17",
+   "what": "Cutover time",
+   "ask": "When is the queue cutover?",
+   "session": "s6",
+   "re": "\\b0?7:30|\\b22(nd)? Oct|Oct\\w*\\.? 22\\b"
+  },
+  {
+   "id": "q18",
+   "what": "Prefetch",
+   "ask": "How many messages does each consumer prefetch?",
+   "session": "s6",
+   "re": "\\b25\\b"
+  }
+ ]
+}
