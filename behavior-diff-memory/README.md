@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Find Why Agent Behavior Changed by Diffing the Memory That Drove It*](https://www.memorylake.ai/en/usecase/memory-diff-for-agent-behavior-analysis),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** WATCH_LINE
+**Watch it run:** [CLI, 1:38](https://github.com/memorylake-ai/memorylake-usecases/releases/download/behavior-diff-memory-v1/behavior-diff-memory-cli-demo.mp4) · [Web, 1:49](https://github.com/memorylake-ai/memorylake-usecases/releases/download/behavior-diff-memory-v1/behavior-diff-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/behavior-diff-memory-v1); GitHub serves them as downloads). Each video is one run; the numbers below add up all of them.
 
 **The problem.** The use case page puts it plainly: the model didn't change, the prompts didn't change, the answers
 did — "something in memory shifted". The natural way to find out what is to diff memory between the two runs. How
@@ -208,7 +209,22 @@ Both facts changed; neither has a trace entry after its `ADD`. Only `updated_at`
 
 ## Measured
 
-MEASURED
+5 runs: three terminal runs (the second over the first's leftovers, the third with `--reset`), the browser run recorded for the Web video, and the run recorded for the CLI video (from a fresh `git clone`). Every number comes from the saved reports (`out/runs/`); every run gave the same answers, the same diffs and the same verdicts.
+
+Over the 5 runs (3 changed answers per run):
+
+| | A trace window | B snapshot diff | C answer receipts + replay |
+|---|---|---|---|
+| changes listed per run | 7 | 11 | 4 (inside the receipts of the 3 changed answers) |
+| cause among the named | 10 of 15 | 15 of 15 | 15 of 15 |
+| named exactly the cause | 10 of 15 | 10 of 15 | 15 of 15 |
+| replay with the named put back gives the eval-1 answer | 5 of 15 | 15 of 15 | 15 of 15 |
+| metadata-only changes visible | 0 of 20 | 20 of 20 | the 10 that were in a changed answer's receipt |
+
+A misses Q1 in every run (it names R-RET-HOW, a reworded note) and cannot replay Q4 (it names the right fact,
+R-PRICE, but has only its old text). B names three facts for Q1 in every run. The first terminal run took 35 s. All
+writes go through the API with fixed texts and metadata (no extraction from conversations, no search ranking), so
+nothing in the outcome depends on a model.
 
 ## Use it in your own agents
 
