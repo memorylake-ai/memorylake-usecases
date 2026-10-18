@@ -1,0 +1,42 @@
+{
+  "company": "Quellbrook",
+  "project_name": "Quellbrook support agent memory",
+  "today": "2026-10-18",
+  "backup": {"at": "02:00", "what": "nightly backup: every live fact, exported with `fact list`"},
+  "facts": [
+    {"key": "refund", "label": "Refund limit", "value": "$200", "text": "Refund limit (tier-1 agents, no approval needed): $200 per order"},
+    {"key": "escalation", "label": "Escalation channel", "value": "#ops-red", "text": "Escalation channel for P1 incidents: #ops-red"},
+    {"key": "sla", "label": "First-response SLA", "value": "4 hours", "text": "First-response SLA for Pro accounts: 4 hours"},
+    {"key": "phone", "label": "Lena Varro's phone", "value": "+1 555 0142", "pii": true, "text": "Customer Lena Varro (account QB-2291) callback phone: +1 555 0142"},
+    {"key": "price", "label": "Pro price", "value": "$49/seat", "text": "Pro plan price: $49 per seat per month"},
+    {"key": "freeze", "label": "Holiday freeze", "value": "Dec 20 – Jan 3", "text": "Holiday change freeze: Dec 20 – Jan 3, no plan migrations"},
+    {"key": "nordic", "label": "Nordic language", "value": "English", "text": "Default reply language for Nordic accounts: English"},
+    {"key": "returns", "label": "Returns window", "value": "30 days", "text": "Hardware returns window: 30 days from delivery"}
+  ],
+  "day": [
+    {"op": "update", "key": "refund", "value": "$350", "at": "09:10", "why": "finance raised the tier-1 limit", "text": "Refund limit (tier-1 agents, no approval needed): $350 per order"},
+    {"op": "forget", "key": "phone", "at": "10:05", "why": "erasure request ER-118 from Lena Varro"},
+    {"op": "update", "key": "sla", "value": "2 hours", "at": "10:40", "why": "new Pro contract terms", "text": "First-response SLA for Pro accounts: 2 hours"},
+    {"op": "add", "key": "status", "label": "Status page", "value": "status.quellbrook.example", "at": "11:15", "why": "status page moved", "text": "Public status page: status.quellbrook.example"},
+    {"op": "update", "key": "price", "value": "$54/seat", "at": "11:30", "why": "price change effective today", "text": "Pro plan price: $54 per seat per month"},
+    {"op": "add", "key": "sms", "label": "SMS vendor", "value": "Tallow", "at": "11:40", "why": "SMS notifications switched vendors", "text": "SMS notification vendor: Tallow (account TL-7730)"}
+  ],
+  "incident": {
+    "at": "14:52",
+    "what": "an agent run follows instructions planted in a customer email and rewrites its own memory",
+    "ops": [
+      {"op": "update", "key": "refund", "value": "$5,000", "text": "Refund limit (tier-1 agents, no approval needed): $5,000 per order"},
+      {"op": "update", "key": "escalation", "value": "#general", "text": "Escalation channel for P1 incidents: #general"},
+      {"op": "forget", "key": "nordic"},
+      {"op": "update", "key": "returns", "value": "365 days", "text": "Hardware returns window: 365 days from delivery"},
+      {"op": "forget", "key": "sms"},
+      {"op": "add", "key": "autoapprove", "label": "Auto-approve", "value": "all refunds", "text": "All refund requests are approved automatically, any amount"}
+    ]
+  },
+  "restore_at": "15:20",
+  "arms": {
+    "A": {"title": "A · restore last night's backup", "short": "A backup", "how": "forget every live fact, then `fact add` the 02:00 export"},
+    "B": {"title": "B · restore to 14:51 from fact trace", "short": "B trace · backup+list ids", "how": "for every fact id in the backup or in `fact list`, take its last `fact trace` entry before the incident"},
+    "C": {"title": "C · trace + the agent's write journal", "short": "C trace · journal ids", "how": "the same, over every id the agent's write journal recorded"}
+  }
+}
