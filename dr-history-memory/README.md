@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Run Agent Memory With Disaster Recovery Built In, Not Bolted On*](https://www.memorylake.ai/en/usecase/disaster-recovery-for-agent-memory-infrastructure),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 2:29](https://github.com/memorylake-ai/memorylake-usecases/releases/download/dr-history-memory-v1/dr-history-memory-cli-demo.mp4) · [Web, 3:13](https://github.com/memorylake-ai/memorylake-usecases/releases/download/dr-history-memory-v1/dr-history-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/dr-history-memory-v1); GitHub serves them as downloads). Each video is one run; the numbers below add up all of them.
 
 **The problem.** The use case page promises an *audit trail through DR events*. That part is easy to lose in the
 restore you run yourself. A teardown script meant for staging deletes the production memory project. `proj delete`
@@ -85,6 +86,11 @@ Paste the API key, press **Run demo**, and follow the steps: the memory, the qua
 three backup formats, the deleted project, the three restores (live), the DR drill, and the incident review. The
 terminal drawer at the bottom shows every `memorylake` command as it runs. The server is standard library only and
 binds to localhost; the key stays in that process and in `.memorylake-demo/`.
+
+| | |
+|---|---|
+| ![A quarter of changes](web/screenshot-changes.png) | ![The DR drill](web/screenshot-drill.png) |
+| ![Restore three ways](web/screenshot-restore.png) | ![The incident review](web/screenshot-review.png) |
 
 ## What happens, step by step
 
@@ -200,15 +206,16 @@ the change and the restore: days or months.
 
 ## Measured
 
-4 runs: three terminal runs (the second over the first's leftovers, the third with `--reset`) and one browser run.
-Every number comes from the saved reports (`out/runs/`).
+6 runs: three terminal runs (the second over the first's leftovers, the third with `--reset`), a browser run, the
+browser run recorded for the Web video, and the run recorded for the CLI video (from a fresh `git clone`). Every
+number comes from the saved reports (`out/runs/`).
 
 | | A values | B values + version chain | C versions + original times |
 |---|---|---|---|
-| current values (the DR drill) | 7/7 in 4 of 4 runs | 7/7 in 4 of 4 | 7/7 in 4 of 4 |
-| value before now | 0 of 16 | 16 of 16 | 16 of 16 |
-| version count | 0 of 16 | 16 of 16 | 16 of 16 |
-| when it last changed | 0 of 16 | 0 of 16 (16 of 16 dated after production's last write) | 16 of 16 |
+| current values (the DR drill) | 7/7 in 6 of 6 runs | 7/7 in 6 of 6 | 7/7 in 6 of 6 |
+| value before now | 0 of 24 | 24 of 24 | 24 of 24 |
+| version count | 0 of 24 | 24 of 24 | 24 of 24 |
+| when it last changed | 0 of 24 | 0 of 24 (24 of 24 dated after production's last write) | 24 of 24 |
 
 The first terminal run took 71 s. All writes go through the API (no extraction from conversations), so nothing in
 the outcome depends on a model.
