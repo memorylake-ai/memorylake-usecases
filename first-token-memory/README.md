@@ -4,20 +4,21 @@ A runnable version of the MemoryLake use case
 [*Support Streaming Agent Responses Without Sacrificing Memory Retrieval*](https://www.memorylake.ai/en/usecase/memory-for-streaming-agent-responses),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 2:49](https://github.com/memorylake-ai/memorylake-usecases/releases/download/first-token-memory-v1/first-token-memory-cli-demo.mp4) · [Web, 2:36](https://github.com/memorylake-ai/memorylake-usecases/releases/download/first-token-memory-v1/first-token-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/first-token-memory-v1); GitHub serves them as downloads). Each video is one real run.
 
 **The problem.** A streaming assistant feels fast only if the first token shows quickly. Memory retrieval sits in
 front of that first token. Three common ways to wire it, measured here on the same six questions:
 
 - **Retrieve, then stream** (`router chat --stream --boundary`: MemoryRouter looks the memory up, then the model
-  starts). The answers use the memory, but the first token waits for the lookup: **4.9–5.4 s median** in this demo,
+  starts). The answers use the memory, but the first token waits for the lookup: **4.7–5.4 s median** over five runs,
   against about 1 s for the same call without memory.
 - **Give retrieval a deadline** (`search` gets 1.0 s; when it misses, stream without memory and let the search
   finish). The first token is always on time. **The answers are the no-memory answers**: `npm install date-fns` for
   a pnpm user, `FROM node:18` for a Node 20 service, `heroku ps:scale` for a Fly.io team. Nothing errors. The search
-  comes back 2.7–4.1 s after the question, holding the exact fact the answer needed, and is thrown away. On a
+  comes back 2.6–4.6 s after the question, holding the exact fact the answer needed, and is thrown away. On a
   latency dashboard this way looks perfect: 6/6 on time, 0/6 using memory, half of them contradicting it.
-- **Prefetch at session open** (`fact list --actors` once when the chat opens, under a second, while the user is
+- **Prefetch at session open** (`fact list --actors` once when the chat opens, 0.9–2.2 s in these runs, while the user is
   still typing; every answer streams with that profile in the prompt). First token about 1 s, memory used 6/6.
 
 **What this demo shows.** Tallow Labs (fictional) puts a coding assistant, Quill, in Priya's editor. Her memory is
@@ -68,7 +69,7 @@ memory behind, it is cleaned up first.
 python3 web/server.py                     # opens http://127.0.0.1:8765
 ```
 
-Paste the API key, press **Run demo**, and watch the three ways answer the same six questions: each answer streams
+[Watch the browser run (2:36)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/first-token-memory-v1/first-token-memory-web-demo.mp4). Paste the API key, press **Run demo**, and watch the three ways answer the same six questions: each answer streams
 into its card, with a first-token bar against the 2.5 s budget, and the deadline way shows when its search came back
 and what it held. Step 6 scores them side by side. The page drives the same `demo.py` (it imports it); the
 **Terminal** drawer at the bottom shows every `memorylake` command as it runs. **Clean up** removes everything.
@@ -174,10 +175,16 @@ process and the network; yours will differ, the ordering should not.
 |---|---|---|---|
 | 2 | 5.38 s · 5/6 | 2.03 s · 0/6 · 3/6 | 0.90 s · 0.88 s · 6/6 |
 | 3 (`--reset`) | 4.87 s · 6/6 | 2.01 s · 0/6 · 3/6 | 0.94 s · 1.01 s · 6/6 |
+| web check | 4.89 s · 6/6 | 2.08 s · 0/6 · 3/6 | 1.01 s · 0.89 s · 6/6 |
+| CLI video | 4.71 s · 6/6 | 1.91 s · 0/6 · 3/6 | 1.28 s · 0.94 s · 6/6 |
+| web video | 5.19 s · 6/6 | 1.99 s · 0/6 · 3/6 | 2.21 s · 0.91 s · 6/6 |
+| **all 5** | **0/30 on time · 29/30 used** | **30/30 on time · 0/30 used · 15/30 contradicted** | **30/30 on time · 30/30 used** |
 
-In every run B missed its deadline on 6/6 questions and the late search held the needed fact 6/6 times. A's one
-miss (run 2, the health route) was MemoryRouter's answer naming no framework — retrieval in A is per question and
-not guaranteed to attach the fact.
+In every run B missed its deadline on 6/6 questions, and the late search held the needed fact 30/30 times — always
+after the answer had finished streaming (2.6–4.6 s after the question). A's one miss (run 2, the health route) was
+MemoryRouter's answer naming no framework: retrieval in A is per question and not guaranteed to attach the fact.
+The prefetch itself took 0.9–2.2 s; it is paid once, before the first question, not on any answer. (Run 1, not in
+the table, used a 2.0 s budget and a different sixth question; B was over that budget on 5/6 and used memory 0/6.)
 
 ## Use it in your own agents
 
