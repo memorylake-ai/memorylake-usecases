@@ -1,0 +1,121 @@
+{
+  "company": "Harrowgate Freight",
+  "project_name": "Harrowgate dispatch agent memory",
+  "facts": [
+    {
+      "key": "cutoff",
+      "label": "Rotterdam pickup cutoff",
+      "value": "14:00 CET",
+      "text": "Same-day pickup cutoff at the Rotterdam depot is 14:00 CET."
+    },
+    {
+      "key": "claims",
+      "label": "Claims second approver",
+      "value": "above 2,500 EUR",
+      "text": "Damage claims above 2,500 EUR need a second approver."
+    },
+    {
+      "key": "hazmat",
+      "label": "Hazmat class 3 route",
+      "value": "via Antwerp",
+      "text": "Hazmat class 3 shipments route through the Antwerp hub."
+    },
+    {
+      "key": "terms",
+      "label": "Brightwell Ltd terms",
+      "value": "net-30",
+      "text": "Brightwell Ltd is on net-30 payment terms."
+    },
+    {
+      "key": "oncall",
+      "label": "Weekend on-call",
+      "value": "Lisbon team",
+      "text": "Weekend outage on-call is the Lisbon team."
+    },
+    {
+      "key": "pallet",
+      "label": "Leeds pallet limit",
+      "value": "1,000 kg",
+      "text": "The pallet weight limit at the Leeds depot is 1,000 kg."
+    },
+    {
+      "key": "broker",
+      "label": "UK customs broker",
+      "value": "Marlow & Pike",
+      "text": "The customs broker for UK imports is Marlow & Pike."
+    }
+  ],
+  "changes": [
+    {
+      "key": "cutoff",
+      "value": "15:00 CET",
+      "when": "July",
+      "why": "summer schedule",
+      "text": "Same-day pickup cutoff at the Rotterdam depot is 15:00 CET."
+    },
+    {
+      "key": "oncall",
+      "value": "Kraków team",
+      "when": "August",
+      "why": "Lisbon team on leave",
+      "text": "Weekend outage on-call is the Kraków team."
+    },
+    {
+      "key": "claims",
+      "value": "above 1,500 EUR",
+      "when": "August",
+      "why": "fraud spike",
+      "text": "Damage claims above 1,500 EUR need a second approver."
+    },
+    {
+      "key": "terms",
+      "value": "net-45",
+      "when": "September",
+      "why": "renewal",
+      "text": "Brightwell Ltd is on net-45 payment terms."
+    },
+    {
+      "key": "oncall",
+      "value": "Lisbon team",
+      "when": "September",
+      "why": "Lisbon team back",
+      "text": "Weekend outage on-call is the Lisbon team."
+    },
+    {
+      "key": "cutoff",
+      "value": "13:30 CET",
+      "when": "October",
+      "why": "new carrier slot",
+      "text": "Same-day pickup cutoff at the Rotterdam depot is 13:30 CET."
+    }
+  ],
+  "backup": {
+    "at": "02:00",
+    "what": "nightly backup job"
+  },
+  "incident": {
+    "at": "03:40",
+    "what": "a teardown script meant for a staging project deletes the production memory project"
+  },
+  "restore_at": "04:05",
+  "arms": {
+    "A": {
+      "title": "A  values backup",
+      "short": "A values",
+      "backup": "`fact list` export: id + text of every live fact",
+      "how": "`fact add` every text into a new project"
+    },
+    "B": {
+      "title": "B  values + version chain",
+      "short": "B + versions",
+      "backup": "the export + each fact's version texts from `fact trace`",
+      "how": "replay each fact: `fact add` its first version, then `fact update` through the rest, in order"
+    },
+    "C": {
+      "title": "C  versions + original times",
+      "short": "C + times",
+      "backup": "the export + full `fact trace`: texts, times, original id",
+      "how": "replay like B; the last write also stores the original id and every version's original timestamp in metadata"
+    }
+  }
+}
