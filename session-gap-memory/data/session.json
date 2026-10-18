@@ -1,0 +1,81 @@
+{
+  "company": "Brindlewood Payments",
+  "person": {"key": "rhea", "display": "Rhea Tanaka", "role": "Backend engineer on the ledger service at Brindlewood Payments (a fictional company)"},
+  "assistant": {"key": "pair", "display": "Pair", "role": "Brindlewood's coding agent, working on the ledger service with Rhea"},
+  "project_name": "Ledger service — Pair's memory",
+  "today": "Monday 19 October 2026",
+  "window_steps": 6,
+  "step_pause": 1.5,
+  "playbook": "You are Pair, Brindlewood Payments' coding agent. You work with Rhea Tanaka on the ledger service: you run commands, write migrations, open pull requests and follow the team's conventions exactly. When a convention has changed, use the latest one. Answer in one to three short sentences and give the exact value (port, command, branch, reviewer, time, key) the task needs. If a value is not in this conversation or in the notes you are given, say it is not on file instead of guessing.",
+  "sessions": [
+    {"id": "s1", "at": "2026-08-04T09:00:00Z", "topic": "Local setup", "turns": [
+      {"who": "rhea", "text": "Rhea Tanaka (backend engineer, Brindlewood): Welcome aboard, Pair. First things for the ledger service: the test command is `make test-ledger`, and it expects the local Postgres on port 5433."},
+      {"who": "pair", "text": "Pair (coding agent): Got it. Ledger tests run with `make test-ledger`, against local Postgres on port 5433."},
+      {"who": "rhea", "text": "Rhea Tanaka (backend engineer, Brindlewood): Right. 5432 is taken by the shared dev database, which is why ledger uses 5433."},
+      {"who": "pair", "text": "Pair (coding agent): Understood: 5433 for the ledger database, 5432 is the shared one."}
+    ]},
+    {"id": "s2", "at": "2026-08-13T09:00:00Z", "topic": "Branches and merges", "turns": [
+      {"who": "rhea", "text": "Rhea Tanaka (backend engineer, Brindlewood): Branch naming for ledger work: `feat/LED-<ticket>`, for example `feat/LED-311`. We always squash-merge into `main`."},
+      {"who": "pair", "text": "Pair (coding agent): Noted: branches are `feat/LED-<ticket>` and pull requests are squash-merged into main."}
+    ]},
+    {"id": "s3", "at": "2026-08-25T09:00:00Z", "topic": "Money and migrations", "turns": [
+      {"who": "rhea", "text": "Rhea Tanaka (backend engineer, Brindlewood): Two rules for the schema. Money is stored as integer cents, and those columns end in `_cents`. Migrations live in `db/migrations/` and are created with `alembic revision -m`."},
+      {"who": "pair", "text": "Pair (coding agent): Understood: integer cents in `_cents` columns, migrations in `db/migrations/` via `alembic revision -m`."}
+    ]},
+    {"id": "s4", "at": "2026-09-08T09:00:00Z", "topic": "Code review", "turns": [
+      {"who": "rhea", "text": "Rhea Tanaka (backend engineer, Brindlewood): Every ledger pull request needs a review from Tomasz Ilic. He owns the ledger code."},
+      {"who": "pair", "text": "Pair (coding agent): Got it: ledger pull requests go to Tomasz Ilic for review."}
+    ]},
+    {"id": "s5", "at": "2026-09-17T09:00:00Z", "topic": "Staging deploys", "turns": [
+      {"who": "rhea", "text": "Rhea Tanaka (backend engineer, Brindlewood): Staging deploys for ledger happen on Tuesdays and Thursdays at 14:00 UTC. Nothing goes to staging outside that window."},
+      {"who": "pair", "text": "Pair (coding agent): Noted: ledger staging deploys only on Tuesday and Thursday at 14:00 UTC."}
+    ]},
+    {"id": "s6", "at": "2026-09-28T09:00:00Z", "topic": "Feature flags", "turns": [
+      {"who": "rhea", "text": "Rhea Tanaka (backend engineer, Brindlewood): Feature flags go in `flags.yaml`, and every ledger flag key starts with `ledger.`, like `ledger.batch_posting`."},
+      {"who": "pair", "text": "Pair (coding agent): Understood: ledger flags live in `flags.yaml` with keys prefixed `ledger.`."}
+    ]}
+  ],
+  "conventions": [
+    {"id": "port", "label": "local Postgres port", "from": "s1", "old": "5433", "new": "6543", "old_re": ["5433"], "new_re": ["6543"], "changed_at": 1},
+    {"id": "test", "label": "ledger test command", "from": "s1", "old": "make test-ledger", "new": "just ledger-test", "old_re": ["make test-ledger"], "new_re": ["just ledger-test"], "changed_at": 2},
+    {"id": "branch", "label": "branch naming", "from": "s2", "old": "feat/LED-<ticket>", "old_re": ["feat/LED-"]},
+    {"id": "cents", "label": "money columns", "from": "s3", "old": "integer cents, `_cents`", "old_re": ["cents"]},
+    {"id": "review", "label": "ledger reviewer", "from": "s4", "old": "Tomasz Ilic", "new": "Priya Nair", "old_re": ["Tomasz"], "new_re": ["Priya"], "changed_at": 3},
+    {"id": "deploy", "label": "staging deploy window", "from": "s5", "old": "Tue/Thu 14:00 UTC", "old_re": ["Tue", "Thu", "14:00"]},
+    {"id": "flags", "label": "flag key prefix", "from": "s6", "old": "`ledger.` in flags.yaml", "old_re": ["ledger\\."]}
+  ],
+  "live": [
+    {"user": "Rhea: Morning, Pair. Heads-up before we start: I moved my local Postgres to port 6543 this morning, because 5433 clashes with the new analytics container. Use 6543 from now on.", "agent": "Pair: Understood. Local Postgres is on port 6543 from now on."},
+    {"user": "Rhea: Also, we dropped the Makefile on Friday. The ledger tests run with `just ledger-test` now.", "agent": "Pair: Noted. Ledger tests run with `just ledger-test`."},
+    {"user": "Rhea: And Tomasz is on leave until November. Send ledger reviews to Priya Nair instead.", "agent": "Pair: Got it. Ledger reviews go to Priya Nair while Tomasz is away."},
+    {"user": "Rhea: Today's task is LED-418: rename `ledger_entries.amt` to `amount_cents` and backfill the old rows.", "agent": "Pair: Starting LED-418. Reading `ledger_entries` and the repository layer first."},
+    {"q": "q1", "user": "Rhea: Point the migration script at my local database. Which port?"},
+    {"user": "Tool output: `alembic revision -m \"rename amt to amount_cents\"` created db/migrations/0042_rename_amt_to_amount_cents.py", "agent": "Pair: Migration file created. Writing the column rename and the backfill next."},
+    {"user": "Tool output: edited db/migrations/0042_rename_amt_to_amount_cents.py (+38 lines)", "agent": "Pair: The rename and the backfill are in the migration. Updating the repository layer."},
+    {"q": "q2", "user": "Rhea: Create the branch for this ticket. What is it called?"},
+    {"user": "Tool output: edited ledger/repository.py (14 references to `amt` replaced with `amount_cents`)", "agent": "Pair: Repository layer updated. Running the migration locally next."},
+    {"q": "q3", "user": "Rhea: Before you run the migration: which port is my local Postgres on?"},
+    {"user": "Tool output: migration 0042 applied, 18,204 rows backfilled in 2.3 s", "agent": "Pair: Migration applied locally and the backfill converted 18,204 rows."},
+    {"user": "Tool output: edited tests/test_backfill.py (+3 tests: empty table, negative amounts, rounding)", "agent": "Pair: Added three backfill tests. Ready to run the suite."},
+    {"q": "q4", "user": "Rhea: Run the ledger tests now. Which command are you using?"},
+    {"user": "Tool output: 212 passed, 0 failed in 41.8 s", "agent": "Pair: All 212 ledger tests pass. Regenerating the OpenAPI schema."},
+    {"q": "q5", "user": "Rhea: When is the next slot to put this on staging?"},
+    {"user": "Tool output: regenerated openapi.json (field `amt` → `amount_cents` in 3 schemas)", "agent": "Pair: OpenAPI schema regenerated. Drafting the changelog entry."},
+    {"user": "Tool output: edited CHANGELOG.md (+4 lines under Unreleased)", "agent": "Pair: Changelog entry added. Opening the pull request next."},
+    {"q": "q6", "user": "Rhea: Open the pull request. Who do you request the review from?"},
+    {"user": "Tool output: pull request #1187 opened: LED-418 rename amt to amount_cents", "agent": "Pair: Pull request #1187 is open. Adding the feature flag for the new display."},
+    {"user": "Tool output: grafana query `ledger_volume` still references `amt`", "agent": "Pair: The Grafana query needs the new column name too. Fixing it in the same pull request."},
+    {"q": "q7", "user": "Rhea: The new cents display needs a feature flag. What key and file do you use?"},
+    {"q": "q8", "user": "Rhea: Last thing: write me the three-line checklist for whoever picks this up tomorrow: the test command, the database port, and the reviewer."}
+  ],
+  "questions": {
+    "q1": {"needs": ["port"]},
+    "q2": {"needs": ["branch"], "re": ["feat/LED-418"]},
+    "q3": {"needs": ["port"]},
+    "q4": {"needs": ["test"]},
+    "q5": {"needs": ["deploy"], "re": ["Tue", "14:00"]},
+    "q6": {"needs": ["review"]},
+    "q7": {"needs": ["flags"], "re": ["ledger\\.[a-z_]+", "flags\\.yaml"]},
+    "q8": {"needs": ["test", "port", "review"]}
+  }
+}
