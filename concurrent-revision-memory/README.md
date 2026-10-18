@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Multi-Agent Systems a Shared Memory Backend They Can Trust*](https://www.memorylake.ai/en/usecase/memory-backend-for-multi-agent-systems),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 4:42](https://github.com/memorylake-ai/memorylake-usecases/releases/download/concurrent-revision-memory-v1/concurrent-revision-memory-cli-demo.mp4) · [Web, 5:07](https://github.com/memorylake-ai/memorylake-usecases/releases/download/concurrent-revision-memory-v1/concurrent-revision-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/concurrent-revision-memory-v1); GitHub serves them as downloads). Each video is one run; the numbers below add up all of them.
 
 **The problem.** A crew of agents shares one memory. Each agent reports what it decided in its own conversation, and
 MemoryLake extracts facts from every conversation in the background. When two agents change *different* things at the
@@ -71,6 +72,11 @@ Paste the API key, press **Run demo**, and follow the steps: the team, the kicko
 memory says, the audit, and the lead's decision. The terminal drawer at the bottom shows every `memorylake` command as
 it runs. The server is standard library only and binds to localhost; the key stays in that process and in
 `.memorylake-demo/`.
+
+| | |
+|---|---|
+| ![Three reports in the same minute](web/screenshot-reports.png) | ![What memory says](web/screenshot-memory.png) |
+| ![The audit](web/screenshot-audit.png) | ![The lead decides](web/screenshot-decide.png) |
 
 ## What happens, step by step
 
@@ -182,17 +188,25 @@ audit reads. `fact update` replaces the text; the old values stay in `fact trace
 
 ## Measured
 
-Every run of the final version is counted, from the saved reports (`out/runs/`): three terminal runs (the third with
-`--reset`), each alongside three parallel copies with their own `custom_id` prefix, plus one browser run.
+Every run of the final version is counted, from the saved reports (`out/runs/`): three terminal runs (the second a
+re-run, the third with `--reset`), each alongside three parallel copies with their own `custom_id` prefix; two browser
+runs (one of them recorded for the Web video); and the run recorded for the CLI video, from a fresh `git clone`.
 
-- **The date was settled by arrival order in 13 of 13 runs**: Monday in 6, Friday in 7. The audit flagged exactly one
-  blind overwrite on the date every time.
-- **The owner change landed cleanly in 12 of 13.** In the browser run, extraction wrote "Ana Ruiz now owns …" as a new
-  fact and left "Ben Ito owns …" live beside it — two answers at once; the demo reports it as `UNRESOLVED` and the
-  lead's decision removes the extra fact.
-- **Conflict detection flagged the date race in 0 of 13 runs.** One run raised one `self` conflict about something
-  else (a weekday/date mismatch extraction itself introduced into the ops-freeze fact).
-- **After the decision, both fields read as decided in 13 of 13**, with Monday and Ana Ruiz.
+| | runs | date settled by arrival order | which date won | blind overwrites flagged | owner change | conflicts on the race | decided after step 7 |
+|---|---|---|---|---|---|---|---|
+| terminal + copies | 12 | 12 | Monday 6 · Friday 6 | 1 per run | clean 12 | 0 | 12 |
+| browser | 2 | 2 | Friday 2 | 1 per run | clean 1 · two live answers 1 | 0 | 2 |
+| CLI video | 1 | 1 | Monday | 1 | clean | 0 | 1 |
+| **all** | **15** | **15** | **Monday 7 · Friday 8** | **15 of 15 runs** | **clean 14 of 15** | **0 of 15** | **15 of 15** |
+
+- **Two agents changed the date in the same minute, and memory settled it by arrival order every time.** Which one won
+  was close to a coin toss. The losing value was always still readable — inside the winner's `previously …`, with the
+  same as-of date.
+- **The owner change, made by one agent alone, landed cleanly in 14 of 15.** In one browser run extraction wrote "Ana
+  Ruiz now owns …" as a new fact and left "Ben Ito owns …" live beside it; the demo reports `UNRESOLVED` and the lead's
+  decision removes the extra fact.
+- **Conflict detection flagged the date race in 0 of 15 runs.** One run raised one `self` conflict about something
+  else: a weekday/date mismatch extraction itself introduced into the ops-freeze fact.
 
 Earlier versions of the demo (not counted above) showed two more shapes worth knowing: extraction sometimes keeps the
 date and the owner in **one** fact, and then every report revises that fact; and under load it once applied the owner
