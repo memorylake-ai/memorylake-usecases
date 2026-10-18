@@ -1,0 +1,79 @@
+{
+  "org": "Larkfield Analytics",
+  "team": "Larkfield research team",
+  "study": "Team onboarding pilot",
+  "project_name": "Larkfield research",
+  "pages": {
+    "sync1": {"title": "Research sync notes, 14 September 2026", "kind": "meeting notes"},
+    "sync2": {"title": "Research sync notes, 28 September 2026", "kind": "meeting notes"},
+    "decisions": {"title": "Pilot study decisions", "kind": "living page", "v1_edited": "15 September 2026", "v2_edited": "12 October 2026"}
+  },
+  "first_sync": "2026-09-29",
+  "second_sync": "2026-10-12",
+  "topics": [
+    {
+      "id": "cohort", "kind": "change", "label": "Pilot cohort", "page": "sync1",
+      "note": "the pilot cohort will be 40 accounts",
+      "v1": "the pilot cohort is 40 accounts", "v2": "the pilot cohort is 25 accounts", "was": "40 accounts",
+      "ask": "How many accounts are in the pilot cohort?",
+      "current": "25 accounts", "stale": "40 accounts",
+      "values": {"25 accounts": "\\b25\\b|twenty-five", "40 accounts": "\\b40\\b|forty"}
+    },
+    {
+      "id": "close", "kind": "change", "label": "Survey close date", "page": "sync1",
+      "note": "the customer survey closes on 30 October",
+      "v1": "the customer survey closes on 30 October", "v2": "the customer survey closes on 6 November", "was": "30 October",
+      "ask": "When does the customer survey close?",
+      "current": "6 November", "stale": "30 October",
+      "values": {"6 November": "\\b0?6(?:th)?\\s+(?:of\\s+)?Nov|Nov\\w*\\.?\\s+0?6(?:th)?\\b|\\b11/0?6\\b|-11-06\\b", "30 October": "\\b30(?:th)?\\s+(?:of\\s+)?Oct|Oct\\w*\\.?\\s+30(?:th)?\\b|\\b10/30\\b|-10-30\\b"}
+    },
+    {
+      "id": "metric", "kind": "change", "label": "Primary metric", "page": "sync1",
+      "note": "the primary success metric is weekly active teams",
+      "v1": "the primary success metric is weekly active teams", "v2": "the primary success metric is retained seats at day 60", "was": "weekly active teams",
+      "ask": "What is the primary success metric for the pilot?",
+      "current": "retained seats at day 60", "stale": "weekly active teams",
+      "values": {"retained seats at day 60": "retained seats|seat retention|seats retained", "weekly active teams": "weekly active teams|active teams"}
+    },
+    {
+      "id": "incentive", "kind": "change", "label": "Interview incentive", "page": "sync1",
+      "note": "the interview incentive is a 75 dollar gift card",
+      "v1": "the interview incentive is a 75 dollar gift card", "v2": "the interview incentive is a 120 dollar gift card", "was": "75 dollars",
+      "ask": "How much is the interview incentive?",
+      "current": "120 dollars", "stale": "75 dollars",
+      "values": {"120 dollars": "\\b120\\b", "75 dollars": "\\b75\\b"}
+    },
+    {
+      "id": "interviews", "kind": "change", "label": "Interview count", "page": "sync2",
+      "note": "we will run 14 customer interviews",
+      "v1": "the study runs 14 customer interviews", "v2": "the study runs 20 customer interviews", "was": "14 interviews",
+      "ask": "How many customer interviews are we running?",
+      "current": "20 interviews", "stale": "14 interviews",
+      "values": {"20 interviews": "\\b20\\b|twenty\\b", "14 interviews": "\\b14\\b|fourteen"}
+    },
+    {
+      "id": "readout", "kind": "change", "label": "Readout audience", "page": "sync2",
+      "note": "the pilot readout will be presented to the product council",
+      "v1": "the pilot readout is presented to the product council", "v2": "the pilot readout is presented to the executive staff meeting", "was": "the product council",
+      "ask": "Who is the pilot readout presented to?",
+      "current": "the executive staff meeting", "stale": "the product council",
+      "values": {"the executive staff meeting": "executive staff|exec staff|executive team|executives", "the product council": "product council"}
+    },
+    {
+      "id": "length", "kind": "control", "label": "Interview length", "page": "sync1",
+      "note": "each customer interview lasts 45 minutes",
+      "v1": "each customer interview lasts 45 minutes", "v2": "each customer interview lasts 45 minutes", "was": null,
+      "ask": "How long is each customer interview?",
+      "current": "45 minutes", "stale": null,
+      "values": {"45 minutes": "\\b45\\b|forty-five"}
+    },
+    {
+      "id": "exclusion", "kind": "control", "label": "Sample exclusion", "page": "sync2",
+      "note": "the sample excludes accounts in their first 30 days",
+      "v1": "the sample excludes accounts in their first 30 days", "v2": "the sample excludes accounts in their first 30 days", "was": null,
+      "ask": "Which accounts are excluded from the pilot sample?",
+      "current": "accounts in their first 30 days", "stale": null,
+      "values": {"accounts in their first 30 days": "\\b30 days|thirty days|first month"}
+    }
+  ]
+}
