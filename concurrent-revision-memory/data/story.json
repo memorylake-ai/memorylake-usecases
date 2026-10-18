@@ -1,0 +1,117 @@
+{
+  "company": "Corvane Labs",
+  "project_name": "Halyard 2.0 launch",
+  "subject": "launch review",
+  "people": {
+    "mara": {
+      "display": "Mara Quill",
+      "role": "engineering lead",
+      "agent": false
+    },
+    "planner": {
+      "display": "Planner agent",
+      "role": "plans the launch",
+      "agent": true
+    },
+    "scheduler": {
+      "display": "Scheduler agent",
+      "role": "owns the calendar",
+      "agent": true
+    },
+    "qa": {
+      "display": "QA-gate agent",
+      "role": "owns release gates",
+      "agent": true
+    },
+    "staffing": {
+      "display": "Staffing agent",
+      "role": "owns who does what",
+      "agent": true
+    }
+  },
+  "kickoff": {
+    "key": "kickoff",
+    "agent": "planner",
+    "name": "Kickoff — Planner agent",
+    "date": "2026-10-12T09:00:00Z",
+    "turns": [
+      [
+        "mara",
+        "Mara Quill (engineering lead): Let's lock the Halyard 2.0 launch review."
+      ],
+      [
+        "planner",
+        "Planner agent: Recorded: the Halyard launch review is on Thursday, October 22, and Ben Ito owns it."
+      ]
+    ]
+  },
+  "reports": [
+    {
+      "key": "scheduler",
+      "agent": "scheduler",
+      "name": "Report — Scheduler agent",
+      "field": "date",
+      "value": "Friday, October 23",
+      "turns": [
+        [
+          "mara",
+          "Mara Quill (engineering lead): Ops freeze runs through Thursday."
+        ],
+        [
+          "scheduler",
+          "Scheduler agent: Update: the Halyard launch review moves to Friday, October 23."
+        ]
+      ]
+    },
+    {
+      "key": "qa",
+      "agent": "qa",
+      "name": "Report — QA-gate agent",
+      "field": "date",
+      "value": "Monday, October 26",
+      "turns": [
+        [
+          "mara",
+          "Mara Quill (engineering lead): The security sign-off will not land until Friday evening."
+        ],
+        [
+          "qa",
+          "QA-gate agent: Update: the Halyard launch review moves to Monday, October 26."
+        ]
+      ]
+    },
+    {
+      "key": "staffing",
+      "agent": "staffing",
+      "name": "Report — Staffing agent",
+      "field": "owner",
+      "value": "Ana Ruiz",
+      "turns": [
+        [
+          "mara",
+          "Mara Quill (engineering lead): Ben Ito is on leave next week."
+        ],
+        [
+          "staffing",
+          "Staffing agent: Update: Ana Ruiz now owns the Halyard launch review."
+        ]
+      ]
+    }
+  ],
+  "reports_date": "2026-10-14T09:00:00Z",
+  "decision": {
+    "by": "mara",
+    "date": "2026-10-15",
+    "values": {
+      "date": "Monday, October 26",
+      "owner": "Ana Ruiz"
+    },
+    "reason": "the review waits for the security sign-off, and Ben Ito is on leave",
+    "text": {
+      "date": "The Halyard launch review is on {date}",
+      "owner": "{owner} owns the Halyard launch review",
+      "both": "The Halyard launch review is on {date}, and {owner} owns it"
+    },
+    "suffix": " (decided by Mara Quill, engineering lead, on 2026-10-15 after the agent reports of 2026-10-14 collided)."
+  }
+}
