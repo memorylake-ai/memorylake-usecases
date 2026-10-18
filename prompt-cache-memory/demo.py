@@ -819,7 +819,7 @@ def cleanup(cli: CLI, quiet: bool = False) -> None:
         rep.rename(OUT / "runs" / f"report-{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}.json")
 
 
-EXAMPLE = "4"
+EXAMPLE = "37"
 
 
 def main() -> None:

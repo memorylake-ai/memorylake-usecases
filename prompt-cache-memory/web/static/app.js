@@ -136,7 +136,7 @@
     const nums = S.qs.length ? S.qs.map((q) => q.rows[0].pool) : [1, 12, 23, 37, 44, 57];
     const qs = nums.map((k) => ({ k, text: pool[k - 1]?.text || "" }));
     return `<h1>Ask one — through A–D, twice in a row</h1>
-      <p class="lead">A question number, or any question that names a customer. The second round repeats the first byte for byte: even B can hit then, because its whole prompt was just seen — in real traffic the next question retrieves a different block.</p>
+      <p class="lead">A question number, or any question that names a customer. The second round sends the same question again: if <code>search</code> returns the same facts, B's prompt is byte-identical and can hit — the only way B shares a prefix. In real traffic the next question retrieves a different block.</p>
       <div class="card"><label for="t-q">question number (1–60) or question</label><input id="t-q" value="${esc(S.tq)}">
         <div class="chips">${qs.map((q) => `<button class="chip" data-q="${q.k}">${q.k} · ${esc(q.text)}</button>`).join("")}</div>
         <div class="row" style="margin-top:12px"><button class="btn primary" data-act="try" ${ready && !running() ? "" : "disabled"}>Ask</button>${ready ? "" : '<span class="muted small">Run the demo first.</span>'}</div>

@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Cut Agent Memory Costs 10-100x at Production Scale*](https://www.memorylake.ai/en/usecase/cost-optimized-agent-memory-at-scale),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 4:35](https://github.com/memorylake-ai/memorylake-usecases/releases/download/prompt-cache-memory-v1/prompt-cache-memory-cli-demo.mp4) · [Web, 5:00](https://github.com/memorylake-ai/memorylake-usecases/releases/download/prompt-cache-memory-v1/prompt-cache-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/prompt-cache-memory-v1); GitHub serves them as downloads). Both were recorded after the provider's cache from earlier runs had expired; both are counted in the Measured table below.
 
 **The problem.** Retrieving a few hundred tokens of memory instead of pasting a customer's whole history makes every
 prompt smaller. The page also promises "prompt cache compatibility": a model provider bills the start of a prompt at
@@ -20,11 +21,13 @@ Q3  "What payment terms does Tomas Berg have?"
 
 Tessavane Freight (a fictional carrier) runs a support assistant, Dock. Every request carries the same handling
 playbook (969 words, about 1,300 tokens, shared by every customer) and what Dock remembers about the customer asking. Over
-3 full runs (36 questions each way), B and C sent **exactly the same number of tokens on 36 of 36 questions** and were
-right 35 of 36 times each. C was read from the cache **36 of 36** times. B was read from the cache 5 times, and every
-one of those 5 requests started with a memory block sent minutes earlier, by an earlier run of this demo. On prompts whose start had not been sent
-before, B hit **0 of 31** times. Priced from the account's own `router models` list (gpt-4o-mini: input 0.15,
-cache_read 0.075 USD per million tokens), B cost **206 USD per million calls**, C **131** and MemoryRouter (D) **128**.
+6 full runs (72 questions each way), B and C sent **exactly the same number of tokens on 72 of 72 questions** and were
+right 71 of 72 times each. C was read from the cache **70 of 72** times (the two misses were the first request of a
+run, before anything had warmed the cache). B was read from the cache 13 times. Every one of those 13 requests started
+with a memory block that had been sent minutes earlier, because the same question drew the same facts in an earlier run of this demo. On
+prompts whose start had not been sent before, B hit **0 of 58** times. Priced from the account's own `router models`
+list (gpt-4o-mini: input 0.15, cache_read 0.075 USD per million tokens), B cost **202 USD per million calls**, C **134**
+and MemoryRouter (D) **130**.
 
 ## What it shows
 
@@ -35,15 +38,15 @@ cache_read 0.075 USD per million tokens), B cost **206 USD per million calls**, 
   question, so their memory block is identical. B puts it first and C puts it last. The token counts match exactly,
   but B gets a cache miss on every prompt whose start is new.
 - **MemoryRouter keeps the shared part first.** D sends only the playbook as the system prompt. `--boundary`
-  attaches the memory after it, so 36 of 36 calls were read from the cache, with no retrieval code in the app.
+  attaches the memory after it, so 71 of 72 calls were read from the cache, with no retrieval code in the app.
 - **A stuffed customer file can also be cached, but only per customer.** Arm A pastes the customer's whole ticket
   history in front of the playbook. Each customer asks twice within about two minutes here, and the file is the
-  same bytes each time, so A hit 35 of 36 times (92% of its tokens cached). It still sends about 47% more tokens than
+  same bytes each time, so A hit 63 of 72 times (83% of its tokens cached; it misses on each customer's first question when the cache is cold). It still sends about 47% more tokens than
   B or C, and in production a customer rarely comes back while their file is still in the cache.
-- **The same tokens do not mean the same words.** B and C replied word for word the same on 23 of 36 questions; the
-  rest differ in phrasing, not in the fact given (both were right 35 of 36 times). Ines Vahl's memory says she
-  prefers German: B and D each answered her once in German (of 6), A and C never, so the order showed no consistent
-  effect on language here.
+- **The same tokens do not mean the same words.** B and C replied word for word the same on 50 of 72 questions. The
+  rest differ in phrasing, not in the fact given (both were right 71 of 72 times). Ines Vahl's memory says she
+  prefers German: of 12 answers to her questions per arm, B answered in German twice, C once, D twice and A never.
+  The order showed no consistent effect on language here.
 - **Retrieval can still miss.** "Can we book a new collection for Ines Vahl this week?" once got a top-5 without the
   credit-hold fact: B and C both said yes or "no information", while D (MemoryRouter) answered correctly. The demo
   grades every reply and prints ✗.
@@ -164,19 +167,24 @@ times, B's second prompt is byte-identical to its first and can hit the cache. T
 
 ## Measured
 
-Every run below is a full run on a free account. Hits count calls with `cached_tokens > 0`; "B, head new" counts B's
-calls whose first ~1,000 tokens had not been sent from this folder in the last hour.
+Every run below is a full run of the final version on a free account. Hits count calls with `cached_tokens > 0`; "B, head new"
+counts B's calls whose first ~1,000 tokens had not been sent from that folder in the last hour.
 
 | run | cache hits (A · B · C · D) | B, head new: hits | B = C tokens | right (A · B · C · D) | USD per 1M calls (A · B · C · D) |
 |---|---|---|---|---|---|
 | run 1 | 12/12 · 3/12 · 12/12 · 12/12 | 3/12 | 12/12 | 12/12 · 12/12 · 12/12 · 12/12 | 171 · 195 · 129 · 126 |
 | run 2 | 12/12 · 0/12 · 12/12 · 12/12 | 0/12 | 12/12 | 12/12 · 11/12 · 11/12 · 12/12 | 173 · 221 · 133 · 130 |
 | `--reset` | 11/12 · 2/12 · 12/12 · 12/12 | 1/11 | 12/12 | 12/12 · 12/12 · 12/12 · 12/12 | 184 · 203 · 130 · 127 |
-| **total (3 runs)** | **35/36 · 5/36 · 36/36 · 36/36** | **4/35** | **36/36** | **36/36 · 35/36 · 35/36 · 36/36** | **176 · 206 · 131 · 128** |
+| browser check | 10/12 · 8/12 · 11/12 · 12/12 | 1/4 | 12/12 | 12/12 · 12/12 · 12/12 · 12/12 | 195 · 156 · 134 · 126 |
+| CLI recording (cold cache) | 6/12 · 0/12 · 11/12 · 11/12 | 0/12 | 12/12 | 12/12 · 12/12 · 12/12 · 12/12 | 246 · 221 · 142 · 140 |
+| Web recording | 12/12 · 0/12 · 12/12 · 12/12 | 0/12 | 12/12 | 12/12 · 12/12 · 12/12 · 12/12 | 172 · 219 · 133 · 128 |
+| **total (6 runs)** | **63/72 · 13/72 · 70/72 · 71/72** | **5/63** | **72/72** | **72/72 · 71/72 · 71/72 · 72/72** | **190 · 202 · 134 · 130** |
 
-The 4 "head new" hits for B were all questions that the demo's unlogged development runs had asked 10–20 minutes
-earlier, with the same retrieved facts. The provider still had those prompts cached. Not counting them, B hit 0 of 31.
-Share of prompt tokens read from the cache: A 92% · B 13% · C 85% · D 86%.
+Where B's 13 hits came from: 8 were requests whose start had been sent minutes earlier from the same folder (8 of
+the 9 such requests hit). The other 5 were questions that the demo's earlier development runs had asked 10–20 minutes before, with
+the same retrieved facts. Those runs kept no log, so the requests show as "head new". On every other request, B hit 0 of 58.
+The browser check ran right after four other runs and drew many repeated questions; since then, each draw leaves out questions
+asked from the folder in the last hour. Share of prompt tokens read from the cache: A 83% · B 17% · C 82% · D 84%.
 
 ## Use it in your own app
 
