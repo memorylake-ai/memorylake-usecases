@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Your AI a Second Brain That Actually Remembers Your Work*](https://www.memorylake.ai/en/usecase/ai-second-brain-for-knowledge-workers),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded; links follow here.
+**Watch it run:** [CLI, 6:33](https://github.com/memorylake-ai/memorylake-usecases/releases/download/kept-promise-memory-v1/kept-promise-memory-cli-demo.mp4) · [Web, 7:12](https://github.com/memorylake-ai/memorylake-usecases/releases/download/kept-promise-memory-v1/kept-promise-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/kept-promise-memory-v1); GitHub serves them as downloads). Each video is one run; the numbers below add up all of them.
 
 **The problem.** A knowledge worker talks to her AI assistant every day: what she found, what she decided — and what
 she promised. "I told Mara I'd send her the literature review by Friday 23 October." A second brain is supposed to
@@ -37,11 +38,11 @@ one boundary per copy: the project plus Noor's actor), twice per copy, on `gpt-4
 owes by the end of October, each promise's due date, two controls about her findings and preferences, and one about a
 promise she never made.
 
-Over 8 runs, the four promises to people (with their dates) were kept by extraction **A 1/32 · B 1/32 ·
-C 2/32**; in D the app's records held all of them (40/40). The assistant answered the promise questions
-right **A 16/56 · B 2/29 · C 10/54 · D 96/96** (answers where MemoryRouter attached nothing left out — that
-happened A 48 · B 84 · C 50 · D 0 times out of 144). The notes — findings, decision, caveat,
-preference — were kept **A 36/40 · B 29/40 · C 33/40 · D 36/40**. Details in [Measured](#measured).
+Over 9 runs, the four promises to people (with their dates) were kept by extraction **A 1/36 · B 1/36 ·
+C 2/36**; in D the app's records held all of them (45/45). The assistant answered the promise questions
+right **A 18/61 · B 2/31 · C 10/60 · D 108/108** (answers where MemoryRouter attached nothing left out — that
+happened A 57 · B 98 · C 58 · D 0 times out of 162). The notes — findings, decision, caveat,
+preference — were kept **A 40/45 · B 33/45 · C 37/45 · D 41/45**. Details in [Measured](#measured).
 
 ## Prerequisites
 
@@ -262,12 +263,13 @@ gpt-4o-mini mostly says "It is not recorded." — it does not invent a deadline.
 
 ## Measured
 
-8 runs (terminal runs and parallel copies of the demo with their own `custom_id` prefix, plus the browser run). Every number below comes from the saved reports, re-graded with the final grader.
+9 runs (three terminal runs (the last one is the CLI video), four parallel copies of the demo with their own `custom_id` prefix, and two browser runs (the second is the web video); a first terminal run asked an earlier version of a control question and is left out). Every number below comes from the saved reports, re-graded with the final grader.
 
 **What extraction kept** (per run: the four promises to people, counted when a fact names the promise with its due date · the to-do · the five notes):
 
 | run | A promises · to-do · notes | B | C | D (extraction · records) |
 |---|---|---|---|---|
+| cli | 0/4 · ✓ · 4/5 | 0/4 · ✗ · 4/5 | 0/4 · ✗ · 4/5 | 3/4 · ✗ · 5/5 · records 5/5 |
 | copy1 | 0/4 · ✗ · 5/5 | 0/4 · ✗ · 2/5 | 0/4 · ✗ · 4/5 | 0/4 · ✗ · 4/5 · records 5/5 |
 | copy2 | 0/4 · ✓ · 5/5 | 1/4 · ✗ · 4/5 | 0/4 · ✗ · 5/5 | 0/4 · ✓ · 5/5 · records 5/5 |
 | copy3 | 0/4 · ✗ · 4/5 | 0/4 · ✗ · 3/5 | 1/4 · ✗ · 4/5 | 0/4 · ✗ · 4/5 · records 5/5 |
@@ -276,43 +278,43 @@ gpt-4o-mini mostly says "It is not recorded." — it does not invent a deadline.
 | run3 | 0/4 · ✓ · 4/5 | 0/4 · ✗ · 3/5 | 1/4 · ✓ · 4/5 | 0/4 · ✗ · 4/5 · records 5/5 |
 | web1 | 0/4 · ✓ · 5/5 | 0/4 · ✗ · 5/5 | 0/4 · ✓ · 3/5 | 0/4 · ✗ · 4/5 · records 5/5 |
 | web2 | 0/4 · ✗ · 5/5 | 0/4 · ✗ · 5/5 | 0/4 · ✓ · 4/5 | 0/4 · ✗ · 5/5 · records 5/5 |
-| **all** | **1/32 · 5/8 · 36/40** | **1/32 · 0/8 · 29/40** | **2/32 · 3/8 · 33/40** | **0/32 · 2/8 · 36/40 · records 40/40** |
+| **all** | **1/36 · 6/9 · 40/45** | **1/36 · 0/9 · 33/45** | **2/36 · 3/9 · 37/45** | **3/36 · 2/9 · 41/45 · records 45/45** |
 
 **The assistant's answers** (right / answered with something attached; ∅ = MemoryRouter attached nothing):
 
 | question | A | B | C | D |
 |---|---|---|---|---|
-| What do I owe other people before the end of October? List each item with who it is for and its due date. | 0/9 (∅ 7) | 0/7 (∅ 9) | 0/8 (∅ 8) | 16/16 |
-| When is the literature review due to Mara? | 0/7 (∅ 9) | 2/4 (∅ 12) | 0/10 (∅ 6) | 16/16 |
-| What did I promise Tomas, and by when? | 2/16 | 0/7 (∅ 9) | 4/16 | 16/16 |
-| What do I still need to get from Ilse? | 14/16 | 0/9 (∅ 7) | 6/16 | 16/16 |
-| When is my review of Joss's methods appendix due? | 0/5 (∅ 11) | 0/0 (∅ 16) | 0/4 (∅ 12) | 16/16 |
-| When do the signed consent forms have to go to the ethics office? | 0/3 (∅ 13) | 0/2 (∅ 14) | 0/0 (∅ 16) | 16/16 |
-| After reweighting, how many hours of focused work a day do remote staff report? | 16/16 | 10/14 (∅ 2) | 10/14 (∅ 2) | 14/16 |
-| Which citation style do I use in drafts? | 16/16 | 14/14 (∅ 2) | 16/16 | 16/16 |
-| Did I promise anyone a draft of the conclusion chapter? | 6/8 (∅ 8) | 3/3 (∅ 13) | 8/10 (∅ 6) | 16/16 |
+| What do I owe other people before the end of October? List each item with who it is for and its due date. | 0/11 (∅ 7) | 0/7 (∅ 11) | 0/9 (∅ 9) | 18/18 |
+| When is the literature review due to Mara? | 0/8 (∅ 10) | 2/4 (∅ 14) | 0/11 (∅ 7) | 18/18 |
+| What did I promise Tomas, and by when? | 2/16 (∅ 2) | 0/8 (∅ 10) | 4/18 | 18/18 |
+| What do I still need to get from Ilse? | 16/18 | 0/10 (∅ 8) | 6/18 | 18/18 |
+| When is my review of Joss's methods appendix due? | 0/5 (∅ 13) | 0/0 (∅ 18) | 0/4 (∅ 14) | 18/18 |
+| When do the signed consent forms have to go to the ethics office? | 0/3 (∅ 15) | 0/2 (∅ 16) | 0/0 (∅ 18) | 18/18 |
+| After reweighting, how many hours of focused work a day do remote staff report? | 16/18 | 12/16 (∅ 2) | 12/16 (∅ 2) | 16/18 |
+| Which citation style do I use in drafts? | 18/18 | 14/14 (∅ 4) | 18/18 | 18/18 |
+| Did I promise anyone a draft of the conclusion chapter? | 6/8 (∅ 10) | 3/3 (∅ 15) | 8/10 (∅ 8) | 16/18 |
 
-- **Promises are what goes missing.** Per promise, how often extraction kept it with its due date (8 runs):
+- **Promises are what goes missing.** Per promise, how often extraction kept it with its due date (9 runs):
 
 | promise | A | B | C | D (extraction) |
 |---|---|---|---|---|
-| Literature review → Mara (Fri 23 Oct) | 0/8 | 1/8 | 0/8 | 0/8 |
-| One-page summary → Tomas (Wed 28 Oct) | 1/8 | 0/8 | 2/8 | 0/8 |
-| Ask Ilse for raw survey file (no date) | 5/8 | 0/8 | 3/8 | 2/8 |
-| Appendix review → Joss (Wed 21 Oct) | 0/8 | 0/8 | 0/8 | 0/8 |
-| Consent forms → ethics office (Fri 30 Oct) | 0/8 | 0/8 | 0/8 | 0/8 |
+| Literature review → Mara (Fri 23 Oct) | 0/9 | 1/9 | 0/9 | 0/9 |
+| One-page summary → Tomas (Wed 28 Oct) | 1/9 | 0/9 | 2/9 | 1/9 |
+| Ask Ilse for raw survey file (no date) | 6/9 | 0/9 | 3/9 | 2/9 |
+| Appendix review → Joss (Wed 21 Oct) | 0/9 | 0/9 | 0/9 | 1/9 |
+| Consent forms → ethics office (Fri 30 Oct) | 0/9 | 0/9 | 0/9 | 1/9 |
 
   The to-do for Ilse survives more often than the dated promises to people: extraction writes it as a state of the
   work ("The raw survey file is not yet available and needs to be requested from Ilse").
-- **The fact instruction did not help** — B kept 1/32 promises to people, and kept fewer notes than A (29/40
-  vs 36/40); its MemoryRouter calls came back with nothing attached most often (84 of 144). Instructions
+- **The fact instruction did not help** — B kept 1/36 promises to people, and kept fewer notes than A (33/45
+  vs 40/45); its MemoryRouter calls came back with nothing attached most often (98 of 162). Instructions
   can make extraction keep things (see [provisioned-tenant-memory](../provisioned-tenant-memory/), where one kept
   bare metric readings); here the sentence asking for commitments did not.
 - **"Commitment logged" in the chat is not a write.** C's assistant confirms each promise in a plain sentence with the
-  date; extraction kept 2/32. A user reading the chat has every reason to believe it was stored.
-- **The app's write is what the assistant reads.** D answered 96/96 promise questions right and named all four
-  promises in every list answer (64/64 names). Its controls: 30/32.
-- **What the model got wrong.** Asked about a promise Noor never made (a draft of the conclusion chapter), the assistant said she had promised Tomas "a one-page summary of the conclusion chapter" (A 2, C 2, D 0 times) — only in runs where Tomas's promise had been kept, so the summary was real and the chapter was not. The control on focused hours was answered with 6.2 — the reading before reweighting, presented as "after reweighting" — each time extraction had not kept the reweighted 6.0 in that copy (A 0 · B 4 · C 4 · D 2 wrong control answers). No promise question got a wrong specific date. Where extraction kept a need without Noor's promise or its date ("The ethics office still needs the signed interview consent forms"), the answer was "as soon as possible" or, in the list, "by the end of October" — the question's own words; and B twice said the consent forms were to come from Ilse (2 answers).
+  date; extraction kept 2/36. A user reading the chat has every reason to believe it was stored.
+- **The app's write is what the assistant reads.** D answered 108/108 promise questions right and named all four
+  promises in every list answer (72/72 names). Its controls: 34/36.
+- **What the model got wrong.** Asked about a promise Noor never made (a draft of the conclusion chapter), the assistant said she had promised Tomas "a one-page summary of the conclusion chapter" (A 2, C 2, D 2 times) — only in runs where Tomas's promise had been kept, so the summary was real and the chapter was not. The control on focused hours was answered with 6.2 — the reading before reweighting, presented as "after reweighting" — each time extraction had not kept the reweighted 6.0 in that copy (A 2 · B 4 · C 4 · D 2 wrong control answers). No promise question got a wrong specific date. Where extraction kept a need without Noor's promise or its date ("The ethics office still needs the signed interview consent forms"), the answer was "as soon as possible" or, in the list, "by the end of October" — the question's own words; and B twice said the consent forms were to come from Ilse (2 answers).
 
 ## Use it in your own assistant
 
