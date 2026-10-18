@@ -1,0 +1,124 @@
+{
+  "company": "Tallow Labs",
+  "assistant": "Quill",
+  "budget_secs": 2.5,
+  "deadline_secs": 1.0,
+  "model": "gpt-4o-mini",
+  "max_tokens": 110,
+  "system": "You are Quill, the coding assistant in Priya's editor. Answer in at most 4 short lines, command or code first, no preamble.",
+  "user": {
+    "key": "priya",
+    "display": "Priya Raman",
+    "role": "Backend developer at Tallow Labs (fictional)"
+  },
+  "facts": [
+    {
+      "key": "pkg",
+      "text": "Priya uses pnpm for every package install; never suggest npm or yarn commands."
+    },
+    {
+      "key": "node",
+      "text": "Priya's service runs on Node 20 LTS."
+    },
+    {
+      "key": "deploy",
+      "text": "Priya's team deploys every service to Fly.io in the ams region with flyctl."
+    },
+    {
+      "key": "db",
+      "text": "Priya's database is Postgres 15 hosted on Neon."
+    },
+    {
+      "key": "test",
+      "text": "Priya writes tests with Vitest, not Jest."
+    },
+    {
+      "key": "indent",
+      "text": "Priya's repo uses tabs for indentation."
+    },
+    {
+      "key": "api",
+      "text": "Priya's API is built with the Hono framework."
+    },
+    {
+      "key": "orm",
+      "text": "Priya's schema and migrations are managed with Drizzle ORM."
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1",
+      "short": "add a dependency",
+      "ask": "Add date-fns to the project. What's the command?",
+      "fact": "pkg",
+      "expect": "\\bpnpm\\b",
+      "expect_label": "pnpm",
+      "contra": "\\bnpm (?:i|install)\\b|\\byarn add\\b",
+      "contra_label": "npm / yarn"
+    },
+    {
+      "id": "Q2",
+      "short": "write a unit test",
+      "ask": "Write a unit test for my parseDate helper.",
+      "fact": "test",
+      "expect": "\\bvitest\\b",
+      "expect_label": "Vitest",
+      "contra": "\\bjest\\b|\\bmocha\\b",
+      "contra_label": "Jest / Mocha"
+    },
+    {
+      "id": "Q3",
+      "short": "deploy a worker",
+      "ask": "How do I deploy the new background worker?",
+      "fact": "deploy",
+      "expect": "\\bfly(?:ctl|\\.io)?\\b",
+      "expect_label": "Fly.io",
+      "contra": "\\bvercel\\b|\\bheroku\\b|\\brender\\.com\\b|\\brailway\\b|\\baws\\b",
+      "contra_label": "another host"
+    },
+    {
+      "id": "Q4",
+      "short": "write a migration",
+      "ask": "Write a migration that adds a last_seen_at column to users.",
+      "fact": "orm",
+      "expect": "\\bdrizzle\\b",
+      "expect_label": "Drizzle",
+      "contra": "\\bprisma\\b|\\bknex\\b|\\bsequelize\\b|\\btypeorm\\b|\\bdjango\\b|\\brails\\b",
+      "contra_label": "another ORM"
+    },
+    {
+      "id": "Q5",
+      "short": "add a health route",
+      "ask": "Add a GET /health endpoint to the API.",
+      "fact": "api",
+      "expect": "\\bhono\\b",
+      "expect_label": "Hono",
+      "contra": "\\bexpress\\b|\\bfastify\\b|\\bflask\\b|\\bkoa\\b|\\bfastapi\\b",
+      "contra_label": "another framework"
+    },
+    {
+      "id": "Q6",
+      "short": "pick the Node image",
+      "ask": "Which Node version goes in the FROM line of the service's Dockerfile?",
+      "fact": "node",
+      "expect": "\\bnode(?:js)?[: ]?20\\b|\\bnode\\.js 20\\b|\\b20(?:\\.\\d+)?-(?:alpine|slim|bookworm)\\b",
+      "expect_label": "Node 20",
+      "contra": "\\bnode(?:js)?[: ]?(?:1[0-9]|2[1-9])\\b|\\bnode\\.js (?:1[0-9]|2[1-9])\\b|\\b(?:1[0-9]|2[1-9])(?:\\.\\d+)?-(?:alpine|slim|bookworm)\\b",
+      "contra_label": "another Node version"
+    }
+  ],
+  "arms": {
+    "A": {
+      "short": "A  retrieve, then stream",
+      "how": "`router chat --stream --boundary`: MemoryRouter looks up Priya's memory, then the model starts"
+    },
+    "B": {
+      "short": "B  1 s deadline",
+      "how": "`search` with a 1.0 s deadline; when it misses, stream without memory (`router chat --stream`), and let the search finish anyway"
+    },
+    "C": {
+      "short": "C  prefetch at session open",
+      "how": "`fact list --actors` once when the chat opens, while Priya types; each answer streams with that profile in the prompt (`router chat --stream --body`)"
+    }
+  }
+}
