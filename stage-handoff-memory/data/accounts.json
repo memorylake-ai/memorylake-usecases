@@ -1,0 +1,94 @@
+{
+ "org": "Ferrowind",
+ "today": "2026-10-18",
+ "records_date": "2026-09-02",
+ "queue": "account.changed",
+ "bot": {
+  "key": "intake",
+  "display": "intake-stage",
+  "role": "Pipeline stage 1: reads customer requests and writes what changed into memory"
+ },
+ "system": "You are the fulfilment stage of {org}'s account-change pipeline (a SaaS company). Today is {today}. Before acting, you check what is remembered about the customer's account. Reply in one line that starts with \"Answer: <value>\" (or \"Answer: Unknown\"), then one short sentence.",
+ "customers": [
+  {
+   "id": "orvane", "name": "Orvane Labs", "field": "workspace region", "ticket": "T-4101", "kind": "change",
+   "record": "Account record (2026-09-02): Orvane Labs' workspace is hosted in the US region (us-east).",
+   "note": "Intake note, ticket T-4101: Orvane Labs asked to move their workspace to the EU region (eu-central) for data residency. New environments must be created in eu-central.",
+   "result": "Intake result (2026-10-18, ticket T-4101): Orvane Labs' workspace region is now eu-central (EU), for data residency. This replaces us-east; create new environments in eu-central.",
+   "action": "create the new environment",
+   "ask": "Which region should Orvane Labs' new environment be created in?",
+   "values": {"eu-central": "eu-central|\\bEU\\b|\\bEurope", "us-east": "us-east|\\bUS\\b|United States"},
+   "current": "eu-central", "stale": "us-east"
+  },
+  {
+   "id": "pemberlin", "name": "Pemberlin Foods", "field": "billing contact", "ticket": "T-4102", "kind": "change",
+   "record": "Account record (2026-09-02): Pemberlin Foods' billing contact is dana.roe@pemberlin.example.",
+   "note": "Intake note, ticket T-4102: Pemberlin Foods changed their billing contact to li.wen@pemberlin.example. Dana Roe has left the company; do not send invoices to her any more.",
+   "result": "Intake result (2026-10-18, ticket T-4102): Pemberlin Foods' billing contact is now li.wen@pemberlin.example. This replaces dana.roe@pemberlin.example, who has left the company.",
+   "action": "send the October invoice",
+   "ask": "Which email address should Pemberlin Foods' October invoice be sent to?",
+   "values": {"li.wen": "li\\.wen|Li Wen", "dana.roe": "dana\\.roe|Dana Roe"},
+   "current": "li.wen", "stale": "dana.roe"
+  },
+  {
+   "id": "quassett", "name": "Quassett Health", "field": "seat count", "ticket": "T-4103", "kind": "change",
+   "record": "Account record (2026-09-02): Quassett Health is on the Team plan with 25 seats.",
+   "note": "Intake note, ticket T-4103: Quassett Health upgraded to the Business plan with 60 seats, effective today.",
+   "result": "Intake result (2026-10-18, ticket T-4103): Quassett Health is now on the Business plan with 60 seats. This replaces the Team plan with 25 seats.",
+   "action": "provision seats",
+   "ask": "How many seats should Quassett Health's workspace be provisioned with?",
+   "values": {"60": "(?<![\\d.,])60(?!\\d)", "25": "(?<![\\d.,])25(?!\\d)"},
+   "current": "60", "stale": "25"
+  },
+  {
+   "id": "tirlow", "name": "Tirlow Digital", "field": "incident updates", "ticket": "T-4104", "kind": "change",
+   "record": "Account record (2026-09-02): Tirlow Digital receives incident updates by email at ops@tirlow.example.",
+   "note": "Intake note, ticket T-4104: Tirlow Digital wants incident updates posted in their shared Slack channel #ferrowind-incidents from now on, not by email.",
+   "result": "Intake result (2026-10-18, ticket T-4104): Tirlow Digital's incident updates now go to their shared Slack channel #ferrowind-incidents. This replaces email to ops@tirlow.example.",
+   "action": "post the incident update",
+   "ask": "Where should Tirlow Digital's incident updates be posted?",
+   "values": {"Slack": "\\bSlack\\b|#ferrowind-incidents", "email": "\\bemail\\b|e-mail|ops@tirlow"},
+   "current": "Slack", "stale": "email"
+  },
+  {
+   "id": "wrenfield", "name": "Wrenfield Analytics", "field": "invoice currency", "ticket": "T-4105", "kind": "change",
+   "record": "Account record (2026-09-02): Wrenfield Analytics is invoiced in US dollars (USD).",
+   "note": "Intake note, ticket T-4105: Wrenfield Analytics moved their billing entity to Dublin and asked to be invoiced in euros (EUR) from the next invoice on.",
+   "result": "Intake result (2026-10-18, ticket T-4105): Wrenfield Analytics is now invoiced in euros (EUR), billing entity in Dublin. This replaces US dollars (USD).",
+   "action": "issue the next invoice",
+   "ask": "Which currency should Wrenfield Analytics' next invoice be issued in?",
+   "values": {"EUR": "\\bEUR\\b|\\beuros?\\b|€", "USD": "\\bUSD\\b|dollars?\\b|\\$"},
+   "current": "EUR", "stale": "USD"
+  },
+  {
+   "id": "halvex", "name": "Halvex Studio", "field": "SSO provider", "ticket": "T-4106", "kind": "change",
+   "record": "Account record (2026-09-02): Halvex Studio signs in with SSO through Okta.",
+   "note": "Intake note, ticket T-4106: Halvex Studio is switching their SSO from Okta to Microsoft Entra ID; configure Entra ID for them.",
+   "result": "Intake result (2026-10-18, ticket T-4106): Halvex Studio's SSO provider is now Microsoft Entra ID. This replaces Okta.",
+   "action": "configure SSO",
+   "ask": "Which identity provider should Halvex Studio's SSO be configured with?",
+   "values": {"Entra ID": "Entra|Azure AD|Azure Active Directory", "Okta": "\\bOkta\\b"},
+   "current": "Entra ID", "stale": "Okta"
+  },
+  {
+   "id": "brismoor", "name": "Brismoor Freight", "field": "workspace region", "ticket": "T-4107", "kind": "control",
+   "record": "Account record (2026-09-02): Brismoor Freight's workspace is hosted in the US West region (us-west).",
+   "note": "Intake note, ticket T-4107: Brismoor Freight asked for their API rate limit to be raised to 600 requests per minute.",
+   "result": "Intake result (2026-10-18, ticket T-4107): Brismoor Freight's API rate limit is now 600 requests per minute.",
+   "action": "create the new environment",
+   "ask": "Which region should Brismoor Freight's new environment be created in?",
+   "values": {"us-west": "us-west|US West|\\bwest\\b"},
+   "current": "us-west", "stale": ""
+  },
+  {
+   "id": "calderine", "name": "Calderine Media", "field": "seat count", "ticket": "T-4108", "kind": "control",
+   "record": "Account record (2026-09-02): Calderine Media is on the Team plan with 10 seats.",
+   "note": "Intake note, ticket T-4108: Calderine Media asked for a copy of our SOC 2 Type II report for their security review.",
+   "result": "Intake result (2026-10-18, ticket T-4108): Calderine Media requested our SOC 2 Type II report for their security review.",
+   "action": "provision seats",
+   "ask": "How many seats should Calderine Media's workspace be provisioned with?",
+   "values": {"10": "(?<![\\d.,])10(?!\\d)"},
+   "current": "10", "stale": ""
+  }
+ ]
+}
