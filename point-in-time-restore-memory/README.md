@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Back Up and Restore Agent Memory With Point-in-Time Recovery*](https://www.memorylake.ai/en/usecase/memory-backup-and-restore-for-agent-systems),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 2:46](https://github.com/memorylake-ai/memorylake-usecases/releases/download/point-in-time-restore-memory-v1/point-in-time-restore-memory-cli-demo.mp4) · [Web, 3:24](https://github.com/memorylake-ai/memorylake-usecases/releases/download/point-in-time-restore-memory-v1/point-in-time-restore-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/point-in-time-restore-memory-v1); GitHub serves them as downloads). Each video is one run; the numbers below add up all of them.
 
 **The problem.** An agent run goes wrong — here it follows instructions planted in a customer email — and rewrites its
 own memory: a refund limit raised to $5,000, the escalation channel moved, two facts forgotten, one bad rule added.
@@ -199,9 +200,19 @@ All three restores removed every trace of the incident. Only C got 14:51 back.
 
 ## Measured
 
-Every run so far gave the same result, fact for fact: three terminal runs (the second over the first's leftovers, the
-third with `--reset`) and the browser run recorded for the Web video. A: 4/9, all 5 of the day's changes lost, the
-phone number back. B: 8/9, the SMS vendor missing. C: 9/9. Each run takes 100–110 s. The writes are all made through
+5 runs: three terminal runs (the second over the first's leftovers, the third with `--reset`), the browser run
+recorded for the Web video, and the run recorded for the CLI video (from a fresh `git clone`). Every number comes
+from the saved reports (`out/runs/`).
+
+| | A restore the backup | B trace, backup + `fact list` ids | C trace, write journal ids |
+|---|---|---|---|
+| facts right | 4/9 in 5 of 5 runs | 8/9 in 5 of 5 | 9/9 in 5 of 5 |
+| the day's changes kept | 0 of 25 | 20 of 25 (SMS vendor lost every time) | 25 of 25 |
+| erased phone number back | 5 of 5 runs | 0 of 5 | 0 of 5 |
+| incident writes left | 0 | 0 | 0 |
+
+Each terminal run took 102–111 s. In B, the id catalog was 10 every time (8 in the backup, 8 in `fact list`, 6 in
+both); the journal had 11. The writes are all made through
 the API (no extraction from conversations), so nothing in the outcome depends on a model.
 
 ## Use it in your own agents
