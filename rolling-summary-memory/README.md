@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Stop Summarizing Agent History. Retrieve Structured Memory Instead.*](https://www.memorylake.ai/en/usecase/stop-summarizing-agent-history-retrieve-it-instead),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 10:08](https://github.com/memorylake-ai/memorylake-usecases/releases/download/rolling-summary-memory-v1/rolling-summary-memory-cli-demo.mp4) · [Web, 10:22](https://github.com/memorylake-ai/memorylake-usecases/releases/download/rolling-summary-memory-v1/rolling-summary-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/rolling-summary-memory-v1); GitHub serves them as downloads). Each video is one run; the numbers below add up all of them.
 
 **The problem.** Long agent history doesn't fit in the prompt, so many assistants keep a running summary: after each
 session the model folds the new session into the summary, with a size budget. It looks cheap and tidy. Two things
@@ -36,7 +37,7 @@ Then, on Wednesday 21 October, Ferry is asked for the 18 values — once per sum
 on `gpt-4o-mini` at temperature 0, with a system prompt that says "If it is not in what you remember, say it is not
 recorded." Nobody is tricked into guessing: the failure is honest forgetting.
 
-Over 7 runs (21 summary chains), **17 of 21 chains lost 4–12 values in a single compaction** (most often 9–11 at once); none of the 21 stayed under its 150-word budget (final size 160–608 words). Ferry answered **198/378** right from the summaries — 179 times "It is not recorded" — and **245/252** through MemoryLake, where all 18 values were in the facts in every run. Per question, the summary cost 537 prompt tokens on average (279–930); MemoryRouter's attachment, 172 (149–278). Details in [Measured](#measured).
+Over 9 runs (27 summary chains), **23 of 27 chains lost 4–12 values in a single compaction** (most often 9–11 at once); none of the 27 stayed under its 150-word budget (final size 160–608 words). Ferry answered **247/486** right from the summaries — 238 times "It is not recorded" — and **315/324** through MemoryLake, where all 18 values were in the facts in every run. Per question, the summary cost 522 prompt tokens on average (279–930); MemoryRouter's attachment, 172 (149–278). Details in [Measured](#measured).
 
 ## Prerequisites
 
@@ -211,7 +212,7 @@ because the whole summary rides along every time. MemoryRouter attached about 17
 
 ## Measured
 
-7 runs: three terminal runs, three parallel copies of the demo with their own `custom_id` prefix, and one browser run. Every number below comes from the saved reports (`out/runs/`), re-graded with the final grader.
+9 runs: three terminal runs, three parallel copies of the demo with their own `custom_id` prefix, the run recorded for the CLI video (from a fresh `git clone`), and two browser runs (the second is the web video). Every number below comes from the saved reports (`out/runs/`), re-graded with the final grader.
 
 **Per run** — each summary chain's final size and values held, and every compaction that dropped 3 or more values the summary held a moment before (`−N at sK (words before → after)`); then answers right from the summaries (3 chains × 18), what the facts held, and answers right through MemoryLake (2 × 18):
 
@@ -223,36 +224,38 @@ because the whole summary rides along every time. MemoryRouter attached about 17
 | copy1 | 336 w · 6/18 · −4 at s5 (182→171 w), −9 at s9 (338→156 w) | 232 w · 7/18 · −11 at s11 (510→164 w) | 219 w · 7/18 · −11 at s11 (507→152 w) | 20/54 | 47 facts · 18/18 | 36/36 |
 | copy2 | 599 w · 18/18 | 231 w · 7/18 · −11 at s11 (510→163 w) | 247 w · 8/18 · −10 at s11 (510→180 w) | 33/54 | 49 facts · 18/18 | 34/36 |
 | copy3 | 345 w · 8/18 · −11 at s8 (317→165 w) | 423 w · 8/18 · −11 at s7 (259→161 w) | 228 w · 8/18 · −10 at s11 (486→161 w) | 24/54 | 50 facts · 18/18 | 34/36 |
+| cli | 247 w · 8/18 · −11 at s7 (256→166 w) | 331 w · 8/18 · −11 at s7 (255→166 w) | 230 w · 8/18 · −10 at s11 (516→163 w) | 24/54 | 46 facts · 18/18 | 36/36 |
 | web1 | 327 w · 8/18 · −11 at s8 (306→193 w) | 219 w · 7/18 · −11 at s11 (506→152 w) | 608 w · 18/18 | 33/54 | 44 facts · 18/18 | 34/36 |
+| web2 | 364 w · 8/18 · −11 at s8 (317→183 w) | 225 w · 8/18 · −6 at s8 (313→264 w), −4 at s11 (377→159 w) | 350 w · 10/18 · −9 at s8 (308→151 w) | 25/54 | 52 facts · 18/18 | 34/36 |
 
 **Per question** (right / asked; the first nine are from the first three sessions):
 
 | value | A (summaries) | B (MemoryLake) |
 |---|---|---|
-| Postgres port | 21/21 | 14/14 |
-| Report replica | 21/21 | 14/14 |
-| Pool cap per pod | 21/21 | 14/14 |
-| Redis eviction | 20/21 | 14/14 |
-| Rate-card TTL | 19/21 | 14/14 |
-| Redis shards | 20/21 | 14/14 |
-| Deploy freeze | 15/21 | 14/14 |
-| Canary hold | 19/21 | 14/14 |
-| Rollback owner | 4/21 | 14/14 |
-| Webhook retries | 4/21 | 14/14 |
-| Max backoff | 4/21 | 14/14 |
-| Dead-letter queue | 4/21 | 11/14 |
-| TLS renewal | 4/21 | 14/14 |
-| kf_live_ revocation | 4/21 | 14/14 |
-| Audit-log retention | 4/21 | 14/14 |
-| Consumer group | 4/21 | 14/14 |
-| Cutover time | 6/21 | 14/14 |
-| Prefetch | 4/21 | 10/14 |
+| Postgres port | 27/27 | 18/18 |
+| Report replica | 27/27 | 18/18 |
+| Pool cap per pod | 27/27 | 18/18 |
+| Redis eviction | 26/27 | 18/18 |
+| Rate-card TTL | 25/27 | 18/18 |
+| Redis shards | 26/27 | 18/18 |
+| Deploy freeze | 21/27 | 18/18 |
+| Canary hold | 25/27 | 18/18 |
+| Rollback owner | 4/27 | 18/18 |
+| Webhook retries | 4/27 | 18/18 |
+| Max backoff | 4/27 | 18/18 |
+| Dead-letter queue | 4/27 | 15/18 |
+| TLS renewal | 4/27 | 18/18 |
+| kf_live_ revocation | 4/27 | 18/18 |
+| Audit-log retention | 4/27 | 18/18 |
+| Consumer group | 4/27 | 18/18 |
+| Cutover time | 7/27 | 18/18 |
+| Prefetch | 4/27 | 12/18 |
 
-- **The drop is a single step, and it takes the middle.** 17 of 21 chains lost a block of values in one compaction — usually at s7, s8 or s11 — and the block was sessions 3–6: the rollback owner, the webhook settings, the certificate and key dates, the cutover. Values from the first two sessions (Postgres, Redis) were answered right 122/126 from the summaries; values from sessions 4–6, 38/189. In 17 of those 19 compactions the summary also got much *shorter* (252–510 words → 144–193) — the only moment in a run it came near its budget; in the other 2, new sessions pushed old values out at about the same length.
-- **The chains that never dropped kept growing.** 4 of 21 ended at 590, 592, 599, 608 words (about 4× the budget) with every value — and paid for it on every question (900+ prompt tokens).
-- **The failure is honest.** With "say it is not recorded" in the system prompt, the summaries answered "It is not recorded" 179 times and gave a wrong value 1 time (a deploy freeze answered as "every Thursday", without the time). Without that sentence (an earlier probe, one chain that lost 10 values), 7 of the 10 holes were filled with a made-up value, 4 of them the very default the model gives with no memory at all: "retry three times", "webhook-dead-letter-queue", "renews every 90 days", "prefetches 10 messages".
-- **The two changes came through in MemoryLake.** Each session was extracted before the next was appended, so "raised the pool cap to 64" and "canaries held for 30 minutes, not 20" revised the earlier facts; B answered both with the new value every time (14/14 and 14/14); the summaries never answered with an old value either (0 times) — what they lost, they lost outright.
-- **MemoryLake's misses.** 7 of 252 answers said "not recorded" although the fact was in the project: the dead-letter queue (3) and the prefetch (4). In one run extraction had written the prefetch as "The ack latency alarm fires when a consumer prefetches above 25 messages", and the model would not read that as the prefetch count; for the others, what MemoryRouter attached was not inspected. ∅ (nothing attached): 0.
+- **The drop is a single step, and it takes the middle.** 23 of 27 chains lost a block of values in one compaction — usually at s7, s8 or s11 — and the block was sessions 3–6: the rollback owner, the webhook settings, the certificate and key dates, the cutover. Values from the first two sessions (Postgres, Redis) were answered right 158/162 from the summaries; values from sessions 4–6, 39/243. In 23 of those 26 compactions the summary also got much *shorter* (252–516 words → 144–193) — the only moment in a run it came near its budget; in the other 3, new sessions pushed old values out at about the same length.
+- **The chains that never dropped kept growing.** 4 of 27 ended at 590, 592, 599, 608 words (about 4× the budget) with every value — and paid for it on every question (900+ prompt tokens).
+- **The failure is honest.** With "say it is not recorded" in the system prompt, the summaries answered "It is not recorded" 238 times and gave a wrong value 1 time (a deploy freeze answered as "every Thursday", without the time). Without that sentence (an earlier probe, one chain that lost 10 values), 7 of the 10 holes were filled with a made-up value, 4 of them the very default the model gives with no memory at all: "retry three times", "webhook-dead-letter-queue", "renews every 90 days", "prefetches 10 messages".
+- **The two changes came through in MemoryLake.** Each session was extracted before the next was appended, so "raised the pool cap to 64" and "canaries held for 30 minutes, not 20" revised the earlier facts; B answered both with the new value every time (18/18 and 18/18); the summaries never answered with an old value either (0 times) — what they lost, they lost outright.
+- **MemoryLake's misses.** 9 of 324 answers said "not recorded" although the fact was in the project: the dead-letter queue (3) and the prefetch (6). In one run extraction had written the prefetch as "The ack latency alarm fires when a consumer prefetches above 25 messages", and the model would not read that as the prefetch count; for the others, what MemoryRouter attached was not inspected. ∅ (nothing attached): 0.
 
 ## Use it in your own assistant
 
@@ -262,7 +265,7 @@ because the whole summary rides along every time. MemoryRouter attached about 17
   `demo.py` does to draw the trace.
 - **Retrieve instead of re-summarizing.** Write each session to MemoryLake (`conv msg append` on a conversation in
   your project) and let extraction keep the facts; at answer time `router chat --boundary <id>` attaches only what
-  the question needs. Here that was ~170 prompt tokens per question against 280–920 for the summaries.
+  the question needs. Here that was ~170 prompt tokens per question against 280–930 for the summaries.
 - **Order the writes when sessions revise each other.** Extract each session before appending the next: the pool cap
   and canary changes came out as the new value ("raised to 64 … previously 40") because the older fact was already
   there to revise.
