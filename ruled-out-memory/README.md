@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give ReAct Agent Loops Memory of Every Thought, Action, and Observation*](https://www.memorylake.ai/en/usecase/memory-for-react-style-agent-loops),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress (videos will be linked here)
+**Watch it run:** [CLI, 5:59](https://github.com/memorylake-ai/memorylake-usecases/releases/download/ruled-out-memory-v1/ruled-out-memory-cli-demo.mp4) · [Web, 6:14](https://github.com/memorylake-ai/memorylake-usecases/releases/download/ruled-out-memory-v1/ruled-out-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/ruled-out-memory-v1); GitHub serves them as downloads). Both recordings are counted in the Measured table below; in the CLI one, B also answers "Yes, already ruled out" for slow queries.
 
 **The problem.** An investigation agent runs a ReAct loop: Thought, Action, Observation, repeat. In one run of five
 actions it checks four suspects for a checkout latency incident, and each observation rules one out; the fifth action
@@ -18,30 +19,30 @@ in memory (B):       nothing about the cache                        (the lead fr
 run 2 plans:         get_slow_queries, get_db_locks, ↻get_dns_latency, ↻get_pool_stats
 ```
 
-Over 7 runs, the scratchpad stored as text (B) left **0 of 28** ruled-out suspects in memory and kept the lead
-7 of 7 times. The resumed run then planned to check ruled-out suspects again **25** times in 84 picks.
+Over 8 runs, the scratchpad stored as text (B) left **0 of 32** ruled-out suspects in memory and kept the lead
+8 of 8 times. The resumed run then planned to check ruled-out suspects again **26** times in 96 picks.
 
-Making the agent say its verdicts ("… so X is ruled out", C) mostly works here (24 of 28), but it is extraction's
+Making the agent say its verdicts ("… so X is ruled out", C) mostly works here (28 of 32), but it is extraction's
 call: one run kept none of them, and in the select probe for this demo (a shorter loop) the stated verdicts survived
-2 of 9 times. Writing one typed record per iteration with `fact add` (D) keeps all of them (28 of 28) and the
-plans never repeat a dead end (0 in 84 picks re-checks). But a memory full of "ruled out" records has a cost the plans
-don't show: asked whether two suspects **nobody checked** were ruled out, D answered **"Yes"** 26 of 41 times,
+2 of 9 times. Writing one typed record per iteration with `fact add` (D) keeps all of them (32 of 32) and the
+plans never repeat a dead end (0 in 96 picks re-checks). But a memory full of "ruled out" records has a cost the plans
+don't show: asked whether two suspects **nobody checked** were ruled out, D answered **"Yes"** 29 of 47 times,
 including for slow queries on the orders database, the obvious next check. One more record saying what run 1 covered,
-and that nothing else is ruled out (E), brings that to **0 of 42** and gives back some re-checks (10 in 84 picks).
+and that nothing else is ruled out (E), brings that to **0 of 48** and gives back some re-checks (12 in 96 picks).
 
 ## What it shows
 
 - **Typed tool blocks (A) are stored but not extracted.** The framework-default log (`TOOL_USE` / `TOOL_RESULT`) left
-  0 of 28 ruled-out suspects and the lead 0 of 7 times in memory. MemoryRouter attached nothing to 88 of 147 of A's
+  0 of 32 ruled-out suspects and the lead 0 of 8 times in memory. MemoryRouter attached nothing to 88 of 168 of A's
   answers.
 - **When the observations are text (B), extraction is selective.** It kept the deploy log entry (the lead) every time
-  and dropped the four rule-outs (4 bare readings such as "DNS resolver latency had p99_ms 3", never a
+  and dropped the four rule-outs (7 bare readings such as "DNS resolver latency had p99_ms 3", never a
   verdict). None of the Thoughts with "most likely" became a fact either.
-- **A Yes is not a memory.** B's memory holds no verdicts, yet its answers said "Yes, it was ruled out" 38
+- **A Yes is not a memory.** B's memory holds no verdicts, yet its answers said "Yes, it was ruled out" 47
   times. The demo marks those ◇ (the right word with nothing behind it), not ✓.
-- **Step records fix the plan and break the yes/no question (D).** Plans 21 of 21 clean; never-checked suspects
-  claimed ruled out 26 of 41: "Yes … as the relevant migration involved rebuilding indexes".
-- **Coverage fixes the question (E)** (0 of 42), and the plans re-pick `get_cache_stats` 10 in 84 picks times. E's Router
+- **Step records fix the plan and break the yes/no question (D).** Plans 24 of 24 clean; never-checked suspects
+  claimed ruled out 29 of 47: "Yes … as the relevant migration involved rebuilding indexes".
+- **Coverage fixes the question (E)** (0 of 48), and the plans re-pick `get_cache_stats` 12 in 96 picks times. E's Router
   calls carry fewer prompt tokens than D's (511 against 687 in the main run), so a smaller set of records was
   attached; which ones is not shown by the API.
 
@@ -231,9 +232,10 @@ final grading. Re-checks are counted over the plans' picks (4 per plan, ∅ plan
 | `--reset` | 0/4 (no lead) · 0/4 · 4/4 · 4/4 · 4/4 | 7/12 · 0/0 · 3/12 · 0/12 · 0/12 · 1/12 | 0/6 · 0/0 · 3/6 · 3/6 · 3/6 · 0/6 |
 | browser check (page errors in the UI, fixed; report kept) | 0/4 (no lead) · 0/4 · 4/4 · 4/4 · 4/4 | 8/12 · 7/12 · 3/12 · 1/12 · 0/12 · 1/12 | 0/6 · 2/6 · 2/6 · 0/5 · 2/6 · 0/6 |
 | Web recording | 0/4 (no lead) · 0/4 · 4/4 · 4/4 · 4/4 | 6/12 · 0/0 · 3/12 · 3/12 · 0/12 · 2/12 | 0/6 · 0/0 · 0/6 · 0/6 · 5/6 · 0/6 |
-| **total (7 runs)** | **0/28 · 0/28 · 24/28 · 28/28 · 28/28** | **44/84 · 24/48 · 25/84 · 12/84 · 0/84 · 10/84** | **0/42 · 5/18 · 10/41 · 8/39 · 26/41 · 0/42** |
+| CLI recording | 0/4 (no lead) · 0/4 · 4/4 · 4/4 · 4/4 | 6/12 · 7/12 · 1/12 · 3/12 · 0/12 · 2/12 | 0/6 · 2/6 · 4/6 · 0/5 · 3/6 · 0/6 |
+| **total (8 runs)** | **0/32 · 0/32 · 28/32 · 32/32 · 32/32** | **50/96 · 31/60 · 26/96 · 15/96 · 0/96 · 12/96** | **0/48 · 7/24 · 14/47 · 8/44 · 29/47 · 0/48** |
 
-Lead kept in memory: A 0/7 · B 7/7 · C 7/7 · D 7/7 · E 7/7. Answers left out as ∅ (MemoryRouter attached nothing): A 88/147 · B 16/147 · C 3/147 · D 1/147 · E 0/147. "Yes" on a ruled-out suspect with no verdict in memory (◇): no memory 5 · A 12 · B 38 · C 3 · D 0 · E 0.
+Lead kept in memory: A 0/8 · B 8/8 · C 8/8 · D 8/8 · E 8/8. Answers left out as ∅ (MemoryRouter attached nothing): A 88/168 · B 17/168 · C 4/168 · D 1/168 · E 0/168. "Yes" on a ruled-out suspect with no verdict in memory (◇): no memory 6 · A 19 · B 47 · C 3 · D 0 · E 0.
 
 ## Use it in your own app
 
@@ -245,7 +247,7 @@ Lead kept in memory: A 0/7 · B 7/7 · C 7/7 · D 7/7 · E 7/7. Answers left out
 - Don't rely on extraction for negative results. In this demo it kept the lead every time it saw it as text and kept
   the rule-outs only when the agent said them in so many words, and not always then.
 - Grade a "Yes" against what memory holds. A model answering a yes/no question with some memory attached says "Yes"
-  readily; B said it 38 times with no verdict in memory.
+  readily; B said it 47 times with no verdict in memory.
 
 ## Troubleshooting
 
