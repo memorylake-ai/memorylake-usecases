@@ -1,0 +1,40 @@
+{
+  "company": "Tindlewood Analytics",
+  "agent": "account assistant",
+  "project_name": "Tindlewood account assistant memory",
+  "priority": ["business", "enterprise"],
+  "v1_accounts": [
+    {"key": "corvane", "name": "Corvane Dental", "plan": "business", "seats": 40, "billing": "annual"},
+    {"key": "mistlow", "name": "Mistlow Roastery", "plan": "pro", "seats": 12, "billing": "monthly"},
+    {"key": "pelleth", "name": "Pelleth Logistics", "plan": "enterprise", "seats": 200, "billing": "annual"},
+    {"key": "quarrow", "name": "Quarrow Studio", "plan": "starter", "seats": 3, "billing": "monthly"},
+    {"key": "bramwick", "name": "Bramwick Legal", "plan": "pro", "seats": 18, "billing": "annual"},
+    {"key": "saltmere", "name": "Saltmere Clinic", "plan": "business", "seats": 55, "billing": "annual"},
+    {"key": "hollin", "name": "Hollin Freight", "plan": "starter", "seats": 5, "billing": "monthly"},
+    {"key": "dunmarsh", "name": "Dunmarsh Print", "plan": "pro", "seats": 9, "billing": "monthly"}
+  ],
+  "v1_changes": [
+    {"key": "mistlow", "plan": "business", "seats": 30, "when": "June", "why": "second roastery opened"},
+    {"key": "hollin", "plan": "pro", "seats": 15, "when": "August", "why": "added the dispatch team"}
+  ],
+  "v2_accounts": [
+    {"key": "wrenfield", "name": "Wrenfield Labs", "tier": "enterprise", "seats": 120, "billing": "annual"},
+    {"key": "ivelton", "name": "Ivelton Garden Co", "tier": "starter", "seats": 4, "billing": "monthly"},
+    {"key": "tollan", "name": "Tollan Yardworks", "tier": "business", "seats": 35, "billing": "annual"},
+    {"key": "ashcombe", "name": "Ashcombe Tutors", "tier": "pro", "seats": 10, "billing": "monthly"}
+  ],
+  "arms": {
+    "A": {"short": "A no migration", "title": "A · ship v2 code, no migration",
+          "how": "v2 code goes out; the 8 v1 records stay as they are; new accounts are written in the v2 shape only"},
+    "B": {"short": "B rename in place", "title": "B · rename in place",
+          "how": "each v1 record gets `fact update --metadata` with the v2 shape (`plan` → `tier`, + `billing`, `schema: 2`); the text is left alone"},
+    "C": {"short": "C expand & record", "title": "C · expand, then record",
+          "how": "one `fact update --text … --metadata …` per record: v2 keys next to the v1 key, the text in v2 wording with the v1 phrase kept, and `schema_history` with the v1 fields and the migration time; new accounts are written with both keys"}
+  },
+  "readers": {
+    "R1": {"name": "support router", "code": "v2", "reads": "metadata `tier`"},
+    "R2": {"name": "billing export", "code": "v1", "reads": "metadata `plan`"},
+    "R3": {"name": "ops search", "code": "v2", "reads": "`fact list --query \"tier <name>\"`"},
+    "R4": {"name": "saved search", "code": "v1", "reads": "`fact list --query \"plan <name>\"`"}
+  }
+}
