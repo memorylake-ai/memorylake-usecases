@@ -1,0 +1,304 @@
+{
+ "person": {
+  "key": "noor",
+  "display": "Noor Abadi",
+  "role": "Research analyst at Thornwick Policy Lab, writing a book chapter on remote work"
+ },
+ "assistant": {
+  "key": "bot",
+  "display": "Noor's assistant",
+  "role": "Noor's AI research assistant"
+ },
+ "project_name": "Noor's notes",
+ "today": "Monday 19 October 2026",
+ "instruction": "Remember Noor's research work: findings with their numbers, decisions, caveats, and preferences. Also remember every commitment Noor makes: each promise to another person, or task she says she will do, as its own fact with who it is for, what is owed, and the due date if one is given. Write every fact in English.",
+ "system": "Today is Monday 19 October 2026. You are Noor Abadi's AI research assistant. Answer from what you remember of her work, in one or two short sentences. If it is not in what you remember, say it is not recorded.",
+ "sessions": [
+  {
+   "id": "s1",
+   "name": "Mon 12 Oct",
+   "at": "2026-10-12T09:00:00Z",
+   "turns": [
+    {
+     "who": "noor",
+     "text": "Morning. Picking up the remote-work chapter. Where I am: the 2025 Ferrow Work Panel shows remote staff report 6.2 hours of focused work a day versus 4.9 for in-office staff. Last week we decided to use the panel data for the chapter, not the scraped job-board set."
+    },
+    {
+     "who": "bot",
+     "text": "Got it: panel data for the chapter, 6.2 versus 4.9 focused hours. What first?"
+    },
+    {
+     "who": "noor",
+     "text": "Outline first. Also, I told Mara I'd send her the literature review by Friday 23 October, so that has to fit in this week.",
+     "commits": [
+      "mara"
+     ]
+    },
+    {
+     "who": "bot",
+     "text": "Noted. Here is a draft outline: 1) the focus gap, 2) who gains, 3) the caveats.",
+     "logged": "Commitment logged: literature review to Mara, due Friday 23 October. Here is a draft outline: 1) the focus gap, 2) who gains, 3) the caveats.",
+     "logs": [
+      "mara"
+     ]
+    },
+    {
+     "who": "noor",
+     "text": "Good. After the outline I'll rerun the weighting with the 2024 census margins."
+    },
+    {
+     "who": "bot",
+     "text": "Understood."
+    }
+   ]
+  },
+  {
+   "id": "s2",
+   "name": "Wed 14 Oct",
+   "at": "2026-10-14T09:00:00Z",
+   "turns": [
+    {
+     "who": "noor",
+     "text": "Back on the chapter. The reweighted panel moves the gap a little: 6.0 versus 4.9 hours. A caveat to keep in the text: the panel under-samples shift workers."
+    },
+    {
+     "who": "bot",
+     "text": "Updated: 6.0 versus 4.9 after reweighting, with the shift-worker caveat."
+    },
+    {
+     "who": "noor",
+     "text": "I promised Tomas a one-page summary of the chapter before the steering meeting on 28 October. And I need to ask Ilse for the raw survey file.",
+     "commits": [
+      "tomas",
+      "ilse"
+     ]
+    },
+    {
+     "who": "bot",
+     "text": "Okay. Anything else for today?",
+     "logged": "Commitments logged: one-page chapter summary to Tomas, due before the steering meeting on 28 October; ask Ilse for the raw survey file (no date). Anything else for today?",
+     "logs": [
+      "tomas",
+      "ilse"
+     ]
+    },
+    {
+     "who": "noor",
+     "text": "I prefer APA citations in drafts. That's it for today."
+    },
+    {
+     "who": "bot",
+     "text": "Noted, APA in drafts."
+    }
+   ]
+  },
+  {
+   "id": "s3",
+   "name": "Fri 16 Oct",
+   "at": "2026-10-16T09:00:00Z",
+   "turns": [
+    {
+     "who": "noor",
+     "text": "Quick one today. Joss asked me to review the methods appendix for his chapter, and I said I'd get it back to him by Wednesday 21 October.",
+     "commits": [
+      "joss"
+     ]
+    },
+    {
+     "who": "bot",
+     "text": "Okay.",
+     "logged": "Commitment logged: review of Joss's methods appendix, due Wednesday 21 October.",
+     "logs": [
+      "joss"
+     ]
+    },
+    {
+     "who": "noor",
+     "text": "Also, the ethics office still needs the signed interview consent forms; I said I'd hand them in by 30 October.",
+     "commits": [
+      "ethics"
+     ]
+    },
+    {
+     "who": "bot",
+     "text": "Got it.",
+     "logged": "Commitment logged: signed interview consent forms to the ethics office, due 30 October.",
+     "logs": [
+      "ethics"
+     ]
+    },
+    {
+     "who": "noor",
+     "text": "One more finding for the notes: in the interviews, 9 of 14 managers said they track output, not hours."
+    },
+    {
+     "who": "bot",
+     "text": "Noted: 9 of 14 managers track output, not hours."
+    }
+   ]
+  }
+ ],
+ "commitments": [
+  {
+   "id": "mara",
+   "what": "Literature review → Mara",
+   "to": "Mara",
+   "item": "the literature review",
+   "due": "2026-10-23",
+   "due_text": "Fri 23 Oct",
+   "made": "2026-10-12",
+   "owed": true,
+   "who_re": "\\bMara\\b",
+   "topic_re": "literature|review|文献|综述|revisi[oó]n",
+   "record": "Commitment (made Mon 12 Oct 2026): Noor owes Mara the literature review, due Friday 23 October 2026."
+  },
+  {
+   "id": "tomas",
+   "what": "One-page summary → Tomas",
+   "to": "Tomas",
+   "item": "a one-page summary of the chapter",
+   "due": "2026-10-28",
+   "due_text": "Wed 28 Oct",
+   "made": "2026-10-14",
+   "owed": true,
+   "who_re": "\\bTomas\\b",
+   "topic_re": "summary|one-page|摘要|resumen",
+   "record": "Commitment (made Wed 14 Oct 2026): Noor owes Tomas a one-page summary of the chapter, due before the steering meeting on Wednesday 28 October 2026."
+  },
+  {
+   "id": "ilse",
+   "what": "Ask Ilse for raw survey file",
+   "to": "Ilse",
+   "item": "ask Ilse for the raw survey file",
+   "due": null,
+   "due_text": "no date",
+   "made": "2026-10-14",
+   "owed": false,
+   "who_re": "\\bIlse\\b",
+   "topic_re": "survey|raw|问卷|encuesta",
+   "record": "To-do (noted Wed 14 Oct 2026): Noor is to ask Ilse for the raw survey file; no due date was given."
+  },
+  {
+   "id": "joss",
+   "what": "Appendix review → Joss",
+   "to": "Joss",
+   "item": "a review of his methods appendix",
+   "due": "2026-10-21",
+   "due_text": "Wed 21 Oct",
+   "made": "2026-10-16",
+   "owed": true,
+   "who_re": "\\bJoss\\b",
+   "topic_re": "appendix|methods|附录|ap[eé]ndice",
+   "record": "Commitment (made Fri 16 Oct 2026): Noor owes Joss a review of his methods appendix, due Wednesday 21 October 2026."
+  },
+  {
+   "id": "ethics",
+   "what": "Consent forms → ethics office",
+   "to": "the ethics office",
+   "item": "the signed interview consent forms",
+   "due": "2026-10-30",
+   "due_text": "Fri 30 Oct",
+   "made": "2026-10-16",
+   "owed": true,
+   "who_re": "\\bethics\\b|伦理|[eé]tica",
+   "topic_re": "consent|同意书|consentimiento",
+   "record": "Commitment (made Fri 16 Oct 2026): Noor owes the ethics office the signed interview consent forms, due Friday 30 October 2026."
+  }
+ ],
+ "notes": [
+  {
+   "id": "gap",
+   "what": "Finding: 6.0 vs 4.9 h (reweighted)",
+   "re": "(?<![\\d.])6\\.0(?![\\d])"
+  },
+  {
+   "id": "panel",
+   "what": "Decision: panel data, not job-board set",
+   "re": "job.?board|scraped"
+  },
+  {
+   "id": "caveat",
+   "what": "Caveat: under-samples shift workers",
+   "re": "shift.?work|轮班"
+  },
+  {
+   "id": "apa",
+   "what": "Preference: APA citations",
+   "re": "\\bAPA\\b"
+  },
+  {
+   "id": "managers",
+   "what": "Finding: 9 of 14 managers track output",
+   "re": "\\b9 (?:of|out of) 14\\b|9/14"
+  }
+ ],
+ "questions": [
+  {
+   "id": "owe",
+   "kind": "list",
+   "what": "What do I owe people by end of Oct?",
+   "ask": "What do I owe other people before the end of October? List each item with who it is for and its due date."
+  },
+  {
+   "id": "q_mara",
+   "kind": "commit",
+   "target": "mara",
+   "what": "Mara's lit review — due when?",
+   "ask": "When is the literature review due to Mara?"
+  },
+  {
+   "id": "q_tomas",
+   "kind": "commit",
+   "target": "tomas",
+   "what": "What did I promise Tomas?",
+   "ask": "What did I promise Tomas, and by when?"
+  },
+  {
+   "id": "q_ilse",
+   "kind": "commit",
+   "target": "ilse",
+   "what": "What do I need from Ilse?",
+   "ask": "What do I still need to get from Ilse?"
+  },
+  {
+   "id": "q_joss",
+   "kind": "commit",
+   "target": "joss",
+   "what": "Joss's appendix — due when?",
+   "ask": "When is my review of Joss's methods appendix due?"
+  },
+  {
+   "id": "q_ethics",
+   "kind": "commit",
+   "target": "ethics",
+   "what": "Consent forms — due when?",
+   "ask": "When do the signed consent forms have to go to the ethics office?"
+  },
+  {
+   "id": "q_gap",
+   "kind": "control",
+   "target": "gap",
+   "what": "Control: remote focused hours",
+   "ask": "After reweighting, how many hours of focused work a day do remote staff report?",
+   "ok_re": "(?<![\\d.])6(?:\\.0)?(?![\\d.])(?! ?(?:of|out of) 14)",
+   "answer": "6.0 hours"
+  },
+  {
+   "id": "q_apa",
+   "kind": "control",
+   "target": "apa",
+   "what": "Control: citation style",
+   "ask": "Which citation style do I use in drafts?",
+   "ok_re": "\\bAPA\\b",
+   "made_re": "\\b(?:MLA|Chicago|Harvard|IEEE|Vancouver)\\b",
+   "answer": "APA"
+  },
+  {
+   "id": "q_none",
+   "kind": "reverse",
+   "what": "Reverse: a promise never made",
+   "ask": "Did I promise anyone a draft of the conclusion chapter?",
+   "answer": "no such promise"
+  }
+ ]
+}
