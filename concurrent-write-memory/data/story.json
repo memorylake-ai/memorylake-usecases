@@ -1,0 +1,67 @@
+{
+  "company": "Kesswick Labs",
+  "tool": "Tamsor",
+  "seats": 20,
+  "in_use_before": 12,
+  "today": "2026-10-19",
+  "project_name": "Tamsor seat pool",
+  "hires": [
+    {
+      "name": "Nadia Kerr",
+      "email": "nadia.kerr@kesswick.test",
+      "agent": "onboard-agent-1"
+    },
+    {
+      "name": "Omar Haddad",
+      "email": "omar.haddad@kesswick.test",
+      "agent": "onboard-agent-2"
+    },
+    {
+      "name": "Lena Moretti",
+      "email": "lena.moretti@kesswick.test",
+      "agent": "onboard-agent-3"
+    },
+    {
+      "name": "Ravi Iyer",
+      "email": "ravi.iyer@kesswick.test",
+      "agent": "onboard-agent-4"
+    },
+    {
+      "name": "Sofia Brandt",
+      "email": "sofia.brandt@kesswick.test",
+      "agent": "onboard-agent-5"
+    },
+    {
+      "name": "Tomas Okoro",
+      "email": "tomas.okoro@kesswick.test",
+      "agent": "onboard-agent-6"
+    }
+  ],
+  "arms": {
+    "A": {
+      "title": "A · one counter fact",
+      "how": "One fact holds the count. Each agent reads it (fact get), adds one, and writes it back (fact update) — the way a shared counter row works in a DIY store.",
+      "seed": [
+        "Kesswick Labs Tamsor seats: 12 of 20 in use."
+      ],
+      "write": "Kesswick Labs Tamsor seats: {n} of 20 in use (last assigned: {name} by {agent}).",
+      "short": "A  one counter fact"
+    },
+    "B": {
+      "title": "B · one record per assignment, the seat as subject",
+      "how": "Each agent adds its own record (fact add); the app knows the pool (20 seats, 12 in use before today) and counts the records. The record names the seat: “Tamsor seat assigned to …”.",
+      "seed": [],
+      "write": "Tamsor seat assigned to {email} by {agent}.",
+      "query": "Tamsor seat assigned to",
+      "short": "B  records, seat as subject"
+    },
+    "C": {
+      "title": "C · one record per assignment, the person as subject",
+      "how": "Each agent adds its own record (fact add); the app knows the pool (20 seats, 12 in use before today) and counts the records. The record names the person who holds a seat.",
+      "seed": [],
+      "write": "{name} ({email}) holds one of Kesswick Labs' 20 Tamsor seats; assigned by {agent} on 2026-10-19.",
+      "query": "holds one of Kesswick Labs' 20 Tamsor seats",
+      "short": "C  records, person as subject"
+    }
+  }
+}
