@@ -4,7 +4,10 @@ A runnable version of the MemoryLake use case
 [*Give Edge-Deployed AI Agents Memory That Works Offline and Syncs on Reconnect*](https://www.memorylake.ai/en/usecase/memory-for-edge-deployed-ai-agents),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 4:05](https://github.com/memorylake-ai/memorylake-usecases/releases/download/offline-sync-memory-v1/offline-sync-memory-cli-demo.mp4) · [Web, 3:45](https://github.com/memorylake-ai/memorylake-usecases/releases/download/offline-sync-memory-v1/offline-sync-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/offline-sync-memory-v1); GitHub serves them as downloads). Each video is one real run:
+in the CLI run the extractor wrote nothing from the replayed messages (two requests lost), in the Web run it rewrote
+the orders (5521 overwritten).
 
 **The problem.** An agent on a kiosk, a robot or a vehicle loses its connection. While it is offline it keeps
 answering from a local copy of its memory and writes down what people tell it. Meanwhile the cloud does not stand
@@ -82,10 +85,15 @@ previous run left behind first (`--reset` is accepted and does the same).
 python3 web/server.py                   # opens http://127.0.0.1:8765
 ```
 
-Paste the API key, press **Run demo**, and follow the steps: the orders, the snapshot, the offline window as it
+[Watch the browser run (3:45)](https://github.com/memorylake-ai/memorylake-usecases/releases/download/offline-sync-memory-v1/offline-sync-memory-web-demo.mp4). Paste the API key, press **Run demo**, and follow the steps: the orders, the snapshot, the offline window as it
 happens, the three syncs, and the score. The terminal drawer at the bottom shows every `memorylake` command as it
 runs. The server is standard library only and binds to localhost; the key stays in that process and in
 `.memorylake-demo/`.
+
+| | |
+|---|---|
+| ![Memory](web/screenshot-setup.png) | ![Offline for 70 seconds](web/screenshot-offline.png) |
+| ![Score](web/screenshot-score.png) | |
 
 ## What happens, step by step
 
@@ -192,25 +200,26 @@ result for the kiosk.
 
 ## Measured
 
-6 full runs: four in this directory (two terminal runs, one with `--reset`, and a browser run) and two copies run
-side by side with their own prefix. Every number comes from the saved reports (`out/runs/`).
+8 full runs: four in this directory (two terminal runs, one with `--reset`, and a browser run), two copies run side
+by side with their own prefix, and the two recorded runs (CLI from a fresh `git clone`, Web). Every number comes
+from the saved reports (`out/runs/`).
 
-| over 6 runs | A replay the transcript | B version check | C request vs last write |
+| over 8 runs | A replay the transcript | B version check | C request vs last write |
 |---|---|---|---|
-| orders current (of 24) | 16 | 18 | **24** |
-| runs with every order current | 0 of 6 | 0 of 6 | 6 of 6 |
-| order 5521 (kiosk first, HQ later) | Friday 4 · Saturday 2 | held, Saturday 6 | held, Saturday 6 |
-| order 5530 (HQ first, kiosk later) | Monday 4 · Wednesday 2 | **held, Wednesday 6** | Monday 6 |
-| order 5547 (kiosk only) | Sunday 4 · Saturday 2 | Sunday 6 | Sunday 6 |
+| orders current (of 32) | 21 | 24 | **32** |
+| runs with every order current | 0 of 8 | 0 of 8 | 8 of 8 |
+| order 5521 (kiosk first, HQ later) | Friday 5 · Saturday 3 | held, Saturday 8 | held, Saturday 8 |
+| order 5530 (HQ first, kiosk later) | Monday 5 · Wednesday 3 | **held, Wednesday 8** | Monday 8 |
+| order 5547 (kiosk only) | Sunday 5 · Saturday 3 | Sunday 8 | Sunday 8 |
 
 What the extractor did with the replayed messages:
 
-| over 6 runs | |
+| over 8 runs | |
 |---|---|
-| rewrote the orders' own facts ("…Friday 23 October (previously Saturday 24 October)") | 1 |
+| rewrote the orders' own facts ("…Friday 23 October (previously Saturday 24 October)") | 2 |
 | added a new fact per request beside the order's ("…was requested to be moved to Friday 23 October") | 3 |
-| wrote nothing (cook finished, three messages stored, 0 facts) — Mei's and Omar's requests lost | 2 (the two copies run side by side) |
-| the older request for 5521 ended up as what the kiosk reads, when it wrote anything | 4 of 4 |
+| wrote nothing (cook finished, three messages stored, 0 facts) — Mei's and Omar's requests lost | 3 (the two copies run side by side, and the recorded CLI run, alone) |
+| the older request for 5521 ended up as what the kiosk reads, whenever it wrote anything | 5 of 5 |
 
 Before the demo, a probe of the same shape (3 copies) gave the same answer 3 of 3 times, rewriting the order's own
 fact. A, B and C are measured, never assumed: the score reads each project back with `fact list` after the sync.

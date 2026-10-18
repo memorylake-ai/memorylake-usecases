@@ -825,8 +825,13 @@ def show_timeline(cli: CLI) -> None:
     emit("text", f"\n  kiosk-log project: {len(notes)} review note(s) written by B and C")
     for n in notes:
         emit("text", f"    {n}")
-    note("in A, the extractor's writes (COOK) land after HQ's (MANUAL) whatever time their messages carry: "
-         "it orders by arrival, not by the message's timestamp")
+    a_facts = project_facts(cli, world["projects"]["A"])
+    cooked = [f for f in a_facts if any(o["order"] in (f.get("fact") or "") for o in d["orders"])
+              and ((cli.run("fact", "trace", f["id"], "--project", world["projects"]["A"], scoped=True, echo=False)
+                    or {}).get("trace") or [{}])[0].get("source_kind") == "COOK"]
+    note("in A, the extractor's writes (COOK) landed after HQ's (MANUAL), whatever time their messages carry: "
+         "it orders by arrival, not by the message's timestamp" if cooked else
+         "in A, the extractor wrote nothing from the replayed messages this time: the customers' requests are not in memory")
 
 
 # --------------------------------------------------------------------------- cleanup
