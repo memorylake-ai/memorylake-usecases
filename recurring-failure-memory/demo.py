@@ -641,7 +641,11 @@ def precheck(cli: CLI, d: dict, world: dict) -> dict:
     a["trace_count"] = len(a["trace_dates"])
     a["trace_escalate"] = a["trace_count"] >= rule["threshold"]
     a["escalate"] = a["count"] >= rule["threshold"]
-    a["recovery"] = a["facts"][0]["text"] if a["facts"] else None
+    # What worked last: the facts the last extraction wrote (one cook can write two facts milliseconds apart, and the
+    # newer is not always the one with the recovery in it).
+    last = parse_ts(a["facts"][0]["updated_at"]) if a["facts"] else None
+    a["recovery"] = " | ".join(f["text"] or "" for f in a["facts"]
+                               if last and (last - parse_ts(f["updated_at"])).total_seconds() <= 5) or None
     emit("text", f"\n  A run log: {len(a['facts'])} fact(s) about it, dates written in them: {', '.join(a['dates']) or 'none'}")
     for f in a["facts"]:
         emit("text", textwrap.fill(f["text"] or "", 108, initial_indent="    · ", subsequent_indent="      "))
