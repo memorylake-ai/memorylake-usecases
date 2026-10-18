@@ -1,0 +1,30 @@
+{
+  "company": "Harlow Desk",
+  "project_name": "Harlow Desk support policies",
+  "policies": [
+    {"key": "annual_refund", "text": "Refund window for annual plans is 30 days from purchase."},
+    {"key": "monthly_refund", "text": "Monthly plans can be refunded within the first 7 days."},
+    {"key": "exports", "text": "Data exports are delivered as CSV within 24 hours."},
+    {"key": "support_hours", "text": "Support hours are 08:00-20:00 UTC on weekdays."},
+    {"key": "invoices", "text": "Enterprise invoices are payable net 45."},
+    {"key": "sso", "text": "SSO is available on the Business plan and above."}
+  ],
+  "questions": [
+    {"id": "Q1", "ask": "How long is the refund window for annual plans?", "match": ["annual", "refund"], "short": "annual refund window"},
+    {"id": "Q2", "ask": "Can a monthly plan be refunded?", "match": ["monthly"], "short": "monthly refunds"},
+    {"id": "Q3", "ask": "How fast are data exports delivered?", "match": ["export"], "short": "data export time"},
+    {"id": "Q4", "ask": "What are the support hours?", "match": ["support hours"], "short": "support hours"}
+  ],
+  "admin_edit": {"key": "annual_refund", "text": "Refund window for annual plans is 14 days from purchase.",
+                 "who": "Mara Ilves (support ops)", "why": "the admin tool saves the new refund policy"},
+  "billing_lead": {"key": "priya", "display": "Priya Nand", "role": "Billing lead, Harlow Desk"},
+  "channel": {"name": "billing-policy channel",
+              "text": "Priya Nand (billing lead, Harlow Desk): Finance update, effective today: the refund window for annual plans is now 21 days from purchase, and data exports now take up to 48 hours."},
+  "watch": ["annual_refund", "exports"],
+  "retire": {"key": "monthly_refund", "who": "Mara Ilves (support ops)", "why": "monthly plans are no longer refundable; the policy is retired"},
+  "arms": {
+    "A": {"short": "A TTL 15 min", "how": "keyed by question text; an entry is used for 15 minutes"},
+    "B": {"short": "B project version", "how": "every read first checks `proj get` → `updated_at`; same version as the entry → use it"},
+    "C": {"short": "C fact watermark", "how": "every read first checks `fact list --page-size 1` → (newest fact's `updated_at`, `total`); same → use it"}
+  }
+}
