@@ -200,26 +200,27 @@ result for the kiosk.
 
 ## Measured
 
-8 full runs: four in this directory (two terminal runs, one with `--reset`, and a browser run), two copies run side
-by side with their own prefix, and the two recorded runs (CLI from a fresh `git clone`, Web). Every number comes
+9 full runs: four in this directory (two terminal runs, one with `--reset`, and a browser run), two copies run side
+by side with their own prefix, the two recorded runs (CLI from a fresh `git clone`, Web), and one more terminal run
+after the recordings. Every number comes
 from the saved reports (`out/runs/`).
 
-| over 8 runs | A replay the transcript | B version check | C request vs last write |
+| over 9 runs | A replay the transcript | B version check | C request vs last write |
 |---|---|---|---|
-| orders current (of 32) | 21 | 24 | **32** |
-| runs with every order current | 0 of 8 | 0 of 8 | 8 of 8 |
-| order 5521 (kiosk first, HQ later) | Friday 5 · Saturday 3 | held, Saturday 8 | held, Saturday 8 |
-| order 5530 (HQ first, kiosk later) | Monday 5 · Wednesday 3 | **held, Wednesday 8** | Monday 8 |
-| order 5547 (kiosk only) | Sunday 5 · Saturday 3 | Sunday 8 | Sunday 8 |
+| orders current (of 36) | 24 | 27 | **36** |
+| runs with every order current | 0 of 9 | 0 of 9 | 9 of 9 |
+| order 5521 (kiosk first, HQ later) | Friday 6 · Saturday 3 | held, Saturday 9 | held, Saturday 9 |
+| order 5530 (HQ first, kiosk later) | Monday 6 · Wednesday 3 | **held, Wednesday 9** | Monday 9 |
+| order 5547 (kiosk only) | Sunday 6 · Saturday 3 | Sunday 9 | Sunday 9 |
 
 What the extractor did with the replayed messages:
 
-| over 8 runs | |
+| over 9 runs | |
 |---|---|
-| rewrote the orders' own facts ("…Friday 23 October (previously Saturday 24 October)") | 2 |
+| rewrote the orders' own facts ("…Friday 23 October (previously Saturday 24 October)") | 3 |
 | added a new fact per request beside the order's ("…was requested to be moved to Friday 23 October") | 3 |
 | wrote nothing (cook finished, three messages stored, 0 facts) — Mei's and Omar's requests lost | 3 (the two copies run side by side, and the recorded CLI run, alone) |
-| the older request for 5521 ended up as what the kiosk reads, whenever it wrote anything | 5 of 5 |
+| the older request for 5521 ended up as what the kiosk reads, whenever it wrote anything | 6 of 6 |
 
 Before the demo, a probe of the same shape (3 copies) gave the same answer 3 of 3 times, rewriting the order's own
 fact. A, B and C are measured, never assumed: the score reads each project back with `fact list` after the sync.
