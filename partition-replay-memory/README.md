@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Run Distributed Agent Fleets on Memory That Survives Network Partitions*](https://www.memorylake.ai/en/usecase/memory-for-distributed-agent-deployments),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 5:09](https://github.com/memorylake-ai/memorylake-usecases/releases/download/partition-replay-memory-v1/partition-replay-memory-cli-demo.mp4) · [Web, 5:47](https://github.com/memorylake-ai/memorylake-usecases/releases/download/partition-replay-memory-v1/partition-replay-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/partition-replay-memory-v1); GitHub serves them as downloads). Each video is one run; the numbers below add up all of them.
 
 **The problem.** A region loses its link to shared memory, keeps working, and journals its writes in a local outbox.
 When the link comes back it replays the outbox. Meanwhile the connected regions changed some of the same settings —
@@ -217,27 +218,28 @@ $ memorylake fact conflict resolve cfl-… --project proj-f999… --strategy kee
 
 ## Measured
 
-7 runs: three terminal runs (the third with `--reset` over a previous run's data), three parallel copies of the demo
-with their own `custom_id` prefix, and the browser run recorded for the Web video. Every number comes from the saved
-reports (`out/runs/`).
+8 runs: three terminal runs (the third with `--reset` over a previous run's data), three parallel copies of the demo
+with their own `custom_id` prefix, the browser run recorded for the Web video, and the run recorded for the CLI video
+(from a fresh `git clone`). Every number comes from the saved reports (`out/runs/`) and, for the CLI video, its
+screen.
 
 | | A replay as-is | B replay as new facts | C replay only if unchanged |
 |---|---|---|---|
-| fields right | 4/6 in 7 of 7 runs | 4/6 in 7 of 7 (after resolving) | 6/6 in 7 of 7 |
-| us-east changes kept | 0 of 14 | 0 of 14 | 14 of 14 |
-| eu-west changes that only it made, applied | 14 of 14 | 14 of 14 | 14 of 14 |
-| conflicts raised | 0 | 4 per run (28): 14 real, 14 only stale | 0 |
-| sent to a person | 0 | 28 | 14 held, all real |
+| fields right | 4/6 in 8 of 8 runs | 4/6 in 8 of 8 (after resolving) | 6/6 in 8 of 8 |
+| us-east changes kept | 0 of 16 | 0 of 16 | 16 of 16 |
+| eu-west changes that only it made, applied | 16 of 16 | 16 of 16 | 16 of 16 |
+| conflicts raised | 0 | 4 per run (32): 16 real, 16 only stale | 0 |
+| sent to a person | 0 | 32 | 16 held, all real |
 
 - **A overwrote both of us-east's changes in every run, with no error and no conflict.** The trace named the replaced
   value each time.
-- **B's conflicts appeared 9–13 s after the last add** (the first ones); in the six terminal runs all four were there by the second check, at 26–30 s. Names and
+- **B's conflicts appeared 9–14 s after the last add** (the first ones); in the six terminal runs all four were there by the second check, at 26–30 s. Names and
   descriptions are written by a model and differ from run to run (“Failover gateway mismatch”, “Payment gateway
   failover target mismatch”, …); the field each one covers did not. Keeping the newest fact kept eu-west's value in
-  28 of 28 resolutions — right for the 14 fields only eu-west changed, wrong for all 14 where us-east's later decision
+  32 of 32 resolutions — right for the 16 fields only eu-west changed, wrong for all 16 where us-east's later decision
   was forgotten.
-- **C held exactly the two fields us-east had changed, in 7 of 7 runs**, and its `fact trace` check after each write
-  found the write had replaced the text eu-west read every time (14 of 14). That check is for a write that slips in
+- **C held exactly the two fields us-east had changed, in 8 of 8 runs**, and its `fact trace` check after each write
+  found the write had replaced the text eu-west read every time (16 of 16). That check is for a write that slips in
   between `fact get` and `fact update`; it never fired here.
 
 ## Use it in your own agents
