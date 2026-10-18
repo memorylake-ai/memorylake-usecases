@@ -1,0 +1,64 @@
+{
+  "company": "Tollquay Freight",
+  "agent": "quote agent",
+  "project_name": "Tollquay quote agent memory",
+  "rules": [
+    {"key": "R-WEIGHT", "topic": "weight", "kind": "rule", "applies_to": "all", "op": "max", "value": 30, "unit": "kg", "status": "active",
+     "text": "Weight: parcels up to 30 kg ship on the standard service."},
+    {"key": "R-WEIGHT-FRG", "topic": "weight", "kind": "rule", "applies_to": "fragile", "op": "max", "value": 20, "unit": "kg", "status": "active",
+     "text": "Weight, fragile: fragile parcels up to 20 kg ship on the standard service."},
+    {"key": "R-LITH", "topic": "batteries", "kind": "rule", "applies_to": "loose", "op": "never", "status": "active",
+     "text": "Batteries: loose lithium batteries never ship."},
+    {"key": "R-LITH-INST", "topic": "batteries", "kind": "rule", "applies_to": "installed", "op": "always", "status": "active",
+     "text": "Batteries: lithium batteries installed in equipment ship on the standard service."},
+    {"key": "R-CUTOFF", "topic": "same_day", "kind": "rule", "applies_to": "all", "op": "max", "value": 14, "unit": "hour", "status": "active",
+     "text": "Same-day pickup: bookings made by 14:00 are picked up the same day."},
+    {"key": "R-CUTOFF-SAT", "topic": "same_day", "kind": "rule", "applies_to": "saturday", "op": "max", "value": 11, "unit": "hour", "status": "active",
+     "text": "Same-day pickup, Saturday: bookings made by 11:00 are picked up the same day."},
+    {"key": "R-VALUE", "topic": "declared_value", "kind": "rule", "applies_to": "all", "op": "max", "value": 5000, "unit": "dollars", "status": "active",
+     "text": "Declared value: we cover parcels declared at up to 5000 dollars."},
+    {"key": "R-REMOTE", "topic": "remote_zone", "kind": "rule", "applies_to": "all", "op": "always", "status": "draft",
+     "text": "Remote zones: deliveries to remote postcodes carry a 12 dollar surcharge."},
+    {"key": "R-LIQUID", "topic": "liquids", "kind": "rule", "applies_to": "all", "op": "min", "value": 3, "unit": "packaging grade", "status": "active",
+     "text": "Liquids: liquids ship in packaging graded 3 or higher."}
+  ],
+  "tests": [
+    {"id": "T1", "topic": "weight", "category": "standard", "x": 30, "expect": "Yes", "boundary": true,
+     "ask": "A 30 kg parcel: standard service?"},
+    {"id": "T2", "topic": "weight", "category": "fragile", "x": 18, "expect": "Yes",
+     "ask": "An 18 kg fragile parcel: standard service?"},
+    {"id": "T3", "topic": "batteries", "category": "loose", "x": 0, "expect": "No",
+     "ask": "A box of loose lithium batteries: can it ship?"},
+    {"id": "T4", "topic": "batteries", "category": "installed", "x": 0, "expect": "Yes",
+     "ask": "A drill with its battery installed: can it ship?"},
+    {"id": "T5", "topic": "same_day", "category": "weekday", "x": 14, "expect": "Yes", "boundary": true,
+     "ask": "Booked at 14:00 on a Tuesday: same-day pickup?"},
+    {"id": "T6", "topic": "same_day", "category": "saturday", "x": 12, "expect": "No",
+     "ask": "Booked at 12:00 on a Saturday: same-day pickup?"},
+    {"id": "T7", "topic": "declared_value", "category": "artwork", "x": 1500, "expect": "Yes",
+     "ask": "A framed print declared at 1500 dollars: covered?"},
+    {"id": "T8", "topic": "remote_zone", "category": "remote", "x": 0, "expect": "No record",
+     "ask": "A delivery to a remote postcode: is there a surcharge?"}
+  ],
+  "changes": [
+    {"key": "R-WEIGHT", "do": "text+meta", "who": "Imke (ops)", "text": "Weight: parcels up to 25 kg ship on the standard service; heavier parcels go as freight.", "meta": {"value": 25}, "why": "new van fleet: 30 → 25 kg"},
+    {"key": "R-CUTOFF-SAT", "do": "text+meta", "who": "Imke (ops)", "text": "Same-day pickup, Saturday: bookings made by 12:00 are picked up the same day.", "meta": {"value": 12}, "why": "Saturday shift extended: 11:00 → 12:00"},
+    {"key": "R-REMOTE", "do": "meta", "who": "Dario (pricing)", "meta": {"status": "active"}, "why": "remote surcharge approved (metadata only)"},
+    {"key": "R-VALUE", "do": "text", "who": "Ana (support)", "text": "Declared value: cover applies to parcels declared at up to 5000 dollars, proof of value required.", "why": "wording: proof of value"},
+    {"key": "R-VALUE-ART", "do": "add", "who": "Dario (pricing)", "rule": {"key": "R-VALUE-ART", "topic": "declared_value", "kind": "rule", "applies_to": "artwork", "op": "max", "value": 1000, "unit": "dollars", "status": "active",
+      "text": "Declared value, artwork: artwork is covered up to 1000 dollars."}, "why": "new rule for artwork"}
+  ],
+  "regression": {
+    "version": "v2",
+    "commit": "refactor: share one compare() for max and min",
+    "bug": "max rules compare with < instead of <=, so a value exactly at the limit is refused"
+  },
+  "strategies": {
+    "A": {"short": "A live memory", "title": "A · no fixture: read live memory",
+          "how": "the tests read today's `fact list` at test time"},
+    "B": {"short": "B pinned ids", "title": "B · pin the fact ids",
+          "how": "at pin time the fixture saves the 9 fact ids (fixtures/ids.json); the tests load each id with `fact get`; the fixture check is: every pinned id still resolves"},
+    "C": {"short": "C pinned content", "title": "C · pin the content",
+          "how": "at pin time the fixture saves every fact as read: id, text, metadata, updated_at and a sha256 of the three (fixtures/snapshot.json); the tests read only this file; a separate drift check compares it with live memory and does not fail the build"}
+  }
+}
