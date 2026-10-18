@@ -1,0 +1,63 @@
+{
+  "saas": "Minutely",
+  "org": "Quillfold",
+  "account": "acct_7f3a91c2",
+  "today": "2026-10-17",
+  "signup_note": "Our AI team's weekly eval sync. Keep every metric reading we say in these meetings as its own fact: what was measured, the exact number and its unit, and the meeting date. Write every fact in English.",
+  "system": "You are Quillfold's meeting assistant, built into Minutely. Answer from what the team's meetings left in memory, in one short sentence. Give the number with its unit, or say Unknown if it is not remembered.",
+  "people": [
+    {"key": "ml", "display": "Priya Natarajan", "role": "ML lead, Quillfold"},
+    {"key": "eng", "display": "Jonah Park", "role": "Engineering lead, Quillfold"}
+  ],
+  "meetings": [
+    {"id": "m1", "name": "Eval sync 1 Oct", "at": "2026-10-01T09:00:00Z"},
+    {"id": "m2", "name": "Eval sync 8 Oct", "at": "2026-10-08T09:00:00Z"},
+    {"id": "m3", "name": "Eval sync 15 Oct", "at": "2026-10-15T09:00:00Z"}
+  ],
+  "lines": [
+    {"id": "reranker", "meeting": "m1", "speaker": "ml", "kind": "reading", "what": "Reranker recall at 10",
+     "text": "Recall at 10 for the new reranker came in at 0.81.", "value": "0.81", "value_re": "(?<![\\d.])0?\\.81\\b",
+     "ask": "What recall at 10 did the new reranker get?"},
+    {"id": "latency", "meeting": "m1", "speaker": "eng", "kind": "reading", "what": "Smaller model p95 latency",
+     "text": "p95 latency on the smaller model came in at 1,140 milliseconds.", "value": "1,140 ms", "value_re": "\\b1,?140\\b|\\b1\\.14 ?s",
+     "ask": "What was the p95 latency on the smaller model?"},
+    {"id": "cache", "meeting": "m1", "speaker": "ml", "kind": "reading", "what": "Response cache hit rate",
+     "text": "The response cache hit rate came in at 52 percent.", "value": "52%", "value_re": "(?<![\\d.])52\\b",
+     "ask": "What hit rate did the response cache get?"},
+    {"id": "compaction", "meeting": "m1", "speaker": "eng", "kind": "reading", "what": "Token cost with compaction",
+     "text": "Token cost per session with the compaction job came in at 2.6 cents.", "value": "2.6 cents", "value_re": "(?<![\\d.])2\\.6\\b",
+     "ask": "What was the token cost per session with the compaction job?"},
+    {"id": "rerun", "meeting": "m1", "speaker": "eng", "kind": "action", "what": "Action: rerun latency eval",
+     "text": "I will rerun the latency eval on the larger GPU pool before next week's sync.", "topic_re": "rerun|larger GPU|GPU pool"},
+
+    {"id": "router", "meeting": "m2", "speaker": "ml", "kind": "reading", "what": "Tool router v2 error rate",
+     "text": "The tool-call error rate on tool router v2 came in at 3.7 percent.", "value": "3.7%", "value_re": "(?<![\\d.])3\\.7\\b",
+     "ask": "What was the tool-call error rate on tool router v2?"},
+    {"id": "longtask", "meeting": "m2", "speaker": "eng", "kind": "reading", "what": "Long-session task success",
+     "text": "Task success on long sessions without the summarization buffer came in at 79 percent.", "value": "79%", "value_re": "(?<![\\d.])79\\b",
+     "ask": "What was task success on long sessions without the summarization buffer?"},
+    {"id": "grounded", "meeting": "m2", "speaker": "ml", "kind": "reading", "what": "Grounded-answer hallucination rate",
+     "text": "The hallucination rate on grounded answers came in at 4.2 percent.", "value": "4.2%", "value_re": "(?<![\\d.])4\\.2\\b",
+     "ask": "What was the hallucination rate on grounded answers?"},
+    {"id": "ttft", "meeting": "m2", "speaker": "eng", "kind": "reading", "what": "Median time to first token",
+     "text": "Median time to first token came in at 640 milliseconds.", "value": "640 ms", "value_re": "(?<![\\d.])640\\b|\\b0\\.64 ?s",
+     "ask": "What was the median time to first token?"},
+    {"id": "billing", "meeting": "m2", "speaker": "ml", "kind": "action", "what": "Action: add billing conversations",
+     "text": "I will add 300 billing conversations to the eval set this week.", "topic_re": "billing conversations|300 billing"},
+
+    {"id": "escalation", "meeting": "m3", "speaker": "ml", "kind": "reading", "what": "Escalation precision",
+     "text": "Escalation precision on the new classifier came in at 0.68.", "value": "0.68", "value_re": "(?<![\\d.])0?\\.68\\b",
+     "ask": "What escalation precision did the new classifier get?"},
+    {"id": "refund", "meeting": "m3", "speaker": "eng", "kind": "reading", "what": "Refund-policy answer accuracy",
+     "text": "Accuracy on refund-policy questions came in at 92 percent.", "value": "92%", "value_re": "(?<![\\d.])92\\b",
+     "ask": "What was the accuracy on refund-policy questions?"},
+    {"id": "ticketcost", "meeting": "m3", "speaker": "ml", "kind": "reading", "what": "Cost per resolved ticket",
+     "text": "Cost per resolved ticket came in at 38 cents.", "value": "38 cents", "value_re": "(?<![\\d.])38\\b|\\$?0?\\.38\\b",
+     "ask": "What was the cost per resolved ticket?"},
+    {"id": "context", "meeting": "m3", "speaker": "eng", "kind": "reading", "what": "Context window utilization",
+     "text": "Context window utilization came in at 71 percent.", "value": "71%", "value_re": "(?<![\\d.])71\\b",
+     "ask": "What was the context window utilization?"},
+    {"id": "writeup", "meeting": "m3", "speaker": "eng", "kind": "action", "what": "Action: cost write-up",
+     "text": "I will write up the cost findings for Friday's review.", "topic_re": "write[ -]?up|cost findings|Friday"}
+  ]
+}
