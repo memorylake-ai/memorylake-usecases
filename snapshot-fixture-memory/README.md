@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Test Agents Reliably With Memory Snapshots You Can Pin and Replay*](https://www.memorylake.ai/en/usecase/memory-snapshotting-for-agent-testing),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 1:25](https://github.com/memorylake-ai/memorylake-usecases/releases/download/snapshot-fixture-memory-v1/snapshot-fixture-memory-cli-demo.mp4) · [Web, 1:57](https://github.com/memorylake-ai/memorylake-usecases/releases/download/snapshot-fixture-memory-v1/snapshot-fixture-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/snapshot-fixture-memory-v1); GitHub serves them as downloads). Each video is one real run.
 
 **The problem.** An agent that reads memory has tests that read memory. Point them at live memory and they turn red
 whenever a teammate edits a rule — no code changed, the build is "flaky". The usual fix is a fixture: pin the facts
@@ -182,9 +183,20 @@ Prints each difference between the pin and live memory with both versions side b
 
 ## Measured
 
-Runs so far: three terminal runs (the second over the first's leftovers, the third with `--reset`) and one browser
-run. Every run gave the same table above; the first terminal run took 22 s. All writes go through the API with fixed
-texts and metadata (no extraction from conversations, no search ranking), so nothing depends on a model.
+5 runs: three terminal runs (the second over the first's leftovers, the third with `--reset`), the browser run
+recorded for the Web video, and the run recorded for the CLI video (from a fresh `git clone`). Every number comes from
+the saved reports (`out/runs/`); all 5 gave the same results test by test.
+
+| over 5 runs | A live memory | B pinned ids | C pinned content |
+|---|---|---|---|
+| tests flipped in CI #2 (code unchanged) | 20 of 40 | 15 of 40 | 0 of 40 |
+| fixture check passed in CI #2 | (none) | 5 of 5 (9/9 ids every time) | 5 of 5 (sha256), drift 5 changes every time |
+| regression tests that caught the CI #3 bug | 5 of 10 | 5 of 10 | 10 of 10 |
+| CI #3 reds the code did not cause | 15 | 10 | 0 |
+| tests the bug turned green | 5 (T6) | 5 (T6) | 0 |
+
+The first terminal run took 22 s. All writes go through the API with fixed texts and metadata (no extraction from
+conversations, no search ranking), so nothing depends on a model.
 
 ## Use it in your own agents
 
