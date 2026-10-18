@@ -1,0 +1,31 @@
+{
+  "company": "Copperleaf Billing",
+  "agent": {"key": "tally", "display": "Tally (nightly billing agent)", "role": "Nightly billing agent at Copperleaf Billing"},
+  "log_project_name": "Copperleaf nightly billing runs",
+  "records_project_name": "Copperleaf tool failure records",
+  "rule": {"threshold": 3, "window_days": 7,
+           "text": "the same tool failing with the same error 3 or more times in 7 days is not bad luck: stop retrying, open a systematic fix"},
+  "watch": {"tool": "export_invoices", "api": "Ledgerline API", "error": "HTTP 429", "label": "export_invoices → HTTP 429"},
+  "tonight": {"run": 47, "date": "2026-10-18", "tool": "export_invoices", "api": "Ledgerline API"},
+  "runs": [
+    {"run": 41, "date": "2026-10-12", "tool": "export_invoices", "api": "Ledgerline API", "error": "HTTP 429 (rate limited)", "where": "batch 3 of 8",
+     "recovery": "waited 30 seconds and resent in batches of 50 instead of 200", "outcome": "the export completed", "worked": true},
+    {"run": 42, "date": "2026-10-13", "tool": "fetch_fx_rates", "api": "Ratebook API", "error": "timed out after 20 seconds", "where": "",
+     "recovery": "retried once with a 60 second timeout", "outcome": "it succeeded", "worked": true},
+    {"run": 43, "date": "2026-10-14", "tool": "export_invoices", "api": "Ledgerline API", "error": "HTTP 429 (rate limited)", "where": "batch 5 of 8",
+     "recovery": "waited 30 seconds and resent in batches of 50", "outcome": "the export completed", "worked": true},
+    {"run": 44, "date": "2026-10-15", "tool": "send_reminders", "api": "Mailbird API", "error": "HTTP 429 (rate limited)", "where": "message 120 of 300",
+     "recovery": "waited 60 seconds and resumed from message 120", "outcome": "all reminders went out", "worked": true},
+    {"run": 45, "date": "2026-10-16", "tool": "export_invoices", "api": "Ledgerline API", "error": "HTTP 429 (rate limited)", "where": "batch 2 of 9",
+     "recovery": "waited 30 seconds and resent in batches of 50", "outcome": "the export completed", "worked": true},
+    {"run": 46, "date": "2026-10-17", "tool": "export_invoices", "api": "Ledgerline API", "error": "HTTP 429 (rate limited)", "where": "batch 4 of 8",
+     "recovery": "waiting 30 seconds and resending in batches of 50 did not help; switched to batches of 20", "outcome": "the export completed only after the switch", "worked": true,
+     "worked_with": "batches of 20"}
+  ],
+  "arms": {
+    "A": {"short": "A run log",
+          "how": "each night's run log goes to a conversation on the runs project; MemoryLake's extractor turns it into memory"},
+    "B": {"short": "B failure records",
+          "how": "the tool error handler writes one typed record per failure: `fact add` + `fact update --metadata` {run, date, tool, error, recovery, outcome}"}
+  }
+}
