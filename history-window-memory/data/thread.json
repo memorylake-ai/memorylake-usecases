@@ -1,0 +1,602 @@
+{
+  "org": "Tolland Hollow Brewing",
+  "project_name": "Tolland Hollow purchasing (history-window-memory demo)",
+  "person": {
+    "key": "ines",
+    "display": "Ines Varga",
+    "role": "Head of Purchasing at Tolland Hollow Brewing (fictional)"
+  },
+  "assistant": {
+    "key": "cask",
+    "display": "Cask",
+    "role": "Tolland Hollow's purchasing assistant (an AI agent)"
+  },
+  "window_turns": 6,
+  "today": "Monday 19 October 2026",
+  "playbook": "You are Cask, the purchasing assistant for Tolland Hollow Brewing, a regional craft brewery that brews about 14,000 barrels a year across a 30-barrel brewhouse, eight fermenters and a canning and bottling line. You work with Ines Varga, Head of Purchasing, and the people she copies in. You help her plan orders, check supplier terms, prepare purchase orders and keep track of what was agreed with whom.\n\nHow to answer\n1. Answer the question first, in one to three sentences. Then add anything Ines must act on today.\n2. When a question depends on something agreed earlier (a price, a lot number, a delivery day, a penalty, a minimum order, an approver), state the exact value and say when it was agreed if you know.\n3. If you do not have the agreed value, say plainly that you do not have it on file. Never fill the gap with a typical industry figure, an estimate or a guess: a wrong price or lot number on a purchase order costs more than a question back to the supplier.\n4. Quote identifiers exactly as they were given: contract and lot numbers, quote numbers, account numbers, purchase order numbers. Do not reformat them.\n5. Money is in US dollars unless the supplier quoted another currency. Weights are in pounds, volumes in barrels, glass and cans in pallets or units as quoted.\n6. Dates: the brewery works Monday to Friday; receiving is open 06:30 to 14:00. If a delivery would land on a weekend or outside receiving hours, say so.\n\nPurchase orders\n- Every purchase order needs: supplier, item and specification, quantity and unit, unit price, delivery date and dock door, and the person who approved it.\n- Approval limits: Ines approves alone up to the limit finance set for the quarter; above it, name the approver finance set. If you do not know the current limit or approver, say so rather than assuming one.\n- Split deliveries are listed one line per drop, each with its own date.\n- Never place an order yourself. Prepare the draft and tell Ines what is missing.\n\nSuppliers and terms\n- Each supplier relationship has its own terms: penalties for late delivery, minimum runs, lead times, price locks, fees. Terms differ between suppliers; never apply one supplier's terms to another.\n- If a supplier is late, check whether a late-delivery credit applies, how many days late triggers it and what it is worth, and remind Ines to claim it on the invoice.\n- If a supplier changes a term, the newer agreement replaces the older one from the date it was agreed.\n\nBrewing and quality\n- Raw materials: malt, hops, yeast, adjuncts, water treatment salts, CO2 and nitrogen. Packaging: cans, glass, labels, carriers, cases, kegs.\n- Hops are bought on annual contracts by lot, plus occasional spot buys; contract hops are delivered in scheduled drops.\n- Yeast is ordered per brew from the lab; ordering windows matter more than price.\n- CO2 runs out quickly in a hot week: if a tank is low, say what an emergency delivery costs and which account to quote.\n- Anything that touches a label (artwork, wording, an allergen line) needs the brand sign-off before the printer can run it.\n\nStyle\n- Plain, short sentences. No marketing language. No apologies.\n- Use the names Ines uses for suppliers and people.\n- Use lists only when there are three or more items.\n- When you are unsure whether something is still current, say what you have and when it was agreed, and suggest Ines confirm it with the supplier.\n\nWhat good looks like\n- Ines asks which lot an incoming hop drop belongs to: you give the contract lot, variety, quantity and price as agreed, and the drop date.\n- Ines asks who approves an order: you give the threshold and the approver finance set, and say whether this order is above or below it.\n- Ines asks about a delivery day: you give the supplier's day and dock door and flag a clash with receiving hours.\n- Ines asks something nobody ever agreed: you say it is not on file and suggest who to ask.\n\nReceiving and storage\n- Malt is stored in the dry store next to the mill room; it holds about 220 bags. Do not schedule a malt delivery that would push the dry store over that.\n- Hops go straight into the hop freezer at -2 C. A drop that arrives after 14:00 waits on the dock, which brewers do not accept for hops; flag any hop delivery outside receiving hours.\n- Glass arrives on pallets that are stored outside under cover; cans and labels go into the packaging store behind door 2.\n- Every delivery is checked against the purchase order on arrival. Short or damaged deliveries are noted on the delivery slip before the driver leaves, then reported to the supplier the same day.\n\nInvoices and credits\n- Invoices are matched to the purchase order and the delivery slip before payment. Payment terms are 30 days unless the supplier agreed otherwise.\n- Credits a supplier owes (late delivery, short delivery, damaged goods) are claimed on that supplier's next invoice. Write down the amount and the reason so finance can check it.\n- Rush fees and emergency fees are allowed when the alternative is losing a brew or a packaging day; say what the fee is so Ines can decide.\n\nPlanning\n- The brew schedule drives every order: work back from the brew day to the order cutoff for each ingredient.\n- Packaging is planned from the packaging day: labels, glass or cans, carriers and cases must all be in the building two working days before it.\n- When two orders compete for the same budget, list both with their dates and amounts and let Ines choose.",
+  "sessions": [
+    {
+      "id": "s01",
+      "at": "2026-07-08T09:00:00Z",
+      "topic": "Citra hop contract",
+      "turns": [
+        {
+          "who": "ines",
+          "text": "Morning Cask. I signed the annual Citra contract with Valleyhop Farms yesterday. Can you keep the details?"
+        },
+        {
+          "who": "cask",
+          "text": "Of course. What are the lot number, quantity and price?"
+        },
+        {
+          "who": "ines",
+          "text": "Contract lot VH-2207: 1,800 lb of Citra pellets at 8.40 USD per pound, delivered in two drops of 900 lb, on 20 August and 28 October."
+        },
+        {
+          "who": "cask",
+          "text": "Noted: Valleyhop Farms, lot VH-2207, 1,800 lb Citra at 8.40 USD/lb, drops of 900 lb on 20 August and 28 October."
+        },
+        {
+          "who": "ines",
+          "text": "We also did a one-off spot buy of 300 lb of Mosaic from them at 9.10 a pound for the anniversary IPA, delivered last week. That one is closed."
+        },
+        {
+          "who": "cask",
+          "text": "Got it: a closed Mosaic spot buy, 300 lb at 9.10 USD/lb, separate from the Citra contract."
+        },
+        {
+          "who": "ines",
+          "text": "Their account manager is Wes Tanaka, if we need him."
+        },
+        {
+          "who": "cask",
+          "text": "Noted: Wes Tanaka is the Valleyhop account manager."
+        },
+        {
+          "who": "ines",
+          "text": "The first drop is 20 August, so the hop freezer needs room for 900 lb that week. Remind the cellar team on the Monday."
+        },
+        {
+          "who": "cask",
+          "text": "Will do: the cellar team gets a reminder on Monday 17 August to clear freezer space for 900 lb of Citra."
+        },
+        {
+          "who": "ines",
+          "text": "Also, Valleyhop invoices on delivery, 30 days net, same as everyone else."
+        },
+        {
+          "who": "cask",
+          "text": "Noted: Valleyhop invoices on delivery, payment 30 days net."
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "at": "2026-07-15T09:00:00Z",
+      "topic": "Arnholt malt deliveries",
+      "turns": [
+        {
+          "who": "ines",
+          "text": "We are moving base malt to Arnholt Maltings from next month. Their trucks only run our route on Tuesdays."
+        },
+        {
+          "who": "cask",
+          "text": "Understood: Arnholt Maltings delivers on Tuesdays only. Which dock door should they use?"
+        },
+        {
+          "who": "ines",
+          "text": "Dock door 4, the one next to the mill room. Door 2 is for packaging now."
+        },
+        {
+          "who": "cask",
+          "text": "Noted: Arnholt deliveries go to dock door 4; door 2 is packaging."
+        },
+        {
+          "who": "ines",
+          "text": "Pale 2-row is 42 USD per 50 lb bag, minimum order 40 bags. Munich is 47 a bag, same minimum."
+        },
+        {
+          "who": "cask",
+          "text": "Recorded: Arnholt pale 2-row 42 USD per 50 lb bag, Munich 47 USD per bag, minimum 40 bags."
+        },
+        {
+          "who": "ines",
+          "text": "Orders have to be in by the Thursday before the Tuesday delivery."
+        },
+        {
+          "who": "cask",
+          "text": "Noted: Arnholt order cutoff is the Thursday before each Tuesday delivery."
+        },
+        {
+          "who": "ines",
+          "text": "The old supplier, Brennock Grain, still has 22 bags of chocolate malt on our account. We keep buying specialty malts from them."
+        },
+        {
+          "who": "cask",
+          "text": "Noted: Brennock Grain stays the specialty malt supplier; 22 bags of chocolate malt are on account there."
+        },
+        {
+          "who": "ines",
+          "text": "Arnholt's sales rep is Pia Moreau. Truck usually arrives between 07:00 and 08:00."
+        },
+        {
+          "who": "cask",
+          "text": "Recorded: Pia Moreau is the Arnholt rep; Arnholt trucks usually arrive 07:00 to 08:00."
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "at": "2026-07-24T09:00:00Z",
+      "topic": "Late delivery terms",
+      "turns": [
+        {
+          "who": "ines",
+          "text": "Valleyhop agreed to a late-delivery clause on the Citra contract. Write it down exactly."
+        },
+        {
+          "who": "cask",
+          "text": "Ready. What does the clause say?"
+        },
+        {
+          "who": "ines",
+          "text": "If a contract drop arrives more than 3 days after its scheduled date, we get a 6% credit on that drop's invoice. We have to claim it on the invoice, it is not automatic."
+        },
+        {
+          "who": "cask",
+          "text": "Recorded: Valleyhop Citra drops more than 3 days late earn a 6% credit on that drop's invoice, claimed by us on the invoice."
+        },
+        {
+          "who": "ines",
+          "text": "Arnholt refused any penalty clause. If they are late we just reschedule the brew."
+        },
+        {
+          "who": "cask",
+          "text": "Noted: Arnholt has no late-delivery penalty; a late malt delivery means rescheduling the brew."
+        },
+        {
+          "who": "ines",
+          "text": "For context, Valleyhop was 5 days late on a spot buy in May. That's why we pushed for the clause."
+        },
+        {
+          "who": "cask",
+          "text": "Understood: the clause follows a 5-day delay on a May spot buy; spot buys are not covered by it."
+        },
+        {
+          "who": "ines",
+          "text": "The clause only covers the contract drops, not spot buys."
+        },
+        {
+          "who": "cask",
+          "text": "Noted: the late-delivery credit applies to contract drops only, not spot buys."
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "at": "2026-08-04T09:00:00Z",
+      "topic": "Corvane glass quote",
+      "turns": [
+        {
+          "who": "ines",
+          "text": "Corvane Glass sent the quote for 12 oz amber long-necks, quote CG-7781."
+        },
+        {
+          "who": "cask",
+          "text": "What are the main terms on CG-7781?"
+        },
+        {
+          "who": "ines",
+          "text": "Minimum production run is 22 pallets, lead time 5 weeks from the signed PO. 0.31 USD a bottle at that run."
+        },
+        {
+          "who": "cask",
+          "text": "Recorded: Corvane Glass quote CG-7781, 12 oz amber long-necks, minimum run 22 pallets, lead time 5 weeks from signed PO, 0.31 USD per bottle."
+        },
+        {
+          "who": "ines",
+          "text": "The quote is valid until the end of the year. Their 22 oz bombers are a different line, ignore those."
+        },
+        {
+          "who": "cask",
+          "text": "Noted: CG-7781 is valid until 31 December; the 22 oz bomber line is out of scope."
+        },
+        {
+          "who": "ines",
+          "text": "We compared it with Ostrava Glassworks: their minimum was 30 pallets and 7 weeks, so Corvane wins."
+        },
+        {
+          "who": "cask",
+          "text": "Noted: Ostrava Glassworks quoted a 30-pallet minimum and 7 weeks; Corvane was chosen."
+        },
+        {
+          "who": "ines",
+          "text": "Corvane delivers glass on their own trucks, any weekday, two days' notice."
+        },
+        {
+          "who": "cask",
+          "text": "Recorded: Corvane delivers on its own trucks on weekdays with two days' notice."
+        }
+      ]
+    },
+    {
+      "id": "s05",
+      "at": "2026-08-12T09:00:00Z",
+      "topic": "CO2 supply",
+      "turns": [
+        {
+          "who": "ines",
+          "text": "We ran out of CO2 on Saturday and it was a mess. Let's write down how Ferrous Gas works."
+        },
+        {
+          "who": "cask",
+          "text": "Go ahead: regular schedule, emergency deliveries and the account to quote?"
+        },
+        {
+          "who": "ines",
+          "text": "Our Ferrous Gas account is FG-5531. Regular fill is every Thursday. An emergency delivery inside 24 hours costs a flat 180 USD on top of the gas."
+        },
+        {
+          "who": "cask",
+          "text": "Recorded: Ferrous Gas account FG-5531, regular CO2 fill on Thursdays, emergency delivery within 24 hours is a flat 180 USD fee plus the gas."
+        },
+        {
+          "who": "ines",
+          "text": "The tank is 6 tons. Anything under 20% on the gauge on a Monday means we will not make Thursday."
+        },
+        {
+          "who": "cask",
+          "text": "Noted: 6-ton CO2 tank; below 20% on a Monday means an emergency delivery before Thursday."
+        },
+        {
+          "who": "ines",
+          "text": "Nitrogen for the nitro stout comes from Ferrous too, but on a separate account, FG-5532."
+        },
+        {
+          "who": "cask",
+          "text": "Recorded: nitrogen is on a separate Ferrous Gas account, FG-5532."
+        },
+        {
+          "who": "ines",
+          "text": "Their dispatcher picks up the emergency line 24/7; the regular office is closed weekends."
+        },
+        {
+          "who": "cask",
+          "text": "Noted: Ferrous Gas emergency line is 24/7; the office is closed at weekends."
+        }
+      ]
+    },
+    {
+      "id": "s06",
+      "at": "2026-08-21T09:00:00Z",
+      "topic": "Label approvals",
+      "turns": [
+        {
+          "who": "ines",
+          "text": "New rule from marketing: no label goes to Halyard Print without a brand sign-off."
+        },
+        {
+          "who": "cask",
+          "text": "Who signs off, and how long does it take?"
+        },
+        {
+          "who": "ines",
+          "text": "Dara Osei, our brand manager, signs every label proof. She commits to a 48-hour turnaround on proofs."
+        },
+        {
+          "who": "cask",
+          "text": "Recorded: Dara Osei (brand manager) signs off every label proof before Halyard Print runs it; 48-hour turnaround."
+        },
+        {
+          "who": "ines",
+          "text": "Halyard needs 8 working days after sign-off to print and deliver."
+        },
+        {
+          "who": "cask",
+          "text": "Noted: Halyard Print needs 8 working days from sign-off to delivery."
+        },
+        {
+          "who": "ines",
+          "text": "The spring labels went out without her sign-off and the ABV was wrong on 4,000 labels. That's why."
+        },
+        {
+          "who": "cask",
+          "text": "Understood: the sign-off rule follows 4,000 spring labels printed with the wrong ABV."
+        },
+        {
+          "who": "ines",
+          "text": "Halyard's minimum print run is 5,000 labels per design."
+        },
+        {
+          "who": "cask",
+          "text": "Recorded: Halyard Print minimum run is 5,000 labels per design."
+        }
+      ]
+    },
+    {
+      "id": "s07",
+      "at": "2026-08-28T09:00:00Z",
+      "topic": "Can price lock",
+      "turns": [
+        {
+          "who": "ines",
+          "text": "Brightwell Cans locked our 16 oz price until year end."
+        },
+        {
+          "who": "cask",
+          "text": "What is the locked price and the minimum?"
+        },
+        {
+          "who": "ines",
+          "text": "0.142 USD per can until 31 December, minimum one truckload, which is 8 pallets of sleek 16 oz."
+        },
+        {
+          "who": "cask",
+          "text": "Recorded: Brightwell Cans 16 oz at 0.142 USD per can, locked until 31 December, minimum one truckload (8 pallets)."
+        },
+        {
+          "who": "ines",
+          "text": "After that they warned us aluminium could add 9 to 12 percent."
+        },
+        {
+          "who": "cask",
+          "text": "Noted: Brightwell expects 9 to 12 percent higher can prices after the lock ends."
+        },
+        {
+          "who": "ines",
+          "text": "Brightwell delivers on Wednesdays and Fridays. Door 2, packaging."
+        },
+        {
+          "who": "cask",
+          "text": "Recorded: Brightwell Cans delivers Wednesdays and Fridays to door 2."
+        },
+        {
+          "who": "ines",
+          "text": "We have 3 truckloads planned between now and December."
+        },
+        {
+          "who": "cask",
+          "text": "Noted: three Brightwell truckloads planned before December."
+        }
+      ]
+    },
+    {
+      "id": "s08",
+      "at": "2026-09-09T09:00:00Z",
+      "topic": "Yeast ordering",
+      "turns": [
+        {
+          "who": "ines",
+          "text": "Northbank Yeast Labs changed their ordering window. Please keep this one."
+        },
+        {
+          "who": "cask",
+          "text": "What is the new window?"
+        },
+        {
+          "who": "ines",
+          "text": "Pitches have to be ordered at least 10 days before brew day. Anything shorter is a rush fee of 75 USD per pitch."
+        },
+        {
+          "who": "cask",
+          "text": "Recorded: Northbank Yeast Labs pitches must be ordered 10 days before brew day; shorter notice costs a 75 USD rush fee per pitch."
+        },
+        {
+          "who": "ines",
+          "text": "And the brewers want a hard limit of 6 generations on repitching the house ale strain."
+        },
+        {
+          "who": "cask",
+          "text": "Noted: house ale strain repitched at most 6 generations."
+        },
+        {
+          "who": "ines",
+          "text": "They also moved shipping to overnight courier only, 38 USD per box, up to 4 pitches a box."
+        },
+        {
+          "who": "cask",
+          "text": "Recorded: Northbank ships overnight only, 38 USD per box of up to 4 pitches."
+        },
+        {
+          "who": "ines",
+          "text": "The lab contact is Dr. Hamid Sorel if a pitch looks off."
+        },
+        {
+          "who": "cask",
+          "text": "Noted: Dr. Hamid Sorel is the Northbank lab contact for quality issues."
+        }
+      ]
+    },
+    {
+      "id": "s09",
+      "at": "2026-09-18T09:00:00Z",
+      "topic": "Pellam Freight LTL",
+      "turns": [
+        {
+          "who": "ines",
+          "text": "For outbound LTL to distributors we are using Pellam Freight from October."
+        },
+        {
+          "who": "cask",
+          "text": "What are their fees and limits?"
+        },
+        {
+          "who": "ines",
+          "text": "Liftgate is 65 USD per stop, they take at most 10 pallets per pickup, and pickups need to be booked by noon the day before."
+        },
+        {
+          "who": "cask",
+          "text": "Recorded: Pellam Freight LTL, liftgate 65 USD per stop, maximum 10 pallets per pickup, booking by noon the day before."
+        },
+        {
+          "who": "ines",
+          "text": "Their dispatcher is Rosa Lindqvist."
+        },
+        {
+          "who": "cask",
+          "text": "Noted: Rosa Lindqvist is the Pellam Freight dispatcher."
+        },
+        {
+          "who": "ines",
+          "text": "The distributor in Halbrook needs deliveries on Mondays only, so book Pellam for Friday pickups for them."
+        },
+        {
+          "who": "cask",
+          "text": "Noted: Halbrook distributor receives Mondays only; book Pellam Friday pickups for Halbrook."
+        },
+        {
+          "who": "ines",
+          "text": "Fuel surcharge floats; last invoice was 14%."
+        },
+        {
+          "who": "cask",
+          "text": "Recorded: Pellam's fuel surcharge floats, 14% on the last invoice."
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "at": "2026-09-30T09:00:00Z",
+      "topic": "Q4 budget and approvals",
+      "turns": [
+        {
+          "who": "ines",
+          "text": "Finance set the Q4 packaging budget and approval rules this morning."
+        },
+        {
+          "who": "cask",
+          "text": "What are the numbers?"
+        },
+        {
+          "who": "ines",
+          "text": "Packaging budget for Q4 is 48,000 USD. I can approve any single PO up to 5,000 USD. Above 5,000 it needs Tomas Reyne, the CFO."
+        },
+        {
+          "who": "cask",
+          "text": "Recorded: Q4 packaging budget 48,000 USD; Ines approves POs up to 5,000 USD; above 5,000 USD needs Tomas Reyne (CFO)."
+        },
+        {
+          "who": "ines",
+          "text": "Raw materials stay on the old rule, the head brewer co-signs anything over 10,000."
+        },
+        {
+          "who": "cask",
+          "text": "Noted: raw-material POs over 10,000 USD need the head brewer's co-signature."
+        },
+        {
+          "who": "ines",
+          "text": "Raw materials budget for Q4 is 112,000 USD, tracked separately from packaging."
+        },
+        {
+          "who": "cask",
+          "text": "Recorded: Q4 raw materials budget 112,000 USD, tracked separately from the 48,000 USD packaging budget."
+        },
+        {
+          "who": "ines",
+          "text": "Finance closes the quarter on 18 December; nothing can be invoiced to Q4 after that."
+        },
+        {
+          "who": "cask",
+          "text": "Noted: Q4 closes on 18 December; invoices after that fall into Q1."
+        }
+      ]
+    }
+  ],
+  "live": [
+    {
+      "text": "Morning Cask. Today I want to plan the Q4 orders for the holiday releases. First, the brew schedule: Winter Porter on 9 November, Spruce Tip Ale on 16 November, and the Citra Pale reissue on 23 November."
+    },
+    {
+      "text": "The Winter Porter needs 70 bags of base malt and 18 bags of Munich. The Spruce Tip uses the same base, 64 bags."
+    },
+    {
+      "text": "Taproom says the holiday 4-pack will be cans only this year, no glass for that one."
+    },
+    {
+      "id": "q1",
+      "text": "Valleyhop's second Citra drop is due on 28 October. Which contract lot is it, and what price per pound did we agree?",
+      "re": [
+        "VH-2207",
+        "8\\.40"
+      ],
+      "values": "lot VH-2207 · 8.40 USD/lb",
+      "from": "s01"
+    },
+    {
+      "text": "The Citra Pale reissue will use about 600 lb of that drop; the rest goes into the January IPA."
+    },
+    {
+      "id": "q2",
+      "text": "If that 28 October drop turns up on 2 November instead, are we owed anything?",
+      "re": [
+        "6\\s?%|6 percent|six percent"
+      ],
+      "values": "6% credit (more than 3 days late)",
+      "from": "s03"
+    },
+    {
+      "text": "For the porter we also need 4 bags of chocolate malt; the old supplier still has stock, so that is a separate order."
+    },
+    {
+      "id": "q3",
+      "text": "I'm ordering 60 bags of pale malt from Arnholt for the November brews. Which day will it arrive, and at which door?",
+      "re": [
+        "Tuesday",
+        "door 4|door four|door #4|#4"
+      ],
+      "values": "Tuesday · dock door 4",
+      "from": "s02"
+    },
+    {
+      "text": "Put the Arnholt order in as 134 bags of pale 2-row and 18 of Munich in total, not 60. I misread the sheet."
+    },
+    {
+      "text": "The bottle-conditioned barleywine is coming back for the holidays, so we need glass after all, 12 oz amber."
+    },
+    {
+      "id": "q4",
+      "text": "For that barleywine glass: what is Corvane's minimum run and lead time on the quote?",
+      "re": [
+        "22 pallets|22-pallet",
+        "5 weeks|five weeks|5-week"
+      ],
+      "values": "22 pallets · 5 weeks",
+      "from": "s04"
+    },
+    {
+      "text": "Bottling day for the barleywine is 7 December, so the glass has to be here by 4 December."
+    },
+    {
+      "id": "q5",
+      "text": "The CO2 gauge is at 15% this morning, so we need a delivery before Thursday. What will the emergency delivery cost, and which account do I quote?",
+      "re": [
+        "180",
+        "FG-5531"
+      ],
+      "values": "180 USD fee · account FG-5531",
+      "from": "s05"
+    },
+    {
+      "text": "The barleywine label needs a new allergen line for the oats. Artwork is ready today."
+    },
+    {
+      "id": "q6",
+      "text": "Who has to sign off that label proof before Halyard can print it, and how long does she take?",
+      "re": [
+        "Dara",
+        "48[- ]?h|48 hours|two days|2 days"
+      ],
+      "values": "Dara Osei · 48 hours",
+      "from": "s06"
+    },
+    {
+      "id": "q7",
+      "text": "The Corvane glass PO comes to 7,400 USD. Can I approve it myself, or who has to?",
+      "re": [
+        "Tomas|Reyne"
+      ],
+      "values": "above 5,000 USD → Tomas Reyne (CFO)",
+      "from": "s10"
+    }
+  ]
+}
