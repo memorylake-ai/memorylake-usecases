@@ -1,0 +1,422 @@
+{
+ "org": "Tessavane Freight",
+ "assistant": "Dock",
+ "project_name": "Tessavane customer memory",
+ "model": "gpt-4o-mini",
+ "playbook": "You are Dock, the customer support assistant of Tessavane Freight, a regional pallet and parcel carrier. These handling rules are the same for every customer. Answer in one or two short sentences. When the question is about one customer's own arrangements, answer from what you remember about that customer; if you have nothing on it, say so instead of guessing.\n\nHandling rules:\n1. Pallet weight: Pallets over 1,000 kg travel as heavy freight and need a tail-lift vehicle; quote the heavy-freight surcharge of 38 euros per pallet.\n2. Oversize loads: Loads longer than 2.4 m or wider than 1.2 m are oversize; they need a site check and 48 hours' notice before collection.\n3. Temperature control: Chilled freight (2-8 C) is collected only from docks with a cold-chain log; ask for the logger serial before booking.\n4. Dangerous goods: ADR classes 2, 3 and 8 need the DG declaration uploaded before 16:00 the day before collection; never accept a verbal declaration.\n5. Lithium batteries: Loose lithium cells ship only as class 9 with UN3480 labels; batteries inside devices go as standard parcels with a mark.\n6. Delivery windows: A customer delivery window is honoured as booked; a missed window is logged as a service failure and the customer is told the new ETA within one hour.\n7. Failed delivery: After a failed delivery we try once more next working day; after the second failure the freight goes back to the depot for 5 working days.\n8. Proof of delivery: Proof of delivery is the signed handheld record; photos are kept 90 days and sent on request, never by default.\n9. Claims: Damage claims must be filed within 7 days of delivery with photos; shortage claims within 3 days; we acknowledge every claim within 24 hours.\n10. Liability: Our liability is 8.33 SDR per kg unless the customer bought declared-value cover before collection.\n11. Invoices: Invoices are issued every Monday for the previous week; payment terms are 30 days net unless the account says otherwise.\n12. Disputed invoices: A disputed invoice is put on hold while billing reviews it; never promise a credit note before billing confirms it.\n13. Fuel surcharge: The fuel surcharge is set monthly from the national diesel index and published on the first working day of the month.\n14. Forklift bookings: A forklift at the customer's dock must be booked at least two working days ahead; same-day forklift requests go to the depot lead.\n15. Tail-lift: Tail-lift delivery is included for residential addresses and charged at 18 euros for business addresses.\n16. Collections: Collections booked before 14:00 are picked up the next working day; after 14:00 they move one more day.\n17. Customs: Shipments to non-EU destinations need a commercial invoice and the receiver's EORI number; we do not file export declarations for customers.\n18. Address changes: An address change after collection is a re-route and costs 25 euros; it must be requested in writing by the account owner.\n19. Notifications: Delivery notices go to the contact on the account unless the customer has asked for a different address; always use the address they asked for.\n20. Account contacts: Only named contacts on the account may change bookings; anyone else is asked to have a named contact confirm by email.\n21. Holiday service: On public holidays the depots are closed; bookings for that day move to the next working day automatically.\n22. Weekend delivery: Saturday delivery is available in the city zones for a 30 euro supplement; there is no Sunday service.\n23. Packaging: Pallets must be stretch-wrapped and corner-boarded; loose cartons are refused at collection unless the customer bought a repack.\n24. Labels: Every pallet carries our barcode label on two sides; customer labels alone are not enough for the sorter.\n25. Tracking: Tracking updates come from the handheld scans; if tracking is silent for more than 24 hours, open a trace with the depot.\n26. Escalation: Escalate to the depot lead when a delivery has failed twice, when a claim is over 2,000 euros, or when the customer asks for a manager.\n27. Complaints: Log every complaint in the account record with the date and the customer's own words; promise a reply within two working days.\n28. Credit holds: An account more than 45 days overdue is put on credit hold; new collections are refused until billing lifts the hold.\n29. Rates: Rate questions go to the account's rate card; never quote a spot rate in chat.\n30. Insurance: Declared-value cover costs 0.6 percent of the declared value, minimum 12 euros, and must be bought before collection.\n31. Returns: Return-to-sender shipments are charged at the outbound rate; the customer must approve the charge first.\n32. Waiting time: The first 30 minutes of waiting at a dock are free; after that we charge 15 euros per started 15 minutes.\n33. Data requests: Requests for a customer's stored data go to the privacy desk; never paste shipment history into chat.\n34. Language: Answer in the language the customer wrote in; keep product names and codes as written.\n35. Tone: Be brief and specific; do not apologise more than once per reply; never blame a driver by name.\n36. Unknown answers: If a rule or a customer arrangement is not in your instructions or memory, say you will check with the depot.\n37. Special handling: Fragile marks do not change handling on the sorter; fragile freight needs the white-glove service booked in advance.\n38. Multi-drop: Multi-drop collections are booked as one job per address; each drop is billed as a separate consignment.\n39. Cut-off times: Same-day changes are accepted until 11:00; after 11:00 the change applies from the next working day.\n40. Service levels: Standard service is next working day within the region and two working days across regions; express is same day within the city zone.",
+ "customers": [
+  {
+   "key": "lind",
+   "name": "Oskar Lind",
+   "company": "Lind Bakeries",
+   "facts": [
+    "Oskar Lind (Lind Bakeries) wants deliveries only between 06:00 and 08:30, before the ovens are loaded.",
+    "Oskar Lind (Lind Bakeries) has a standing forklift booking at the Ostrava dock every Tuesday.",
+    "Oskar Lind (Lind Bakeries) disputed invoice TV-4108 in September over a double-charged tail-lift.",
+    "Oskar Lind (Lind Bakeries) asked that delivery notices go to dock@lind-bakeries.example, not the office.",
+    "Oskar Lind (Lind Bakeries) ships flour in 1,100 kg pallets, so every load is heavy freight.",
+    "Oskar Lind (Lind Bakeries) has 45-day payment terms agreed in March.",
+    "Oskar Lind (Lind Bakeries) prefers to be called, not emailed, about failed deliveries.",
+    "Oskar Lind (Lind Bakeries) filed a damage claim in August for two crushed pallets; it was paid.",
+    "Oskar Lind (Lind Bakeries) bought declared-value cover for the December peak.",
+    "Oskar Lind (Lind Bakeries) closes the dock on the first Monday of each month for cleaning."
+   ],
+   "history": "Ticket 1 (Lind Bakeries). Customer: Hi, this is Oskar from Lind Bakeries. Just so it is on record: Oskar wants deliveries only between 06:00 and 08:30, before the ovens are loaded. Can you note that and confirm? Agent: Thanks Oskar, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 2 (Lind Bakeries). Customer: Hi, this is Oskar from Lind Bakeries. Just so it is on record: Oskar has a standing forklift booking at the Ostrava dock every Tuesday. Can you note that and confirm? Agent: Thanks Oskar, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 3 (Lind Bakeries). Customer: Hi, this is Oskar from Lind Bakeries. Just so it is on record: Oskar disputed invoice TV-4108 in September over a double-charged tail-lift. Can you note that and confirm? Agent: Thanks Oskar, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 4 (Lind Bakeries). Customer: Hi, this is Oskar from Lind Bakeries. Just so it is on record: Oskar asked that delivery notices go to dock@lind-bakeries.example, not the office. Can you note that and confirm? Agent: Thanks Oskar, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 5 (Lind Bakeries). Customer: Hi, this is Oskar from Lind Bakeries. Just so it is on record: Oskar ships flour in 1,100 kg pallets, so every load is heavy freight. Can you note that and confirm? Agent: Thanks Oskar, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 6 (Lind Bakeries). Customer: Hi, this is Oskar from Lind Bakeries. Just so it is on record: Oskar has 45-day payment terms agreed in March. Can you note that and confirm? Agent: Thanks Oskar, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 7 (Lind Bakeries). Customer: Hi, this is Oskar from Lind Bakeries. Just so it is on record: Oskar prefers to be called, not emailed, about failed deliveries. Can you note that and confirm? Agent: Thanks Oskar, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 8 (Lind Bakeries). Customer: Hi, this is Oskar from Lind Bakeries. Just so it is on record: Oskar filed a damage claim in August for two crushed pallets; it was paid. Can you note that and confirm? Agent: Thanks Oskar, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 9 (Lind Bakeries). Customer: Hi, this is Oskar from Lind Bakeries. Just so it is on record: Oskar bought declared-value cover for the December peak. Can you note that and confirm? Agent: Thanks Oskar, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 10 (Lind Bakeries). Customer: Hi, this is Oskar from Lind Bakeries. Just so it is on record: Oskar closes the dock on the first Monday of each month for cleaning. Can you note that and confirm? Agent: Thanks Oskar, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks."
+  },
+  {
+   "key": "feld",
+   "name": "Mira Feld",
+   "company": "Feld Pharma Supply",
+   "facts": [
+    "Mira Feld (Feld Pharma Supply) ships chilled freight at 2-8 C with logger series FL-22.",
+    "Mira Feld (Feld Pharma Supply) disputed invoice TV-4131 because the fuel surcharge used the old index.",
+    "Mira Feld (Feld Pharma Supply) needs proof of delivery photos sent automatically for every pharmacy drop.",
+    "Mira Feld (Feld Pharma Supply) only allows Jonas Weber and herself to change bookings.",
+    "Mira Feld (Feld Pharma Supply) wants deliveries before 10:00 at the Brno warehouse.",
+    "Mira Feld (Feld Pharma Supply) sends ADR class 3 hand sanitiser once a month.",
+    "Mira Feld (Feld Pharma Supply) asked that delivery notices go to cold-chain@feldpharma.example.",
+    "Mira Feld (Feld Pharma Supply) has a forklift booked at Brno every Thursday morning.",
+    "Mira Feld (Feld Pharma Supply) was promised a reply on the September complaint by 22 October.",
+    "Mira Feld (Feld Pharma Supply) uses express same-day service for urgent pharmacy restocks."
+   ],
+   "history": "Ticket 1 (Feld Pharma Supply). Customer: Hi, this is Mira from Feld Pharma Supply. Just so it is on record: Mira ships chilled freight at 2-8 C with logger series FL-22. Can you note that and confirm? Agent: Thanks Mira, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 2 (Feld Pharma Supply). Customer: Hi, this is Mira from Feld Pharma Supply. Just so it is on record: Mira disputed invoice TV-4131 because the fuel surcharge used the old index. Can you note that and confirm? Agent: Thanks Mira, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 3 (Feld Pharma Supply). Customer: Hi, this is Mira from Feld Pharma Supply. Just so it is on record: Mira needs proof of delivery photos sent automatically for every pharmacy drop. Can you note that and confirm? Agent: Thanks Mira, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 4 (Feld Pharma Supply). Customer: Hi, this is Mira from Feld Pharma Supply. Just so it is on record: Mira only allows Jonas Weber and herself to change bookings. Can you note that and confirm? Agent: Thanks Mira, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 5 (Feld Pharma Supply). Customer: Hi, this is Mira from Feld Pharma Supply. Just so it is on record: Mira wants deliveries before 10:00 at the Brno warehouse. Can you note that and confirm? Agent: Thanks Mira, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 6 (Feld Pharma Supply). Customer: Hi, this is Mira from Feld Pharma Supply. Just so it is on record: Mira sends ADR class 3 hand sanitiser once a month. Can you note that and confirm? Agent: Thanks Mira, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 7 (Feld Pharma Supply). Customer: Hi, this is Mira from Feld Pharma Supply. Just so it is on record: Mira asked that delivery notices go to cold-chain@feldpharma.example. Can you note that and confirm? Agent: Thanks Mira, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 8 (Feld Pharma Supply). Customer: Hi, this is Mira from Feld Pharma Supply. Just so it is on record: Mira has a forklift booked at Brno every Thursday morning. Can you note that and confirm? Agent: Thanks Mira, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 9 (Feld Pharma Supply). Customer: Hi, this is Mira from Feld Pharma Supply. Just so it is on record: Mira was promised a reply on the September complaint by 22 October. Can you note that and confirm? Agent: Thanks Mira, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 10 (Feld Pharma Supply). Customer: Hi, this is Mira from Feld Pharma Supply. Just so it is on record: Mira uses express same-day service for urgent pharmacy restocks. Can you note that and confirm? Agent: Thanks Mira, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks."
+  },
+  {
+   "key": "berg",
+   "name": "Tomas Berg",
+   "company": "Berg Furniture",
+   "facts": [
+    "Tomas Berg (Berg Furniture) ships sofas as oversize loads of 2.6 m and books a site check each time.",
+    "Tomas Berg (Berg Furniture) has a standing forklift booking at the Zlin dock every Wednesday.",
+    "Tomas Berg (Berg Furniture) disputed invoice TV-4150 over waiting time charged at the Zlin dock.",
+    "Tomas Berg (Berg Furniture) wants residential deliveries on Saturdays in the city zone.",
+    "Tomas Berg (Berg Furniture) asked that delivery notices go to orders@bergfurniture.example.",
+    "Tomas Berg (Berg Furniture) buys white-glove service for every glass table.",
+    "Tomas Berg (Berg Furniture) is on 30-day terms and pays on time.",
+    "Tomas Berg (Berg Furniture) wants deliveries between 12:00 and 16:00 on weekdays.",
+    "Tomas Berg (Berg Furniture) had a re-route in July from Olomouc to Prerov, charged 25 euros.",
+    "Tomas Berg (Berg Furniture) asked for a manager after two failed deliveries in June."
+   ],
+   "history": "Ticket 1 (Berg Furniture). Customer: Hi, this is Tomas from Berg Furniture. Just so it is on record: Tomas ships sofas as oversize loads of 2.6 m and books a site check each time. Can you note that and confirm? Agent: Thanks Tomas, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 2 (Berg Furniture). Customer: Hi, this is Tomas from Berg Furniture. Just so it is on record: Tomas has a standing forklift booking at the Zlin dock every Wednesday. Can you note that and confirm? Agent: Thanks Tomas, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 3 (Berg Furniture). Customer: Hi, this is Tomas from Berg Furniture. Just so it is on record: Tomas disputed invoice TV-4150 over waiting time charged at the Zlin dock. Can you note that and confirm? Agent: Thanks Tomas, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 4 (Berg Furniture). Customer: Hi, this is Tomas from Berg Furniture. Just so it is on record: Tomas wants residential deliveries on Saturdays in the city zone. Can you note that and confirm? Agent: Thanks Tomas, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 5 (Berg Furniture). Customer: Hi, this is Tomas from Berg Furniture. Just so it is on record: Tomas asked that delivery notices go to orders@bergfurniture.example. Can you note that and confirm? Agent: Thanks Tomas, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 6 (Berg Furniture). Customer: Hi, this is Tomas from Berg Furniture. Just so it is on record: Tomas buys white-glove service for every glass table. Can you note that and confirm? Agent: Thanks Tomas, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 7 (Berg Furniture). Customer: Hi, this is Tomas from Berg Furniture. Just so it is on record: Tomas is on 30-day terms and pays on time. Can you note that and confirm? Agent: Thanks Tomas, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 8 (Berg Furniture). Customer: Hi, this is Tomas from Berg Furniture. Just so it is on record: Tomas wants deliveries between 12:00 and 16:00 on weekdays. Can you note that and confirm? Agent: Thanks Tomas, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 9 (Berg Furniture). Customer: Hi, this is Tomas from Berg Furniture. Just so it is on record: Tomas had a re-route in July from Olomouc to Prerov, charged 25 euros. Can you note that and confirm? Agent: Thanks Tomas, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 10 (Berg Furniture). Customer: Hi, this is Tomas from Berg Furniture. Just so it is on record: Tomas asked for a manager after two failed deliveries in June. Can you note that and confirm? Agent: Thanks Tomas, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks."
+  },
+  {
+   "key": "vahl",
+   "name": "Ines Vahl",
+   "company": "Vahl Electronics",
+   "facts": [
+    "Ines Vahl (Vahl Electronics) ships loose lithium cells as class 9 UN3480 every second week.",
+    "Ines Vahl (Vahl Electronics) asked that delivery notices go to logistics@vahl-electronics.example, not to her.",
+    "Ines Vahl (Vahl Electronics) disputed invoice TV-4166 because a Saturday supplement was charged on a Friday drop.",
+    "Ines Vahl (Vahl Electronics) has a forklift booked at the Pilsen dock every Monday.",
+    "Ines Vahl (Vahl Electronics) wants deliveries between 09:00 and 11:00.",
+    "Ines Vahl (Vahl Electronics) exports to Norway and supplies the receiver's EORI number herself.",
+    "Ines Vahl (Vahl Electronics) is on credit hold since 2 October until billing lifts it.",
+    "Ines Vahl (Vahl Electronics) prefers replies in German.",
+    "Ines Vahl (Vahl Electronics) bought declared-value cover for a 40,000 euro test-equipment shipment.",
+    "Ines Vahl (Vahl Electronics) wants tracking silence over 12 hours reported to her straight away."
+   ],
+   "history": "Ticket 1 (Vahl Electronics). Customer: Hi, this is Ines from Vahl Electronics. Just so it is on record: Ines ships loose lithium cells as class 9 UN3480 every second week. Can you note that and confirm? Agent: Thanks Ines, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 2 (Vahl Electronics). Customer: Hi, this is Ines from Vahl Electronics. Just so it is on record: Ines asked that delivery notices go to logistics@vahl-electronics.example, not to her. Can you note that and confirm? Agent: Thanks Ines, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 3 (Vahl Electronics). Customer: Hi, this is Ines from Vahl Electronics. Just so it is on record: Ines disputed invoice TV-4166 because a Saturday supplement was charged on a Friday drop. Can you note that and confirm? Agent: Thanks Ines, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 4 (Vahl Electronics). Customer: Hi, this is Ines from Vahl Electronics. Just so it is on record: Ines has a forklift booked at the Pilsen dock every Monday. Can you note that and confirm? Agent: Thanks Ines, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 5 (Vahl Electronics). Customer: Hi, this is Ines from Vahl Electronics. Just so it is on record: Ines wants deliveries between 09:00 and 11:00. Can you note that and confirm? Agent: Thanks Ines, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 6 (Vahl Electronics). Customer: Hi, this is Ines from Vahl Electronics. Just so it is on record: Ines exports to Norway and supplies the receiver's EORI number herself. Can you note that and confirm? Agent: Thanks Ines, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 7 (Vahl Electronics). Customer: Hi, this is Ines from Vahl Electronics. Just so it is on record: Ines is on credit hold since 2 October until billing lifts it. Can you note that and confirm? Agent: Thanks Ines, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 8 (Vahl Electronics). Customer: Hi, this is Ines from Vahl Electronics. Just so it is on record: Ines prefers replies in German. Can you note that and confirm? Agent: Thanks Ines, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 9 (Vahl Electronics). Customer: Hi, this is Ines from Vahl Electronics. Just so it is on record: Ines bought declared-value cover for a 40,000 euro test-equipment shipment. Can you note that and confirm? Agent: Thanks Ines, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 10 (Vahl Electronics). Customer: Hi, this is Ines from Vahl Electronics. Just so it is on record: Ines wants tracking silence over 12 hours reported to her straight away. Can you note that and confirm? Agent: Thanks Ines, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks."
+  },
+  {
+   "key": "dorn",
+   "name": "Pavel Dorn",
+   "company": "Dorn Garden Centres",
+   "facts": [
+    "Pavel Dorn (Dorn Garden Centres) ships live plants as chilled freight at 4 C in spring only.",
+    "Pavel Dorn (Dorn Garden Centres) runs a 6-drop multi-drop collection every Friday.",
+    "Pavel Dorn (Dorn Garden Centres) disputed invoice TV-4172 because two drops were billed as one.",
+    "Pavel Dorn (Dorn Garden Centres) wants deliveries before 07:30 so the centres open stocked.",
+    "Pavel Dorn (Dorn Garden Centres) asked that delivery notices go to stock@dorngarden.example.",
+    "Pavel Dorn (Dorn Garden Centres) has a forklift booked at the Olomouc dock every Friday.",
+    "Pavel Dorn (Dorn Garden Centres) ships compost on 1,050 kg pallets as heavy freight.",
+    "Pavel Dorn (Dorn Garden Centres) is on 30-day terms.",
+    "Pavel Dorn (Dorn Garden Centres) wants returns of unsold plants approved by him before any charge.",
+    "Pavel Dorn (Dorn Garden Centres) closes all centres on public holidays."
+   ],
+   "history": "Ticket 1 (Dorn Garden Centres). Customer: Hi, this is Pavel from Dorn Garden Centres. Just so it is on record: Pavel ships live plants as chilled freight at 4 C in spring only. Can you note that and confirm? Agent: Thanks Pavel, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 2 (Dorn Garden Centres). Customer: Hi, this is Pavel from Dorn Garden Centres. Just so it is on record: Pavel runs a 6-drop multi-drop collection every Friday. Can you note that and confirm? Agent: Thanks Pavel, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 3 (Dorn Garden Centres). Customer: Hi, this is Pavel from Dorn Garden Centres. Just so it is on record: Pavel disputed invoice TV-4172 because two drops were billed as one. Can you note that and confirm? Agent: Thanks Pavel, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 4 (Dorn Garden Centres). Customer: Hi, this is Pavel from Dorn Garden Centres. Just so it is on record: Pavel wants deliveries before 07:30 so the centres open stocked. Can you note that and confirm? Agent: Thanks Pavel, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 5 (Dorn Garden Centres). Customer: Hi, this is Pavel from Dorn Garden Centres. Just so it is on record: Pavel asked that delivery notices go to stock@dorngarden.example. Can you note that and confirm? Agent: Thanks Pavel, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 6 (Dorn Garden Centres). Customer: Hi, this is Pavel from Dorn Garden Centres. Just so it is on record: Pavel has a forklift booked at the Olomouc dock every Friday. Can you note that and confirm? Agent: Thanks Pavel, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 7 (Dorn Garden Centres). Customer: Hi, this is Pavel from Dorn Garden Centres. Just so it is on record: Pavel ships compost on 1,050 kg pallets as heavy freight. Can you note that and confirm? Agent: Thanks Pavel, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 8 (Dorn Garden Centres). Customer: Hi, this is Pavel from Dorn Garden Centres. Just so it is on record: Pavel is on 30-day terms. Can you note that and confirm? Agent: Thanks Pavel, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 9 (Dorn Garden Centres). Customer: Hi, this is Pavel from Dorn Garden Centres. Just so it is on record: Pavel wants returns of unsold plants approved by him before any charge. Can you note that and confirm? Agent: Thanks Pavel, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 10 (Dorn Garden Centres). Customer: Hi, this is Pavel from Dorn Garden Centres. Just so it is on record: Pavel closes all centres on public holidays. Can you note that and confirm? Agent: Thanks Pavel, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks."
+  },
+  {
+   "key": "ruud",
+   "name": "Lena Ruud",
+   "company": "Ruud Print Works",
+   "facts": [
+    "Lena Ruud (Ruud Print Works) wants deliveries between 14:00 and 17:00, after the presses stop.",
+    "Lena Ruud (Ruud Print Works) has a forklift booked at the Ostrava print yard every Thursday afternoon.",
+    "Lena Ruud (Ruud Print Works) disputed invoice TV-4189 because insurance was charged without being bought.",
+    "Lena Ruud (Ruud Print Works) asked that delivery notices go to yard@ruudprint.example.",
+    "Lena Ruud (Ruud Print Works) ships paper rolls of 1,200 kg as heavy freight.",
+    "Lena Ruud (Ruud Print Works) sends ADR class 8 cleaning agents twice a year.",
+    "Lena Ruud (Ruud Print Works) is on 60-day terms agreed for the catalogue season.",
+    "Lena Ruud (Ruud Print Works) wants proof of delivery photos only on request.",
+    "Lena Ruud (Ruud Print Works) has express same-day bookings for catalogue proofs.",
+    "Lena Ruud (Ruud Print Works) asked for replies in English even when she writes in Czech."
+   ],
+   "history": "Ticket 1 (Ruud Print Works). Customer: Hi, this is Lena from Ruud Print Works. Just so it is on record: Lena wants deliveries between 14:00 and 17:00, after the presses stop. Can you note that and confirm? Agent: Thanks Lena, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 2 (Ruud Print Works). Customer: Hi, this is Lena from Ruud Print Works. Just so it is on record: Lena has a forklift booked at the Ostrava print yard every Thursday afternoon. Can you note that and confirm? Agent: Thanks Lena, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 3 (Ruud Print Works). Customer: Hi, this is Lena from Ruud Print Works. Just so it is on record: Lena disputed invoice TV-4189 because insurance was charged without being bought. Can you note that and confirm? Agent: Thanks Lena, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 4 (Ruud Print Works). Customer: Hi, this is Lena from Ruud Print Works. Just so it is on record: Lena asked that delivery notices go to yard@ruudprint.example. Can you note that and confirm? Agent: Thanks Lena, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 5 (Ruud Print Works). Customer: Hi, this is Lena from Ruud Print Works. Just so it is on record: Lena ships paper rolls of 1,200 kg as heavy freight. Can you note that and confirm? Agent: Thanks Lena, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 6 (Ruud Print Works). Customer: Hi, this is Lena from Ruud Print Works. Just so it is on record: Lena sends ADR class 8 cleaning agents twice a year. Can you note that and confirm? Agent: Thanks Lena, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 7 (Ruud Print Works). Customer: Hi, this is Lena from Ruud Print Works. Just so it is on record: Lena is on 60-day terms agreed for the catalogue season. Can you note that and confirm? Agent: Thanks Lena, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 8 (Ruud Print Works). Customer: Hi, this is Lena from Ruud Print Works. Just so it is on record: Lena wants proof of delivery photos only on request. Can you note that and confirm? Agent: Thanks Lena, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 9 (Ruud Print Works). Customer: Hi, this is Lena from Ruud Print Works. Just so it is on record: Lena has express same-day bookings for catalogue proofs. Can you note that and confirm? Agent: Thanks Lena, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks.\nTicket 10 (Ruud Print Works). Customer: Hi, this is Lena from Ruud Print Works. Just so it is on record: Lena asked for replies in English even when she writes in Czech. Can you note that and confirm? Agent: Thanks Lena, noted on the account and confirmed. Anything else today? Customer: No, that is all, thanks."
+  }
+ ],
+ "questions": [
+  {
+   "customer": "lind",
+   "text": "When can we deliver to Oskar Lind at Lind Bakeries?",
+   "expect": "06:00|6:00|6 ?am|08:30|8:30"
+  },
+  {
+   "customer": "lind",
+   "text": "Which day is Oskar Lind's standing forklift booking?",
+   "expect": "Tuesday"
+  },
+  {
+   "customer": "lind",
+   "text": "Which invoice did Oskar Lind dispute?",
+   "expect": "TV-4108"
+  },
+  {
+   "customer": "lind",
+   "text": "Where do delivery notices for Oskar Lind go?",
+   "expect": "dock@lind-bakeries\\.example"
+  },
+  {
+   "customer": "lind",
+   "text": "How heavy are Oskar Lind's flour pallets?",
+   "expect": "1,?100"
+  },
+  {
+   "customer": "lind",
+   "text": "What payment terms does Oskar Lind have?",
+   "expect": "45"
+  },
+  {
+   "customer": "lind",
+   "text": "How does Oskar Lind want to hear about a failed delivery?",
+   "expect": "call|phone"
+  },
+  {
+   "customer": "lind",
+   "text": "Was Oskar Lind's August damage claim paid?",
+   "expect": "\\bpaid\\b|yes"
+  },
+  {
+   "customer": "lind",
+   "text": "Did Oskar Lind buy declared-value cover for December?",
+   "expect": "yes|declared-value|bought"
+  },
+  {
+   "customer": "lind",
+   "text": "Can we deliver to Oskar Lind on the first Monday of the month?",
+   "expect": "clean|closed|no\\b"
+  },
+  {
+   "customer": "feld",
+   "text": "At what temperature does Mira Feld's freight travel?",
+   "expect": "2.?(-|–|to).?8"
+  },
+  {
+   "customer": "feld",
+   "text": "Which invoice did Mira Feld dispute, and why?",
+   "expect": "TV-4131"
+  },
+  {
+   "customer": "feld",
+   "text": "Does Mira Feld want proof-of-delivery photos sent?",
+   "expect": "yes|automatic|every"
+  },
+  {
+   "customer": "feld",
+   "text": "Who may change bookings for Mira Feld's account?",
+   "expect": "Jonas Weber"
+  },
+  {
+   "customer": "feld",
+   "text": "When does Mira Feld want deliveries at Brno?",
+   "expect": "10:00|10 ?am"
+  },
+  {
+   "customer": "feld",
+   "text": "Which ADR class does Mira Feld ship?",
+   "expect": "\\b3\\b"
+  },
+  {
+   "customer": "feld",
+   "text": "Where should delivery notices for Mira Feld go?",
+   "expect": "cold-chain@feldpharma\\.example"
+  },
+  {
+   "customer": "feld",
+   "text": "Which day is Mira Feld's forklift booking?",
+   "expect": "Thursday"
+  },
+  {
+   "customer": "feld",
+   "text": "By when did we promise Mira Feld a reply on her complaint?",
+   "expect": "22 October|October 22"
+  },
+  {
+   "customer": "feld",
+   "text": "Which service does Mira Feld use for urgent restocks?",
+   "expect": "express|same.day"
+  },
+  {
+   "customer": "berg",
+   "text": "How long are Tomas Berg's sofa loads?",
+   "expect": "2\\.6"
+  },
+  {
+   "customer": "berg",
+   "text": "Which day is Tomas Berg's standing forklift booking?",
+   "expect": "Wednesday"
+  },
+  {
+   "customer": "berg",
+   "text": "Which invoice did Tomas Berg dispute?",
+   "expect": "TV-4150"
+  },
+  {
+   "customer": "berg",
+   "text": "When does Tomas Berg want residential deliveries?",
+   "expect": "Saturday"
+  },
+  {
+   "customer": "berg",
+   "text": "Where should delivery notices for Tomas Berg go?",
+   "expect": "orders@bergfurniture\\.example"
+  },
+  {
+   "customer": "berg",
+   "text": "What service does Tomas Berg buy for glass tables?",
+   "expect": "white.glove"
+  },
+  {
+   "customer": "berg",
+   "text": "What payment terms does Tomas Berg have?",
+   "expect": "30"
+  },
+  {
+   "customer": "berg",
+   "text": "What weekday delivery window does Tomas Berg want?",
+   "expect": "12:00|16:00|noon"
+  },
+  {
+   "customer": "berg",
+   "text": "What did Tomas Berg's July re-route cost?",
+   "expect": "25"
+  },
+  {
+   "customer": "berg",
+   "text": "Why did Tomas Berg ask for a manager in June?",
+   "expect": "two failed|failed deliver|2 failed"
+  },
+  {
+   "customer": "vahl",
+   "text": "What does Ines Vahl ship every second week?",
+   "expect": "lithium|UN3480|class 9"
+  },
+  {
+   "customer": "vahl",
+   "text": "Where should delivery notices for Ines Vahl go?",
+   "expect": "logistics@vahl-electronics\\.example"
+  },
+  {
+   "customer": "vahl",
+   "text": "Which invoice did Ines Vahl dispute?",
+   "expect": "TV-4166"
+  },
+  {
+   "customer": "vahl",
+   "text": "Which day is Ines Vahl's forklift booking?",
+   "expect": "Monday|Montag"
+  },
+  {
+   "customer": "vahl",
+   "text": "When does Ines Vahl want deliveries?",
+   "expect": "09:00|9:00|11:00"
+  },
+  {
+   "customer": "vahl",
+   "text": "Who supplies the EORI number for Ines Vahl's Norway exports?",
+   "expect": "she|herself|Ines|selbst"
+  },
+  {
+   "customer": "vahl",
+   "text": "Can we book a new collection for Ines Vahl this week?",
+   "expect": "credit hold|on hold|Kredit|2 October|2\\. Oktober"
+  },
+  {
+   "customer": "vahl",
+   "text": "Which language does Ines Vahl want replies in?",
+   "expect": "German|Deutsch"
+  },
+  {
+   "customer": "vahl",
+   "text": "Is Ines Vahl's test-equipment shipment insured?",
+   "expect": "yes|declared|40,?000|ja"
+  },
+  {
+   "customer": "vahl",
+   "text": "When should tracking silence be reported to Ines Vahl?",
+   "expect": "12"
+  },
+  {
+   "customer": "dorn",
+   "text": "At what temperature do Pavel Dorn's plants travel?",
+   "expect": "4"
+  },
+  {
+   "customer": "dorn",
+   "text": "How many drops is Pavel Dorn's Friday collection?",
+   "expect": "\\b6\\b|six"
+  },
+  {
+   "customer": "dorn",
+   "text": "Which invoice did Pavel Dorn dispute?",
+   "expect": "TV-4172"
+  },
+  {
+   "customer": "dorn",
+   "text": "When does Pavel Dorn want deliveries?",
+   "expect": "07:30|7:30"
+  },
+  {
+   "customer": "dorn",
+   "text": "Where should delivery notices for Pavel Dorn go?",
+   "expect": "stock@dorngarden\\.example"
+  },
+  {
+   "customer": "dorn",
+   "text": "Which day is Pavel Dorn's forklift booking?",
+   "expect": "Friday"
+  },
+  {
+   "customer": "dorn",
+   "text": "How heavy are Pavel Dorn's compost pallets?",
+   "expect": "1,?050"
+  },
+  {
+   "customer": "dorn",
+   "text": "What payment terms does Pavel Dorn have?",
+   "expect": "30"
+  },
+  {
+   "customer": "dorn",
+   "text": "Who must approve charges for Pavel Dorn's returns?",
+   "expect": "Pavel|him|he"
+  },
+  {
+   "customer": "dorn",
+   "text": "Are Pavel Dorn's centres open on public holidays?",
+   "expect": "clos|no\\b"
+  },
+  {
+   "customer": "ruud",
+   "text": "When does Lena Ruud want deliveries?",
+   "expect": "14:00|17:00|2 ?pm|5 ?pm"
+  },
+  {
+   "customer": "ruud",
+   "text": "Which day is Lena Ruud's forklift booking?",
+   "expect": "Thursday"
+  },
+  {
+   "customer": "ruud",
+   "text": "Which invoice did Lena Ruud dispute?",
+   "expect": "TV-4189"
+  },
+  {
+   "customer": "ruud",
+   "text": "Where should delivery notices for Lena Ruud go?",
+   "expect": "yard@ruudprint\\.example"
+  },
+  {
+   "customer": "ruud",
+   "text": "How heavy are Lena Ruud's paper rolls?",
+   "expect": "1,?200"
+  },
+  {
+   "customer": "ruud",
+   "text": "Which ADR class does Lena Ruud ship?",
+   "expect": "\\b8\\b"
+  },
+  {
+   "customer": "ruud",
+   "text": "What payment terms does Lena Ruud have?",
+   "expect": "60"
+  },
+  {
+   "customer": "ruud",
+   "text": "Does Lena Ruud want proof-of-delivery photos by default?",
+   "expect": "request|no\\b"
+  },
+  {
+   "customer": "ruud",
+   "text": "Which service does Lena Ruud use for catalogue proofs?",
+   "expect": "express|same.day"
+  },
+  {
+   "customer": "ruud",
+   "text": "Which language does Lena Ruud want replies in?",
+   "expect": "English"
+  }
+ ],
+ "traffic": {
+  "per_customer": 2
+ }
+}
