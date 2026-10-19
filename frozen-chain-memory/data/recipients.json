@@ -1,0 +1,20 @@
+{
+  "company": "Brindle Lane Deliveries",
+  "assistant": "Dispatchbot",
+  "dispatcher": "Noor",
+  "recipients": [
+    {"name": "Hollis Grant",    "parcel": "BL-2201", "old": "4471", "new": "8305"},
+    {"name": "Nadia Ferro",     "parcel": "BL-2202", "old": "2960", "new": "7138"},
+    {"name": "Owen Castellan",  "parcel": "BL-2203", "old": "5817", "new": "1694"},
+    {"name": "Ruth Abara",      "parcel": "BL-2204", "old": "3352", "new": "9027"},
+    {"name": "Sami Kettering",  "parcel": "BL-2205", "old": "6248", "new": "2583"},
+    {"name": "Yara Lindholm",   "parcel": "BL-2206", "old": "7709", "new": "4416"}
+  ],
+  "fact_template": "{name} (parcel {parcel}): the drop-off gate code is {code}.",
+  "call_note": "{name} phoned: the building changed the gate code.",
+  "turn1": "I'm loading {name}'s parcel {parcel}. What's the drop-off gate code?",
+  "turn2": {
+    "confirm": "Before I seal {name}'s parcel: confirm the drop-off gate code.",
+    "driver": "The driver is leaving now with parcel {parcel} for {name}. Which gate code should they punch in?"
+  }
+}
