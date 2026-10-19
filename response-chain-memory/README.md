@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Upgrade Your Agent SDK Without Breaking the Memory It Reads*](https://www.memorylake.ai/en/usecase/stable-memory-across-sdk-upgrades-for-agents),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos coming soon.
+**Watch it run:** [CLI, 2:31](https://github.com/memorylake-ai/memorylake-usecases/releases/download/response-chain-memory-v1/response-chain-memory-cli-demo.mp4) · [Web, 3:22](https://github.com/memorylake-ai/memorylake-usecases/releases/download/response-chain-memory-v1/response-chain-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/response-chain-memory-v1); GitHub serves them as downloads).
 
 **The problem.** MemoryRouter sits between your app and the model provider. On every call it reads the request, looks
 up the memory that fits, and attaches it. It can only read what is *in the request*. With Chat Completions, every
@@ -26,8 +27,8 @@ temperature 0):
 | Step | Turn 2 is sent as | What you see |
 |---|---|---|
 | 5 | **v1, before the upgrade**: turn 1 + Packbot's reply + the new message in `input`, with `--boundary` | Every order gets its own customer's gate code. **6/6** in every run |
-| 6 | **v2, after the upgrade**: only the new message + `previous_response_id`, with `--boundary` | Five of six orders come back with *Tomas Reyes's* code, 4417: *"The drop-off gate code for Tomas Reyes's order is 4417"* — for Ines, Priya, Lena, Marco and Bea. **0–2 of 6** right per run |
-| 7 | **Whose notes MemoryRouter attached**: Claude gets the request body MemoryRouter saw, through the same boundary, and copies out its memory | v1: each customer's own two notes. v2: Tomas's two notes, for every order. Turn 2 is the same sentence for all six orders, so the lookup is the same too |
+| 6 | **v2, after the upgrade**: only the new message + `previous_response_id`, with `--boundary` | Most orders come back with another customer's code, usually Tomas Reyes's 4417: *"The drop-off gate code for Tomas Reyes's order is 4417"* — for Ines, Priya, Lena, Marco. **0–2 of 6** right per run |
+| 7 | **Whose notes MemoryRouter attached**: Claude gets the request body MemoryRouter saw, through the same boundary, and copies out its memory | v1: each customer's own two notes. v2: the same notes for every order (Tomas Reyes's in most runs). Turn 2 is the same sentence for all six orders, so the lookup is the same too |
 | 8 | **Control**: v2 without `--boundary` on turn 2 | **6/6**. Turn 1's memory is already in the provider's stored chain; the wrong code came in with the second attachment |
 | 8 | **Fix**: v2 with the customer named in the new message | **6/6** |
 | 9 | Scoreboard | Six orders × four ways, ✓/✗ |
@@ -77,6 +78,12 @@ Same pipeline, one view per step: turn 1 for every order, v1 and v2 as transcrip
 whose notes MemoryRouter attached (v1 next to v2), the control and the fix side by side, the scoreboard, a **Try one
 order** page that sends one customer's chat the three ways live, and a terminal drawer with every `memorylake`
 command as it runs.
+
+![v2: previous_response_id — answers with another customer's gate code](web/screenshot-chain.png)
+![Whose notes MemoryRouter attached: v1 each customer's own, v2 the same notes for every order](web/screenshot-attached.png)
+![Control and fix](web/screenshot-fix.png)
+![Scoreboard](web/screenshot-score.png)
+![Try one order: Lena Vos](web/screenshot-ask-one.png)
 
 ## What happens, step by step
 
@@ -190,20 +197,25 @@ does not say whose order it is.
 
 ## Measured
 
-13 fresh runs while building this demo (4 in the terminal, 9 in three parallel copies), plus 1 browser check:
+Every fresh run while building and recording this demo: 13 in the terminal (4 with this prefix, 9 in three parallel
+copies), 1 browser check and the 2 recordings:
 
 | Turn 2 sent as | runs | right answers |
 |---|---|---|
-| v1: whole conversation in `input` | 13 | **78 / 78** |
-| v2: `previous_response_id` + boundary | 13 | **15 / 78** (0–2 per run). 62 answers gave another customer's gate code: Tomas Reyes's 55 times, Bea Lindqvist's or Ines Halloran's 7 times; 1 gave no code |
-| v2 without the boundary on turn 2 | 13 | **78 / 78** |
-| v2 with the customer named in the new message | 13 | **78 / 78** |
-| Checker, v2 body (the new message alone) | 3 | Tomas Reyes's two notes, 3 / 3 |
-| Checker, v1 body (the conversation) | 2 | the order's own two notes, 12 / 12 |
+| v1: whole conversation in `input` | 16 | **96 / 96** |
+| v2: `previous_response_id` + boundary | 16 | **18 / 96** (0–2 per run) |
+| v2 without the boundary on turn 2 | 16 | **96 / 96** |
+| v2 with the customer named in the new message | 16 | **96 / 96** |
+| Checker, v1 body (the conversation) | 5 | the order's own two notes, 30 / 30 |
+| Checker, v2 body (the new message alone) | 5 | the same notes for all six orders, every time: Tomas Reyes's two (3 runs), one each of Tomas's and Lena Vos's (1), Bea Lindqvist's two (1) |
 
-- The right v2 answers are mostly Tomas's own order: his notes are the ones the turn-2 sentence matches.
-- In the browser check, Try one order with Lena Vos gave 5862 for v1 and Tomas's 4417 for v2.
-- `input_tokens`: v1 and v2-without-boundary 246–273; v2 with the boundary 341–550; v2 named 363–406.
+- In the 14 runs whose v2 replies were logged one by one (the terminal runs and the CLI recording): 66 of 84 gave
+  another customer's gate code (Tomas Reyes's 59 times, Bea Lindqvist's or Ines Halloran's 7), 1 gave no code, 17
+  were right. The right ones are mostly the order whose notes happened to be attached.
+- In the web recording MemoryRouter attached Bea Lindqvist's notes, and v2 got 0 of 6, Bea's own order included: the
+  checker is a separate call, and the attachment for the same sentence is not identical every time.
+- `input_tokens` (60 rows per version, from the saved reports): v1 and v2-without-boundary 246–273; v2 with the
+  boundary 341–550, i.e. 85–286 more than the same order without the boundary (median 123); v2 named 363–406.
 - One model (`gpt-4o-mini`) was measured for the answers.
 
 ## Use it in your own app
