@@ -1,0 +1,64 @@
+{
+  "company": "Halvorsen Analytics",
+  "person": {"display": "Mei Okafor", "role": "Data engineer at Halvorsen Analytics (fictional)"},
+  "assistant": {"display": "Tern", "role": "Autonomous agent that runs Halvorsen's overnight backfills"},
+  "project_name": "Overnight backfills",
+  "today": "Monday 19 October 2026",
+  "run_name": "the September order-events backfill",
+  "step_pause": 2.0,
+  "playbook": "You are Tern, Halvorsen Analytics' autonomous backfill agent. You run overnight data backfills for Mei Okafor and follow the run settings exactly: target schema, batch size, staging bucket, write window and alert channel. When a setting has changed, use the latest one. You have just been restarted after a crash: the notes you kept in the process are gone, and what you know comes from the memory you are given. Answer in one or two short sentences and give the exact value. If a value is not in the memory you are given, say it is not on file instead of guessing.",
+  "sessions": [
+    {"id": "s1", "at": "2026-09-07T09:00:00Z", "topic": "Backfill setup", "turns": [
+      {"who": "mei", "text": "Mei Okafor (data engineer, Halvorsen): Tern, ground rules for backfills. You write to the analytics_v3 schema, and you stage files in the s3://hv-stage-a bucket."},
+      {"who": "tern", "text": "Tern (backfill agent): Understood. Backfills write to the analytics_v3 schema and stage files in s3://hv-stage-a."},
+      {"who": "mei", "text": "Mei Okafor (data engineer, Halvorsen): Right. Nothing goes to the production schemas directly; analytics_v3 is the one the dashboards read."},
+      {"who": "tern", "text": "Tern (backfill agent): Noted: analytics_v3 is the target, staging in s3://hv-stage-a, no direct writes to production schemas."}
+    ]},
+    {"id": "s2", "at": "2026-09-15T09:00:00Z", "topic": "Load limits", "turns": [
+      {"who": "mei", "text": "Mei Okafor (data engineer, Halvorsen): Two limits for the warehouse. Load in batches of 5,000 rows, and only write between 01:00 and 05:00 UTC."},
+      {"who": "tern", "text": "Tern (backfill agent): Got it: batches of 5,000 rows, and writes only between 01:00 and 05:00 UTC."},
+      {"who": "mei", "text": "Mei Okafor (data engineer, Halvorsen): Outside that window the BI team runs their refreshes, so stop and wait if you run over."},
+      {"who": "tern", "text": "Tern (backfill agent): Understood. If a run reaches 05:00 UTC I pause until 01:00 UTC the next night."}
+    ]},
+    {"id": "s3", "at": "2026-09-24T09:00:00Z", "topic": "Alerting", "turns": [
+      {"who": "mei", "text": "Mei Okafor (data engineer, Halvorsen): When a backfill fails, post the alert to the #pipeline-alerts channel."},
+      {"who": "tern", "text": "Tern (backfill agent): Will do: failure alerts go to #pipeline-alerts."},
+      {"who": "mei", "text": "Mei Okafor (data engineer, Halvorsen): Include the partition and the error line in the alert, nothing else."},
+      {"who": "tern", "text": "Tern (backfill agent): Noted: each alert in #pipeline-alerts carries the partition and the error line."}
+    ]}
+  ],
+  "conventions": [
+    {"id": "schema", "label": "target schema", "from": "s1", "old": "analytics_v3", "new": "analytics_v4",
+     "old_re": ["analytics_v3"], "new_re": ["analytics_v4"], "changed_at": 2,
+     "question": "Restarted mid-run. Which schema is tonight's backfill writing to?"},
+    {"id": "batch", "label": "batch size", "from": "s2", "old": "5,000 rows", "new": "2,000 rows",
+     "old_re": ["\\b5,?000\\b"], "new_re": ["\\b2,?000\\b"], "changed_at": 6,
+     "question": "Restarted mid-run. How many rows go in each batch tonight?"},
+    {"id": "alerts", "label": "alert channel", "from": "s3", "old": "#pipeline-alerts", "new": "#backfill-oncall",
+     "old_re": ["pipeline-alerts"], "new_re": ["backfill-oncall"], "changed_at": 10,
+     "question": "Restarted mid-run. Which channel do failure alerts for this run go to?"},
+    {"id": "bucket", "label": "staging bucket", "from": "s1", "old": "s3://hv-stage-a",
+     "old_re": ["hv-stage-a"], "question": "Restarted mid-run. Which bucket do you stage files in?"},
+    {"id": "window", "label": "write window", "from": "s2", "old": "01:00–05:00 UTC",
+     "old_re": ["\\b0?1:00\\b", "\\b0?5:00\\b"], "question": "Restarted mid-run. Between which hours may you write to the warehouse?"}
+  ],
+  "controls": {"schema": "bucket", "batch": "window", "alerts": "bucket"},
+  "live": [
+    {"user": "Mei: Tern, start tonight's backfill of the September order events.", "agent": "Tern: Starting the September order-events backfill. 30 daily partitions queued."},
+    {"user": "Mei: One change for tonight: write to the analytics_v4 schema, not analytics_v3. v3 is frozen for the audit.", "agent": "Tern: Understood. Tonight's backfill writes to analytics_v4.", "change": "schema"},
+    {"user": "Mei: Check the source counts first.", "agent": "Tern: Source counts read: 41.2 million rows across 30 partitions."},
+    {"user": "Mei: Go ahead with partitions 1 to 5.", "agent": "Tern: Partitions 1 to 5 loaded and verified."},
+    {"user": "Mei: Keep going.", "agent": "Tern: Partitions 6 to 10 loaded."},
+    {"user": "Mei: The warehouse is under load tonight, so drop the batch size to 2,000 rows instead of 5,000.", "agent": "Tern: Noted. Batches are 2,000 rows from now on.", "change": "batch"},
+    {"user": "Mei: Status?", "agent": "Tern: Partitions 11 to 14 loaded at the smaller batch size."},
+    {"user": "Mei: Fine, continue.", "agent": "Tern: Partitions 15 to 18 loaded."},
+    {"user": "Mei: Any errors?", "agent": "Tern: None so far; partition 17 needed two retries, both succeeded."},
+    {"user": "Mei: Alerts for this run go to #backfill-oncall now. #pipeline-alerts is muted during the migration.", "agent": "Tern: Got it. Failure alerts go to #backfill-oncall.", "change": "alerts"},
+    {"user": "Mei: Continue with the rest.", "agent": "Tern: Partitions 19 to 23 loaded."},
+    {"user": "Mei: How long is left?", "agent": "Tern: About 40 minutes for the last seven partitions."},
+    {"user": "Mei: OK.", "agent": "Tern: Partitions 24 to 27 loaded."},
+    {"user": "Mei: Keep me posted.", "agent": "Tern: Partitions 28 to 30 loaded."},
+    {"user": "Mei: Run the row-count check.", "agent": "Tern: Row counts match the source for all 30 partitions."},
+    {"user": "Mei: Good. Wrap up.", "agent": "Tern: Backfill complete. Summary written to the run log."}
+  ]
+}
