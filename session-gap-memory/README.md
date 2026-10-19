@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Session Memory vs Persistent Memory: An Architectural Guide*](https://www.memorylake.ai/en/usecase/session-memory-vs-persistent-memory-for-ai),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 6:39](https://github.com/memorylake-ai/memorylake-usecases/releases/download/session-gap-memory-v1/session-gap-memory-cli-demo.mp4) · [Web, 7:14](https://github.com/memorylake-ai/memorylake-usecases/releases/download/session-gap-memory-v1/session-gap-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/session-gap-memory-v1); GitHub serves them as downloads). Both are real, unedited runs from a clean account and are counted in the Measured table below: in the CLI one extraction beat the window and C was right every time, in the Web one it did not.
 
 **The problem.** A common design keeps a short window of the current session in the prompt (session memory) and lets
 retrieval bring back everything older (persistent memory). It works for things agreed weeks ago. It breaks for things
@@ -43,10 +44,11 @@ asks each arm's memory directly (`fact list --query`) which value it holds at th
 each new value first shows up.
 
 <!-- measured-summary -->
-Over the 4 runs counted below, B answered all 16 questions about a change that had already left the window
-with the value from before the change. C got 11 of 16 right and 5 with the old value, depending on whether extraction
-beat the window that time (it reached C's memory between 10 s before and 35 s after the step left the window).
-D got all 16, carrying up to 15 extra steps and 1.55–1.74× C's prompt tokens.
+Over the 7 runs counted below, B answered all 28 questions about a change that had already left the window
+with the value from before the change. C got 20 of 28 right and 8 with the old value, depending on whether extraction
+beat the window that time (in the runs measured with the final reading rule, it reached C's memory between
+11 s before and 37 s after the step left the window).
+D got all 28, carrying up to 15 extra steps and 1.47–1.75× C's prompt tokens.
 <!-- /measured-summary -->
 
 ## What it shows
@@ -56,12 +58,13 @@ D got all 16, carrying up to 15 extra steps and 1.55–1.74× C's prompt tokens.
   agent uses it without hesitation: `5433`, `make test-ledger`, Tomasz Ilic.
 - **Saving at session end is wrong inside the session, every time.** B answered every question about a change that
   had left the window with the pre-change value. Its memory is right only for the next session.
-- **Writing as you go is a race.** C's memory picked up each change 15–35 seconds after it left the window in some
-  runs and before it in others. The same question got the old value at +37 s in one run and the new one in the
-  next. The demo prints, for each change, when it was said, when it left the window and when it reached memory.
+- **Writing as you go is a race.** In the Web recording each change reached C's memory 31–37 seconds after it left
+  the window, and C answered three of four such questions with the old value; in the CLI recording extraction was
+  faster than the window and C was right every time. The demo prints, for each change, when it was said, when it left
+  the window and when it reached memory.
 - **The fix is to drop from the window only what memory holds.** D was right on every question. The price is prompt
   size: `cook-status` is one flag for the whole conversation, and while an agent keeps appending it rarely reports
-  finished, so D carried up to 15 extra steps (1.55–1.74× C's prompt tokens over the session).
+  finished, so D carried up to 15 extra steps (1.47–1.75× C's prompt tokens over the session).
 - **Extraction revises facts the way they were written, not the way you think of them.** In one run D's memory
   held "the test command is `make test-ledger`, and it expects a local Postgres on port 5433" as one fact. Today's
   session revised it to port 6543 and left `make test-ledger` in it; the new command reached memory only through
@@ -181,6 +184,8 @@ answer them from memory.
 
 ### Step 5: the gap
 
+From the first run (its gap times are upper bounds, see ¹ under Measured):
+
 ```
     Each change: when Rhea said it, when it left the 6-step window, when it reached memory.
         change                                      said  left window  in C memory  in D memory   gap (C)
@@ -223,13 +228,21 @@ lost it first). "Past values" is how many of the seven agreed values step 3 foun
 
 | run | past values | B after the window | C after the window | D after the window | gap in C (s) | D's most extra steps | prompt tokens B · C · D |
 |---|---|---|---|---|---|---|---|
-| first run (built) | 7/7 | 0 ✓ · 4 ⟲ | 2 ✓ · 2 ⟲ | 4 ✓ · 0 ⟲ | +25.2 · +19.8 · +15.0 | 15 | 4,542 · 4,905 · 7,605 |
-| second run (B reused, C and D rebuilt) | 7/7 | 0 ✓ · 4 ⟲ | 2 ✓ · 2 ⟲ | 4 ✓ · 0 ⟲ | +35.2 · +29.7 · +24.9 | 15 | 4,511 · 4,872 · 7,549 |
-| `--reset` | 6/7 | 0 ✓ · 4 ⟲ | 4 ✓ · 0 ⟲ | 4 ✓ · 0 ⟲ | +6.7 · +0.4 · -0.4 | 15 | 4,446 · 4,731 · 7,512 |
-| browser check (built) | 7/7 | 0 ✓ · 4 ⟲ | 3 ✓ · 1 ⟲ | 4 ✓ · 0 ⟲ | -2.5 · -9.8 · +12.8 | 15 | 4,415 · 4,508 · 7,837 |
-| **total (4 runs)** | | **0 ✓ · 16 ⟲** | **11 ✓ · 5 ⟲** | **16 ✓ · 0 ⟲** | -10 to +35 | 15 | D = 1.55–1.74× C |
+| first run (built) | 7/7 | 0 ✓ · 4 ⟲ | 2 ✓ · 2 ⟲ | 4 ✓ · 0 ⟲ | +25.2 · +19.8 · +15.0¹ | 15 | 4,542 · 4,905 · 7,605 |
+| second run (B reused, C and D rebuilt) | 7/7 | 0 ✓ · 4 ⟲ | 2 ✓ · 2 ⟲ | 4 ✓ · 0 ⟲ | +35.2 · +29.7 · +24.9¹ | 15 | 4,511 · 4,872 · 7,549 |
+| `--reset` | 6/7 | 0 ✓ · 4 ⟲ | 4 ✓ · 0 ⟲ | 4 ✓ · 0 ⟲ | +6.7 · +0.4 · -0.4¹ | 15 | 4,446 · 4,731 · 7,512 |
+| browser check (built) | 7/7 | 0 ✓ · 4 ⟲ | 3 ✓ · 1 ⟲ | 4 ✓ · 0 ⟲ | -2.5 · -9.8 · +12.8¹ | 15 | 4,415 · 4,508 · 7,837 |
+| CLI recording, first take (not published) | 7/7 | 0 ✓ · 4 ⟲ | 4 ✓ · 0 ⟲ | 4 ✓ · 0 ⟲ | +4.5 · -0.7 · +92.7¹ | 15 | 4,460 · 4,799 · 7,675 |
+| CLI recording | 7/7 | 0 ✓ · 4 ⟲ | 4 ✓ · 0 ⟲ | 4 ✓ · 0 ⟲ | -5.7 · -10.7 · +4.0 | 15 | 4,516 · 4,973 · 7,321 |
+| Web recording | 6/7 | 0 ✓ · 4 ⟲ | 1 ✓ · 3 ⟲ | 4 ✓ · 0 ⟲ | +37.2 · +31.6 · +30.7 | 15 | 4,595 · 4,498 · 7,853 |
+| **total (7 runs)** | | **0 ✓ · 28 ⟲** | **20 ✓ · 8 ⟲** | **28 ✓ · 0 ⟲** | -11 to +37 (runs without ¹) | 15 | D = 1.47–1.75× C |
 
-On the other questions (the change still in the window, or a convention that did not change) all three arms were right in every run: all eight questions, B 16/32 · C 27/32 · D 32/32.
+¹ These runs read each fact by the first value it names, so a fact such as "Tomasz is on leave, so reviews go to
+Priya Nair" counted as the old reviewer. That rule can only see a new value late, never early: their gap times are
+upper bounds, and their "memory: old" labels may hide a fact that already had the new value. From the CLI recording on,
+a fact is read up to "previously" and counts as new if it names the new value at all. The grades do not depend on it.
+
+On the other questions (the change still in the window, or a convention that did not change) all three arms were right in every run: all eight questions, B 28/56 · C 48/56 · D 56/56.
 <!-- /measured-table -->
 
 ## Use it in your own app
@@ -253,7 +266,7 @@ On the other questions (the change still in the window, or a convention that did
 | `MemoryRouter refused the call for lack of balance` | Router calls are billed; the memory steps still ran. Top up in the console. |
 | `still extracting after 420 s` | Extraction is slow right now; the run continues and the value check says what is missing. |
 | An agreed value shows `·` in step 3 | Extraction left it out, or wrote it in another language (it happens); the check reads English only. That arm may still answer it. |
-| C gets everything right | Extraction beat the window this time. Run again: the race goes both ways (see Measured). |
+| C gets everything right | Extraction beat the window this time (it did in 3 of 7 runs). Run again: the race goes both ways (see Measured). |
 | A change shows `—` in "in C memory" | It had not reached memory within 180 s after the last step. |
 
 ## Files
