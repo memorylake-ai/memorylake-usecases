@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Coding Agents Memory That Survives Every Session Boundary*](https://www.memorylake.ai/en/usecase/persistent-memory-for-ai-coding-agents),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 8:43](https://github.com/memorylake-ai/memorylake-usecases/releases/download/cache-ttl-memory-v1/cache-ttl-memory-cli-demo.mp4) · [Web, 8:59](https://github.com/memorylake-ai/memorylake-usecases/releases/download/cache-ttl-memory-v1/cache-ttl-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/cache-ttl-memory-v1); GitHub serves them as downloads). Both recordings are real runs, the 5½-minute break included, and both are counted in the Measured table below.
 
 **The problem.** A coding agent sends the same long repository guide (repo map, conventions, owners) with every
 request, so it marks it with an Anthropic prompt-caching breakpoint (`"cache_control": {"type": "ephemeral"}`):
@@ -33,7 +34,7 @@ simulated), and asks 4 more questions. Every request goes through four cache set
 | C | `{"type": "ephemeral", "ttl": "1h"}`: written at 2× input, lives an hour |
 | D | the default 5 minutes, plus one 1-token call 4 minutes into the break |
 
-Over 4 full runs, **B's first request after the break wrote the whole guide again in 4 of 4 runs**, while **C and D read it (4 and 4 of 4)**. Over both sessions B cost **0.42×** what A cost with no cache at all, C **0.37×** and D **0.29×**. The answers came from memory in every arm: A, B, C and D got 24, 24, 24 and 24 of 24 judged answers right.
+Over 6 full runs, **B's first request after the break wrote the whole guide again in 6 of 6 runs**, while **C and D read it (6 and 6 of 6)**. Over both sessions B cost **0.42×** what A cost with no cache at all, C **0.37×** and D **0.29×**. The answers came from memory in every arm: A, B, C and D got 36, 36, 36 and 36 of 36 judged answers right.
 
 ## What it shows
 
@@ -210,10 +211,12 @@ The first ask writes the guide, and a second ask within the hour reads it:
 | CLI 1 (first run) | 0.1016 | 0.0426 | 0.0375 | 0.0296 | written 12,103 | read | read (ping read 12,103) | 5:43 | 6 · 6 · 6 · 6 of 6 |
 | CLI 2 | 0.1014 | 0.0425 | 0.0370 | 0.0296 | written 12,103 | read | read (ping read 12,103) | 5:43 | 6 · 6 · 6 · 6 of 6 |
 | CLI 3 (`--reset`) | 0.1017 | 0.0424 | 0.0373 | 0.0302 | written 12,106 | read | read (ping read 12,106) | 5:46 | 6 · 6 · 6 · 6 of 6 |
-| Web (browser check = Web recording) | 0.1016 | 0.0423 | 0.0379 | 0.0300 | written 12,105 | read | read (ping read 12,105) | 5:43 | 6 · 6 · 6 · 6 of 6 |
-| **all 4** | 0.4064 | 0.1698 | 0.1497 | 0.1193 | written 4/4 | read 4/4 | read 4/4 | | 24 · 24 · 24 · 24 of 24 |
+| Web check (first Web recording; replaced) | 0.1016 | 0.0423 | 0.0379 | 0.0300 | written 12,105 | read | read (ping read 12,105) | 5:43 | 6 · 6 · 6 · 6 of 6 |
+| CLI recording | 0.1013 | 0.0427 | 0.0373 | 0.0297 | written 12,103 | read | read (ping read 12,103) | 5:42 | 6 · 6 · 6 · 6 of 6 |
+| Web recording | 0.1017 | 0.0421 | 0.0378 | 0.0302 | written 12,104 | read | read (ping read 12,104) | 5:42 | 6 · 6 · 6 · 6 of 6 |
+| **all 6** | 0.6093 | 0.2545 | 0.2248 | 0.1792 | written 6/6 | read 6/6 | read 6/6 | | 36 · 36 · 36 · 36 of 36 |
 
-B's idle time between its last session-1 call and its first session-2 call was 5:43–5:46 in every run. D's ping read the whole guide each time. Costs use the claude-haiku-4-5 prices from `router models`, for every token of every call (guide, memory, question, reply). The two session-log requests in session 1 are not judged.
+B's idle time between its last session-1 call and its first session-2 call was 5:42–5:46 in every run. D's ping read the whole guide each time. Costs use the claude-haiku-4-5 prices from `router models`, for every token of every call (guide, memory, question, reply). The two session-log requests in session 1 are not judged.
 
 ## Use it in your own agent
 

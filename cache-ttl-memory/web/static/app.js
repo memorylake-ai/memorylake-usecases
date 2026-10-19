@@ -69,7 +69,7 @@
         <div class="card"><h2 style="margin-top:0">Before you start</h2><ol class="steps-list">
           <li><b>Get an API key.</b> Sign up at <a href="https://app.memorylake.ai" target="_blank" rel="noopener">app.memorylake.ai</a>, open <b>API Keys</b>, create one.</li>
           <li><b>CLI v20261015 or later</b> — <code>memorylake router</code> is new in that release.</li>
-          <li><b>Router calls are billed</b> to your MemoryLake balance: 33 calls on claude-haiku-4-5 per run, about 0.15 USD.</li></ol>
+          <li><b>Router calls are billed</b> to your MemoryLake balance: 33 calls on claude-haiku-4-5 per run, about 0.21 USD.</li></ol>
           <p class="muted small" style="margin-bottom:0">Use case page: <a href="https://www.memorylake.ai/en/usecase/persistent-memory-for-ai-coding-agents" target="_blank" rel="noopener">memorylake.ai › Persistent memory for AI coding agents</a>
           · Source: <a href="https://github.com/memorylake-ai/memorylake-usecases" target="_blank" rel="noopener">memorylake-usecases</a></p></div></div>`;
   }
