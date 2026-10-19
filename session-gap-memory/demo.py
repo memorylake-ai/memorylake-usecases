@@ -488,14 +488,30 @@ def check_grader(d: dict) -> None:
         got = grade(d, qid, reply)
         if got != want:
             die(f"grader self-check failed on {qid}: “{reply}” graded {got}, expected {want}")
+    conv = conventions(d)
+    facts = [("review", "Tomasz is on leave until November, so ledger reviews go to Priya Nair.", "new"),
+             ("review", "Tomasz Ilic owns the ledger code. (as of 2026-09-08)", "old"),
+             ("port", "The local Postgres runs on port 6543. (as of 2026-10-19, previously … port 5433 as of 2026-08-04)", "new"),
+             ("port", "Port 5433 clashes with the analytics container.", "old"),
+             ("test", "The test command is `make test-ledger`, and it expects Postgres on port 6543. (as of 2026-10-19, "
+                      "previously … port 5433 …)", "old")]
+    for k, text, want in facts:
+        got = value_in(conv[k], text)
+        if got != want:
+            die(f"fact-reading self-check failed on {k}: “{text}” read as {got}, expected {want}")
 
 
 def value_in(c: dict, text: str) -> str | None:
-    """Which value a fact states for a changed convention: the first one in the text. A revised fact carries the
-    old value along in "previously …", so "contains the old value" would misread it."""
-    hits = [(m.start(), v) for v, rs in (("new", c["new_re"]), ("old", c["old_re"])) for r in rs
-            for m in [re.search(r, text, re.I)] if m]
-    return min(hits)[1] if hits else None
+    """Which value a fact states for a changed convention: "new" if it names today's value, else "old" if it names the
+    earlier one, else None. A revised fact carries the earlier value along in "previously …", so that tail is not
+    read; and a fact can name the earlier value first and still state the new one ("Tomasz is on leave, so reviews
+    go to Priya Nair"), so the order of the values is not used either."""
+    head = re.split(r"\bpreviously\b", text, maxsplit=1, flags=re.I)[0]
+    if any(re.search(r, head, re.I) for r in c["new_re"]):
+        return "new"
+    if any(re.search(r, head, re.I) for r in c["old_re"]):
+        return "old"
+    return None
 
 
 # --------------------------------------------------------------------------- MemoryRouter
@@ -819,13 +835,13 @@ def window(thread: list[dict], steps: int) -> list[dict]:
     return thread[-2 * steps:]
 
 
-def held_now(cli: CLI, world: dict, arm: str, c: dict) -> str | None:
-    """What the arm's memory says about a changed convention at this moment: "new", "old" or None."""
+def held_now(cli: CLI, world: dict, arm: str, c: dict) -> tuple[str, list[str]]:
+    """What the arm's memory says about a changed convention at this moment: ("new" or "old", the facts that name
+    today's value)."""
     items = (cli.run("fact", "list", "--projects", world["arms"][arm]["project"], "--query", c["new_re"][0], "--page-size", "20",
                      scoped=True, echo=False) or {}).get("items") or []
-    if any(value_in(c, f.get("fact") or "") == "new" for f in items):
-        return "new"
-    return "old"
+    texts = [f.get("fact") or "" for f in items if value_in(c, f.get("fact") or "") == "new"]
+    return ("new" if texts else "old"), texts
 
 
 def d_window(cli: CLI, conv: str, writer: Writer, state: dict, thread: list[dict], steps: int) -> list[dict]:
@@ -908,7 +924,8 @@ def run_session(cli: CLI, world: dict, d: dict, p: dict) -> dict:
             if r:
                 r["usd"] = cost(p, r["prompt_tokens"], r["cached"], r["completion_tokens"])
                 r["grade"] = grade(d, qid, r["reply"])
-                r["memory"] = mem[a]
+                r["memory"] = {k: v[0] for k, v in mem[a].items()}
+                r["memory_facts"] = {k: v[1] for k, v in mem[a].items()}
             row["arms"][a] = r
             threads[a] += [{"role": "user", "content": step["user"]},
                            {"role": "assistant", "content": r["reply"] if r else "(no reply)"}]
