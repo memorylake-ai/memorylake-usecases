@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Give Autonomous Agents a Memory Store Built for Long-Running Work*](https://www.memorylake.ai/en/usecase/memory-store-for-autonomous-agents),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 4:54](https://github.com/memorylake-ai/memorylake-usecases/releases/download/commit-point-memory-v1/commit-point-memory-cli-demo.mp4) · [Web, 5:50](https://github.com/memorylake-ai/memorylake-usecases/releases/download/commit-point-memory-v1/commit-point-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/commit-point-memory-v1); GitHub serves them as downloads). Both are real, unedited runs from a clean account and are counted in the Measured table below: in the CLI one, C caught one write while its call was in flight; in the Web one it caught none.
 
 **The problem.** A long-running agent writes every step into MemoryLake as it goes, so that a crash at hour five
 does not send it back to step one. But "written as it goes" has a delay in it: the server accepts the message at
@@ -42,17 +43,23 @@ notes of its own: only the playbook, the date, the run it is resuming, and what 
 (`router chat --boundary`). At each of B's restarts it is also asked an unchanged setting, as a control.
 
 <!-- measured-summary -->
+Over the 5 runs counted below (15 changes), restarting when the append returned (B) never brought back the new value:
+13 times the old one, twice "not on file". Restarting when extraction had read the step (C) brought back the old value
+11 times, "not on file" twice, and the new value twice, when the write landed while its MemoryRouter call was in
+flight. Restarting on the `fact-actions` receipt (D) brought back the new value 15 times out of 15. Read and written were
+2.8 to 8.4 seconds apart; the unchanged settings asked as a control were right 15 times out of 15.
 <!-- /measured-summary -->
 
 ## What it shows
 
-- **"The server has it" is not "memory has it".** B restarts about two seconds after the change and always gets the
-  old value back: the message is stored, but nothing has been extracted from it yet.
+- **"The server has it" is not "memory has it".** B restarts about two seconds after the change and never gets the
+  new value back: the message is stored, but nothing has been extracted from it yet.
 - **"Extraction has read it" is not "memory has it" either.** `consumed-messages` fills in when a batch is *read*;
-  the facts land several seconds later. Restarted at that moment, C found the old value every time.
+  the facts land 3 to 8 seconds later. Restarted at that moment, C found the old value 11 times in 15 and the new one
+  only when the write happened to land during its own MemoryRouter call.
 - **The receipt is per batch, and it comes when the write does.** `fact-actions --message` answers for the whole
   batch the message was read in (every message in it gets the same list), and it is empty until the batch's changes
-  are written. Restarted on the receipt, D found the new value.
+  are written. Restarted on the receipt, D found the new value every time.
 - **A batch with nothing to write never gets a receipt.** Progress chatter ("Partitions 6 to 10 loaded") yields no
   facts, so its `fact-actions` stays empty forever. A rule that waits for every message's own receipt would keep
   those steps in the process for good; D also releases a batch once a *later* batch has its receipt.
@@ -95,7 +102,11 @@ Paste the key, press **Run demo**: the same pipeline, with every `memorylake` co
 **Tonight** shows each change with its three restarts as they happen; **Commit log** shows every extraction batch and
 D's verdict on it; **Ask one** asks a restarted Tern.
 
-<!-- screenshots -->
+| Step 4: tonight | Step 5: commit log |
+|---|---|
+| ![](web/screenshot-night.png) | ![](web/screenshot-log.png) |
+| **Step 3: the past** | **Step 6: tally** |
+| ![](web/screenshot-history.png) | ![](web/screenshot-tally.png) |
 
 ## What happens, step by step
 
@@ -196,6 +207,25 @@ Tern with nothing but its memory; after a run, all three of tonight's changes ar
 ## Measured
 
 <!-- measured-table -->
+Full runs of the final version on a free account. Each cell is the restarted agent's grade and how many seconds after
+Mei said the change that rule called the step committed, for the schema · batch size · alert channel changes.
+"Past settings" is how many of the five agreed settings step 3 found, written in English; when the alert channel was
+missing, B and C answered "not on file" (∅) for it instead of the old channel.
+
+| run | past settings | B: schema · batch · alerts (s after said) | C | D | control | batches (no receipt) | cook_finished true while running |
+|---|---|---|---|---|---|---|---|
+| first run of this version (memory rebuilt) | 4/5 | ⟲ 1.9 ⟲ 2.0 ∅ 1.8 | ⟲ 19.9 ⟲ 16.6 ∅ 11.3 | ✓ 22.9 ✓ 21.9 ✓ 17.4 | 3/3 | 7 (2) | 1/18 |
+| `--reset` | 5/5 | ⟲ 2.7 ⟲ 2.3 ⟲ 2.0 | ⟲ 18.4 ⟲ 13.3 ⟲ 13.9 | ✓ 25.8 ✓ 19.9 ✓ 20.1 | 3/3 | 8 (4) | 1/19 |
+| browser check | 4/5 | ⟲ 2.0 ⟲ 1.8 ∅ 1.9 | ✓ 12.0 ⟲ 22.6 ∅ 23.0 | ✓ 14.8 ✓ 29.4 ✓ 28.0 | 3/3 | 6 (0) | 1/18 |
+| CLI recording | 5/5 | ⟲ 2.0 ⟲ 2.6 ⟲ 2.2 | ⟲ 12.5 ✓ 19.7 ⟲ 12.6 | ✓ 20.9 ✓ 23.0 ✓ 16.5 | 3/3 | 7 (3) | 2/19 |
+| Web recording | 5/5 | ⟲ 2.5 ⟲ 2.2 ⟲ 1.9 | ⟲ 21.4 ⟲ 19.4 ⟲ 13.3 | ✓ 25.6 ✓ 24.4 ✓ 18.5 | 3/3 | 7 (3) | 1/19 |
+| **total (5 runs, 15 changes)** | | **0 ✓ · 13 ⟲ · 2 ∅** | **2 ✓ · 11 ⟲ · 2 ∅** | **15 ✓ · 0 ⟲ · 0 ∅** | **15/15** | | |
+
+Two runs of an earlier version are not counted. Its restarted agent was not told the date or which run it was
+resuming. In one of them D got 1 of 3: extraction had written two of the changes as new facts beside the old rule
+("the September order-events backfill job uses a batch size of 2,000 rows instead of 5,000"), `search` ranked the new
+fact first, and the model still answered "not on file" and `#pipeline-alerts`. With the date and the run name in its
+prompt, the same memory gave the right answer to all four questions, and D was right in every run since.
 <!-- /measured-table -->
 
 ## Use it in your own app
