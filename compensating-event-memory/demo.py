@@ -564,7 +564,7 @@ def questions(d: dict) -> list[dict]:
 AS_OF = re.compile(r"\((?:as of|on) (\d{4}-\d\d-\d\d)|\bon (\d{4}-\d\d-\d\d)\b|\bas of (\d{4}-\d\d-\d\d)\b")
 PAREN_DATES = re.compile(r"\((?:as of|on) [^)]*\)")
 FROM_TO = re.compile(r"\bfrom\b.{0,80}?\bto\b", re.I)
-PREVIOUSLY = re.compile(r"\bpreviously\b|\bformerly\b", re.I)
+PREVIOUSLY = re.compile(r"\bpreviously\b|\bformerly\b|\bprevious\b", re.I)
 REVERSAL = re.compile(r"\brevers|\brevert|\bundo|\bundone|\bvoid\b|\brolled back\b|\brescind", re.I)
 # A sentence that rejects a value does not state it: "The bank rejected mandate DD-5530", "the meter is not eligible
 # for the Flat tariff", "billing@… was a typo". (Extraction often keeps a reversal's reason as a fact of its own.)
@@ -642,8 +642,9 @@ def census_one(a: dict, facts: list[str]) -> dict:
     mentions = [f for f in facts if rev and (rev["id"] in f or rev["reverses"] in f or REVERSAL.search(f))]
     dated = [(fact_date(f) or "", asserted(a["values"], f), f) for f in facts]
     dated = [x for x in dated if x[1]]
-    # Did the change the reversal undoes reach memory at all? Any fact naming its value, read or not as current.
-    changed = any(re.search(a["values"][a["stale"]], f, re.I | re.A) for f in facts)
+    # Did the change the reversal undoes reach memory at all? Any fact naming its value, read or not as current —
+    # except a sentence that rejects it ("the meter is not eligible for the Flat tariff" is not the change).
+    changed = any(re.search(a["values"][a["stale"]], f, re.I | re.A) and not NEGATED.search(f) for f in facts)
     if not dated:
         return dict(state="missing", facts=facts, top=[], reversal=mentions, changed=changed)
     latest = max(x[0] for x in dated)

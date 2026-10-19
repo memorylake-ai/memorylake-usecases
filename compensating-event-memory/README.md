@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Memory for Event-Sourced AI Agents*](https://www.memorylake.ai/en/usecase/memory-for-event-sourced-ai-agents),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** videos are being recorded.
+**Watch it run:** [CLI, 9:52](https://github.com/memorylake-ai/memorylake-usecases/releases/download/compensating-event-memory-v1/compensating-event-memory-cli-demo.mp4) · [Web, 9:50](https://github.com/memorylake-ai/memorylake-usecases/releases/download/compensating-event-memory-v1/compensating-event-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/compensating-event-memory-v1); GitHub serves them as downloads). Both recordings are full runs and count in [Measured](#measured).
 
 **The problem.** In an event-sourced system nothing is edited in place. When an event turns out to be wrong, you
 append a *compensating event* that undoes it — and, the way most event stores write it, it names the event it undoes
@@ -46,10 +47,10 @@ Eight questions ("What is Tallow & Finch Bakery's service address right now?"), 
 `gpt-4o-mini` at temperature 0.7. Last, the app reads the event log back out of memory (`fact list`) and folds it to
 any day — the state on 25 September, and today — without a model.
 
-Over 8 runs: in A, the latest fact about the field states the **reversed value for 45 of 48** reversed accounts (for
-the other 3, the change itself never reached memory). Questions about the reversed accounts: **A 38/144** (↺ the
-reversed value 86, Unknown 25), **B 130/144**, **C 124/144**, **D 54/54** (3 runs). B pays for it on a control:
-Pellow & Daughters 9/24 against A's 20/24. Replay from the event log in memory: **64/64**. Details in
+Over 13 runs: in A, the latest fact about the field states the **reversed value for 74 of 78** reversed accounts
+(for the other 4, the change itself never reached memory). Questions about the reversed accounts: **A 44/234** (↺ the
+reversed value 162, Unknown 39), **B 208/234**, **C 198/234**, **D 144/144** (8 runs). B pays for it on a control:
+Pellow & Daughters 21/39 against A's 35/39. Replay from the event log in memory: **104/104**. Details in
 [Measured](#measured).
 
 ## Prerequisites
@@ -92,6 +93,14 @@ python3 web/server.py                # opens http://127.0.0.1:8765
 Paste the API key and press **Run the demo**. Follow the steps on the left; the terminal drawer shows every
 `memorylake` command as it runs. **Replay** folds the event log to any day you pick. **Ask one** sends any question
 through A, B, C and D and grades it if it is one of the eight. **Clean up** removes everything.
+
+| Step 3: the events | Step 4: what memory says now |
+|---|---|
+| ![](web/screenshot-events.png) | ![](web/screenshot-census.png) |
+| **Step 6: the assistant's answers** | **Step 7: the score** |
+| ![](web/screenshot-ask.png) | ![](web/screenshot-score.png) |
+| **Step 5: C and D, the app's projection** | **Step 8: replay to any day** |
+| ![](web/screenshot-state.png) | ![](web/screenshot-replay.png) |
 
 ## What happens, step by step
 
@@ -256,7 +265,8 @@ fold.
 ## Measured
 
 Per run. "A: latest fact states the reversed value" and "B: latest fact current" are about the 6 reversed accounts,
-read from the saved facts. Answers are graded from the saved `out/report.json` with the current grader: reversed
+read from the saved facts with the current census rules. Answers are graded from the saved `out/report.json` with the
+current grader: reversed
 accounts (18 answers), controls (6); ↺ = the value the reversal undid (for a control, the value before the latest
 change), ? = Unknown, – = neither.
 
@@ -270,39 +280,46 @@ change), ? = Unknown, – = neither.
 | fourth run (D added) | 6/6 | 5/6 (Kestle Yard Brewery stale) | 5/18 · controls 5/6 (↺ 11 · ? 3) | 12/18 · controls 6/6 (↺ 3 · ? 3) | 17/18 · controls 6/6 (↺ 1) | 18/18 · controls 6/6 | 8/8 |
 | PREFIX copy 3 | 6/6 | 5/6 (Kestle Yard Brewery stale) | 3/18 · controls 6/6 (↺ 12 · ? 3) | 18/18 · controls 6/6 | 15/18 · controls 6/6 (↺ 3) | 18/18 · controls 6/6 | 8/8 |
 | PREFIX copy 4 | 6/6 | 6/6 | 3/18 · controls 6/6 (↺ 12 · ? 3) | 18/18 · controls 5/6 (↺ 1) | 16/18 · controls 6/6 (↺ 2) | 18/18 · controls 6/6 | 8/8 |
-| **total** | **45/48** | **45/48** | **38/144** · controls 43/48 (↺ 86 · ? 25) | **130/144** · controls 32/48 (↺ 23 · ? 7) | **124/144** · controls 48/48 (↺ 18 · ? 2) | **54/54** · controls 18/18 (↺ 0) | **64/64** |
+| CLI recording | 6/6 | 6/6 | 2/18 · controls 6/6 (↺ 13 · ? 3) | 14/18 · controls 3/6 (↺ 7) | 16/18 · controls 6/6 (↺ 2) | 18/18 · controls 6/6 | 8/8 |
+| browser check (PREFIX copy 5) | 5/6 (Kestle Yard Brewery: the change never reached memory) | 6/6 | 3/18 · controls 6/6 (↺ 15) | 15/18 · controls 6/6 (↺ 2 · ? 1) | 14/18 · controls 6/6 (↺ 4) | 18/18 · controls 6/6 | 8/8 |
+| Web recording, replaced ¹ | 6/6 | 6/6 | 0/18 · controls 5/6 (↺ 16 · ? 3) | 15/18 · controls 6/6 (↺ 3) | 14/18 · controls 6/6 (↺ 4) | 18/18 · controls 6/6 | 8/8 |
+| Web recording, replaced ² | 6/6 | 6/6 | 1/18 · controls 4/6 (↺ 14 · ? 5) | 16/18 · controls 6/6 (↺ 1 · ? 1) | 16/18 · controls 6/6 (↺ 2) | 18/18 · controls 6/6 | 8/8 |
+| Web recording | 6/6 | 6/6 | 0/18 · controls 3/6 (↺ 18 · ? 3) | 18/18 · controls 3/6 (– 3) | 14/18 · controls 6/6 (↺ 4) | 18/18 · controls 6/6 | 8/8 |
+| **total** | **74/78** | **75/78** | **44/234** · controls 67/78 (↺ 162 · ? 39) | **208/234** · controls 56/78 (↺ 36 · ? 9 · – 3) | **198/234** · controls 78/78 (↺ 34 · ? 2) | **144/144** · controls 48/48 (↺ 0) | **104/104** |
 
 D was added after the first five runs (A, B and C are unchanged). The PREFIX copies are the same demo run side by side
-under another prefix (`mlu-cev1-`, `mlu-cev2-`).
+under another prefix (`mlu-cev1-`, `mlu-cev2-`); copy 5 is the browser walkthrough that took the screenshots. Two Web
+recordings were replaced, each a full run: ¹ the connect page said "about 6 minutes" (a run takes about 7); ² the lists
+of state facts and event-log facts were laid out as two-column rows and broke apart.
 
 Per question, all runs (✓ / answers):
 
 | question | now | A | B | C | D |
 |---|---|---|---|---|---|
-| Tallow & Finch Bakery · service address | 14 Quarry Lane | 0/24 (↺ 24) | 20/24 (↺ 4) | 15/24 (↺ 9) | 9/9 |
-| Brackenridge Dental · plan | Standard | 11/24 (↺ 13) | 24/24 | 21/24 (↺ 3) | 9/9 |
-| Ostler Row Studios · billing email | accounts@ostlerrow.example | 9/24 (↺ 15) | 24/24 | 20/24 (↺ 4) | 9/9 |
-| Marrowgate Laundry · payment method | card ending 4417 | 6/24 | 17/24 (↺ 2) | 22/24 | 9/9 |
-| Kestle Yard Brewery · meter tariff | Day/Night | 12/24 (↺ 5) | 21/24 (↺ 1) | 24/24 | 9/9 |
-| Wrenfield Clinic · contract end date | 31 March 2027 | 0/24 (↺ 24) | 24/24 | 22/24 (↺ 2) | 9/9 |
-| Pellow & Daughters · plan (control) | Business | 20/24 (↺ 4) | 9/24 (↺ 15) | 24/24 | 9/9 |
-| Corran Ferries · service address (control) | 9 Pier Street | 23/24 (↺ 1) | 23/24 (↺ 1) | 24/24 | 9/9 |
+| Tallow & Finch Bakery · service address | 14 Quarry Lane | 0/39 (↺ 39) | 32/39 (↺ 6) | 25/39 (↺ 14) | 24/24 |
+| Brackenridge Dental · plan | Standard | 11/39 (↺ 28) | 37/39 (↺ 2) | 31/39 (↺ 8) | 24/24 |
+| Ostler Row Studios · billing email | accounts@ostlerrow.example | 10/39 (↺ 29) | 39/39 | 31/39 (↺ 8) | 24/24 |
+| Marrowgate Laundry · payment method | card ending 4417 | 7/39 (↺ 11) | 31/39 (↺ 2) | 36/39 (↺ 1) | 24/24 |
+| Kestle Yard Brewery · meter tariff | Day/Night | 16/39 (↺ 5) | 30/39 (↺ 7) | 39/39 | 24/24 |
+| Wrenfield Clinic · contract end date | 31 March 2027 | 0/39 (↺ 39) | 39/39 | 36/39 (↺ 3) | 24/24 |
+| Pellow & Daughters · plan (control) | Business | 35/39 (↺ 4) | 21/39 (↺ 15) | 39/39 | 24/24 |
+| Corran Ferries · service address (control) | 9 Pier Street | 32/39 (↺ 7) | 35/39 (↺ 4) | 39/39 | 24/24 |
 
 What goes wrong where:
 
-- **A**: in 45 of 48 cases the latest fact about the reversed field states the undone value; the reversal itself is
-  in memory as a fact of its own in 46 of 48 ("evt-1018 on account Tallow & Finch Bakery reversed evt-1010 …"), but
-  no fact says what `evt-1010` was. The model then answers with the undone value (Tallow & Finch, Wrenfield: 0 right
-  in every run) or, where the reason gives a hint ("the bank rejected mandate DD-5530"), says Unknown. In 3 of 48
-  cases the change itself was never extracted (Brackenridge twice, Ostler once), so A was right by accident there.
-- **B** fixes most of it: the latest fact is current for 45 of 48. But extraction now and then drops the *control*
-  account's last ordinary change (Pellow & Daughters' move to Business was missing from B's memory in 3 of 8 runs; in
+- **A**: in 74 of 78 cases the latest fact about the reversed field states the undone value; the reversal itself is
+  in memory as a fact of its own in 71 of 78 ("evt-1018 on account Tallow & Finch Bakery reversed evt-1010 …"), but
+  no fact says what `evt-1010` was. The model then answers with the undone value (Tallow & Finch, Wrenfield: 0 of 39)
+  or, where the reason gives a hint ("the bank rejected mandate DD-5530"), says Unknown. In the other 4 cases the
+  change itself was never extracted (Brackenridge twice, Ostler once, Kestle once), so the old value was all memory had.
+- **B** fixes most of it: the latest fact is current for 75 of 78. But extraction now and then drops the *control*
+  account's last ordinary change (Pellow & Daughters' move to Business was missing from B's memory in 4 of 13 runs; in
   two more it was there and the assistant still answered Business Plus — we did not find why). Spelling the reversal
   out is a fix to the message, not to the projection.
-- **C** has the app's state fact *and* A's wrong fact in the same memory. Mostly the state fact wins (124/144), but
-  not always: Tallow & Finch 15/24, with the copied "is 3 Mill Yard, Halden (as of 2026-09-10 …)" fact attached
+- **C** has the app's state fact *and* A's wrong fact in the same memory. Mostly the state fact wins (198/234), but
+  not always: Tallow & Finch 25/39, with the copied "is 3 Mill Yard, Halden (as of 2026-09-10 …)" fact attached
   next to it.
-- **D** reads only what the app projected: 54/54, controls 18/18.
+- **D** reads only what the app projected: 144/144, controls 48/48.
 
 ## What else we measured
 
@@ -319,16 +336,16 @@ Probes before the demo (one account, ten events in two sessions; 2026-10-19):
 
 - **Keep the projection in your code.** An event store already knows how to fold its own events; a reversal is one
   line in that fold. Write the result into memory as one `fact add` per entity and field, saying which events set it
-  and which were reversed. D: 54/54.
+  and which were reversed. D: 144/144.
 - **Don't let extraction write the same field next to it.** In C the app's state fact shared the memory with the
-  facts extracted from the same events, and the stale ones still won 18 times out of 144. If you also send the raw
+  facts extracted from the same events, and the stale ones still won 34 times out of 234. If you also send the raw
   events through a conversation, send them to a different project than the one your assistant reads for current
   state.
 - **If you must send events through extraction, make reversals self-describing.** Write what the undone event was and
-  what the value is now — B took the reversed accounts from 38/144 to 130/144. It does not stop extraction from
+  what the value is now — B took the reversed accounts from 44/234 to 208/234. It does not stop extraction from
   dropping other events (the Pellow control).
 - **Keep the event log in memory with its ids.** One `fact add` per event, in a form you can parse back, gives you
-  replay to any day from memory alone (`fact list` returns all of it): 64/64 here.
+  replay to any day from memory alone (`fact list` returns all of it): 104/104 here.
 
 ## Troubleshooting
 

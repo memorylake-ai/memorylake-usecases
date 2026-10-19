@@ -71,7 +71,7 @@
           <dt>Workspace</dt><dd>${esc(st.workspace?.name)} <span class="mono muted">${esc(st.workspace?.id)}</span></dd>
           <dt>Memory</dt><dd>${S.world ? `<span class="mono">${esc(S.world.projects?.plain)}</span>` : '<span class="muted">not created yet</span>'}</dd></dl>
         <div class="row" style="margin-top:16px"><button class="btn primary" data-act="run" ${running() ? "disabled" : ""}>${S.world ? "Run again" : "Run the demo"}</button>
-          <span class="muted small">about 6 minutes (48 event messages read one at a time, then ~104 Router calls) · everything it creates is prefixed <code>${esc(d.prefix || "mlu-cev")}-</code></span></div></div>` : `
+          <span class="muted small">about 7 minutes (48 event messages read one at a time, then ~104 Router calls) · everything it creates is prefixed <code>${esc(d.prefix || "mlu-cev")}-</code></span></div></div>` : `
       <form class="card" id="connect-form">
         <label for="api-key">MemoryLake API key</label>
         <div class="field"><input id="api-key" type="password" placeholder="sk-…" autocomplete="off" required><button type="button" class="eye" data-act="eye">show</button></div>
@@ -137,8 +137,8 @@
       ${ACCTS().map((a) => { const r = a.events.find((e) => e.reverses); return `<tr><td class="small"><b>${esc(a.name)}</b></td><td class="small">${esc(a.field)}</td><td class="small">${esc(a.now)}</td>
         <td class="small muted">${r ? `<span class="mono">${esc(r.reverses)}</span> undone by <span class="mono">${esc(r.id)}</span>` : "control: latest change"}</td></tr>`; }).join("")}
       </tbody></table></div>
-      <div class="card"><h3 style="margin-top:0">State facts</h3>${p.states.map((t) => `<div class="copyrow small">${hiDate(t)}</div>`).join("")}</div>
-      <div class="card"><h3 style="margin-top:0">Event log — one fact per event</h3>${p.logs.map((t) => `<div class="copyrow small mono">${esc(t)}</div>`).join("")}</div>`;
+      <div class="card"><h3 style="margin-top:0">State facts</h3>${p.states.map((t) => `<div class="factline small">${hiDate(t)}</div>`).join("")}</div>
+      <div class="card"><h3 style="margin-top:0">Event log — one fact per event</h3>${p.logs.map((t) => `<div class="factline small mono">${esc(t)}</div>`).join("")}</div>`;
   }
 
   function askView() {

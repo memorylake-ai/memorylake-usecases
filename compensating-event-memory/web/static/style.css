@@ -294,3 +294,5 @@ table.lint.plain td:nth-child(1), table.lint.plain td:nth-child(2) { white-space
 .sbar span { display: block; height: 100%; }
 .sbar .g1 { background: var(--accent); opacity: .45; }
 .sbar .g2 { background: var(--accent); }
+.factline { font-size: 13.5px; padding: 6px 0; border-top: 1px dashed var(--line); overflow-wrap: anywhere; }
+.factline:first-of-type { border-top: 0; }
