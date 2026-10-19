@@ -4,7 +4,7 @@ A runnable version of the MemoryLake use case
 [*Give Claude API Apps Persistent Context Beyond the 200k Window*](https://www.memorylake.ai/en/usecase/persistent-context-for-claude-api-apps),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** CLI video: recording · [Web, 4:59](https://github.com/memorylake-ai/memorylake-usecases/releases/download/cache-breakpoint-memory-v1/cache-breakpoint-memory-web-demo.mp4)
+**Watch it run:** [CLI, 4:08](https://github.com/memorylake-ai/memorylake-usecases/releases/download/cache-breakpoint-memory-v1/cache-breakpoint-memory-cli-demo.mp4) · [Web, 4:59](https://github.com/memorylake-ai/memorylake-usecases/releases/download/cache-breakpoint-memory-v1/cache-breakpoint-memory-web-demo.mp4)
 ([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/cache-breakpoint-memory-v1); GitHub serves them as downloads). Both recordings are counted in the Measured table below.
 
 **The problem.** A Claude API app sends a long, stable system prompt with every request, so it marks it with a
@@ -24,8 +24,8 @@ Q2/12  "Dev Patel is returning a chair. Should the refund go to his card or to s
 
 Larkspan Home (a fictional homewares retailer) runs a returns assistant, Wren, on `claude-haiku-4-5`. Every request
 carries the same returns playbook (5,396 words, about 6,900 tokens) and what Wren remembers about the customer. Over
-4 full runs (48 requests per arm), **B wrote the cache on every request and read it on none
-(48 of 48 written, 0 read)** and cost **1.24× what A cost with no breakpoint at all**. The same
+5 full runs (60 requests per arm), **B wrote the cache on every request and read it on none
+(60 of 60 written, 0 read)** and cost **1.24× what A cost with no breakpoint at all**. The same
 memory block moved into the user turn (C), or attached by MemoryRouter (D), let the playbook be written once per run
 and read on every later request: C and D cost **0.23×** and **0.23×** A. A, B and C sent the same memory block
 and were right on every question.
@@ -146,7 +146,7 @@ playbook + memory again (7,004, 7,027, 7,024 …), because each question retriev
 
 D's two misses in this run (Q6, Q11) have nothing to do with caching: MemoryRouter attached 139–144 tokens of memory
 and the model still said the delivery address / delivery time was not on file. Which facts it attached is not in the
-reply. A–C got `search` top-5 and answered both. Across all runs D missed 6 of 48, always Q6
+reply. A–C got `search` top-5 and answered both. Across all runs D missed 7 of 60, always Q6
 and/or Q11.
 
 ### Step 6: a breakpoint that does nothing
@@ -179,9 +179,10 @@ prompt again, because its memory block changed.
 | CLI 2 | 0.0864 | 0.1076 | 0.0199 | 0.0199 | 12/12 · 0/12 | 11/12 | 11/12 | 12 · 12 · 12 · 11 | 0 / 0 |
 | CLI 3 (`--reset`) | 0.0865 | 0.1075 | 0.0197 | 0.0201 | 12/12 · 0/12 | 11/12 | 11/12 | 12 · 12 · 12 · 10 | 0 / 0 |
 | Web (browser check = Web recording) | 0.0866 | 0.1076 | 0.0198 | 0.0200 | 12/12 · 0/12 | 11/12 | 11/12 | 12 · 12 · 12 · 11 | 0 / 0 |
-| **all 4** | 0.3460 | 0.4302 | 0.0792 | 0.0798 | 48/48 · 0/48 | 44/48 | 44/48 | 48 · 48 · 48 · 42 | |
+| CLI recording | 0.0864 | 0.1077 | 0.0201 | 0.0196 | 12/12 · 0/12 | 11/12 | 11/12 | 12 · 12 · 12 · 11 | 0 / 0 |
+| **all 5** | 0.4324 | 0.5378 | 0.0993 | 0.0993 | 60/60 · 0/60 | 55/60 | 55/60 | 60 · 60 · 60 · 53 | |
 
-Per million calls: A 7,208 · B 8,962 · C 1,650 · D 1,662 USD (claude-haiku-4-5 prices from `router models`). B's uncached input stayed at 19–30 tokens per request: the memory block was always inside the cache write. C and D read on every request except the first of each run. The trimmed playbook was written or read 0 times in every run.
+Per million calls: A 7,206 · B 8,964 · C 1,654 · D 1,655 USD (claude-haiku-4-5 prices from `router models`). B's uncached input stayed at 19–30 tokens per request: the memory block was always inside the cache write. C and D read on every request except the first of each run. The trimmed playbook was written or read 0 times in every run.
 
 ## Use it in your own app
 
