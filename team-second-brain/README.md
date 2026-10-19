@@ -128,7 +128,7 @@ shows the report. The terminal drawer shows every `memorylake` command as it run
 ### 1. Connect
 
 ```
-$ memorylake auth login --api-key sk-f7b3… --base-url https://app.memorylake.ai/openapi/memorylake --profile memorylake-usecases
+$ memorylake auth login --api-key sk-… --base-url https://app.memorylake.ai/openapi/memorylake --profile memorylake-usecases
 $ memorylake team get
   · connected to team “you@example.com” (personal) as tenant_owner
 ```
