@@ -1,0 +1,20 @@
+{
+  "company": "Larkfield Home",
+  "assistant": "Packbot",
+  "packer": "Jules",
+  "customers": [
+    {"name": "Tomas Reyes",  "order": "LK-5400", "gate": "4417", "item": "latex",            "no_pack": "anything with latex in it (latex allergy); seal the box with the nitrile-glove packing kit"},
+    {"name": "Ines Halloran", "order": "LK-5401", "gate": "2290", "item": "packing peanuts",  "no_pack": "foam packing peanuts (she cannot dispose of them); use the paper void fill"},
+    {"name": "Priya Okafor",  "order": "LK-5402", "gate": "7731", "item": "invoice",          "no_pack": "a printed invoice, the order is a gift; email the invoice instead"},
+    {"name": "Lena Vos",      "order": "LK-5403", "gate": "5862", "item": "scented",          "no_pack": "scented inserts or cedar sachets (fragrance sensitivity)"},
+    {"name": "Marco Tieri",   "order": "LK-5404", "gate": "3148", "item": "cleaning",         "no_pack": "the free cleaning-spray sample (a cat at home chews packaging)"},
+    {"name": "Bea Lindqvist", "order": "LK-5405", "gate": "6605", "item": "air pillows",      "no_pack": "plastic air pillows (she asked for plastic-free packaging)"}
+  ],
+  "fact_templates": [
+    "{name} (order {order}): the drop-off gate code is {gate}.",
+    "{name} (order {order}): must not go in the box: {no_pack}."
+  ],
+  "turn1": "I'm packing {name}'s order {order} now.",
+  "turn2": "What's the gate code for the drop-off, and is there anything I must not put in the box?",
+  "turn2_named": "What's the gate code for {name}'s drop-off, and is there anything I must not put in {name}'s box?"
+}
