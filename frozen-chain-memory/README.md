@@ -4,7 +4,8 @@ A runnable version of the MemoryLake use case
 [*Ship LLM Apps Without Building Memory Infrastructure From Scratch*](https://www.memorylake.ai/en/usecase/memory-api-for-llm-developers),
 built entirely on the [`memorylake` CLI](https://github.com/memorylake-ai/memorylake-cli) (v20261015 or later).
 
-**Watch it run:** recording in progress.
+**Watch it run:** [CLI, 3:44](https://github.com/memorylake-ai/memorylake-usecases/releases/download/frozen-chain-memory-v1/frozen-chain-memory-cli-demo.mp4) · [Web, 4:35](https://github.com/memorylake-ai/memorylake-usecases/releases/download/frozen-chain-memory-v1/frozen-chain-memory-web-demo.mp4)
+([release](https://github.com/memorylake-ai/memorylake-usecases/releases/tag/frozen-chain-memory-v1); GitHub serves them as downloads).
 
 **The problem.** A memory API with versioning means you can change a fact in place (`fact update`) and every later
 read gets the new value, with the old one kept in the fact's history (`fact trace`). MemoryRouter reads that memory
@@ -32,7 +33,7 @@ Turn 2 goes to the same model (`gpt-4o-mini`, temperature 0) four ways:
 | 6 | **The whole conversation in `input`** (turn 1 + Dispatchbot's reply with the old code), with `--boundary` | **New code, 12/12** in every run |
 | 7 | **`previous_response_id`, no boundary** — the usual way to keep MemoryRouter from attaching someone else's notes on a follow-up | **Old code, 12/12** in every run. `fact list` printed the new codes a few seconds earlier |
 | 8 | **`previous_response_id` + boundary** | The old note (in the chain) and the new one (attached now) side by side. **confirm: mostly the old code** (0–2 of 6 new per run); **driver: mostly the new one** (5–6 of 6) |
-| 8 | **Fix that keeps the chain**: the same, plus one sentence in `instructions`: *if two notes disagree, the notes attached to the newest message are current* | **New code**, 119/120 over all runs |
+| 8 | **Fix that keeps the chain**: the same, plus one sentence in `instructions`: *if two notes disagree, the notes attached to the newest message are current* | **New code**, 143/144 over all runs |
 | 9 | Scoreboard | Six parcels × four ways × two asks, ✓/✗ |
 
 Model output varies from run to run, so every reply is graded and printed as it comes out, and [Measured](#measured)
@@ -81,6 +82,12 @@ Same pipeline, one view per step: turn 1 for every parcel, the code change (`fac
 way of sending turn 2 as transcripts with ✓/✗ and `input_tokens` (the two asks side by side), the scoreboard, a
 **Try one parcel** page that runs one recipient's chat — code change included — the four ways live, and a terminal
 drawer with every `memorylake` command as it runs.
+
+![The codes change: fact list shows the new codes, fact trace keeps the old one](web/screenshot-update.png)
+![Chain only: previous_response_id without the boundary answers the old code](web/screenshot-bare.png)
+![Chain + memory: confirm mostly old, driver new; the fix below](web/screenshot-chain.png)
+![Scoreboard](web/screenshot-score.png)
+![Try one parcel: Ruth Abara](web/screenshot-ask-one.png)
 
 ## What happens, step by step
 
@@ -207,21 +214,21 @@ The same code path is right or wrong depending on how the dispatcher phrases the
 
 ## Measured
 
-Every fresh run while building this demo: 9 in the terminal (3 with this prefix, 6 in three parallel copies) and 1
-browser check. Each run: 6 parcels × 2 asks per way of sending turn 2.
+Every fresh run while building and recording this demo: 9 in the terminal (3 with this prefix, 6 in three parallel
+copies), 1 browser check and the 2 recordings. Each run: 6 parcels × 2 asks per way of sending turn 2.
 
 | Turn 2 sent as | runs | new code | old code |
 |---|---|---|---|
-| Whole conversation in `input` + boundary | 10 | **120 / 120** | 0 |
-| `previous_response_id`, no boundary | 10 | **0 / 120** | **120** |
-| `previous_response_id` + boundary, *confirm* | 10 | **12 / 60** (0–2 per run) | 48 |
-| `previous_response_id` + boundary, *driver* | 10 | 57 / 60 (5–6 per run) | 3 |
-| `previous_response_id` + boundary + “newest notes are current” | 10 | **119 / 120** | 1 (Yara Lindholm, *confirm*, once) |
-| Check: a new conversation through the boundary after `fact update` | 10 | 10 / 10 | 0 |
+| Whole conversation in `input` + boundary | 12 | **144 / 144** | 0 |
+| `previous_response_id`, no boundary | 12 | **0 / 144** | **144** |
+| `previous_response_id` + boundary, *confirm* | 12 | **15 / 72** (0–2 per run) | 57 |
+| `previous_response_id` + boundary, *driver* | 12 | 69 / 72 (5–6 per run) | 3 |
+| `previous_response_id` + boundary + “newest notes are current” | 12 | **143 / 144** | 1 (Yara Lindholm, *confirm*, once) |
+| Check: a new conversation through the boundary after `fact update` | 12 | 12 / 12 | 0 |
 
-- Turn 1 answered the code on file 60/60. No reply gave both codes or no code.
-- In the *confirm* column with the boundary, the right answers came from two parcels only (Sami Kettering 7 times,
-  Nadia Ferro 5); the other four parcels got the old code on *confirm* in every run.
+- Turn 1 answered the code on file 72/72. No reply gave both codes or no code.
+- In the *confirm* column with the boundary, the right answers came from two parcels only (Sami Kettering 8 times,
+  Nadia Ferro 7); the other four parcels got the old code on *confirm* in every run.
 - `input_tokens`: whole conversation and chain-without-boundary 211–227; chain + boundary 296–314; with the extra
   sentence 319–337.
 - One model (`gpt-4o-mini`) was measured. Before the demo, two probes on another data set (4 and 6 recipients, the

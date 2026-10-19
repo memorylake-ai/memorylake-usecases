@@ -152,7 +152,7 @@ def data_bundle() -> dict:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "response-chain-memory/1.0"
+    server_version = "frozen-chain-memory/1.0"
 
     def log_message(self, fmt, *args):
         if "/api/stream" in (args[0] if args else "") or self.path.startswith("/static"):
@@ -237,7 +237,7 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="Web companion for the response-chain-memory demo")
+    ap = argparse.ArgumentParser(description="Web companion for the frozen-chain-memory demo")
     ap.add_argument("--port", type=int, default=8765)
     ap.add_argument("--no-browser", action="store_true")
     args = ap.parse_args()
@@ -256,7 +256,7 @@ def main() -> None:
         sys.exit(1)
     httpd.daemon_threads = True
     url = f"http://127.0.0.1:{port}/"
-    print(f"response-chain-memory web demo on {url}  (Ctrl-C to stop)", flush=True)
+    print(f"frozen-chain-memory web demo on {url}  (Ctrl-C to stop)", flush=True)
     if not args.no_browser:
         threading.Timer(0.6, lambda: webbrowser.open(url)).start()
     try:
