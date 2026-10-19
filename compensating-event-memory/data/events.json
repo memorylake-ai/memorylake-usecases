@@ -1,0 +1,301 @@
+{
+ "org": "Ferrowyn Energy",
+ "today": "2026-10-19",
+ "replay_at": "2026-09-25",
+ "bot": {
+  "key": "bus",
+  "display": "account-event-store",
+  "role": "Event store that writes each customer account's events into memory"
+ },
+ "system": "You are the account service assistant at {org}, an energy supplier. Today is {today}. Use what you remember about the customer's account. Reply in one line that starts with \"Answer: <the current value>\" (or \"Answer: Unknown\"), then one short sentence.",
+ "accounts": [
+  {
+   "id": "tallow",
+   "name": "Tallow & Finch Bakery",
+   "field": "service address",
+   "kind": "reversed",
+   "ask": "What is Tallow & Finch Bakery's service address right now?",
+   "values": {
+    "14 Quarry Lane": "\\b14 Quarry Lane\\b|\\bQuarry Lane\\b",
+    "3 Mill Yard": "\\b3 Mill Yard\\b|\\bMill Yard\\b"
+   },
+   "current": "14 Quarry Lane",
+   "stale": "3 Mill Yard",
+   "events": [
+    {
+     "id": "evt-1002",
+     "type": "AccountOpened",
+     "at": "2026-09-02T09:00:00Z",
+     "text": "Tallow & Finch Bakery opened an account; service address 14 Quarry Lane, Halden.",
+     "value": "14 Quarry Lane"
+    },
+    {
+     "id": "evt-1010",
+     "type": "ServiceAddressChanged",
+     "at": "2026-09-10T09:00:00Z",
+     "text": "Service address changed from 14 Quarry Lane to 3 Mill Yard, Halden.",
+     "value": "3 Mill Yard"
+    },
+    {
+     "id": "evt-1018",
+     "type": "EventReversed",
+     "at": "2026-09-29T09:00:00Z",
+     "text": "the request came from an unverified caller; fraud review FR-22 confirmed it.",
+     "reverses": "evt-1010"
+    }
+   ]
+  },
+  {
+   "id": "brack",
+   "name": "Brackenridge Dental",
+   "field": "plan",
+   "kind": "reversed",
+   "ask": "Which plan is Brackenridge Dental on right now?",
+   "values": {
+    "Standard": "\\bStandard\\b",
+    "Business Plus": "\\bBusiness Plus\\b"
+   },
+   "current": "Standard",
+   "stale": "Business Plus",
+   "events": [
+    {
+     "id": "evt-1003",
+     "type": "AccountOpened",
+     "at": "2026-09-03T09:00:00Z",
+     "text": "Brackenridge Dental opened an account on the Standard plan.",
+     "value": "Standard"
+    },
+    {
+     "id": "evt-1008",
+     "type": "PlanChanged",
+     "at": "2026-09-08T09:00:00Z",
+     "text": "Plan changed from Standard to Business Plus.",
+     "value": "Business Plus"
+    },
+    {
+     "id": "evt-1019",
+     "type": "EventReversed",
+     "at": "2026-10-01T09:00:00Z",
+     "text": "it was posted to the wrong account; Brackbury Dental asked for the upgrade.",
+     "reverses": "evt-1008"
+    }
+   ]
+  },
+  {
+   "id": "ostler",
+   "name": "Ostler Row Studios",
+   "field": "billing email",
+   "kind": "reversed",
+   "ask": "Which email address do Ostler Row Studios' invoices go to right now?",
+   "values": {
+    "accounts@ostlerrow.example": "accounts@ostlerrow",
+    "billing@ostler-row.example": "billing@ostler-?row"
+   },
+   "current": "accounts@ostlerrow.example",
+   "stale": "billing@ostler-row.example",
+   "events": [
+    {
+     "id": "evt-1004",
+     "type": "AccountOpened",
+     "at": "2026-09-04T09:00:00Z",
+     "text": "Ostler Row Studios opened an account; invoices go to accounts@ostlerrow.example.",
+     "value": "accounts@ostlerrow.example"
+    },
+    {
+     "id": "evt-1013",
+     "type": "BillingEmailChanged",
+     "at": "2026-09-14T09:00:00Z",
+     "text": "Billing email changed from accounts@ostlerrow.example to billing@ostler-row.example.",
+     "value": "billing@ostler-row.example"
+    },
+    {
+     "id": "evt-1022",
+     "type": "EventReversed",
+     "at": "2026-10-06T09:00:00Z",
+     "text": "the new address was a typo and every invoice sent to it bounced.",
+     "reverses": "evt-1013"
+    }
+   ]
+  },
+  {
+   "id": "marrow",
+   "name": "Marrowgate Laundry",
+   "field": "payment method",
+   "kind": "reversed",
+   "ask": "How does Marrowgate Laundry pay its bills right now?",
+   "values": {
+    "card ending 4417": "\\bcard\\b|\\b4417\\b",
+    "direct debit": "\\bdirect[- ]debit\\b|\\bDD-5530\\b"
+   },
+   "current": "card ending 4417",
+   "stale": "direct debit",
+   "events": [
+    {
+     "id": "evt-1005",
+     "type": "AccountOpened",
+     "at": "2026-09-05T09:00:00Z",
+     "text": "Marrowgate Laundry opened an account and pays by card ending 4417.",
+     "value": "card ending 4417"
+    },
+    {
+     "id": "evt-1014",
+     "type": "PaymentMethodChanged",
+     "at": "2026-09-16T09:00:00Z",
+     "text": "Payment method changed from card ending 4417 to direct debit (mandate DD-5530).",
+     "value": "direct debit"
+    },
+    {
+     "id": "evt-1017",
+     "type": "EventReversed",
+     "at": "2026-09-23T09:00:00Z",
+     "text": "the bank rejected mandate DD-5530.",
+     "reverses": "evt-1014"
+    }
+   ]
+  },
+  {
+   "id": "kestle",
+   "name": "Kestle Yard Brewery",
+   "field": "meter tariff",
+   "kind": "reversed",
+   "ask": "Which meter tariff is Kestle Yard Brewery on right now?",
+   "values": {
+    "Day/Night": "\\bDay\\s*/\\s*Night\\b|\\bday[- ]and[- ]night\\b|\\bEconomy 7\\b",
+    "Flat": "\\bFlat\\b"
+   },
+   "current": "Day/Night",
+   "stale": "Flat",
+   "events": [
+    {
+     "id": "evt-1007",
+     "type": "AccountOpened",
+     "at": "2026-09-07T09:00:00Z",
+     "text": "Kestle Yard Brewery opened an account on the Day/Night meter tariff.",
+     "value": "Day/Night"
+    },
+    {
+     "id": "evt-1015",
+     "type": "TariffChanged",
+     "at": "2026-09-18T09:00:00Z",
+     "text": "Meter tariff changed from Day/Night to Flat.",
+     "value": "Flat"
+    },
+    {
+     "id": "evt-1023",
+     "type": "EventReversed",
+     "at": "2026-10-09T09:00:00Z",
+     "text": "the brewery's meter is not eligible for the Flat tariff.",
+     "reverses": "evt-1015"
+    }
+   ]
+  },
+  {
+   "id": "wren",
+   "name": "Wrenfield Clinic",
+   "field": "contract end date",
+   "kind": "reversed",
+   "ask": "When does Wrenfield Clinic's contract end?",
+   "values": {
+    "31 March 2027": "\\b31 March 2027\\b|\\bMarch 31,? 2027\\b|\\b2027-03-31\\b|\\bMarch 2027\\b",
+    "30 September 2027": "\\b30 September 2027\\b|\\bSeptember 30,? 2027\\b|\\b2027-09-30\\b|\\bSeptember 2027\\b"
+   },
+   "current": "31 March 2027",
+   "stale": "30 September 2027",
+   "events": [
+    {
+     "id": "evt-1009",
+     "type": "AccountOpened",
+     "at": "2026-09-09T09:00:00Z",
+     "text": "Wrenfield Clinic opened an account; the contract ends on 31 March 2027.",
+     "value": "31 March 2027"
+    },
+    {
+     "id": "evt-1016",
+     "type": "ContractExtended",
+     "at": "2026-09-20T09:00:00Z",
+     "text": "Contract end date changed from 31 March 2027 to 30 September 2027.",
+     "value": "30 September 2027"
+    },
+    {
+     "id": "evt-1024",
+     "type": "EventReversed",
+     "at": "2026-10-12T09:00:00Z",
+     "text": "the extension was signed by someone without authority to sign for the clinic.",
+     "reverses": "evt-1016"
+    }
+   ]
+  },
+  {
+   "id": "pellow",
+   "name": "Pellow & Daughters",
+   "field": "plan",
+   "kind": "control",
+   "ask": "Which plan is Pellow & Daughters on right now?",
+   "values": {
+    "Business": "\\bBusiness\\b(?! Plus)",
+    "Business Plus": "\\bBusiness Plus\\b"
+   },
+   "current": "Business",
+   "stale": "Business Plus",
+   "events": [
+    {
+     "id": "evt-1001",
+     "type": "AccountOpened",
+     "at": "2026-09-01T09:00:00Z",
+     "text": "Pellow & Daughters opened an account on the Standard plan.",
+     "value": "Standard"
+    },
+    {
+     "id": "evt-1011",
+     "type": "PlanChanged",
+     "at": "2026-09-11T09:00:00Z",
+     "text": "Plan changed from Standard to Business Plus.",
+     "value": "Business Plus"
+    },
+    {
+     "id": "evt-1020",
+     "type": "PlanChanged",
+     "at": "2026-10-02T09:00:00Z",
+     "text": "Plan changed from Business Plus to Business.",
+     "value": "Business"
+    }
+   ]
+  },
+  {
+   "id": "corran",
+   "name": "Corran Ferries",
+   "field": "service address",
+   "kind": "control",
+   "ask": "What is Corran Ferries' service address right now?",
+   "values": {
+    "9 Pier Street": "\\b9 Pier Street\\b|\\bPier Street\\b",
+    "22 Slipway Road": "\\b22 Slipway Road\\b|\\bSlipway Road\\b"
+   },
+   "current": "9 Pier Street",
+   "stale": "22 Slipway Road",
+   "events": [
+    {
+     "id": "evt-1006",
+     "type": "AccountOpened",
+     "at": "2026-09-06T09:00:00Z",
+     "text": "Corran Ferries opened an account; service address 7 Harbour Walk, Ardlow.",
+     "value": "7 Harbour Walk"
+    },
+    {
+     "id": "evt-1012",
+     "type": "ServiceAddressChanged",
+     "at": "2026-09-12T09:00:00Z",
+     "text": "Service address changed from 7 Harbour Walk to 22 Slipway Road, Ardlow.",
+     "value": "22 Slipway Road"
+    },
+    {
+     "id": "evt-1021",
+     "type": "ServiceAddressChanged",
+     "at": "2026-10-05T09:00:00Z",
+     "text": "Service address changed from 22 Slipway Road to 9 Pier Street, Ardlow.",
+     "value": "9 Pier Street"
+    }
+   ]
+  }
+ ]
+}
