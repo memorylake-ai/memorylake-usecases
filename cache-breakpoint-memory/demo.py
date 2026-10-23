@@ -349,7 +349,8 @@ def prices(cli: CLI, echo: bool = True) -> dict:
     """USD per million tokens for MODEL, from the account's own price list: input, cache write (5 min), cache read,
     output."""
     res = cli.run("router", "models", echo=echo) or {}
-    items = (res.get("data") or {}).get("items") or res.get("items") or []
+    # CLI v20261023+ prints the model list itself; earlier versions wrapped it in {"data": {"items": [...]}}
+    items = res if isinstance(res, list) else (res.get("data") or {}).get("items") or res.get("items") or []
     m = next((i for i in items if i.get("name") == MODEL), None)
     if not m:
         die(f"{MODEL} is not in `memorylake router models` on this account")

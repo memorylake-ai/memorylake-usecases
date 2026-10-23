@@ -380,7 +380,8 @@ def describe(story: dict, mem: dict[str, dict], c: dict) -> dict:
             gone = "forgotten" if fid in ((c.get("resolve") or {}).get("forgotten_fact_ids") or []) else "deleted"
             sides.append(dict(fid=fid, ref=orig["key"] if orig else "?", body=snap or "(no snapshot)",
                               round=orig["round"] if orig else "", study=r["study"] if r else "", on=r["date"] if r else "",
-                              participants=orig["participants"] if orig else [], segments={}, gone=gone))
+                              participants=orig["participants"] if orig else [], segments={}, gone=gone,
+                              kind="finding" if orig else ""))
             f = sides[-1]
         segs = {}
         for p in f.get("participants") or []:
@@ -389,11 +390,14 @@ def describe(story: dict, mem: dict[str, dict], c: dict) -> dict:
         if f.get("gone"):
             f["segments"] = segs
             continue
-        sides.append(dict(fid=fid, ref=f["ref"], body=f["body"], round=f["round"], study=f["study"], on=f["on"],
-                          participants=f.get("participants") or [], segments=segs))
+        # The check sometimes pairs a finding with a roster or context fact; those carry no round / study / date.
+        sides.append(dict(fid=fid, ref=f.get("ref") or f.get("key", "?"), body=f["body"], round=f.get("round", ""),
+                          study=f.get("study", ""), on=f.get("on", ""), participants=f.get("participants") or [],
+                          segments=segs, kind=f.get("kind", "")))
     sides.sort(key=lambda s: s["on"])
     return dict(id=c["id"], name=c.get("name") or "", category=c.get("category") or "", sides=sides,
-                resolved=(c.get("resolve") or {}).get("strategy") or "")
+                resolved=(c.get("resolve") or {}).get("strategy") or "",
+                findings=all(s["kind"] == "finding" for s in sides))
 
 
 def verdict(story: dict, mem: dict[str, dict], d: dict) -> dict:
@@ -514,7 +518,7 @@ def latest_wins(cli: CLI, pid: str, story: dict, found: list[dict]) -> dict:
     note("the team's habit (it is in memory too): when two findings disagree, keep the one from the most recent study")
     done = []
     for i, d in enumerate(found):
-        if d["resolved"] or len(d["sides"]) != 2:
+        if d["resolved"] or len(d["sides"]) != 2 or not d["findings"]:  # never resolve away a roster/context fact
             continue
         old, new = d["sides"]
         cli.run("fact", "conflict", "resolve", d["id"], "--project", pid, "--strategy", "keep_fact",
