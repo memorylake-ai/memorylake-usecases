@@ -353,7 +353,9 @@ def ms(iso: str) -> str:
 
 
 def parse_ts(iso: str) -> datetime:
-    return datetime.fromisoformat(iso.replace("Z", "+00:00"))
+    # The server trims trailing zeros (".73645"); Python 3.9 only parses 3 or 6 fraction digits.
+    iso = re.sub(r"\.(\d+)", lambda m: "." + (m.group(1) + "000000")[:6], iso.replace("Z", "+00:00"))
+    return datetime.fromisoformat(iso)
 
 
 def save(name: str, obj) -> Path:
