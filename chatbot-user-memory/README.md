@@ -64,7 +64,7 @@ With `MEMORYLAKE_API_KEY` set, the demo logs into its own CLI profile under `./.
 | `MEMORYLAKE_BASE_URL` | API endpoint; default global, China is `https://app.memorylake.cn/openapi/memorylake` |
 | `MEMORYLAKE_WORKSPACE` | Workspace id; default is the one remembered by `ws use`, else your default workspace |
 | `python3 demo.py --reset` | Delete the demo project and sessions first |
-| `python3 demo.py --with-llm` | Also generate a real reply through the Model Router with the same key (needs model quota; free accounts get `insufficient_quota` and the step is skipped) |
+| `python3 demo.py --with-llm` | Also generate a real reply through the Model Router (`memorylake router chat`, same login; needs model quota — without it, or if the router cannot serve the model right now, the step is skipped) |
 | `python3 demo.py profiles` | Print what the bot knows about each user |
 | `python3 demo.py cleanup` | Delete the sessions, the project, the users (and their memory) and the bot |
 
@@ -140,7 +140,12 @@ The order matters: `actor delete` on its own leaves the actor's facts readable a
 actor is gone `fact delete` fails with `ACTOR_INACTIVE`, so they can no longer be removed.
 
 **7. Optional: a real reply.** With `--with-llm`, the memory block and the user's question go to the
-Model Router (`/v1/chat/completions`, same API key) and Nimbus answers for real.
+Model Router and Nimbus answers for real:
+
+```bash
+memorylake router chat "<the user's question>" --model claude-haiku-4-5 --max-tokens 200 \
+  --system "You are Nimbus, a travel concierge bot. Use the memory block; … <memory block>"
+```
 
 ## Wiring it into your own bot
 
@@ -160,7 +165,8 @@ Model Router (`/v1/chat/completions`, same API key) and Nimbus answers for real.
 - **`tls handshake eof` / `could not connect`** while polling: a dropped connection. Read-only commands
   retry four times; otherwise re-run `python3 demo.py` and it resumes.
 - **`401 service account not found`**: the key was deleted or belongs to the other deployment.
-- **`insufficient_quota`** only affects `--with-llm`.
+- **`insufficient_quota`, `model_not_found` or a 5xx from the Model Router** only affect `--with-llm`: the
+  demo reports it and skips step 7; the memory steps have already run.
 - **Facts come back in another language than the transcript**: extraction language is chosen server-side
   and is not configurable from the CLI today.
 - **“this CLI cannot set an actor type”**: CLI v20261009 removed `actor create --type`, so the bot is

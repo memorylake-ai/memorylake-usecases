@@ -29,8 +29,6 @@ import shutil
 import subprocess
 import sys
 import time
-import urllib.error
-import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -49,7 +47,7 @@ PROJECT = dict(
     name="Nimbus — chat sessions",
     description="Every chat session of the Nimbus concierge bot. Demo data.",
 )
-LLM_MODEL = "claude-haiku-4-5-20251001"
+LLM_MODEL = "claude-haiku-4-5"   # as `memorylake router models` lists it
 
 
 # --------------------------------------------------------------------------- output sink
@@ -477,33 +475,39 @@ def forget(cli: CLI, users: dict[str, str]) -> None:
 # --------------------------------------------------------------------------- optional: a real reply through the Model Router
 
 def llm_reply(cli: CLI, contexts: dict[str, dict]) -> None:
-    key = cli.secret or os.environ.get("MEMORYLAKE_API_KEY", "")
-    if not key:
-        note("no API key in hand (you are using a stored login), so the Model Router call is skipped")
-        return
-    router = cli.base_url.split("/openapi/")[0] + "/v1/chat/completions"
+    """Nimbus answers for real: the memory block goes in the system prompt of one `router chat` call per user.
+
+    The reply step is optional, so a refusal from the model side (no quota, no channel for the model,
+    a 5xx from the router) is reported and the step is skipped; the memory steps above have already run."""
+    system = "You are Nimbus, a travel concierge bot. Use the memory block; keep it to three short sentences.\n\n"
     for u in load_users():
         ctx = contexts.get(u["key"])
         if not ctx:
             continue
-        body = {"model": LLM_MODEL, "max_tokens": 200, "messages": [
-            {"role": "system", "content": "You are Nimbus, a travel concierge bot. Use the memory block; keep it to three short sentences.\n\n" + ctx["block"]},
-            {"role": "user", "content": ctx["question"]}]}
-        emit("cmd", f"curl {router} -H 'Authorization: Bearer sk-…' -d '{{\"model\": \"{LLM_MODEL}\", …}}'")
-        req = urllib.request.Request(router, data=json.dumps(body).encode(), method="POST",
-                                     headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"})
         try:
-            with urllib.request.urlopen(req, timeout=60) as resp:
-                reply = json.load(resp)["choices"][0]["message"]["content"].strip()
-            emit("text", f"\n  Nimbus → {u['display']}: {reply}")
-            emit("llm", "", user=u["key"], reply=reply)
-        except urllib.error.HTTPError as e:
-            msg = e.read().decode(errors="replace")
-            if e.code in (402, 429) or "quota" in msg.lower():
+            res = cli.run("router", "chat", ctx["question"], "--model", LLM_MODEL, "--max-tokens", "200",
+                          "--system", system + ctx["block"])
+        except CLIError as e:
+            lines = [ln.strip() for ln in str(e).splitlines() if ln.strip()]
+            # The CLI prints "Error: call …", "Caused by:", then the provider's message: show that message.
+            after = lines[lines.index("Caused by:") + 1:] if "Caused by:" in lines else lines
+            reason = (after or [f"exit {e.rc}"])[0][:300]
+            if e.has("402", "429", "quota", "insufficient", "balance"):
                 note("the Model Router needs model quota on your account (insufficient_quota); the memory steps above need none. Skipping.")
                 emit("llm", "", user=u["key"], reply=None, skipped="quota")
                 return
+            if e.has("model_not_found", "no available channel", "model_router_error",
+                     "500", "502", "503", "504", "service unavailable", "bad gateway"):
+                note("the Model Router could not serve this model right now; the memory steps above are unaffected. Skipping:")
+                emit("text", "    " + reason)
+                emit("llm", "", user=u["key"], reply=None, skipped="router_unavailable")
+                return
             raise
+        if not isinstance(res, dict):
+            die(f"unexpected router reply: {str(res)[:200]}")
+        reply = (res["choices"][0]["message"]["content"] or "").strip()
+        emit("text", f"\n  Nimbus → {u['display']}: {reply}")
+        emit("llm", "", user=u["key"], reply=reply)
 
 
 def delete_actor(cli: CLI, actor_id: str) -> int:
