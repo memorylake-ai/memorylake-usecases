@@ -34,6 +34,13 @@ Totals over the 6 runs made while building and recording it (4 command-line runs
 recording; 3 drafts × 6 tasks per arm per run). ∅ = MemoryRouter
 attached nothing (prompt tokens equal to the same call without a boundary), graded apart.
 
+D's 0 holds only when extraction stores each private remark as its own `PRIVATE:` fact. In a later regression
+run (2026-11-27) extraction merged Ben's remark into the middle of another fact (*"The buyer wants the listing
+agent to see an opening offer price of $410,000; PRIVATE: …"*). The move works by prefix, so it moved nothing for
+him, and D leaked 3 of 18 (all three Ben drafts). The demo's removal check printed it (`Ben Adeyemi moved 0
+fact(s) … 1 unmarked fact(s) still carry it`), and E's stub still kept that run at 0 of 18. Moving the whole
+merged fact would also hide the public offer, so the demo leaves it and reports it.
+
 What the arms show:
 
 - **The rule in the prompt helps a little.** 28 → 15. The model reads the private fact and the rule, and often
